@@ -9,7 +9,7 @@ const MasterSvgLogo = () => (
         height: "6rem",
       },
       "& svg": {
-        transform: "rotate(298deg)",
+        transform: "rotate(145deg)",
       },
     }}
   >
