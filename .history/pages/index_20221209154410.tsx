@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <>
+    <div>
       <Head>
         <title>Мастер в Балашихе - Закажите ремонт компьютера сегодня</title>
         <meta
@@ -12,12 +12,15 @@ export default function Home() {
           content="Мастер в Балашихе - Закажите ремонт компьютера сегодня"
         />
       </Head>
-      <h1>Welcome to Next.js!</h1>
 
-      <p>
-        Get started by editing <code>pages/index.tsx</code>
-      </p>
-    </>
+      <main>
+        <h1>Welcome to Next.js!</h1>
+
+        <p>
+          Get started by editing <code>pages/index.tsx</code>
+        </p>
+      </main>
+    </div>
   );
 }
 Home.Layout = Layout;
