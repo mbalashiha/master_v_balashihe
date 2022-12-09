@@ -75,7 +75,7 @@ export const NavbarLinks = ({
       }
       sx={{
         display: displayAs,
-        padding: 2,
+        padding: 0,
         "& a, & .aLinkPreplacement": {
           p: 1,
           borderRadius: 1,

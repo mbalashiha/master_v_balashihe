@@ -23,8 +23,8 @@ const Layout: FC<Props> = ({ children }: Props) => {
           )} */}
         <NavBreadcrumbs breadcrumbs={breadcrumbs}></NavBreadcrumbs>
         <main>{children}</main>
-        <Footer />
       </Container>
+      <Footer />
     </>
   );
 };

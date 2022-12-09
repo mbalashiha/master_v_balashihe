@@ -29,11 +29,14 @@ import PaletterModeSwitch from "@components/common/paletter/PaletteSwitch";
 import { useRouter } from "next/router";
 import NavbarLinks from "./NavbarLinks";
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  background: "black",
-  backgroundColor: "black",
-  position: "absolute",
-  top: 0,
-  zIndex: 1,
+  background: "none",
+  backdropFilter: "saturate(180%) blur(15px)",
+  backgroundColor: "rgba(241, 243, 245, 0.75)",
+  boxShadow: "0px 4px 10px 0px rgb(48 59 68 / 20%)",
+  height: "70px",
+  "& a": {
+    textDecoration: "none",
+  },
 }));
 const StyledBadge = styled(Badge)(({ theme }) => ({
   cursor: "pointer",
@@ -71,19 +74,19 @@ const Navbar: FC = () => {
   const isIndexPage = pathname === "/";
   const cartPage = pathname === "/market/cart";
   return (
-    <StyledAppBar position="fixed">
+    <StyledAppBar>
       {/* <PaletterModeSwitch sx={{ right: "auto", left: 0 }} /> */}
       <Toolbar
         sx={{
-          height: "6.2rem",
-          background: "black",
-          backgroundColor: "black",
           boxShadow: (theme) => {
             return !isIndexPage && theme.palette.mode === "light"
               ? "0 0 40px rgb(80 80 110 / 60%)"
               : "0 0 90px rgb(90 90 90 / 70%)";
           },
-          zIndex: 2,
+          "&&&": {
+            px: { xs: "0.2rem", md: "0.3rem", lg: "2rem", xl: "4rem" },
+            py: 0,
+          },
         }}
       >
         <Stack
@@ -92,7 +95,7 @@ const Navbar: FC = () => {
           alignItems="center"
           sx={{ width: "100%" }}
         >
-          <Box sx={{ mr: 2, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               edge="start"
@@ -152,6 +155,7 @@ const Navbar: FC = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                py: "0.25rem",
               }}
             >
               <Link href="/" passHref>
@@ -160,41 +164,52 @@ const Navbar: FC = () => {
                   justifyContent="space-between"
                   alignItems="center"
                   sx={{
-                    marginLeft: "-1rem",
-                    border: "1px solid #555555",
-                    borderRadius: "15px",
-                    maxWidth: {
-                      xs: "230px",
-                      sm: "inherit",
-                    },
-                    height: { xs: "4.7rem", sm: "inherit" },
+                    width: "300px",
                   }}
                 >
                   <MasterSvgLogo />
                   <Typography
                     component="h1"
                     variant="h1"
-                    className="furore-font-family"
                     sx={{
-                      fontSize: {
-                        xs: "1.1rem",
-                        sm: "1.4rem",
-                        lg: "2.15rem",
-                      },
-                      lineHeight: {
-                        xs: "1.4rem",
-                        sm: "2rem",
-                        lg: "2.5rem",
-                      },
-                      padding: "0 0.8rem 0 0.3rem",
-                      fontStretch: "expanded",
-                      fontWeight: 300,
-                      "&&&": {
-                        color: "white",
-                      },
+                      fontSize: "1.4rem",
+                      lineHeight: "1.3rem",
+                      px: "0.5rem",
+                      py: 0,
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      letterSpacing: 0,
+                      display: "block",
+                      position: "relative",
                     }}
                   >
-                    Компьютерный <br /> Мастер в Москве
+                    <Box
+                      component="span"
+                      letterSpacing={0}
+                      fontSize="1.0rem"
+                      display="block"
+                      pl="0.108rem"
+                    >
+                      Компьютерный&nbsp;
+                    </Box>
+                    <Box
+                      component="span"
+                      letterSpacing={0}
+                      fontSize="1.7rem"
+                      display="block"
+                      position="relative"
+                      top="-0.07rem"
+                    >
+                      Мастер&nbsp;
+                    </Box>
+                    <Box
+                      component="span"
+                      letterSpacing={0}
+                      fontSize="1.293rem"
+                      display="block"
+                    >
+                      в Балашихе
+                    </Box>
                   </Typography>
                 </Stack>
               </Link>

@@ -32,6 +32,7 @@ declare module "@mui/material/styles" {
 }
 const getMuiTheme = (): Theme => {
   const colorMode: PaletteMode = "light";
+  const fontFamily = "Gotham, Arial, sans-serif";
   let theme = createTheme({
     palette: {
       mode: colorMode,
@@ -45,13 +46,13 @@ const getMuiTheme = (): Theme => {
     },
     spacing: 12,
     typography: {
-      fontFamily: `Montserrat, "Roboto", "Helvetica", "Arial", sans-serif`,
+      fontFamily,
       fontSize: 14,
       fontWeightLight: 300,
       fontWeightRegular: 400,
       fontWeightMedium: 500,
       button: {
-        fontFamily: `Montserrat, "Roboto", "Helvetica", "Arial", sans-serif`,
+        fontFamily,
         fontSize: 14,
         fontWeightLight: 300,
         fontWeightRegular: 400,
@@ -65,33 +66,21 @@ const getMuiTheme = (): Theme => {
       MuiCssBaseline: {
         styleOverrides: {
           body: {
+            "& h1, & h2, & h3": {
+              color: "#303B44",
+            },
+            minHeight: "100vh",
+            position: "relative",
+            paddingBottom: "27rem",
+            backgroundColor:
+              theme.palette.mode === "dark" ? "#212529" : "#F1F3F5",
+            color: theme.palette.mode === "dark" ? "#f1f3f5" : "#000000",
+            "& > footer": {
+              height: "24rem",
+              width: "100%",
+            },
             "& button": {
               background: theme.palette.secondary.light,
-            },
-            "&, & > * > .MuiContainer-root, & > .MuiContainer-root": {
-              "&, &.MuiContainer-maxWidthLg, &.MuiContainer-root": {
-                backgroundColor:
-                  theme.palette.mode === "dark" ? "#212529" : "#FAFAFA",
-                color: theme.palette.mode === "dark" ? "#f1f3f5" : "#000000",
-              },
-            },
-            "& > * > .MuiContainer-root, & > .MuiContainer-root": {
-              "&, &.MuiContainer-maxWidthLg, &.MuiContainer-root": {
-                margin: 0,
-                padding: 0,
-                paddingLeft: 0,
-                paddingRight: 0,
-                minHeight: "100vh",
-                position: "relative",
-                width: "100%",
-                maxWidth: "100vw",
-                minWidth: "100%",
-                paddingBottom: "27rem",
-                "& > footer": {
-                  height: "24rem",
-                  width: "100%",
-                },
-              },
             },
           },
         },
@@ -100,7 +89,7 @@ const getMuiTheme = (): Theme => {
         styleOverrides: {
           badge: {
             fontSize: "1rem",
-            fontFamily: "roboto",
+            fontFamily,
           },
         },
       },
@@ -173,7 +162,7 @@ const getMuiTheme = (): Theme => {
         styleOverrides: {
           root: {
             color: theme.palette.mode === "dark" ? grey[100] : "black",
-            fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
+            fontFamily,
           },
           outlined: {
             "&:not(.MuiInputLabel-shrink)": {
@@ -185,7 +174,7 @@ const getMuiTheme = (): Theme => {
       MuiOutlinedInput: {
         styleOverrides: {
           notchedOutline: {
-            fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
+            fontFamily,
           },
           input: {
             padding: 0,
@@ -199,7 +188,7 @@ const getMuiTheme = (): Theme => {
         styleOverrides: {
           root: {
             "&&, && *": {
-              fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
+              fontFamily,
             },
             "& textarea": {
               padding: 0,
