@@ -179,7 +179,6 @@ const getMuiTheme = (): Theme => {
             },
             "& .MuiButton-iconSizeMedium": {
               transform: "scale(1.2)",
-              marginLeft: "-15px",
             },
           },
         },

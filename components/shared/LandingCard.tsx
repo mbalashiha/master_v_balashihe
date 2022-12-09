@@ -10,6 +10,7 @@ import {
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import StartIcon from "@mui/icons-material/Start";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -22,9 +23,16 @@ export const LandingCard = ({ children, image }: Props) => {
         elevation={6}
         sx={{
           zIndex: 0,
-          minHeight: "220px",
+          minHeight: "240px",
           minWidth: "340px",
           position: "relative",
+          "& ul": {
+            "&, & li": {
+              fontSize: "14px",
+              lineHeight: "18px",
+              color: "#303B44",
+            },
+          },
         }}
       >
         <Stack
@@ -33,18 +41,26 @@ export const LandingCard = ({ children, image }: Props) => {
           py="0.8rem"
           alignItems="flex-end"
           direction="column"
+          spacing={1}
         >
           {children}
           <Button
             sx={{
               padding: 0,
               border: "none",
-              background: "transparent",
+              borderRadius: 0,
+              "&, &:hover, & svg": {
+                background: "white",
+              },
               "&:hover": {
-                background: "transparent",
                 color: "black",
               },
+              "& .MuiButton-startIcon": {
+                pr: 0,
+                mr: "3px",
+              },
             }}
+            startIcon={<StartIcon />}
           >
             Вызвать мастера
           </Button>
@@ -52,11 +68,14 @@ export const LandingCard = ({ children, image }: Props) => {
         <CardMedia
           sx={{
             zIndex: -1,
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            "& img": {
+              zIndex: -1,
+              position: "absolute",
+              top: "auto",
+              right: "auto",
+              bottom: 0,
+              left: 0,
+            },
           }}
         >
           {image}

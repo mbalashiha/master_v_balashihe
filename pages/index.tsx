@@ -36,6 +36,11 @@ export default function Home() {
             }
           >
             <Typography variant="h6">Системные блоки</Typography>
+            <ul>
+              <li>Игровые</li>
+              <li>Для бизнеса</li>
+              <li>Домашние</li>
+            </ul>
           </LandingCard>
           <LandingCard
             image={
@@ -49,6 +54,11 @@ export default function Home() {
             }
           >
             <Typography variant="h6">Моноблоки</Typography>
+            <ul>
+              <li>Для дома</li>
+              <li>Для работы</li>
+              <li>Для учёбы</li>
+            </ul>
           </LandingCard>
           <LandingCard
             image={
@@ -62,6 +72,11 @@ export default function Home() {
             }
           >
             <Typography variant="h6">Ноутбуки</Typography>
+            <ul>
+              <li>Игровые</li>
+              <li>Офисные</li>
+              <li>Домашние</li>
+            </ul>
           </LandingCard>
         </Grid>
         <p>
