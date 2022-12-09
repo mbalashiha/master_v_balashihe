@@ -45,6 +45,9 @@ const getMuiTheme = (): Theme => {
       },
     },
     spacing: 12,
+    shape: {
+      borderRadius: 24,
+    },
     typography: {
       fontFamily,
       fontSize: 14,
@@ -58,6 +61,24 @@ const getMuiTheme = (): Theme => {
         fontWeightRegular: 400,
         fontWeightMedium: 500,
       },
+      h1: {
+        color: "#303B44",
+        fontSize: "40px",
+        lineHeight: "52px",
+        fontWeight: 700,
+      },
+      h2: {
+        color: "#303B44",
+        fontSize: "26px",
+        lineHeight: "32px",
+        fontWeight: 700,
+      },
+      h6: {
+        color: "#303B44",
+        fontSize: "24px",
+        lineHeight: "30px",
+        fontWeight: 600,
+      },
     },
   });
   return createTheme({
@@ -67,7 +88,7 @@ const getMuiTheme = (): Theme => {
         styleOverrides: {
           body: {
             "& h1, & h2, & h3": {
-              color: "#303B44",
+              color: theme.typography.h1.color,
             },
             minHeight: "100vh",
             position: "relative",
@@ -83,6 +104,11 @@ const getMuiTheme = (): Theme => {
               background: theme.palette.secondary.light,
             },
           },
+        },
+      },
+      MuiTypography: {
+        styleOverrides: {
+          h1: {},
         },
       },
       MuiBadge: {

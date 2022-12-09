@@ -1,7 +1,10 @@
 import { Layout } from "@components/site";
-import { Container } from "@mui/material";
+import { Container, Grid, Card, Paper } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import LandingCard from "@components/shared/LandingCard";
 
 export default function Home() {
   return (
@@ -13,9 +16,54 @@ export default function Home() {
           content="Мастер в Балашихе - Закажите ремонт компьютера сегодня"
         />
       </Head>
-      <Container maxWidth="md" sx={{ pt: "200px" }}>
-        <h1>Welcome to Next.js!</h1>
-
+      <Container maxWidth="lg" sx={{ pt: "200px" }}>
+        <Typography component="h1" variant="h1" gutterBottom>
+          <Box component="span" color="primary.main">
+            Ремонтирую
+          </Box>{" "}
+          технику для дома, офиса и бизнеса
+        </Typography>
+        <Grid container sx={{ mt: "1.5rem" }} spacing={3}>
+          <LandingCard
+            image={
+              <Image
+                alt=""
+                quality={100}
+                src="/images/pc2.png"
+                width={360}
+                height={223}
+              />
+            }
+          >
+            <Typography variant="h6">Системные блоки</Typography>
+          </LandingCard>
+          <LandingCard
+            image={
+              <Image
+                alt=""
+                quality={100}
+                src="/images/pc3.png"
+                width={360}
+                height={223}
+              />
+            }
+          >
+            <Typography variant="h6">Моноблоки</Typography>
+          </LandingCard>
+          <LandingCard
+            image={
+              <Image
+                alt=""
+                quality={100}
+                src="/images/pc1.png"
+                width={360}
+                height={223}
+              />
+            }
+          >
+            <Typography variant="h6">Ноутбуки</Typography>
+          </LandingCard>
+        </Grid>
         <p>
           Get started by editing <code>pages/index.tsx</code>
         </p>
