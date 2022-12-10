@@ -54,6 +54,9 @@ const getMuiTheme = (): Theme => {
       fontWeightLight: 300,
       fontWeightRegular: 400,
       fontWeightMedium: 500,
+      allVariants: {
+        color: "#303B44",
+      },
       button: {
         fontFamily,
         fontSize: 14,
@@ -62,19 +65,21 @@ const getMuiTheme = (): Theme => {
         fontWeightMedium: 500,
       },
       h1: {
-        color: "#303B44",
         fontSize: "40px",
         lineHeight: "52px",
         fontWeight: 700,
       },
       h2: {
-        color: "#303B44",
         fontSize: "26px",
         lineHeight: "32px",
         fontWeight: 700,
       },
+      h3: {
+        fontSize: "24px",
+        lineHeight: "37px",
+        fontWeight: 700,
+      },
       h6: {
-        color: "#303B44",
         fontSize: "24px",
         lineHeight: "30px",
         fontWeight: 600,
@@ -122,7 +127,7 @@ const getMuiTheme = (): Theme => {
       MuiMenuItem: {
         styleOverrides: {
           root: {
-            fontFamily: "var(--theme-font)",
+            fontFamily,
             fontWeight: "normal",
             fontSize: "1rem",
           },

@@ -16,7 +16,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
   )?.props?.breadcrumbs;
   return (
     <>
-      <Container>
+      <Container sx={{ pb: "22rem" }}>
         <Navbar />
         {/* {(router.asPath === "/" && <IndexHeader />) || (
             <Box sx={{ width: "100%", height: "6rem" }}></Box>
