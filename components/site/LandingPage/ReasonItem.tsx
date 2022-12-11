@@ -22,7 +22,12 @@ export const ReasonItem = ({ svgIcon, title, children }: Props) => {
           <Typography variant="h3" gutterBottom>
             {title}
           </Typography>
-          <Typography component="p">{children}</Typography>
+          <Typography
+            component="p"
+            sx={{ fontSize: "15px", lineHeight: "23px" }}
+          >
+            {children}
+          </Typography>
         </Box>
       </Stack>
     </Grid>

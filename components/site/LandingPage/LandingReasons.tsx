@@ -19,7 +19,7 @@ export const LandingReasons = () => {
           Есть 4 причины
         </Box>{" "} обратиться ко мне отремонтировать и настроить компьютер
       </Typography>
-      <Grid container sx={{ mt: "1.5rem" }} spacing={2}>
+      <Grid container sx={{ mt: "1.5rem" }} spacing={3}>
         <ReasonItem svgIcon={<IconOne />} title={<>Гарантия 60 дней</>}>
           Я несу ответственность за оказанные мною услуги и после ремонта. На
           все работы можно оформить гарантию.

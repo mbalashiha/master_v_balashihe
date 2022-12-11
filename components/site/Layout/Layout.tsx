@@ -16,14 +16,14 @@ const Layout: FC<Props> = ({ children }: Props) => {
   )?.props?.breadcrumbs;
   return (
     <>
-      <Container sx={{ pb: "22rem" }}>
-        <Navbar />
-        {/* {(router.asPath === "/" && <IndexHeader />) || (
+      <Navbar />
+      {/* {(router.asPath === "/" && <IndexHeader />) || (
             <Box sx={{ width: "100%", height: "6rem" }}></Box>
           )} */}
-        <NavBreadcrumbs breadcrumbs={breadcrumbs}></NavBreadcrumbs>
-        <main>{children}</main>
-      </Container>
+      <NavBreadcrumbs breadcrumbs={breadcrumbs}></NavBreadcrumbs>
+      <Box component="main" pb="24rem">
+        {children}
+      </Box>
       <Footer />
     </>
   );

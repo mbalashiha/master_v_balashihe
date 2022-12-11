@@ -38,7 +38,7 @@ const NavBreadcrumbs = ({ breadcrumbs }: Props) => {
     <>
       {breadcrumbs && (
         <StyledBox>
-          <Container maxWidth="xl">
+          <Container maxWidth="lg">
             <StyledBreadcrumbs
               aria-label="breadcrumb"
               separator={"\u2014"}

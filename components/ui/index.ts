@@ -50,5 +50,6 @@ export { default as Autocomplete } from "./Autocomplete";
 export { default as Popover } from "./Popover";
 export { default as Stack } from "./Stack";
 export { default as SuccessSnackbar } from "./SuccessSnackbar";
+export { default as GradientCard } from "./GradientCard";
 
 export * from "./contexts";

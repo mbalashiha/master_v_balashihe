@@ -189,6 +189,9 @@ const Navbar: FC = () => {
                       fontSize="1.0rem"
                       display="block"
                       pl="0.108rem"
+                      sx={{
+                        color: "#575757",
+                      }}
                     >
                       Компьютерный&nbsp;
                     </Box>
@@ -199,6 +202,9 @@ const Navbar: FC = () => {
                       display="block"
                       position="relative"
                       top="-0.07rem"
+                      sx={{
+                        color: (theme) => theme.palette.primary.main,
+                      }}
                     >
                       Мастер&nbsp;
                     </Box>
@@ -207,6 +213,9 @@ const Navbar: FC = () => {
                       letterSpacing={0}
                       fontSize="1.293rem"
                       display="block"
+                      sx={{
+                        color: "#010031",
+                      }}
                     >
                       в Балашихе
                     </Box>
