@@ -33,7 +33,7 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backdropFilter: "saturate(180%) blur(15px)",
   backgroundColor: "rgba(241, 243, 245, 0.75)",
   boxShadow: "0px 4px 10px 0px rgb(48 59 68 / 20%)",
-  height: "70px",
+  height: "83px",
   "& a": {
     textDecoration: "none",
   },

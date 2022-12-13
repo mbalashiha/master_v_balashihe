@@ -21,7 +21,7 @@ export const GradientCard = ({ children, title, titleIcon }: Props) => {
       elevation={8}
       sx={{
         zIndex: 0,
-        minHeight: "600px",
+        minHeight: "200px",
         width: "inherit",
         position: "relative",
         "& ul": {
@@ -87,7 +87,14 @@ export const GradientCard = ({ children, title, titleIcon }: Props) => {
           </Box>
         </Stack>
       </Box>
-      <Stack width="100%" px="1.7rem" my="2rem" direction="column" spacing={1}>
+      <Stack
+        width="100%"
+        px={{ xs: "1.5rem", md: "2.5rem", lg: "3.5rem" }}
+        pt="2.5rem"
+        pb="1.5rem"
+        direction="column"
+        spacing={{xs: "17px", sm: "8px", md: "17px"}}
+      >
         {children}
       </Stack>
     </Card>

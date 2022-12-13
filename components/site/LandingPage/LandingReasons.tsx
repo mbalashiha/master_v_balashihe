@@ -17,7 +17,7 @@ export const LandingReasons = () => {
       <Typography component="h3" variant="h1" gutterBottom>
         <Box component="span" color="primary.main">
           Есть 4 причины
-        </Box>{" "} обратиться ко мне отремонтировать и настроить компьютер
+        </Box>{" "} обратиться ко мне отремонтировать и настроить компьютер в Балашихе
       </Typography>
       <Grid container sx={{ mt: "1.5rem" }} spacing={3}>
         <ReasonItem svgIcon={<IconOne />} title={<>Гарантия 60 дней</>}>

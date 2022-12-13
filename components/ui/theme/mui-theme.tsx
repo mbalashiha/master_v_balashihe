@@ -111,6 +111,16 @@ const getMuiTheme = (): Theme => {
           },
         },
       },
+      MuiContainer: {
+        styleOverrides: {
+          root: {
+            "@media (min-width: 600px)": {
+              paddingLeft: "18px",
+              paddingRight: "18px",
+            },
+          },
+        },
+      },
       MuiTypography: {
         styleOverrides: {
           h1: {},

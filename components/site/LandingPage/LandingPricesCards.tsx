@@ -8,6 +8,7 @@ import { PriceIcon1 } from "@components/icons/Landing/PriceIcon1";
 import { PriceIcon2 } from "@components/icons/Landing/PriceIcon2";
 import { PriceIcon3 } from "@components/icons/Landing/PriceIcon3";
 import { GradientCard } from "components/ui/GradientCard";
+import PriceRow from "./PriceRow";
 
 export const LandingPricesCards = () => {
   return (
@@ -25,7 +26,17 @@ export const LandingPricesCards = () => {
             title={"Настройка компьютера"}
             titleIcon={<PriceIcon1 />}
           >
-            <></>
+            <PriceRow title={"Установка Windows"} amount={470} />
+            <PriceRow title={"Установка другой ОС"} amount={740} />
+            <PriceRow title={"Установка программ"} amount={330} />
+            <PriceRow title={"Чистка компьютера"} amount={700} />
+            <PriceRow title={"Удаление вирусов"} amount={470} />
+            <PriceRow title={"Настройка Wi-Fi"} amount={300} />
+            <PriceRow title={"Восстановление Windows"} amount={470} />
+            <PriceRow title={"Сброс BIOS"} amount={200} />
+            <PriceRow title={"Аппаратный сброс пароля BIOS"} amount={1170} />
+            <PriceRow title={"Сброс пароля Windows"} amount={200} />
+            <PriceRow title={"Настройка Windows"} amount={700} />
           </GradientCard>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -34,7 +45,17 @@ export const LandingPricesCards = () => {
             title={"Модернизация"}
             titleIcon={<PriceIcon2 />}
           >
-            <></>
+            <PriceRow title={"Замена HDD или SSD"} amount={900} />
+            <PriceRow title={"Настройка RAID массива"} amount={900} />
+            <PriceRow title={"Замена ОЗУ"} amount={400} />
+            <PriceRow title={"Замена процессора"} amount={730} />
+            <PriceRow title={"Замена чипов мат платы"} amount={2000} />
+            <PriceRow title={"Замена шлейфа матрицы"} amount={400} />
+            <PriceRow title={"Замена видеокарты"} amount={800} />
+            <PriceRow title={"Замена кулера"} amount={1070} />
+            <PriceRow title={"Замена разъёмов"} amount={1900} />
+            <PriceRow title={"Замена матрицы"} amount={1700} />
+            <PriceRow title={"Замена батарейки BIOS"} amount={200} />
           </GradientCard>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -43,7 +64,12 @@ export const LandingPricesCards = () => {
             title={"Ремонт устройства"}
             titleIcon={<PriceIcon3 />}
           >
-            <></>
+            <PriceRow title={"Ремонт мат платы"} amount={900} />
+            <PriceRow title={"Пайка элементов мат платы"} amount={1900} />
+            <PriceRow title={"Ремонт цепи питания"} amount={700} />
+            <PriceRow title={"Ремонт корпуса"} amount={400} />
+            <PriceRow title={"Ремонт системы охлаждения"} amount={730} />
+            <PriceRow title={"Ремонт клавиатуры"} amount={400} />
           </GradientCard>
         </Grid>
       </Grid>

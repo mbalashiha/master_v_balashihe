@@ -1,7 +1,9 @@
 function GradientOne() {
   const startColor = "red";
   const stopColor = "black";
-  const idKeySuffix = "_" + startColor + "_" + stopColor;
+  const idKeySuffix = ("_" + startColor + "_" + stopColor)
+    .replaceAll("#", "")
+    .replace(/[\s\/\,\.\(\)]/gim, "_");
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 557 588" fill="none">
       <g clip-path={`url(#clip_gradient_2022${idKeySuffix})`}>
