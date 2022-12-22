@@ -21,7 +21,7 @@ export const CardGridContainer = () => {
             <Image
               alt=""
               quality={100}
-              src="/images/pc2.png"
+              src="/images/landing-banner-background-1.svg"
               width={360}
               height={223}
             />
@@ -39,7 +39,7 @@ export const CardGridContainer = () => {
             <Image
               alt=""
               quality={100}
-              src="/images/pc3.png"
+              src="/images/landing-banner-background-2.svg"
               width={360}
               height={223}
             />
@@ -57,7 +57,7 @@ export const CardGridContainer = () => {
             <Image
               alt=""
               quality={100}
-              src="/images/pc1.png"
+              src="/images/landing-banner-background-3.svg"
               width={360}
               height={223}
             />

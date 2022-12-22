@@ -14,7 +14,7 @@ import StartIcon from "@mui/icons-material/Start";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
-  image: React.ReactNode | React.ReactNode[];
+  image: any | React.ReactNode | React.ReactNode[];
 }
 export const LandingCard = ({ children, image }: Props) => {
   return (
@@ -73,6 +73,8 @@ export const LandingCard = ({ children, image }: Props) => {
               position: "absolute",
               top: "auto",
               right: "auto",
+              width: "auto",
+              height: "100%",
               bottom: 0,
               left: 0,
             },

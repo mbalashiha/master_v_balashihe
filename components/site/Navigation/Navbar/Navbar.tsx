@@ -38,25 +38,6 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
     textDecoration: "none",
   },
 }));
-const StyledBadge = styled(Badge)(({ theme }) => ({
-  cursor: "pointer",
-  "& .MuiSvgIcon-root": {
-    fontSize: "3rem",
-    color: grey[50],
-    transform: "scale(1.001)",
-    transition: "all 0.1s ease-in",
-  },
-  "& .BaseBadge-badge.MuiBadge-badge": {
-    paddingTop: "0.66rem",
-    paddingBottom: "0.53rem",
-    color: "white",
-    background: theme.palette.primary.main,
-  },
-  "&:hover .MuiSvgIcon-root": {
-    transition: "all 0.1s ease-in",
-    transform: "scale(1.1)",
-  },
-}));
 const Navbar: FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mounted, setIsMounted] = React.useState<boolean>(false);
