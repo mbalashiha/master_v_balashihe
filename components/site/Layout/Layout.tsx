@@ -6,6 +6,7 @@ import Footer from "../Footer";
 import { Navbar, NavBreadcrumbs } from "../Navigation";
 import { Container, styled } from "@mui/material";
 import { Box } from "@mui/material";
+import YandexMapIframe from "@components/site/YandexMapIframe";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -23,6 +24,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
       <NavBreadcrumbs breadcrumbs={breadcrumbs}></NavBreadcrumbs>
       <Box component="main" pb="24rem">
         {children}
+        <YandexMapIframe></YandexMapIframe>
       </Box>
       <Footer />
     </>

@@ -15,7 +15,9 @@ const Noop: FC<any> = ({ children }) => <>{children}</>;
 
 function MyMasterApp(ctx: AppProps & { Component: { Layout: FC<any> } }) {
   const { Component, pageProps } = ctx;
-  const Layout = Component.Layout ?? Noop;
+  const hasLayout = !!Component.Layout;
+  const Layout = hasLayout ? Component.Layout : Noop;
+  const CurrentThemeProvider = hasLayout ? ThemeProvider : Noop;
   const themePaletteCtx = useThemePalette(getMuiTheme);
   const { theme } = themePaletteCtx;
   const title = pageProps?.product?.title;
@@ -27,14 +29,14 @@ function MyMasterApp(ctx: AppProps & { Component: { Layout: FC<any> } }) {
         <meta name="description" content="Мастер в Балашихе - Закажите ремонт компьютера сегодня" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ThemeProvider theme={theme}>
+      <CurrentThemeProvider theme={theme}>
         <CssBaseline />
         <AlertsProvider>
           <Layout {...pageProps}>
             <Component {...pageProps} />
           </Layout>
         </AlertsProvider>
-      </ThemeProvider>
+      </CurrentThemeProvider>
     </>
   );
 }
