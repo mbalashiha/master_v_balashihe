@@ -27,8 +27,8 @@ export const IconThree = () => {
           gradientUnits="userSpaceOnUse"
         >
           {" "}
-          <stop stop-color="#852121"></stop>{" "}
-          <stop offset="1" stop-color="#D8002F"></stop>{" "}
+          <stop stopColor="#852121"></stop>{" "}
+          <stop offset="1" stopColor="#D8002F"></stop>{" "}
         </linearGradient>{" "}
         <linearGradient
           id="paint1_linear_2022_reason_icon3"
@@ -39,8 +39,8 @@ export const IconThree = () => {
           gradientUnits="userSpaceOnUse"
         >
           {" "}
-          <stop stop-color="#4E1414"></stop>{" "}
-          <stop offset="1" stop-color="#D8002F"></stop>{" "}
+          <stop stopColor="#4E1414"></stop>{" "}
+          <stop offset="1" stopColor="#D8002F"></stop>{" "}
         </linearGradient>{" "}
       </defs>{" "}
     </svg>

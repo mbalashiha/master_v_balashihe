@@ -20,8 +20,8 @@ export const IconTwo = () => {
           y2="159.184"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#852121"></stop>{" "}
-          <stop offset="1" stop-color="#D8002F"></stop>{" "}
+          <stop stopColor="#852121"></stop>{" "}
+          <stop offset="1" stopColor="#D8002F"></stop>{" "}
         </linearGradient>
       </defs>
     </svg>

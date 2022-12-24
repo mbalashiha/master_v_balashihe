@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="100"
+   height="100"
+   viewBox="0 0 100 100"
+   fill="none"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="icon_phone.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="8.37"
+     inkscape:cx="36.021505"
+     inkscape:cy="50.059737"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <rect
+     x="6"
+     y="6"
+     width="90"
+     height="90"
+     rx="45"
+     id="rect2"
+     style="fill:#aa203e;fill-opacity:1" />
+  <path
+     d="M72.36 60.0133C69.08 60.0133 65.9067 59.48 62.9467 58.52C62.483 58.3628 61.9843 58.3395 61.508 58.4527C61.0316 58.5659 60.5968 58.811 60.2533 59.16L56.0667 64.4133C48.52 60.8133 41.4533 54.0133 37.6933 46.2L42.8933 41.7733C43.6133 41.0267 43.8267 39.9867 43.5333 39.0533C42.5467 36.0933 42.04 32.92 42.04 29.64C42.04 28.2 40.84 27 39.4 27H30.1733C28.7333 27 27 27.64 27 29.64C27 54.4133 47.6133 75 72.36 75C74.2533 75 75 73.32 75 71.8533V62.6533C75 61.2133 73.8 60.0133 72.36 60.0133Z"
+     fill="white"
+     id="path4" />
+</svg>

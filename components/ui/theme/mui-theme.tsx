@@ -7,28 +7,33 @@ import {
   Button as MuiButton,
 } from "@mui/material";
 import { purple, pink, amber, grey, blueGrey } from "@mui/material/colors";
-declare module "@mui/material/styles" {
-  interface Theme {
-    // status: {
-    //   danger: string;
-    // };
+declare module "@mui/material/styles/createTypography" {
+  interface Typography {
+    allVariants: {
+      color: React.CSSProperties["color"];
+    };
   }
+  // interface Palette {
+  //   borderColor: Palette["primary"] & {
+  //     primaryButton: React.CSSProperties["color"];
+  //   };
+  // }
+  // interface PaletteOptions {
+  //   borderColor?: PaletteOptions["primary"] & {
+  //     primaryButton: React.CSSProperties["color"];
+  //   };
+  // }
+  // interface Theme {
+  // status: {
+  //   danger: string;
+  // };
+  // }
   // allow configuration using `createTheme`
-  interface ThemeOptions {
-    // status?: {
-    //   danger?: string;
-    // };
-  }
-  interface Palette {
-    borderColor: Palette["primary"] & {
-      primaryButton: React.CSSProperties["color"];
-    };
-  }
-  interface PaletteOptions {
-    borderColor?: PaletteOptions["primary"] & {
-      primaryButton: React.CSSProperties["color"];
-    };
-  }
+  // interface ThemeOptions {
+  // status?: {
+  //   danger?: string;
+  // };
+  // }
 }
 const getMuiTheme = (): Theme => {
   const colorMode: PaletteMode = "light";
@@ -39,9 +44,6 @@ const getMuiTheme = (): Theme => {
       primary: { main: "#AA203E" },
       background: {
         default: "#4D001D",
-      },
-      borderColor: {
-        primaryButton: "#DD2626",
       },
     },
     spacing: 12,
