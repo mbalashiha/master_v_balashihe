@@ -2,8 +2,9 @@ import { Container, Grid, Card, Paper, Stack } from "@mui/material";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import YandexMapIframe from "@components/site/YandexMapIframe";
 
-export const LastHeaderBeforeContacts = () => {
+export const BottomContactsWithMap = () => {
   return (
     <Container maxWidth={"lg"} sx={{ pt: "100px" }}>
       <Typography
@@ -15,7 +16,7 @@ export const LastHeaderBeforeContacts = () => {
         color={(theme) => theme.palette.text.primary}
       >
         <Box component="span" color="primary.main">
-          Готовы заказать{" "}
+          Хотите заказать{" "}
         </Box>
         <br /> ремонт компьютера{" "}
         <Box component="span" color="primary.main">
@@ -23,6 +24,7 @@ export const LastHeaderBeforeContacts = () => {
         </Box>
         ?
       </Typography>
+      <YandexMapIframe></YandexMapIframe>
     </Container>
   );
 };

@@ -8,7 +8,6 @@ import LandingCard from "@components/shared/LandingCard";
 import CardGridContainer from "@components/site/LandingPage/CardGridContainer";
 import LandingReasons from "@components/site/LandingPage/LandingReasons";
 import LandingPricesCards from "@components/site/LandingPage/LandingPricesCards";
-import { LastHeaderBeforeContacts } from "@components/site/LandingPage/LastHeaderBeforeContacts";
 
 export default function Home() {
   return (
@@ -23,7 +22,6 @@ export default function Home() {
       <CardGridContainer />
       <LandingReasons />
       <LandingPricesCards />
-      <LastHeaderBeforeContacts />
     </>
   );
 }
