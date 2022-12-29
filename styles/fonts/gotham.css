@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-LightItalic.eot');
-    src: local('/fonts/gotham/Gotham Light Italic'), local('/fonts/gotham/Gotham-LightItalic'),
+    src: local('Gotham Light Italic'), local('Gotham-LightItalic'),
         url('/fonts/gotham/Gotham-LightItalic.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-LightItalic.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-LightItalic.woff') format('woff'),
@@ -13,7 +13,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-BoldItalic.eot');
-    src: local('/fonts/gotham/Gotham Bold Italic'), local('/fonts/gotham/Gotham-BoldItalic'),
+    src: local('Gotham Bold Italic'), local('Gotham-BoldItalic'),
         url('/fonts/gotham/Gotham-BoldItalic.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-BoldItalic.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-BoldItalic.woff') format('woff'),
@@ -25,7 +25,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-XLight.eot');
-    src: local('/fonts/gotham/Gotham ExtraLight'), local('/fonts/gotham/Gotham-XLight'),
+    src: local('Gotham ExtraLight'), local('Gotham-XLight'),
         url('/fonts/gotham/Gotham-XLight.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-XLight.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-XLight.woff') format('woff'),
@@ -37,7 +37,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-Thin.eot');
-    src: local('/fonts/gotham/Gotham Thin'), local('/fonts/gotham/Gotham-Thin'),
+    src: local('Gotham Thin'), local('Gotham-Thin'),
         url('/fonts/gotham/Gotham-Thin.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-Thin.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-Thin.woff') format('woff'),
@@ -49,7 +49,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-Book.eot');
-    src: local('/fonts/gotham/Gotham Book'), local('/fonts/gotham/Gotham-Book'),
+    src: local('Gotham Book'), local('Gotham-Book'),
         url('/fonts/gotham/Gotham-Book.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-Book.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-Book.woff') format('woff'),
@@ -61,7 +61,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-ThinItalic.eot');
-    src: local('/fonts/gotham/Gotham Thin Italic'), local('/fonts/gotham/Gotham-ThinItalic'),
+    src: local('Gotham Thin Italic'), local('Gotham-ThinItalic'),
         url('/fonts/gotham/Gotham-ThinItalic.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-ThinItalic.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-ThinItalic.woff') format('woff'),
@@ -73,7 +73,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-MediumItalic.eot');
-    src: local('/fonts/gotham/Gotham Medium Italic'), local('/fonts/gotham/Gotham-MediumItalic'),
+    src: local('Gotham Medium Italic'), local('Gotham-MediumItalic'),
         url('/fonts/gotham/Gotham-MediumItalic.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-MediumItalic.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-MediumItalic.woff') format('woff'),
@@ -85,7 +85,7 @@
 @font-face {
     font-family: 'Gotham Ultra';
     src: url('/fonts/gotham/Gotham-UltraItalic.eot');
-    src: local('/fonts/gotham/Gotham Ultra Italic'), local('/fonts/gotham/Gotham-UltraItalic'),
+    src: local('Gotham Ultra Italic'), local('Gotham-UltraItalic'),
         url('/fonts/gotham/Gotham-UltraItalic.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-UltraItalic.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-UltraItalic.woff') format('woff'),
@@ -97,7 +97,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-BookItalic.eot');
-    src: local('/fonts/gotham/Gotham Book Italic'), local('/fonts/gotham/Gotham-BookItalic'),
+    src: local('Gotham Book Italic'), local('Gotham-BookItalic'),
         url('/fonts/gotham/Gotham-BookItalic.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-BookItalic.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-BookItalic.woff') format('woff'),
@@ -109,7 +109,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-BlackItalic.eot');
-    src: local('/fonts/gotham/Gotham Black Italic'), local('/fonts/gotham/Gotham-BlackItalic'),
+    src: local('Gotham Black Italic'), local('Gotham-BlackItalic'),
         url('/fonts/gotham/Gotham-BlackItalic.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-BlackItalic.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-BlackItalic.woff') format('woff'),
@@ -121,7 +121,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-Light.eot');
-    src: local('/fonts/gotham/Gotham Light'), local('/fonts/gotham/Gotham-Light'),
+    src: local('Gotham Light'), local('Gotham-Light'),
         url('/fonts/gotham/Gotham-Light.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-Light.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-Light.woff') format('woff'),
@@ -133,7 +133,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-Bold.eot');
-    src: local('/fonts/gotham/Gotham Bold'), local('/fonts/gotham/Gotham-Bold'),
+    src: local('Gotham Bold'), local('Gotham-Bold'),
         url('/fonts/gotham/Gotham-Bold.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-Bold.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-Bold.woff') format('woff'),
@@ -145,7 +145,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-Medium.eot');
-    src: local('/fonts/gotham/Gotham Medium'), local('/fonts/gotham/Gotham-Medium'),
+    src: local('Gotham Medium'), local('Gotham-Medium'),
         url('/fonts/gotham/Gotham-Medium.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-Medium.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-Medium.woff') format('woff'),
@@ -157,7 +157,7 @@
 @font-face {
     font-family: 'Gotham Ultra';
     src: url('/fonts/gotham/Gotham-Ultra.eot');
-    src: local('/fonts/gotham/Gotham Ultra'), local('/fonts/gotham/Gotham-Ultra'),
+    src: local('Gotham Ultra'), local('Gotham-Ultra'),
         url('/fonts/gotham/Gotham-Ultra.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-Ultra.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-Ultra.woff') format('woff'),
@@ -169,7 +169,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-XLightItalic.eot');
-    src: local('/fonts/gotham/Gotham ExtraLight Italic'), local('/fonts/gotham/Gotham-XLightItalic'),
+    src: local('Gotham ExtraLight Italic'), local('Gotham-XLightItalic'),
         url('/fonts/gotham/Gotham-XLightItalic.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-XLightItalic.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-XLightItalic.woff') format('woff'),
@@ -181,7 +181,7 @@
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/gotham/Gotham-Black.eot');
-    src: local('/fonts/gotham/Gotham Black'), local('/fonts/gotham/Gotham-Black'),
+    src: local('Gotham Black'), local('Gotham-Black'),
         url('/fonts/gotham/Gotham-Black.eot?#iefix') format('embedded-opentype'),
         url('/fonts/gotham/Gotham-Black.woff2') format('woff2'),
         url('/fonts/gotham/Gotham-Black.woff') format('woff'),

@@ -88,12 +88,13 @@ export const GradientCard = ({ children, title, titleIcon }: Props) => {
         </Stack>
       </Box>
       <Stack
+        component="ul"
         width="100%"
         px={{ xs: "1.5rem", md: "2.5rem", lg: "3.5rem" }}
         pt="2.5rem"
         pb="1.5rem"
         direction="column"
-        spacing={{xs: "17px", sm: "8px", md: "17px"}}
+        spacing={{ xs: "17px", sm: "8px", md: "17px" }}
       >
         {children}
       </Stack>

@@ -36,7 +36,7 @@ declare module "@mui/material/styles/createTypography" {
   // }
 }
 const getMuiTheme = (): Theme => {
-  const colorMode: PaletteMode = "light";
+  const colorMode: PaletteMode = "light" as any;
   const fontFamily = "Gotham, Arial, sans-serif";
   let theme = createTheme({
     palette: {
@@ -75,11 +75,17 @@ const getMuiTheme = (): Theme => {
         fontSize: "26px",
         lineHeight: "32px",
         fontWeight: 700,
+        color: grey[700],
+        marginTop: "30px",
       },
       h3: {
         fontSize: "24px",
         lineHeight: "37px",
         fontWeight: 700,
+      },
+      h5: {
+        color: colorMode === "dark" ? "white" : "black",
+        fontWeight: 500,
       },
       h6: {
         fontSize: "24px",
@@ -96,6 +102,9 @@ const getMuiTheme = (): Theme => {
           body: {
             "& h1, & h2, & h3": {
               color: theme.typography.h1.color,
+            },
+            "& p": {
+              marginBottom: "2rem",
             },
             minHeight: "100vh",
             position: "relative",
@@ -116,6 +125,8 @@ const getMuiTheme = (): Theme => {
       MuiContainer: {
         styleOverrides: {
           root: {
+            paddingLeft: "8px",
+            paddingRight: "8px",
             "@media (min-width: 600px)": {
               paddingLeft: "18px",
               paddingRight: "18px",

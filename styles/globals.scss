@@ -1,4 +1,5 @@
 @import "@styles/fonts/gotham.css";
+@import "@styles/fonts/segoe-ui.css";
 
 html,
 body,
@@ -6,6 +7,15 @@ body,
   padding: 0;
   margin: 0;
   font-family: Gotham, Arial, sans-serif;
+}
+ul {
+  padding: 1em 1em 1em 2.5em;
+}
+li {
+  padding: 0.25em 0;
+  text-indent: 0;
+  font-family: "Segoe UI", Tahoma, Verdana, Arial;
+  // font-size: 1em;
 }
 // @media (prefers-color-scheme: dark) {
 //   html {

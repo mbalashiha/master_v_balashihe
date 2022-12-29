@@ -9,6 +9,7 @@ import { PriceIcon2 } from "@components/icons/Landing/PriceIcon2";
 import { PriceIcon3 } from "@components/icons/Landing/PriceIcon3";
 import { GradientCard } from "components/ui/GradientCard";
 import PriceRow from "./PriceRow";
+import Link from "next/link";
 
 export const LandingPricesCards = () => {
   return (
@@ -26,7 +27,11 @@ export const LandingPricesCards = () => {
             title={"Настройка компьютера"}
             titleIcon={<PriceIcon1 />}
           >
-            <PriceRow title={"Установка Windows"} amount={470} />
+            <PriceRow
+              href="/uslugi-mastera-v-balashihe/ustanovka-windows"
+              title={"Установка Windows в Балашихе"}
+              amount={470}
+            />
             <PriceRow title={"Установка другой ОС"} amount={740} />
             <PriceRow title={"Установка программ"} amount={330} />
             <PriceRow title={"Чистка компьютера"} amount={700} />
@@ -64,6 +69,11 @@ export const LandingPricesCards = () => {
             title={"Ремонт устройства"}
             titleIcon={<PriceIcon3 />}
           >
+            <PriceRow
+              href={`/uslugi-mastera-v-balashihe/remont-kompyuterov-s-horoshymi-otzyvami`}
+              title={"Ремонт в Балашихе с хорошими озывами"}
+              amount={900}
+            />
             <PriceRow title={"Ремонт мат платы"} amount={900} />
             <PriceRow title={"Пайка элементов мат платы"} amount={1900} />
             <PriceRow title={"Ремонт цепи питания"} amount={700} />

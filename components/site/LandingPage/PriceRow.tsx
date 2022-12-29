@@ -1,16 +1,42 @@
 import { Layout } from "@components/site";
-import { Container, Grid, Card, Paper, Stack } from "@mui/material";
+import { Container, Grid, Card, Paper, Stack, styled } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
+type NextLinkProps = React.ComponentProps<typeof Link>;
 interface Props {
   title: React.ReactNode;
   amount: string | number;
+  href?: NextLinkProps["href"];
 }
-export const PriceRow = ({ title, amount }: Props) => {
+const StyledLink = styled(Link)(({ theme }) => ({
+  "&, & *": {
+    color: theme.palette.text.primary,
+  },
+  "&:hover": {
+    "&, & *": {
+      color: theme.palette.primary.main,
+    },
+  },
+}));
+const UpperLink = ({ href, children }: any) => {
+  if (href) {
+    return (
+      <b>
+        <StyledLink href={href}>{children}</StyledLink>
+      </b>
+    );
+  } else {
+    return <>{children}</>;
+  }
+};
+
+export const PriceRow = ({ href, title, amount }: Props) => {
   return (
     <Stack
+      component={"li"}
       direction="row"
       spacing={2}
       width="100%"
@@ -22,10 +48,10 @@ export const PriceRow = ({ title, amount }: Props) => {
         },
       }}
     >
-      <Typography component="div" sx={{ flexGrow: 1 }}>
-        {title}
+      <Typography component="span" sx={{ flexGrow: 1 }}>
+        <UpperLink href={href}>{title}</UpperLink>
       </Typography>
-      <Typography component="div">от {amount} &#x20bd;</Typography>
+      <Typography component="span">от {amount} &#x20bd;</Typography>
     </Stack>
   );
 };
