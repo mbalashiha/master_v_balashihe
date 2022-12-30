@@ -6,7 +6,6 @@ import {
   CardHeader,
 } from "@components/ui";
 import { Grid } from "@mui/material";
-import { ImagePlacehoder } from "@components/icons";
 import { calculateAspectRatioFit } from "@lib/aspect-ration-fit";
 import { CardMediaImage } from "./CardMediaImage";
 import Link from "next/link";

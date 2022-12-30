@@ -1,4 +1,6 @@
-import { Box, Typography, Paper } from "@mui/material";
+import { GradientBackground1 } from "@components/shared/Gradients/Backgrounds";
+import { Box, Typography, Paper, Grid } from "@mui/material";
+import ImagePaper from "@components/common/Article/ImagePaper";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -11,6 +13,12 @@ export default function Article({ title, children }: Props) {
       <Typography component="h1" variant="h5" gutterBottom>
         {title}
       </Typography>
+      <Grid container sx={{ mt: "30px", mb: "60px" }}>
+        <Grid item xs={12} md={6}>
+          <ImagePaper />
+        </Grid>
+        <Grid item xs={12} md={6}></Grid>
+      </Grid>
       <Paper
         component="article"
         elevation={0}

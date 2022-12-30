@@ -54,7 +54,7 @@ const ButtonForStyling = ({
   ...props
 }: ButtonForStylingProps) => <Button {...props} />;
 
-const StyledButton = styled(ButtonForStyling)<{
+const StyledButton: any = styled(ButtonForStyling)<{
   zIndex: number;
   isLoading: boolean;
   oneClickSended: boolean;
@@ -106,7 +106,7 @@ const StyledButton = styled(ButtonForStyling)<{
     },
   },
 }));
-const SecondButton = styled(StyledButton)<{
+const SecondButton: any = styled(StyledButton)<{
   zIndex: number;
   isLoading: boolean;
   oneClickSended: boolean;

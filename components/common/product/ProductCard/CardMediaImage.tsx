@@ -1,5 +1,4 @@
 import { Card, CardMedia, CardContent, CardHeader } from "@components/ui";
-import { ImagePlacehoder } from "@components/icons";
 import { calculateAspectRatioFit } from "@lib/aspect-ration-fit";
 import Link from "next/link";
 import Image from "next/image";
@@ -32,7 +31,7 @@ const CardMediaImage = ({ sx, product, ...props }: Props) => {
             layout="responsive"
           />
         ) : (
-          <ImagePlacehoder />
+          <></>
         )}
       </Link>
     </CardMedia>

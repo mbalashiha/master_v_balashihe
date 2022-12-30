@@ -1,6 +1,4 @@
-import { ProductInList } from "@common/commerce/types";
 import { Card, CardMedia, CardContent, CardHeader } from "@components/ui";
-import { ImagePlacehoder } from "@components/icons";
 import { calculateAspectRatioFit } from "@lib/aspect-ration-fit";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,7 +9,7 @@ import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { CardMediaTypeMap } from "@mui/material";
 interface Props
   extends ComponentProps<OverridableComponent<CardMediaTypeMap<{}, "div">>> {
-  product: ProductInList;
+  product: any;
 }
 export const CardMediaImage = ({ sx, product, ...props }: Props) => {
   return (
@@ -33,7 +31,7 @@ export const CardMediaImage = ({ sx, product, ...props }: Props) => {
             layout="responsive"
           />
         ) : (
-          <ImagePlacehoder />
+          <></>
         )}
       </Link>
     </CardMedia>

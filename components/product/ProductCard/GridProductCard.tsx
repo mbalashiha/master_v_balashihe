@@ -1,4 +1,4 @@
-import { Product, ProductInList } from "@common/commerce/types";
+
 import {
   Stack,
   Card,
@@ -7,7 +7,6 @@ import {
   CardHeader,
 } from "@components/ui";
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
-import { ImagePlacehoder } from "@components/icons";
 import { calculateAspectRatioFit } from "@lib/aspect-ration-fit";
 import { CardMediaImage } from "./CardMediaImage";
 import Link from "next/link";
@@ -18,7 +17,7 @@ import cn from "classnames";
 import PriceNode from "@components/product/Price";
 import { Grid, Box, Button, Rating } from "@mui/material";
 interface Props {
-  product: ProductInList;
+  product: any;
   key: string;
 }
 const GridProductCard: FC<Props> = ({ key, product }) => {
