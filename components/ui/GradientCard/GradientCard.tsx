@@ -14,8 +14,14 @@ interface Props {
   children: React.ReactNode | React.ReactNode[];
   title: React.ReactNode;
   titleIcon?: React.ReactNode;
+  gradientNumber?: number;
 }
-export const GradientCard = ({ children, title, titleIcon }: Props) => {
+export const GradientCard = ({
+  children,
+  title,
+  titleIcon,
+  gradientNumber = 1,
+}: Props) => {
   return (
     <Card
       elevation={8}
@@ -27,31 +33,12 @@ export const GradientCard = ({ children, title, titleIcon }: Props) => {
         "& ul": {
           "&, & li": {},
         },
+        backgroundPosition: "top",
+        backgroundSize: "fit",
+        backgroundRepeat: "no-repeat",
+        backgroundImage: `url('/images/gradients/list-card-head-gradient-${gradientNumber}.svg')`,
       }}
     >
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          "& svg": {},
-          "& svg, & svg rect": {
-            zIndex: -1,
-            width: "100%",
-            minWidth: "557px",
-            position: "absolute",
-            top: 0,
-            left: "auto",
-            right: "auto",
-            bottom: "auto",
-            marginLeft: "auto",
-            marginRight: "auto",
-          },
-        }}
-      >
-        <GradientOne />
-      </Box>
       <Box
         sx={{
           width: "100%",

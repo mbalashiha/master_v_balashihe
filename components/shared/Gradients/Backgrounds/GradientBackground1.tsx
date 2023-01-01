@@ -10,7 +10,7 @@ const GradientBackground1 = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs id="defs136">
-        <linearGradient id="linearGradient5532">
+        <linearGradient id="linearGradient15532">
           <stop
             style={{ stopColor: "#ff3945", stopOpacity: 1 }}
             offset="0"
@@ -38,8 +38,8 @@ const GradientBackground1 = () => {
           />
         </linearGradient>
         <linearGradient
-          xlinkHref="#linearGradient5532"
-          id="linearGradient5534"
+          xlinkHref="#linearGradient15532"
+          id="linearGradient15534"
           x1="-35.233685"
           y1="2.4075248"
           x2="1479.0995"
@@ -51,12 +51,12 @@ const GradientBackground1 = () => {
       <g id="layer2" transform="translate(0,-15.925455)">
         <path
           style={{
-            fill: "url(#linearGradient5534)",
+            fill: "url(#linearGradient15534)",
             fillOpacity: 1,
             stroke: "none",
           }}
           d="m 0,54.977555 c 13.748762,-0.444135 106.82514,-21.499249 68.619924,65.860755 -26.111269,59.706 14.182729,80.2534 50.892156,80.02724 51.9463,-0.32005 76.68721,7.37385 123.05811,15.4058 73.90819,12.80171 179.11466,-20.66634 223.76152,-15.98618 74.30797,7.78941 36.85103,37.37538 159.83232,29.69158 289.63249,-17.01087 430.19107,26.46556 648.89607,-0.77478 59.7844,-7.62358 157.3593,11.54127 202.1496,-21.11462 v 57.8381 H 738.60485 0 V 158.21197 Z"
-          id="path5454"
+          id="path15454"
         />
       </g>
     </svg>

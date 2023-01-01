@@ -29,7 +29,7 @@ export const LandingPricesCards = () => {
           >
             <PriceRow
               href="/uslugi-mastera-v-balashihe/ustanovka-windows"
-              title={"Установка Windows в Балашихе"}
+              title={"Установка Windows"}
               amount={470}
             />
             <PriceRow title={"Установка другой ОС"} amount={740} />
@@ -49,6 +49,7 @@ export const LandingPricesCards = () => {
             key={"2"}
             title={"Модернизация"}
             titleIcon={<PriceIcon2 />}
+            gradientNumber={2}
           >
             <PriceRow title={"Замена HDD или SSD"} amount={900} />
             <PriceRow title={"Настройка RAID массива"} amount={900} />
@@ -68,10 +69,11 @@ export const LandingPricesCards = () => {
             key={"3"}
             title={"Ремонт устройства"}
             titleIcon={<PriceIcon3 />}
+            gradientNumber={3}
           >
             <PriceRow
               href={`/uslugi-mastera-v-balashihe/remont-kompyuterov-s-horoshymi-otzyvami`}
-              title={"Ремонт в Балашихе с хорошими озывами"}
+              title={"Ремонт с хорошими отзывами"}
               amount={900}
             />
             <PriceRow title={"Ремонт мат платы"} amount={900} />
@@ -80,6 +82,25 @@ export const LandingPricesCards = () => {
             <PriceRow title={"Ремонт корпуса"} amount={400} />
             <PriceRow title={"Ремонт системы охлаждения"} amount={730} />
             <PriceRow title={"Ремонт клавиатуры"} amount={400} />
+          </GradientCard>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <GradientCard
+            key={"3"}
+            title={"Балашиха"}
+            titleIcon={<PriceIcon3 />}
+            gradientNumber={4}
+          >
+            <PriceRow
+              href={`/uslugi-mastera-v-balashihe/remont-kompyuterov-s-horoshymi-otzyvami`}
+              title={"Ремонт в Балашихе с хорошими отзывами"}
+              amount={900}
+            />            
+            <PriceRow
+              href="/uslugi-mastera-v-balashihe/ustanovka-windows"
+              title={"Установка Windows в Балашихе"}
+              amount={470}
+            />
           </GradientCard>
         </Grid>
       </Grid>

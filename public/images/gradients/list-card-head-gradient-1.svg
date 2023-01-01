@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="154.108mm"
+   height="30mm"
+   viewBox="0 0 582.45546 113.38584"
+   sodipodi:docname="list-card-head-gradient-1.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient2491">
+      <stop
+         style="stop-color:#00a9ef;stop-opacity:1;"
+         offset="0"
+         id="stop2489" />
+      <stop
+         style="stop-color:#e10001;stop-opacity:1;"
+         offset="1"
+         id="stop2487" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2491"
+       id="linearGradient2493"
+       x1="-123.7978"
+       y1="154.25807"
+       x2="597.71234"
+       y2="-60.972"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter9605"
+       x="-0.011202872"
+       y="-0.061589474"
+       width="1.0234829"
+       height="1.1439062">
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(68,68,68)"
+         result="flood"
+         id="feFlood9595" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite9597" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="2.6"
+         result="blur"
+         id="feGaussianBlur9599" />
+      <feOffset
+         dx="0.6"
+         dy="2.1"
+         result="offset"
+         id="feOffset9601" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite9603" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="1.7051519"
+     inkscape:cx="261.26705"
+     inkscape:cy="57.472886"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2"
+     inkscape:document-units="mm" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Моё">
+    <path
+       id="path1005"
+       style="fill:url(#linearGradient2493);fill-opacity:1;stroke:none;stroke-width:1;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers stroke fill;filter:url(#filter9605)"
+       d="m 0,0 v 101.31601 c 0,0 17.744552,-45.112951 70.160295,-24.99953 C 200.23706,126.23066 139.62736,37.512562 443.30979,90.621443 540.5143,107.62085 556.99999,52.361149 556.99999,52.361149 L 557,0 Z"
+       sodipodi:nodetypes="ccssccc"
+       inkscape:label="path1005"
+       transform="scale(1.045701,1)" />
+  </g>
+</svg>
