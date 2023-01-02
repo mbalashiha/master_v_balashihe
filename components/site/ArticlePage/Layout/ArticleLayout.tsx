@@ -11,13 +11,8 @@ interface Props {
 const ArticleLayout: FC<Props> = ({ children }: Props) => {
   return (
     <Layout>
-      <Container sx={{ pt: "160px" }} maxWidth={"xl"}>
-        <Grid container>
-          <Grid item xs={12} md={9}>
-            {children}
-          </Grid>
-          <Grid item xs={12} md={3}></Grid>
-        </Grid>
+      <Container sx={{ pt: "160px", px: { xl: 0 } }} maxWidth={"xl"}>
+        {children}
       </Container>
     </Layout>
   );

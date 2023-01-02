@@ -38,8 +38,9 @@ export default function ImagePaper({ gradientBackground }: Props) {
         overflow: "hidden",
         height: "400px",
         width: { xs: "100%", md: "500px" },
-        "& svg": {
-          zIndex: 2,
+        maxWidth: "100%",
+        "& img": {
+          width: "100%",
         },
       }}
     >
@@ -51,7 +52,6 @@ export default function ImagePaper({ gradientBackground }: Props) {
       ></Image>
       <Box
         sx={{
-          zIndex: 0,
           "& svg": {
             zIndex: -1,
             position: "absolute",
