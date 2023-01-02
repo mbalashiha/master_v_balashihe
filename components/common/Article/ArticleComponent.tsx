@@ -10,7 +10,11 @@ interface Props {
 export default function Article({ title, children }: Props) {
   return (
     <>
-      <Grid container sx={{ mt: 0, mb: "60px" }} spacing={0}>
+      <Grid
+        container
+        sx={{ mt: 0, mb: "60px" }}
+        spacing={{ xs: 0, lg: 1, xl: 2 }}
+      >
         <Grid item xs={12} lg={8} xl={9}>
           <Typography
             component="h1"
@@ -57,7 +61,7 @@ export default function Article({ title, children }: Props) {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} lg={4} xl={3} sx={{ pt: { xs: 1, lg: 8 } }}>
+        <Grid item xs={12} lg={4} xl={3} sx={{ pt: { xs: 1, lg: 8, xl: 8 } }}>
           <Paper sx={{ width: "100%", minHeight: "400px" }}></Paper>
         </Grid>
       </Grid>
