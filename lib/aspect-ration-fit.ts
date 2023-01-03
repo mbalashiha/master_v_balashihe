@@ -18,3 +18,13 @@ export function roundUp(num: number, precision: number = 1) {
   precision = Math.pow(10, precision);
   return Math.ceil(num * precision) / precision;
 }
+export function fitWidth(
+  srcWidth: number,
+  srcHeight: number,
+  maxWidth: number
+): { width: number; height: number } {
+  srcWidth = srcWidth || maxWidth || 1;
+  const ratio = maxWidth / srcWidth;
+
+  return { width: srcWidth * ratio, height: srcHeight * ratio };
+}

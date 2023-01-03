@@ -5,26 +5,34 @@ import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Article } from "@components/common/Article";
-import Link from "next/link";
 
 export default function Page() {
   return (
     <>
       <Head>
         <title>
-          Мастер по ремонту компьютеров с хорошими отзывами в Балашихе
+          Мастер по ремонту компьютеров Удалить вирусы в компьютере по низкой
+          цене или удалить вирусы самому
         </title>
         <meta
           name="description"
-          content="Мастер по ремонту компьютеров с хорошими отзывами в Балашихе"
+          content="Мастер по ремонту компьютеров Удалить вирусы в компьютере по низкой цене или удалить вирусы самому"
         />
       </Head>
       <Article
-        title={`Мастер по ремонту компьютеров с хорошими отзывами в Балашихе. Мастер с выездом на дом или в офисе рядом с центром города Балашиха`}
+        title={`Удалить вирусы в компьютере по низкой цене или удалить вирусы самому - Мастер по ремонту компьютеров`}
+        image={
+          <Image
+            src={"/images/pages/virus.png"}
+            width={750}
+            height={750}
+            alt="Удаление вирусов в Балашихе"
+            layout="responsive"
+          />
+        }
       >
         <Typography component="h2" variant="h2" gutterBottom>
-          Возможно ли справиться с ремонтом компьютерной техники самому?
-          Оправдано ли это?
+          Удалить вирусы в компьютере по низкой цене или удалить вирусы самому
         </Typography>
         <p>
           Конечно можно освоить любую предметную область, если есть желание.
@@ -66,12 +74,8 @@ export default function Page() {
               Windows 10 и Windows 11
             </li>
             <li>
-              Мастер может вручную{" "}
-              <Link href="/uslugi-mastera-v-balashihe/nizkaya-tsena-udaleniya-computer-virus">
-                удалить компьютерные вирусы и восстановить Вашу антивирусную
-                защиту
-              </Link>{" "}
-              Microsoft Defender
+              Мастер может вручную удалить компьютерные вирусы и восстановить
+              Вашу антивирусную защиту Microsoft Defender
             </li>
             <li>
               Вдохнуть в Ваш морально и физически устаревший компьютер вторую

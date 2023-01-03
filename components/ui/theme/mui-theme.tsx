@@ -106,6 +106,17 @@ const getMuiTheme = (): Theme => {
             "& p": {
               marginBottom: "2rem",
             },
+            "& a": {
+              color: theme.palette.primary.main,
+              textDecoration: "none",
+              transition: "all 0.1s linear",
+              fontWeight: 600,
+              "&:hover": {
+                color: "red",
+                textDecoration: "none",
+                transition: "all 0.1s linear",
+              },
+            },
             minHeight: "100vh",
             position: "relative",
             paddingBottom: "27rem",

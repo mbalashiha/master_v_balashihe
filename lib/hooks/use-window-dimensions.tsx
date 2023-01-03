@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 interface WindowDimensions {
   width: number;
   height: number;
-  orientation: "landscape" | "portraite";
+  orientation: "landscape" | "portrate";
   windowWidthBiggerOrEqualThanHeigh: boolean;
 }
 
@@ -12,7 +12,7 @@ function getWindowDimensions(): WindowDimensions {
   return {
     width,
     height,
-    orientation: innerWidth >= innerHeight ? "landscape" : "portraite",
+    orientation: innerWidth >= innerHeight ? "landscape" : "portrate",
     windowWidthBiggerOrEqualThanHeigh: innerWidth >= innerHeight,
   };
 }

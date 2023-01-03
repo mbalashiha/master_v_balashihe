@@ -1,13 +1,18 @@
 import { GradientBackground1 } from "@components/shared/Gradients/Backgrounds";
 import { Box, Typography, Paper, Grid } from "@mui/material";
 import ImagePaper from "@components/common/Article/ImagePaper";
+import Image from "next/image";
+
+type NextImageType = typeof Image;
+type NextImageTypeProps = React.ComponentProps<NextImageType>;
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
   title: string;
+  image?: React.ReactNode;
 }
 
-export default function Article({ title, children }: Props) {
+export default function Article({ title, children, image }: Props) {
   return (
     <>
       <Grid
@@ -29,7 +34,7 @@ export default function Article({ title, children }: Props) {
             spacing={{ xs: 1, sm: 1, md: 2, lg: 3, xl: 4 }}
           >
             <Grid item xs={12} md={6} lg={6}>
-              <ImagePaper />
+              <ImagePaper image={image} />
             </Grid>
             <Grid item xs={12} md={6} lg={6}></Grid>
             <Grid item xs={12} md={12}>
