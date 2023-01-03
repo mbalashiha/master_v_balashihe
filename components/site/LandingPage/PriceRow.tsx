@@ -51,7 +51,12 @@ export const PriceRow = ({ href, title, amount }: Props) => {
       <Typography component="span" sx={{ flexGrow: 1 }}>
         <UpperLink href={href}>{title}</UpperLink>
       </Typography>
-      <Typography component="span">от {amount} &#x20bd;</Typography>
+      <Typography
+        component="span"
+        sx={{ minWidth: { xs: "90px", sm: "80px" } }}
+      >
+        от {amount} &#x20bd;
+      </Typography>
     </Stack>
   );
 };

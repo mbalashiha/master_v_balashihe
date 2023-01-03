@@ -4,12 +4,12 @@ import { Box } from "@mui/material";
 const MasterSvgLogo = () => (
   <Box
     sx={{
-      pr: "1.4rem",
+      pr: "0.4rem",
       "&, & svg": {
-        height: "6rem",
+        height: "6.5rem",
       },
       "& svg": {
-        transform: "rotate(145deg)",
+        transform: "rotate(120deg)",
       },
     }}
   >

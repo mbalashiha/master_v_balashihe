@@ -61,7 +61,7 @@ export default function Article({ title, children }: Props) {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} lg={4} xl={3} sx={{ pt: { xs: 1, lg: 8, xl: 8 } }}>
+        <Grid item xs={12} lg={4} xl={3}>
           <Paper sx={{ width: "100%", minHeight: "400px" }}></Paper>
         </Grid>
       </Grid>

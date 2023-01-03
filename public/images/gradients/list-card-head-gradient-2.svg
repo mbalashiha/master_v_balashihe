@@ -24,7 +24,7 @@
          offset="0"
          id="stop2489" />
       <stop
-         style="stop-color:#8f7eff;stop-opacity:1;"
+         style="stop-color:#b98e00;stop-opacity:1;"
          offset="1"
          id="stop2487" />
     </linearGradient>
@@ -32,10 +32,10 @@
        inkscape:collect="always"
        xlink:href="#linearGradient2491"
        id="linearGradient2493"
-       x1="-4.3415051"
-       y1="98.544571"
-       x2="669.49829"
-       y2="-76.21991"
+       x1="9.6791868"
+       y1="94.439362"
+       x2="630.80121"
+       y2="-63.904289"
        gradientUnits="userSpaceOnUse" />
     <filter
        style="color-interpolation-filters:sRGB;"
@@ -85,8 +85,8 @@
      inkscape:deskcolor="#505050"
      showgrid="false"
      inkscape:zoom="1.7051519"
-     inkscape:cx="338.09304"
-     inkscape:cy="57.472884"
+     inkscape:cx="291.76286"
+     inkscape:cy="57.472886"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="-8"
