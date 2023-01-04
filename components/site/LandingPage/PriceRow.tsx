@@ -14,10 +14,12 @@ interface Props {
 const StyledLink = styled(Link)(({ theme }) => ({
   "&, & *": {
     color: theme.palette.text.primary,
+    textDecoration: "underline",
   },
   "&:hover": {
     "&, & *": {
       color: theme.palette.primary.main,
+      textDecoration: "none",
     },
   },
 }));

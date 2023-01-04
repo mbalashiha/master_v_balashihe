@@ -28,6 +28,15 @@ export default function ImagePaper({
   gradientBackground,
   image = <ImagePlaceholder />,
 }: Props) {
+  image = React.useMemo(() => {
+    let cloningImage = image;
+    if (React.isValidElement(cloningImage)) {
+      cloningImage = React.cloneElement(cloningImage, {
+        layout: "responsive",
+      } as any);
+    }
+    return cloningImage;
+  }, [image]);
   const [usingGradientBackground, setGradientBackground] =
     React.useState<React.ReactNode>(gradientBackground);
   React.useEffect(() => {
@@ -48,7 +57,7 @@ export default function ImagePaper({
       setGradientBackground(locGradientBackground);
     }
   }, [gradientBackground]);
-  const { imagePaperRef } = useImagePaperDimentions();
+  const { imagePaperRef } = useImagePaperDimentions(image);
   return (
     <Paper
       ref={imagePaperRef}

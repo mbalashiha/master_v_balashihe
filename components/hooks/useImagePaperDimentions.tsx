@@ -2,8 +2,10 @@ import { fitWidth } from "@lib/aspect-ration-fit";
 import { Box, Typography, Paper, Grid } from "@mui/material";
 import React from "react";
 
-export default function useImagePaperDimentions() {
+export default function useImagePaperDimentions(image?: React.ReactNode) {
   const imagePaperRef = React.useRef<HTMLDivElement>(null);
+  const originalImgWidth = image && (image as any).width;
+  const originalImgHeight = image && (image as any).height;
   const setPaperDimentions = React.useCallback(() => {
     if (imagePaperRef.current) {
       const div = imagePaperRef.current;
@@ -14,8 +16,9 @@ export default function useImagePaperDimentions() {
         !/(\.svg\&)|(.svg$)/im.test(imageElem.src)
       ) {
         const imageDims = {
-          width: imageElem.width || imageElem.offsetWidth,
-          height: imageElem.height || imageElem.offsetHeight,
+          width: originalImgWidth || imageElem.width || imageElem.offsetWidth,
+          height:
+            originalImgHeight || imageElem.height || imageElem.offsetHeight,
         };
         const containerDims = {
           width: div.offsetWidth,
@@ -33,11 +36,11 @@ export default function useImagePaperDimentions() {
         }
       }
     }
-  }, []);
-  React.useEffect(() => setPaperDimentions(), []);
+  }, [originalImgWidth, originalImgHeight]);
+  React.useEffect(() => setPaperDimentions(), [setPaperDimentions]);
   React.useEffect(() => {
     window.addEventListener("resize", setPaperDimentions);
     return () => window.removeEventListener("resize", setPaperDimentions);
-  }, []);
+  }, [setPaperDimentions]);
   return { imagePaperRef };
 }
