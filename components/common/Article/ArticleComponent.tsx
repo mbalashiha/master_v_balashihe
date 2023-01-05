@@ -2,6 +2,7 @@ import { GradientBackground1 } from "@components/shared/Gradients/Backgrounds";
 import { Box, Typography, Paper, Grid } from "@mui/material";
 import ImagePaper from "@components/common/Article/ImagePaper";
 import Image from "next/image";
+import { Sidebar1 } from "./Sidebars";
 
 type NextImageType = typeof Image;
 type NextImageTypeProps = React.ComponentProps<NextImageType>;
@@ -67,7 +68,7 @@ export default function Article({ title, children, image }: Props) {
           </Grid>
         </Grid>
         <Grid item xs={12} lg={4} xl={3}>
-          <Paper sx={{ width: "100%", minHeight: "400px" }}></Paper>
+          <Sidebar1 />
         </Grid>
       </Grid>
     </>
