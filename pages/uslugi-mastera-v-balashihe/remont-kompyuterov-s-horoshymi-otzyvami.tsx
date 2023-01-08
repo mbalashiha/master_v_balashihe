@@ -21,6 +21,14 @@ export default function Page() {
       </Head>
       <Article
         title={`Мастер по ремонту компьютеров с хорошими отзывами в Балашихе. Мастер с выездом на дом или в офисе рядом с центром города Балашиха`}
+        image={
+          <Image
+            width={922}
+            height={663}
+            alt="Ремонт ноутбуков в Балашихе в день обращения у Вас дома"
+            src="/images/pages/balashiha-remont-compute-hardware.webp"
+          />
+        }
       >
         <Typography component="h2" variant="h2" gutterBottom>
           Возможно ли справиться с ремонтом компьютерной техники самому?

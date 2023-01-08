@@ -20,6 +20,10 @@ const getNavigation = (routerPath?: string): Array<NavigationEntry> => {
       href: "/uslugi-mastera-v-balashihe/remont-kompyuterov-s-horoshymi-otzyvami",
       name: "Ремонт в Балашихе",
     },
+    {
+      href: "/uslugi-mastera-v-balashihe/balashikha-remont-noutbukov-computer-master",
+      name: "Балашиха Ремонт ноутбуков",
+    },
   ];
   entries.forEach((elem) => {
     if (elem.href === routerPath) {

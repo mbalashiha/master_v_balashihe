@@ -25,7 +25,10 @@ export default function Article({ title, children, image }: Props) {
           <Typography
             component="h1"
             variant="h5"
-            sx={{ mb: { xs: "16px", md: "36px" } }}
+            sx={{
+              mb: { xs: "16px", md: "36px" },
+              color: (theme) => theme.palette.primary.dark,
+            }}
           >
             {title}
           </Typography>
@@ -59,6 +62,9 @@ export default function Article({ title, children, image }: Props) {
                   },
                   "& > h2:first-of-type": {
                     marginTop: 0,
+                  },
+                  "&& h2": {
+                    color: (theme) => theme.palette.primary.light,
                   },
                 }}
               >
