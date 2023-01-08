@@ -33,7 +33,7 @@ export const GradientCard = ({
         "& ul": {
           "&, & li": {},
         },
-        backgroundPosition: "top",
+        backgroundPosition: "top center",
         backgroundSize: "fit",
         backgroundRepeat: "no-repeat",
         backgroundImage: `url('/images/gradients/list-card-head-gradient-${gradientNumber}.svg')`,

@@ -1,6 +1,10 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { default as Link, LinkProps } from "next/link";
+import ListSubheader from "@mui/material/ListSubheader";
+import List from "@mui/material/List";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import cn from "classnames";
 import { grey, blueGrey } from "@mui/material/colors";
@@ -17,6 +21,7 @@ import {
   SxProps,
   Theme,
 } from "@mui/material";
+import { NavigationLink } from "./NavigationLink";
 
 type DividerProps = {
   orientation: "row" | "column";
@@ -33,6 +38,10 @@ interface Props extends StackProps {
   handleClose?: ItemProps["handleClose"];
   orientation?: DividerProps["orientation"];
 }
+const getLinks = () => [
+  { href: "/", name: <HomeIcon /> },
+  { href: "/market", name: "Магазин" },
+];
 export const NavbarLinks = ({
   orientation,
   handleClose,
@@ -45,10 +54,7 @@ export const NavbarLinks = ({
       name: string | React.ReactNode;
       href: string;
       active?: boolean;
-    }> = [
-      { href: "/", name: <HomeIcon /> },
-      { href: "/market", name: "Магазин" },
-    ];
+    }> = getLinks();
     navLinks.forEach((elem) => {
       if (elem.href === pathname) {
         elem.active = true;
@@ -61,18 +67,9 @@ export const NavbarLinks = ({
     stackOrientation === "row"
       ? { xs: "none", md: "flex" }
       : { xs: "flex", md: "none" };
-  const dividerOrientation =
-    stackOrientation === "row" ? "vertical" : "horizontal";
   return (
-    <Stack
-      direction={stackOrientation}
-      spacing={0.5}
-      divider={
-        <Divider
-          orientation={dividerOrientation}
-          sx={{ background: grey[600] }}
-        />
-      }
+    <List
+      component="nav"
       sx={{
         display: displayAs,
         padding: 0,
@@ -93,22 +90,19 @@ export const NavbarLinks = ({
         },
         ...sx,
       }}
-      {...props}
     >
       {navLinks.map((linkProps) => (
-        <React.Fragment key={linkProps.href + "_" + linkProps.name?.toString()}>
-          {linkProps.active ? (
-            <div className={cn("active", "aLinkPreplacement")}>
-              {linkProps.name}
-            </div>
-          ) : (
-            <Link href={linkProps.href} passHref>
-              {linkProps.name}
-            </Link>
+        <ListItemButton
+          component={() => (
+            <NavigationLink
+              key={linkProps.href + "_" + linkProps.name?.toString()}
+              linkProps={linkProps}
+            />
           )}
-        </React.Fragment>
+          key={linkProps.href + "_" + linkProps.name?.toString()}
+        ></ListItemButton>
       ))}
-    </Stack>
+    </List>
   );
 };
 export default NavbarLinks;
