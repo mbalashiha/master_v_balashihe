@@ -28,6 +28,8 @@ export const LandingCard = ({ children, image }: Props) => {
           position: "relative",
           "& ul": {
             "&, & li": {
+              px: 0,
+              py: "1px",
               fontSize: "14px",
               lineHeight: "18px",
               color: "#303B44",
@@ -37,7 +39,8 @@ export const LandingCard = ({ children, image }: Props) => {
       >
         <Stack
           width="100%"
-          px="1.7rem"
+          pl="1.7rem"
+          pr="1.2rem"
           py="0.8rem"
           alignItems="flex-end"
           direction="column"
@@ -46,19 +49,27 @@ export const LandingCard = ({ children, image }: Props) => {
           {children}
           <Button
             sx={{
-              padding: 0,
+              padding: "0 14px",
               border: "none",
-              borderRadius: 0,
-              "&, &:hover, & svg": {
-                background: "white",
+              borderRadius: 1,
+              transition: "all .2s linear",
+              "&": {
+                background: "rgba(255,255,255,0.75)",
+              },
+              "& svg": {
+                background: "none",
               },
               "&:hover": {
                 color: "black",
+                background: "rgba(255,255,255,0.9)",
               },
               "& .MuiButton-startIcon": {
                 pr: 0,
                 mr: "3px",
               },
+              position: "absolute",
+              bottom: "15px",
+              right: "14px",
             }}
             startIcon={<StartIcon />}
           >
