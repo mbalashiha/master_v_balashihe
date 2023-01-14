@@ -11,18 +11,23 @@ export default function Page() {
     <>
       <Head>
         <title>
-          Мастер в Балашихе - Установка и активация лицензионной OC Windows в
-          Балашихе
+          Мастер в Балашихе - Компьютерные системные блоки в Балашихе
         </title>
         <meta
           name="description"
-          content="Установка и активация лицензионной OC Windows в Балашихе"
+          content="Компьютерные системные блоки в Балашихе"
         />
       </Head>
       <Article
-        title={`Установка Windows 10 или 11 на ПК или ноутбук в Балашихе менее чем за
-        час. Компьютерный мастер придёт к Вам на дом или в офис в течении
-        нескольких часов`}
+        title={`Компьютерные системные блоки в Балашихе Ремонт ПК`}
+        image={
+          <Image
+            src="/images/pages/computer-cases-housings-thermaltake.webp"
+            width={1920}
+            height={1600}
+            alt={"Компьютерные системные блоки в Балашихе"}
+          />
+        }
       >
         <Typography component="h2" variant="h2" gutterBottom>
           Windows нужно установить на SSD накопитель и не использовать

@@ -24,7 +24,7 @@ export default function Article({ title, children, image }: Props) {
         <Grid item xs={12} lg={8} xl={9}>
           <Typography
             component="h1"
-            variant="h5"
+            variant="h1"
             sx={{
               mb: { xs: "16px", md: "36px" },
               color: (theme) => theme.palette.primary.dark,

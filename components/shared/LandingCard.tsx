@@ -11,6 +11,7 @@ import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import StartIcon from "@mui/icons-material/Start";
+import Link from "next/link";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -47,34 +48,36 @@ export const LandingCard = ({ children, image }: Props) => {
           spacing={1}
         >
           {children}
-          <Button
-            sx={{
-              padding: "0 14px",
-              border: "none",
-              borderRadius: 1,
-              transition: "all .2s linear",
-              "&": {
-                background: "rgba(255,255,255,0.75)",
-              },
-              "& svg": {
-                background: "none",
-              },
-              "&:hover": {
-                color: "black",
-                background: "rgba(255,255,255,0.9)",
-              },
-              "& .MuiButton-startIcon": {
-                pr: 0,
-                mr: "3px",
-              },
-              position: "absolute",
-              bottom: "15px",
-              right: "14px",
-            }}
-            startIcon={<StartIcon />}
-          >
-            Вызвать мастера
-          </Button>
+          <Link href="/uslugi-mastera-v-balashihe/pc-sistemnye-bloki-balashiha">
+            <Button
+              sx={{
+                padding: "0 14px",
+                border: "none",
+                borderRadius: 1,
+                transition: "all .2s linear",
+                "&": {
+                  background: "rgba(255,255,255,0.75)",
+                },
+                "& svg": {
+                  background: "none",
+                },
+                "&:hover": {
+                  color: "black",
+                  background: "rgba(255,255,255,0.9)",
+                },
+                "& .MuiButton-startIcon": {
+                  pr: 0,
+                  mr: "3px",
+                },
+                position: "absolute",
+                bottom: "15px",
+                right: "14px",
+              }}
+              startIcon={<StartIcon />}
+            >
+              Вызвать мастера
+            </Button>
+          </Link>
         </Stack>
         <CardMedia
           sx={{
