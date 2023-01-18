@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Article, DescriptionParser } from "@components/common/Article";
 import type { InferGetStaticPropsType } from "next";
+import getAllArticles from "@framework/article/get-all-articles";
 
 const descriptionHTML = `
 <Typography component="h2" variant="h2" gutterBottom>
@@ -72,7 +73,9 @@ const descriptionHTML = `
 "Компьютерного мастера". Просто позвоните и ничего не бойтесь!
 </p>`;
 
-export default function Page({ descriptionHTML}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Page({
+  descriptionHTML,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
@@ -98,5 +101,10 @@ export default function Page({ descriptionHTML}: InferGetStaticPropsType<typeof 
 Page.Layout = ArticleLayout;
 
 export async function getStaticProps() {
-  return { props: { descriptionHTML } };
+  return {
+    props: {
+      descriptionHTML,
+      articles: await getAllArticles(),
+    },
+  };
 }
