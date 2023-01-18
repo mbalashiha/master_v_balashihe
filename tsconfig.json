@@ -31,7 +31,9 @@
       "@images/*": ["public/images/*"],
       "@styles": ["styles"],
       "@styles/*": ["styles/*"],
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@root": ["."],
+      "@root/*": ["./*"]
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
