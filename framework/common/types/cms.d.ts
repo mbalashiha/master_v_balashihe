@@ -5,12 +5,23 @@ declare namespace CMS {
     handle: string;
     type: string;
   }
+  declare interface Image {
+    url: string;
+    alt: string;
+    height: number;
+    width: number;
+    orderNumber?: number;
+    originalWidth: number;
+    originalHeight: number;
+    createdAt: string;
+    updatedAt: string;
+  }
 }
 declare namespace Blog {
   declare interface Article {
     articleId: ID;
     title: string;
-    handle: string;
+    url: string;
     description: string;
     descriptionHtml: string;
     published: boolean;

@@ -1,2 +1,2 @@
-export { default as fetchApi } from "./fetch-api";
+export { default as getConfig } from "./api-config";
 export { default as extractGraphQLError } from "./extract-graphql-error";

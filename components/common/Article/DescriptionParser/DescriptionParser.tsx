@@ -26,6 +26,9 @@ const options = {
       delete convertedProps.children;
       switch (domNode.name) {
         case "typography":
+          if (typeof convertedProps.gutterBottom === "string") {
+            convertedProps.gutterBottom = true as any;
+          }
           return (
             <Typography {...(convertedProps as any)}>
               {domToReact(children, options)}
@@ -45,6 +48,9 @@ const options = {
         case "h4":
         case "h5":
         case "h6":
+          if (typeof convertedProps.gutterBottom === "string") {
+            convertedProps.gutterBottom = true as any;
+          }
           return (
             <Typography
               {...(convertedProps as any)}

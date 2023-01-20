@@ -18,7 +18,7 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
   return {
     articleId,
     title,
-    handle,
+    url: `/${handle}`,
     description,
     descriptionHtml,
     published,
@@ -40,4 +40,30 @@ export const normalizeArticles = (
     blogArticles: { nodes: articles },
   } = data;
   return articles.map((node) => normalizeArticle(node));
+};
+export const normalizeImage = (data: Schema.Image): CMS.Image => {
+  const {
+    imageId,
+    imgSrc,
+    altText,
+    height,
+    width,
+    orderNumber,
+    originalWidth,
+    originalHeight,
+    pathOfOriginal,
+    createdAt,
+    updatedAt,
+  } = data;
+  return {
+    url: imgSrc,
+    alt: altText,
+    height,
+    width,
+    orderNumber,
+    originalWidth,
+    originalHeight,
+    createdAt,
+    updatedAt,
+  };
 };
