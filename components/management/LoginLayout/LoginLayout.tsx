@@ -7,17 +7,14 @@ import { Container, styled } from "@mui/material";
 import { Box } from "@mui/material";
 import Head from "next/head";
 import CssBaseline from "@mui/material/CssBaseline";
-import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
-import { theme as getMuiTheme, useThemePalette } from "@components/ui";
+import { theme as getMuiTheme } from "@components/management/ui/theme";
+import { useThemePalette } from "@components/ui";
 import { ThemeProvider } from "@mui/material";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
 }
-const Layout: FC<Props> = ({ children }: Props) => {
-  // const breadcrumbs: Array<{ name: string; url: string }> | undefined = (
-  //   children as any
-  // )?.props?.breadcrumbs;
+const LoginLayout: FC<Props> = ({ children }: Props) => {
   const themePaletteCtx = useThemePalette(getMuiTheme);
   const { theme } = themePaletteCtx;
   return (
@@ -27,18 +24,9 @@ const Layout: FC<Props> = ({ children }: Props) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Navbar />
-        {/* {(router.asPath === "/" && <IndexHeader />) || (
-            <Box sx={{ width: "100%", height: "6rem" }}></Box>
-          )} */}
-        {/* <NavBreadcrumbs breadcrumbs={breadcrumbs}></NavBreadcrumbs> */}
-        <Box component="main" pb="24rem">
-          {children}
-          <BottomContactsWithMap />
-        </Box>
-        <Footer />
+        {children}
       </ThemeProvider>
     </>
   );
 };
-export default Layout;
+export default LoginLayout;
