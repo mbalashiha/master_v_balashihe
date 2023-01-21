@@ -10,6 +10,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { theme as getMuiTheme } from "@components/management/ui/theme";
 import { useThemePalette } from "@components/ui";
 import { ThemeProvider } from "@mui/material";
+import { ManagementApiProvider } from "@framework/management";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -19,13 +20,15 @@ const LoginLayout: FC<Props> = ({ children }: Props) => {
   const { theme } = themePaletteCtx;
   return (
     <>
-      <Head>
-        <meta name="theme-color" content={theme.palette.primary.main} />
-      </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
+      <ManagementApiProvider>
+        <Head>
+          <meta name="theme-color" content={theme.palette.primary.main} />
+        </Head>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {children}
+        </ThemeProvider>
+      </ManagementApiProvider>
     </>
   );
 };

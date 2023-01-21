@@ -6,5 +6,6 @@ declare namespace API {
   }
   declare interface Config {
     request<T>(options: ApiFetcherOptions): Promise<T>;
+    restApi: AxiosStatic;
   }
 }

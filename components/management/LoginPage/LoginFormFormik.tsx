@@ -12,6 +12,7 @@ import * as Yup from "yup";
 import useErrorsProvider from "@components/ui/contexts/use-errors-context";
 import { default as LoginForm } from "./LoginForm";
 import { simpleEncrypt } from "@components/encryption/message-hmac-private-key";
+import useSignIn from "@framework/management/auth/use-sign-in";
 // import useTokenInfo from "@framework/commerce/management/use-token-info";
 
 import {
@@ -33,7 +34,7 @@ const SignupSchema = Yup.object().shape({
     .required("Укажите пароль"),
 });
 const LoginFormFormik = () => {
-  // const trySignIn = useSignIn();
+  const trySignIn = useSignIn();
   const router = useRouter();
   const { errors, addError, resetErrors, removeErrorAlert } =
     useErrorsProvider();
@@ -54,6 +55,7 @@ const LoginFormFormik = () => {
       innerRef={formikRef as any}
       initialValues={{ login: "", password: "" }}
       onSubmit={async (values) => {
+        alert(trySignIn(values));
         console.log("f onsubmit:", values);
         try {
           // const { success, error } = await trySignIn(simpleEncrypt(values));
@@ -80,7 +82,7 @@ const LoginFormFormik = () => {
           console.error(e.stack || e.message || e);
         }
       }}
-      validationSchema={SignupSchema}
+      // validationSchema={SignupSchema}
       validateOnMount={false}
       validateOnChange={true}
       validateOnBlur={true}

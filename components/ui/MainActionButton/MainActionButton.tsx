@@ -76,7 +76,7 @@ const MainActionButton = styled(LoadingButton)<Props>(({ theme, loading }) => ({
     border: "none",
     "&:hover": {
       background: theme.palette.primary.dark || "black",
-      boxShadow: "0 0 30px rgb(13 70 144 / 20%)",
+      boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
     },
     "&:disabled": {
       transition: "all .25s linear",

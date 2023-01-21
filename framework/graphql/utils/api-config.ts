@@ -1,32 +1,28 @@
 import { API_URL } from "@framework/const";
 import { GraphQLClient } from "graphql-request";
+import axios from "axios";
 
 class Config {
-  request: <Output = any>(options: API.ApiFetcherOptions) => Promise<Output>;
+  config: API.Config;
   constructor() {
     const graphqlClient = new GraphQLClient(API_URL, {
       mode: "cors", // same-origin, no-cors
       credentials: "include",
     });
-    this.request = <Output = any>(
+    const request = <Output = any>(
       options: API.ApiFetcherOptions
     ): Promise<Output> => {
       const { query, variables, headers } = options;
       return graphqlClient.request(query, variables, headers);
-      // .catch((err) => {
-      //   const graphqlError =
-      //     (err &&
-      //       err.response &&
-      //       err.response.errors &&
-      //       err.response.errors[0] &&
-      //       err.response.errors[0].message) ||
-      //     err;
-      //   console.error("graphQL error:", graphqlError);
-      //   throw err;
-      // });
     };
+    this.config = { request, restApi: axios };
+  }
+  getConfig(): API.Config {
+    return this.config;
   }
 }
+const config = new Config();
+
 export default function getConfig(): API.Config {
-  return new Config();
+  return config.getConfig();
 }
