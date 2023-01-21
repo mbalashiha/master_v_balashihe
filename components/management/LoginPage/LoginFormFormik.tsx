@@ -32,7 +32,7 @@ const SignupSchema = Yup.object().shape({
     .max(128, "Слишком длинный пароль (более 128 символов)")
     .required("Укажите пароль"),
 });
-const LoginFormContainer = () => {
+const LoginFormFormik = () => {
   // const trySignIn = useSignIn();
   const router = useRouter();
   const { errors, addError, resetErrors, removeErrorAlert } =
@@ -82,7 +82,7 @@ const LoginFormContainer = () => {
       }}
       validationSchema={SignupSchema}
       validateOnMount={false}
-      validateOnChange={false}
+      validateOnChange={true}
       validateOnBlur={true}
     >
       <Form>
@@ -91,4 +91,4 @@ const LoginFormContainer = () => {
     </Formik>
   );
 };
-export default LoginFormContainer;
+export default LoginFormFormik;

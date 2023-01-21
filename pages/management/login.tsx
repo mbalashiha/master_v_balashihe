@@ -3,7 +3,7 @@ import { Box, Card, Paper, Stack, TextField } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 import { ErrorsProvider } from "@components/ui/contexts/use-errors-context";
 import Typography from "@mui/material/Typography";
-import { LoginFormContainer, LoginLayout } from "@components/management";
+import { LoginFormFormik, LoginLayout } from "@components/management";
 
 export default function LoginPage() {
   return (
@@ -29,7 +29,7 @@ export default function LoginPage() {
         elevation={3}
       >
         <ErrorsProvider>
-          <LoginFormContainer></LoginFormContainer>
+          <LoginFormFormik />
         </ErrorsProvider>
       </Paper>
     </Box>

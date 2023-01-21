@@ -70,10 +70,10 @@ const MainActionButton = styled(LoadingButton)<Props>(({ theme, loading }) => ({
     lineHeight: "1rem",
     height: "auto",
     padding: "0.85rem",
-    letterSpacing: "0.01rem",
+    letterSpacing: "0.04rem",
     textTransform: "none",
     boxShadow: "0 0 5px rgba(0,0,0, 0.125)",
-    border: `none`,
+    border: "none",
     "&:hover": {
       background: theme.palette.primary.dark || "black",
       boxShadow: "0 0 30px rgb(13 70 144 / 20%)",
