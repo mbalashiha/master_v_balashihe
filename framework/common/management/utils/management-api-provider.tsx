@@ -1,18 +1,22 @@
 import { createContext, useContext, useMemo } from "react";
-export const ManagementApiContext = createContext({});
+export const ManagementApiContext = createContext<
+  Partial<API.ApiProviderContext>
+>({});
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
   config: API.Config;
+  hooks: API.Hooks;
 }
 
-export const ManagementApiProvider = ({ children, config }: Props) => {
+export const ManagementApiProvider = ({ children, config, hooks }: Props) => {
   const coreConfig = useMemo(
     () => ({
       request: config.request,
-      restApi: config.restApi,
+      restRequest: config.restRequest,
+      hooks,
     }),
-    [config.request, config.restApi]
+    [config.request, config.restRequest, hooks]
   );
   return (
     <ManagementApiContext.Provider value={coreConfig}>
@@ -22,5 +26,5 @@ export const ManagementApiProvider = ({ children, config }: Props) => {
 };
 
 export const useManagementApiProvider = () => {
-  return useContext(ManagementApiContext);
+  return useContext(ManagementApiContext) as API.ApiProviderContext;
 };

@@ -15,7 +15,7 @@ class Config {
       const { query, variables, headers } = options;
       return graphqlClient.request(query, variables, headers);
     };
-    this.config = { request, restApi: axios };
+    this.config = { request, restRequest: axios };
   }
   getConfig(): API.Config {
     return this.config;

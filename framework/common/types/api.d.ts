@@ -5,7 +5,19 @@ declare namespace API {
     headers?: HeadersInit;
   }
   declare interface Config {
-    request<T>(options: ApiFetcherOptions): Promise<T>;
-    restApi: AxiosStatic;
+    request: Request;
+    restRequest: AxiosStatic;
+  }
+  declare interface Hooks {
+    management: {
+      auth: {
+        useSignIn: any;
+      };
+    };
+  }
+  declare type Request<T = any> = (options: ApiFetcherOptions) => Promise<T>;
+  declare interface ApiProviderContext {
+    hooks: Hooks;
+    request: Request;
   }
 }

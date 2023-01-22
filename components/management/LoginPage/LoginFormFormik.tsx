@@ -55,8 +55,8 @@ const LoginFormFormik = () => {
       innerRef={formikRef as any}
       initialValues={{ login: "", password: "" }}
       onSubmit={async (values) => {
-        alert(trySignIn(values));
         console.log("f onsubmit:", values);
+        alert(JSON.stringify(trySignIn(values), null, 2));
         try {
           // const { success, error } = await trySignIn(simpleEncrypt(values));
           // if (!success) {

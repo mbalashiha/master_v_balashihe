@@ -1,19 +1,16 @@
-
 import { useSignIn } from "@common/management/auth";
-
 
 export default useSignIn;
 
-
 export const handler = {
-  request: () => {
-    console.log("Fetching Data!")
+  request: (input: any) => {
+    console.log("Fetching Data!");
+    return JSON.stringify(input) + "_MODIFIED";
   },
-  useHook: () => {
+  useHook: ({ request }: any) => {
     return (input: any) => {
-      return {
-        output: JSON.stringify(input) + "_MODIFIED"
-      }
-    }
-  }
-}
+      const response = request(input);
+      return { output: response };
+    };
+  },
+};
