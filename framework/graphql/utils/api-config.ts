@@ -25,7 +25,7 @@ class Config {
       // Origin: "http://localhost:3000",
       // },
     });
-    const restRequest: API.RestRequest = async ({
+    const restRequest: API.RestRequest<any> = async ({
       url,
       variables,
       headers,
@@ -33,7 +33,7 @@ class Config {
       enc,
       contentType,
       axios,
-    }) => {
+    }): Promise<API.ApiRequestResults<any>> => {
       headers = { ...headers, "Content-Type": "application/json" };
       if (enc) {
         headers = { ...headers, "Content-Type": "text/plain" };
@@ -57,13 +57,31 @@ class Config {
             ? "post"
             : "get";
       }
+      let responseResult: API.ApiRequestResults<any>;
       if (axios) {
-        return axInstance.request({
+        const resp = await axInstance.request({
           url,
           data: body,
           headers,
           method: method || "post",
         });
+        if (typeof resp.data === "string") {
+          try {
+            resp.data = JSON.parse(resp.data);
+          } catch (e: any) {}
+        }
+        const {
+          data,
+          status,
+          statusText,
+          headers: responseHeaders,
+        } = resp;
+        responseResult = {
+          data,
+          status,
+          statusText,
+          headers: responseHeaders,
+        };
       } else {
         const resp = await fetch(url, {
           mode: "cors", // same-origin, no-cors
@@ -72,14 +90,22 @@ class Config {
           body,
           headers,
         });
+        let data;
         const text = await resp.text();
         try {
-          return JSON.parse(text);
+          data = JSON.parse(text);
         } catch (e: any) {
-          console.error(e.stack || e.message || e);
-          return text;
+          data = text;
         }
+        const { status, statusText, headers: responseHeaders } = resp;
+        responseResult = {
+          data,
+          status,
+          statusText,
+          headers: responseHeaders,
+        };
       }
+      return responseResult;
     };
     this.config = { request, restRequest };
   }
