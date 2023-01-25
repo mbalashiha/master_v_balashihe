@@ -52,7 +52,10 @@ class Config {
         ? JSON.stringify(variables)
         : variables;
       if (!method) {
-        method = body && (typeof body === 'string' || Object.keys(body).length) ? "post" : "get";
+        method =
+          body && (typeof body === "string" || Object.keys(body).length)
+            ? "post"
+            : "get";
       }
       if (axios) {
         return axInstance.request({
