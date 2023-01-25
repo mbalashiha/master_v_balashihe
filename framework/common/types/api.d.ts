@@ -17,7 +17,7 @@ declare namespace API {
     data: T;
     status: number;
     statusText: string;
-    headers: any;
+    headers: Headers;
   };
   declare interface Config {
     request: ApiRequest;

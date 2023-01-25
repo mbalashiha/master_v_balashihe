@@ -70,17 +70,20 @@ class Config {
             resp.data = JSON.parse(resp.data);
           } catch (e: any) {}
         }
-        const {
-          data,
-          status,
-          statusText,
-          headers: responseHeaders,
-        } = resp;
+        const { data, status, statusText, headers: responseHeaders } = resp;
+        const formattedResponseHeaders = new Headers();
+        for (const [key, val] of Object.entries(responseHeaders)) {
+          if (typeof val === "string") {
+            formattedResponseHeaders.append(key, val);
+          } else if (Array.isArray(val)) {
+            val.forEach((elem) => formattedResponseHeaders.append(key, elem));
+          }
+        }
         responseResult = {
           data,
           status,
           statusText,
-          headers: responseHeaders,
+          headers: formattedResponseHeaders,
         };
       } else {
         const resp = await fetch(url, {
