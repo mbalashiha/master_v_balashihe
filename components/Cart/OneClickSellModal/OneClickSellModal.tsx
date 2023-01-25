@@ -13,7 +13,7 @@ import {
 const Modal = MuiModal as any;
 import { ModalBody } from "@components/ui";
 import { FormProvider } from "@components/ui/FormProvider";
-import { simpleEncrypt } from "@encryption/message-hmac-private-key";
+import { simpleEncrypt } from "@framework/management/utils/encryption/message-hmac-private-key";
 import useErrorsProvider from "@components/ui/contexts/use-errors-context";
 import { useProductView } from "@components/product";
 

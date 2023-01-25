@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import * as Yup from "yup";
 import useErrorsProvider from "@components/ui/contexts/use-errors-context";
 import { default as LoginForm } from "./LoginForm";
-import { simpleEncrypt } from "@components/encryption/message-hmac-private-key";
+import { simpleEncrypt } from "@framework/management/utils/encryption/message-hmac-private-key";
 import useSignIn from "@framework/management/auth/use-sign-in";
 // import useTokenInfo from "@framework/commerce/management/use-token-info";
 
@@ -56,7 +56,7 @@ const LoginFormFormik = () => {
       initialValues={{ login: "", password: "" }}
       onSubmit={async (values) => {
         console.log("f onsubmit:", values);
-        alert(JSON.stringify(trySignIn(values), null, 2));
+        alert(JSON.stringify(await trySignIn(values), null, 2));
         try {
           // const { success, error } = await trySignIn(simpleEncrypt(values));
           // if (!success) {

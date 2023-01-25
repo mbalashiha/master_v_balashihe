@@ -4,9 +4,21 @@ declare namespace API {
     variables?: any;
     headers?: HeadersInit;
   }
+  declare interface RestRequestOptions {
+    url: string;
+    variables?: any;
+    headers?: { [key: string]: string };
+    method?: "get" | "post" | "delete" | "head" | "options" | "put" | "patch";
+    enc?: boolean;
+    contentType?: "application/json" | "multipart/form-data" | "text/plain";
+    axios?: boolean;
+  }
+  declare type ApiRequestResults<T> = {
+    data: T;
+  };
   declare interface Config {
-    request: Request;
-    restRequest: AxiosStatic;
+    request: ApiRequest;
+    restRequest: RestRequest;
   }
   declare interface Hooks {
     management: {
@@ -15,9 +27,51 @@ declare namespace API {
       };
     };
   }
-  declare type Request<T = any> = (options: ApiFetcherOptions) => Promise<T>;
+  declare type ApiRequest<T = any> = (
+    options: ApiFetcherOptions
+  ) => Promise<ApiFetcherResults<T>>;
+
+  declare type RestRequest<T = any> = (
+    options: RestRequestOptions
+  ) => Promise<ApiFetcherResults<T>>;
+
   declare interface ApiProviderContext {
     hooks: Hooks;
-    request: Request;
+    request: ApiRequest;
+    restRequest: RestRequest;
+  }
+  declare interface GraphqlRequestContext {
+    input: any;
+    request: ApiRequest;
+    options: ApiFetcherOptions;
+  }
+  declare interface FetchDataContext {
+    request: ApiRequest;
+  }
+  declare interface MutationHookContext {
+    request: ApiRequest;
+  }
+  declare interface RestApiHookContext {
+    restRequest: RestRequest;
+  }
+  declare interface FetchDataHook {
+    requestOptions: ApiFetcherOptions;
+    request: (context: GraphqlRequestContext) => any;
+    useHook(context: FetchDataHookContext): (input: any) => any;
+  }
+  declare interface MutationHook {
+    requestOptions: ApiFetcherOptions;
+    request: (context: GraphqlRequestContext) => any;
+    useHook(context: MutationHookContext): (input: any) => any;
+  }
+  declare interface RestApiRequestContext {
+    input: any;
+    restRequest: RestRequest;
+    options: RestRequestOptions;
+  }
+  declare interface RestApiHook {
+    options: RestRequestOptions;
+    restRequest: (context: RestApiRequestContext) => any;
+    useHook(context: RestApiHookContext): (input: any) => any;
   }
 }

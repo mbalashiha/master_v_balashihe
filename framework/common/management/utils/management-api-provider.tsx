@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const ManagementApiProvider = ({ children, config, hooks }: Props) => {
-  const coreConfig = useMemo(
+  const coreConfig = useMemo<API.ApiProviderContext>(
     () => ({
       request: config.request,
       restRequest: config.restRequest,

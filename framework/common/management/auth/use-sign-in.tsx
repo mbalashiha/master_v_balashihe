@@ -1,12 +1,10 @@
-import { useHook } from "@common/utils/use-hook";
+import { useHook, useRestApiHook } from "@common/utils/use-hook";
 
 const useSignIn = () => {
   const hook = useHook((hooks) => {
     return hooks.management.auth.useSignIn;
   });
-  return hook.useHook({
-    request: hook.request,
-  });
+  return useRestApiHook({ ...hook });
 };
 
 export default useSignIn;
