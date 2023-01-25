@@ -15,9 +15,9 @@ declare namespace API {
   }
   declare type ApiRequestResults<T> = {
     data: T;
-    status: number;
-    statusText: string;
-    headers: Headers;
+    status?: number;
+    statusText?: string;
+    headers?: Headers;
   };
   declare interface Config {
     request: ApiRequest;

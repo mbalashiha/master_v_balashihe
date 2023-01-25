@@ -10,11 +10,16 @@ class Config {
       mode: "cors", // same-origin, no-cors
       credentials: "include",
     });
-    const request = <Output = any>(
+    const request = async <Output = any>(
       options: API.ApiFetcherOptions
-    ): Promise<Output> => {
+    ): Promise<API.ApiRequestResults<any>> => {
       const { query, variables, headers } = options;
-      return graphqlClient.request(query, variables, headers);
+      const resp: Output = await graphqlClient.request<Output>(
+        query,
+        variables,
+        headers
+      );
+      return { data: resp };
     };
     const axInstance = axios.create({
       baseURL: API_ORIGIN,
