@@ -27,6 +27,7 @@ declare namespace API {
     management: {
       auth: {
         useSignIn: any;
+        useTokenInfo: any;
       };
     };
   }

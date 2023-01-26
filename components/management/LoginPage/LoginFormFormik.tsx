@@ -13,7 +13,7 @@ import useErrorsProvider from "@components/ui/contexts/use-errors-context";
 import { default as LoginForm } from "./LoginForm";
 import { simpleEncrypt } from "@framework/management/utils/encryption/message-hmac-private-key";
 import useSignIn from "@framework/management/auth/use-sign-in";
-// import useTokenInfo from "@framework/commerce/management/use-token-info";
+import useTokenInfo from "@framework/management/auth/use-token-info";
 
 import {
   useFormikContext,
@@ -35,6 +35,7 @@ const SignupSchema = Yup.object().shape({
 });
 const LoginFormFormik = () => {
   const trySignIn = useSignIn();
+  useTokenInfo()
   const router = useRouter();
   const { errors, addError, resetErrors, removeErrorAlert } =
     useErrorsProvider();

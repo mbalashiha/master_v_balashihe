@@ -1,4 +1,6 @@
 import { useManagementApiProvider } from "@common/management/utils";
+import { DeblurSharp } from "@mui/icons-material";
+import React from "react";
 
 export const useHook = (fn: (apiHooks: API.Hooks) => API.RestApiHook) => {
   const { hooks } = useManagementApiProvider();
@@ -41,3 +43,35 @@ export const useRestApiHook = (hook: API.RestApiHook) => {
     },
   });
 };
+
+const useData = (hook: any, request: API.ApiRequest) => {
+  const [data, setData] = React.useState(null);
+  const hookRequest = async () => {
+    try {
+      return await hook.request({ request, options: hook.requestOptions });
+    } catch (e: any) {
+      throw e;
+    }
+  };
+  debugger;
+  if (!data) {
+    hookRequest().then((data) => {
+      setData(data as any);
+    });
+  }
+  debugger;
+  return data;
+};
+
+export const useSWRHook = (hook: any) => {
+  const { request } = useManagementApiProvider();
+  return hook.useHook({
+    useData() {
+      debugger;
+      const data = useData(hook, request);
+      debugger;
+      return data;
+    },
+  });
+};
+
