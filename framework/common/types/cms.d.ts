@@ -35,3 +35,18 @@ declare namespace Blog {
     breadcrumbs: CMS.Breadcrumb[];
   }
 }
+declare namespace Management {
+  declare interface Manager {
+    id: ID;
+    friendlyName: String;
+    isManager: Boolean;
+    isAdmin: Boolean;
+    created: Date;
+    updated: Date;
+  }
+  declare interface ManagerTokenResponse {
+    success: Boolean;
+    error: string | null;
+    manager: Manager;
+  }
+}

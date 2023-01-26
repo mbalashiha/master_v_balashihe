@@ -47,5 +47,20 @@ declare namespace Schema {
     declare interface BlogArticles {
       blogArticles: BlogArticlesConnection;
     }
+    declare interface Manager {
+      id: ID
+      friendlyName: String
+      isManager: Boolean
+      isAdmin: Boolean
+      created: Date
+      updated: Date
+    }
+    declare interface VerifyManagementTokenResponse {
+      verifyManagementToken: {
+        success: Boolean;
+        error: string | null;
+        manager: Manager;
+      }
+    }
   }
 }

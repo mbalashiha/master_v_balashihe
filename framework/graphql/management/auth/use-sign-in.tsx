@@ -1,10 +1,16 @@
 import { useSignIn } from "@common/management/auth";
 import { MANAGEMENT_LOGIN_API_URL } from "@framework/const";
-import { string } from "yup";
 
 export default useSignIn;
-
-export const handler: API.RestApiHook = {
+export interface SignInHook {
+  requestInput: {
+    login: string;
+    password: string;
+  };
+  requestOutput: { success: boolean };
+  data: { success: boolean };
+}
+export const handler: API.Rest.RestApiHook<SignInHook> = {
   options: {
     url: MANAGEMENT_LOGIN_API_URL,
     enc: true,
@@ -12,20 +18,21 @@ export const handler: API.RestApiHook = {
   restRequest: async ({ restRequest, input, options }) => {
     console.log("Fetching Data!");
     try {
-      const resp = await restRequest({
+      const { data } = await restRequest({
         ...options,
         variables: input,
       });
-      console.log(resp);
+      return data;
     } catch (e: any) {
       console.error(e.stack || e.message || e);
+      throw e;
     }
-    return JSON.stringify(input) + "_MODIFIED";
   },
   useHook: ({ restRequest }) => {
-    return async (input: any) => {
+    return async (input) => {
       const response = await restRequest(input);
-      return { output: response };
+      debugger;
+      return response;
     };
   },
 };

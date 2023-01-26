@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -15,7 +15,8 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
-    "paths": {"@common": ["framework/common"],
+    "paths": {
+      "@common": ["framework/common"],
       "@encryption": ["framework/graphql/management/utils/encryption"],
       "@encryption/*": ["framework/graphql/management/utils/encryption/*"],
       "@common/*": ["framework/common/*"],
@@ -34,8 +35,8 @@
       "@/*": ["./*"],
       "@root": ["."],
       "@root/*": ["./*"]
-    },
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", ".history", ".git"]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["**webpack:**", "node_modules", ".history", ".git", ".next", "html-archives"]
 }

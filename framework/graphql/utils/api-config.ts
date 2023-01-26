@@ -10,16 +10,19 @@ class Config {
       mode: "cors", // same-origin, no-cors
       credentials: "include",
     });
-    const request = async <Output = any>(
-      options: API.ApiFetcherOptions
-    ): Promise<API.ApiRequestResults<any>> => {
+    const request: API.Graphql.RequestFunction<any, any> = async <
+      Input = any,
+      Output = any
+    >(
+      options: API.Graphql.RequestOptions<any>
+    ): Promise<API.Graphql.RequestResults<Output>> => {
       const { query, variables, headers } = options;
-      const resp: Output = await graphqlClient.request<Output>(
+      const resp: Output = await graphqlClient.request(
         query,
         variables,
         headers
       );
-      return { data: resp };
+      return resp;
     };
     const axInstance = axios.create({
       baseURL: API_ORIGIN,
@@ -30,7 +33,10 @@ class Config {
       // Origin: "http://localhost:3000",
       // },
     });
-    const restRequest: API.RestRequest<any> = async ({
+    const restRequest: API.Rest.RequestFunction<any, any> = async <
+      Input = any,
+      Output = any
+    >({
       url,
       variables,
       headers,
@@ -38,7 +44,9 @@ class Config {
       enc,
       contentType,
       axios,
-    }): Promise<API.ApiRequestResults<any>> => {
+    }: API.Rest.RequestOptions<any>): Promise<
+      API.Rest.RequestResults<Output>
+    > => {
       headers = { ...headers, "Content-Type": "application/json" };
       if (enc) {
         headers = { ...headers, "Content-Type": "text/plain" };
@@ -62,7 +70,7 @@ class Config {
             ? "post"
             : "get";
       }
-      let responseResult: API.ApiRequestResults<any>;
+      let responseResult: API.Rest.RequestResults<any>;
       if (axios) {
         const resp = await axInstance.request({
           url,
@@ -76,19 +84,10 @@ class Config {
           } catch (e: any) {}
         }
         const { data, status, statusText, headers: responseHeaders } = resp;
-        const formattedResponseHeaders = new Headers();
-        for (const [key, val] of Object.entries(responseHeaders)) {
-          if (typeof val === "string") {
-            formattedResponseHeaders.append(key, val);
-          } else if (Array.isArray(val)) {
-            val.forEach((elem) => formattedResponseHeaders.append(key, elem));
-          }
-        }
         responseResult = {
           data,
           status,
           statusText,
-          headers: formattedResponseHeaders,
         };
       } else {
         const resp = await fetch(url, {
@@ -110,7 +109,6 @@ class Config {
           data,
           status,
           statusText,
-          headers: responseHeaders,
         };
       }
       return responseResult;

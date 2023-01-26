@@ -1,27 +1,7 @@
 declare namespace API {
-  declare interface ApiFetcherOptions {
-    query: string;
-    variables?: any;
-    headers?: HeadersInit;
-  }
-  declare interface RestRequestOptions {
-    url: string;
-    variables?: any;
-    headers?: { [key: string]: string };
-    method?: "get" | "post" | "delete" | "head" | "options" | "put" | "patch";
-    enc?: boolean;
-    contentType?: "application/json" | "multipart/form-data" | "text/plain";
-    axios?: boolean;
-  }
-  declare type ApiRequestResults<T> = {
-    data: T;
-    status?: number;
-    statusText?: string;
-    headers?: Headers;
-  };
   declare interface Config {
-    request: ApiRequest;
-    restRequest: RestRequest;
+    request: Graphql.RequestFunction;
+    restRequest: Rest.RequestFunction;
   }
   declare interface Hooks {
     management: {
@@ -31,51 +11,85 @@ declare namespace API {
       };
     };
   }
-  declare type ApiRequest<T = any> = (
-    options: ApiFetcherOptions
-  ) => Promise<ApiFetcherResults<T>>;
-
-  declare type RestRequest<T = any> = (
-    options: RestRequestOptions
-  ) => Promise<ApiFetcherResults<T>>;
-
+  declare interface HookDescriptor {
+    requestInput: any;
+    requestOutput: any;
+    data: any;
+  }
   declare interface ApiProviderContext {
     hooks: Hooks;
-    request: ApiRequest;
-    restRequest: RestRequest;
+    request: Graphql.RequestFunction;
+    restRequest: Rest.RequestFunction;
   }
-  declare interface GraphqlRequestContext {
-    input: any;
-    request: ApiRequest;
-    options: ApiFetcherOptions;
+
+  declare namespace Graphql {
+    declare interface HookRequestOptions {
+      query: string;
+      headers?: HeadersInit;
+    }
+    declare type RequestResults<T> = T;
+    declare interface RequestFunction<Input, Output> {
+      (options: RequestFunctionOptions<Input>): Promise<RequestResults<Output>>;
+    }
+    declare interface RequestContext<Input, Output> {
+      input: Input;
+      request: RequestFunction<Input, Output>;
+      options: HookRequestOptions;
+    }
+    declare interface HookRequest<Input, Output> {
+      (context: RequestContext<Input, Output>): Promise<Output>;
+    }
+    declare interface MutationHookContext<Input, Output> {
+      request: (input: Input) => Promise<Output>;
+    }    
+    declare interface RequestOptions<Input> extends HookRequestOptions {
+      variables: Input;
+    }
+    declare interface MutationHook<H extends HookDescriptor> {
+      requestOptions: HookRequestOptions;
+      request: HookRequest<H["requestInput"], H["requestOutput"]>;
+      useHook(
+        context: MutationHookContext<H["requestInput"], H["requestOutput"]>
+      ): (input: H["requestInput"]) => Promise<H["data"]>;
+    }
   }
-  declare interface FetchDataContext {
-    request: ApiRequest;
-  }
-  declare interface MutationHookContext {
-    request: ApiRequest;
-  }
-  declare interface RestApiHookContext {
-    restRequest: RestRequest;
-  }
-  declare interface FetchDataHook {
-    requestOptions: ApiFetcherOptions;
-    request: (context: GraphqlRequestContext) => any;
-    useHook(context: FetchDataHookContext): (input: any) => any;
-  }
-  declare interface MutationHook {
-    requestOptions: ApiFetcherOptions;
-    request: (context: GraphqlRequestContext) => any;
-    useHook(context: MutationHookContext): (input: any) => any;
-  }
-  declare interface RestApiRequestContext {
-    input: any;
-    restRequest: RestRequest;
-    options: RestRequestOptions;
-  }
-  declare interface RestApiHook {
-    options: RestRequestOptions;
-    restRequest: (context: RestApiRequestContext) => any;
-    useHook(context: RestApiHookContext): (input: any) => any;
+  declare namespace Rest {
+    declare interface HookRequestOptions {
+      url: string;
+      headers?: { [key: string]: string };
+      method?: "get" | "post" | "delete" | "head" | "options" | "put" | "patch";
+      enc?: boolean;
+      contentType?: "application/json" | "multipart/form-data" | "text/plain";
+      axios?: boolean;
+    }
+    declare type RequestResults<T> = {
+      data: T;
+      status?: number;
+      statusText?: string;
+    };
+    declare interface RestApiHookContext<Input, Output> {
+      restRequest: (input: Input) => Promise<Output>;
+    }
+    declare interface RequestFunction<Input, Output> {
+      (options: RestRequestOptions<Input>): Promise<RequestResults<Output>>;
+    }
+    declare interface RestApiRequestContext<Input, Output> {
+      input: Input;
+      restRequest: RequestFunction<Input, Output>;
+      options: HookRequestOptions;
+    }
+    declare interface HookRequest<Input, Output> {
+      (context: RestApiRequestContext<Input, Output>): Promise<Output>;
+    }
+    declare interface RequestOptions<Input> extends HookRequestOptions {
+      variables: Input;
+    }
+    declare interface RestApiHook<H extends HookDescriptor> {
+      options: HookRequestOptions;
+      restRequest: HookRequest<H["requestInput"], H["requestOutput"]>;
+      useHook(
+        context: RestApiHookContext<H["requestInput"], H["requestOutput"]>
+      ): (input: H["requestInput"]) => Promise<H["data"]>;
+    }
   }
 }

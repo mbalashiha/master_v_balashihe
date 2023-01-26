@@ -454,12 +454,12 @@
 
 "@types/body-scroll-lock@^3.1.0":
   version "3.1.0"
-  resolved "https://registry.npmjs.org/@types/body-scroll-lock/-/body-scroll-lock-3.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/@types/body-scroll-lock/-/body-scroll-lock-3.1.0.tgz#435f6abf682bf58640e1c2ee5978320b891970e7"
   integrity sha512-3owAC4iJub5WPqRhxd8INarF2bWeQq1yQHBgYhN0XLBJMpd5ED10RrJ3aKiAwlTyL5wK7RkBD4SZUQz2AAAMdA==
 
 "@types/crypto-js@^4.1.1":
   version "4.1.1"
-  resolved "https://registry.npmjs.org/@types/crypto-js/-/crypto-js-4.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-4.1.1.tgz#602859584cecc91894eb23a4892f38cfa927890d"
   integrity sha512-BG7fQKZ689HIoc5h+6D2Dgq1fABRa0RbBWKBd9SP/MVRVXROflpm5fhwyATX5duFmbStzyzyycPB8qUYKDH3NA==
 
 "@types/js-cookie@^3.0.2":
@@ -477,10 +477,10 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.191.tgz#09511e7f7cba275acd8b419ddac8da9a6a79e2fa"
   integrity sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==
 
-"@types/node@18.11.10":
-  version "18.11.10"
-  resolved "https://registry.npmjs.org/@types/node/-/node-18.11.10.tgz"
-  integrity sha512-juG3RWMBOqcOuXC643OAdSA525V44cVgGV6dUDuiFtss+8Fk5x1hI93Rsld43VeJVIeqlP9I7Fn9/qaVqoEAuQ==
+"@types/node@^18.11.18":
+  version "18.11.18"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.18.tgz#8dfb97f0da23c2293e554c5a50d61ef134d7697f"
+  integrity sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -2537,9 +2537,9 @@ safe-regex-test@^1.0.0:
     get-intrinsic "^1.1.3"
     is-regex "^1.1.4"
 
-sass@^1.56.1:
+sass@^1.57.1:
   version "1.57.1"
-  resolved "https://registry.npmjs.org/sass/-/sass-1.57.1.tgz"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.57.1.tgz#dfafd46eb3ab94817145e8825208ecf7281119b5"
   integrity sha512-O2+LwLS79op7GI0xZ8fqzF7X2m/m8WFfI02dHOdsK5R2ECeS5F62zrwg/relM1rjSLy7Vd/DiMNIvPrQGsA0jw==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
@@ -2705,6 +2705,13 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
+swr@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/swr/-/swr-2.0.2.tgz#fd34f3aac354f6b70f9134eb4218c747cc899a8d"
+  integrity sha512-iHbQW17hsduonMEliZnr6/yaxb+yvLe2r0+AH+ZfeqKzwc2bb+QRYpZm5/b/H0Lxgy7VWow4o71JeSazSun+9A==
+  dependencies:
+    use-sync-external-store "^1.2.0"
+
 synckit@^0.8.4:
   version "0.8.4"
   resolved "https://registry.npmjs.org/synckit/-/synckit-0.8.4.tgz"
@@ -2818,6 +2825,11 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+use-sync-external-store@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
+  integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"

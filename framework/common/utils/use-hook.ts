@@ -1,16 +1,18 @@
 import { useManagementApiProvider } from "@common/management/utils";
 import { DeblurSharp } from "@mui/icons-material";
 import React from "react";
+import useSWR from "swr";
 
-export const useHook = (fn: (apiHooks: API.Hooks) => API.RestApiHook) => {
+export const useHook = (fn: (apiHooks: API.Hooks) => API.Rest.RestApiHook<any>) => {
   const { hooks } = useManagementApiProvider();
   return fn(hooks);
 };
 
-export const useFetchDataHook = (hook: API.FetchDataHook) => {
+export const useMutationHook = (hook: API.Graphql.MutationHook<any>) => {
   const { request } = useManagementApiProvider();
   return hook.useHook({
     request: (input: any) => {
+      debugger;
       return hook.request({
         input,
         options: hook.requestOptions,
@@ -19,19 +21,7 @@ export const useFetchDataHook = (hook: API.FetchDataHook) => {
     },
   });
 };
-export const useMutationHook = (hook: API.MutationHook) => {
-  const { request } = useManagementApiProvider();
-  return hook.useHook({
-    request: (input: any) => {
-      return hook.request({
-        input,
-        options: hook.requestOptions,
-        request,
-      });
-    },
-  });
-};
-export const useRestApiHook = (hook: API.RestApiHook) => {
+export const useRestApiHook = (hook: API.Rest.RestApiHook<any>) => {
   const { restRequest } = useManagementApiProvider();
   return hook.useHook({
     restRequest: (input: any) => {
@@ -44,34 +34,29 @@ export const useRestApiHook = (hook: API.RestApiHook) => {
   });
 };
 
-const useData = (hook: any, request: API.ApiRequest) => {
+const useData = (hook: any, request: API.Graphql.RequestFunction<any, any>, ctx: any) => {
   const [data, setData] = React.useState(null);
-  const hookRequest = async () => {
+  const hookRequest = async (query: string) => {
     try {
-      return await hook.request({ request, options: hook.requestOptions });
+      return await hook.request({ request, options: { query } });
     } catch (e: any) {
       throw e;
     }
   };
-  debugger;
-  if (!data) {
-    hookRequest().then((data) => {
-      setData(data as any);
-    });
-  }
-  debugger;
-  return data;
+  const response = useSWR(
+    hook.requestOptions.query,
+    hookRequest,
+    ctx?.swrOptions
+  );
+  return response;
 };
 
 export const useSWRHook = (hook: any) => {
   const { request } = useManagementApiProvider();
   return hook.useHook({
-    useData() {
-      debugger;
-      const data = useData(hook, request);
-      debugger;
+    useData(ctx: any) {
+      const data = useData(hook, request, ctx);
       return data;
     },
   });
 };
-
