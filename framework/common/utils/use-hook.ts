@@ -54,16 +54,17 @@ const useOneTime = (
     data: swrData,
     isValidating,
     isLoading,
+    error,
   } = useSWR(
     fetched ? null : hook.requestOptions.query,
     hookRequest,
     ctx?.swrOptions
   );
-  if (!fetched && !isValidating && !isLoading) {
+  if (!fetched && !isValidating && !isLoading && !error) {
     setData(swrData);
     setFetched(true);
   }
-  return { data: data || swrData };
+  return { data: data || swrData, fetched, error };
 };
 
 export const useOneTimeHook = (hook: any) => {

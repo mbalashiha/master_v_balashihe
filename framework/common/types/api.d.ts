@@ -41,7 +41,10 @@ declare namespace API {
     }
     declare interface MutationHookContext<Input, Output> {
       request: (input: Input) => Promise<Output>;
-    }    
+    }
+    declare interface SWRHookContext<Input, Output> {
+      useData: (input: Input) => Promise<Output>;
+    }
     declare interface RequestOptions<Input> extends HookRequestOptions {
       variables: Input;
     }
@@ -50,6 +53,13 @@ declare namespace API {
       request: HookRequest<H["requestInput"], H["requestOutput"]>;
       useHook(
         context: MutationHookContext<H["requestInput"], H["requestOutput"]>
+      ): () => (input: H["requestInput"]) => Promise<H["data"]>;
+    }
+    declare interface SWRHook<H extends HookDescriptor> {
+      requestOptions: HookRequestOptions;
+      request: HookRequest<H["requestInput"], H["requestOutput"]>;
+      useHook(
+        context: SWRHookContext<H["requestInput"], H["requestOutput"]>
       ): (input: H["requestInput"]) => Promise<H["data"]>;
     }
   }
@@ -89,7 +99,7 @@ declare namespace API {
       restRequest: HookRequest<H["requestInput"], H["requestOutput"]>;
       useHook(
         context: RestApiHookContext<H["requestInput"], H["requestOutput"]>
-      ): (input: H["requestInput"]) => Promise<H["data"]>;
+      ): () => (input: H["requestInput"]) => Promise<H["data"]>;
     }
   }
 }

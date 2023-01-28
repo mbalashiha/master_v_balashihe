@@ -1,7 +1,9 @@
 import { useSignIn } from "@common/management/auth";
+import { UseSignIn } from "@common/management/auth/use-sign-in";
 import { MANAGEMENT_LOGIN_API_URL } from "@framework/const";
 
-export default useSignIn;
+export default useSignIn as UseSignIn<typeof handler>;
+
 export interface SignInHook {
   requestInput: {
     login: string;
@@ -28,11 +30,12 @@ export const handler: API.Rest.RestApiHook<SignInHook> = {
       throw e;
     }
   },
-  useHook: ({ restRequest }) => {
-    return async (input) => {
+  useHook:
+    ({ restRequest }) =>
+    () =>
+    async (input) => {
       const response = await restRequest(input);
       debugger;
       return response;
-    };
-  },
+    },
 };
