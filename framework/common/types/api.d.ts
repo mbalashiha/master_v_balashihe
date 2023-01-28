@@ -6,7 +6,7 @@ declare namespace API {
   declare interface Hooks {
     management: {
       auth: {
-        useSignIn: any;
+        useSignIn: API.Rest.RestApiHook<any>;
         useTokenInfo: any;
       };
     };
