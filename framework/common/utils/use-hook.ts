@@ -92,11 +92,16 @@ const useData = (
 ) => {
   const { input, key } = React.useMemo(() => {
     let input, key;
-    if (ctx?.variables || ctx?.initial?.variables) {
-      const preObject = { ...ctx?.variables, ...ctx?.initial?.variables };
-      if (Object.keys(preObject).length) {
-        input = preObject;
-      }
+    if (ctx?.variables && typeof ctx?.variables === "object") {
+      input = input || {};
+      input = { ...input, ...ctx?.variables };
+    }
+    if (
+      ctx?.initial?.variables &&
+      typeof ctx?.initial?.variables === "object"
+    ) {
+      input = input || {};
+      input = { ...input, ...ctx?.initial?.variables };
     }
     key = input
       ? [hook.requestOptions.query, input]
@@ -114,11 +119,7 @@ const useData = (
       throw e;
     }
   };
-  const response = useSWR(
-    key,
-    hookRequest,
-    ctx?.swrOptions
-  );
+  const response = useSWR(key, hookRequest, ctx?.swrOptions);
   return response;
 };
 
