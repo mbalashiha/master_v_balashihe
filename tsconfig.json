@@ -38,5 +38,12 @@
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["**webpack:**", "node_modules", ".history", ".git", ".next", "html-archives"]
+  "exclude": [
+    "**webpack:**",
+    "node_modules",
+    ".history",
+    ".git",
+    ".next",
+    "html-archives"
+  ]
 }

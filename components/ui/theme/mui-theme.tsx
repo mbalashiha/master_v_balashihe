@@ -13,27 +13,6 @@ declare module "@mui/material/styles/createTypography" {
       color: React.CSSProperties["color"];
     };
   }
-  // interface Palette {
-  //   borderColor: Palette["primary"] & {
-  //     primaryButton: React.CSSProperties["color"];
-  //   };
-  // }
-  // interface PaletteOptions {
-  //   borderColor?: PaletteOptions["primary"] & {
-  //     primaryButton: React.CSSProperties["color"];
-  //   };
-  // }
-  // interface Theme {
-  // status: {
-  //   danger: string;
-  // };
-  // }
-  // allow configuration using `createTheme`
-  // interface ThemeOptions {
-  // status?: {
-  //   danger?: string;
-  // };
-  // }
 }
 const getMuiTheme = (): Theme => {
   const colorMode: PaletteMode = "light" as any;

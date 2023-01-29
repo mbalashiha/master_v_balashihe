@@ -2,6 +2,7 @@ import { API_ORIGIN, API_URL } from "@framework/const";
 import { GraphQLClient } from "graphql-request";
 import { default as axios } from "axios";
 import { simpleEncrypt } from "@encryption";
+import { API } from "@common/types";
 
 class Config {
   config: API.Config;
@@ -10,14 +11,11 @@ class Config {
       mode: "cors", // same-origin, no-cors
       credentials: "include",
     });
-    const request: API.Graphql.RequestFunction<any, any> = async <
-      Input = any,
-      Output = any
-    >(
+    const request: API.Graphql.RequestFunction<any, any> = async (
       options: API.Graphql.RequestOptions<any>
-    ): Promise<API.Graphql.RequestResults<Output>> => {
+    ): Promise<API.Graphql.RequestResults<any>> => {
       const { query, variables, headers } = options;
-      const resp: Output = await graphqlClient.request(
+      const resp = await graphqlClient.request(
         query,
         variables,
         headers
@@ -33,10 +31,7 @@ class Config {
       // Origin: "http://localhost:3000",
       // },
     });
-    const restRequest: API.Rest.RequestFunction<any, any> = async <
-      Input = any,
-      Output = any
-    >({
+    const restRequest: API.RestApi.RequestFunction<any, any> = async({
       url,
       variables,
       headers,
@@ -44,8 +39,8 @@ class Config {
       enc,
       contentType,
       axios,
-    }: API.Rest.RequestOptions<any>): Promise<
-      API.Rest.RequestResults<Output>
+    }: API.RestApi.RestRequestOptions<any>): Promise<
+      API.RestApi.RequestResults<any>
     > => {
       headers = { ...headers, "Content-Type": "application/json" };
       if (enc) {
@@ -70,7 +65,7 @@ class Config {
             ? "post"
             : "get";
       }
-      let responseResult: API.Rest.RequestResults<any>;
+      let responseResult: API.RestApi.RequestResults<any>;
       if (axios) {
         const resp = await axInstance.request({
           url,

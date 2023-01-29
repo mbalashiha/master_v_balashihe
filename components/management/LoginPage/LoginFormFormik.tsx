@@ -36,10 +36,6 @@ const SignupSchema = Yup.object().shape({
 const LoginFormFormik = () => {
   const trySignIn = useSignIn();
   const { data: tokenInfo } = useTokenInfo();
-  if (tokenInfo) {
-    console.log(tokenInfo);
-    // debugger;
-  }
   const router = useRouter();
   const { errors, addError, resetErrors, removeErrorAlert } =
     useErrorsProvider();

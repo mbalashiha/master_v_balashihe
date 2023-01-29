@@ -1,7 +1,8 @@
+import { API } from "@common/types";
 import { useHook, useRestApiHook } from "@common/utils/use-hook";
 
 export type UseSignIn<
-  H extends API.Rest.RestApiHook<any> = API.Rest.RestApiHook<any>
+  H extends API.RestApi.RestApiHook<any> = API.RestApi.RestApiHook<any>
 > = ReturnType<H["useHook"]>;
 
 const useSignIn: UseSignIn = () => {
