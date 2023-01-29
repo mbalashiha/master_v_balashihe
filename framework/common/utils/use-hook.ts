@@ -85,7 +85,7 @@ const useOneTime = (
     setData(swrData);
     setFetched(true);
   }
-  const outData = data || swrData;
+  const outData = swrData || data;
   return {
     data: outData,
     fetched,
