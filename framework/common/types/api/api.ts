@@ -14,7 +14,8 @@ export interface Hooks {
   management: {
     auth: {
       useSignIn: RestApi.RestApiHook<any>;
-      useTokenInfo: any;
+      useTokenInfo: Graphql.SWRHook<any>;
+      useTokenOneTime: Graphql.OneTimeHook<any>;
     };
   };
 }

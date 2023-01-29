@@ -24,17 +24,17 @@ export namespace Graphql {
   export interface MutationHookContext<Input, Output> {
     request: (input: Input) => Promise<Output>;
   }
-  export type UseDataContext<Input, Data> = {
+  export interface UseDataContext<Input, Data> {
     variables?: Input;
     swrOptions?: SWRConfiguration<Data>;
     initial?: {
       variables?: Input;
       options?: SWRConfiguration<Data>;
     };
-  };
-  export type UseData<Input, Data> = (
-    ctx: UseDataContext<Input, Data>
-  ) => SWRResponse<Data>;
+  }
+  export interface UseData<Input, Data> {
+    (ctx: UseDataContext<Input, Data>): SWRResponse<Data>;
+  }
 
   export interface ModSWRResponse<Data> extends SWRResponse<Data> {
     isEmpty: boolean;
@@ -56,16 +56,19 @@ export namespace Graphql {
       initial?: UseDataContext<H["requestInput"], H["data"]>["initial"]
     ) => ModSWRResponse<H["data"]>;
   }
-  export interface TryOneResponse<Data, ERR> {
-    data: SWRResponse<Data, ERR>["data"];
-    error: SWRResponse<Data, ERR>["error"];
+  export interface TryOneResponse<Data> extends SWRResponse<Data> {
     fetched: boolean;
   }
-  export interface OneTypeHook<H extends HookDescriptor> {
+  export interface UseOneTime<Input, Data> {
+    (ctx: UseDataContext<Input, Data>): TryOneResponse<Data>;
+  }
+  export interface OneTimeHook<H extends HookDescriptor> {
     requestOptions: HookRequestOptions;
     request: HookRequest<H["requestInput"], H["requestOutput"], H["data"]>;
     useHook(context: {
-      useData: UseData<H["requestInput"], H["data"]>;
-    }): () => ModSWRResponse<H["data"]>;
+      useOneTime: UseOneTime<H["requestInput"], H["data"]>;
+    }): (
+      initial?: UseDataContext<H["requestInput"], H["data"]>["initial"]
+    ) => TryOneResponse<H["data"]>;
   }
 }

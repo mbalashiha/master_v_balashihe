@@ -23,6 +23,7 @@ import {
   useField,
   FormikProps,
 } from "formik";
+import useTokenOneTime from "@framework/management/auth/use-token-one-time";
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
     .min(2, "Введите значение от 2 символов")
@@ -35,7 +36,11 @@ const SignupSchema = Yup.object().shape({
 });
 const LoginFormFormik = () => {
   const trySignIn = useSignIn();
-  const { data: tokenInfo } = useTokenInfo();
+  const { data: tokenInfo } = useTokenOneTime();
+  if (tokenInfo) {
+    console.log(tokenInfo);
+    // debugger;
+  }
   const router = useRouter();
   const { errors, addError, resetErrors, removeErrorAlert } =
     useErrorsProvider();

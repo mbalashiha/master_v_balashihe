@@ -34,20 +34,36 @@ export const useRestApiHook = (hook: API.RestApi.RestApiHook<any>) => {
 };
 
 const useOneTime = (
-  hook: any,
+  hook: API.Graphql.OneTimeHook<any>,
   request: API.Graphql.RequestFunction<any, any>,
-  ctx: any
+  ctx: API.Graphql.UseDataContext<any, any>
 ) => {
   const [data, setData] = React.useState(undefined);
   const [fetched, setFetched] = React.useState(false);
-  const hookRequest = async (query: string) => {
-    if (fetched) {
-      return null;
+  const { input, key } = React.useMemo(() => {
+    let input, key;
+    if (ctx?.variables && typeof ctx?.variables === "object") {
+      input = input || {};
+      input = { ...input, ...ctx?.variables };
     }
+    if (
+      ctx?.initial?.variables &&
+      typeof ctx?.initial?.variables === "object"
+    ) {
+      input = input || {};
+      input = { ...input, ...ctx?.initial?.variables };
+    }
+    key = input
+      ? [hook.requestOptions.query, input]
+      : hook.requestOptions.query;
+    return { input, key };
+  }, [ctx?.variables, ctx?.initial?.variables, hook.requestOptions.query]);
+  const hookRequest = async () => {
     try {
       return await hook.request({
+        input,
         request,
-        options: { ...hook.requestOptions, query },
+        options: hook.requestOptions,
       });
     } catch (e: any) {
       throw e;
@@ -58,32 +74,38 @@ const useOneTime = (
     isValidating,
     isLoading,
     error,
-  } = useSWR(
-    fetched ? null : hook.requestOptions.query,
-    hookRequest,
-    ctx?.swrOptions
-  );
+    mutate: swrMutate,
+    ...rest
+  } = useSWR(fetched ? null : key, hookRequest, ctx?.swrOptions);
+  const mutate: typeof swrMutate = (data, opts) => {
+    setFetched(false);
+    return swrMutate(data, opts);
+  };
   if (!fetched && !isValidating && !isLoading && !error) {
     setData(swrData);
     setFetched(true);
   }
   const outData = data || swrData;
-  if (error) {
-    return { data: outData, fetched, error };
-  } else {
-    return { data: outData, fetched };
-  }
+  return {
+    data: outData,
+    fetched,
+    error,
+    isValidating,
+    isLoading,
+    mutate,
+    ...rest,
+  };
 };
 
-// export const useOneTimeHook = (hook: API.Graphql.OneTimeHook<any>) => {
-//   const { request } = useManagementApiProvider();
-//   return hook.useHook({
-//     useOneTime(ctx: any) {
-//       const data = useOneTime(hook, request, ctx);
-//       return data;
-//     },
-//   });
-// };
+export const useOneTimeHook = (hook: API.Graphql.OneTimeHook<any>) => {
+  const { request } = useManagementApiProvider();
+  return hook.useHook({
+    useOneTime(ctx: any) {
+      const data = useOneTime(hook, request, ctx);
+      return data;
+    },
+  });
+};
 
 const useData = (
   hook: API.Graphql.SWRHook<any>,

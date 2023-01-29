@@ -1,20 +1,20 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useTokenInfo } from "@common/management/auth";
-import { UseTokenInfo } from "@common/management/auth/use-token-info";
+import { useTokenOneTime } from "@common/management/auth/use-token-one-time";
+import { UseTokenOneTime } from "@common/management/auth/use-token-one-time";
 import { API } from "@common/types";
 import { Management } from "@common/types/cms";
 import { useMemo } from "react";
 import { normalizeManagerTokenInfo } from "./normalize";
 import { verifyManagementToken } from "./queries/get-token-info";
 
-export default useTokenInfo as UseTokenInfo<typeof handler>;
+export default useTokenOneTime as UseTokenOneTime<typeof handler>;
 
 export interface TokenInfoHook {
   requestInput: void;
   requestOutput: Schema.QueryResponse.VerifyManagementTokenResponse;
   data: Management.ManagerTokenResponse;
 }
-export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
+export const handler: API.Graphql.OneTimeHook<TokenInfoHook> = {
   requestOptions: {
     query: verifyManagementToken,
   },
@@ -23,17 +23,15 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
     return normalizeManagerTokenInfo(data);
   },
   useHook:
-    ({ useData }) =>
+    ({ useOneTime }) =>
     (initial) => {
-      const { data, isValidating, ...rest } = useData({
+      const { data, fetched, ...rest } = useOneTime({
         initial,
-        swrOptions: {
-          revalidateOnFocus: false,
-        },
+        swrOptions: {},
       });
       // return useMemo(() => {
       //   return { data, isEmpty: !data };
       // }, [data]);
-      return { data, isEmpty: !data, isValidating, ...rest };
+      return { data, fetched, ...rest };
     },
 };
