@@ -83,6 +83,7 @@ const useOneTime = (
       return swrMutate(data, opts);
     } catch (e: any) {
       console.error(e?.stack || e?.message || e);
+      throw e;
       return data as any;
     }
   };
