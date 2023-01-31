@@ -38,7 +38,7 @@ const useOneTime = (
   request: API.Graphql.RequestFunction<any, any>,
   ctx: API.Graphql.UseDataContext<any, any>
 ) => {
-  const [data, setData] = React.useState(undefined);
+  const [data, setData] = React.useState<any>(undefined);
   const [fetched, setFetched] = React.useState(false);
   const { input, key } = React.useMemo(() => {
     let input, key;
