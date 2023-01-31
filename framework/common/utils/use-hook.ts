@@ -78,14 +78,19 @@ const useOneTime = (
     ...rest
   } = useSWR(fetched ? null : key, hookRequest, ctx?.swrOptions);
   const mutate: typeof swrMutate = (data, opts) => {
-    setFetched(false);
-    return swrMutate(data, opts);
+    setData(data);
+    try {
+      return swrMutate(data, opts);
+    } catch (e: any) {
+      console.error(e?.stack || e?.message || e);
+      return data as any;
+    }
   };
   if (!fetched && !isValidating && !isLoading && !error) {
     setData(swrData);
     setFetched(true);
   }
-  const outData = swrData || data;
+  const outData = data || swrData;
   return {
     data: outData,
     fetched,
