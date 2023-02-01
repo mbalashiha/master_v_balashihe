@@ -10,8 +10,8 @@ export interface SignInHook {
     login: string;
     password: string;
   };
-  requestOutput: { success: boolean };
-  data: { success: boolean };
+  requestOutput: { success: boolean, error?: string };
+  data: { success: boolean, error?: string };
 }
 export const handler: API.RestApi.RestApiHook<SignInHook> = {
   options: {

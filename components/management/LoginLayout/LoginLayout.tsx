@@ -11,6 +11,7 @@ import { theme as getMuiTheme } from "@components/management/ui/theme";
 import { useThemePalette } from "@components/ui";
 import { ThemeProvider } from "@mui/material";
 import { ManagementApiProvider } from "@framework/management";
+import { SnackbarProvider } from "notistack";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -21,12 +22,15 @@ const LoginLayout: FC<Props> = ({ children }: Props) => {
   return (
     <>
       <ManagementApiProvider>
-        <Head>
-          <meta name="theme-color" content={theme.palette.primary.main} />
-        </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          {children}
+          <SnackbarProvider
+            autoHideDuration={8000}
+            anchorOrigin={{ horizontal: "center", vertical: "top" }}
+            maxSnack={1}
+          >
+            {children}
+          </SnackbarProvider>
         </ThemeProvider>
       </ManagementApiProvider>
     </>

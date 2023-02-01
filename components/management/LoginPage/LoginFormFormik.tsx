@@ -18,6 +18,9 @@ import {
   useField,
   FormikProps,
 } from "formik";
+import Cookies from "js-cookie";
+import useFromLogin from "@common/management/utils/hooks/use-from-login";
+import { useSnackbar } from "notistack";
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
     .min(2, "Введите значение от 2 символов")
@@ -31,39 +34,36 @@ const SignupSchema = Yup.object().shape({
 const LoginFormFormik = () => {
   const trySignIn = useSignIn();
   const {} = useTokenInfo();
-
-  const { errors, addError, resetErrors, removeErrorAlert } =
-    useErrorsProvider();
+  const { doRedirectAuthorized } = useFromLogin();
   const formikRef =
     React.useRef<FormikProps<{ login: string; password: string }>>();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   return (
     <Formik
       innerRef={formikRef as any}
       initialValues={{ login: "", password: "" }}
       onSubmit={async (values) => {
-        console.log("f onsubmit:", values);
-        alert(JSON.stringify(await trySignIn(values), null, 2));
+        const { success, error } = await trySignIn(values);
         try {
-          // const { success, error } = await trySignIn(simpleEncrypt(values));
-          // if (!success) {
-          //   addError(
-          //     error === "Authentification failed"
-          //       ? "Вы ввели неверные логин и/или пароль"
-          //       : error
-          //       ? error
-          //       : !success
-          //       ? "Аутентификация не удалась"
-          //       : "Нет сообщения об ошибке (("
-          //   );
-          //   formikRef.current?.setFieldValue("password", "");
-          // } else {
-          //   let redirectUrl =
-          //     Cookies.get(AFTER_LOGIN_BACKTO_URI) || "/management";
-          //   redirectUrl = Array.isArray(redirectUrl)
-          //     ? redirectUrl.join("/")
-          //     : redirectUrl;
-          //   router.replace(redirectUrl, redirectUrl);
-          // }
+          if (!success) {
+            const errorAlertMessage =
+              error === "Authentification failed"
+                ? "Вы ввели неверные логин и/или пароль"
+                : error
+                ? error
+                : !success
+                ? "Аутентификация не удалась"
+                : "Нет сообщения об ошибке ((";
+            enqueueSnackbar(errorAlertMessage, {
+              variant: "error",
+            });
+            formikRef.current
+              ?.getFieldHelpers("login")
+              .setError(errorAlertMessage);
+          } else {
+            closeSnackbar();
+            doRedirectAuthorized();
+          }
         } catch (e: any) {
           console.error(e.stack || e.message || e);
         }

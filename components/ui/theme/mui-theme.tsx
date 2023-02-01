@@ -79,6 +79,10 @@ const getMuiTheme = (): Theme => {
       MuiCssBaseline: {
         styleOverrides: {
           body: {
+            "& .SnackbarContent-root.SnackbarItem-variantError": {
+              color: "white",
+              backgroundColor: "#AA203E",
+            },
             "& h1, & h2, & h3": {
               color: theme.typography.h1.color,
             },

@@ -38,14 +38,14 @@ export namespace Blog {
 export namespace Management {
   export interface Manager {
     id: ID;
-    friendlyName: String;
-    isManager: Boolean;
-    isAdmin: Boolean;
+    friendlyName: string;
+    isManager: boolean;
+    isAdmin: boolean;
     created: Date;
     updated: Date;
   }
   export interface ManagerTokenResponse {
-    success: Boolean;
+    success: boolean;
     error: string | null;
     manager: Manager;
   }

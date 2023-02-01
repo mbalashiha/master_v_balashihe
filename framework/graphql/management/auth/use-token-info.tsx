@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useTokenInfo } from "@common/management/auth";
 import { UseTokenInfo } from "@common/management/auth/use-token-info";
-import useLoginRoute, { managerLoginUrl } from "@common/management/utils/hooks/use-login-route";
+import useLoginRoute, {
+  managerLoginUrl,
+} from "@common/management/utils/hooks/use-login-route";
 import { API } from "@common/types";
 import { Management } from "@common/types/cms";
 import { Schema } from "@framework/types";
@@ -11,6 +13,7 @@ import { verifyManagementToken } from "./queries/get-token-info";
 import Cookies from "js-cookie";
 import { AFTER_LOGIN_BACKTO_URI } from "@framework/const";
 import { useRouter } from "next/router";
+import useFromLogin from "@common/management/utils/hooks/use-from-login";
 
 export default useTokenInfo as UseTokenInfo<typeof handler>;
 
@@ -30,6 +33,7 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
   useHook: ({ useData }) => {
     const router = useRouter();
     const toLoginPage = useLoginRoute();
+    const { doRedirectAuthorized } = useFromLogin();
     return (initial) => {
       const { data, isValidating, isLoading, ...rest } = useData({
         initial,
@@ -45,11 +49,7 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
         if (managerWasNotAuthorized) {
           toLoginPage();
         } else if (router.pathname === managerLoginUrl) {
-            let redirectUrl = Cookies.get(AFTER_LOGIN_BACKTO_URI) || "/management";
-            redirectUrl = Array.isArray(redirectUrl)
-              ? redirectUrl.join("/")
-              : redirectUrl;
-            router.replace(redirectUrl, redirectUrl);
+          doRedirectAuthorized();
         }
       }
       return { data, isEmpty, isValidating, isLoading, ...rest };

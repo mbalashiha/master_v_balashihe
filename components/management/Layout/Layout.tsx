@@ -10,7 +10,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { theme as getMuiTheme } from "@components/management/ui/theme";
 import { useThemePalette } from "@components/ui";
 import { ThemeProvider } from "@mui/material";
-import { ManagementApiProvider } from "@common/management";
+import { ManagementApiProvider } from "@framework/management";
+import { ManagementLayoutProvider } from "@framework/management/utils/providers";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -24,26 +25,25 @@ const Layout: FC<Props> = ({ children }: Props) => {
   return (
     <>
       <ManagementApiProvider>
-        <Head>
-          <meta name="theme-color" content={theme.palette.primary.main} />
-        </Head>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Container
-            sx={{
-              position: "relative",
-              minHeight: "100vh",
-              paddingBottom: "20rem",
-            }}
-          >
-            <Box
-              component="main"
-              sx={{ padding: { xs: "3.2rem 0.4rem", xl: "3.2rem 1rem" } }}
+        <ManagementLayoutProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Container
+              sx={{
+                position: "relative",
+                minHeight: "100vh",
+                paddingBottom: "20rem",
+              }}
             >
-              {children}
-            </Box>
-          </Container>
-        </ThemeProvider>
+              <Box
+                component="main"
+                sx={{ padding: { xs: "3.2rem 0.4rem", xl: "3.2rem 1rem" } }}
+              >
+                {children}
+              </Box>
+            </Container>
+          </ThemeProvider>
+        </ManagementLayoutProvider>
       </ManagementApiProvider>
     </>
   );
