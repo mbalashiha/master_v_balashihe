@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useTokenOneTime } from "@common/management/auth/use-token-one-time";
 import { UseTokenOneTime } from "@common/management/auth/use-token-one-time";
+import useLoginRoute from "@common/management/utils/hooks/use-login-route";
 import { API } from "@common/types";
 import { Management } from "@common/types/cms";
+import { Schema } from "@framework/types";
 import { useMemo } from "react";
 import { normalizeManagerTokenInfo } from "./normalize";
 import { verifyManagementToken } from "./queries/get-token-info";
@@ -22,16 +24,24 @@ export const handler: API.Graphql.OneTimeHook<TokenInfoHook> = {
     const data = await request({ ...options, variables: input });
     return normalizeManagerTokenInfo(data);
   },
-  useHook:
-    ({ useOneTime }) =>
-    (initial) => {
+  useHook: ({ useOneTime }) => {
+    const toLoginPage = useLoginRoute();
+    return (initial) => {
       const { data, fetched, ...rest } = useOneTime({
         initial,
-        swrOptions: {},
       });
-      // return useMemo(() => {
-      //   return { data, isEmpty: !data };
-      // }, [data]);
-      return { data, fetched, ...rest };
-    },
+      const isEmpty = !(
+        data &&
+        data.success &&
+        data.manager &&
+        data.manager.id
+      );
+      if (fetched) {
+        if (isEmpty) {
+          toLoginPage();
+        }
+      }
+      return { data, isEmpty, fetched, ...rest };
+    };
+  },
 };

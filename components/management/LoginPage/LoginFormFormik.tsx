@@ -2,19 +2,14 @@ import React from "react";
 import { MainActionButton } from "@components/ui";
 import { Box, Card, Stack, TextField } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
-import Cookies from "js-cookie";
-// import queryString from "query-string";
 import { AFTER_LOGIN_BACKTO_URI } from "@framework/const";
 import Typography from "@mui/material/Typography";
-// import useSignIn from "@framework/commerce/management/use-sign-in";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 import useErrorsProvider from "@components/ui/contexts/use-errors-context";
 import { default as LoginForm } from "./LoginForm";
-import { simpleEncrypt } from "@framework/management/utils/encryption/message-hmac-private-key";
 import useSignIn from "@framework/management/auth/use-sign-in";
 import useTokenInfo from "@framework/management/auth/use-token-info";
-
 import {
   useFormikContext,
   Form,
@@ -23,7 +18,6 @@ import {
   useField,
   FormikProps,
 } from "formik";
-import useTokenOneTime from "@framework/management/auth/use-token-one-time";
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
     .min(2, "Введите значение от 2 символов")
@@ -36,24 +30,10 @@ const SignupSchema = Yup.object().shape({
 });
 const LoginFormFormik = () => {
   const trySignIn = useSignIn();
-  const { data: tokenInfo } = useTokenOneTime();
-  if (tokenInfo) {
-    console.log(tokenInfo);
-    // debugger;
-  }
-  const router = useRouter();
+  const {} = useTokenInfo();
+
   const { errors, addError, resetErrors, removeErrorAlert } =
     useErrorsProvider();
-  // const { data: tokenInfo, isValidating } = useTokenInfo();
-  // React.useEffect(() => {
-  //   if (!isValidating && tokenInfo && tokenInfo.id) {
-  //     let redirectUrl = Cookies.get(AFTER_LOGIN_BACKTO_URI) || "/management";
-  //     redirectUrl = Array.isArray(redirectUrl)
-  //       ? redirectUrl.join("/")
-  //       : redirectUrl;
-  //     router.replace(redirectUrl, redirectUrl);
-  //   }
-  // }, [isValidating, tokenInfo, router]);
   const formikRef =
     React.useRef<FormikProps<{ login: string; password: string }>>();
   return (

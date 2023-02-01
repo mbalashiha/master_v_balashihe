@@ -1,11 +1,16 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useTokenInfo } from "@common/management/auth";
 import { UseTokenInfo } from "@common/management/auth/use-token-info";
+import useLoginRoute, { managerLoginUrl } from "@common/management/utils/hooks/use-login-route";
 import { API } from "@common/types";
 import { Management } from "@common/types/cms";
+import { Schema } from "@framework/types";
 import { useMemo } from "react";
 import { normalizeManagerTokenInfo } from "./normalize";
 import { verifyManagementToken } from "./queries/get-token-info";
+import Cookies from "js-cookie";
+import { AFTER_LOGIN_BACKTO_URI } from "@framework/const";
+import { useRouter } from "next/router";
 
 export default useTokenInfo as UseTokenInfo<typeof handler>;
 
@@ -22,18 +27,32 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
     const data = await request({ ...options, variables: input });
     return normalizeManagerTokenInfo(data);
   },
-  useHook:
-    ({ useData }) =>
-    (initial) => {
-      const { data, isValidating, ...rest } = useData({
+  useHook: ({ useData }) => {
+    const router = useRouter();
+    const toLoginPage = useLoginRoute();
+    return (initial) => {
+      const { data, isValidating, isLoading, ...rest } = useData({
         initial,
-        swrOptions: {
-          revalidateOnFocus: false,
-        },
       });
-      // return useMemo(() => {
-      //   return { data, isEmpty: !data };
-      // }, [data]);
-      return { data, isEmpty: !data, isValidating, ...rest };
-    },
+      const isEmpty = !(
+        data &&
+        data.success &&
+        data.manager &&
+        data.manager.id
+      );
+      const managerWasNotAuthorized = isEmpty;
+      if (!isValidating && !isLoading) {
+        if (managerWasNotAuthorized) {
+          toLoginPage();
+        } else if (router.pathname === managerLoginUrl) {
+            let redirectUrl = Cookies.get(AFTER_LOGIN_BACKTO_URI) || "/management";
+            redirectUrl = Array.isArray(redirectUrl)
+              ? redirectUrl.join("/")
+              : redirectUrl;
+            router.replace(redirectUrl, redirectUrl);
+        }
+      }
+      return { data, isEmpty, isValidating, isLoading, ...rest };
+    };
+  },
 };

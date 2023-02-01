@@ -56,11 +56,14 @@ export namespace Graphql {
       initial?: UseDataContext<H["requestInput"], H["data"]>["initial"]
     ) => ModSWRResponse<H["data"]>;
   }
-  export interface TryOneResponse<Data> extends SWRResponse<Data> {
+  export interface FetchedSWRResponse<Data> extends SWRResponse<Data> {
     fetched: boolean;
   }
+  export interface TryOneResponse<Data> extends FetchedSWRResponse<Data> {
+    isEmpty: boolean;
+  }
   export interface UseOneTime<Input, Data> {
-    (ctx: UseDataContext<Input, Data>): TryOneResponse<Data>;
+    (ctx: UseDataContext<Input, Data>): FetchedSWRResponse<Data>;
   }
   export interface OneTimeHook<H extends HookDescriptor> {
     requestOptions: HookRequestOptions;

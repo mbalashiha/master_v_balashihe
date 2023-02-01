@@ -84,7 +84,6 @@ const useOneTime = (
     } catch (e: any) {
       console.error(e?.stack || e?.message || e);
       throw e;
-      return data as any;
     }
   };
   if (!fetched && !isValidating && !isLoading && !error) {

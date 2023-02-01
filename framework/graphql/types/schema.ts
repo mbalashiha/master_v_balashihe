@@ -1,6 +1,6 @@
-declare namespace Schema {
-  declare type ID = string | number;
-  declare interface Image {
+export namespace Schema {
+  export type ID = string | number;
+  export interface Image {
     imageId: ID;
     imgSrc: string;
     altText: string;
@@ -13,18 +13,18 @@ declare namespace Schema {
     createdAt: string;
     updatedAt: string;
   }
-  declare interface ImageConnection {
+  export interface ImageConnection {
     nodes: Image[];
   }
-  declare interface Breadcrumb {
+  export interface Breadcrumb {
     name: string;
     handle: string;
     type: string;
   }
-  declare interface BlogCategoryId {
+  export interface BlogCategoryId {
     id: ID;
   }
-  declare interface BlogArticle {
+  export interface BlogArticle {
     articleId: ID;
     title: string;
     handle: string;
@@ -40,14 +40,14 @@ declare namespace Schema {
     publishedAt: Date;
     breadcrumbs: Breadcrumb[];
   }
-  declare interface BlogArticlesConnection {
+  export interface BlogArticlesConnection {
     nodes: BlogArticle[];
   }
-  declare namespace QueryResponse {
-    declare interface BlogArticles {
+  export namespace QueryResponse {
+    export interface BlogArticles {
       blogArticles: BlogArticlesConnection;
     }
-    declare interface Manager {
+    export interface Manager {
       id: ID
       friendlyName: String
       isManager: Boolean
@@ -55,7 +55,7 @@ declare namespace Schema {
       created: Date
       updated: Date
     }
-    declare interface VerifyManagementTokenResponse {
+    export interface VerifyManagementTokenResponse {
       verifyManagementToken: {
         success: Boolean;
         error: string | null;
