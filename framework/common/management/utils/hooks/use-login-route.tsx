@@ -8,7 +8,7 @@ import util from "util";
 const useLoginRoute = () => {
   const router = useRouter();
   const toLoginPage = React.useCallback(
-    async (errorMessage?: string) => {
+    () => {
       try {
         const fullCurrentPath = router.asPath;
         if (router.pathname !== managerLoginUrl) {
@@ -21,7 +21,7 @@ const useLoginRoute = () => {
     },
     [router]
   );
-  return toLoginPage;
+  return { toLoginPage };
 };
 
 export default useLoginRoute;

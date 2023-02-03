@@ -35,7 +35,7 @@ const getMuiTheme = (): Theme => {
   let theme = createTheme({
     palette: {
       mode: colorMode,
-      primary: { main: "#AA203E" },
+      primary: { main: "#121220" },
       background: {
         default: "#4D001D",
       },
@@ -118,7 +118,7 @@ const getMuiTheme = (): Theme => {
             position: "relative",
             paddingBottom: "27rem",
             backgroundColor:
-              theme.palette.mode === "dark" ? "#212529" : "#F1F3F5",
+              theme.palette.mode === "dark" ? "#212529" : "#BBBBBB",
             color: theme.palette.mode === "dark" ? "#f1f3f5" : "#000000",
             "& > footer": {
               height: "24rem",
@@ -145,6 +145,26 @@ const getMuiTheme = (): Theme => {
       MuiTypography: {
         styleOverrides: {
           h1: {},
+        },
+      },
+      MuiPopover: {
+        styleOverrides: {
+          root: {
+            "& .MuiPaper-rounded": {
+              borderRadius: "6px",
+            },
+            "&.MuiMenu-root": {
+              "& .MuiPaper-root": {
+                backgroundColor: blueGrey["100"],
+              },
+              "& .MuiMenu-list": {
+                padding: 0,
+                "& .MuiMenuItem-root": {
+                  padding: "10px 20px",
+                },
+              },
+            },
+          },
         },
       },
       MuiBadge: {

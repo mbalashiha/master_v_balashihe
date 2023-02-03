@@ -1,6 +1,8 @@
 import { useSignIn } from "@common/management/auth";
 import { UseSignIn } from "@common/management/auth/use-sign-in";
 import { API } from "@common/types";
+import { ID, Management } from "@common/types/cms";
+import { useLoginProvider } from "@components/management/LoginLayout";
 import { MANAGEMENT_LOGIN_API_URL } from "@framework/const";
 
 export default useSignIn as UseSignIn<typeof handler>;
@@ -10,8 +12,8 @@ export interface SignInHook {
     login: string;
     password: string;
   };
-  requestOutput: { success: boolean, error?: string };
-  data: { success: boolean, error?: string };
+  requestOutput: Management.ManagerTokenResponse;
+  data: Management.ManagerTokenResponse;
 }
 export const handler: API.RestApi.RestApiHook<SignInHook> = {
   options: {
@@ -19,7 +21,6 @@ export const handler: API.RestApi.RestApiHook<SignInHook> = {
     enc: true,
   },
   restRequest: async ({ restRequest, input, options }) => {
-    console.log("Fetching Data!");
     try {
       const { data } = await restRequest({
         ...options,
@@ -31,11 +32,14 @@ export const handler: API.RestApi.RestApiHook<SignInHook> = {
       throw e;
     }
   },
-  useHook:
-    ({ restRequest }) =>
-    () =>
-    async (input) => {
+  useHook: ({ restRequest }) => {
+    const { authData, doRedirectAuthorized } = useLoginProvider();
+    return () => async (input) => {
       const response = await restRequest(input);
+      if (response.success) {
+        authData.mutate({ ...response }, false);
+      }
       return response;
-    },
+    };
+  },
 };

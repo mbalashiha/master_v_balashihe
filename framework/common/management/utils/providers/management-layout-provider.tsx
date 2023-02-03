@@ -1,12 +1,14 @@
 import { ID, Management } from "@common/types/cms";
 import { SnackbarProvider } from "notistack";
 import { createContext, useContext, useMemo } from "react";
+import { KeyedMutator } from "swr";
 export interface ManagementLayoutValue {
   manager: {
     friendlyName: string;
     id: ID;
     isAdmin: boolean;
   };
+  mutateAuthInfo: KeyedMutator<Management.ManagerTokenResponse>;
 }
 export const ManagementLayoutContext = createContext<
   Partial<ManagementLayoutValue>
@@ -15,9 +17,14 @@ export const ManagementLayoutContext = createContext<
 interface Props {
   children: React.ReactNode | React.ReactNode[];
   manager?: Management.ManagerTokenResponse["manager"];
+  mutateAuthInfo: KeyedMutator<Management.ManagerTokenResponse>;
 }
 
-export const ManagementLayoutProvider = ({ children, manager }: Props) => {
+export const ManagementLayoutProvider = ({
+  children,
+  manager,
+  mutateAuthInfo,
+}: Props) => {
   const providing = useMemo<ManagementLayoutValue>(
     () => ({
       manager: {
@@ -25,13 +32,14 @@ export const ManagementLayoutProvider = ({ children, manager }: Props) => {
         id: manager?.id || "",
         isAdmin: manager?.isAdmin || false,
       },
+      mutateAuthInfo,
     }),
-    [manager?.friendlyName, manager?.id, manager?.isAdmin]
+    [mutateAuthInfo, manager?.friendlyName, manager?.id, manager?.isAdmin]
   );
   return (
     <ManagementLayoutContext.Provider value={providing}>
       <SnackbarProvider
-        autoHideDuration={8000}
+        autoHideDuration={18000}
         anchorOrigin={{ horizontal: "center", vertical: "top" }}
       >
         {children}

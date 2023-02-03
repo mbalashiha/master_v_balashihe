@@ -21,6 +21,7 @@ import {
 import Cookies from "js-cookie";
 import useFromLogin from "@common/management/utils/hooks/use-from-login";
 import { useSnackbar } from "notistack";
+import { useLoginProvider } from "@components/management/LoginLayout/LoginProvider";
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
     .min(2, "Введите значение от 2 символов")
@@ -33,8 +34,7 @@ const SignupSchema = Yup.object().shape({
 });
 const LoginFormFormik = () => {
   const trySignIn = useSignIn();
-  const {} = useTokenInfo();
-  const { doRedirectAuthorized } = useFromLogin();
+  const { authData, doRedirectAuthorized } = useLoginProvider();
   const formikRef =
     React.useRef<FormikProps<{ login: string; password: string }>>();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();

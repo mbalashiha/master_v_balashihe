@@ -8,10 +8,9 @@ export default function extractGraphQLError(
       err.response.errors &&
       err.response.errors[0] &&
       err.response.errors[0].message) ||
-    err ||
     null;
   if (!graphqlError) {
-    return null;
+    return graphqErrorCandidate;
   } else if (typeof graphqlError !== "string") {
     if (typeof graphqlError === "object") {
       return JSON.stringify(graphqlError, null, 2);

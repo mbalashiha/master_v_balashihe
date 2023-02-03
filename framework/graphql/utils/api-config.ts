@@ -3,10 +3,14 @@ import { GraphQLClient } from "graphql-request";
 import { default as axios } from "axios";
 import { simpleEncrypt } from "@encryption";
 import { API } from "@common/types";
+import extractGraphQLError from "./extract-graphql-error";
+import delay from "delay";
 
 class Config {
   config: API.Config;
-  constructor() {
+  constructor(props?: ConfigConstructorProps) {
+    const toLoginPage = props && props.toLoginPage;
+    const self = this;
     const graphqlClient = new GraphQLClient(API_URL, {
       mode: "cors", // same-origin, no-cors
       credentials: "include",
@@ -15,12 +19,24 @@ class Config {
       options: API.Graphql.RequestOptions<any>
     ): Promise<API.Graphql.RequestResults<any>> => {
       const { query, variables, headers } = options;
-      const resp = await graphqlClient.request(
-        query,
-        variables,
-        headers
-      );
-      return resp;
+      try {
+        const resp = await graphqlClient.request(query, variables, headers);
+        return resp;
+      } catch (e: any) {
+        const apiError = extractGraphQLError(e);
+        if (typeof self.config.toLoginPage === "function") {
+          if (
+            apiError &&
+            typeof apiError === "string" &&
+            (apiError === "Manager Unauthorized" ||
+              apiError === "Client Unauthorized")
+          ) {
+            self.config.toLoginPage();
+            await delay(1000);
+          }
+        }
+        throw apiError && apiError === "string" ? new Error(apiError) : e;
+      }
     };
     const axInstance = axios.create({
       baseURL: API_ORIGIN,
@@ -31,7 +47,7 @@ class Config {
       // Origin: "http://localhost:3000",
       // },
     });
-    const restRequest: API.RestApi.RequestFunction<any, any> = async({
+    const restRequest: API.RestApi.RequestFunction<any, any> = async ({
       url,
       variables,
       headers,
@@ -108,14 +124,20 @@ class Config {
       }
       return responseResult;
     };
-    this.config = { request, restRequest };
+    this.config = { request, restRequest, toLoginPage };
   }
-  getConfig(): API.Config {
+  getConfig(props?: ConfigConstructorProps): API.Config {
+    const toLoginPage = props && props.toLoginPage;
+    if (typeof toLoginPage === "function") {
+      this.config.toLoginPage = toLoginPage;
+    }
     return this.config;
   }
 }
 const config = new Config();
-
-export default function getConfig(): API.Config {
-  return config.getConfig();
+interface ConfigConstructorProps {
+  toLoginPage: () => void;
+}
+export default function getConfig(props?: ConfigConstructorProps): API.Config {
+  return config.getConfig(props);
 }

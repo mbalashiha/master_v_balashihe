@@ -5,7 +5,6 @@ import useLoginRoute from "@common/management/utils/hooks/use-login-route";
 import { API } from "@common/types";
 import { Management } from "@common/types/cms";
 import { Schema } from "@framework/types";
-import { useMemo } from "react";
 import { normalizeManagerTokenInfo } from "./normalize";
 import { verifyManagementToken } from "./queries/get-token-info";
 
@@ -25,7 +24,7 @@ export const handler: API.Graphql.OneTimeHook<TokenInfoHook> = {
     return normalizeManagerTokenInfo(data);
   },
   useHook: ({ useOneTime }) => {
-    const toLoginPage = useLoginRoute();
+    const { toLoginPage } = useLoginRoute();
     return (initial) => {
       const { data, fetched, ...rest } = useOneTime({
         initial,

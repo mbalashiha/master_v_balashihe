@@ -39,16 +39,18 @@ export namespace Graphql {
   export interface ModSWRResponse<Data> extends SWRResponse<Data> {
     isEmpty: boolean;
   }
-  export interface MutationHook<H extends HookDescriptor> {
+  export interface FetchHook<H extends HookDescriptor> {
     requestOptions: HookRequestOptions;
     request: HookRequest<H["requestInput"], H["requestOutput"], H["data"]>;
     useHook(
       context: MutationHookContext<H["requestInput"], H["requestOutput"]>
     ): () => (input: H["requestInput"]) => Promise<H["data"]>;
   }
+  export type MutationHook<H extends HookDescriptor> = FetchHook<H>;
 
   export interface SWRHook<H extends HookDescriptor> {
     requestOptions: HookRequestOptions;
+    swrKey?: string;
     request: HookRequest<H["requestInput"], H["requestOutput"], H["data"]>;
     useHook(context: {
       useData: UseData<H["requestInput"], H["data"]>;
@@ -67,6 +69,7 @@ export namespace Graphql {
   }
   export interface OneTimeHook<H extends HookDescriptor> {
     requestOptions: HookRequestOptions;
+    swrKey?: string;
     request: HookRequest<H["requestInput"], H["requestOutput"], H["data"]>;
     useHook(context: {
       useOneTime: UseOneTime<H["requestInput"], H["data"]>;

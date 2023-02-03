@@ -9,8 +9,12 @@ interface Props {
 }
 
 export const ManagementLayoutProvider = ({ children }: Props) => {
-  const { data: managerTokenInfo } = useTokenOneTime();
-  return <CoreLayoutProvider manager={managerTokenInfo?.manager}>{children}</CoreLayoutProvider>;
+  const { data: managerTokenInfo, mutate: mutateAuthInfo } = useTokenOneTime();
+  return (
+    <CoreLayoutProvider manager={managerTokenInfo?.manager} mutateAuthInfo={mutateAuthInfo}>
+      {children}
+    </CoreLayoutProvider>
+  );
 };
 
 export const useManagementLayoutProvider = () => {

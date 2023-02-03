@@ -1,13 +1,25 @@
 import { useManagementApiProvider } from "@common/management/utils";
 import { API } from "@common/types";
-import React from "react";
+import React, { useCallback } from "react";
+import { useSWRConfig } from "swr";
 import useSWR from "swr";
 
 export const useHook = <H>(hookHandler: (apiHooks: API.Hooks) => H) => {
   const { hooks } = useManagementApiProvider();
   return hookHandler(hooks);
 };
-
+export const useFetchHook = (hook: API.Graphql.FetchHook<any>) => {
+  const { request } = useManagementApiProvider();
+  return hook.useHook({
+    request: (input: any) => {
+      return hook.request({
+        input,
+        options: hook.requestOptions,
+        request,
+      });
+    },
+  });
+};
 export const useMutationHook = (hook: API.Graphql.MutationHook<any>) => {
   const { request } = useManagementApiProvider();
   return hook.useHook({
@@ -32,15 +44,11 @@ export const useRestApiHook = (hook: API.RestApi.RestApiHook<any>) => {
     },
   });
 };
-
-const useOneTime = (
-  hook: API.Graphql.OneTimeHook<any>,
-  request: API.Graphql.RequestFunction<any, any>,
+const useSWROptions = (
+  hook: API.Graphql.OneTimeHook<any> | API.Graphql.SWRHook<any>,
   ctx: API.Graphql.UseDataContext<any, any>
 ) => {
-  const [data, setData] = React.useState<any>(undefined);
-  const [fetched, setFetched] = React.useState(false);
-  const { input, key } = React.useMemo(() => {
+  return React.useMemo(() => {
     let input, key;
     if (ctx?.variables && typeof ctx?.variables === "object") {
       input = input || {};
@@ -53,11 +61,30 @@ const useOneTime = (
       input = input || {};
       input = { ...input, ...ctx?.initial?.variables };
     }
-    key = input
-      ? [hook.requestOptions.query, input]
-      : hook.requestOptions.query;
+    if (hook.swrKey) {
+      key = hook.swrKey;
+    } else {
+      key = input
+        ? [hook.requestOptions.query, input]
+        : hook.requestOptions.query;
+    }
     return { input, key };
-  }, [ctx?.variables, ctx?.initial?.variables, hook.requestOptions.query]);
+  }, [
+    hook.swrKey,
+    ctx?.variables,
+    ctx?.initial?.variables,
+    hook.requestOptions.query,
+  ]);
+};
+const useOneTime = (
+  hook: API.Graphql.OneTimeHook<any>,
+  request: API.Graphql.RequestFunction<any, any>,
+  ctx: API.Graphql.UseDataContext<any, any>
+) => {
+  const [data, setData] = React.useState<any>(undefined);
+  const [fetched, setFetched] = React.useState(false);
+  const { input, key } = useSWROptions(hook, ctx);
+  const { mutate: swrConfigMutate } = useSWRConfig();
   const hookRequest = async () => {
     try {
       return await hook.request({
@@ -77,15 +104,18 @@ const useOneTime = (
     mutate: swrMutate,
     ...rest
   } = useSWR(fetched ? null : key, hookRequest, ctx?.swrOptions);
-  const mutate: typeof swrMutate = (data, opts) => {
-    setData(data);
-    try {
-      return swrMutate(data, opts);
-    } catch (e: any) {
-      console.error(e?.stack || e?.message || e);
-      throw e;
-    }
-  };
+  const mutate: typeof swrMutate = useCallback(
+    (data, opts) => {
+      setData(data);
+      try {
+        return swrConfigMutate(key, data, opts);
+      } catch (e: any) {
+        console.error(e?.stack || e?.message || e);
+        throw e;
+      }
+    },
+    [key, swrConfigMutate]
+  );
   if (!fetched && !isValidating && !isLoading && !error) {
     setData(swrData);
     setFetched(true);
@@ -117,24 +147,7 @@ const useData = (
   request: API.Graphql.RequestFunction<any, any>,
   ctx: API.Graphql.UseDataContext<any, any>
 ) => {
-  const { input, key } = React.useMemo(() => {
-    let input, key;
-    if (ctx?.variables && typeof ctx?.variables === "object") {
-      input = input || {};
-      input = { ...input, ...ctx?.variables };
-    }
-    if (
-      ctx?.initial?.variables &&
-      typeof ctx?.initial?.variables === "object"
-    ) {
-      input = input || {};
-      input = { ...input, ...ctx?.initial?.variables };
-    }
-    key = input
-      ? [hook.requestOptions.query, input]
-      : hook.requestOptions.query;
-    return { input, key };
-  }, [ctx?.variables, ctx?.initial?.variables, hook.requestOptions.query]);
+  const { input, key } = useSWROptions(hook, ctx);
   const hookRequest = async () => {
     try {
       return await hook.request({

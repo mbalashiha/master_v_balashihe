@@ -20,6 +20,7 @@
     "classnames": "^2.3.2",
     "crypto-js": "^4.1.1",
     "deep-equal": "^2.1.0",
+    "delay": "^5.0.0",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
     "formik": "^2.2.9",
@@ -44,6 +45,7 @@
     "@types/axios": "^0.14.0",
     "@types/body-scroll-lock": "^3.1.0",
     "@types/crypto-js": "^4.1.1",
+    "@types/delay": "^3.1.0",
     "@types/js-cookie": "^3.0.2",
     "@types/node": "^18.11.18",
     "sass": "^1.57.1"
