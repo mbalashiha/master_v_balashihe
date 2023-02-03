@@ -8,7 +8,7 @@ import { Box } from "@mui/material";
 import Head from "next/head";
 import CssBaseline from "@mui/material/CssBaseline";
 import { theme as getMuiTheme } from "@components/management/Layout/theme";
-import { useThemePalette } from "@components/ui";
+import { MuiSnackbarProvider, useThemePalette } from "@components/ui";
 import { ThemeProvider } from "@mui/material";
 import { ManagementApiProvider } from "@framework/management";
 import { SnackbarProvider } from "notistack";
@@ -25,13 +25,13 @@ const LoginLayout: FC<Props> = ({ children }: Props) => {
       <ManagementApiProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <SnackbarProvider
+          <MuiSnackbarProvider
             autoHideDuration={8000}
             anchorOrigin={{ horizontal: "center", vertical: "top" }}
             maxSnack={1}
           >
             <LoginProvider>{children}</LoginProvider>
-          </SnackbarProvider>
+          </MuiSnackbarProvider>
         </ThemeProvider>
       </ManagementApiProvider>
     </>

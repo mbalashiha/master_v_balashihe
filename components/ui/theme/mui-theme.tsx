@@ -14,6 +14,8 @@ declare module "@mui/material/styles/createTypography" {
     };
   }
 }
+const InterFontFamily = `Inter, Arial, sans-serif`;
+
 const getMuiTheme = (): Theme => {
   const colorMode: PaletteMode = "light" as any;
   const fontFamily = "Gotham, Arial, sans-serif";
@@ -79,9 +81,16 @@ const getMuiTheme = (): Theme => {
       MuiCssBaseline: {
         styleOverrides: {
           body: {
-            "& .SnackbarContent-root.SnackbarItem-variantError": {
-              color: "white",
-              backgroundColor: colors.red.A700,
+            "& .SnackbarContent-root, & .SnackbarItem-contentRoot": {
+              "&&": {
+                fontFamily: InterFontFamily,
+                fontWeight: 500,
+                background: "white",
+                "&.SnackbarItem-variantError": {
+                  color: "white",
+                  backgroundColor: "red",
+                },
+              },
             },
             "& h1, & h2, & h3": {
               color: theme.typography.h1.color,

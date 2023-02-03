@@ -31,10 +31,8 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
     const router = useRouter();
     const { toLoginPage } = useLoginRoute();
     const { doRedirectAuthorized } = useFromLogin();
-    return (initial) => {
-      const { data, isValidating, isLoading, ...rest } = useData({
-        initial,
-      });
+    return () => {
+      const { data, isValidating, isLoading, ...rest } = useData();
       const isEmpty = !(
         data &&
         data.success &&
@@ -43,10 +41,14 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
       );
       const managerWasNotAuthorized = isEmpty;
       if (!isValidating && !isLoading) {
-        if (managerWasNotAuthorized) {
-          toLoginPage();
-        } else if (router.pathname === managerLoginUrl) {
-          doRedirectAuthorized();
+        try {
+          if (managerWasNotAuthorized) {
+            toLoginPage();
+          } else if (router.pathname === managerLoginUrl) {
+            doRedirectAuthorized();
+          }
+        } catch (e) {
+          console.error(e);
         }
       }
       return { data, isEmpty, isValidating, isLoading, ...rest };

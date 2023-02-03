@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import Footer from "@components/site/Footer";
 import { Navbar, NavBreadcrumbs } from "@components/site/Navigation";
 import { Container, styled } from "@mui/material";
+import { MuiSnackbarProvider } from "@components/ui";
+import { SnackbarProvider } from "notistack";
 import { Box } from "@mui/material";
 import Head from "next/head";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -25,22 +27,29 @@ const ManagementLayout: FC<Props> = ({ children }: Props) => {
   const { theme } = themePaletteCtx;
   return (
     <>
-      <ManagementApiProvider>
-        <ManagementLayoutProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <ManagementAppBar />
-            <Container
-              sx={{
-                position: "relative",
-                minHeight: "100vh",
-                paddingBottom: "20rem",
-              }}
-              maxWidth="xl"
-            ></Container>
-          </ThemeProvider>
-        </ManagementLayoutProvider>
-      </ManagementApiProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <MuiSnackbarProvider
+          autoHideDuration={4440000}
+          anchorOrigin={{ horizontal: "center", vertical: "top" }}
+        >
+          <ManagementApiProvider>
+            <ManagementLayoutProvider>
+              <ManagementAppBar />
+              <Container
+                sx={{
+                  position: "relative",
+                  minHeight: "100vh",
+                  paddingBottom: "20rem",
+                }}
+                maxWidth="xl"
+              >
+                {children}
+              </Container>
+            </ManagementLayoutProvider>
+          </ManagementApiProvider>
+        </MuiSnackbarProvider>
+      </ThemeProvider>
     </>
   );
 };

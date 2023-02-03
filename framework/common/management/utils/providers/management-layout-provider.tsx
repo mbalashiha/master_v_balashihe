@@ -1,4 +1,5 @@
 import { ID, Management } from "@common/types/cms";
+import { MuiSnackbarProvider } from "@components/ui";
 import { SnackbarProvider } from "notistack";
 import { createContext, useContext, useMemo } from "react";
 import { KeyedMutator } from "swr";
@@ -38,12 +39,7 @@ export const ManagementLayoutProvider = ({
   );
   return (
     <ManagementLayoutContext.Provider value={providing}>
-      <SnackbarProvider
-        autoHideDuration={40000}
-        anchorOrigin={{ horizontal: "center", vertical: "top" }}
-      >
         {children}
-      </SnackbarProvider>
     </ManagementLayoutContext.Provider>
   );
 };

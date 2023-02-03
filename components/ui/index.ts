@@ -15,13 +15,14 @@ export { default as Container } from "./Container";
 export { default as Marquee } from "./Marquee";
 export { default as Sidebar } from "./Sidebar";
 
+export { default as MuiSnackbarProvider } from "./MuiSnackbarProvider";
+
 export { default as RelativeBackdrop } from "./RelativeBackdrop";
 export { default as FullScreenModal } from "./FullScreenModal";
 export { default as SlideInDialog } from "./SlideInDialog";
-export { default as StyledPhoneInput } from "./StyledPhoneInput";
+// export { default as StyledPhoneInput } from "./StyledPhoneInput";
 export { default as ClosableAlertt } from "./ClosableAlert";
 
-export { default as ModalBody } from "./ModalBody";
 export { default as Button } from "./Button";
 export { default as MainActionButton } from "./MainActionButton";
 export { default as HugeButton } from "./HugeButton";

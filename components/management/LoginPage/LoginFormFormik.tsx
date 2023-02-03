@@ -34,7 +34,8 @@ const SignupSchema = Yup.object().shape({
 });
 const LoginFormFormik = () => {
   const trySignIn = useSignIn();
-  const { authData, doRedirectAuthorized } = useLoginProvider();
+  const { doRedirectAuthorized } = useLoginProvider();
+  const { data: authInfo } = useTokenInfo();
   const formikRef =
     React.useRef<FormikProps<{ login: string; password: string }>>();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();

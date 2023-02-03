@@ -1,6 +1,6 @@
 import { createTheme, Theme } from "@mui/material/styles";
 import { colors, Palette, PaletteMode } from "@mui/material";
-import { purple, pink, amber, grey, blueGrey } from "@mui/material/colors";
+import { purple, pink, amber, grey, blueGrey, red } from "@mui/material/colors";
 declare module "@mui/material/styles/createTypography" {
   interface Typography {
     allVariants: {
@@ -95,9 +95,17 @@ const getMuiTheme = (): Theme => {
       MuiCssBaseline: {
         styleOverrides: {
           body: {
-            "& .SnackbarContent-root.SnackbarItem-variantError": {
-              color: "white",
-              backgroundColor: colors.red.A700,
+            "& .SnackbarContent-root, & .SnackbarItem-contentRoot": {
+              "& .SnackbarItem-message": {
+                color: "black",
+                fontFamily: InterFontFamily,
+                fontWeight: 500,
+                fontSize: "11.5pt",
+              },
+              "&.SnackbarItem-variantError": {
+                color: "white",
+                backgroundColor: "red",
+              },
             },
             "& h1, & h2, & h3": {
               color: theme.typography.h1.color,

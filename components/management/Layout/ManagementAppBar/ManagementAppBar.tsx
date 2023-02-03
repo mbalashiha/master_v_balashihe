@@ -56,7 +56,7 @@ export default function ManagementAppBar() {
         </Typography>
         <Box sx={{ mr: 2, flexGrow: 1 }}></Box>
         {manager && (
-          <div>
+          <>
             <Button
               size="large"
               aria-label="account of current user"
@@ -68,20 +68,21 @@ export default function ManagementAppBar() {
             >
               <Typography component={"span"}>{manager.friendlyName}</Typography>
             </Button>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={handleCloseMenu}
-              sx={{
-                "&& li": {
-                  minWidth: "160px",
-                },
-              }}
-            >
-              <MenuItem onClick={handleLogout}>Выйти</MenuItem>
-            </Menu>
-          </div>
+            {Boolean(anchorEl) && (
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleCloseMenu}
+                sx={{
+                  "& li": {
+                    minWidth: "20ch",
+                  },
+                }}
+              >
+                <MenuItem onClick={handleLogout}>Выйти</MenuItem>
+              </Menu>
+            )}
+          </>
         )}
       </Toolbar>
     </AppBar>

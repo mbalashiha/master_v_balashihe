@@ -25,18 +25,17 @@ export const handler: API.Graphql.OneTimeHook<TokenInfoHook> = {
   },
   useHook: ({ useOneTime }) => {
     const { toLoginPage } = useLoginRoute();
-    return (initial) => {
-      const { data, fetched, ...rest } = useOneTime({
-        initial,
-      });
+    return () => {
+      const { data, fetched, ...rest } = useOneTime();
       const isEmpty = !(
         data &&
         data.success &&
         data.manager &&
         data.manager.id
       );
+      const managerWasNotAuthorized = isEmpty;
       if (fetched) {
-        if (isEmpty) {
+        if (managerWasNotAuthorized) {
           toLoginPage();
         }
       }

@@ -9,12 +9,22 @@ import {
   ReactNode,
   ComponentProps,
 } from "react";
-import {
-  disableBodyScroll as __disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks,
-} from "body-scroll-lock";
-import type { BodyScrollOptions } from "body-scroll-lock";
+// import {
+//   disableBodyScroll as __disableBodyScroll,
+//   enableBodyScroll,
+//   clearAllBodyScrollLocks,
+// } from "b//ody-scroll-lock";
+// import type { BodyScrollOptions } from "b//ody-scroll-lock";
+// const bsOptions: BodyScrollOptions = {
+//   reserveScrollBarGap: true,
+// };
+// const disableBodyScroll = (...args: any[]) => {
+//   const opts: BodyScrollOptions =
+//     typeof args[1] === "object"
+//       ? args[1] && (args[1].reserveScrollBarGap = true) && args[1]
+//       : bsOptions;
+//   return __disableBodyScroll(args[0], opts);
+// };
 import Image from "next/image";
 import { Map } from "immutable";
 import { ChildFriendlyTwoTone, InterpreterMode } from "@mui/icons-material";
@@ -80,16 +90,6 @@ const SlideForwardBtn = styled((props: ComponentProps<typeof IconButton>) => {
 })(({ theme }) => ({}));
 import { calculateAspectRatioFit } from "@lib/aspect-ration-fit";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-const bsOptions: BodyScrollOptions = {
-  reserveScrollBarGap: true,
-};
-const disableBodyScroll = (...args: any[]) => {
-  const opts: BodyScrollOptions =
-    typeof args[1] === "object"
-      ? args[1] && (args[1].reserveScrollBarGap = true) && args[1]
-      : bsOptions;
-  return __disableBodyScroll(args[0], opts);
-};
 interface OverlayProps
   extends React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLDivElement>,
@@ -135,16 +135,6 @@ const StyledOverlay = ({
   ...props
 }: OverlayProps) => {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
-  useEffect(() => {
-    if (ref.current) {
-      if (isOpen) {
-        disableBodyScroll(ref.current);
-      } else {
-        enableBodyScroll(ref.current);
-      }
-    }
-    return () => clearAllBodyScrollLocks();
-  }, [isOpen]);
   return (
     <Portal>
       <div
@@ -579,9 +569,9 @@ const SliderComponent = ({
               return (
                 <>
                   {(Math.floor(marginTop || 0) || null) && (
-                    <div
+                    <Box
                       onClick={onClose}
-                      style={{
+                      sx={{
                         height: marginTop + "px",
                         width: "100%",
                         cursor: "pointer",
@@ -777,9 +767,9 @@ const OneImageComponent = ({
       ) : (
         <>
           {hasMarginTop && (
-            <div
+            <Box
               onClick={onClose}
-              style={{
+              sx={{
                 height: marginTop + "px",
                 width: "100%",
                 cursor: "pointer",
@@ -827,9 +817,9 @@ const OneImageComponent = ({
             </Paper>
           </Box>
           {hasMarginTop && (
-            <div
+            <Box
               onClick={onClose}
-              style={{
+              sx={{
                 height: marginTop + "px",
                 width: "100%",
                 cursor: "pointer",

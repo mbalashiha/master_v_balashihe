@@ -46,7 +46,7 @@ export const useRestApiHook = (hook: API.RestApi.RestApiHook<any>) => {
 };
 const useSWROptions = (
   hook: API.Graphql.OneTimeHook<any> | API.Graphql.SWRHook<any>,
-  ctx: API.Graphql.UseDataContext<any, any>
+  ctx?: API.Graphql.UseDataContext<any, any>
 ) => {
   return React.useMemo(() => {
     let input, key;
@@ -79,7 +79,7 @@ const useSWROptions = (
 const useOneTime = (
   hook: API.Graphql.OneTimeHook<any>,
   request: API.Graphql.RequestFunction<any, any>,
-  ctx: API.Graphql.UseDataContext<any, any>
+  ctx?: API.Graphql.UseDataContext<any, any>
 ) => {
   const [data, setData] = React.useState<any>(undefined);
   const [fetched, setFetched] = React.useState(false);
@@ -145,7 +145,7 @@ export const useOneTimeHook = (hook: API.Graphql.OneTimeHook<any>) => {
 const useData = (
   hook: API.Graphql.SWRHook<any>,
   request: API.Graphql.RequestFunction<any, any>,
-  ctx: API.Graphql.UseDataContext<any, any>
+  ctx?: API.Graphql.UseDataContext<any, any>
 ) => {
   const { input, key } = useSWROptions(hook, ctx);
   const hookRequest = async () => {
