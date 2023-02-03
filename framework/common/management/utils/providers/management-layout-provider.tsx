@@ -39,7 +39,7 @@ export const ManagementLayoutProvider = ({
   return (
     <ManagementLayoutContext.Provider value={providing}>
       <SnackbarProvider
-        autoHideDuration={18000}
+        autoHideDuration={40000}
         anchorOrigin={{ horizontal: "center", vertical: "top" }}
       >
         {children}

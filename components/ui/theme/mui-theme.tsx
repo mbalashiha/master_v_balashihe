@@ -81,7 +81,7 @@ const getMuiTheme = (): Theme => {
           body: {
             "& .SnackbarContent-root.SnackbarItem-variantError": {
               color: "white",
-              backgroundColor: "#AA203E",
+              backgroundColor: colors.red.A700,
             },
             "& h1, & h2, & h3": {
               color: theme.typography.h1.color,

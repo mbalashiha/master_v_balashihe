@@ -29,6 +29,8 @@ declare module "@mui/material/styles/createTypography" {
   // };
   // }
 }
+const InterFontFamily = `Inter, Arial, sans-serif`;
+
 const getMuiTheme = (): Theme => {
   const colorMode: PaletteMode = "light" as any;
   const fontFamily = "Roboto, Gotham, Helvetica, Arial, sans-serif";
@@ -95,7 +97,7 @@ const getMuiTheme = (): Theme => {
           body: {
             "& .SnackbarContent-root.SnackbarItem-variantError": {
               color: "white",
-              backgroundColor: "#AA203E",
+              backgroundColor: colors.red.A700,
             },
             "& h1, & h2, & h3": {
               color: theme.typography.h1.color,
@@ -178,9 +180,10 @@ const getMuiTheme = (): Theme => {
       MuiMenuItem: {
         styleOverrides: {
           root: {
-            fontFamily,
-            fontWeight: "normal",
-            fontSize: "1rem",
+            fontFamily: InterFontFamily,
+            color: "black",
+            fontWeight: 500,
+            fontSize: "1.1rem",
           },
         },
       },
