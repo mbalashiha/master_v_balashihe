@@ -20,7 +20,7 @@
       "name": "Debug client-side",
       "type": "msedge",
       "request": "launch",
-      "url": "http://localhost:3000/management/login",
+      "url": "http://localhost:3000/management/blog/article/create",
       "internalConsoleOptions": "openOnSessionStart",
       "sourceMapPathOverrides": {
         "webpack:///./*": "${workspaceFolder}/*"

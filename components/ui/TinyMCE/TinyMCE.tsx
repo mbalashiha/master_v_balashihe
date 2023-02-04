@@ -18,6 +18,7 @@ export default function TinyMCE({
         tinymceScriptSrc="/tinymce/tinymce.min.js"
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue={initialValue}
+        id="tinymce-editor-in-iframe"
         init={{
           language: "ru",
           language_url: "/tinymce/langs/ru.js", // site absolute URL
@@ -47,7 +48,7 @@ export default function TinyMCE({
           toolbar:
             "undo redo | casechange blocks | bold italic forecolor | " +
             "alignleft aligncenter alignright alignjustify | " +
-            "bullist numlist checklist outdent indent | removeformat | link image | code table help",
+            "bullist numlist checklist outdent indent | removeformat | link image code table help",
           content_style:
             "body { font-family:Inter,Roboto,Helvetica,Arial,sans-serif; font-size:14px }",
           content_langs: [

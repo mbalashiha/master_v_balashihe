@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import { ManagementLayout } from "@components/management";
 import { useSnackbar } from "notistack";
 import React from "react";
+import { ArticleBodyEditor } from "@components/management/blog";
 
 export default function ArticleCreatePage() {
   return (
@@ -22,21 +23,12 @@ export default function ArticleCreatePage() {
         <Grid item xs={12}>
           <Box
             sx={{
-              width: "100%",
-              "& > iframe": {
                 height: "1080px",
                 width: "100%",
                 border: "none",
-              },
             }}
           >
-            <iframe
-              name="tinymce-iframe"
-              title="TinyMCE editor"
-              height={800}
-              width={800}
-              src="/management/blog/article/editor/tinymce-iframe"
-            />
+            <ArticleBodyEditor />
           </Box>
         </Grid>
       </Grid>
