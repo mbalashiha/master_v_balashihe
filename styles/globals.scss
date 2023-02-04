@@ -10,13 +10,19 @@ body,
   margin: 0;
   font-family: Gotham, Arial, sans-serif;
 }
+// .tox-notifications-container {
+//   display: none !important;
+// }
+.tox-editor-container .tox-promotion {
+  display: none !important;
+}
 ul {
   padding: 1em 1em 1em 2.5em;
 }
 li {
   padding: 0.25em 0;
   text-indent: 0;
-  font-family: "Segoe UI", Tahoma, Verdana, Arial;
+  font-family: Inter, Roboto, Tahoma, Verdana, Arial;
   // font-size: 1em;
 }
 // @media (prefers-color-scheme: dark) {

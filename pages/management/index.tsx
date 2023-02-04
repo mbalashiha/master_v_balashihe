@@ -1,11 +1,20 @@
 import { MainActionButton } from "@components/ui";
-import { Box, Button, Card, Grid, Paper, Stack, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Grid,
+  Paper,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 import { ErrorsProvider } from "@components/ui/contexts/use-errors-context";
 import Typography from "@mui/material/Typography";
 import { ManagementLayout } from "@components/management";
 import { useSnackbar } from "notistack";
 import React from "react";
+import Link from "next/link";
 
 export default function ManagementHomePage() {
   const { enqueueSnackbar } = useSnackbar();
@@ -30,7 +39,9 @@ export default function ManagementHomePage() {
     <>
       <Grid container>
         <Grid item xs={12} md={6}>
-          <Button>Добавить статью</Button>
+          <Link href="/management/blog/article/create">
+            <Button>Добавить статью</Button>
+          </Link>
         </Grid>
         <Grid item xs={12} md={6}></Grid>
       </Grid>

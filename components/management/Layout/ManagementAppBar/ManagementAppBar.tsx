@@ -32,7 +32,7 @@ export default function ManagementAppBar() {
     setAnchorEl(null);
   };
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ background: "#121220" }}>
       <Toolbar
         sx={{
           "& *": {
@@ -51,9 +51,13 @@ export default function ManagementAppBar() {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          CMS
-        </Typography>
+        <Box sx={{ flexGrow: 1 }}>
+          <Link href="/management">
+            <Typography variant="h6" component="div">
+              CMS
+            </Typography>
+          </Link>
+        </Box>
         <Box sx={{ mr: 2, flexGrow: 1 }}></Box>
         {manager && (
           <>

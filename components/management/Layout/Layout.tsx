@@ -40,7 +40,6 @@ const ManagementLayout: FC<Props> = ({ children }: Props) => {
                 sx={{
                   position: "relative",
                   minHeight: "100vh",
-                  paddingBottom: "20rem",
                 }}
                 maxWidth="xl"
               >

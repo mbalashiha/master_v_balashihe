@@ -37,7 +37,7 @@ const getMuiTheme = (): Theme => {
   let theme = createTheme({
     palette: {
       mode: colorMode,
-      primary: { main: "#121220" },
+      primary: { main: "#AA203E" },
       background: {
         default: "#4D001D",
       },
@@ -52,7 +52,7 @@ const getMuiTheme = (): Theme => {
       fontWeightRegular: 400,
       fontWeightMedium: 500,
       allVariants: {
-        color: "#303B44",
+        color: "#121220",
       },
       button: {
         fontFamily,
@@ -215,33 +215,19 @@ const getMuiTheme = (): Theme => {
           },
         },
       },
-      MuiButtonBase: {
-        styleOverrides: {
-          root: {
-            transition: "all .15s ease .05s",
-          },
-        },
-      },
-      MuiIconButton: {
-        styleOverrides: {
-          root: {
-            transition: "all .15s ease .05s",
-          },
-        },
-      },
       MuiButton: {
         styleOverrides: {
           // Name of the slot
           root: {
-            transition: "all .15s ease .05s",
-            borderRadius: "50px",
-            border: "3px solid",
-            borderColor: theme.palette.primary.main,
-            color: theme.palette.primary.main,
-            padding: "10px 30px",
-            fontWeight: 600,
+            transition: "all .15s linear",
+            border: "none",
+            borderColor: "none",
+            background: theme.palette.primary.main,
+            color: "#ffffff",
+            padding: "7px 20px",
+            fontWeight: 500,
             "&:hover": {
-              background: theme.palette.primary.main,
+              background: theme.palette.primary.dark,
               color: "#ffffff",
             },
             "& .MuiButton-iconSizeMedium": {
