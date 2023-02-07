@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import { useState, useContext, useMemo, ReactNode } from "react";
 import {
   FieldInputProps,
@@ -7,14 +7,16 @@ import {
   FormikState,
   FormikValues,
   Form as FormikForm,
+  useField as useFieldFormik,
 } from "formik";
+export const useField = useFieldFormik;
+
 type InnerRef<T> = React.MutableRefObject<FormikProps<T> | null>;
 
 interface FormContextType<FormProps extends FormikValues> {
   formik: () => FormikProps<FormProps> | null;
   formikRef: InnerRef<FormProps>;
-  setInitialValues: (values: FormProps | null | undefined) => void;
-  getInitialValues: () => FormProps | null | undefined;
+  getInitialValues: () => FormProps;
   getFieldValue: <Value = any>(props: any) => Value | undefined;
   setFieldValue: FormikProps<FormProps>["setFieldValue"];
   getFieldProps: FormikProps<FormProps>["getFieldProps"];
@@ -36,34 +38,32 @@ interface Props<FormProps extends FormikValues>
   contextRef?: ContextRef<FormProps>;
 }
 export const Form = FormikForm;
-export const RefFormikProvider = <FormProps extends FormikValues,>({
+export const RefFormik = <FormProps extends FormikValues>({
   children,
   contextRef,
+  initialValues: formikInitialValues,
   innerRef: _,
   ...formikProps
 }: Props<FormProps>) => {
+  if (!formikInitialValues || typeof formikInitialValues !== "object") {
+    throw new Error(
+      "Incorrect formik initial values: " + typeof formikInitialValues
+    );
+  }
   const [formWasSubmited, innerSetFormWasSubmited] = React.useState(false);
   const setFormWasSubmited = React.useCallback(() => {
     innerSetFormWasSubmited(true);
   }, []);
   const formikRef: InnerRef<FormProps> = React.useRef(null);
-  const [initialValues, innerSetInitialValues] = useState<
-    FormProps | null | undefined
-  >();
-  const setInitialValues = useCallback(
-    (values: FormProps | null | undefined): void => {
-      if (values && typeof values === "object" && !initialValues) {
-        innerSetInitialValues(values);
-      }
-    },
-    [initialValues]
+  const [initialValues] = useState<FormProps>(
+    JSON.parse(JSON.stringify(formikInitialValues))
   );
-  const getInitialValues = useCallback((): FormProps | null | undefined => {
-    return Object.assign(
-      {},
-      initialValues || formikRef.current?.initialValues || undefined
-    );
-  }, [initialValues]);
+  const initialValuesRef = useRef<FormProps>(initialValues);
+  initialValuesRef.current = initialValues;
+  const getInitialValues = useCallback((): FormProps => {
+    const initialValues = initialValuesRef.current;
+    return { ...initialValues };
+  }, []);
   const providerMethods = useMemo(() => {
     const formik = () => formikRef.current;
     const resetForm: FormikProps<FormProps>["resetForm"] = (
@@ -105,11 +105,14 @@ export const RefFormikProvider = <FormProps extends FormikValues,>({
         }
       }
     };
-    const getValues = (): FormProps | undefined =>
-      (formikRef.current &&
-        formikRef.current.values &&
-        Object.assign({}, formikRef.current.values)) ||
-      undefined;
+    const getValues = (): FormProps => {
+      if (formikRef.current && formikRef.current.values) {
+        return { ...formikRef.current.values };
+      } else {
+        const initialValues = initialValuesRef.current;
+        return { ...initialValues };
+      }
+    };
     const handleSubmit: FormikProps<FormProps>["handleSubmit"] = (
       e?: React.FormEvent<HTMLFormElement> | undefined
     ): void => {
@@ -129,30 +132,29 @@ export const RefFormikProvider = <FormProps extends FormikValues,>({
     return {
       ...providerMethods,
       formikRef,
-      setInitialValues,
       getInitialValues,
       setFormWasSubmited,
       formWasSubmited,
     };
-  }, [
-    providerMethods,
-    setInitialValues,
-    getInitialValues,
-    setFormWasSubmited,
-    formWasSubmited,
-  ]);
+  }, [providerMethods, getInitialValues, setFormWasSubmited, formWasSubmited]);
   if (contextRef) {
     contextRef.current = providerConfig;
   }
   return (
     <FormContext.Provider value={providerConfig}>
-      <Formik innerRef={formikRef as any} {...formikProps}>
+      <Formik
+        innerRef={formikRef as any}
+        initialValues={{ ...formikInitialValues }}
+        {...formikProps}
+      >
         {children}
       </Formik>
     </FormContext.Provider>
   );
 };
 
-export const useRefFormik = <FormProps extends FormikValues,>(): FormContextType<FormProps> => {
+export const useRefFormik = <
+  FormProps extends FormikValues
+>(): FormContextType<FormProps> => {
   return useContext(FormContext) as FormContextType<FormProps>;
 };

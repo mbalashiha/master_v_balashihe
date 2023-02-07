@@ -16,8 +16,10 @@ export default function TinyMCE({
     <>
       <Editor
         tinymceScriptSrc="/tinymce/tinymce.min.js"
-        onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue={initialValue}
+        initialValue={initialValue || ""}
+        onInit={(evt, editor) => {
+          editorRef.current = editor;
+        }}
         id="tinymce-editor-in-iframe"
         init={{
           language: "ru",

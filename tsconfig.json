@@ -37,9 +37,13 @@
       "@root/*": ["./*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "components/ui/StyledPhoneInput/StyledPhoneInput-tsx.exc"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "components/ui/StyledPhoneInput/StyledPhoneInput-tsx.exc"
+  ],
   "exclude": [
-    "**webpack:**",
+    "public",
     "node_modules",
     ".history",
     ".git",

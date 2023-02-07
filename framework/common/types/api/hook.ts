@@ -1,5 +1,5 @@
-export interface HookDescriptor {
-  requestInput: any;
-  requestOutput: any;
-  data: any;
+export interface HookDescriptor<Input = any, ReqOutput = any, Data = any> {
+  requestInput: Input;
+  requestOutput: ReqOutput;
+  data: Data;
 }

@@ -1,44 +1,82 @@
 export namespace Schema {
-  export type ID = string | number;
+  export type ID = String | number;
+  export type Int = number;
+  export type Float = number;
+  type String = string;
   export interface Image {
     imageId: ID;
-    imgSrc: string;
-    altText: string;
-    height: number;
-    width: number;
-    orderNumber?: number;
-    originalWidth: number;
-    originalHeight: number;
-    pathOfOriginal: string;
-    createdAt: string;
-    updatedAt: string;
+    imgSrc: String;
+    altText: String;
+    height: Int;
+    width: Int;
+    orderNumber?: Int;
+    originalWidth: Int;
+    originalHeight: Int;
+    pathOfOriginal: String;
+    createdAt: String;
+    updatedAt: String;
   }
   export interface ImageConnection {
     nodes: Image[];
   }
   export interface Breadcrumb {
-    name: string;
-    handle: string;
-    type: string;
+    name: String;
+    handle: String;
+    type: String;
   }
-  export interface BlogCategoryId {
+  export interface CategoryId {
     id: ID;
   }
   export interface BlogArticle {
     articleId: ID;
-    title: string;
-    handle: string;
-    description: string;
-    descriptionHtml: string;
+    title: String;
+    handle: String;
+    text: String;
+    textHtml: String;
+    textRawDraftContentState: String | null;
     published: boolean;
-    orderNumber: number;
-    category: BlogCategoryId;
-    image: Image;
-    images: ImageConnection;
+    orderNumber: Int;
+    blogCategoryId: ID;
+    category: CategoryId;
     createdAt: Date;
     updatedAt: Date;
     publishedAt: Date;
     breadcrumbs: Breadcrumb[];
+  }
+  export interface ArticleDraftInput {
+    id: ID | null;
+    title: String;
+    handle: String;
+    autoHandleSlug: String;
+    published: Boolean;
+    orderNumber: Int;
+    blogCategoryId: ID;
+    existingArticleId: ID | null;
+  }
+  export interface ArticleTextDraftInput {
+    id: ID | null;
+    text: String;
+    textHtml: String;
+    textRawDraftContentState: String | null;
+    existingArticleId: ID | null;
+  }
+  export interface ArticleDraft {
+    id: ID | null;
+    title: String;
+    handle: String;
+    autoHandleSlug: String;
+    text: String;
+    textHtml: String;
+    textRawDraftContentState: String | null;
+    published: boolean;
+    orderNumber: Int;
+    blogCategoryId: ID;
+    category: CategoryId;
+    createdAt: Date;
+    updatedAt: Date;
+    publishedAt: Date;
+    existingArticleId: ID | null;
+    existingArticle: BlogArticle | null;
   }
   export interface BlogArticlesConnection {
     nodes: BlogArticle[];
@@ -47,20 +85,26 @@ export namespace Schema {
     export interface BlogArticles {
       blogArticles: BlogArticlesConnection;
     }
+    export interface ArticleDraftResponse {
+      articleDraft: ArticleDraft;
+    }
     export interface Manager {
-      id: ID
-      friendlyName: String
-      isManager: Boolean
-      isAdmin: Boolean
-      created: Date
-      updated: Date
+      id: ID;
+      friendlyName: String;
+      isManager: Boolean;
+      isAdmin: Boolean;
+      created: Date;
+      updated: Date;
     }
     export interface VerifyManagementTokenResponse {
       verifyManagementToken: {
         success: Boolean;
-        error: string | null;
+        error: String | null;
         manager: Manager;
-      }
+      };
+    }
+    export interface GetArticleDraftResponse {
+      articleDraft: ArticleDraft;
     }
   }
 }

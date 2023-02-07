@@ -1,6 +1,6 @@
 import { gql } from "graphql-request";
 
-export const verifyManagementToken = gql`
+const articleFragment = gql`
   fragment ArticleFragment on BlogArticle {
     articleId
     title
@@ -11,16 +11,10 @@ export const verifyManagementToken = gql`
     autoHandleSlug
     published
     orderNumber
-    category {
-      id
-    }
+    blogCategoryId
     createdAt
     updatedAt
     publishedAt
   }
-  query managementGetArticles {
-    managementGetArticles {
-      ...ArticleFragment
-    }
-  }
 `;
+export default articleFragment;

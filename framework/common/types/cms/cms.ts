@@ -1,4 +1,8 @@
-export type ID = string | number;
+
+export type ID = String | number;
+export type Int = number;
+export type Float = number;
+type String = string;
 
 export interface Breadcrumb {
   name: string;
@@ -33,6 +37,23 @@ export namespace Blog {
     updatedAt: Date;
     publishedAt: Date;
     breadcrumbs: Breadcrumb[];
+  }
+  export interface ArticleDraft {
+    id: ID | null;
+    title: String;
+    handle: String;
+    autoHandleSlug: String;
+    text: String;
+    textHtml: String;
+    textRawDraftContentState: String | null;
+    published: boolean;
+    orderNumber: Int;
+    blogCategoryId: ID;
+    createdAt: Date;
+    updatedAt: Date;
+    publishedAt: Date;
+    existingArticleId: ID | null;
+    existingArticle: Article | null;
   }
 }
 export namespace Management {
