@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import Cookies from "js-cookie";
-import { AFTER_LOGIN_BACKTO_URI } from "@framework/const";
-export const managerLoginUrl = "/management/login";
+import { AFTER_LOGIN_BACKTO_URI, MANAGER_LOGIN_URL } from "@framework/const";
 import util from "util";
 
 const useLoginRoute = () => {
@@ -11,9 +10,9 @@ const useLoginRoute = () => {
     () => {
       try {
         const fullCurrentPath = router.asPath;
-        if (router.pathname !== managerLoginUrl) {
+        if (router.pathname !== MANAGER_LOGIN_URL) {
           Cookies.set(AFTER_LOGIN_BACKTO_URI, fullCurrentPath);
-          router.push(managerLoginUrl, managerLoginUrl);
+          router.push(MANAGER_LOGIN_URL, MANAGER_LOGIN_URL);
         }
       } catch (e) {
         console.error(e);

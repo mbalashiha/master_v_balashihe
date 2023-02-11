@@ -1,6 +1,6 @@
-export const API_ORIGIN: string = process.env.NEXT_PUBLIC_API_ORIGIN!;
-if (!API_ORIGIN) {
-  throw new Error("No enviroment variable NEXT_PUBLIC_API_ORIGIN");
+export const API_HOST: string = process.env.NEXT_PUBLIC_API_HOST!;
+if (!API_HOST) {
+  throw new Error("No enviroment variable NEXT_PUBLIC_API_HOST");
 }
 if (!process.env.NEXT_PUBLIC_LOGIN_API_TEST_AUTH_URL) {
   throw new Error("No enviroment variable NEXT_PUBLIC_LOGIN_API_TEST_AUTH_URL");
@@ -11,15 +11,16 @@ if (!process.env.NEXT_PUBLIC_MANAGEMENT_LOGIN_API_URL) {
   );
 }
 export const MANAGEMENT_LOGIN_API_URL: string =
-  API_ORIGIN + process.env.NEXT_PUBLIC_MANAGEMENT_LOGIN_API_URL;
-export const API_URL: string = API_ORIGIN + process.env.NEXT_PUBLIC_API_URL!;
+  API_HOST + process.env.NEXT_PUBLIC_MANAGEMENT_LOGIN_API_URL;
+export const API_URL: string = API_HOST + process.env.NEXT_PUBLIC_API_URL!;
 export const LOGIN_API_URL: string =
-  API_ORIGIN + process.env.NEXT_PUBLIC_LOGIN_API_URL!;
+  API_HOST + process.env.NEXT_PUBLIC_LOGIN_API_URL!;
 export const LOGIN_SIGN_OUT_API_URL: string =
-  API_ORIGIN + process.env.NEXT_PUBLIC_LOGIN_SIGN_OUT_API_URL!;
+  API_HOST + process.env.NEXT_PUBLIC_LOGIN_SIGN_OUT_API_URL!;
 export const AFTER_LOGIN_BACKTO_URI = "after_login_backto_uri";
+export const MANAGER_LOGIN_URL = process.env["NEXT_PUBLIC_MANAGEMENT_LOGIN_API_URL"];
 export const TEST_AUTH_URL: string =
-  API_ORIGIN + process.env.NEXT_PUBLIC_LOGIN_API_TEST_AUTH_URL!;
+  API_HOST + process.env.NEXT_PUBLIC_LOGIN_API_TEST_AUTH_URL!;
 if (!TEST_AUTH_URL) {
   throw new Error("No enviroment variable NEXT_PUBLIC_LOGIN_API_TEST_AUTH_URL");
 }

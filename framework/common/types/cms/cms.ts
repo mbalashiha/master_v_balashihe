@@ -40,15 +40,15 @@ export namespace Blog {
   }
   export interface ArticleDraft {
     id: ID | null;
-    title: String;
-    handle: String;
-    autoHandleSlug: String;
+    title: String | null;
+    handle: String | null;
+    autoHandleSlug: String | null;
     text: String;
     textHtml: String;
     textRawDraftContentState: String | null;
-    published: boolean;
-    orderNumber: Int;
-    blogCategoryId: ID;
+    published: boolean | null;
+    orderNumber: Int | null;
+    blogCategoryId: ID | null;
     createdAt: Date;
     updatedAt: Date;
     publishedAt: Date;

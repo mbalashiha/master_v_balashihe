@@ -43,50 +43,52 @@ export namespace Schema {
     publishedAt: Date;
     breadcrumbs: Breadcrumb[];
   }
-  export interface ArticleDraftInput {
-    id: ID | null;
-    title: String;
-    handle: String;
-    autoHandleSlug: String;
-    published: Boolean;
-    orderNumber: Int;
-    blogCategoryId: ID;
-    existingArticleId: ID | null;
-  }
-  export interface ArticleTextDraftInput {
-    id: ID | null;
-    text: String;
-    textHtml: String;
-    textRawDraftContentState: String | null;
-    existingArticleId: ID | null;
-  }
-  export interface ArticleDraft {
-    id: ID | null;
-    title: String;
-    handle: String;
-    autoHandleSlug: String;
-    text: String;
-    textHtml: String;
-    textRawDraftContentState: String | null;
-    published: boolean;
-    orderNumber: Int;
-    blogCategoryId: ID;
-    category: CategoryId;
-    createdAt: Date;
-    updatedAt: Date;
-    publishedAt: Date;
-    existingArticleId: ID | null;
-    existingArticle: BlogArticle | null;
+  export namespace Article {
+    export interface ArticleDraftInput {
+      id: ID | null;
+      title: String | null;
+      handle: String | null;
+      autoHandleSlug: String | null;
+      published: Boolean | null;
+      orderNumber?: Int | null;
+      blogCategoryId: ID | null;
+      existingArticleId: ID | null;
+    }
+    export interface TextDraftInput {
+      id: ID | null;
+      text: String;
+      textHtml: String;
+      textRawDraftContentState: String | null;
+      existingArticleId: ID | null;
+    }
+    export interface ArticleDraft {
+      id: ID | null;
+      title: String;
+      handle: String;
+      autoHandleSlug: String;
+      text: String;
+      textHtml: String;
+      textRawDraftContentState: String | null;
+      published: boolean;
+      orderNumber: Int;
+      blogCategoryId: ID;
+      category: CategoryId;
+      createdAt: Date;
+      updatedAt: Date;
+      publishedAt: Date;
+      existingArticleId: ID | null;
+      existingArticle: BlogArticle | null;
+    }
   }
   export interface BlogArticlesConnection {
     nodes: BlogArticle[];
   }
-  export namespace QueryResponse {
+  export namespace Response {
     export interface BlogArticles {
       blogArticles: BlogArticlesConnection;
     }
     export interface ArticleDraftResponse {
-      articleDraft: ArticleDraft;
+      articleDraft: Article.ArticleDraft;
     }
     export interface Manager {
       id: ID;
@@ -104,7 +106,17 @@ export namespace Schema {
       };
     }
     export interface GetArticleDraftResponse {
-      articleDraft: ArticleDraft;
+      articleDraft: Article.ArticleDraft;
+    }
+    export interface SaveArticleTextDraftResponse {
+      saveArticleTextDraft: {
+        updatedDraft: Article.ArticleDraft;
+      };
+    }
+    export interface SaveArtDraftPropsResponse {
+      saveArticleDraft: {
+        updatedDraft: Article.ArticleDraft;
+      };
     }
   }
 }

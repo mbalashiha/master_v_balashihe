@@ -5,39 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug server-side",
-      "type": "node-terminal",
-      "request": "launch",
-      "command": "yarn dev",
-      "autoAttachChildProcesses": true,
-      "internalConsoleOptions": "openOnSessionStart",
-      "sourceMapPathOverrides": {
-        "webpack:///./*": "${workspaceFolder}/*"
-      },
-      "skipFiles": ["${workspaceRoot}/node_modules/**/*.js"]
-    },
-    {
       "name": "Debug client-side",
       "type": "msedge",
       "request": "launch",
       "url": "http://localhost:3000/management/blog/article/create",
-      "internalConsoleOptions": "openOnSessionStart",
-      "sourceMapPathOverrides": {
-        "webpack:///./*": "${workspaceFolder}/*"
-      },
-      "skipFiles": ["${workspaceRoot}/node_modules/**/*.js"]
-    },
-    {
-      "name": "Debug full stack",
-      "type": "node-terminal",
-      "request": "launch",
-      "command": "yarn dev",
-      "serverReadyAction": {
-        "pattern": "started server on .+, url: (https?://.+)",
-        "uriFormat": "%s",
-        "action": "debugWithEdge"
-      },
-      "autoAttachChildProcesses": true,
       "internalConsoleOptions": "openOnSessionStart",
       "sourceMapPathOverrides": {
         "webpack:///./*": "${workspaceFolder}/*"

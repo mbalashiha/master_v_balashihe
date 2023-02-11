@@ -5,8 +5,8 @@ export const getAllArticlesQuery = gql`
     articleId
     title
     handle
-    description
-    descriptionHtml
+    text
+    textHtml
     published
     orderNumber
     category {

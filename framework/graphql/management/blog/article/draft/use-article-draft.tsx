@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useArticleDraft } from "@common/management/blog/use-article-draft";
-import { UseArticleDraft } from "@common/management/blog/use-article-draft";
+import { useArticleDraft } from "@common/management/blog/article/draft/use-article-draft";
+import { UseArticleDraft } from "@common/management/blog/article/draft/use-article-draft";
 import { API, CMS } from "@common/types";
 import { Management } from "@common/types/cms";
 import { Schema } from "@framework/types";
@@ -11,7 +11,7 @@ export default useArticleDraft as UseArticleDraft<typeof handler>;
 
 export interface UseArticleDraftHook {
   requestInput: Partial<{ articleId: string | number | null }>;
-  requestOutput: Schema.QueryResponse.GetArticleDraftResponse;
+  requestOutput: Schema.Response.GetArticleDraftResponse;
   data: CMS.Blog.ArticleDraft;
 }
 export const handler: API.Graphql.OneTimeHook<UseArticleDraftHook> = {
@@ -25,7 +25,6 @@ export const handler: API.Graphql.OneTimeHook<UseArticleDraftHook> = {
       return normalized;
     } catch (e: any) {
       console.error(e);
-      debugger;
       throw e;
     }
   },

@@ -7,7 +7,7 @@ export type UseArticleDraft<H extends API.Graphql.OneTimeHook<any> = API.Graphql
 
 export const useArticleDraft: UseArticleDraft = (initial) => {
   const hook = useHook((hook: API.Hooks) => {
-    return hook.management.blog.useArticleDraft;
+    return hook.management.blog.article.draft.useArticleDraft;
   });
   return useOneTimeHook({ ...hook })(initial);
 };

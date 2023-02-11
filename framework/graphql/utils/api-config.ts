@@ -1,4 +1,4 @@
-import { API_ORIGIN, API_URL } from "@framework/const";
+import { API_HOST, API_URL } from "@framework/const";
 import { GraphQLClient } from "graphql-request";
 import { default as axios } from "axios";
 import { simpleEncrypt } from "@encryption";
@@ -39,7 +39,7 @@ class Config {
       }
     };
     const axInstance = axios.create({
-      baseURL: API_ORIGIN,
+      baseURL: API_HOST,
       timeout: 18000,
       withCredentials: true,
       // headers: {

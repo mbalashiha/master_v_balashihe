@@ -1,15 +1,15 @@
 import { API } from "@common/types";
 import { useHook, useMutationHook } from "@common/utils/use-hook";
 
-export type UseSaveArticleText<
+export type UseSaveArtDraftProps<
   H extends API.Graphql.MutationHook<any> = API.Graphql.MutationHook<any>
 > = ReturnType<H["useHook"]>;
 
-export const useSaveArticleText: UseSaveArticleText = () => {
+export const useSaveArtDraftProps: UseSaveArtDraftProps = () => {
   const hook = useHook((hook: API.Hooks) => {
-    return hook.management.blog.useSaveArticleText;
+    return hook.management.blog.article.draft.useSaveDraftProps;
   });
   return useMutationHook({ ...hook })();
 };
 
-export default useSaveArticleText;
+export default useSaveArtDraftProps;
