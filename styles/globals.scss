@@ -14,8 +14,19 @@ body,
 //   display: none !important;
 // }
 .tox-editor-container {
-  .tox-promotion, .tox-statusbar__branding {
+  .tox-promotion,
+  .tox-statusbar__branding {
     display: none !important;
+  }
+  button {
+    &,
+    & * {
+      font-family: Roboto, Arial, sans-serif !important;
+      font-weight: 500 !important;
+      &:hover {
+        background: #aeccda !important;
+      }
+    }
   }
 }
 ul {

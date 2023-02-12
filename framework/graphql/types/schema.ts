@@ -49,7 +49,7 @@ export namespace Schema {
       title: String | null;
       handle: String | null;
       autoHandleSlug: String | null;
-      published: Boolean | null;
+      published: number | null;
       orderNumber?: Int | null;
       blogCategoryId: ID | null;
       existingArticleId: ID | null;
@@ -110,11 +110,13 @@ export namespace Schema {
     }
     export interface SaveArticleTextDraftResponse {
       saveArticleTextDraft: {
+        message: String;
         updatedDraft: Article.ArticleDraft;
       };
     }
     export interface SaveArtDraftPropsResponse {
       saveArticleDraft: {
+        message: String;
         updatedDraft: Article.ArticleDraft;
       };
     }

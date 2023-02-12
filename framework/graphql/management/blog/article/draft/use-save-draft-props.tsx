@@ -46,7 +46,7 @@ export const handler: API.Graphql.MutationHook<UseSaveArtDraftPropsHook> = {
           title: all?.title || null,
           handle: all?.handle || null,
           autoHandleSlug: all?.autoHandleSlug || null,
-          published: all?.published || null,
+          published: all?.published ? 1 : null,
           orderNumber: all?.orderNumber || null,
           blogCategoryId: all?.blogCategoryId || null,
         },

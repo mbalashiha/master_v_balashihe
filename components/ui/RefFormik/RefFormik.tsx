@@ -10,6 +10,7 @@ import {
   useField as useFieldFormik,
 } from "formik";
 export const useField = useFieldFormik;
+export const Form: typeof FormikForm = FormikForm;
 
 type InnerRef<T> = React.MutableRefObject<FormikProps<T> | null>;
 
@@ -37,8 +38,8 @@ type ContextRef<FormProps extends FormikValues> = React.MutableRefObject<
 interface Props<FormProps extends FormikValues>
   extends FormikElementProps<FormProps> {
   contextRef?: ContextRef<FormProps>;
+  children: React.ReactNode | React.ReactNode[];
 }
-export const Form = FormikForm;
 export const RefFormik = <FormProps extends FormikValues>({
   children,
   contextRef,
@@ -159,7 +160,7 @@ export const RefFormik = <FormProps extends FormikValues>({
         initialValues={{ ...formikInitialValues }}
         {...formikProps}
       >
-        {children}
+        <Form>{children}</Form>
       </Formik>
     </FormContext.Provider>
   );

@@ -46,7 +46,7 @@ export namespace Blog {
     text: String;
     textHtml: String;
     textRawDraftContentState: String | null;
-    published: boolean | null;
+    published: number | null;
     orderNumber: Int | null;
     blogCategoryId: ID | null;
     createdAt: Date;

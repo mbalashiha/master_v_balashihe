@@ -157,6 +157,49 @@ const getMuiTheme = (): Theme => {
           h1: {},
         },
       },
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            background: "white",
+            padding: "18px 14px 4px 12px",
+            borderRadius: "8px 8px 0 0",
+            "&:hover": {
+              background: blueGrey[100],
+            },
+            "&.Mui-focused": {
+              background: blueGrey[50],
+            },
+          },
+          input: {
+            padding: 0,
+            fontWeight: 500,
+            fontSize: "18px",
+            lineHeight: "18px",
+          },
+        },
+      },
+      MuiInputLabel: {
+        styleOverrides: {
+          root: {
+            color: theme.palette.mode === "dark" ? grey[100] : "black",
+            fontFamily,
+          },
+          outlined: {
+            "&:not(.MuiInputLabel-shrink)": {
+              transform: "translate(14px, 10px)",
+            },
+          },
+          filled: {
+            color: theme.palette.primary.main,
+            "&:not(.MuiInputLabel-shrink)": {
+              transform: "translate(12px, 14px)",
+            },
+            "&.MuiInputLabel-shrink": {
+              transform: "translate(12px, 1px) scale(0.8)",
+            },
+          },
+        },
+      },
       MuiPopover: {
         styleOverrides: {
           root: {
@@ -224,27 +267,17 @@ const getMuiTheme = (): Theme => {
             borderColor: "none",
             background: theme.palette.primary.main,
             color: "#ffffff",
-            padding: "7px 20px",
-            fontWeight: 500,
+            padding: "0px 20px",
+            fontWeight: 400,
+            fontSize: "15px",
+            lineHeight: "15px",
+            height: "42px",
             "&:hover": {
               background: theme.palette.primary.dark,
               color: "#ffffff",
             },
             "& .MuiButton-iconSizeMedium": {
               transform: "scale(1.2)",
-            },
-          },
-        },
-      },
-      MuiInputLabel: {
-        styleOverrides: {
-          root: {
-            color: theme.palette.mode === "dark" ? grey[100] : "black",
-            fontFamily,
-          },
-          outlined: {
-            "&:not(.MuiInputLabel-shrink)": {
-              transform: "translate(14px, 10px)",
             },
           },
         },
@@ -259,18 +292,6 @@ const getMuiTheme = (): Theme => {
           },
           root: {
             padding: "12px 14px 8px 14px",
-          },
-        },
-      },
-      MuiTextField: {
-        styleOverrides: {
-          root: {
-            "&&, && *": {
-              fontFamily,
-            },
-            "& textarea": {
-              padding: 0,
-            },
           },
         },
       },
