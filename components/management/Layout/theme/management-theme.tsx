@@ -54,13 +54,6 @@ const getMuiTheme = (): Theme => {
       allVariants: {
         color: "#121220",
       },
-      button: {
-        fontFamily,
-        fontSize: 14,
-        fontWeightLight: 300,
-        fontWeightRegular: 400,
-        fontWeightMedium: 500,
-      },
       h1: {
         fontSize: "40px",
         lineHeight: "52px",
@@ -160,14 +153,16 @@ const getMuiTheme = (): Theme => {
       MuiFilledInput: {
         styleOverrides: {
           root: {
-            background: "white",
+            background: grey[300],
+            color: "#10101a",
             padding: "18px 14px 4px 12px",
             borderRadius: "8px 8px 0 0",
             "&:hover": {
               background: blueGrey[100],
             },
             "&.Mui-focused": {
-              background: blueGrey[50],
+              background: "white",
+              color: "black",
             },
           },
           input: {
@@ -192,7 +187,7 @@ const getMuiTheme = (): Theme => {
           filled: {
             color: theme.palette.primary.main,
             "&:not(.MuiInputLabel-shrink)": {
-              transform: "translate(12px, 14px)",
+              transform: "translate(12px, 12px)",
             },
             "&.MuiInputLabel-shrink": {
               transform: "translate(12px, 1px) scale(0.8)",
@@ -262,16 +257,20 @@ const getMuiTheme = (): Theme => {
         styleOverrides: {
           // Name of the slot
           root: {
+            "&, && *": {
+              fontFamily,
+            },
             transition: "all .15s linear",
             border: "none",
             borderColor: "none",
             background: theme.palette.primary.main,
             color: "#ffffff",
-            padding: "0px 20px",
+            padding: "0 20px",
             fontWeight: 400,
-            fontSize: "15px",
-            lineHeight: "15px",
-            height: "42px",
+            fontSize: "16px",
+            lineHeight: "18px",
+            letterSpacing: "0.6px",
+            height: "38px",
             "&:hover": {
               background: theme.palette.primary.dark,
               color: "#ffffff",

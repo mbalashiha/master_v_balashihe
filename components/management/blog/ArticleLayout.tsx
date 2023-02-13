@@ -7,6 +7,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
+import SaveIcon from "@mui/icons-material/Save";
 import { RefFormik, useRefFormik } from "@components/ui";
 import useArticleDraft from "@framework/management/blog/article/draft/use-article-draft";
 import React, { useRef } from "react";
@@ -29,8 +30,10 @@ export default function ArticleLayout({ children }: Props) {
           <Grid item xs={12} md={8}>
             <ArticleTitle />
           </Grid>
-          <Grid item xs={12} md={4}>
-            <Button type="submit">Сохранить</Button>
+          <Grid item xs={12} md={4} sx={{ display: "flex", alignItems: "end" }}>
+            <Button type="submit" startIcon={<SaveIcon />}>
+              Сохранить
+            </Button>
           </Grid>
           <Grid item xs={12}>
             <ArticleTextEditor />
