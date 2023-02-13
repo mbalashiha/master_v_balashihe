@@ -268,9 +268,10 @@ const getMuiTheme = (): Theme => {
             padding: "0 20px",
             fontWeight: 400,
             fontSize: "16px",
-            lineHeight: "18px",
-            letterSpacing: "0.6px",
+            lineHeight: "16px",
+            letterSpacing: "0.4px",
             height: "38px",
+            textTransform: "capitalize",
             "&:hover": {
               background: theme.palette.primary.dark,
               color: "#ffffff",

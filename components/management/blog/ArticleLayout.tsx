@@ -32,7 +32,7 @@ export default function ArticleLayout({ children }: Props) {
           </Grid>
           <Grid item xs={12} md={4} sx={{ display: "flex", alignItems: "end" }}>
             <Button type="submit" startIcon={<SaveIcon />}>
-              Сохранить
+              <span>Сохранить</span>
             </Button>
           </Grid>
           <Grid item xs={12}>
