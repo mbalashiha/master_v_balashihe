@@ -1,5 +1,5 @@
 import { gql } from "graphql-request";
-import articleFragment from "./article-fragment";
+import articleFragment from "@framework/management/blog/article/fragments/article-fragment";
 
 export const articleDraftFragment = gql`
   ${articleFragment}

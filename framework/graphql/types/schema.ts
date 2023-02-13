@@ -1,8 +1,10 @@
+type ID = string | number;
+type Int = number;
+type Float = number;
+type Boolean = boolean;
+type String = string;
+
 export namespace Schema {
-  export type ID = String | number;
-  export type Int = number;
-  export type Float = number;
-  type String = string;
   export interface Image {
     imageId: ID;
     imgSrc: String;
@@ -13,8 +15,8 @@ export namespace Schema {
     originalWidth: Int;
     originalHeight: Int;
     pathOfOriginal: String;
-    createdAt: String;
-    updatedAt: String;
+    createdAt: Date;
+    updatedAt: Date;
   }
   export interface ImageConnection {
     nodes: Image[];
@@ -44,12 +46,25 @@ export namespace Schema {
     breadcrumbs: Breadcrumb[];
   }
   export namespace Article {
+    export interface ArticleInput {
+      id: ID | null;
+      title: String | null;
+      handle: String | null;
+      autoHandleSlug: String | null;
+      text: String | null;
+      textHtml: String | null;
+      textRawDraftContentState: String | null;
+      published: Boolean;
+      orderNumber: Int | null;
+      blogCategoryId: ID | null;
+      existingArticleId: ID | null;
+    }
     export interface ArticleDraftInput {
       id: ID | null;
       title: String | null;
       handle: String | null;
       autoHandleSlug: String | null;
-      published: number | null;
+      published: Boolean;
       orderNumber?: Int | null;
       blogCategoryId: ID | null;
       existingArticleId: ID | null;
@@ -118,6 +133,13 @@ export namespace Schema {
       saveArticleDraft: {
         message: String;
         updatedDraft: Article.ArticleDraft;
+      };
+    }
+    export interface SaveArticleResponse {
+      saveArticle: {
+        success: Boolean;
+        message: String;
+        error?: string | null;
       };
     }
   }

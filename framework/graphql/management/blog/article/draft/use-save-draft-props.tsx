@@ -4,6 +4,7 @@ import { UseSaveArtDraftProps } from "@common/management/blog/article/draft/use-
 import { API, CMS } from "@common/types";
 import { useRefFormik } from "@components/ui";
 import { Schema } from "@framework/types";
+import { slugify } from "lib";
 import { saveArticleDraft } from "./mutations/save-draft-props";
 import { normalizeArticleDraft } from "./normalize";
 import useArticleDraft from "./use-article-draft";
@@ -23,11 +24,12 @@ export const handler: API.Graphql.MutationHook<UseSaveArtDraftPropsHook> = {
     try {
       const variables = input;
       const data = await request({ ...options, variables });
-      const normalized = normalizeArticleDraft(data);
+      const normalized = normalizeArticleDraft(
+        data.saveArticleDraft.updatedDraft
+      );
       return normalized;
     } catch (e: any) {
       console.error(e.stack || e.message || e);
-      // alert(e.stack || e.message || e);
       throw e;
     }
   },
@@ -45,8 +47,8 @@ export const handler: API.Graphql.MutationHook<UseSaveArtDraftPropsHook> = {
           existingArticleId: all?.existingArticleId || null,
           title: all?.title || null,
           handle: all?.handle || null,
-          autoHandleSlug: all?.autoHandleSlug || null,
-          published: all?.published ? 1 : null,
+          autoHandleSlug: all?.title ? slugify(all?.title) : null,
+          published: !!all?.published,
           orderNumber: all?.orderNumber || null,
           blogCategoryId: all?.blogCategoryId || null,
         },

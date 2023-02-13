@@ -1,38 +1,35 @@
-
-export type ID = String | number;
-export type Int = number;
-export type Float = number;
+type ID = string | number;
+type Int = number;
+type Float = number;
+type Boolean = boolean;
 type String = string;
 
 export interface Breadcrumb {
-  name: string;
-  handle: string;
-  type: string;
+  name: String;
+  handle: String;
+  type: String;
 }
 export interface Image {
   url: string;
   alt: string;
-  height: number;
-  width: number;
-  orderNumber?: number;
-  originalWidth: number;
-  originalHeight: number;
-  createdAt: string;
-  updatedAt: string;
+  height: Int;
+  width: Int;
+  orderNumber: Int | null;
+  originalWidth: Int;
+  originalHeight: Int;
+  createdAt: Date;
+  updatedAt: Date;
 }
 export namespace Blog {
   export type BlogCategory = any;
   export interface Article {
     articleId: ID;
     title: string;
-    url: string;
-    description: string;
-    descriptionHtml: string;
-    published: boolean;
-    orderNumber: number;
+    url: string;    
+    textHtml: string;
+    published: Boolean;
+    orderNumber: Int;
     category: BlogCategory;
-    image: Image;
-    images: Image[];
     createdAt: Date;
     updatedAt: Date;
     publishedAt: Date;
@@ -46,7 +43,7 @@ export namespace Blog {
     text: String;
     textHtml: String;
     textRawDraftContentState: String | null;
-    published: number | null;
+    published: Boolean;
     orderNumber: Int | null;
     blogCategoryId: ID | null;
     createdAt: Date;

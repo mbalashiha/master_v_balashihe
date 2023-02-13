@@ -1,15 +1,17 @@
+import { CMS } from "@common/types";
+import { Blog } from "@common/types/cms";
+import { Schema } from "@framework/types";
+
 export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
   const {
     articleId,
     title,
     handle,
-    description,
-    descriptionHtml,
+    text,
+    textHtml,
     published,
     orderNumber,
     category,
-    image,
-    images,
     createdAt,
     updatedAt,
     publishedAt,
@@ -19,13 +21,10 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     articleId,
     title,
     url: `/${handle}`,
-    description,
-    descriptionHtml,
+    textHtml,
     published,
     orderNumber,
     category,
-    image,
-    images,
     createdAt,
     updatedAt,
     publishedAt,
@@ -34,7 +33,7 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
 };
 
 export const normalizeArticles = (
-  data: Schema.QueryResponse.BlogArticles
+  data: Schema.Response.BlogArticles
 ): Blog.Article[] => {
   const {
     blogArticles: { nodes: articles },
@@ -60,7 +59,7 @@ export const normalizeImage = (data: Schema.Image): CMS.Image => {
     alt: altText,
     height,
     width,
-    orderNumber,
+    orderNumber: orderNumber || null,
     originalWidth,
     originalHeight,
     createdAt,

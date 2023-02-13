@@ -1,2 +1,2 @@
 export { default as ArticleTextEditor } from "./editor"
-export { default as ArticleLayout } from "./ArticleLayout";
+export { default as ArticleForm } from "./ArticleForm";

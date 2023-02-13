@@ -22,6 +22,7 @@ export interface Hooks {
     };
     blog: {
       article: {
+        useSaveArticle: Graphql.MutationHook<any>;
         draft: {
           useArticleDraft: Graphql.OneTimeHook<any>;
           useSaveArticleText: Graphql.MutationHook<any>;

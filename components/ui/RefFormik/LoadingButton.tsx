@@ -1,8 +1,6 @@
 import React, { FC, ComponentProps } from "react";
-import Link from "next/link";
-import cn from "classnames";
 import { styled } from "@mui/material";
-import { Button, Box } from "@mui/material";
+import { Button } from "@mui/material";
 import CircularProgress, {
   circularProgressClasses,
   CircularProgressProps,
@@ -15,7 +13,7 @@ function MaskedCircularProgress(props: CircularProgressProps) {
         variant="determinate"
         sx={{
           zIndex: 2,
-          opacity: 0.03,
+          opacity: 0.015,
           position: "absolute",
           color: (theme) =>
             theme.palette.mode === "light" ? "black" : grey[500],
@@ -45,7 +43,7 @@ function MaskedCircularProgress(props: CircularProgressProps) {
 type Props = ComponentProps<typeof Button> & {
   loading?: boolean;
 };
-const LoadingButton = React.forwardRef<HTMLButtonElement>(
+const ForwardedButton = React.forwardRef<HTMLButtonElement>(
   function LoadingButton(
     { children, type, loading, disabled, ...props }: Props,
     ref
@@ -59,27 +57,9 @@ const LoadingButton = React.forwardRef<HTMLButtonElement>(
     );
   }
 );
-const MainActionButton = styled(LoadingButton)<Props>(({ theme, loading }) => ({
+const LoadingButton = styled(ForwardedButton)<Props>(({ theme, loading }) => ({
   "&&": {
-    zIndex: 1,
-    width: "100%",
-    background: theme.palette.primary.main,
-    color: "white",
-    fontWeight: 500,
-    fontSize: "1rem",
-    lineHeight: "1rem",
-    height: "auto",
-    padding: "0.85rem",
-    letterSpacing: "0.04rem",
-    textTransform: "none",
-    boxShadow: "0 0 5px rgba(0,0,0, 0.125)",
-    border: "none",
-    "&:hover": {
-      background: theme.palette.primary.dark || "black",
-      boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
-    },
     "&:disabled": {
-      transition: "all .25s linear",
       background: theme.palette.mode === "dark" ? grey[800] : grey[100],
       borderColor: grey[300],
       color: grey[300],
@@ -87,9 +67,9 @@ const MainActionButton = styled(LoadingButton)<Props>(({ theme, loading }) => ({
     },
     "& .MuiCircularProgress-root": {
       "& svg": {
-        transform: "scale(2.2)",
+        transform: "scale(1.4)",
       },
     },
   },
 }));
-export default MainActionButton;
+export default LoadingButton;

@@ -3,7 +3,7 @@ import { Schema } from "@framework/types";
 import { normalizeArticle } from "@framework/utils/normalize";
 
 export const normalizeArticleDraft = (
-  draft: Schema.ArticleDraft
+  draft: Schema.Article.ArticleDraft
 ): CMS.Blog.ArticleDraft => {
   const {
     id,
@@ -30,9 +30,9 @@ export const normalizeArticleDraft = (
     text: text || "",
     textHtml: textHtml || "",
     textRawDraftContentState: textRawDraftContentState || null,
-    published,
-    orderNumber,
-    blogCategoryId,
+    published: Boolean(published),
+    orderNumber: orderNumber || null,
+    blogCategoryId: blogCategoryId || null,
     createdAt,
     updatedAt,
     publishedAt,
