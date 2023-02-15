@@ -8,7 +8,7 @@ export const useHook = <H>(hookHandler: (apiHooks: API.Hooks) => H) => {
   const { hooks } = useManagementApiProvider();
   return hookHandler(hooks);
 };
-export const useFetchHook = (hook: API.Graphql.FetchHook<any>) => {
+export const useFetchHook = (hook: API.Graphql.MutationHook<any>) => {
   const { request } = useManagementApiProvider();
   return hook.useHook({
     request: (input: any) => {
@@ -50,6 +50,9 @@ const useSWROptions = (
 ) => {
   return React.useMemo(() => {
     let input, key;
+    if (ctx?.isReady === false) {
+      return { input, key: null };
+    }
     if (ctx?.variables && typeof ctx?.variables === "object") {
       input = input || {};
       input = { ...input, ...ctx?.variables };
@@ -74,6 +77,7 @@ const useSWROptions = (
     ctx?.variables,
     ctx?.initial?.variables,
     hook.requestOptions.query,
+    ctx?.isReady,
   ]);
 };
 const useOneTime = (
@@ -116,7 +120,7 @@ const useOneTime = (
     },
     [key, swrConfigMutate]
   );
-  if (!fetched && !isValidating && !isLoading && !error) {
+  if (!fetched && !isValidating && !isLoading && !error && key) {
     setData(swrData);
     setFetched(true);
   }

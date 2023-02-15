@@ -1,13 +1,10 @@
 import { gql } from "graphql-request";
 
-const articleFragment = gql`
-  fragment ArticleFragment on BlogArticle {
+export const ListArticleFragment = gql`
+  fragment ListArticleFragment on BlogArticle {
     id
     title
     handle
-    text
-    textHtml
-    textRawDraftContentState
     autoHandleSlug
     published
     orderNumber
@@ -17,4 +14,3 @@ const articleFragment = gql`
     publishedAt
   }
 `;
-export default articleFragment;

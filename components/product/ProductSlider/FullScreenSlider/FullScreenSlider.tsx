@@ -329,7 +329,6 @@ const SliderComponent = ({
         carouselRef.current &&
         (carouselRef.current.carouselWrapperRef as HTMLDivElement);
       if (carousel && typeof carousel.querySelector === "function") {
-        //   console.log("carousel:", carousel);
         const mainSlider: HTMLDivElement =
           carousel.querySelector(".carousel-slider") || carousel;
         setControlsPortal(mainSlider);
@@ -339,7 +338,6 @@ const SliderComponent = ({
   useEffect(() => {
     const carousel = carouselRef.current?.carouselWrapperRef as HTMLDivElement;
     if (carousel && typeof carousel.querySelector === "function") {
-      //   console.log("carousel:", carousel);if (sliderNode && typeof sliderNode.querySelector === "function") {
       const selectedSlideNode = carousel.querySelector(
         ".slide.selected .current-slide-paper"
       ) as HTMLDivElement;
@@ -410,7 +408,6 @@ const SliderComponent = ({
   const calcItemSize = useCallback(
     (item: any) => {
       const { width, height } = getSizePropertyOfElement(item);
-      // console.log("fullscreen item:", { width, height });
       const sx: {
         width: number | string;
         height: number | string;
@@ -538,7 +535,6 @@ const SliderComponent = ({
                 const selectedItem = (carouselRef.current as Carousel).state
                   .selectedItem;
                 setMySelectedItemNumber(selectedItem);
-                // console.log("carouselRef.current:", carouselRef.current);
                 if (fullDisplayWidthFit) {
                   setFullDisplayWidthFit(false);
                 }
@@ -641,7 +637,6 @@ const OneImageComponent = ({
     React.useState<boolean>(true);
   const item = Array.isArray(children) ? children[0] : (children as any);
   const { width, height } = getSizePropertyOfElement(item);
-  // console.log("fullscreen item:", { width, height });
   const sx: {
     width: number | string;
     height: number | string;
@@ -697,7 +692,6 @@ const OneImageComponent = ({
   useEffect(() => {
     const carousel = containerBoxRef.current as HTMLDivElement;
     if (carousel && typeof carousel.querySelector === "function") {
-      //   console.log("carousel:", carousel);if (sliderNode && typeof sliderNode.querySelector === "function") {
       const selectedSlideNode = carousel.querySelector(
         ".slide.selected .current-slide-paper"
       ) as HTMLDivElement;

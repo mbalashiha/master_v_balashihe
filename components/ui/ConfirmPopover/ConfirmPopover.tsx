@@ -140,7 +140,6 @@ const StyledPopper = ({
       const popperBody =
         (inPopperElement as HTMLDivElement).querySelector(".popperBody") ||
         inPopperElement;
-      // console.log("inPopperElement:", inPopperElement);
       const anchorCoords = (anchorEl as HTMLDivElement).getBoundingClientRect();
       const popperCoords = (
         popperBody as HTMLDivElement
@@ -151,7 +150,6 @@ const StyledPopper = ({
       const newPopperBodyStyle = {
         ...popperBodyStyle,
       };
-      // console.log("popperCoords:", popperCoords, "anchorCoords:", anchorCoords);
       if (
         popperCoords.top < anchorCoords.top - popperCoords.height * 0.55 ||
         anchorCoords.top + anchorCoords.height / 3 > popperCoords.bottom

@@ -23,7 +23,7 @@ export interface Image {
 export namespace Blog {
   export type BlogCategory = any;
   export interface Article {
-    articleId: ID;
+    id: ID;
     title: string;
     url: string;    
     textHtml: string;
@@ -33,7 +33,7 @@ export namespace Blog {
     createdAt: Date;
     updatedAt: Date;
     publishedAt: Date;
-    breadcrumbs: Breadcrumb[];
+    breadcrumbs?: Breadcrumb[];
   }
   export interface ArticleDraft {
     id: ID | null;

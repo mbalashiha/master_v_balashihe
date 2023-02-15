@@ -128,7 +128,6 @@ export const getImagePathes = (
     newPathArray.push(imagePathname);
   }
   const responseHeaders = response.headers;
-  // console.log("responseHeaders:", responseHeaders);
   const lastModifiedHeader = responseHeaders.get("last-modified");
   if (lastModifiedHeader) {
     const lastModified = Date.parse(
@@ -136,7 +135,6 @@ export const getImagePathes = (
         ? lastModifiedHeader[0]
         : lastModifiedHeader
     );
-    // console.log(lastModified);
     newPathArray.push(lastModified.toString());
   }
   const contentLengthHeader = responseHeaders.get("content-length");

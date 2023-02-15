@@ -30,7 +30,7 @@ export namespace Schema {
     id: ID;
   }
   export interface BlogArticle {
-    articleId: ID;
+    id: ID;
     title: String;
     handle: String;
     text: String;
@@ -129,10 +129,21 @@ export namespace Schema {
         updatedDraft: Article.ArticleDraft;
       };
     }
+    export interface ManagementGetArticles {
+      managementGetArticles: BlogArticle[];
+    }
     export interface SaveArtDraftPropsResponse {
       saveArticleDraft: {
         message: String;
         updatedDraft: Article.ArticleDraft;
+      };
+    }
+    export interface DeleteArticleResponse {
+      deleteArticle: {
+        success: Boolean;
+        message: String;
+        error?: string | null;
+        articleList: BlogArticle[];
       };
     }
     export interface SaveArticleResponse {

@@ -26,6 +26,7 @@ export namespace Graphql {
   }
   export interface UseDataContext<Input, Data> {
     variables?: Input;
+    isReady?: boolean;
     swrOptions?: SWRConfiguration<Data>;
     initial?: {
       variables?: Input;

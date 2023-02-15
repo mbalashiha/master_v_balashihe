@@ -6,6 +6,8 @@ import { handler as useArticleDraft } from "@framework/management/blog/article/d
 import { handler as useSaveArticleText } from "@framework/management/blog/article/draft/use-save-article-text";
 import { handler as useSaveArticleDraftProps } from "@framework/management/blog/article/draft/use-save-draft-props";
 import { handler as useSaveArticle } from "@framework/management/blog/article/use-save-article";
+import { handler as useDeleteArticle } from "@framework/management/blog/article/use-delete-article";
+import { handler as useArticleList } from "@framework/management/blog/use-article-list";
 
 export const graphqlHooks = {
   management: {
@@ -16,8 +18,10 @@ export const graphqlHooks = {
       useSignOut,
     },
     blog: {
+      useArticleList,
       article: {
         useSaveArticle,
+        useDeleteArticle,
         draft: {
           useArticleDraft,
           useSaveArticleText,

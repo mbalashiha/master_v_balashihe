@@ -4,6 +4,7 @@ import { UseArticleDraft } from "@common/management/blog/article/draft/use-artic
 import { API, CMS } from "@common/types";
 import { Management } from "@common/types/cms";
 import { Schema } from "@framework/types";
+import { useRouter } from "next/router";
 import { normalizeArticleDraft } from "./normalize";
 import { getArticleDraft } from "./queries/get-article-draft";
 
@@ -29,9 +30,18 @@ export const handler: API.Graphql.OneTimeHook<UseArticleDraftHook> = {
     }
   },
   useHook: ({ useOneTime }) => {
+    const router = useRouter();
     return () => {
+      const isReady = router.route.endsWith("]") ? router.isReady : true;
+      const articleId =
+        (router.query.articleId &&
+          (Array.isArray(router.query.articleId)
+            ? router.query.articleId[0]
+            : router.query.articleId)) ||
+        null;
       const { data, isValidating, fetched, ...rest } = useOneTime({
-        variables: {},
+        isReady,
+        variables: { articleId },
       });
       const isEmpty = isValidating || !data || !data.id;
       return {

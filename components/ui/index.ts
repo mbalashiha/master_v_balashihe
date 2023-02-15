@@ -14,6 +14,7 @@ export { default as Hero } from "../site/Hero";
 export { default as Container } from "./Container";
 export { default as Marquee } from "./Marquee";
 export { default as Sidebar } from "./Sidebar";
+export { MouseOverPopover } from "./MouseOverPopover";
 
 export { default as MuiSnackbarProvider } from "./MuiSnackbarProvider";
 

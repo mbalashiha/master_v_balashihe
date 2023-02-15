@@ -17,6 +17,7 @@ export const articleDraftFragment = gql`
     createdAt
     updatedAt
     publishedAt
+    existingArticleId
     existingArticle {
       ...ArticleFragment
     }

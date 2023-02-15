@@ -21,8 +21,10 @@ export interface Hooks {
       useTokenOneTime: Graphql.OneTimeHook<any>;
     };
     blog: {
+      useArticleList: Graphql.SWRHook<any>;
       article: {
         useSaveArticle: Graphql.MutationHook<any>;
+        useDeleteArticle: Graphql.MutationHook<any>;
         draft: {
           useArticleDraft: Graphql.OneTimeHook<any>;
           useSaveArticleText: Graphql.MutationHook<any>;

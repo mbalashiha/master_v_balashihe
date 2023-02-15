@@ -15,35 +15,26 @@ import { ManagementLayout } from "@components/management";
 import { useSnackbar } from "notistack";
 import React from "react";
 import Link from "next/link";
+import useArticleList from "@framework/management/blog/use-article-list";
+import { ArticleItem } from "@components/management/blog/Article";
 
 export default function ManagementHomePage() {
-  const { enqueueSnackbar } = useSnackbar();
-  const [count, setCount] = React.useState(0);
-  const countRef = React.useRef(count);
-  countRef.current = count;
-  const enqueueSnackbarRef = React.useRef(enqueueSnackbar);
-  enqueueSnackbarRef.current = enqueueSnackbar;
-  React.useEffect(() => {
-    const iid = window.setInterval(() => {
-      const count = countRef.current + 1;
-      const enqueueSnackbar = enqueueSnackbarRef.current;
-      setCount(count);
-      enqueueSnackbar(count);
-      if (count > 2) {
-        window.clearInterval(iid);
-      }
-    }, 1000);
-    return () => window.clearInterval(iid);
-  }, []);
+  const { data: articles, isEmpty } = useArticleList();
   return (
     <>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Link href="/management/blog/article/create">
             <Button>Добавить статью</Button>
           </Link>
         </Grid>
-        <Grid item xs={12} md={6}></Grid>
+        {!isEmpty &&
+          articles &&
+          articles.map((elem) => (
+            <Grid key={elem.id} item xs={12} md={12}>
+              <ArticleItem article={elem} />
+            </Grid>
+          ))}
       </Grid>
     </>
   );

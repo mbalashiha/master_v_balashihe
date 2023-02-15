@@ -253,6 +253,16 @@ const getMuiTheme = (): Theme => {
           },
         },
       },
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            borderRadius: "4px",
+            fontWeight: 500,
+            fontSize: "18px",
+            padding: "6px 15px",
+          },
+        },
+      },
       MuiButton: {
         styleOverrides: {
           // Name of the slot

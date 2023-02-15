@@ -3,8 +3,8 @@ import { articleDraftFragment } from "@framework/management/blog/article/draft/f
 
 export const getArticleDraft = gql`
   ${articleDraftFragment}
-  query managementGetArticles {
-    articleDraft {
+  query ($articleId: ID) {
+    articleDraft(articleId: $articleId) {
       ...DraftFragment
     }
   }

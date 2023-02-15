@@ -38,7 +38,7 @@ export const handler: API.Graphql.MutationHook<UseSaveArticleHook> = {
       enqueueSnackbar(
         (response.message || response.error || "Error occured").substring(
           0,
-          512
+          312
         )
       );
       return response;

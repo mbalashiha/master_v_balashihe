@@ -4,7 +4,7 @@ import { Schema } from "@framework/types";
 
 export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
   const {
-    articleId,
+    id,
     title,
     handle,
     text,
@@ -17,8 +17,11 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     publishedAt,
     breadcrumbs,
   } = data;
+  if (!id) {
+    throw new Error("No id in article row!");
+  }
   return {
-    articleId,
+    id,
     title,
     url: `/${handle}`,
     textHtml,

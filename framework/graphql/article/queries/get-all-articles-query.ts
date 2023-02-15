@@ -2,16 +2,14 @@ import { gql } from "graphql-request";
 
 export const getAllArticlesQuery = gql`
   fragment BlogArticleFragment on BlogArticle {
-    articleId
+    id
     title
     handle
     text
     textHtml
     published
     orderNumber
-    category {
-      id
-    }
+    blogCategoryId
     createdAt
     updatedAt
     publishedAt
