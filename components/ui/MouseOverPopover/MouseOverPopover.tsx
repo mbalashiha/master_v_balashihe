@@ -22,10 +22,22 @@ export default function MouseOverPopover({
   };
 
   const open = Boolean(anchorEl);
-
+  const ref = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    const listener = () => {
+      handlePopoverClose();
+    };
+    if (open) {
+      const evt = new CustomEvent("MouseOverPopoverOpened");
+      window.dispatchEvent(evt);
+      window.addEventListener("MouseOverPopoverOpened", listener);
+    }
+    return () => window.removeEventListener("MouseOverPopoverOpened", listener);
+  }, [open]);
   return (
     <div>
       <Box
+        ref={ref}
         aria-owns={open ? "mouse-over-popover" : undefined}
         aria-haspopup="true"
         onMouseEnter={handlePopoverOpen}
@@ -34,6 +46,7 @@ export default function MouseOverPopover({
         {children}
       </Box>
       <Popover
+        container={ref.current}
         id="mouse-over-popover"
         sx={{
           pointerEvents: "none",

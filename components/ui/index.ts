@@ -1,6 +1,6 @@
 export { default as styled } from "./styled";
 export { theme, useThemePalette } from "./theme";
-export * from "./Dialog";
+export * from "./ConfirmDialog";
 export {
   AlertsProvider,
   useAlertsProvider,
