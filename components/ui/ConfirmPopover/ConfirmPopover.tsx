@@ -1,6 +1,5 @@
 /* eslint-disable react/display-name */
 import MuiPopper from "@mui/material/Popper";
-import { makeStyles, createStyles } from "@mui/styles";
 import {
   Button as MuiButton,
   Card,
@@ -31,11 +30,13 @@ import {
 import { styled, Container } from "@components/ui";
 import deepEqual from "deep-equal";
 
-type StyledPopperReffedProps = React.ComponentProps<typeof MuiPopper> & {
+interface StyledPopperReffedProps
+  extends React.ComponentProps<typeof MuiPopper> {
   popRef: React.MutableRefObject<HTMLDivElement | null>;
   arrowStyle: any;
   popperBodyStyle: any;
-};
+  children: React.ReactNode | React.ReactNode[];
+}
 const StyledPopperReffed = styled(
   ({
     children,
@@ -106,12 +107,15 @@ const StyledPopperReffed = styled(
     };
   }
 );
+interface StyledPopperProps extends React.ComponentProps<typeof MuiPopper> {
+  children: React.ReactNode | React.ReactNode[];
+}
 const StyledPopper = ({
   children,
   anchorEl,
   placement: inPlacement,
   ...rest
-}: React.ComponentProps<typeof MuiPopper>) => {
+}: StyledPopperProps) => {
   const [placement, setPlacement] = React.useState<
     StyledPopperReffedProps["placement"]
   >(inPlacement || "bottom");
