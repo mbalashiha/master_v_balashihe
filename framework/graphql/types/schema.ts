@@ -1,4 +1,4 @@
-type ID = string | number;
+export type ID = string | number;
 type Int = number;
 type Float = number;
 type Boolean = boolean;
@@ -148,9 +148,11 @@ export namespace Schema {
     }
     export interface SaveArticleResponse {
       saveArticle: {
+        articleId: ID | null;
         success: Boolean;
         message: String;
         error?: string | null;
+        articleDraft: Article.ArticleDraft;
       };
     }
   }

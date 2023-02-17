@@ -12,10 +12,10 @@ export default useTokenOneTime as UseTokenOneTime<typeof handler>;
 
 export interface TokenInfoHook {
   requestInput: void;
-  requestOutput: Schema.QueryResponse.VerifyManagementTokenResponse;
+  requestOutput: Schema.Response.VerifyManagementTokenResponse;
   data: Management.ManagerTokenResponse;
 }
-export const handler: API.Graphql.OneTimeHook<TokenInfoHook> = {
+export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
   requestOptions: {
     query: verifyManagementToken,
   },
@@ -23,10 +23,16 @@ export const handler: API.Graphql.OneTimeHook<TokenInfoHook> = {
     const data = await request({ ...options, variables: input });
     return normalizeManagerTokenInfo(data);
   },
-  useHook: ({ useOneTime }) => {
+  useHook: ({ useData }) => {
     const { toLoginPage } = useLoginRoute();
     return () => {
-      const { data, fetched, ...rest } = useOneTime();
+      const { data, ...rest } = useData({
+        swrOptions: {
+          revalidateOnFocus: false,
+          revalidateOnReconnect: false,
+          focusThrottleInterval: 8 * 60 * 1000,
+        },
+      });
       const isEmpty = !(
         data &&
         data.success &&
@@ -34,12 +40,10 @@ export const handler: API.Graphql.OneTimeHook<TokenInfoHook> = {
         data.manager.id
       );
       const managerWasNotAuthorized = isEmpty;
-      if (fetched) {
-        if (managerWasNotAuthorized) {
-          toLoginPage();
-        }
+      if (data && managerWasNotAuthorized) {
+        toLoginPage();
       }
-      return { data, isEmpty, fetched, ...rest };
+      return { data, isEmpty, ...rest };
     };
   },
 };

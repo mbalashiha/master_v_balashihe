@@ -3,9 +3,9 @@ import { Editor } from "@tinymce/tinymce-react";
 import { styled } from "@mui/material";
 
 interface Props extends React.ComponentProps<typeof Editor> {
-  editorRef: React.MutableRefObject<any>;
+  editorRef?: React.MutableRefObject<any>;
 }
-export default function TinyMCE({
+export default React.memo(function TinyMCE({
   editorRef,
   initialValue,
   onInit: _,
@@ -17,7 +17,9 @@ export default function TinyMCE({
         tinymceScriptSrc="/tinymce/tinymce.min.js"
         initialValue={initialValue || ""}
         onInit={(evt, editor) => {
-          editorRef.current = editor;
+          if (editorRef) {
+            editorRef.current = editor;
+          }
         }}
         id="tinymce-editor-in-iframe"
         init={{
@@ -61,4 +63,4 @@ export default function TinyMCE({
       />
     </>
   );
-}
+});

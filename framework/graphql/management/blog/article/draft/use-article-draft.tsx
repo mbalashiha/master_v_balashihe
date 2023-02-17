@@ -15,7 +15,7 @@ export interface UseArticleDraftHook {
   requestOutput: Schema.Response.GetArticleDraftResponse;
   data: CMS.Blog.ArticleDraft;
 }
-export const handler: API.Graphql.OneTimeHook<UseArticleDraftHook> = {
+export const handler: API.Graphql.SWRHook<UseArticleDraftHook> = {
   requestOptions: {
     query: getArticleDraft,
   },
@@ -29,7 +29,7 @@ export const handler: API.Graphql.OneTimeHook<UseArticleDraftHook> = {
       throw e;
     }
   },
-  useHook: ({ useOneTime }) => {
+  useHook: ({ useData }) => {
     const router = useRouter();
     return () => {
       const isReady = router.route.endsWith("]") ? router.isReady : true;
@@ -39,16 +39,20 @@ export const handler: API.Graphql.OneTimeHook<UseArticleDraftHook> = {
             ? router.query.articleId[0]
             : router.query.articleId)) ||
         null;
-      const { data, isValidating, fetched, ...rest } = useOneTime({
+      const { data, isValidating, ...rest } = useData({
         isReady,
         variables: { articleId },
+        swrOptions: {
+          revalidateOnFocus: false,
+          revalidateOnReconnect: false,
+          focusThrottleInterval: 8 * 60 * 1000,
+        },
       });
-      const isEmpty = isValidating || !data || !data.id;
+      const isEmpty = !data || !data.id;
       return {
-        data: isValidating ? undefined : data,
+        data,
         isValidating,
         isEmpty,
-        fetched,
         ...rest,
       };
     };

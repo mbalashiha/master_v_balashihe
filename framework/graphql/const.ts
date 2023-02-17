@@ -19,6 +19,7 @@ export const LOGIN_SIGN_OUT_API_URL: string =
   API_HOST + process.env.NEXT_PUBLIC_LOGIN_SIGN_OUT_API_URL!;
 export const AFTER_LOGIN_BACKTO_URI = "after_login_backto_uri";
 export const MANAGER_LOGIN_URL = process.env["NEXT_PUBLIC_MANAGEMENT_LOGIN_API_URL"];
+export const PAGE_MANAGER_LOGIN_URL = "/management/login";
 export const TEST_AUTH_URL: string =
   API_HOST + process.env.NEXT_PUBLIC_LOGIN_API_TEST_AUTH_URL!;
 if (!TEST_AUTH_URL) {

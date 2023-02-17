@@ -13,16 +13,27 @@ import { useRefFormik } from "@components/ui";
 import { CMS } from "@common/types";
 import { useArticleContext } from "./ArticleProvider";
 import useSaveArticleText from "@framework/management/blog/article/draft/use-save-article-text";
-const TinyMCE = dynamic(() => import("@components/ui/TinyMCE"), {
-  ssr: false,
-  loading: () => <></>,
-});
+import { useField } from "formik";
+import TinyMCE from "@components/ui/TinyMCE";
 
-export default React.memo(function ArticleTextEditor() {
+export default function ArticleTextEditor() {
   const form = useRefFormik<CMS.Blog.ArticleDraft>();
   const saveDraftText = useSaveArticleText();
-  const { editorRef } = useArticleContext();
+  const mutRef = React.useRef({ form, saveDraftText });
+  mutRef.current = { ...mutRef.current, form, saveDraftText };
+  const onBlur = React.useCallback(() => {
+    const { saveDraftText } = mutRef.current;
+    saveDraftText({});
+  }, []);
+  const onEditorChange = React.useCallback((_: string, editor: any) => {
+    const { form } = mutRef.current;
+    const textHtml = editor.getContent({ format: "html" });
+    form.setFieldValue("textHtml", textHtml);
+    const text = editor.getContent({ format: "text" });
+    form.setFieldValue("text", text);
+  }, []);
   const [initialValue] = React.useState(form.getInitialValues()?.textHtml);
+  const [htmlFieled, meta] = useField("textHtml");
   return (
     <>
       <Box
@@ -37,18 +48,17 @@ export default React.memo(function ArticleTextEditor() {
           },
         }}
       >
+        {meta.error && (
+          <Box sx={{ color: "#d80000", fontWeight: 600, fontSize: "14pt" }}>
+            * {meta.error}
+          </Box>
+        )}
         <TinyMCE
           initialValue={initialValue}
-          editorRef={editorRef}
-          onBlur={() => saveDraftText({})}
-          onEditorChange={(_, editor) => {
-            const textHtml = editor.getContent({ format: "html" });
-            form.setFieldValue("textHtml", textHtml);
-            const text = editor.getContent({ format: "text" });
-            form.setFieldValue("text", text);
-          }}
+          onBlur={onBlur}
+          onEditorChange={onEditorChange}
         />
       </Box>
     </>
   );
-});
+}

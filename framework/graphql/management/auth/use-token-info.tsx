@@ -9,13 +9,13 @@ import { normalizeManagerTokenInfo } from "./normalize";
 import { verifyManagementToken } from "./queries/get-token-info";
 import { useRouter } from "next/router";
 import useFromLogin from "@common/management/utils/hooks/use-from-login";
-import { MANAGER_LOGIN_URL } from "@framework/const";
+import { MANAGER_LOGIN_URL, PAGE_MANAGER_LOGIN_URL } from "@framework/const";
 
 export default useTokenInfo as UseTokenInfo<typeof handler>;
 
 export interface TokenInfoHook {
   requestInput: void;
-  requestOutput: Schema.QueryResponse.VerifyManagementTokenResponse;
+  requestOutput: Schema.Response.VerifyManagementTokenResponse;
   data: Management.ManagerTokenResponse;
 }
 export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
@@ -43,7 +43,7 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
         try {
           if (managerWasNotAuthorized) {
             toLoginPage();
-          } else if (router.pathname === MANAGER_LOGIN_URL) {
+          } else if (router.pathname === PAGE_MANAGER_LOGIN_URL) {
             doRedirectAuthorized();
           }
         } catch (e) {

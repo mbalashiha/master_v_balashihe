@@ -19,17 +19,32 @@ import useSaveArticle from "@framework/management/blog/article/use-save-article"
 import { ValuesOfCorrectTypeRule } from "graphql";
 import { slugify } from "@lib";
 import type { ContextRef } from "@components/ui/RefFormik/RefFormik";
+import { useRouter } from "next/router";
 
 interface Props {
   children?: React.ReactNode | React.ReactNode[];
 }
 
 export default function ArticleForm({ children }: Props) {
+  const router = useRouter();
   const { data } = useArticleDraft();
   const saveArticle = useSaveArticle();
   return data ? (
     <RefFormik
-      initialValues={{ ...data }}
+      initialValues={data}
+      validate={(values) => {
+        const errors: any = {};
+        if (!(values.text || "").trim()) {
+          errors.text = "Обязательно введите текст статьи";
+        }
+        if (!(values.textHtml || "").trim()) {
+          errors.textHtml = "Обязательно введите текст статьи";
+        }
+        if (!(values.title || "").trim()) {
+          errors.title = "Введите название статьи";
+        }
+        return errors;
+      }}
       onSubmit={async (values, helpers) => {
         const {
           id,
@@ -57,8 +72,10 @@ export default function ArticleForm({ children }: Props) {
           blogCategoryId,
           existingArticleId,
         };
-        const { success } = await saveArticle({ article });
-        if (success) {
+        const { success, articleId, articleDraft } = await saveArticle({
+          article,
+        });
+        if (success && articleId) {
           helpers.destroyForm();
         }
       }}

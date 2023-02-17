@@ -9,8 +9,7 @@ export interface Config {
 export type Hook =
   | Graphql.MutationHook<any>
   | Graphql.SWRHook<any>
-  | RestApi.RestApiHook<any>
-  | Graphql.OneTimeHook<any>;
+  | RestApi.RestApiHook<any>;
 
 export interface Hooks {
   management: {
@@ -18,7 +17,7 @@ export interface Hooks {
       useSignIn: RestApi.RestApiHook<any>;
       useSignOut: RestApi.RestApiHook<any>;
       useTokenInfo: Graphql.SWRHook<any>;
-      useTokenOneTime: Graphql.OneTimeHook<any>;
+      useTokenOneTime: Graphql.SWRHook<any>;
     };
     blog: {
       useArticleList: Graphql.SWRHook<any>;
@@ -26,7 +25,7 @@ export interface Hooks {
         useSaveArticle: Graphql.MutationHook<any>;
         useDeleteArticle: Graphql.MutationHook<any>;
         draft: {
-          useArticleDraft: Graphql.OneTimeHook<any>;
+          useArticleDraft: Graphql.SWRHook<any>;
           useSaveArticleText: Graphql.MutationHook<any>;
           useSaveDraftProps: Graphql.MutationHook<any>;
         };
