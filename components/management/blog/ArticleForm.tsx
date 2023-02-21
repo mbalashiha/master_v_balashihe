@@ -10,7 +10,7 @@ import {
 import SaveIcon from "@mui/icons-material/Save";
 import { RefFormik, SubmitButton, useRefFormik } from "@components/ui";
 import useArticleDraft from "@framework/management/blog/article/draft/use-article-draft";
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useMemo } from "react";
 import { ArticleProvider } from "./ArticleProvider";
 import { ArticleTextEditor } from "@components/management/blog";
 import { Title } from "@mui/icons-material";
@@ -18,15 +18,26 @@ import ArticleTitle from "./ArticleTitle";
 import useSaveArticle from "@framework/management/blog/article/use-save-article";
 import { ValuesOfCorrectTypeRule } from "graphql";
 import { slugify } from "@lib";
-import type { ContextRef } from "@components/ui/RefFormik/RefFormik";
 import { useRouter } from "next/router";
+import { useFabButton } from "../Layout";
 
 interface Props {
   children?: React.ReactNode | React.ReactNode[];
 }
 
 export default function ArticleForm({ children }: Props) {
+  const { setCreateButton, unsetCreateButton } = useFabButton();
   const router = useRouter();
+  const isCreatePage = useMemo(() => {
+    return router.pathname.endsWith("/article/create");
+  }, [router.pathname]);
+  useEffect(() => {
+    if (!isCreatePage) {
+      setCreateButton({ href: "/management/blog/article/create" });
+    } else {
+      unsetCreateButton();
+    }
+  }, [isCreatePage, setCreateButton, unsetCreateButton]);
   const { data } = useArticleDraft();
   const saveArticle = useSaveArticle();
   return data ? (
@@ -77,6 +88,14 @@ export default function ArticleForm({ children }: Props) {
         });
         if (success && articleId) {
           helpers.destroyForm();
+        }
+        if (isCreatePage && articleId) {
+          router.push({
+            pathname: `/management/blog/article/edit/[articleId]`,
+            query: {
+              articleId,
+            },
+          });
         }
       }}
     >

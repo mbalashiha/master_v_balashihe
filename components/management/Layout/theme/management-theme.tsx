@@ -150,6 +150,11 @@ const getMuiTheme = (): Theme => {
           h1: {},
         },
       },
+      MuiFormControl: {
+        styleOverrides: {
+          root: {},
+        },
+      },
       MuiFilledInput: {
         styleOverrides: {
           root: {
@@ -180,15 +185,17 @@ const getMuiTheme = (): Theme => {
             fontFamily,
           },
           outlined: {
-            "&:not(.MuiInputLabel-shrink)": {
-              transform: "translate(14px, 10px)",
+            transform: "translate(14px, 10px)",
+            background: "transparent",
+            padding: "0 8px",
+            "&.MuiInputLabel-shrink": {
+              transform: "translate(12px, -8px) scale(0.835)",
+              background: theme.palette.background.paper,
             },
           },
           filled: {
             color: theme.palette.primary.main,
-            "&:not(.MuiInputLabel-shrink)": {
-              transform: "translate(12px, 12px)",
-            },
+            transform: "translate(12px, 12px)",
             "&.MuiInputLabel-shrink": {
               transform: "translate(12px, 1px) scale(0.8)",
             },
@@ -244,11 +251,11 @@ const getMuiTheme = (): Theme => {
       MuiFab: {
         styleOverrides: {
           root: {
-            backgroundColor: colors.red[900],
+            backgroundColor: colors.red.A700,
             color: "white",
             ":hover": {
-              backgroundColor: colors.red.A700,
-              boxShadow: "-1px 6px 12px 6px rgba(130, 0, 0, 0.3)",
+              backgroundColor: colors.red[900],
+              boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
             },
           },
         },
@@ -285,6 +292,7 @@ const getMuiTheme = (): Theme => {
             "&:hover": {
               background: theme.palette.primary.dark,
               color: "#ffffff",
+              boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
             },
             "& .MuiButton-iconSizeMedium": {
               transform: "scale(1.2)",
@@ -294,9 +302,6 @@ const getMuiTheme = (): Theme => {
       },
       MuiOutlinedInput: {
         styleOverrides: {
-          notchedOutline: {
-            fontFamily,
-          },
           input: {
             padding: 0,
           },

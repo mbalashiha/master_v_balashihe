@@ -50,7 +50,10 @@ export const handler: API.Graphql.MutationHook<UseDeleteArticleHook> = {
           (response.message || response.error || "Error occured").substring(
             0,
             312
-          )
+          ),
+          {
+            variant: "error",
+          }
         );
       } else {
         updateArticleList(response.articleList, false);

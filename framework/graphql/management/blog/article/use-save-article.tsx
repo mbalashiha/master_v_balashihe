@@ -56,13 +56,20 @@ export const handler: API.Graphql.MutationHook<UseSaveArticleHook> = {
           (response.message || response.error || "Error occured").substring(
             0,
             312
-          )
+          ),
+          (response.error && {
+            variant: "error",
+          }) ||
+            undefined
         );
         await updateDraft(response.articleDraft, false);
         return response;
       } catch (e: any) {
         enqueueSnackbar(
-          (e.message || e.error || "Error occured").substring(0, 312)
+          (e.message || e.error || "Error occured").substring(0, 312),
+          {
+            variant: "error",
+          }
         );
         throw e;
       }

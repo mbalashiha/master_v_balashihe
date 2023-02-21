@@ -207,6 +207,7 @@ const getMuiTheme = (): Theme => {
             "&:hover": {
               background: theme.palette.primary.main,
               color: "#ffffff",
+              boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
             },
             "& .MuiButton-iconSizeMedium": {
               transform: "scale(1.2)",

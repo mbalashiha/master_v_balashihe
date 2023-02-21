@@ -6,7 +6,6 @@ import { AFTER_LOGIN_BACKTO_URI } from "@framework/const";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
-import useErrorsProvider from "@components/ui/contexts/use-errors-context";
 import { default as LoginForm } from "./LoginForm";
 import useSignIn from "@framework/management/auth/use-sign-in";
 import useTokenInfo from "@framework/management/auth/use-token-info";
@@ -55,18 +54,21 @@ const LoginFormFormik = () => {
                 : !success
                 ? "Аутентификация не удалась"
                 : "Нет сообщения об ошибке ((";
-            enqueueSnackbar(errorAlertMessage, {
+            enqueueSnackbar(errorAlertMessage.substring(0, 512), {
               variant: "error",
             });
             formikRef.current
               ?.getFieldHelpers("login")
-              .setError(errorAlertMessage);
+              .setError(errorAlertMessage.substring(0, 512));
           } else {
             closeSnackbar();
             doRedirectAuthorized();
           }
         } catch (e: any) {
           console.error(e.stack || e.message || e);
+          enqueueSnackbar((e.stack || e.message || e).substring(0, 512), {
+            variant: "error",
+          });
         }
       }}
       // validationSchema={SignupSchema}

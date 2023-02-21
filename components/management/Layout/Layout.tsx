@@ -30,7 +30,7 @@ const ManagementLayout: FC<Props> = ({ children }: Props) => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <MuiSnackbarProvider
-          autoHideDuration={4440000}
+          autoHideDuration={2 * 60 * 1000}
           anchorOrigin={{ horizontal: "center", vertical: "top" }}
         >
           <ManagementApiProvider>

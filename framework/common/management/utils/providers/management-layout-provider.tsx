@@ -1,6 +1,6 @@
-import { ID, Management } from "@common/types/cms";
-import { MuiSnackbarProvider } from "@components/ui";
-import { SnackbarProvider } from "notistack";
+import { Management } from "@common/types/cms";
+import { FabButtonProvider } from "@components/management/Layout";
+import { ID } from "@framework/types";
 import { createContext, useContext, useMemo } from "react";
 import { KeyedMutator } from "swr";
 export interface ManagementLayoutValue {
@@ -39,7 +39,7 @@ export const ManagementLayoutProvider = ({
   );
   return (
     <ManagementLayoutContext.Provider value={providing}>
-        {children}
+      <FabButtonProvider>{children}</FabButtonProvider>
     </ManagementLayoutContext.Provider>
   );
 };

@@ -9,17 +9,21 @@ import {
   TextField,
 } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
-import { ErrorsProvider } from "@components/ui/contexts/use-errors-context";
 import Typography from "@mui/material/Typography";
 import { ManagementLayout } from "@components/management";
 import { useSnackbar } from "notistack";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import useArticleList from "@framework/management/blog/use-article-list";
 import { ArticleItem } from "@components/management/blog/Article";
+import { useFabButton } from "@components/management/Layout";
 
 export default function ManagementHomePage() {
   const { data: articles, isEmpty } = useArticleList();
+  const { setCreateButton } = useFabButton();
+  useEffect(() => {
+    setCreateButton({ href: "/management/blog/article/create" });
+  }, [setCreateButton]);
   return (
     <>
       <Grid container spacing={2}>

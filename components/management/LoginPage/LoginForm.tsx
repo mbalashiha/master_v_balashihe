@@ -4,7 +4,6 @@ import { blueGrey, grey } from "@mui/material/colors";
 import ClosableAlert from "@components/ui/ClosableAlert";
 import { AlertTitle } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import useErrorsProvider from "@components/ui/contexts/use-errors-context";
 import {
   useFormikContext,
   Form,
@@ -17,26 +16,13 @@ import {
 const LoginForm = () => {
   const [loginField, { error: loginFieldError }] = useField("login");
   const [passwordField, { error: passwordFieldError }] = useField("password");
-  const { errors, addError, resetErrors, removeErrorAlert } =
-    useErrorsProvider();
   const { handleSubmit, isSubmitting } = useFormikContext();
   return (
     <Stack
       sx={{
         width: "100%",
-        minHeight: "100%",
+        height: "100%",
         "& > *": { width: "100%" },
-        "& .MuiOutlinedInput-notchedOutline": {
-          borderWidth: "2px",
-          borderColor: "#3D3357",
-        },
-        "& .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl:not(.Mui-focused):not(.Mui-error)":
-          {
-            color: "#3D3357",
-          },
-        "&& .MuiInputBase-input.MuiOutlinedInput-input": {
-          color: "black",
-        },
       }}
       direction={"column"}
       spacing={4}
@@ -57,24 +43,7 @@ const LoginForm = () => {
           CMS
         </Box>
       </Typography>
-      {!errors || !errors.length ? (
-        <Box height="4.3rem"></Box>
-      ) : (
-        <Box sx={{ maxHeight: "300px", overflow: "auto" }}>
-          {errors.map((error, index) => (
-            <ClosableAlert
-              severity="error"
-              onClose={() => removeErrorAlert(index)}
-              shakingEffect={error.shakingEffect}
-              key={error.additionalKey || index}
-            >
-              {error.header && <AlertTitle>{error.header}</AlertTitle>}
-              {error.message}
-              {error.stack && <pre>{error.stack}</pre>}
-            </ClosableAlert>
-          ))}
-        </Box>
-      )}
+      <Box height="4.3rem"></Box>
       <TextField
         sx={{ height: "3.2rem" }}
         label="Логин"

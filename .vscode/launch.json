@@ -10,9 +10,6 @@
       "request": "launch",
       "url": "http://localhost:3000/management/blog/article/create",
       "internalConsoleOptions": "openOnSessionStart",
-      "sourceMapPathOverrides": {
-        "webpack:///./*": "${workspaceFolder}/*"
-      },
       "skipFiles": ["${workspaceRoot}/node_modules/**/*.js"]
     }
   ]

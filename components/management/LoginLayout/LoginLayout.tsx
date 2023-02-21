@@ -26,7 +26,7 @@ const LoginLayout: FC<Props> = ({ children }: Props) => {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <MuiSnackbarProvider
-            autoHideDuration={8000}
+            autoHideDuration={48 * 1000}
             anchorOrigin={{ horizontal: "center", vertical: "top" }}
             maxSnack={1}
           >

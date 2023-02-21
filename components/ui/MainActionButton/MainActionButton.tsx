@@ -11,7 +11,7 @@ import { blueGrey, grey } from "@mui/material/colors";
 function MaskedCircularProgress(props: CircularProgressProps) {
   return (
     <>
-      <CircularProgress
+      <CircularProgress 
         variant="determinate"
         sx={{
           zIndex: 2,
