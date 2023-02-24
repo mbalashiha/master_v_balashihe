@@ -18,13 +18,25 @@ body,
   .tox-statusbar__branding {
     display: none !important;
   }
-  button {
-    &,
-    & * {
-      font-family: Roboto, Arial, sans-serif !important;
-      font-weight: 500 !important;
-      &:hover {
-        background: #aeccda !important;
+  &,
+  & .tox-toolbar-overlord {
+    button,
+    .tox-tbtn {
+      &,
+      & * {
+        font-family: Roboto, Arial, sans-serif !important;
+        font-weight: 500 !important;
+        &:hover {
+          background: #d3e8f1 !important;
+        }
+      }
+    }
+  }
+  .tox-toolbar-overlord {
+    .main_color {
+      &,
+      & * {
+        color: red;
       }
     }
   }
