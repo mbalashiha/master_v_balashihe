@@ -20,6 +20,12 @@ body,
   }
   &,
   & .tox-toolbar-overlord {
+    .main_color {
+      &,
+      & * {
+        color: red;
+      }
+    }
     button,
     .tox-tbtn {
       &,
@@ -29,14 +35,6 @@ body,
         &:hover {
           background: #d3e8f1 !important;
         }
-      }
-    }
-  }
-  .tox-toolbar-overlord {
-    .main_color {
-      &,
-      & * {
-        color: red;
       }
     }
   }
