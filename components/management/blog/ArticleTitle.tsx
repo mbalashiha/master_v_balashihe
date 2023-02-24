@@ -13,6 +13,8 @@ export const ArticleTitle = () => {
         required
         sx={{ width: "100%" }}
         variant="filled"
+        error={!!meta.error}
+        helperText={meta.error}
         {...field}
         onBlur={(ev, ...rest) => {
           saveDraft({});

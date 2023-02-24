@@ -27,10 +27,12 @@ export interface FormContextType<FormProps extends FormikValues> {
   setFormWasSubmited: () => void;
   resetForm: FormikProps<FormProps>["resetForm"];
   destroyForm: () => any;
+  refreshForm: () => any;
 }
 export interface MyFormikHelpers<FormProps extends FormikValues>
   extends FormikHelpers<FormProps> {
   destroyForm: () => any;
+  refreshForm: () => any;
   context: FormContextType<FormProps>;
 }
 const FormContext = React.createContext<Partial<FormContextType<any>>>({});
@@ -48,12 +50,15 @@ export interface Props<FormProps extends FormikValues>
     formikHelpers: MyFormikHelpers<FormProps>
   ) => void | Promise<any>;
 }
-interface InnerRefProps<FormProps extends FormikValues> extends Props<FormProps>{
-    destroyForm: () => void
+interface InnerRefProps<FormProps extends FormikValues>
+  extends Props<FormProps> {
+  destroyForm: () => void;
+  refreshForm: () => void;
 }
 export const InnerRefFormik = <FormProps extends FormikValues>({
   children,
   destroyForm,
+  refreshForm,
   onSubmit: passedOnSubmit,
   initialValues: formikInitialValues,
   innerRef: __innerRef,
@@ -152,8 +157,9 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
       getValues,
       resetForm,
       destroyForm,
+      refreshForm,
     };
-  }, [destroyForm]);
+  }, [destroyForm, refreshForm]);
   const providerConfig = useMemo(() => {
     return {
       ...providerMethods,
@@ -185,6 +191,7 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
             {
               context: providerConfig,
               destroyForm: providerConfig.destroyForm,
+              refreshForm: providerConfig.refreshForm,
             }
           );
           return passedOnSubmit(values, formikHelpers);

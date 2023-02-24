@@ -37,6 +37,11 @@
       "@root/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/ui/TinyMCE/MemozedTinyMCE"
+  ],
   "exclude": ["node_modules"]
 }

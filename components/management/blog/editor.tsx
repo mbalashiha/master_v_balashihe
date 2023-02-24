@@ -25,11 +25,9 @@ export default function ArticleTextEditor() {
     const { saveDraftText } = mutRef.current;
     saveDraftText({});
   }, []);
-  const onEditorChange = React.useCallback((_: string, editor: any) => {
+  const onEditorChange = React.useCallback((textHtml: string, text: string, ) => {
     const { form } = mutRef.current;
-    const textHtml = editor.getContent({ format: "html" });
     form.setFieldValue("textHtml", textHtml);
-    const text = editor.getContent({ format: "text" });
     form.setFieldValue("text", text);
   }, []);
   const [initialValue] = React.useState(form.getInitialValues()?.textHtml);

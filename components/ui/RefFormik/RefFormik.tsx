@@ -19,14 +19,16 @@ export const RefFormik = <FormProps extends FormikValues>(
   props: Props<FormProps>
 ) => {
   const [destroyed, __setDestoryed] = useState(false);
-  React.useEffect(() => {
-    if (destroyed) {
-      __setDestoryed(false);
-    }
-  }, [destroyed]);
   const destroyForm = React.useCallback(() => __setDestoryed(true), []);
-  return destroyed ? null : (
-    <InnerRefFormik destroyForm={destroyForm} {...props} />
+  const [refreshing, __setFefreshing] = useState(false);
+  const refreshForm = React.useCallback(() => __setFefreshing(true), []);
+  React.useEffect(()=>{
+    if (refreshing) {
+      __setFefreshing(false);
+    };
+  },[refreshing]);
+  return (refreshing || destroyed) ? null : (
+    <InnerRefFormik destroyForm={destroyForm} refreshForm={refreshForm} {...props} />
   );
 };
 export { useRefFormik } from "./InnerRefProvider";

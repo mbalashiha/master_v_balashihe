@@ -20,6 +20,7 @@ import { ValuesOfCorrectTypeRule } from "graphql";
 import { slugify } from "@lib";
 import { useRouter } from "next/router";
 import { useFabButton } from "../Layout";
+import { error } from "console";
 
 interface Props {
   children?: React.ReactNode | React.ReactNode[];
@@ -54,6 +55,13 @@ export default function ArticleForm({ children }: Props) {
         if (!(values.title || "").trim()) {
           errors.title = "Введите название статьи";
         }
+        const title = values.title;
+        const test_autoHandleSlug = title ? slugify(title) : null;
+        if (!errors.title && !test_autoHandleSlug) {
+          errors.title =
+            "Введите корректное название статьи для пути URL страницы: " +
+            (title || "null").toString().substring(0, 16);
+        }
         return errors;
       }}
       onSubmit={async (values, helpers) => {
@@ -74,7 +82,8 @@ export default function ArticleForm({ children }: Props) {
           id,
           title,
           handle,
-          autoHandleSlug: title ? slugify(title) : null,
+          autoHandleSlug:
+            (title ? slugify(title) : null) || autoHandleSlug || null,
           text,
           textHtml,
           textRawDraftContentState,
@@ -86,16 +95,16 @@ export default function ArticleForm({ children }: Props) {
         const { success, articleId, articleDraft } = await saveArticle({
           article,
         });
-        if (success && articleId) {
+        if (success && articleId && isCreatePage) {
           helpers.destroyForm();
-        }
-        if (isCreatePage && articleId) {
           router.push({
             pathname: `/management/blog/article/edit/[articleId]`,
             query: {
               articleId,
             },
           });
+        } else if (success && articleId) {
+          helpers.refreshForm();
         }
       }}
     >
