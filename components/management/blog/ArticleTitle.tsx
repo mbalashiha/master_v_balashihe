@@ -11,7 +11,7 @@ export const ArticleTitle = () => {
       <TextField
         label="Заголовок статьи"
         required
-        sx={{ width: "100%" }}
+        sx={{ width: "100%", height: "71px" }}
         variant="filled"
         error={!!meta.error}
         helperText={meta.error}

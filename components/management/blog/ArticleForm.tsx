@@ -109,11 +109,16 @@ export default function ArticleForm({ children }: Props) {
       }}
     >
       <ArticleProvider>
-        <Grid container spacing={2} mt={2}>
+        <Grid
+          container
+          spacing={2}
+          mt={2}
+          sx={{ "& > .MuiGrid-item": { pt: 0 } }}
+        >
           <Grid item xs={12} md={8}>
             <ArticleTitle />
           </Grid>
-          <Grid item xs={12} md={4} sx={{ display: "flex", alignItems: "end" }}>
+          <Grid item xs={12} md={4} sx={{ display: "flex", alignItems: "end", pb: "22px" }}>
             <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
           </Grid>
           <Grid item xs={12}>

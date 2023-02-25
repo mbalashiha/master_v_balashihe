@@ -158,12 +158,12 @@ const getMuiTheme = (): Theme => {
       MuiFilledInput: {
         styleOverrides: {
           root: {
-            background: grey[300],
+            background: "white",
             color: "#10101a",
             padding: "18px 14px 4px 12px",
             borderRadius: "8px 8px 0 0",
             "&:hover": {
-              background: blueGrey[100],
+              background: blueGrey[50],
             },
             "&.Mui-focused": {
               background: "white",
