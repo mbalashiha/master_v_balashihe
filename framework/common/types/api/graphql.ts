@@ -30,7 +30,8 @@ export namespace Graphql {
     swrOptions?: SWRConfiguration<Data>;
     initial?: {
       variables?: Input;
-      options?: SWRConfiguration<Data>;
+      isReady?: boolean;
+      swrOptions?: SWRConfiguration<Data>;
     };
   }
   export interface UseData<Input, Data> {

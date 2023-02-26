@@ -10,6 +10,7 @@ import {
   useField,
   FormikHelpers,
 } from "formik";
+import { useManagementApiProvider } from "@common/management";
 
 type InnerRef<T> = React.MutableRefObject<FormikProps<T> | null>;
 
@@ -24,15 +25,14 @@ export interface FormContextType<FormProps extends FormikValues> {
   handleSubmit: FormikProps<FormProps>["handleSubmit"];
   getValues: () => FormProps | undefined;
   formWasSubmited: Boolean;
+  formIsResetting: Boolean;
   setFormWasSubmited: () => void;
   resetForm: FormikProps<FormProps>["resetForm"];
   destroyForm: () => any;
-  refreshForm: () => any;
 }
 export interface MyFormikHelpers<FormProps extends FormikValues>
   extends FormikHelpers<FormProps> {
   destroyForm: () => any;
-  refreshForm: () => any;
   context: FormContextType<FormProps>;
 }
 const FormContext = React.createContext<Partial<FormContextType<any>>>({});
@@ -53,12 +53,10 @@ export interface Props<FormProps extends FormikValues>
 interface InnerRefProps<FormProps extends FormikValues>
   extends Props<FormProps> {
   destroyForm: () => void;
-  refreshForm: () => void;
 }
 export const InnerRefFormik = <FormProps extends FormikValues>({
   children,
   destroyForm,
-  refreshForm,
   onSubmit: passedOnSubmit,
   initialValues: formikInitialValues,
   innerRef: __innerRef,
@@ -90,15 +88,24 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
     const initialValues = initialValuesRef.current;
     return __set_initialValues({ ...initialValues, ...newVals });
   }, []);
+
+  const [formIsResetting, setFormIsResetting] = useState(false);
+  React.useEffect(() => {
+    if (formIsResetting) {
+      setFormIsResetting(false);
+    }
+  }, [formIsResetting]);
   const providerMethods = useMemo(() => {
     const formik = () => formikRef.current;
     const resetForm: FormikProps<FormProps>["resetForm"] = (
       nextState?: Partial<FormikState<FormProps>> | undefined
-    ) =>
+    ) => {
       formikRef.current?.resetForm({
         ...formikRef.current?.values,
         ...nextState,
       });
+      setFormIsResetting(true);
+    };
     const getFieldProps: FormikProps<FormProps>["getFieldProps"] = <Value,>(
       props: any
     ): FieldInputProps<Value> =>
@@ -157,9 +164,8 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
       getValues,
       resetForm,
       destroyForm,
-      refreshForm,
     };
-  }, [destroyForm, refreshForm]);
+  }, [destroyForm]);
   const providerConfig = useMemo(() => {
     return {
       ...providerMethods,
@@ -168,6 +174,7 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
       setInitialValues,
       setFormWasSubmited,
       formWasSubmited,
+      formIsResetting,
     };
   }, [
     providerMethods,
@@ -175,6 +182,7 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
     setInitialValues,
     setFormWasSubmited,
     formWasSubmited,
+    formIsResetting,
   ]);
   return (
     <FormContext.Provider value={providerConfig}>
@@ -192,7 +200,6 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
             {
               context: providerConfig,
               destroyForm: providerConfig.destroyForm,
-              refreshForm: providerConfig.refreshForm,
             }
           );
           return passedOnSubmit(values, formikHelpers);

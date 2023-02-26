@@ -17,7 +17,7 @@ export const StyledDialog = styled(MuiDialog)(({ theme }) => ({
     overflowX: "hidden",
   },
   "& .MuiDialog-paper, & .MuiDialog-paperScrollPaper": {
-    backgroundColor: blueGrey[100],
+    backgroundColor: "white",
     margin: 0,
     width: "99.5vw",
     [theme.breakpoints.down("sm")]: {

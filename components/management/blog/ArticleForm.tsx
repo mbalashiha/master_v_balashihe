@@ -8,7 +8,12 @@ import {
   TextField,
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
-import { RefFormik, SubmitButton, useRefFormik } from "@components/ui";
+import {
+  ConfirmDialog,
+  RefFormik,
+  SubmitButton,
+  useRefFormik,
+} from "@components/ui";
 import useArticleDraft from "@framework/management/blog/article/draft/use-article-draft";
 import React, { useRef, useEffect, useMemo } from "react";
 import { ArticleProvider } from "./ArticleProvider";
@@ -20,7 +25,7 @@ import { ValuesOfCorrectTypeRule } from "graphql";
 import { slugify } from "@lib";
 import { useRouter } from "next/router";
 import { useFabButton } from "../Layout";
-import { error } from "console";
+import DeleteDraftButton from "./Article/DeleteDraftButton";
 
 interface Props {
   children?: React.ReactNode | React.ReactNode[];
@@ -32,6 +37,7 @@ export default function ArticleForm({ children }: Props) {
   const isCreatePage = useMemo(() => {
     return router.pathname.endsWith("/article/create");
   }, [router.pathname]);
+  const isReady = isCreatePage ? true : router.isReady;
   useEffect(() => {
     if (!isCreatePage) {
       setCreateButton({ href: "/management/blog/article/create" });
@@ -39,7 +45,16 @@ export default function ArticleForm({ children }: Props) {
       unsetCreateButton();
     }
   }, [isCreatePage, setCreateButton, unsetCreateButton]);
-  const { data } = useArticleDraft();
+  const articleId =
+    (router.query.articleId &&
+      (Array.isArray(router.query.articleId)
+        ? router.query.articleId[0]
+        : router.query.articleId)) ||
+    null;
+  const { data } = useArticleDraft({ isReady, variables: { articleId } });
+  // if (!isValidating && data) {
+  //   formRef?.current?.resetForm({ values: { ...data } });
+  // }
   const saveArticle = useSaveArticle();
   return data ? (
     <RefFormik
@@ -96,6 +111,7 @@ export default function ArticleForm({ children }: Props) {
           article,
         });
         if (success && articleId && isCreatePage) {
+          helpers.resetForm();
           helpers.destroyForm();
           router.push({
             pathname: `/management/blog/article/edit/[articleId]`,
@@ -104,7 +120,7 @@ export default function ArticleForm({ children }: Props) {
             },
           });
         } else if (success && articleId) {
-          helpers.refreshForm();
+          helpers.resetForm({ values: articleDraft });
         }
       }}
     >
@@ -118,8 +134,14 @@ export default function ArticleForm({ children }: Props) {
           <Grid item xs={12} md={8}>
             <ArticleTitle />
           </Grid>
-          <Grid item xs={12} md={4} sx={{ display: "flex", alignItems: "end", pb: "22px" }}>
+          <Grid
+            item
+            xs={12}
+            md={4}
+            sx={{ display: "flex", alignItems: "end", pb: "22px" }}
+          >
             <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
+            <DeleteDraftButton />
           </Grid>
           <Grid item xs={12}>
             <ArticleTextEditor />

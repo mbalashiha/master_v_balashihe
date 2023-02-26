@@ -7,9 +7,11 @@ import { handler as useSaveArticleText } from "@framework/management/blog/articl
 import { handler as useSaveArticleDraftProps } from "@framework/management/blog/article/draft/use-save-draft-props";
 import { handler as useSaveArticle } from "@framework/management/blog/article/use-save-article";
 import { handler as useDeleteArticle } from "@framework/management/blog/article/use-delete-article";
+import { handler as useDeleteArticleDraft } from "@framework/management/blog/article/draft/use-delete-draft";
 import { handler as useArticleList } from "@framework/management/blog/use-article-list";
+import { API } from "@common/types";
 
-export const graphqlHooks = {
+export const graphqlHooks: API.Hooks = {
   management: {
     auth: {
       useSignIn,
@@ -26,6 +28,7 @@ export const graphqlHooks = {
           useArticleDraft,
           useSaveArticleText,
           useSaveDraftProps: useSaveArticleDraftProps,
+          useDeleteDraft: useDeleteArticleDraft,
         },
       },
     },

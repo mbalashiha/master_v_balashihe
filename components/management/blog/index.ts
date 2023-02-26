@@ -1,2 +1,5 @@
-export { default as ArticleTextEditor } from "./editor"
-export { default as ArticleForm } from "./ArticleForm";
+export { default as ArticleTextEditor } from "./editor";
+import dinamyc from "next/dynamic";
+export const ArticleForm = dinamyc(() => import("./ArticleForm"), {
+  ssr: false,
+});

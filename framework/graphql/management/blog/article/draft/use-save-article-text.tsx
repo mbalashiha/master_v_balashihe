@@ -58,10 +58,9 @@ export const handler: API.Graphql.MutationHook<UseSaveArticleTextHook> = {
           (initial.textRawDraftContentState || "");
       if (needToUpdate) {
         const response = await request(inputObj);
-        form.setInitialValues({ ...draft });
-        if (response) {
-          await updateDraft({ ...response }, false);
-        }
+        form.setInitialValues({ ...response });
+        form.setFieldValue("id", response.id);
+        await updateDraft({ ...response }, false);
         return response;
       } else {
         return initial;

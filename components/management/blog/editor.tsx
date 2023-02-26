@@ -15,6 +15,7 @@ import { useArticleContext } from "./ArticleProvider";
 import useSaveArticleText from "@framework/management/blog/article/draft/use-save-article-text";
 import { useField } from "formik";
 import TinyMCE from "@components/ui/TinyMCE";
+import { useRouter } from "next/router";
 
 export default function ArticleTextEditor() {
   const form = useRefFormik<CMS.Blog.ArticleDraft>();
@@ -25,13 +26,13 @@ export default function ArticleTextEditor() {
     const { saveDraftText } = mutRef.current;
     saveDraftText({});
   }, []);
-  const onEditorChange = React.useCallback((textHtml: string, text: string, ) => {
+  const onEditorChange = React.useCallback((textHtml: string, text: string) => {
     const { form } = mutRef.current;
     form.setFieldValue("textHtml", textHtml);
     form.setFieldValue("text", text);
   }, []);
-  const [initialValue] = React.useState(form.getInitialValues()?.textHtml);
   const [htmlFieled, meta] = useField("textHtml");
+  const initialValue = form.formIsResetting ? "" : htmlFieled.value;
   return (
     <>
       <Box
@@ -51,11 +52,13 @@ export default function ArticleTextEditor() {
             * {meta.error}
           </Box>
         )}
-        <TinyMCE
-          initialValue={initialValue}
-          onBlur={onBlur}
-          onEditorChange={onEditorChange}
-        />
+        {form.formIsResetting ? null : (
+          <TinyMCE
+            initialValue={initialValue}
+            onBlur={onBlur}
+            onEditorChange={onEditorChange}
+          />
+        )}
       </Box>
     </>
   );

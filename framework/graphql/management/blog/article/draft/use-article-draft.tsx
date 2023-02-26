@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { useManagementApiProvider } from "@common/management";
 import { useArticleDraft } from "@common/management/blog/article/draft/use-article-draft";
 import { UseArticleDraft } from "@common/management/blog/article/draft/use-article-draft";
 import { API, CMS } from "@common/types";
 import { Management } from "@common/types/cms";
+import { useRefFormik } from "@components/ui";
 import { Schema } from "@framework/types";
 import { useRouter } from "next/router";
 import { normalizeArticleDraft } from "./normalize";
@@ -30,19 +32,11 @@ export const handler: API.Graphql.SWRHook<UseArticleDraftHook> = {
     }
   },
   useHook: ({ useData }) => {
-    const router = useRouter();
-    return () => {
-      const isReady = router.route.endsWith("]") ? router.isReady : true;
-      const articleId =
-        (router.query.articleId &&
-          (Array.isArray(router.query.articleId)
-            ? router.query.articleId[0]
-            : router.query.articleId)) ||
-        null;
+    return (initial) => {
       const { data, isValidating, ...rest } = useData({
-        isReady,
-        variables: { articleId },
+        ...initial,
         swrOptions: {
+          ...initial?.swrOptions,
           revalidateOnFocus: false,
           revalidateOnReconnect: false,
           focusThrottleInterval: 8 * 60 * 1000,

@@ -1,7 +1,7 @@
 import { useManagementApiProvider } from "@common/management/utils";
 import { API } from "@common/types";
 import React, { useCallback } from "react";
-import { useSWRConfig } from "swr";
+import { unstable_serialize, useSWRConfig } from "swr";
 import useSWR from "swr";
 
 export const useHook = <H>(hookHandler: (apiHooks: API.Hooks) => H) => {
@@ -45,7 +45,7 @@ export const useRestApiHook = (hook: API.RestApi.RestApiHook<any>) => {
   });
 };
 const useSWROptions = (
-  hook: API.Graphql.OneTimeHook<any> | API.Graphql.SWRHook<any>,
+  hook: API.Graphql.SWRHook<any>,
   ctx?: API.Graphql.UseDataContext<any, any>
 ) => {
   return React.useMemo(() => {
@@ -67,9 +67,11 @@ const useSWROptions = (
     if (hook.swrKey) {
       key = hook.swrKey;
     } else {
-      key = input
-        ? [hook.requestOptions.query, input]
-        : hook.requestOptions.query;
+      if (input) {
+        key = unstable_serialize([hook.requestOptions.query, input]);
+      } else {
+        key = hook.requestOptions.query;
+      }
     }
     return { input, key };
   }, [

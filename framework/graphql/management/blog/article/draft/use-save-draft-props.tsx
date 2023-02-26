@@ -63,10 +63,9 @@ export const handler: API.Graphql.MutationHook<UseSaveArtDraftPropsHook> = {
         (draft.orderNumber || "") != (initial.orderNumber || "");
       if (needToUpdate) {
         const response = await request(inputObj);
-        form.setInitialValues({ ...draft });
-        if (response) {
-          await updateDraft({ ...response }, false);
-        }
+        form.setInitialValues({ ...response });
+        form.setFieldValue("id", response.id);
+        await updateDraft({ ...response }, false);
         return response;
       } else {
         return initial;

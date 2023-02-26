@@ -138,6 +138,14 @@ export namespace Schema {
         updatedDraft: Article.ArticleDraft;
       };
     }
+    export interface DeleteArticleDraftResponse {
+      deleteArticleDraft: {
+        success: Boolean;
+        message?: string | null;
+        error?: string | null;
+        updatedDraft?: Article.ArticleDraft;
+      };
+    }
     export interface DeleteArticleResponse {
       deleteArticle: {
         success: Boolean;

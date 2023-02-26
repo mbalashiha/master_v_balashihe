@@ -3,7 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { Portal, styled } from "@mui/material";
 import InsertCodeIcon from "./InsertCodeIcon";
 
-interface MemoizedTinyMCEProps {
+export interface MemoizedTinyMCEProps {
   initialValue: string;
   onEditorChange: (textHtml: string, text: string) => void;
   onBlur: (event: any) => void;
