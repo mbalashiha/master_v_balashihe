@@ -2,6 +2,17 @@ import { CMS } from "@common/types";
 import { Blog } from "@common/types/cms";
 import { Schema } from "@framework/types";
 
+export const normalizeArticleUrl = (
+  handle: string | null,
+  autoHandleSlug?: string | null
+): string | null => {
+  handle = handle || autoHandleSlug || null;
+  if (!handle) {
+    return null;
+  } else {
+    return `/uslugi-mastera-v-balashihe/${handle}`;
+  }
+};
 export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
   const {
     id,
@@ -20,10 +31,11 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
   if (!id) {
     throw new Error("No id in article row!");
   }
+  const url = id ? normalizeArticleUrl(handle) : null;
   return {
     id,
     title,
-    url: `/${handle}`,
+    url: url || `/${handle}`,
     textHtml,
     published,
     orderNumber,

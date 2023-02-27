@@ -56,8 +56,20 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
                 text: `Вставить код`,
                 icon: `insert-code-icon`,
                 onAction: async function (_) {
-                  const fromBuffer = await navigator.clipboard.readText();
+                  let fromBuffer = await navigator.clipboard.readText();
                   if (fromBuffer) {
+                    if (
+                      !fromBuffer.includes("<") ||
+                      !fromBuffer.includes(">")
+                    ) {
+                      fromBuffer = "<p>" + fromBuffer + "</p>";
+                      fromBuffer = fromBuffer
+                        .replace(/\r\n\r\n/g, "</p><p>")
+                        .replace(/\n\n/g, "</p><p>");
+                      fromBuffer = fromBuffer
+                        .replace(/\r\n/g, "<br />")
+                        .replace(/\n/g, "<br />");
+                    }
                     editor.insertContent(fromBuffer);
                   }
                 },

@@ -22,6 +22,9 @@ const LoginLayout: FC<Props> = ({ children }: Props) => {
   const { theme } = themePaletteCtx;
   return (
     <>
+    <Head>
+      <title>Вход в панель управления CMS</title>
+    </Head>
       <ManagementApiProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />

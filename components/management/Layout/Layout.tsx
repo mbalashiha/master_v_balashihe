@@ -27,6 +27,9 @@ const ManagementLayout: FC<Props> = ({ children }: Props) => {
   const { theme } = themePaletteCtx;
   return (
     <>
+      <Head>
+        <title>Панель управления сайтом CMS</title>
+      </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <MuiSnackbarProvider

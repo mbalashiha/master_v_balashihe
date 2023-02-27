@@ -51,6 +51,7 @@ export namespace Blog {
     publishedAt: Date;
     existingArticleId: ID | null;
     existingArticle: Article | null;
+    url: string | null;
   }
 }
 export namespace Management {
