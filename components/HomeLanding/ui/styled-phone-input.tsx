@@ -1,6 +1,6 @@
-import PhoneInput, { PhoneInputProps } from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
-import ru from "react-phone-input-2/lang/ru.json";
+// import PhoneInput, { PhoneInputProps } from "react-phone-input-2";
+// import "react-phone-input-2/lib/style.css";
+// import ru from "react-phone-input-2/lang/ru.json";
 import React from "react";
 import { Box, styled } from "@mui/material";
 import { useRef } from "react";
@@ -58,10 +58,11 @@ const StyledLabel = styled("label")`
     text-shadow: 0 0 9px black, 0 0 12px black, 0 0 14px black;
   }
 `;
-type Props = PhoneInputProps & {
-  labelText: string;
-  errorMessage?: string | null | undefined;
-};
+// type Props = PhoneInputProps & {
+//   labelText: string;
+//   errorMessage?: string | null | undefined;
+// };
+type Props = any;
 const StyledContainer = styled(Box)`
   &&& {
     display: block;
@@ -212,6 +213,9 @@ const StyledContainer = styled(Box)`
     }
   }
 `;
+const PhoneInput = (props: any)=>{
+  return <></>;
+}
 const StyledPhoneInput: React.FC<Props> = ({
   labelText,
   errorMessage,
@@ -225,7 +229,7 @@ const StyledPhoneInput: React.FC<Props> = ({
         <PhoneInput
           {...rest}
           placeholder=""
-          onFocus={(event, data) => {
+          onFocus={(event: any, data: any) => {
             if (
               containerRef.current &&
               !containerRef.current.classList.contains("Mui-focused")
@@ -242,7 +246,7 @@ const StyledPhoneInput: React.FC<Props> = ({
               return rest.onFocus(event, data);
             }
           }}
-          onBlur={(event, data) => {
+          onBlur={(event: any, data: any) => {
             if (
               containerRef.current &&
               containerRef.current.classList.contains("Mui-focused")
@@ -259,7 +263,7 @@ const StyledPhoneInput: React.FC<Props> = ({
               return rest.onBlur(event, data);
             }
           }}
-          onChange={(value, country, e, formattedValue) => {
+          onChange={(value: any, country: any, e: any, formattedValue: any) => {
             if (labelRef.current && value && value.length > 1) {
               if (
                 !labelRef.current.classList.contains("MuiInputLabel-shrink")

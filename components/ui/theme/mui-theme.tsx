@@ -128,11 +128,11 @@ const getMuiTheme = (): Theme => {
       MuiContainer: {
         styleOverrides: {
           root: {
-            paddingLeft: "8px",
-            paddingRight: "8px",
+            paddingLeft: "4px",
+            paddingRight: "4px",
             "@media (min-width: 600px)": {
-              paddingLeft: "18px",
-              paddingRight: "18px",
+              paddingLeft: "5px",
+              paddingRight: "5px",
             },
           },
         },

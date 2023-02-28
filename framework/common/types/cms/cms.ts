@@ -22,6 +22,11 @@ export interface Image {
 }
 export namespace Blog {
   export type BlogCategory = any;
+  export interface ArticleCard {
+    title: string;
+    url: string;
+    createdAt: string;
+  }
   export interface Article {
     id: ID;
     title: string;

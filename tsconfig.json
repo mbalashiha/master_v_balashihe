@@ -40,8 +40,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "components/ui/TinyMCE/MemozedTinyMCE"
+    "**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }

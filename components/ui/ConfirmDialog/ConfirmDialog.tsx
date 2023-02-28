@@ -27,12 +27,10 @@ interface Props {
   message?: string;
 }
 
-const ConfirmDialog: FC<Props> = ({
-  children: trigger,
-  confirmCaption,
-  title,
-  message,
-}: Props) => {
+const ConfirmDialog = React.forwardRef(function ConfirmDialog(
+  { children: trigger, confirmCaption, title, message }: Props,
+  ref: any
+) {
   title = title || "";
   message = message || "Подвердите операцию";
   confirmCaption = confirmCaption || "OK";
@@ -59,7 +57,6 @@ const ConfirmDialog: FC<Props> = ({
       "No trigger button on-click event handler (used in onConfirm action)."
     );
   }
-  const ref = useRef<HTMLDivElement | null>(null);
   React.useEffect(() => {
     if (isOpen) {
       const evt = new CustomEvent("MouseOverPopoverOpened");
@@ -131,6 +128,6 @@ const ConfirmDialog: FC<Props> = ({
       ) : null}
     </>
   );
-};
+});
 
 export default ConfirmDialog;

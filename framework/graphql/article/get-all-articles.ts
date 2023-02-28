@@ -1,10 +1,13 @@
+import { API } from "@common/types";
+import { Blog } from "@common/types/cms";
+import { Schema } from "@framework/types";
 import { getConfig } from "@framework/utils";
 import { normalizeArticles } from "@framework/utils/normalize";
 import { getAllArticlesQuery } from "./queries";
 
 const getAllArticles = async (config?: API.Config): Promise<Blog.Article[]> => {
   config = config || getConfig();
-  const data = await config.request<Schema.QueryResponse.BlogArticles>({
+  const data = await config.request<void, Schema.Response.BlogArticles>({
     query: getAllArticlesQuery,
   });
   return normalizeArticles(data);

@@ -6,16 +6,30 @@ export namespace Graphql {
     query: string;
     headers?: HeadersInit;
   }
-  export interface RequestOptions<Input> extends HookRequestOptions {
+  export type RequestOptions<Input> = Input extends
+    | void
+    | never
+    | null
+    | undefined
+    ? RequestOptionsOptionalVariables<Input>
+    : RequestOptionsVariables<Input>;
+  export interface RequestOptionsVariables<Input> extends HookRequestOptions {
     variables: Input;
   }
-  export type RequestResults<T> = T;
-  export interface RequestFunction<Input, Output> {
-    (options: RequestOptions<Input>): Promise<RequestResults<Output>>;
+  export interface RequestOptionsOptionalVariables<Input>
+    extends HookRequestOptions {
+    variables?: Input;
   }
+  export type RequestResults<T> = T;
+  export interface RequestFunction {
+    <Input = any, Output = any>(options: RequestOptions<Input>): Promise<
+      RequestResults<Output>
+    >;
+  }
+
   export interface RequestContext<Input, Output> {
     input: Input;
-    request: RequestFunction<Input, Output>;
+    request: RequestFunction;
     options: HookRequestOptions;
   }
   export interface HookRequest<Input, Output, Data> {

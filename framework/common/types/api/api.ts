@@ -2,8 +2,8 @@ import type { Graphql } from "./graphql";
 import type { RestApi } from "./restApi";
 
 export interface Config {
-  request: Graphql.RequestFunction<any, any>;
-  restRequest: RestApi.RequestFunction<any, any>;
+  request: Graphql.RequestFunction;
+  restRequest: RestApi.RequestFunction;
   toLoginPage: (() => void) | undefined;
 }
 export type Hook =
@@ -36,6 +36,6 @@ export interface Hooks {
 }
 export interface ApiProviderContext {
   hooks: Hooks;
-  request: Graphql.RequestFunction<any, any>;
-  restRequest: RestApi.RequestFunction<any, any>;
+  request: Graphql.RequestFunction;
+  restRequest: RestApi.RequestFunction;
 }

@@ -15,7 +15,7 @@ class Config {
       mode: "cors", // same-origin, no-cors
       credentials: "include",
     });
-    const request: API.Graphql.RequestFunction<any, any> = async (
+    const request: API.Graphql.RequestFunction = async (
       options: API.Graphql.RequestOptions<any>
     ): Promise<API.Graphql.RequestResults<any>> => {
       const { query, variables, headers } = options;
@@ -47,7 +47,7 @@ class Config {
       // Origin: "http://localhost:3000",
       // },
     });
-    const restRequest: API.RestApi.RequestFunction<any, any> = async ({
+    const restRequest: API.RestApi.RequestFunction = async ({
       url,
       variables,
       headers,

@@ -13,6 +13,21 @@ export const normalizeArticleUrl = (
     return `/uslugi-mastera-v-balashihe/${handle}`;
   }
 };
+export const normalizeBlogRow = (data: Schema.BlogArticleCard): Blog.ArticleCard => {
+  const { title, handle, createdAt } = data;
+  const url = handle ? normalizeArticleUrl(handle) : null;
+  return {
+    title,
+    url: url || `/${handle}`,
+    createdAt: new Date(createdAt).toLocaleString("ru", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    }),
+  };
+};
 export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
   const {
     id,
@@ -39,11 +54,15 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     textHtml,
     published,
     orderNumber,
-    category,
+    category: {
+      ...category,
+    },
     createdAt,
     updatedAt,
     publishedAt,
-    breadcrumbs,
+    breadcrumbs: {
+      ...breadcrumbs,
+    },
   };
 };
 

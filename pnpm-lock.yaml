@@ -23,6 +23,7 @@ specifiers:
   graphql-request: 5.1.0
   html-react-parser: ^3.0.9
   js-cookie: 3.0.1
+  moment: ^2.29.4
   next: 13.1.6
   notistack: 2.0.8
   react: 18.2.0
@@ -57,6 +58,7 @@ dependencies:
   graphql-request: 5.1.0_graphql@16.6.0
   html-react-parser: 3.0.9_react@18.2.0
   js-cookie: 3.0.1
+  moment: 2.29.4
   next: 13.1.6_wiv434v7erz4aedd5whhdwmpv4
   notistack: 2.0.8_s7gt3hmdzws52jopa6grz5igdq
   react: 18.2.0
@@ -2331,6 +2333,10 @@ packages:
 
   /minimist/1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
+    dev: false
+
+  /moment/2.29.4:
+    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
     dev: false
 
   /ms/2.1.2:

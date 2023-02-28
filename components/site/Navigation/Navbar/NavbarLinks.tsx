@@ -40,7 +40,7 @@ interface Props extends StackProps {
 }
 const getLinks = () => [
   { href: "/", name: <HomeIcon /> },
-  { href: "/market", name: "Магазин" },
+  { href: "/uslugi-mastera-v-balashihe", name: "Услуги" },
 ];
 export const NavbarLinks = ({
   orientation,
@@ -92,15 +92,12 @@ export const NavbarLinks = ({
       }}
     >
       {navLinks.map((linkProps) => (
-        <ListItemButton
-          component={() => (
-            <NavigationLink
-              key={linkProps.href + "_" + linkProps.name?.toString()}
-              linkProps={linkProps}
-            />
-          )}
-          key={linkProps.href + "_" + linkProps.name?.toString()}
-        ></ListItemButton>
+        <NavigationLink
+          key={linkProps.href + "_" + (linkProps.name || "")}
+          linkProps={linkProps}
+        >
+          {linkProps.name || ""}
+        </NavigationLink>
       ))}
     </List>
   );

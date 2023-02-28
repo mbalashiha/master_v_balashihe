@@ -9,23 +9,34 @@ export namespace RestApi {
     contentType?: "application/json" | "multipart/form-data" | "text/plain";
     axios?: boolean;
   }
-  export interface RestRequestOptions<Input> extends HookRequestOptions {
+  export type RestRequestOptions<Input> = Input extends void | never | null | undefined
+    ? RestRequestOptionsOptionalVariables<Input>
+    : RestRequestOptionsVariables<Input>;
+
+  export interface RestRequestOptionsVariables<Input> extends HookRequestOptions {
     variables: Input;
   }
+  export interface RestRequestOptionsOptionalVariables<Input>
+    extends HookRequestOptions {
+    variables?: Input;
+  }
+  
   export interface RequestResults<T> {
     data: T;
     status?: number;
     statusText?: string;
-  };
+  }
   export interface RestApiHookContext<Input, Output> {
     restRequest: (input: Input) => Promise<Output>;
   }
-  export interface RequestFunction<Input, Output> {
-    (options: RestRequestOptions<Input>): Promise<RequestResults<Output>>;
+  export interface RequestFunction {
+    <Input = any, Output = any>(options: RestRequestOptions<Input>): Promise<
+      RequestResults<Output>
+    >;
   }
   export interface RestApiRequestContext<Input, Output> {
     input: Input;
-    restRequest: RequestFunction<Input, Output>;
+    restRequest: RequestFunction;
     options: HookRequestOptions;
   }
   export interface HookRequest<Input, Output, Data> {

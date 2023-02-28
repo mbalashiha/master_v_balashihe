@@ -5,6 +5,9 @@ type Boolean = boolean;
 type String = string;
 
 export namespace Schema {
+  export interface PathHandle {
+    handle: String;
+  }
   export interface Image {
     imageId: ID;
     imgSrc: String;
@@ -28,6 +31,11 @@ export namespace Schema {
   }
   export interface CategoryId {
     id: ID;
+  }
+  export interface BlogArticleCard {
+    title: String;
+    handle: String;
+    createdAt: Date;
   }
   export interface BlogArticle {
     id: ID;
@@ -104,6 +112,19 @@ export namespace Schema {
     }
     export interface ArticleDraftResponse {
       articleDraft: Article.ArticleDraft;
+    }
+    export interface ArticlesCardsConnection {
+      articlesCards: {
+        nodes: BlogArticleCard[];
+      };
+    }
+    export interface ArticlesPathesResponse {
+      articlesPathes: {
+        nodes: PathHandle[];
+      };
+    }
+    export interface ArticleByHandleResponse {
+      articleByHandle: BlogArticle;
     }
     export interface Manager {
       id: ID;
