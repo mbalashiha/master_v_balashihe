@@ -16,66 +16,66 @@ interface Props {
 export default function Article({ title, children, image }: Props) {
   return (
     <>
-      <Grid
-        container
-        sx={{ mt: 0, mb: "60px" }}
-        spacing={{ xs: 0, lg: 1, xl: 2 }}
-      >
-        <Grid item xs={12} lg={8} xl={9}>
-          <Typography
-            component="h1"
-            variant="h1"
+      <Grid container sx={{ mt: 0, mb: "60px" }} spacing={{ xs: 1, xl: 3 }}>
+        <Grid item xs={12} md={12} lg={12} xl={2.5}></Grid>
+        <Grid item xs={12} md={8} lg={7.5} xl={5}>
+          <Grid container sx={{ mt: 0, mb: 0 }} spacing={0}>
+            {image && (
+              <>
+                <Grid item xs={12} md={6} lg={6}>
+                  <ImagePaper image={image} />
+                </Grid>
+                <Grid item xs={12} md={6} lg={6}></Grid>
+              </>
+            )}
+          </Grid>
+          <Box component="header">
+            <Typography
+              component="h1"
+              variant="h1"
+              sx={{
+                color: (theme) => theme.palette.primary.dark,
+                fontSize: "25px",
+                lineHeight: "30px",
+                fontWeight: 600,
+                pb: "35px",
+              }}
+            >
+              {title}
+            </Typography>
+          </Box>
+          <Box
+            component="article"
             sx={{
-              mb: { xs: "16px", md: "36px" },
-              color: (theme) => theme.palette.primary.dark,
+              "&, & p, & .MuiPaper-root": {
+                fontFamily: 'Roboto, "Segoe UI", Tahoma, Verdana, Arial',
+                fontWeight: 500,
+                fontSize: "18px",
+                lineHeight: "28px",
+                color: (theme) =>
+                  theme.palette.mode === "light" ? "#0e0e0f" : "white",
+              },
+              "& .MuiPaper-elevation1": {
+                fontSize: "17px",
+                lineHeight: "25px",
+                marginBottom: "2rem",
+                boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.2)",
+              },
+              "& > h2:first-of-type": {
+                marginTop: 0,
+              },
+              "&& h2": {
+                color: (theme) => theme.palette.primary.light,
+              },
             }}
           >
-            {title}
-          </Typography>
-          <Grid
-            container
-            sx={{ mt: 0, mb: 0 }}
-            spacing={{ xs: 1, sm: 1, md: 2, lg: 3, xl: 4 }}
-          >
-            <Grid item xs={12} md={6} lg={6}>
-              <ImagePaper image={image} />
-            </Grid>
-            <Grid item xs={12} md={6} lg={6}></Grid>
-            <Grid item xs={12} md={12}>
-              <Paper
-                component="article"
-                elevation={0}
-                sx={{
-                  padding: { xs: "1.5em 1em 1em 1em", md: "2em" },
-                  "& p, & .MuiPaper-root": {
-                    fontFamily: '"Segoe UI", Tahoma, Verdana, Arial',
-                    fontSize: "20px",
-                    lineHeight: "32px",
-                    color: (theme) =>
-                      theme.palette.mode === "dark" ? "white" : "black",
-                  },
-                  "& .MuiPaper-elevation1": {
-                    fontSize: "17px",
-                    lineHeight: "25px",
-                    marginBottom: "2rem",
-                    boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.2)",
-                  },
-                  "& > h2:first-of-type": {
-                    marginTop: 0,
-                  },
-                  "&& h2": {
-                    color: (theme) => theme.palette.primary.light,
-                  },
-                }}
-              >
-                {children}
-              </Paper>
-            </Grid>
-          </Grid>
+            {children}
+          </Box>
         </Grid>
-        <Grid item xs={12} lg={4} xl={3}>
+        <Grid item xs={12} md={4} lg={4.5} xl={2.5}>
           <Sidebar1 />
         </Grid>
+        <Grid item xs={0} md={0} lg={0} xl={2}></Grid>
       </Grid>
     </>
   );

@@ -4,7 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Article } from "@components/common/Article";
+import { Article, DescriptionParser } from "@components/common/Article";
 import getArticlesPathes from "@framework/article/get-articles-pathes";
 import {
   GetStaticProps,
@@ -35,20 +35,19 @@ export const getStaticProps = async (
 export default function Page(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
-  console.log(props);
-  //   debugger;
+  const { article } = props;
+  const { textHtml } = article;
   return (
     <>
       <Head>
-        <title>Мастер в Балашихе</title>
+        <title>Мастер в Балашихе - {article.title}</title>
         <meta
           name="description"
-          content="Ремонт материнских плат в Балашихе и Московской области"
+          content={`Мастер по ремонту в Балашихе и Московской области - ${article.title}`}
         />
       </Head>
-      <Article title={`в Балашихе и Московской области`}>
-        <Typography component="h2" variant="h2" gutterBottom></Typography>
-        <p></p>
+      <Article title={article.title}>
+        <DescriptionParser descriptionHTML={textHtml} />
       </Article>
     </>
   );

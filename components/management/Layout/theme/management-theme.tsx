@@ -1,34 +1,6 @@
 import { createTheme, Theme } from "@mui/material/styles";
 import { colors, Palette, PaletteMode } from "@mui/material";
 import { purple, pink, amber, grey, blueGrey, red } from "@mui/material/colors";
-declare module "@mui/material/styles/createTypography" {
-  interface Typography {
-    allVariants: {
-      color: React.CSSProperties["color"];
-    };
-  }
-  // interface Palette {
-  //   borderColor: Palette["primary"] & {
-  //     primaryButton: React.CSSProperties["color"];
-  //   };
-  // }
-  // interface PaletteOptions {
-  //   borderColor?: PaletteOptions["primary"] & {
-  //     primaryButton: React.CSSProperties["color"];
-  //   };
-  // }
-  // interface Theme {
-  // status: {
-  //   danger: string;
-  // };
-  // }
-  // allow configuration using `createTheme`
-  // interface ThemeOptions {
-  // status?: {
-  //   danger?: string;
-  // };
-  // }
-}
 const InterFontFamily = `Inter, Arial, sans-serif`;
 
 const getMuiTheme = (): Theme => {
@@ -40,6 +12,9 @@ const getMuiTheme = (): Theme => {
       primary: { main: "#AA203E" },
       background: {
         default: "#4D001D",
+      },
+      articleText: {
+        main: "#302f5c",
       },
     },
     shape: {

@@ -5,15 +5,9 @@ import {
   PaletteMode,
   Button,
   Button as MuiButton,
+  PaletteColorOptions,
 } from "@mui/material";
 import { purple, pink, amber, grey, blueGrey } from "@mui/material/colors";
-declare module "@mui/material/styles/createTypography" {
-  interface Typography {
-    allVariants: {
-      color: React.CSSProperties["color"];
-    };
-  }
-}
 const InterFontFamily = `Inter, Arial, sans-serif`;
 
 const getMuiTheme = (): Theme => {
@@ -25,6 +19,9 @@ const getMuiTheme = (): Theme => {
       primary: { main: "#AA203E" },
       background: {
         default: "#4D001D",
+      },
+      articleText: {
+        main: "#302f5c",
       },
     },
     spacing: 12,
@@ -135,11 +132,6 @@ const getMuiTheme = (): Theme => {
               paddingRight: "5px",
             },
           },
-        },
-      },
-      MuiTypography: {
-        styleOverrides: {
-          h1: {},
         },
       },
       MuiBadge: {

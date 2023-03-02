@@ -8,18 +8,13 @@ import { Layout } from "@components/site";
 interface Props {
   children: React.ReactNode | React.ReactNode[];
 }
-const ArticleLayout: FC<Props> = ({ children }: Props) => {
+const CardsLayout: FC<Props> = ({ children }: Props) => {
   return (
     <Layout>
-      <Box sx={{ mt: "160px", borderRadius: 0 }}>
-        <Container
-          maxWidth={false}
-          sx={{ maxWidth: "1900px", px: { xs: 1, md: 2, lg: 3, xl: 1 } }}
-        >
-          {children}
-        </Container>
-      </Box>
+      <Container sx={{ mt: "140px", px: { xs: 1, xl: 0 } }} maxWidth={"xl"}>
+        {children}
+      </Container>
     </Layout>
   );
 };
-export default ArticleLayout;
+export default CardsLayout;

@@ -1,4 +1,4 @@
-import { ArticleLayout } from "@components/site";
+import { CardsLayout } from "@components/site";
 import { Typography, Card, Grid, Button, Box } from "@mui/material";
 import Head from "next/head";
 import { InferGetStaticPropsType } from "next/types";
@@ -32,7 +32,7 @@ export default function Page(
                   sx={{
                     p: 2,
                     "&, & h5, & p": {
-                      color: "#302f5b",
+                      color: (theme) => theme.palette.articleText.main,
                     },
                     "&, & a, & a > *": {
                       transition: "all .5s ease-in-out",
@@ -41,7 +41,7 @@ export default function Page(
                       boxShadow: "0 35px 15px 0 rgba(0,0,0,.0605)",
                       "& a": {
                         "& button": {
-                          color: "#302f5b",
+                          color: (theme) => theme.palette.articleText.main,
                         },
                         "&, & > *": {
                           color: (theme) => theme.palette.primary.main,
@@ -73,7 +73,7 @@ export default function Page(
     </>
   );
 }
-Page.Layout = ArticleLayout;
+Page.Layout = CardsLayout;
 export async function getStaticProps() {
   return {
     props: {
