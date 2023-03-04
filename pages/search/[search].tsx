@@ -1,21 +1,26 @@
-import { CardsLayout } from "@components/site";
+import { CardsLayout, Search } from "@components/site";
 import { Typography, Card, Grid, Button, Box } from "@mui/material";
 import Head from "next/head";
-import { InferGetStaticPropsType } from "next/types";
+import {
+  InferGetServerSidePropsType,
+  GetServerSidePropsContext,
+} from "next/types";
 import { HugeContainer } from "@components/ui";
 import getArticlesCards from "@framework/article/get-articles-cards";
 import { ArticleCard } from "@components/common/Article";
+import { SearchPageLayout } from "@components/site/Layout";
 
-export default function Page(
-  { articles }: InferGetStaticPropsType<typeof getStaticProps>
-) {
+export default function SearchPage({
+  search,
+  articles,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <Head>
-        <title>Мастер в Балашихе</title>
+        <title>{`Страница поиска - Мастер в Балашихе`}</title>
         <meta
           name="description"
-          content="Ремонт материнских плат в Балашихе и Московской области"
+          content={`Страница поиска - Мастер в Балашихе`}
         />
       </Head>
       <HugeContainer
@@ -23,6 +28,7 @@ export default function Page(
           <Card elevation={0} sx={{ width: "100%", height: "800px" }}></Card>
         }
       >
+        <Search search={search} sx={{ mb: 4 }} />
         <Grid container spacing={{ xs: 2, lg: 3 }}>
           {articles.map((article) => (
             <ArticleCard key={article.url} article={article} />
@@ -32,10 +38,14 @@ export default function Page(
     </>
   );
 }
-Page.Layout = CardsLayout;
-export async function getStaticProps() {
+SearchPage.Layout = SearchPageLayout;
+export async function getServerSideProps(
+  context: GetServerSidePropsContext<{ search: string }>
+) {
+  const search = decodeURIComponent(context.params?.search || "");
   return {
     props: {
+      search,
       articles: await getArticlesCards(),
     },
   };

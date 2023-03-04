@@ -1,8 +1,8 @@
 import { gql } from "graphql-request";
 
 export const getArticlesCardsQuery = gql`
-  query getArticlesCardsQuery {
-    articlesCards {
+  query ($search: String) {
+    articlesCards(search: $search) {
       nodes {
         title
         handle
