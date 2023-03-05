@@ -13,10 +13,14 @@ export const normalizeArticleUrl = (
     return `/uslugi-mastera-v-balashihe/${handle}`;
   }
 };
-export const normalizeBlogRow = (data: Schema.BlogArticleCard): Blog.ArticleCard => {
-  const { title, handle, createdAt } = data;
+export const normalizeBlogRow = (
+  data: Schema.BlogArticleCard
+): Blog.ArticleCard => {
+  const { title, handle, createdAt, score, fragment } = data;
   const url = handle ? normalizeArticleUrl(handle) : null;
   return {
+    score: typeof score === "number" || score ? score : null,
+    fragment: fragment || null,
     title,
     url: url || `/${handle}`,
     createdAt: new Date(createdAt).toLocaleString("ru", {

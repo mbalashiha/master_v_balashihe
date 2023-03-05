@@ -26,6 +26,8 @@ export namespace Blog {
     title: string;
     url: string;
     createdAt: string;
+    score: Float | null;
+    fragment: String | null;
   }
   export interface Article {
     id: ID;

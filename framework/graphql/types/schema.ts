@@ -36,6 +36,8 @@ export namespace Schema {
     title: String;
     handle: String;
     createdAt: Date;
+    score: Float | null;
+    fragment: String | null;
   }
   export interface BlogArticle {
     id: ID;

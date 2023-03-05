@@ -37,8 +37,11 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
               }
             });
           }}
-          onEditorChange={(text, editor) => {
+          onEditorChange={(__textHtml, editor) => {
             const textHtml = editor.getContent({ format: "html" });
+            const text = editor
+              .getContent({ format: "text" })
+              .replace(/\s+/gim, " ");
             onEditorChange(textHtml, text);
           }}
           id="tinymce-editor-in-iframe"

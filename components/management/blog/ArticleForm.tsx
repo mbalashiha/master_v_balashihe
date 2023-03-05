@@ -34,7 +34,7 @@ interface Props {
 export default function ArticleForm({ children }: Props) {
   const { setCreateButton, unsetCreateButton } = useFabButton();
   const router = useRouter();
-  const isCreatePage = useMemo(() => {
+  const isCreatePage = useMemo<boolean>(() => {
     return router.pathname.endsWith("/article/create");
   }, [router.pathname]);
   const isReady = isCreatePage ? true : router.isReady;
@@ -102,7 +102,7 @@ export default function ArticleForm({ children }: Props) {
           text,
           textHtml,
           textRawDraftContentState,
-          published,
+          published: true,
           orderNumber,
           blogCategoryId,
           existingArticleId,

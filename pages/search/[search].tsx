@@ -46,7 +46,7 @@ export async function getServerSideProps(
   return {
     props: {
       search,
-      articles: await getArticlesCards(),
+      articles: await getArticlesCards({ search }),
     },
   };
 }

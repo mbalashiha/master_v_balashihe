@@ -1,4 +1,11 @@
-import { TextField, Button, IconButton, Stack, Paper, SxProps } from "@mui/material";
+import {
+  TextField,
+  Button,
+  IconButton,
+  Stack,
+  Paper,
+  SxProps,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import * as React from "react";
@@ -80,7 +87,7 @@ export default function Search({ search, sx, onSubmit }: Props) {
             ),
           }}
           onChange={(event) => {
-            setSearchString(event.currentTarget.value.trim());
+            setSearchString(event.currentTarget.value);
           }}
         />
         <Button

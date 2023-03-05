@@ -7,6 +7,8 @@ export const getArticlesCardsQuery = gql`
         title
         handle
         createdAt
+        score
+        fragment
       }
     }
   }
