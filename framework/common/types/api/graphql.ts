@@ -21,15 +21,15 @@ export namespace Graphql {
     variables?: Input;
   }
   export type RequestResults<T> = T;
-  export interface RequestFunction {
-    <Input = any, Output = any>(options: RequestOptions<Input>): Promise<
-      RequestResults<Output>
-    >;
+  export interface RequestFunction<Input1 = any, Output1 = any> {
+    <Input2 = Input1, Output2 = Output1>(
+      options: RequestOptions<Input2>
+    ): Promise<RequestResults<Output2>>;
   }
 
   export interface RequestContext<Input, Output> {
     input: Input;
-    request: RequestFunction;
+    request: RequestFunction<Input, Output>;
     options: HookRequestOptions;
   }
   export interface HookRequest<Input, Output, Data> {
@@ -42,6 +42,7 @@ export namespace Graphql {
     variables?: Input;
     isReady?: boolean;
     swrOptions?: SWRConfiguration<Data>;
+    swrKey?: string;
     initial?: {
       variables?: Input;
       isReady?: boolean;

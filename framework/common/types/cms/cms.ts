@@ -23,6 +23,7 @@ export interface Image {
 export namespace Blog {
   export type BlogCategory = any;
   export interface ArticleCard {
+    id: ID;
     title: string;
     url: string;
     createdAt: string;

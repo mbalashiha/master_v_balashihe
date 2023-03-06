@@ -64,7 +64,9 @@ const useSWROptions = (
       input = input || {};
       input = { ...input, ...ctx?.initial?.variables };
     }
-    if (hook.swrKey) {
+    if (ctx?.swrKey) {
+      key = ctx.swrKey;
+    } else if (hook.swrKey) {
       key = hook.swrKey;
     } else {
       if (input) {
@@ -75,6 +77,7 @@ const useSWROptions = (
     }
     return { input, key };
   }, [
+    ctx?.swrKey,
     hook.swrKey,
     ctx?.variables,
     ctx?.initial?.variables,

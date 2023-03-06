@@ -3,7 +3,7 @@ import { useDeleteArticle } from "@common/management/blog/article/use-delete-art
 import { UseDeleteArticle } from "@common/management/blog/article/use-delete-article";
 import { API, CMS } from "@common/types";
 import { Schema } from "@framework/types";
-import { normalizeArticle } from "@framework/utils/normalize";
+import { normalizeArticle, normalizeBlogRow } from "@framework/utils/normalize";
 import { slugify } from "lib";
 import { useSnackbar } from "notistack";
 import useArticleList from "../use-article-list";
@@ -11,13 +11,13 @@ import { deleteArticle } from "./mutations/delete-article";
 export default useDeleteArticle as UseDeleteArticle<typeof handler>;
 
 export interface UseDeleteArticleHook {
-  requestInput: { id: string | number };
+  requestInput: { search?: string; id: string | number };
   requestOutput: Schema.Response.DeleteArticleResponse;
   data: {
     success: Boolean;
     message: String;
     error?: string | null;
-    articleList?: CMS.Blog.Article[];
+    articleList?: CMS.Blog.ArticleCard[];
   };
 }
 export const handler: API.Graphql.MutationHook<UseDeleteArticleHook> = {
@@ -29,7 +29,9 @@ export const handler: API.Graphql.MutationHook<UseDeleteArticleHook> = {
       const variables = input;
       const data = await request({ ...options, variables });
       const res = data.deleteArticle;
-      const articleList = res.articleList.map((el) => normalizeArticle(el));
+      const articleList = res.articleList.nodes.map((el) =>
+        normalizeBlogRow(el)
+      );
       return { ...res, success: Boolean(res.success), articleList };
     } catch (e: any) {
       console.error(e.stack || e.message || e);
@@ -56,7 +58,10 @@ export const handler: API.Graphql.MutationHook<UseDeleteArticleHook> = {
           }
         );
       } else {
-        updateArticleList(response.articleList, false);
+        updateArticleList(
+          { search: input.search || "", articles: response.articleList },
+          false
+        );
       }
       return response;
     };

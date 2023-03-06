@@ -29,14 +29,14 @@ export namespace RestApi {
   export interface RestApiHookContext<Input, Output> {
     restRequest: (input: Input) => Promise<Output>;
   }
-  export interface RequestFunction {
-    <Input = any, Output = any>(options: RestRequestOptions<Input>): Promise<
-      RequestResults<Output>
+  export interface RequestFunction<Input1 = any, Output1 = any> {
+    <Input2 = Input1, Output2 = Output1>(options: RestRequestOptions<Input2>): Promise<
+      RequestResults<Output2>
     >;
   }
   export interface RestApiRequestContext<Input, Output> {
     input: Input;
-    restRequest: RequestFunction;
+    restRequest: RequestFunction<Input, Output>;
     options: HookRequestOptions;
   }
   export interface HookRequest<Input, Output, Data> {

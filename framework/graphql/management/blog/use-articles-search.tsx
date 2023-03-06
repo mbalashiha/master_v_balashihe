@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useArticleList } from "@common/management/blog/use-article-list";
-import { UseArticleList } from "@common/management/blog/use-article-list";
+import { useArticleSearch } from "@common/management/blog/use-article-search";
+import { UseArticleSearch } from "@common/management/blog/use-article-search";
 import { API, CMS } from "@common/types";
 import { Management } from "@common/types/cms";
 import { useSearchProvider } from "@components/management/blog/Article";
@@ -8,39 +8,33 @@ import { Schema } from "@framework/types";
 import { normalizeArticle, normalizeBlogRow } from "@framework/utils/normalize";
 import { useMemo } from "react";
 import { managementArticlesCards } from "./queries/management-get-articles-cards";
+import useArticleList from "./use-article-list";
 
-export default useArticleList as UseArticleList<typeof handler>;
+export default useArticleSearch as UseArticleSearch<typeof handler>;
 
-export interface UseArticleListHook {
-  requestInput: { search?: string } | undefined;
+export interface UseArticleSearchHook {
+  requestInput: { search: string };
   requestOutput: Schema.Response.ManagementArticlesCards;
   data: { search: string; articles: CMS.Blog.ArticleCard[] };
 }
-export const handler: API.Graphql.SWRHook<UseArticleListHook> = {
+export const handler: API.Graphql.MutationHook<UseArticleSearchHook> = {
   requestOptions: {
     query: managementArticlesCards,
   },
-  swrKey: managementArticlesCards,
   async request({ request, options, input }) {
     const data = await request({ ...options, variables: input });
     const { search, nodes } = data.managementArticlesCards;
     const articles = nodes.map((el) => normalizeBlogRow(el));
     return { search: search || "", articles };
   },
-  useHook: ({ useData }) => {
+  useHook: ({ request }) => {
     const ctx = useSearchProvider();
-    return (initial) => {
-      const search = ctx?.search || "";
-      const { data, isValidating, ...rest } = useData({
-        variables: {
-          search,
-        },
-        swrOptions: {
-          revalidateOnFocus: false,
-        },
-      });
-      const isEmpty = !data || !data.articles?.length;
-      return { data, isEmpty, isValidating, ...rest };
+    const { mutate: updateArticleList } = useArticleList();
+    return () => async (input) => {
+      ctx.setSearchQuery(input.search);
+      const response = await request(input);
+      await updateArticleList(response, false);
+      return response;
     };
   },
 };

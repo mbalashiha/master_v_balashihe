@@ -33,6 +33,7 @@ export namespace Schema {
     id: ID;
   }
   export interface BlogArticleCard {
+    id: ID;
     title: String;
     handle: String;
     createdAt: Date;
@@ -155,6 +156,12 @@ export namespace Schema {
     export interface ManagementGetArticles {
       managementGetArticles: BlogArticle[];
     }
+    export interface ManagementArticlesCards {
+      managementArticlesCards: {
+        search: String;
+        nodes: BlogArticleCard[];
+      };
+    }
     export interface SaveArtDraftPropsResponse {
       saveArticleDraft: {
         message: String;
@@ -174,7 +181,10 @@ export namespace Schema {
         success: Boolean;
         message: String;
         error?: string | null;
-        articleList: BlogArticle[];
+        articleList: {
+          search: String;
+          nodes: BlogArticleCard[];
+        };
       };
     }
     export interface SaveArticleResponse {

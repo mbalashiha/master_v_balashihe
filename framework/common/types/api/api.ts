@@ -21,6 +21,7 @@ export interface Hooks {
     };
     blog: {
       useArticleList: Graphql.SWRHook<any>;
+      useArticleSearch: Graphql.MutationHook<any>;
       article: {
         useSaveArticle: Graphql.MutationHook<any>;
         useDeleteArticle: Graphql.MutationHook<any>;

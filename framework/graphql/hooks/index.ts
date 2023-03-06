@@ -9,6 +9,7 @@ import { handler as useSaveArticle } from "@framework/management/blog/article/us
 import { handler as useDeleteArticle } from "@framework/management/blog/article/use-delete-article";
 import { handler as useDeleteArticleDraft } from "@framework/management/blog/article/draft/use-delete-draft";
 import { handler as useArticleList } from "@framework/management/blog/use-article-list";
+import { handler as useArticleSearch } from "@framework/management/blog/use-articles-search";
 import { API } from "@common/types";
 
 export const graphqlHooks: API.Hooks = {
@@ -21,6 +22,7 @@ export const graphqlHooks: API.Hooks = {
     },
     blog: {
       useArticleList,
+      useArticleSearch,
       article: {
         useSaveArticle,
         useDeleteArticle,

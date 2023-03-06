@@ -25,6 +25,7 @@ export default React.forwardRef(function LinkButton(
           "&:hover": {
             background: "none",
             boxShadow: "none",
+            color: "primary.main",
           },
           "& .MuiButton-startIcon": {
             margin: 0,

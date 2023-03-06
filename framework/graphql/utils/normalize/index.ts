@@ -1,6 +1,6 @@
 import { CMS } from "@common/types";
 import { Blog } from "@common/types/cms";
-import { Schema } from "@framework/types";
+import { ID, Schema } from "@framework/types";
 
 export const normalizeArticleUrl = (
   handle: string | null,
@@ -16,9 +16,10 @@ export const normalizeArticleUrl = (
 export const normalizeBlogRow = (
   data: Schema.BlogArticleCard
 ): Blog.ArticleCard => {
-  const { title, handle, createdAt, score, fragment } = data;
+  const { id, title, handle, createdAt, score, fragment } = data;
   const url = handle ? normalizeArticleUrl(handle) : null;
   return {
+    id: id || (null as any as ID),
     score: typeof score === "number" || score ? score : null,
     fragment: fragment || null,
     title,
