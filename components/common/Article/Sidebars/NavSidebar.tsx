@@ -30,21 +30,21 @@ export default function NavSidebar({ navigation }: Props) {
       }}
     >
       <Box>
-        <Typography component="h6" variant="h6" sx={{ textAlign: "center", mb: "10px", color: 'grey.700' }}>
+        <Typography
+          component="h6"
+          variant="h6"
+          sx={{ textAlign: "center", mb: "10px", color: "grey.700" }}
+        >
           Информация
         </Typography>
       </Box>
       {navigation.nearestSiblings?.map((el) => (
-        <>
-          {el && (
-            <SidebarLink
-              key={el.url}
-              title={el.title}
-              url={el.url}
-              active={el.active}
-            />
-          )}
-        </>
+        <SidebarLink
+          key={el.url.toString() + (el.active || "null").toString()}
+          title={el.title}
+          url={el.url}
+          active={el.active}
+        />
       ))}
     </Paper>
   );
