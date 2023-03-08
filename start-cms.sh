@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ps -fe | grep 'master_v_balashihe' | grep '/node ' | awk '{print $2}' | xargs kill -9 &> /dev/null
+ps -fe | grep 'master_v_balashihe' | grep '/nodemon.' | awk '{print $2}' | xargs kill -9 &> /dev/null
 kill -9 $(lsof -t -i:3000) &> /dev/null 
 kill -9 $(lsof -t -i:4402) &> /dev/null
 kill -9 $(lsof -t -i:9934) &> /dev/null

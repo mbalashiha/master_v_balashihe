@@ -5,7 +5,10 @@ import { API, CMS } from "@common/types";
 import { Management } from "@common/types/cms";
 import { useSearchProvider } from "@components/management/blog/Article";
 import { Schema } from "@framework/types";
-import { normalizeArticle, normalizeBlogRow } from "@framework/utils/normalize";
+import {
+  normalizeArticle,
+  normalizeBlogRow,
+} from "@framework/utils/normalize/article";
 import { useMemo } from "react";
 import { managementArticlesCards } from "./queries/management-get-articles-cards";
 

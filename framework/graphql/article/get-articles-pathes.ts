@@ -2,7 +2,7 @@ import { API } from "@common/types";
 import { Blog } from "@common/types/cms";
 import { Schema } from "@framework/types";
 import { getConfig } from "@framework/utils";
-import { normalizeArticles } from "@framework/utils/normalize";
+import { normalizeArticles } from "@framework/utils/normalize/article";
 import { getArticlesPathesQuery } from "./queries";
 
 const getArticlesPathes = async (

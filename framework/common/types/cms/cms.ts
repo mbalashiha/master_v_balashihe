@@ -30,10 +30,20 @@ export namespace Blog {
     score: Float | null;
     fragment: String | null;
   }
+  export interface NavigationItem {
+    title: String;
+    url: String;
+    active: true | null;
+  }
+  export interface BlogArticleNavigation {
+    prev: NavigationItem | null;
+    next: NavigationItem | null;
+    nearestSiblings: NavigationItem[] | null;
+  }
   export interface Article {
     id: ID;
     title: string;
-    url: string;    
+    url: string;
     textHtml: string;
     published: Boolean;
     orderNumber: Int;
@@ -42,6 +52,7 @@ export namespace Blog {
     updatedAt: Date;
     publishedAt: Date;
     breadcrumbs?: Breadcrumb[];
+    navigation: BlogArticleNavigation;
   }
   export interface ArticleDraft {
     id: ID | null;

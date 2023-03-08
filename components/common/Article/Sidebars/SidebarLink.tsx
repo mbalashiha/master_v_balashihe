@@ -3,43 +3,54 @@ import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import Image from "next/image";
 import Link from "next/link";
 interface Props {
-  item: NavigationEntry;
+  url: string;
+  active: true | null;
+  title: string;
 }
 interface LinkComponentProps extends Props {
   children: React.ReactNode | React.ReactNode[];
 }
-const LinkComponent = ({ item, children }: LinkComponentProps) => {
-  if (item.active) {
-    return <>{children}</>;
+const LinkComponent = ({
+  title,
+  url,
+  active,
+  children,
+}: LinkComponentProps) => {
+  if (active) {
+    return <div>{children}</div>;
   } else {
-    return <Link href={item.href}>{children}</Link>;
+    return (
+      <Link href={url} as={url}>
+        {children}
+      </Link>
+    );
   }
 };
-export default function SidebarLink({ item }: Props) {
+export default function SidebarLink({ title, url, active }: Props) {
+  active = active || !url ? true : null;
   return (
-    <Box key={item.href} component="li">
-      <LinkComponent item={item}>
-        <Button
-          sx={{
-            padding: 0,
-            margin: 0,
-            px: 1,
-            border: "none",
-            background: "none",
-            "&:hover": {
-              background: "none",
-              color: "red",
-            },
-            "&:disabled": {
-              color: "black",
-            },
-          }}
-          disabled={!!item.active}
-          startIcon={<EastRoundedIcon />}
-        >
-          {item.name}
-        </Button>
+    <Button
+      component={"li"}
+      disabled={Boolean(active)}
+      sx={{
+        mx: 0,
+        width: "100%",
+        border: "none",
+        background: "none",
+        color: active && "black !important",
+        "&:hover": {
+          backgroundColor: "transparent",
+          color: "red",
+        },
+        alignItems: "center",
+        justifyContent: "flex-start",
+        padding: "3px 3px 3px 10px",
+      }}
+      startIcon={<EastRoundedIcon />}
+    >
+      <LinkComponent title={title} url={url} active={active}>
+        {title}
       </LinkComponent>
-    </Box>
+    </Button>
   );
 }

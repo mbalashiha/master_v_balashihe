@@ -2,8 +2,9 @@ import { GradientBackground1 } from "@components/shared/Gradients/Backgrounds";
 import { Box, Typography, Paper, Grid } from "@mui/material";
 import ImagePaper from "@components/common/Article/ImagePaper";
 import Image from "next/image";
-import { Sidebar1 } from "./Sidebars";
+import { NavSidebar } from "./Sidebars";
 import { HugeContainer } from "@components/ui";
+import { Blog } from "@common/types/cms";
 type NextImageType = typeof Image;
 type NextImageTypeProps = React.ComponentProps<NextImageType>;
 
@@ -11,11 +12,12 @@ interface Props {
   children: React.ReactNode | React.ReactNode[];
   title: string;
   image?: React.ReactNode;
+  navigation: Blog.BlogArticleNavigation;
 }
 
-export default function Article({ title, children, image }: Props) {
+export default function Article({ title, children, image, navigation }: Props) {
   return (
-    <HugeContainer rightSidebar={<Sidebar1 />}>
+    <HugeContainer rightSidebar={<NavSidebar navigation={navigation} />}>
       <Grid container spacing={0}>
         {image && (
           <>

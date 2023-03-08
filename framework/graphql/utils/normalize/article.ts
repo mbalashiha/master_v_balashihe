@@ -33,6 +33,36 @@ export const normalizeBlogRow = (
     }),
   };
 };
+const normalizeArtNavItem = (
+  item: Schema.NavigationItem
+): Blog.NavigationItem => {
+  item = item || {};
+  const { title, handle } = item;
+  const url = (handle && normalizeArticleUrl(handle)) || "";
+  return { title: title || "", url, active: handle === "" ? true : null };
+};
+const normalizeArticleNavigationItems = (
+  nav: Schema.BlogArticleNavigation | null
+): Blog.BlogArticleNavigation => {
+  if (!nav) {
+    return {
+      prev: null,
+      next: null,
+      nearestSiblings: null,
+    };
+  }
+  const prev = (nav.prev && normalizeArtNavItem(nav.prev)) || null;
+  const next = (nav.next && normalizeArtNavItem(nav.next)) || null;
+  const nearestSiblings =
+    (nav.nearestSiblings &&
+      nav.nearestSiblings.map((item: any) => normalizeArtNavItem(item))) ||
+    null;
+  return {
+    prev,
+    next,
+    nearestSiblings,
+  };
+};
 export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
   const {
     id,
@@ -47,6 +77,7 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     updatedAt,
     publishedAt,
     breadcrumbs,
+    navigation,
   } = data;
   if (!id) {
     throw new Error("No id in article row!");
@@ -56,6 +87,7 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     id,
     title,
     url: url || `/${handle}`,
+    navigation: normalizeArticleNavigationItems(navigation),
     textHtml,
     published,
     orderNumber,

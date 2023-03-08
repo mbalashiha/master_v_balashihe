@@ -3,7 +3,10 @@ import { useDeleteArticle } from "@common/management/blog/article/use-delete-art
 import { UseDeleteArticle } from "@common/management/blog/article/use-delete-article";
 import { API, CMS } from "@common/types";
 import { Schema } from "@framework/types";
-import { normalizeArticle, normalizeBlogRow } from "@framework/utils/normalize";
+import {
+  normalizeArticle,
+  normalizeBlogRow,
+} from "@framework/utils/normalize/article";
 import { slugify } from "lib";
 import { useSnackbar } from "notistack";
 import useArticleList from "../use-article-list";

@@ -3,7 +3,7 @@ import { Schema } from "@framework/types";
 import {
   normalizeArticle,
   normalizeArticleUrl,
-} from "@framework/utils/normalize";
+} from "@framework/utils/normalize/article";
 
 export const normalizeArticleDraft = (
   draft: Schema.Article.ArticleDraft

@@ -40,6 +40,15 @@ export namespace Schema {
     score: Float | null;
     fragment: String | null;
   }
+  export interface NavigationItem {
+    title: String;
+    handle: String;
+  }
+  export interface BlogArticleNavigation {
+    prev: NavigationItem | null;
+    next: NavigationItem | null;
+    nearestSiblings: NavigationItem[] | null;
+  }
   export interface BlogArticle {
     id: ID;
     title: String;
@@ -55,6 +64,7 @@ export namespace Schema {
     updatedAt: Date;
     publishedAt: Date;
     breadcrumbs: Breadcrumb[];
+    navigation: BlogArticleNavigation | null;
   }
   export namespace Article {
     export interface ArticleInput {
