@@ -1,6 +1,7 @@
 import { CMS } from "@common/types";
 import { Blog } from "@common/types/cms";
 import { ID, Schema } from "@framework/types";
+import util from "util";
 
 export const normalizeArticleUrl = (
   handle: string | null,
@@ -37,9 +38,14 @@ const normalizeArtNavItem = (
   item: Schema.NavigationItem
 ): Blog.NavigationItem => {
   item = item || {};
-  const { title, handle } = item;
+  const { title, handle, itIsloop } = item;
   const url = (handle && normalizeArticleUrl(handle)) || "";
-  return { title: title || "", url, active: handle === "" ? true : null };
+  return {
+    title: title || "",
+    url,
+    active: handle === "" ? true : null,
+    itIsloop: Boolean(itIsloop),
+  };
 };
 const normalizeArticleNavigationItems = (
   nav: Schema.BlogArticleNavigation | null

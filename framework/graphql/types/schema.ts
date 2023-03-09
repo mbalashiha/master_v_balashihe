@@ -43,6 +43,7 @@ export namespace Schema {
   export interface NavigationItem {
     title: String;
     handle: String;
+    itIsloop: Boolean | null;
   }
   export interface BlogArticleNavigation {
     prev: NavigationItem | null;

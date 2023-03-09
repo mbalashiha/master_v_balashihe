@@ -103,11 +103,14 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
               "alignleft aligncenter alignright alignjustify | " +
               "bullist numlist checklist outdent indent | removeformat | link image code table help",
             content_style:
-              "body { color: #10101a; font-family: Inter,Arial,sans-serif; font-weight: 500; font-size: 18px; }",
+              "body { color: #06060e; font-family: Inter,Arial,sans-serif; font-weight: 500; font-size: 18px; }",
             content_langs: [
               { title: "Русский", code: "ru" },
               { title: "English", code: "en" },
             ],
+            valid_elements:
+              "@[class],p[style],h3,h4,h5,h6,a[href|target],strong/b," +
+              "div[align],br,table,tbody,thead,tr,td,ul,ol,li,img[src|alt|width|height],paper,typography",
           }}
           {...rest}
         />

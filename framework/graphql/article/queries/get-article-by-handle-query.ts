@@ -2,13 +2,15 @@ import { gql } from "graphql-request";
 
 export const getArticleByHandleQuery = gql`
   fragment NavigationFragment on BlogArticleNavigation {
-    prev {
-      title
-      handle
-    }
     next {
       title
       handle
+      itIsloop
+    }
+    prev {
+      title
+      handle
+      itIsloop
     }
     nearestSiblings {
       title

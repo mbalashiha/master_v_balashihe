@@ -1,10 +1,14 @@
 import { GradientBackground1 } from "@components/shared/Gradients/Backgrounds";
-import { Box, Typography, Paper, Grid } from "@mui/material";
+import { Box, Typography, Paper, Grid, Button } from "@mui/material";
+import Link from "next/link";
 import ImagePaper from "@components/common/Article/ImagePaper";
 import Image from "next/image";
+import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import { NavSidebar } from "./Sidebars";
 import { HugeContainer } from "@components/ui";
 import { Blog } from "@common/types/cms";
+import util from "util";
 type NextImageType = typeof Image;
 type NextImageTypeProps = React.ComponentProps<NextImageType>;
 
@@ -75,6 +79,56 @@ export default function Article({ title, children, image, navigation }: Props) {
       >
         {children}
       </Box>
+      <Grid
+        component="nav"
+        container
+        spacing={3}
+        sx={{
+          "& a, & a > *": {
+            width: "100%",
+            height: "124px",
+            textOverflow: "ellipsis",
+            transition: "all .15s ease .05s",
+            textDecoration: "underline",
+            "&:hover": {
+              textDecoration: "none",
+            },
+          },
+        }}
+      >
+        <Grid component={"strong"} item xs={6}>
+          {navigation.prev?.url && (
+            <Link href={navigation.prev.url}>
+              <Button
+                component="span"
+                startIcon={
+                  <ArrowBackIosRoundedIcon
+                    sx={{ transform: "scale(4)", ml: 1, mr: 2 }}
+                  />
+                }
+              >
+                {navigation.prev.title}
+              </Button>
+            </Link>
+          )}
+        </Grid>
+        <Grid component={"strong"} item xs={6}>
+          {navigation.next?.url && (
+            <Link href={navigation.next.url}>
+              <Button
+                component="span"
+                endIcon={
+                  <ArrowForwardIosRoundedIcon
+                    sx={{ transform: "scale(4)", ml: 2, mr: 1 }}
+                  />
+                }
+              >
+                {navigation.next.title}
+              </Button>
+            </Link>
+          )}
+        </Grid>
+      </Grid>
     </HugeContainer>
   );
 }

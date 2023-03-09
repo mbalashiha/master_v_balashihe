@@ -11,6 +11,24 @@
       "url": "http://localhost:3000/uslugi-mastera-v-balashihe",
       "internalConsoleOptions": "openOnSessionStart",
       "skipFiles": ["${workspaceRoot}/node_modules/**/*.js"]
+    },
+    {
+      "name": "Next.js Server-side",
+      "type": "node",
+      "request": "attach",
+      "outFiles": ["${workspaceFolder}/.next/server/**/*.js"],
+      "sourceMaps": true,
+      "smartStep": true,
+      "address": "127.0.0.1",
+      "port": 9229,
+      "continueOnAttach": true,
+      "autoAttachChildProcesses": true,
+      "restart": true,
+      "internalConsoleOptions": "openOnSessionStart",
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${workspaceFolder}/*"
+      },
+      "skipFiles": ["${workspaceRoot}/node_modules/**/*.js"]
     }
   ]
 }

@@ -34,6 +34,7 @@ export namespace Blog {
     title: String;
     url: String;
     active: true | null;
+    itIsloop: Boolean | null;
   }
   export interface BlogArticleNavigation {
     prev: NavigationItem | null;
