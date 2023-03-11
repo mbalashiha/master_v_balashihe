@@ -72,6 +72,7 @@ export namespace Blog {
     existingArticleId: ID | null;
     existingArticle: Article | null;
     url: string | null;
+    isCreatePage: Boolean;
   }
 }
 export namespace Management {

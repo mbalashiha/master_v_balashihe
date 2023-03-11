@@ -44,6 +44,7 @@ export const normalizeArticleDraft = (
     updatedAt,
     publishedAt,
     existingArticleId,
+    isCreatePage: !Boolean(existingArticleId && existingArticle),
     existingArticle: existingArticle ? normalizeArticle(existingArticle) : null,
   };
 };

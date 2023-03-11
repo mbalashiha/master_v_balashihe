@@ -5,7 +5,7 @@ export type UseArticleDraft<H extends API.Graphql.SWRHook<any> = API.Graphql.SWR
   H["useHook"]
 >;
 
-export const useArticleDraft: UseArticleDraft = (initial) => {
+export const useArticleDraft: UseArticleDraft = (initial: any) => {
   const hook = useHook((hook: API.Hooks) => {
     return hook.management.blog.article.draft.useArticleDraft;
   });

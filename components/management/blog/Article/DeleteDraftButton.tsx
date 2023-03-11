@@ -18,24 +18,26 @@ import useArticleDraft from "@framework/management/blog/article/draft/use-articl
 import useDeleteDraft from "@framework/management/blog/article/draft/use-delete-draft";
 import React, { useRef, useEffect, useMemo } from "react";
 
-const DeleteDraftButton = () => {    
-  const { data } = useArticleDraft();
+const DeleteDraftButton = () => {
+  const { data } = useArticleDraft({ variables: undefined });
   const deleteDraft = useDeleteDraft();
-  return <>{
-    data && data.id && (
-      <ConfirmDialog message="Очистить черновик?">
-        <Button
-          sx={{ background: "black" }}
-          onClick={() => {
-            if (data.id) {
-              deleteDraft({ id: data.id });
-            }
-          }}
-        >
-          Удалить черновик
-        </Button>
-      </ConfirmDialog>
-    )
-  }</>
+  return (
+    <>
+      {data && data.id && (
+        <ConfirmDialog message="Очистить черновик?">
+          <Button
+            sx={{ background: "black" }}
+            onClick={() => {
+              if (data.id) {
+                deleteDraft({ id: data.id });
+              }
+            }}
+          >
+            Удалить черновик
+          </Button>
+        </ConfirmDialog>
+      )}
+    </>
+  );
 };
 export default DeleteDraftButton;

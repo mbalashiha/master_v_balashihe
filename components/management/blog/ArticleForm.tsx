@@ -32,12 +32,10 @@ interface Props {
 }
 
 export default function ArticleForm({ children }: Props) {
-  const { setCreateButton, unsetCreateButton } = useFabButton();
   const router = useRouter();
-  const isCreatePage = useMemo<boolean>(() => {
-    return router.pathname.endsWith("/article/create");
-  }, [router.pathname]);
-  const isReady = isCreatePage ? true : router.isReady;
+  const { setCreateButton, unsetCreateButton } = useFabButton();
+  const { data } = useArticleDraft();
+  const { existingArticleId: articleId, isCreatePage } = data! || {};
   useEffect(() => {
     if (!isCreatePage) {
       setCreateButton({ href: "/management/blog/article/create" });
@@ -45,13 +43,6 @@ export default function ArticleForm({ children }: Props) {
       unsetCreateButton();
     }
   }, [isCreatePage, setCreateButton, unsetCreateButton]);
-  const articleId =
-    (router.query.articleId &&
-      (Array.isArray(router.query.articleId)
-        ? router.query.articleId[0]
-        : router.query.articleId)) ||
-    null;
-  const { data } = useArticleDraft({ isReady, variables: { articleId } });
   // if (!isValidating && data) {
   //   formRef?.current?.resetForm({ values: { ...data } });
   // }
@@ -120,7 +111,9 @@ export default function ArticleForm({ children }: Props) {
             },
           });
         } else if (success && articleId) {
-          helpers.resetForm({ values: articleDraft });
+          helpers.resetForm({
+            values: articleDraft,
+          });
         }
       }}
     >

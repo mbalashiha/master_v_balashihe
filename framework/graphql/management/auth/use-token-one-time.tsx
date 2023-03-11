@@ -11,6 +11,7 @@ import { verifyManagementToken } from "./queries/get-token-info";
 export default useTokenOneTime as UseTokenOneTime<typeof handler>;
 
 export interface TokenInfoHook {
+  input: void;
   requestInput: void;
   requestOutput: Schema.Response.VerifyManagementTokenResponse;
   data: Management.ManagerTokenResponse;

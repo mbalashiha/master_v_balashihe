@@ -1,5 +1,6 @@
-import { SWRConfiguration, SWRResponse } from "swr";
-import { HookDescriptor } from "./hook";
+import { BareFetcher, SWRConfiguration, SWRResponse } from "swr";
+import { PublicConfiguration } from "swr/_internal";
+import { HookDescriptor, SwrHookDescriptor } from "./hook";
 
 export namespace Graphql {
   export interface HookRequestOptions {
@@ -38,19 +39,45 @@ export namespace Graphql {
   export interface MutationHookContext<Input, Data> {
     request: (input: Input) => Promise<Data>;
   }
-  export interface UseDataContext<Input, Data> {
-    variables?: Input;
+  export interface UseDataInitial<InitialInput, Data> {
+    variables: InitialInput;
+    isReady?: boolean;
+    swrOptions?: SWRConfiguration<Data>;
+  }
+  export interface UseDataContextWithVarables<InitialInput, Input, Data> {
+    variables: Input;
     isReady?: boolean;
     swrOptions?: SWRConfiguration<Data>;
     swrKey?: string;
-    initial?: {
-      variables?: Input;
-      isReady?: boolean;
-      swrOptions?: SWRConfiguration<Data>;
-    };
+    initial?: UseDataInitial<InitialInput, Data>;
   }
-  export interface UseData<Input, Data> {
-    (ctx?: UseDataContext<Input, Data>): SWRResponse<Data>;
+  export interface UseDataContextWithInitial<InitialInput, Input, Data>
+    extends UseDataContextWithVarables<InitialInput, Input, Data> {
+    variables: Input;
+    isReady?: boolean;
+    swrOptions?: SWRConfiguration<Data>;
+    swrKey?: string;
+    initial: UseDataInitial<InitialInput, Data>;
+  }
+
+  export type UseDataContext<InitialInput, Input, Data> = Input extends
+    | undefined
+    | void
+    ? Partial<UseDataContextWithVarables<InitialInput, Input, Data>> | void
+    : UseDataContextWithVarables<InitialInput, Input, Data>;
+
+  export interface UseData<InitialInput, Input, Data> {
+    (
+      ctx: Input extends undefined | void
+        ? UseDataContext<InitialInput, Input, Data>
+        : InitialInput extends undefined | void
+        ? UseDataContext<InitialInput, Input, Data>
+        : UseDataContextWithInitial<InitialInput, Input, Data>
+    ): SWRResponse<
+      Data,
+      any,
+      Partial<PublicConfiguration<Data, any, BareFetcher<Data>>> | undefined
+    >;
   }
   export interface ModSWRResponse<Data> extends SWRResponse<Data> {
     isEmpty: boolean;
@@ -62,14 +89,20 @@ export namespace Graphql {
       context: MutationHookContext<H["requestInput"], H["data"]>
     ): () => (input: H["requestInput"]) => Promise<H["data"]>;
   }
-  export interface SWRHook<H extends HookDescriptor> {
+  export interface SWRUseHookFunction<InitialInput, Input, Data> {
+    (initial?: UseDataInitial<InitialInput, Data>): ModSWRResponse<Data>;
+  }
+  export interface SWRUseHookFunctionWithInitial<InitialInput, Input, Data> {
+    (initial: UseDataInitial<InitialInput, Data>): ModSWRResponse<Data>;
+  }
+  export interface SWRHook<H extends SwrHookDescriptor> {
     requestOptions: HookRequestOptions;
     swrKey?: string;
     request: HookRequest<H["requestInput"], H["requestOutput"], H["data"]>;
     useHook(context: {
-      useData: UseData<H["requestInput"], H["data"]>;
-    }): (
-      initial?: UseDataContext<H["requestInput"], H["data"]>["initial"]
-    ) => ModSWRResponse<H["data"]>;
+      useData: UseData<H["input"], H["requestInput"], H["data"]>;
+    }): H["input"] extends undefined | void
+      ? SWRUseHookFunction<H["input"], H["requestInput"], H["data"]>
+      : SWRUseHookFunctionWithInitial<H["input"], H["requestInput"], H["data"]>;
   }
 }

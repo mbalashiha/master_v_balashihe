@@ -15,6 +15,7 @@ import { managementArticlesCards } from "./queries/management-get-articles-cards
 export default useArticleList as UseArticleList<typeof handler>;
 
 export interface UseArticleListHook {
+  input: undefined;
   requestInput: { search?: string } | undefined;
   requestOutput: Schema.Response.ManagementArticlesCards;
   data: { search: string; articles: CMS.Blog.ArticleCard[] };

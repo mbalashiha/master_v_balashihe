@@ -8,7 +8,7 @@
       "name": "Debug client-side",
       "type": "msedge",
       "request": "launch",
-      "url": "http://localhost:3000/uslugi-mastera-v-balashihe",
+      "url": "http://localhost:3000/management",
       "internalConsoleOptions": "openOnSessionStart",
       "skipFiles": ["${workspaceRoot}/node_modules/**/*.js"]
     },

@@ -14,6 +14,7 @@ import { MANAGER_LOGIN_URL, PAGE_MANAGER_LOGIN_URL } from "@framework/const";
 export default useTokenInfo as UseTokenInfo<typeof handler>;
 
 export interface TokenInfoHook {
+  input: void;
   requestInput: void;
   requestOutput: Schema.Response.VerifyManagementTokenResponse;
   data: Management.ManagerTokenResponse;
