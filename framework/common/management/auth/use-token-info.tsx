@@ -5,7 +5,7 @@ export type UseTokenInfo<H extends API.Graphql.SWRHook<any> = API.Graphql.SWRHoo
   H["useHook"]
 >;
 
-export const useTokenInfo: UseTokenInfo = (initial) => {
+export const useTokenInfo: UseTokenInfo = (initial: any) => {
   const hook = useHook((hook: API.Hooks) => {
     return hook.management.auth.useTokenInfo;
   });

@@ -5,7 +5,7 @@ export type UseTokenOneTime<
   H extends API.Graphql.SWRHook<any> = API.Graphql.SWRHook<any>
 > = ReturnType<H["useHook"]>;
 
-export const useTokenOneTime: UseTokenOneTime = (initial) => {
+export const useTokenOneTime: UseTokenOneTime = (initial: any) => {
   const hook = useHook((hook: API.Hooks) => {
     return hook.management.auth.useTokenOneTime;
   });

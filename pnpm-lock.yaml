@@ -7,6 +7,7 @@ specifiers:
   '@mui/material': 5.11.9
   '@next/font': 13.1.6
   '@tinymce/tinymce-react': ^4.3.0
+  '@types/crypto-js': ^4.1.1
   '@types/js-cookie': ^3.0.3
   '@types/node': 18.14.0
   '@types/react': 18.0.28
@@ -42,6 +43,7 @@ dependencies:
   '@mui/material': 5.11.9_xqeqsl5kvjjtyxwyi3jhw3yuli
   '@next/font': 13.1.6
   '@tinymce/tinymce-react': 4.3.0_biqbaboplfbrettd7655fr4n2y
+  '@types/crypto-js': 4.1.1
   '@types/js-cookie': 3.0.3
   '@types/node': 18.14.0
   '@types/react': 18.0.28
@@ -645,6 +647,10 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       tinymce: 6.3.1
+    dev: false
+
+  /@types/crypto-js/4.1.1:
+    resolution: {integrity: sha512-BG7fQKZ689HIoc5h+6D2Dgq1fABRa0RbBWKBd9SP/MVRVXROflpm5fhwyATX5duFmbStzyzyycPB8qUYKDH3NA==}
     dev: false
 
   /@types/js-cookie/3.0.3:

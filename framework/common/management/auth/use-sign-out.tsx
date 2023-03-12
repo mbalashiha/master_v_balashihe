@@ -5,7 +5,7 @@ export type UseSignOut<
   H extends API.RestApi.RestApiHook<any> = API.RestApi.RestApiHook<any>
 > = ReturnType<H["useHook"]>;
 
-const useSignOut: UseSignOut = () => {
+export const useSignOut: UseSignOut = () => {
   const hook = useHook((hooks) => {
     return hooks.management.auth.useSignOut;
   });

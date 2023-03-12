@@ -19,6 +19,9 @@ export interface Hooks {
       useTokenInfo: Graphql.SWRHook<any>;
       useTokenOneTime: Graphql.SWRHook<any>;
     };
+    image: {
+      useImageUpload: RestApi.RestApiHook<any>;
+    };
     blog: {
       useArticleList: Graphql.SWRHook<any>;
       useArticleSearch: Graphql.MutationHook<any>;

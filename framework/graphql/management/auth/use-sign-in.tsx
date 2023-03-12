@@ -1,7 +1,7 @@
 import { useSignIn } from "@common/management/auth";
 import { UseSignIn } from "@common/management/auth/use-sign-in";
 import { API } from "@common/types";
-import { ID, Management } from "@common/types/cms";
+import { Management } from "@common/types/cms";
 import { useLoginProvider } from "@components/management/LoginLayout";
 import { MANAGEMENT_LOGIN_API_URL } from "@framework/const";
 

@@ -1,6 +1,6 @@
 import { API_HOST, API_URL } from "@framework/const";
 import { GraphQLClient } from "graphql-request";
-import { default as axios } from "axios";
+import { AxiosError, default as axios } from "axios";
 import { simpleEncrypt } from "@encryption";
 import { API } from "@common/types";
 import extractGraphQLError from "./extract-graphql-error";
@@ -62,44 +62,67 @@ class Config {
       if (enc) {
         headers = { ...headers, "Content-Type": "text/plain" };
       }
-      if (contentType) {
-        headers = { ...headers, "Content-Type": contentType };
-      }
       const needToStringify =
-        variables &&
-        (headers["Content-Type"] === "application/json" ||
-          headers["Content-Type"] === "text/plain") &&
+        !(variables instanceof FormData) &&
+        headers["Content-Type"] === "application/json" &&
         typeof variables !== "string";
       const body = enc
         ? simpleEncrypt(variables)
         : needToStringify
         ? JSON.stringify(variables)
         : variables;
+      if (contentType) {
+        headers = { ...headers, "Content-Type": contentType };
+      } else if (body instanceof FormData) {
+        contentType = "multipart/form-data";
+        headers = { ...headers, "Content-Type": contentType };
+      }
       if (!method) {
         method =
-          body && (typeof body === "string" || Object.keys(body).length)
+          body &&
+          (body instanceof FormData ||
+            typeof body === "string" ||
+            typeof body === "object")
             ? "post"
             : "get";
       }
       let responseResult: API.RestApi.RequestResults<any>;
       if (axios) {
-        const resp = await axInstance.request({
-          url,
-          data: body,
-          headers,
-          method: method || "post",
-        });
-        if (typeof resp.data === "string") {
-          try {
-            resp.data = JSON.parse(resp.data);
-          } catch (e: any) {}
+        try {
+          const resp = await axInstance.request({
+            url,
+            data: body,
+            headers,
+            method: method || "post",
+            withCredentials: true,
+          });
+          if (typeof resp.data === "string") {
+            try {
+              resp.data = JSON.parse(resp.data);
+            } catch (e: any) {}
+          }
+          const { data, status, statusText, headers: responseHeaders } = resp;
+          responseResult = {
+            data,
+            status,
+            statusText,
+          };
+        } catch (catchedE: any) {
+          const e: AxiosError = catchedE;
+          console.error(e.stack || e.message || e);
+          const status: number = e.response?.status || e.request.status || 0;
+          responseResult = {
+            error:
+              e.stack ||
+              e.cause?.stack ||
+              e.message ||
+              e.cause?.message ||
+              "Axios Error with status: " + status.toString(),
+            data: e.response?.data,
+            status,
+            statusText: e.response?.statusText,
+          };
         }
-        const { data, status, statusText, headers: responseHeaders } = resp;
-        responseResult = {
-          data,
-          status,
-          statusText,
-        };
       } else {
         const resp = await fetch(url, {
           mode: "cors", // same-origin, no-cors

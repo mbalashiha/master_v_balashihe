@@ -25,6 +25,7 @@ export namespace RestApi {
     data: T;
     status?: number;
     statusText?: string;
+    error?: string;
   }
   export interface RestApiHookContext<Input, Output> {
     restRequest: (input: Input) => Promise<Output>;

@@ -2,7 +2,27 @@ import React, { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Portal, styled } from "@mui/material";
 import InsertCodeIcon from "./InsertCodeIcon";
+import useImageUpload from "@framework/management/image/use-image-upload";
+function insertAtLastIndex({
+  targetString,
+  symbolString,
+  subString,
+}: {
+  targetString: string;
+  symbolString: string;
+  subString: string;
+}) {
+  const index = targetString.lastIndexOf(symbolString);
+  if (index > 0) {
+    return (
+      targetString.substring(0, index) +
+      subString +
+      targetString.substring(index, targetString.length)
+    );
+  }
 
+  return targetString + subString;
+}
 export interface MemoizedTinyMCEProps {
   initialValue: string;
   onEditorChange: (textHtml: string, text: string) => void;
@@ -16,14 +36,49 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
   }: MemoizedTinyMCEProps) {
     const [insertCodeIcon, setInsertCodeIcon] =
       React.useState<HTMLElement | null>(null);
+    const uploaderRef = useRef<HTMLInputElement>(null);
+    const editorRef: React.LegacyRef<Editor> = useRef<any>(null);
+    const uploadImage = useImageUpload();
     return (
       <>
+        <input
+          ref={uploaderRef}
+          id="tinymce-uploader"
+          type="file"
+          name="pic"
+          accept="image/*"
+          style={{ display: "none" }}
+          onChange={(event) => {
+            const input = event.currentTarget;
+            const file = input.files && input.files[0];
+            if (file) {
+              console.log(file);
+              const idName = insertAtLastIndex({
+                targetString: file.name,
+                symbolString: ".",
+                subString: `-${file.lastModified}-${file.size}`,
+              });
+              const fr = new FileReader();
+              fr.onload = function () {
+                const img = new Image();
+                img.src = fr.result?.toString() || "";
+                editorRef.current?.editor?.insertContent(
+                  `<img id="${idName}" src="` + img.src + `"/>`
+                );
+                input.value = "";
+                uploadImage({ file, name: idName });
+              };
+              fr.readAsDataURL(file);
+            }
+          }}
+        />
         <Portal container={insertCodeIcon}>
           <InsertCodeIcon />
         </Portal>
         <Editor
           tinymceScriptSrc="/tinymce/tinymce.min.js"
           initialValue={initialValue || ""}
+          ref={editorRef}
           onInit={(evt, editor) => {
             const button = editor.editorContainer.querySelector(
               `[role="group"] button[title="Вставить текст из буфера обмена"]`
@@ -77,6 +132,13 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
                   }
                 },
               });
+              editor.ui.registry.addButton("imageUploadButton", {
+                text: "Картинка",
+                icon: "IMAGE",
+                onAction: function (e) {
+                  uploaderRef.current?.click();
+                },
+              });
             },
             plugins: [
               "advlist",
@@ -99,7 +161,7 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
             ],
             toolbar:
               "undo redo | casechange blocks | bold italic forecolor | " +
-              "insertCodeButton | " +
+              "insertCodeButton imageUploadButton | " +
               "alignleft aligncenter alignright alignjustify | " +
               "bullist numlist checklist outdent indent | removeformat | link image code table help",
             content_style:
@@ -110,7 +172,7 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
             ],
             valid_elements:
               "@[class],p[style],h3,h4,h5,h6,a[href|target],strong/b," +
-              "div[align],br,table,tbody,thead,tr,td,ul,ol,li,img[src|alt|width|height],paper,typography",
+              "div[align],br,table,tbody,thead,tr,td,ul,ol,li,img[src|alt|width|height|id|data-name],paper,typography",
           }}
           {...rest}
         />

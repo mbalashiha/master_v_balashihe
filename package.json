@@ -15,6 +15,7 @@
     "@mui/material": "5.11.9",
     "@next/font": "13.1.6",
     "@tinymce/tinymce-react": "^4.3.0",
+    "@types/crypto-js": "^4.1.1",
     "@types/js-cookie": "^3.0.3",
     "@types/node": "18.14.0",
     "@types/react": "18.0.28",
