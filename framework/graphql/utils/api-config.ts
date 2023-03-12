@@ -77,6 +77,9 @@ class Config {
         contentType = "multipart/form-data";
         headers = { ...headers, "Content-Type": contentType };
       }
+      if (variables instanceof FormData || contentType === "multipart/form-data") {
+        axios = true;
+      };
       if (!method) {
         method =
           body &&
