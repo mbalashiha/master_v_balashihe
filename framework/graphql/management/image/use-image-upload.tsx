@@ -11,31 +11,32 @@ export default useImageUpload as UseImageUpload<typeof handler>;
 
 export interface ImageUploadHook {
   requestInput: {
-    file: File;
-    name?: string;
-    extension?: string;
+    images: Array<{
+      file: File;
+      fieldname: string;
+    }>;
   };
   requestOutput: {
     success: boolean;
     error: string | null;
-    images: {
+    images: Array<{
+      fieldname: string;
+      imageId: string | number | null;
       imgSrc: string;
       width: number;
       height: number;
-      imageId: string | number | null;
-    }[];
+    }>;
   };
   data: {
-    file: File;
-    name: string;
     success: boolean;
     error: string | null;
-    images: {
+    images: Array<{
+      fieldname: string;
+      imageId: string | number | null;
       imgSrc: string;
       width: number;
       height: number;
-      imageId: string | number | null;
-    }[];
+    }>;
   };
 }
 export const handler: API.RestApi.RestApiHook<ImageUploadHook> = {
@@ -47,20 +48,31 @@ export const handler: API.RestApi.RestApiHook<ImageUploadHook> = {
   restRequest: async ({ restRequest, input, options }) => {
     try {
       const formData = new FormData();
-      const extension = input.file.name.split(".").pop();
-      formData.append(
-        slugify(input.name || input.file.name) +
-          (extension ? `.${slugify(extension)}` : ""),
-        input.file
-      );
+      const mapped = new Map<string, { name: string; file: File }>();
+      for (const imgObj of input.images) {
+        const name = imgObj.fieldname || imgObj.file.name;
+        const file = imgObj.file;
+        const extension = file.name.split(".").pop();
+        const fieldname =
+          slugify(name) + (extension ? `.${slugify(extension)}` : "");
+        if (!mapped.has(fieldname)) {
+          mapped.set(fieldname, { name, file });
+        }
+        formData.append(fieldname, file);
+      }
       const resp = await restRequest({
         ...options,
         variables: formData,
       });
       return {
-        file: input.file,
-        name: input.name || input.file.name,
         ...resp.data,
+        images: resp.data.images.map((elem) => {
+          const before = mapped.get(elem.fieldname);
+          return {
+            ...elem,
+            fieldname: before?.name || elem.fieldname,
+          };
+        }),
       };
     } catch (e: any) {
       console.error(e.stack || e.message || e);

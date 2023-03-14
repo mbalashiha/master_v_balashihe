@@ -26,6 +26,7 @@ import { slugify } from "@lib";
 import { useRouter } from "next/router";
 import { useFabButton } from "../Layout";
 import DeleteDraftButton from "./Article/DeleteDraftButton";
+import { useSnackbar } from "notistack";
 
 interface Props {
   children?: React.ReactNode | React.ReactNode[];
@@ -33,6 +34,7 @@ interface Props {
 
 export default function ArticleForm({ children }: Props) {
   const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
   const { setCreateButton, unsetCreateButton } = useFabButton();
   const { data } = useArticleDraft();
   const { existingArticleId: articleId, isCreatePage } = data! || {};
@@ -51,12 +53,20 @@ export default function ArticleForm({ children }: Props) {
     <RefFormik
       initialValues={data}
       validate={(values) => {
-        const errors: any = {};
-        if (!(values.text || "").trim()) {
-          errors.text = "Обязательно введите текст статьи";
+        if (typeof values !== "object") {
+          throw new Error(
+            "Formik form values is not an object. How is that possible?"
+          );
         }
-        if (!(values.textHtml || "").trim()) {
+        const errors: any = {};
+        // if (!(values.text || "").trim()) {
+        // }
+        if ((values.textHtml || "").trim().length < 6) {
           errors.textHtml = "Обязательно введите текст статьи";
+          errors.text = "Обязательно введите текст статьи";
+          enqueueSnackbar(errors.textHtml, {
+            variant: "error",
+          });
         }
         if (!(values.title || "").trim()) {
           errors.title = "Введите название статьи";
