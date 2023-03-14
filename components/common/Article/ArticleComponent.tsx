@@ -87,16 +87,47 @@ export default function Article({ title, children, image, navigation }: Props) {
       <Grid
         component="nav"
         container
-        spacing={3}
+        spacing={{ xs: 1, sm: 2, md: 3 }}
         sx={{
-          "& a, & a > *": {
+          mb: { xs: 3, sm: 1 },
+          "& a": {
             width: "100%",
-            height: "124px",
             textOverflow: "ellipsis",
             transition: "all .15s ease .05s",
-            textDecoration: "underline",
+            "&, & h6": {
+              textDecoration: "underline",
+            },
             "&:hover": {
-              textDecoration: "none",
+              "&, & h6": {
+                textDecoration: "underline",
+              },
+            },
+            "& > span": {
+              height: { xs: "220px", md: "124px" },
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "relative",
+              px: 0,
+              "& > *": {
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              },
+              "& > h6": {
+                fontSize: "14px",
+                width: "80%",
+                maxWidth: "80%",
+                maxHeight: "100%",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                position: "absolute",
+              },
+              "& .MuiSvgIcon-root": {
+                width: "96px",
+                height: "96px",
+                position: "absolute",
+              },
             },
           },
         }}
@@ -106,13 +137,16 @@ export default function Article({ title, children, image, navigation }: Props) {
             <Link href={navigation.prev.url}>
               <Button
                 component="span"
-                startIcon={
-                  <ArrowBackIosRoundedIcon
-                    sx={{ transform: "scale(4)", ml: 1, mr: 2 }}
-                  />
-                }
+                sx={{
+                  "& h6": {
+                    right: { xs: "-2px", sm: "4px", md: "30px" },
+                  },
+                }}
               >
-                {navigation.prev.title}
+                <ArrowBackIosRoundedIcon
+                  sx={{ left: { xs: "-25px", md: "-9px" } }}
+                />
+                <h6>{navigation.prev.title}</h6>
               </Button>
             </Link>
           )}
@@ -122,13 +156,16 @@ export default function Article({ title, children, image, navigation }: Props) {
             <Link href={navigation.next.url}>
               <Button
                 component="span"
-                endIcon={
-                  <ArrowForwardIosRoundedIcon
-                    sx={{ transform: "scale(4)", ml: 2, mr: 1 }}
-                  />
-                }
+                sx={{
+                  "& h6": {
+                    left: { xs: "2px", sm: "4px", md: "30px" },
+                  },
+                }}
               >
-                {navigation.next.title}
+                <h6>{navigation.next.title}</h6>
+                <ArrowForwardIosRoundedIcon
+                  sx={{ right: { xs: "-25px", md: "-9px" } }}
+                />
               </Button>
             </Link>
           )}

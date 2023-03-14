@@ -183,7 +183,12 @@ export default function ArticleForm({ children }: Props) {
             <Grid item xs={12} sx={{ display: "flex", alignItems: "end" }}>
               <Paper sx={{ width: "100%", p: 1, mb: 2, fontWeight: 600 }}>
                 Страница на сайте:{" "}
-                <a href={data.url} title={data.url}>
+                <a
+                  href={data.url}
+                  title={data.url}
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   {data.url}
                 </a>
               </Paper>

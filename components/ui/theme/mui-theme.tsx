@@ -185,6 +185,13 @@ const getMuiTheme = (): Theme => {
           },
         },
       },
+      MuiPaper: {
+        styleOverrides: {
+          elevation1: {
+            boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.2)",
+          },
+        },
+      },
       MuiButton: {
         styleOverrides: {
           // Name of the slot

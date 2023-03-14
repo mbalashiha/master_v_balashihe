@@ -37,7 +37,7 @@ export default function ArticleTextEditor() {
     <>
       <Box
         sx={{
-          height: "1080px",
+          height: "105vh",
           width: "100%",
           border: "none",
           background: "white",
