@@ -48,25 +48,54 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
           name="pic"
           accept="image/*"
           style={{ display: "none" }}
-          onChange={(event) => {
+          onChange={async (event) => {
             const input = event.currentTarget;
             const file = input.files && input.files[0];
             if (file) {
-              console.log(file);
               const idName = insertAtLastIndex({
                 targetString: file.name,
                 symbolString: ".",
                 subString: `-${file.lastModified}-${file.size}`,
               });
               const fr = new FileReader();
-              fr.onload = function () {
+              fr.onload = async function () {
                 const img = new Image();
                 img.src = fr.result?.toString() || "";
-                editorRef.current?.editor?.insertContent(
-                  `<img id="${idName}" src="` + img.src + `"/>`
-                );
+                const insertingHtmlImage =
+                  `<img id="${idName}" src="` + img.src + `"/>`;
+                editorRef.current?.editor?.insertContent(insertingHtmlImage);
                 input.value = "";
-                uploadImage({ file, name: idName });
+                const { name, images } = await uploadImage({
+                  file,
+                  name: idName,
+                });
+                const image = images[0];
+                if (image && name) {
+                  let content =
+                    editorRef.current?.editor?.getContent({
+                      format: "html",
+                    }) || "";
+                  const imageIndex = content.indexOf(` id="${idName}"`);
+                  if (imageIndex < 0) {
+                    alert("image has not been found in editor html content!");
+                  } else {
+                    const openTagIndex = content.lastIndexOf(
+                      `<img `,
+                      imageIndex + 1
+                    );
+                    const closeTagIndex =
+                      openTagIndex >= 0 ? content.indexOf(`>`, imageIndex) : -1;
+                    const replacingImageCode = content.substring(
+                      openTagIndex,
+                      closeTagIndex + 1
+                    );
+                    content = content.replace(
+                      replacingImageCode,
+                      `<img src="${image.imgSrc}" data-original-width="${image.width}" data-original-height="${image.height}">`
+                    );
+                    editorRef.current?.editor?.setContent(content);
+                  }
+                }
               };
               fr.readAsDataURL(file);
             }
@@ -172,7 +201,7 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
             ],
             valid_elements:
               "@[class],p[style],h3,h4,h5,h6,a[href|target],strong/b," +
-              "div[align],br,table,tbody,thead,tr,td,ul,ol,li,img[src|alt|width|height|id|data-name],paper,typography",
+              "div[align|data-images-container],br,table,tbody,thead,tr,td,ul,ol,li,img[src|alt|width|height|id|data-name|title|data-original-width|data-original-height],paper,typography",
           }}
           {...rest}
         />

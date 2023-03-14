@@ -9,31 +9,36 @@ export namespace RestApi {
     contentType?: "application/json" | "multipart/form-data" | "text/plain";
     axios?: boolean;
   }
-  export type RestRequestOptions<Input> = Input extends void | never | null | undefined
+  export type RestRequestOptions<Input> = Input extends
+    | void
+    | never
+    | null
+    | undefined
     ? RestRequestOptionsOptionalVariables<Input>
     : RestRequestOptionsVariables<Input>;
 
-  export interface RestRequestOptionsVariables<Input> extends HookRequestOptions {
+  export interface RestRequestOptionsVariables<Input>
+    extends HookRequestOptions {
     variables: Input;
   }
   export interface RestRequestOptionsOptionalVariables<Input>
     extends HookRequestOptions {
     variables?: Input;
   }
-  
+
   export interface RequestResults<T> {
     data: T;
     status?: number;
     statusText?: string;
     error?: string;
   }
-  export interface RestApiHookContext<Input, Output> {
-    restRequest: (input: Input) => Promise<Output>;
+  export interface RestApiHookContext<Input, Data> {
+    restRequest: (input: Input) => Promise<Data>;
   }
   export interface RequestFunction<Input1 = any, Output1 = any> {
-    <Input2 = Input1, Output2 = Output1>(options: RestRequestOptions<Input2>): Promise<
-      RequestResults<Output2>
-    >;
+    <Input2 = Input1, Output2 = Output1>(
+      options: RestRequestOptions<Input2>
+    ): Promise<RequestResults<Output2>>;
   }
   export interface RestApiRequestContext<Input, Output> {
     input: Input;
@@ -47,7 +52,7 @@ export namespace RestApi {
     options: HookRequestOptions;
     restRequest: HookRequest<H["requestInput"], H["requestOutput"], H["data"]>;
     useHook(
-      context: RestApiHookContext<H["requestInput"], H["requestOutput"]>
+      context: RestApiHookContext<H["requestInput"], H["data"]>
     ): () => (input: H["requestInput"]) => Promise<H["data"]>;
   }
 }

@@ -77,13 +77,46 @@ export default function ArticleForm({ children }: Props) {
           handle,
           autoHandleSlug,
           text,
-          textHtml,
+          textHtml: html,
           textRawDraftContentState,
           published,
           orderNumber,
           blogCategoryId,
           existingArticleId,
         } = values;
+        let textHtml = html;
+        if (window.DOMParser) {
+          const parser = new DOMParser();
+          const document = parser.parseFromString(html, "text/html");
+          const imgs = document.querySelectorAll<HTMLImageElement>("img");
+          imgs.forEach((img) => {
+            let first = img;
+            let preFirst: any = first;
+            while (preFirst?.tagName === "IMG") {
+              preFirst = preFirst.previousSibling;
+              if (preFirst?.tagName === "IMG") {
+                first = preFirst;
+              }
+            }
+            if (!first.parentElement?.getAttribute("data-images-container")) {
+              const wrapper = document.createElement("div");
+              wrapper.setAttribute("data-images-container", "1");
+              // insert wrapper before el in the DOM tree
+              first.parentElement?.insertBefore(wrapper, first);
+              while (first?.tagName === "IMG") {
+                const imgClone = first.cloneNode(true);
+                wrapper.appendChild(imgClone);
+                const olderFirst = first;
+                first = olderFirst.nextSibling as any;
+                olderFirst.remove();
+              }
+            }
+          });
+          textHtml =
+            document.documentElement.querySelector("body")?.innerHTML ||
+            textHtml;
+          // alert(textHtml);
+        }
         const article = {
           id,
           title,

@@ -5,6 +5,7 @@ import { useSnackbar } from "notistack";
 import util from "util";
 import { useImageUpload } from "@common/management/image/use-image-upload";
 import type { UseImageUpload } from "@common/management/image/use-image-upload";
+import { slugify } from "@lib";
 
 export default useImageUpload as UseImageUpload<typeof handler>;
 
@@ -12,9 +13,30 @@ export interface ImageUploadHook {
   requestInput: {
     file: File;
     name?: string;
+    extension?: string;
   };
-  requestOutput: any;
-  data: any | undefined;
+  requestOutput: {
+    success: boolean;
+    error: string | null;
+    images: {
+      imgSrc: string;
+      width: number;
+      height: number;
+      imageId: string | number | null;
+    }[];
+  };
+  data: {
+    file: File;
+    name: string;
+    success: boolean;
+    error: string | null;
+    images: {
+      imgSrc: string;
+      width: number;
+      height: number;
+      imageId: string | number | null;
+    }[];
+  };
 }
 export const handler: API.RestApi.RestApiHook<ImageUploadHook> = {
   options: {
@@ -25,12 +47,21 @@ export const handler: API.RestApi.RestApiHook<ImageUploadHook> = {
   restRequest: async ({ restRequest, input, options }) => {
     try {
       const formData = new FormData();
-      formData.append(input.name || input.file.name, input.file);
+      const extension = input.file.name.split(".").pop();
+      formData.append(
+        slugify(input.name || input.file.name) +
+          (extension ? `.${slugify(extension)}` : ""),
+        input.file
+      );
       const resp = await restRequest({
         ...options,
         variables: formData,
       });
-      return resp;
+      return {
+        file: input.file,
+        name: input.name || input.file.name,
+        ...resp.data,
+      };
     } catch (e: any) {
       console.error(e.stack || e.message || e);
       throw e;
@@ -39,31 +70,15 @@ export const handler: API.RestApi.RestApiHook<ImageUploadHook> = {
   useHook: ({ restRequest }) => {
     const { enqueueSnackbar } = useSnackbar();
     return () => async (input) => {
-      try {
-        const response = await restRequest(input);
-        if (response.error) {
-          {
-            enqueueSnackbar(response.error.substring(0, 312), {
-              variant: "error",
-            });
-          }
-        }
-        return response;
-      } catch (e: any) {
+      const response = await restRequest(input);
+      if (response.error) {
         {
-          enqueueSnackbar(
-            (
-              e.stack ||
-              e.message ||
-              util.inspect(e) ||
-              "Error occured"
-            ).substring(0, 312),
-            {
-              variant: "error",
-            }
-          );
+          enqueueSnackbar(response.error.substring(0, 312), {
+            variant: "error",
+          });
         }
       }
+      return response;
     };
   },
 };

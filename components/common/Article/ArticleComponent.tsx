@@ -58,11 +58,16 @@ export default function Article({ title, children, image, navigation }: Props) {
             color: (theme) =>
               theme.palette.mode === "light" ? "#0e0e0f" : "white",
           },
-          "& .MuiPaper-elevation1": {
+          "& img, & .MuiPaper-elevation1": {
             fontSize: "17px",
             lineHeight: "25px",
             marginBottom: "2rem",
             boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.2)",
+            borderRadius: 1,
+          },
+          "& img": {
+            my: 1,
+            mx: { xs: 0.5, md: 1 },
           },
           "& > h2:first-of-type": {
             marginTop: 0,

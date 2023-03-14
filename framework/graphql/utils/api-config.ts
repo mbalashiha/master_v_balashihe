@@ -5,6 +5,7 @@ import { simpleEncrypt } from "@encryption";
 import { API } from "@common/types";
 import extractGraphQLError from "./extract-graphql-error";
 import delay from "delay";
+import util from "util";
 
 class Config {
   config: API.Config;
@@ -77,9 +78,12 @@ class Config {
         contentType = "multipart/form-data";
         headers = { ...headers, "Content-Type": contentType };
       }
-      if (variables instanceof FormData || contentType === "multipart/form-data") {
+      if (
+        variables instanceof FormData ||
+        contentType === "multipart/form-data"
+      ) {
         axios = true;
-      };
+      }
       if (!method) {
         method =
           body &&
@@ -112,16 +116,33 @@ class Config {
           };
         } catch (catchedE: any) {
           const e: AxiosError = catchedE;
+          let data: string =
+            e.response?.data && typeof e.response?.data === "string"
+              ? e.response?.data
+              : e.response?.data
+              ? util.inspect(e.response?.data).toString()
+              : "";
+          if (data && typeof data === "string") {
+            try {
+              data = JSON.parse(data);
+            } catch (e: any) {}
+          }
           console.error(e.stack || e.message || e);
           const status: number = e.response?.status || e.request.status || 0;
           responseResult = {
             error:
+              data ||
               e.stack ||
               e.cause?.stack ||
               e.message ||
               e.cause?.message ||
               "Axios Error with status: " + status.toString(),
-            data: e.response?.data,
+            data:
+              e.stack ||
+              e.cause?.stack ||
+              e.message ||
+              e.cause?.message ||
+              "Axios Error with status: " + status.toString(),
             status,
             statusText: e.response?.statusText,
           };

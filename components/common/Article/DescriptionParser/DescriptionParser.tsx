@@ -20,8 +20,10 @@ interface Props {
 const options = {
   trim: true,
   replace: (domNode: any) => {
-    if (domNode instanceof Element && domNode.attribs) {
-      const { attribs, children } = domNode;
+    const { attribs, children } = domNode;
+    const Children: string | JSX.Element | JSX.Element[] | undefined =
+      children && <>{domToReact(children, options)}</>;
+    if (domNode.name) {
       const convertedProps = attributesToProps(domNode.attribs);
       delete convertedProps.children;
       switch (domNode.name) {
@@ -30,17 +32,11 @@ const options = {
             convertedProps.gutterBottom = true as any;
           }
           return (
-            <Typography {...(convertedProps as any)}>
-              {domToReact(children, options)}
-            </Typography>
+            <Typography {...(convertedProps as any)}>{Children}</Typography>
           );
           break;
         case "paper":
-          return (
-            <Paper {...(convertedProps as any)}>
-              {domToReact(children, options)}
-            </Paper>
-          );
+          return <Paper {...(convertedProps as any)}>{Children}</Paper>;
           break;
         case "h1":
         case "h2":
@@ -57,42 +53,64 @@ const options = {
               component={domNode.name}
               variant={domNode.name}
             >
-              {domToReact(children, options)}
+              {Children}
             </Typography>
           );
           break;
         case "ul":
           return (
             <Paper>
-              <ul {...(convertedProps as any)}>
-                {domToReact(children, options)}
-              </ul>
+              <ul {...(convertedProps as any)}>{Children}</ul>
             </Paper>
           );
           break;
         case "a":
         case "link":
-          return (
-            <Link {...(convertedProps as any)}>
-              {domToReact(children, options)}
-            </Link>
-          );
+          return <Link {...(convertedProps as any)}>{Children}</Link>;
           break;
         case "img":
         case "image":
+          const width = parseInt(
+            convertedProps.width || convertedProps["data-original-width"] || "0"
+          );
+          const height = parseInt(
+            convertedProps.height ||
+              convertedProps["data-original-height"] ||
+              "0"
+          );
+          const src = (convertedProps.src || "").replace(
+            /^(\.\.(\/)+)+/gim,
+            "/"
+          );
+          const title = convertedProps.title || "";
+          const alt = convertedProps.alt || "";
           return (
-            <Image
-              {...(convertedProps as any)}
-              src={convertedProps.src || ""}
-              alt={convertedProps.alt || ""}
-              width={parseInt(convertedProps.width)}
-              height={parseInt(convertedProps.height)}
-              fill
-            >
-              {domToReact(children, options)}
-            </Image>
+            <>
+              <Image
+                src={src}
+                alt={alt}
+                title={title}
+                width={width}
+                height={height}
+              />
+              <>{Children}</>
+            </>
           );
           break;
+        case "div":
+          if (convertedProps["data-images-container"]) {
+            return (
+              <Box
+                width="100%"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                flexWrap="wrap"
+              >
+                {Children}
+              </Box>
+            );
+          }
       }
       if (
         [
