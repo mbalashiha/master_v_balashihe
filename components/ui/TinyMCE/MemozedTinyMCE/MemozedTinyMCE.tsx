@@ -289,8 +289,12 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
               "insertCodeButton imageUploadButton | " +
               "alignleft aligncenter alignright alignjustify | " +
               "bullist numlist checklist outdent indent | removeformat | link image code table help",
-            content_style:
-              "body { color: #06060e; font-family: Inter,Arial,sans-serif; font-weight: 500; font-size: 18px; }",
+            content_style: `body { color: #06060e; font-family: Inter,Arial,sans-serif; font-weight: 500; font-size: 18px; }
+               img { 
+                box-shadow: 4px 4px 20px rgb(0 0 0 / 20%);
+                border-radius: 24px; 
+                margin: 6px;
+               } `,
             content_langs: [
               { title: "Русский", code: "ru" },
               { title: "English", code: "en" },
