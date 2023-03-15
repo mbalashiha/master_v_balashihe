@@ -38,12 +38,11 @@ export default function ArticleTextEditor() {
       <Box
         sx={{
           border: "none",
-          borderRadius: "0 0 8px 8px",
           width: "100%",
           "& > textarea": {
             display: "none",
           },
-          "& > *, & .tox.tox-tinymce": {
+          "&, & > *, & .tox.tox-tinymce": {
             borderRadius: "0 0 8px 8px",
             height: "105vh",
             background: "white",

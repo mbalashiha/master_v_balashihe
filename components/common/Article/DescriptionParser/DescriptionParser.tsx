@@ -64,6 +64,23 @@ const options = {
             </Paper>
           );
           break;
+        case "table":
+          return (
+            <Paper
+              sx={{
+                "&, & > table": {
+                  width: "100%",
+                  "& td": {
+                    px: 2,
+                    py: 0.5,
+                  },
+                },
+              }}
+            >
+              <table {...(convertedProps as any)}>{Children}</table>
+            </Paper>
+          );
+          break;
         case "a":
         case "link":
           return <Link {...(convertedProps as any)}>{Children}</Link>;
@@ -82,6 +99,9 @@ const options = {
             /^(\.\.(\/)+)+/gim,
             "/"
           );
+          if (!src) {
+            return <></>;
+          }
           const title = convertedProps.title || "";
           const alt = convertedProps.alt || "";
           return (
@@ -92,6 +112,19 @@ const options = {
                 title={title}
                 width={width}
                 height={height}
+                onLoad={(event: any) => {
+                  const target = (event.target ||
+                    event.currentTarget) as HTMLImageElement;
+                  if (
+                    target.parentElement?.offsetWidth &&
+                    target.offsetWidth > target.parentElement?.offsetWidth
+                  ) {
+                    target.setAttribute("width", "auto");
+                    target.setAttribute("height", "auto");
+                    target.style.width = "100%";
+                    target.style.height = "auto";
+                  }
+                }}
               />
               <>{Children}</>
             </>
