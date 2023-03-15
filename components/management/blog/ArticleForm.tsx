@@ -8,6 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
+import { ArticleTabs } from "./ArticleTabs";
 import {
   ConfirmDialog,
   RefFormik,
@@ -29,10 +30,10 @@ import DeleteDraftButton from "./Article/DeleteDraftButton";
 import { useSnackbar } from "notistack";
 
 interface Props {
-  children?: React.ReactNode | React.ReactNode[];
+  // children?: React.ReactNode | React.ReactNode[];
 }
 
-export default function ArticleForm({ children }: Props) {
+export default function ArticleForm({}: Props) {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const { setCreateButton, unsetCreateButton } = useFabButton();
@@ -161,44 +162,20 @@ export default function ArticleForm({ children }: Props) {
       }}
     >
       <ArticleProvider>
-        <Grid
-          container
-          spacing={2}
-          mt={2}
-          sx={{ "& > .MuiGrid-item": { pt: 0 } }}
-        >
-          <Grid item xs={12} md={8}>
-            <ArticleTitle />
-          </Grid>
+        <Grid container sx={{ my: 1 }}>
           <Grid
             item
             xs={12}
-            md={4}
-            sx={{ display: "flex", alignItems: "end", pb: "22px" }}
+            md={12}
+            sx={{ display: "flex", justifyContent: "flex-end" }}
           >
-            <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
-            <DeleteDraftButton />
-          </Grid>
-          {data.url && (
-            <Grid item xs={12} sx={{ display: "flex", alignItems: "end" }}>
-              <Paper sx={{ width: "100%", p: 1, mb: 2, fontWeight: 600 }}>
-                Страница на сайте:{" "}
-                <a
-                  href={data.url}
-                  title={data.url}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  {data.url}
-                </a>
-              </Paper>
-            </Grid>
-          )}
-          <Grid item xs={12}>
-            <ArticleTextEditor />
+            <Stack spacing={1} direction="row">
+              <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
+              <DeleteDraftButton />
+            </Stack>
           </Grid>
         </Grid>
-        {children}
+        <ArticleTabs />
       </ArticleProvider>
     </RefFormik>
   ) : null;

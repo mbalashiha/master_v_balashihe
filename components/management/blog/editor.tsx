@@ -37,13 +37,16 @@ export default function ArticleTextEditor() {
     <>
       <Box
         sx={{
-          height: "105vh",
-          width: "100%",
           border: "none",
-          background: "white",
-          borderRadius: "8px",
+          borderRadius: "0 0 8px 8px",
+          width: "100%",
           "& > textarea": {
             display: "none",
+          },
+          "& > *, & .tox.tox-tinymce": {
+            borderRadius: "0 0 8px 8px",
+            height: "105vh",
+            background: "white",
           },
         }}
       >
