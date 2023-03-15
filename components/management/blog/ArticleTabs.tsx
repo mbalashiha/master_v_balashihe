@@ -74,7 +74,11 @@ export const ArticleTabs = () => {
   const { data } = useArticleDraft();
   return (
     <>
-      <Paper sx={{ minHeight: "70vh" }}>
+      <Paper
+        sx={{
+          borderRadius: "24px",
+        }}
+      >
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
             value={value}
@@ -92,7 +96,13 @@ export const ArticleTabs = () => {
             <Tab label="Редактор" {...a11yProps(2)} />
           </Tabs>
         </Box>
-        <Box sx={{ background: blueGrey[100] }}>
+        <Box
+          sx={{
+            background: blueGrey[100],
+            minHeight: "65vh",
+            borderRadius: "0 0 24px 24px",
+          }}
+        >
           <TabPanel value={value} index={0}>
             <Grid container spacing={0}>
               <Grid item xs={12} md={12}>
@@ -118,9 +128,7 @@ export const ArticleTabs = () => {
               )}
             </Grid>
           </TabPanel>
-          <TabPanel value={value} index={1}>
-            
-          </TabPanel>
+          <TabPanel value={value} index={1}></TabPanel>
           <Box sx={{ display: [0, 2].includes(value) ? "inherit" : "none" }}>
             <ArticleTextEditor />
           </Box>
