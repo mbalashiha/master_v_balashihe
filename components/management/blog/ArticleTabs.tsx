@@ -31,6 +31,7 @@ import {
   useRefFormik,
 } from "@components/ui";
 import { blueGrey } from "@mui/material/colors";
+import { ImagePanel, UploaderComponent } from "./Article";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -105,30 +106,37 @@ export const ArticleTabs = () => {
         >
           <TabPanel value={value} index={0}>
             <Grid container spacing={0}>
-              <Grid item xs={12} md={12}>
-                <ArticleTitle />
-              </Grid>
-              {data?.url && (
-                <Grid item xs={12}>
-                  <Paper
-                    elevation={2}
-                    sx={{ width: "100%", p: 1, fontWeight: 600 }}
-                  >
-                    Страница на сайте:{" "}
-                    <a
-                      href={data.url}
-                      title={data.url}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      {data.url}
-                    </a>
-                  </Paper>
+              <Grid item xs={12} sm={2} lg={1} pr={0} mr={0}><UploaderComponent /></Grid>
+              <Grid item xs={12} sm={10} lg={11}>
+                <Grid container spacing={0} mt={"-5px"}>
+                  <Grid item xs={12} md={12}>
+                    <ArticleTitle />
+                  </Grid>
+                  {data?.url && (
+                    <Grid item xs={12}>
+                      <Paper
+                        elevation={1}
+                        sx={{ width: "100%", p: 1, fontWeight: 600 }}
+                      >
+                        Страница на сайте:{" "}
+                        <a
+                          href={data.url}
+                          title={data.url}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          {data.url}
+                        </a>
+                      </Paper>
+                    </Grid>
+                  )}
                 </Grid>
-              )}
+              </Grid>
             </Grid>
           </TabPanel>
-          <TabPanel value={value} index={1}></TabPanel>
+          <TabPanel value={value} index={1}>
+            <ImagePanel />
+          </TabPanel>
           <Box sx={{ display: [0, 2].includes(value) ? "inherit" : "none" }}>
             <ArticleTextEditor />
           </Box>

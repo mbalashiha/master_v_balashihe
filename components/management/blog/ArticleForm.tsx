@@ -193,7 +193,7 @@ export default function ArticleForm({}: Props) {
             md={12}
             sx={{ display: "flex", justifyContent: "flex-end" }}
           >
-            <Stack spacing={1} direction="row">
+            <Stack spacing={"3px"} direction="row">
               <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
               <DeleteDraftButton />
             </Stack>
