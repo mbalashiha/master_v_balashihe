@@ -12,13 +12,13 @@ export interface Breadcrumb {
 export interface Image {
   url: string;
   alt: string;
-  height: Int;
-  width: Int;
+  height: Int | null;
+  width: Int | null;
   orderNumber: Int | null;
-  originalWidth: Int;
-  originalHeight: Int;
-  createdAt: Date;
-  updatedAt: Date;
+  originalWidth: Int | null;
+  originalHeight: Int | null;
+  createdAt: Date | null;
+  updatedAt: Date | null;
 }
 export namespace Blog {
   export type BlogCategory = any;
@@ -46,6 +46,7 @@ export namespace Blog {
     title: string;
     url: string;
     textHtml: string;
+    renderHtml: String;
     published: Boolean;
     orderNumber: Int;
     category: BlogCategory;
@@ -54,6 +55,8 @@ export namespace Blog {
     publishedAt: Date;
     breadcrumbs?: Breadcrumb[];
     navigation: BlogArticleNavigation;
+    imageId: ID | null;
+    image: Image | null;
   }
   export interface ArticleDraft {
     id: ID | null;
@@ -73,6 +76,8 @@ export namespace Blog {
     existingArticle: Article | null;
     url: string | null;
     isCreatePage: Boolean;
+    imageId: ID | null;
+    image: Image | null;
   }
 }
 export namespace Management {

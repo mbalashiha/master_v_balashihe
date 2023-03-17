@@ -15,6 +15,13 @@ const articleFragment = gql`
     createdAt
     updatedAt
     publishedAt
+    image {
+      imageId
+      imgSrc
+      width
+      height
+      altText
+    }
   }
 `;
 export default articleFragment;

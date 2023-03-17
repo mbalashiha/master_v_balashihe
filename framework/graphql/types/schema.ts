@@ -57,6 +57,7 @@ export namespace Schema {
     text: String;
     textHtml: String;
     textRawDraftContentState: String | null;
+    renderHtml: String;
     published: boolean;
     orderNumber: Int;
     blogCategoryId: ID;
@@ -66,6 +67,8 @@ export namespace Schema {
     publishedAt: Date;
     breadcrumbs: Breadcrumb[];
     navigation: BlogArticleNavigation | null;
+    imageId: ID | null;
+    image: Image | null;
   }
   export namespace Article {
     export interface ArticleInput {
@@ -76,10 +79,12 @@ export namespace Schema {
       text: String | null;
       textHtml: String | null;
       textRawDraftContentState: String | null;
+      renderHtml: String;
       published: Boolean;
       orderNumber: Int | null;
       blogCategoryId: ID | null;
       existingArticleId: ID | null;
+      imageId: ID | null;
     }
     export interface ArticleDraftInput {
       id: ID | null;
@@ -90,6 +95,7 @@ export namespace Schema {
       orderNumber?: Int | null;
       blogCategoryId: ID | null;
       existingArticleId: ID | null;
+      imageId: ID | null;
     }
     export interface TextDraftInput {
       id: ID | null;
@@ -115,6 +121,8 @@ export namespace Schema {
       publishedAt: Date;
       existingArticleId: ID | null;
       existingArticle: BlogArticle | null;
+      imageId: ID | null;
+      image: Image | null;
     }
   }
   export interface BlogArticlesConnection {

@@ -76,6 +76,7 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     handle,
     text,
     textHtml,
+    renderHtml,
     published,
     orderNumber,
     category,
@@ -84,6 +85,8 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     publishedAt,
     breadcrumbs,
     navigation,
+    imageId,
+    image,
   } = data;
   if (!id) {
     throw new Error("No id in article row!");
@@ -94,7 +97,8 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     title,
     url: url || `/${handle}`,
     navigation: normalizeArticleNavigationItems(navigation),
-    textHtml,
+    textHtml: textHtml || renderHtml || "",
+    renderHtml: renderHtml || "",
     published,
     orderNumber,
     category: {
@@ -106,6 +110,8 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     breadcrumbs: {
       ...breadcrumbs,
     },
+    imageId: imageId || null,
+    image: image ? normalizeImage(image) : null,
   };
 };
 
@@ -132,14 +138,14 @@ export const normalizeImage = (data: Schema.Image): CMS.Image => {
     updatedAt,
   } = data;
   return {
-    url: imgSrc,
-    alt: altText,
-    height,
-    width,
+    url: imgSrc.startsWith('/') ? imgSrc : `/${imgSrc}`,
+    alt: altText || '',
+    height: height || null,
+    width: width || null,
     orderNumber: orderNumber || null,
-    originalWidth,
-    originalHeight,
-    createdAt,
-    updatedAt,
+    originalWidth: originalWidth || null,
+    originalHeight: originalHeight || null,
+    createdAt: createdAt || null,
+    updatedAt: updatedAt || null,
   };
 };

@@ -21,5 +21,13 @@ export const articleDraftFragment = gql`
     existingArticle {
       ...ArticleFragment
     }
+    imageId
+    image {
+      imageId
+      imgSrc
+      width
+      height
+      altText
+    }
   }
 `;

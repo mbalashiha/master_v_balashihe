@@ -3,6 +3,7 @@ import { Schema } from "@framework/types";
 import {
   normalizeArticle,
   normalizeArticleUrl,
+  normalizeImage,
 } from "@framework/utils/normalize/article";
 
 export const normalizeArticleDraft = (
@@ -24,6 +25,8 @@ export const normalizeArticleDraft = (
     publishedAt,
     existingArticleId,
     existingArticle,
+    imageId,
+    image,
   } = draft;
   const url = existingArticleId
     ? normalizeArticleUrl(handle, autoHandleSlug)
@@ -46,5 +49,7 @@ export const normalizeArticleDraft = (
     existingArticleId,
     isCreatePage: !Boolean(existingArticleId && existingArticle),
     existingArticle: existingArticle ? normalizeArticle(existingArticle) : null,
+    imageId: imageId || null,
+    image: image ? normalizeImage(image) : null,
   };
 };

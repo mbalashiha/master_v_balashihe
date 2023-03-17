@@ -36,7 +36,7 @@ export default function Page(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const { article } = props;
-  const { textHtml } = article;
+  const { renderHtml } = article;
   return (
     <>
       <Head>
@@ -47,7 +47,7 @@ export default function Page(
         />
       </Head>
       <Article title={article.title} navigation={article.navigation}>
-        <DescriptionParser descriptionHTML={textHtml} />
+        <DescriptionParser descriptionHTML={renderHtml} />
       </Article>
     </>
   );

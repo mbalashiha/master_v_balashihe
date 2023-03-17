@@ -1,5 +1,15 @@
 import React, { useState, FC, memo } from "react";
-import { Container, Grid, Card, Paper } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Card,
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+} from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,7 +46,11 @@ const options = {
           );
           break;
         case "paper":
-          return <Paper {...(convertedProps as any)}>{Children}</Paper>;
+          return (
+            <Paper {...(convertedProps as any)} component="div">
+              {Children}
+            </Paper>
+          );
           break;
         case "h1":
         case "h2":
@@ -59,14 +73,24 @@ const options = {
           break;
         case "ul":
           return (
-            <Paper>
+            <Paper component="div">
               <ul {...(convertedProps as any)}>{Children}</ul>
             </Paper>
           );
           break;
+        case "tbody":
+          return <>{Children}</>;
+          break;
+        case "thead":
+          return <>{Children}</>;
+          break;
+        case "tfoot":
+          return <>{Children}</>;
+          break;
         case "table":
           return (
             <Paper
+              component="div"
               sx={{
                 "&, & > table": {
                   width: "100%",
@@ -77,8 +101,29 @@ const options = {
                 },
               }}
             >
-              <table {...(convertedProps as any)}>{Children}</table>
+              <Grid container component="div">
+                {Children}
+              </Grid>
             </Paper>
+          );
+          break;
+        case "tr":
+        case "th":
+          // eslint-disable-next-line react/jsx-no-undef
+          return (
+            <Grid item xs={12} component="div">
+              <Grid container component="div">
+                {Children}
+              </Grid>
+            </Grid>
+          );
+          break;
+        case "td":
+          // eslint-disable-next-line react/jsx-no-undef
+          return (
+            <Grid item xs={12} md={6} component="div" px={1} py={0.5}>
+              {Children}
+            </Grid>
           );
           break;
         case "a":
@@ -143,6 +188,46 @@ const options = {
                 {Children}
               </Box>
             );
+          } else if (convertedProps["data-component-tag"]) {
+            switch (convertedProps["data-component-tag"]) {
+              case "table":
+                return (
+                  <Paper sx={{ p: 1, m: 0, "&&": { marginBottom: "1.3rem" } }}>
+                    {Children}
+                  </Paper>
+                );
+                break;
+              case "tbody":
+                return <>{Children}</>;
+                break;
+              case "thead":
+                return <h4>{Children}</h4>;
+                break;
+              case "tfoot":
+                return <h4>{Children}</h4>;
+                break;
+              case "tr":
+                return (
+                  <Grid container spacing={1}>
+                    {Children}
+                  </Grid>
+                );
+                break;
+              case "td":
+                return (
+                  <Grid item xs={12} sm={6}>
+                    {Children}
+                  </Grid>
+                );
+                break;
+              case "th":
+                return (
+                  <Grid item xs={12} sm={6}>
+                    {Children}
+                  </Grid>
+                );
+                break;
+            }
           }
       }
       if (

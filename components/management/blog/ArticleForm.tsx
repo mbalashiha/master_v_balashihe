@@ -88,17 +88,18 @@ export default function ArticleForm({}: Props) {
           handle,
           autoHandleSlug,
           text,
-          textHtml: html,
+          textHtml,
           textRawDraftContentState,
           published,
           orderNumber,
           blogCategoryId,
           existingArticleId,
+          imageId,
         } = values;
-        let textHtml = html;
+        let renderHtml = textHtml;
         if (window.DOMParser) {
           const parser = new DOMParser();
-          const document = parser.parseFromString(html, "text/html");
+          const document = parser.parseFromString(renderHtml, "text/html");
           const imgs = document.querySelectorAll<HTMLImageElement>("img");
           imgs.forEach((img) => {
             let first = img;
@@ -123,11 +124,32 @@ export default function ArticleForm({}: Props) {
               }
             }
           });
-          textHtml =
+          renderHtml =
             document.documentElement.querySelector("body")?.innerHTML ||
             textHtml;
-          // alert(textHtml);
         }
+        renderHtml = renderHtml
+          .replace(/<table(\s+[^>]*)?>/g, `<div data-component-tag="table"$1>`)
+          .replace(/<\/table>/g, `</div>`);
+        renderHtml = renderHtml
+          .replace(/<tbody(\s+[^>]*)?>/g, `<div data-component-tag="tbody"$1>`)
+          .replace(/<\/tbody>/g, `</div>`);
+        renderHtml = renderHtml
+          .replace(/<thead(\s+[^>]*)?>/g, `<div data-component-tag="thead"$1>`)
+          .replace(/<\/thead>/g, `</div>`);
+        renderHtml = renderHtml
+          .replace(/<tfoot(\s+[^>]*)?>/g, `<div data-component-tag="tfoot"$1>`)
+          .replace(/<\/tfoot>/g, `</div>`);
+        renderHtml = renderHtml
+          .replace(/<tr(\s+[^>]*)?>/g, `<div data-component-tag="tr"$1>`)
+          .replace(/<\/tr>/g, `</div>`);
+        renderHtml = renderHtml
+          .replace(/<th(\s+[^>]*)?>/g, `<div data-component-tag="th"$1>`)
+          .replace(/<\/th>/g, `</div>`);
+        renderHtml = renderHtml
+          .replace(/<td(\s+[^>]*)?>/g, `<div data-component-tag="td"$1>`)
+          .replace(/<\/td>/g, `</div>`);
+
         const article = {
           id,
           title,
@@ -136,11 +158,13 @@ export default function ArticleForm({}: Props) {
             (title ? slugify(title) : null) || autoHandleSlug || null,
           text,
           textHtml,
+          renderHtml,
           textRawDraftContentState,
           published: true,
           orderNumber,
           blogCategoryId,
           existingArticleId,
+          imageId: imageId || null,
         };
         const { success, articleId, articleDraft } = await saveArticle({
           article,

@@ -21,14 +21,20 @@ export const getArticleByHandleQuery = gql`
     id
     title
     handle
-    text
-    textHtml
+    renderHtml
     published
     orderNumber
     blogCategoryId
     createdAt
     updatedAt
     publishedAt
+    image {
+      imageId
+      imgSrc
+      width
+      height
+      altText
+    }
   }
   query ($handle: String) {
     articleByHandle(handle: $handle) {
