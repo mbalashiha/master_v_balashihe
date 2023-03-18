@@ -28,6 +28,7 @@ import { useRouter } from "next/router";
 import { useFabButton } from "../Layout";
 import DeleteDraftButton from "./Article/DeleteDraftButton";
 import { useSnackbar } from "notistack";
+import { TabsProvider } from "@components/common/Tabs/TabsProvider";
 
 interface Props {
   // children?: React.ReactNode | React.ReactNode[];
@@ -199,7 +200,9 @@ export default function ArticleForm({}: Props) {
             </Stack>
           </Grid>
         </Grid>
-        <ArticleTabs />
+        <TabsProvider>
+          <ArticleTabs />
+        </TabsProvider>
       </ArticleProvider>
     </RefFormik>
   ) : null;

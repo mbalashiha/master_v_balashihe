@@ -6,9 +6,11 @@ import { useField } from "formik";
 import Image from "next/image";
 import { CMS } from "@common/types";
 import { useImageReceived } from "./hooks/use-image-received";
+import { useTabs } from "@components/common/Tabs/TabsProvider";
 type PaperProps = React.ComponentProps<typeof Paper>;
 
 export default function UploaderComponent({ sx, ...rest }: PaperProps) {
+  const { value, handleChange, setTabNumber } = useTabs();
   const uploaderRef = useRef<HTMLInputElement>(null);
   const [imageField] = useField<CMS.Image>("image");
   const image = imageField.value;
@@ -43,6 +45,7 @@ export default function UploaderComponent({ sx, ...rest }: PaperProps) {
             target.style.opacity = "1";
             target.style.maxHeight = "";
           }}
+          onClick={() => setTabNumber(1)}
         />
       ) : (
         <Paper

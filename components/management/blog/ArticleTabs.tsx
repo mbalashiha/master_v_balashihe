@@ -24,6 +24,7 @@ import { useFabButton } from "../Layout";
 import DeleteDraftButton from "./Article/DeleteDraftButton";
 import { useSnackbar } from "notistack";
 import SaveIcon from "@mui/icons-material/Save";
+import { useTabs } from "@components/common/Tabs/TabsProvider";
 import {
   ConfirmDialog,
   RefFormik,
@@ -63,11 +64,7 @@ function a11yProps(index: number) {
 }
 
 export const ArticleTabs = () => {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
+  const { value, handleChange, setTabNumber } = useTabs();
   const { data } = useArticleDraft();
   return (
     <>
@@ -99,18 +96,18 @@ export const ArticleTabs = () => {
             minHeight: "65vh",
             borderRadius: "0 0 24px 24px",
             "& .mainImage": {
-              marginLeft: { sm: "-5px", md: "-10px" },
-              marginTop: "-4px",
+              marginLeft: { sm: "-5px", md: "-9px" },
               borderRadius: "8px",
+              cursor: "pointer",
             },
           }}
         >
           <TabPanel value={value} index={0}>
             <Grid container spacing={0}>
-              <Grid item xs={12} sm={3} lg={2} xl={1} pr={0} mr={0}>
+              <Grid item xs={12} sm={4} lg={2} xl={1} pr={0} mr={0}>
                 <UploaderComponent />
               </Grid>
-              <Grid item xs={12} sm={9} lg={10} xl={11}>
+              <Grid item xs={12} sm={8} lg={10} xl={11}>
                 <Grid container spacing={0}>
                   <Grid item xs={12} md={12}>
                     <ArticleTitle />
