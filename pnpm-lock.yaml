@@ -5,7 +5,6 @@ specifiers:
   '@emotion/styled': 11.10.6
   '@mui/icons-material': 5.11.9
   '@mui/material': 5.11.9
-  '@next/font': 13.1.6
   '@tinymce/tinymce-react': ^4.3.0
   '@types/crypto-js': ^4.1.1
   '@types/js-cookie': ^3.0.3
@@ -41,7 +40,6 @@ dependencies:
   '@emotion/styled': 11.10.6_oouaibmszuch5k64ms7uxp2aia
   '@mui/icons-material': 5.11.9_ofpk46txu7v2f5mzrtv4xsczka
   '@mui/material': 5.11.9_xqeqsl5kvjjtyxwyi3jhw3yuli
-  '@next/font': 13.1.6
   '@tinymce/tinymce-react': 4.3.0_biqbaboplfbrettd7655fr4n2y
   '@types/crypto-js': 4.1.1
   '@types/js-cookie': 3.0.3
@@ -467,10 +465,6 @@ packages:
     resolution: {integrity: sha512-o7cauUYsXjzSJkay8wKjpKJf2uLzlggCsGUkPu3lP09Pv97jYlekTC20KJrjQKmSv5DXV0R/uks2ZXhqjNkqAw==}
     dependencies:
       glob: 7.1.7
-    dev: false
-
-  /@next/font/13.1.6:
-    resolution: {integrity: sha512-AITjmeb1RgX1HKMCiA39ztx2mxeAyxl4ljv2UoSBUGAbFFMg8MO7YAvjHCgFhD39hL7YTbFjol04e/BPBH5RzQ==}
     dev: false
 
   /@next/swc-android-arm-eabi/13.2.4:

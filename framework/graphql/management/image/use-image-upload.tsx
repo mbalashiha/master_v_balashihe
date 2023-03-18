@@ -5,7 +5,6 @@ import { useSnackbar } from "notistack";
 import util from "util";
 import { useImageUpload } from "@common/management/image/use-image-upload";
 import type { UseImageUpload } from "@common/management/image/use-image-upload";
-import { slugify } from "@lib";
 
 export default useImageUpload as UseImageUpload<typeof handler>;
 
@@ -14,6 +13,7 @@ export interface ImageUploadHook {
     images: Array<{
       file: File;
       fieldname: string;
+      id: string;
     }>;
   };
   requestOutput: {
@@ -31,6 +31,7 @@ export interface ImageUploadHook {
     success: boolean;
     error: string | null;
     images: Array<{
+      id: string;
       fieldname: string;
       imageId: string | number | null;
       imgSrc: string;
@@ -48,15 +49,11 @@ export const handler: API.RestApi.RestApiHook<ImageUploadHook> = {
   restRequest: async ({ restRequest, input, options }) => {
     try {
       const formData = new FormData();
-      const mapped = new Map<string, { name: string; file: File }>();
+      const mapped = new Map<string, { id: string; file: File }>();
       for (const imgObj of input.images) {
-        const name = imgObj.fieldname || imgObj.file.name;
-        const file = imgObj.file;
-        const extension = file.name.split(".").pop();
-        const fieldname =
-          slugify(name) + (extension ? `.${slugify(extension)}` : "");
+        const { file, fieldname, id} = imgObj;
         if (!mapped.has(fieldname)) {
-          mapped.set(fieldname, { name, file });
+          mapped.set(fieldname, { id, file });
         }
         formData.append(fieldname, file);
       }
@@ -70,7 +67,8 @@ export const handler: API.RestApi.RestApiHook<ImageUploadHook> = {
           const before = mapped.get(elem.fieldname);
           return {
             ...elem,
-            fieldname: before?.name || elem.fieldname,
+            fieldname: before?.id || elem.fieldname,
+            id: before?.id || elem.fieldname,
           };
         }),
       };
