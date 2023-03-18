@@ -50,11 +50,7 @@ function TabPanel(props: TabPanelProps) {
       aria-labelledby={`article-editor-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: { xs: 1, md: 2 } }}>{children}</Box>}
     </div>
   );
 }
@@ -102,13 +98,20 @@ export const ArticleTabs = () => {
             background: blueGrey[100],
             minHeight: "65vh",
             borderRadius: "0 0 24px 24px",
+            "& .mainImage": {
+              marginLeft: { sm: "-5px", md: "-10px" },
+              marginTop: "-4px",
+              borderRadius: "8px",
+            },
           }}
         >
           <TabPanel value={value} index={0}>
             <Grid container spacing={0}>
-              <Grid item xs={12} sm={2} lg={1} pr={0} mr={0}><UploaderComponent /></Grid>
-              <Grid item xs={12} sm={10} lg={11}>
-                <Grid container spacing={0} mt={"-5px"}>
+              <Grid item xs={12} sm={3} lg={2} xl={1} pr={0} mr={0}>
+                <UploaderComponent />
+              </Grid>
+              <Grid item xs={12} sm={9} lg={10} xl={11}>
+                <Grid container spacing={0}>
                   <Grid item xs={12} md={12}>
                     <ArticleTitle />
                   </Grid>

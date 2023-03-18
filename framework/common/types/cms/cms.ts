@@ -12,13 +12,14 @@ export interface Breadcrumb {
 export interface Image {
   url: string;
   alt: string;
-  height: Int | null;
-  width: Int | null;
+  height: number;
+  width: number;
   orderNumber: Int | null;
-  originalWidth: Int | null;
-  originalHeight: Int | null;
+  originalWidth: number | null;
+  originalHeight: number | null;
   createdAt: Date | null;
   updatedAt: Date | null;
+  imageId: ID;
 }
 export namespace Blog {
   export type BlogCategory = any;

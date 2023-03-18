@@ -138,10 +138,11 @@ export const normalizeImage = (data: Schema.Image): CMS.Image => {
     updatedAt,
   } = data;
   return {
-    url: imgSrc.startsWith('/') ? imgSrc : `/${imgSrc}`,
-    alt: altText || '',
-    height: height || null,
-    width: width || null,
+    imageId: imageId || "",
+    url: imgSrc.startsWith("/") ? imgSrc : `/${imgSrc}`,
+    alt: altText || "",
+    height: height && height > 0 ? height : 1,
+    width: width && width > 0 ? width : 1,
     orderNumber: orderNumber || null,
     originalWidth: originalWidth || null,
     originalHeight: originalHeight || null,
