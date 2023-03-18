@@ -104,10 +104,10 @@ export const ArticleTabs = () => {
         >
           <TabPanel value={value} index={0}>
             <Grid container spacing={0}>
-              <Grid item xs={12} sm={4} lg={2} xl={1} pr={0} mr={0}>
+              <Grid item xs={12} sm={4} lg={2} pr={0} mr={0}>
                 <UploaderComponent />
               </Grid>
-              <Grid item xs={12} sm={8} lg={10} xl={11}>
+              <Grid item xs={12} sm={8} lg={10} >
                 <Grid container spacing={0}>
                   <Grid item xs={12} md={12}>
                     <ArticleTitle />

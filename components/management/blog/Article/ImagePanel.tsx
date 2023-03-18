@@ -1,16 +1,24 @@
 import React, { useRef } from "react";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
-import { Grid, Paper, Typography, Box } from "@mui/material";
-import { blueGrey } from "@mui/material/colors";
+import { Grid, Paper, Typography, Box, Button } from "@mui/material";
+import { blueGrey, grey } from "@mui/material/colors";
 import { useField } from "formik";
 import Image from "next/image";
 import { CMS } from "@common/types";
 import { useImageReceived } from "./hooks/use-image-received";
+import { useRefFormik } from "@components/ui";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function ImagePanel() {
   const uploaderRef = useRef<HTMLInputElement>(null);
   const [imageField] = useField<CMS.Image>("image");
+  const [imageIdField] = useField<CMS.Image>("imageId");
+  const form = useRefFormik();
+  const setImageToNull = () => {
+    form.setFieldValue("image", null);
+    form.setFieldValue("imageId", null);
+  };
   const image = imageField.value;
   const inputOnChange = useImageReceived();
   return (
@@ -74,42 +82,76 @@ export default function ImagePanel() {
           )}
         </Grid>
         <Grid item xs={12} md={6} lg={8}>
-          <Paper
-            sx={{ p: { xs: 1, md: 2 }, background: "black", cursor: "pointer" }}
-            onClick={() => uploaderRef.current?.click()}
-          >
-            <Box
-              width="100%"
-              minHeight="308px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              border="2px dashed white"
-              borderRadius={1}
-            >
-              <Box
-                sx={{ color: "white" }}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                flexDirection="column"
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <Paper
+                sx={{
+                  p: { xs: 1, md: 2 },
+                  background: "black",
+                  cursor: "pointer",
+                }}
+                onClick={() => uploaderRef.current?.click()}
               >
-                <Box>
-                  <CloudUploadIcon sx={{ fontSize: "100px" }} />
-                </Box>
-                <Box>
-                  <Typography
-                    variant="h4"
-                    component="h6"
-                    color="grey.400"
-                    fontSize={{ xs: "30px", md: "20px", lg: "35px" }}
+                <Box
+                  width="100%"
+                  minHeight="308px"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  border="2px dashed white"
+                  borderRadius={1}
+                >
+                  <Box
+                    sx={{ color: "white" }}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    flexDirection="column"
                   >
-                    Загрузить изображение
-                  </Typography>
+                    <Box>
+                      <CloudUploadIcon sx={{ fontSize: "100px" }} />
+                    </Box>
+                    <Box>
+                      <Typography
+                        variant="h4"
+                        component="h6"
+                        color="grey.400"
+                        fontSize={{ xs: "30px", md: "20px", lg: "35px" }}
+                      >
+                        Загрузить изображение
+                      </Typography>
+                    </Box>
+                  </Box>
                 </Box>
-              </Box>
-            </Box>
-          </Paper>
+              </Paper>
+            </Grid>
+            {imageIdField.value && (
+              <Grid item xs={12}>
+                <Button
+                  sx={{
+                    width: "100%",
+                    height: "48px",
+                    background: grey[900],
+                    color: "primary.main",
+                    fontWeight: "400",
+                    fontSize: "20px",
+                    textTransform: "uppercase",
+                    position: "relative",
+                    px: "3.4rem",
+                    "& .MuiButton-endIcon": {
+                      position: "absolute",
+                      right: "1.5rem",
+                      transform: "scale(2)",
+                    },
+                  }}
+                  onClick={() => setImageToNull()}
+                  endIcon={<CloseIcon />}
+                >
+                  Удалить изображение
+                </Button>
+              </Grid>
+            )}
+          </Grid>
         </Grid>
       </Grid>
     </>

@@ -94,10 +94,9 @@ const getMuiTheme = (): Theme => {
             },
             minHeight: "100vh",
             position: "relative",
-            paddingBottom: "27rem",
             backgroundColor:
-              theme.palette.mode === "dark" ? "#212529" : "#BBBBBB",
-            color: theme.palette.mode === "dark" ? "#f1f3f5" : "#000000",
+              theme.palette.mode === "dark" ? "#212529" : "#F1F3F5",
+            color: theme.palette.mode === "dark" ? "#f1f3f5" : "#10101a",
             "& > footer": {
               height: "24rem",
               width: "100%",

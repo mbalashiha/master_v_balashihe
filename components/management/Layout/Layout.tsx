@@ -44,7 +44,7 @@ const ManagementLayout: FC<Props> = ({ children }: Props) => {
                   position: "relative",
                   minHeight: "100vh",
                 }}
-                maxWidth="xl"
+                maxWidth="lg"
               >
                 {children}
               </Container>

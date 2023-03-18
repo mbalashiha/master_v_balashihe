@@ -33,7 +33,7 @@ export default function UploaderComponent({ sx, ...rest }: PaperProps) {
           alt={image.alt}
           width={image.width}
           height={image.height}
-          style={{ opacity: "0", maxHeight: "120px" }}
+          style={{ opacity: "0", maxHeight: "189px" }}
           className={"mainImage"}
           onLoad={(event: any) => {
             const target = (event.target ||
@@ -56,8 +56,8 @@ export default function UploaderComponent({ sx, ...rest }: PaperProps) {
             height: "100%",
             background: "grey",
             cursor: "pointer",
-            minHeight: "120px",
-            minWidth: "120px",
+            minHeight: "189px",
+            minWidth: "189px",
             ...sx,
           }}
           onClick={() => uploaderRef.current?.click()}
