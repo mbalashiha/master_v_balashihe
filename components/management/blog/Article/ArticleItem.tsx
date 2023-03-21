@@ -85,7 +85,7 @@ const ArticleItem = ({ article }: Props) => {
 
         <Grid item xs={12} md={2} lg={1}>
           <Stack width="100%" alignItems={"end"} justifyContent={"end"}>
-            <Grid container sx={{ maxWidth: "100px" }}>
+            <Grid container sx={{ maxWidth: "100px" }} spacing={1}>
               <Grid item xs={6}>
                 <MouseOverPopover popoverText={"Удалить"}>
                   <ConfirmDialog
@@ -123,9 +123,6 @@ const ArticleItem = ({ article }: Props) => {
                       "&:hover": {
                         background: blueGrey[100],
                       },
-                    }}
-                    onClick={() => {
-                      deleteArticle({ id });
                     }}
                   >
                     <EditIcon
