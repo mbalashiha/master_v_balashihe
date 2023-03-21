@@ -91,6 +91,9 @@ const ArticleItem = ({ article }: Props) => {
                   <ConfirmDialog
                     confirmCaption="Удалить"
                     message={`Удалить публикацию "${article.title}"?`}
+                    onConfirm={() => {
+                      deleteArticle({ id });
+                    }}
                   >
                     <IconButton
                       sx={{
@@ -99,9 +102,6 @@ const ArticleItem = ({ article }: Props) => {
                         "&:hover": {
                           background: blueGrey[100],
                         },
-                      }}
-                      onClick={() => {
-                        deleteArticle({ id });
                       }}
                     >
                       <DeleteForeverOutlinedIcon

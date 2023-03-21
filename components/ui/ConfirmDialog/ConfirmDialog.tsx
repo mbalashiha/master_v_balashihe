@@ -25,10 +25,11 @@ interface Props {
   confirmCaption?: string;
   title?: React.ReactNode | React.ReactNode[];
   message?: string;
+  onConfirm: () => void;
 }
 
 const ConfirmDialog = React.forwardRef(function ConfirmDialog(
-  { children: trigger, confirmCaption, title, message }: Props,
+  { children: trigger, confirmCaption, title, message, onConfirm }: Props,
   ref: any
 ) {
   title = title || "";
@@ -36,12 +37,8 @@ const ConfirmDialog = React.forwardRef(function ConfirmDialog(
   confirmCaption = confirmCaption || "OK";
   const [isOpen, setIsOpen] = React.useState(false);
   const close = () => setIsOpen(false);
-  let onConfirm: (() => void) | undefined = undefined;
   trigger = React.Children.map(trigger, (element: any) => {
-    if (!React.isValidElement(element)) return element;
-    const { onClick: onClickTrigger } = (element.props || {}) as any;
-    if (onClickTrigger) {
-      onConfirm = onClickTrigger;
+    if (React.isValidElement(element)) {
       const onClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
         event.stopPropagation();
         setIsOpen(true);
@@ -49,8 +46,9 @@ const ConfirmDialog = React.forwardRef(function ConfirmDialog(
       return React.cloneElement(element, {
         onClick,
       } as any);
+    } else {
+      return element;
     }
-    return element;
   }) as any;
   if (typeof onConfirm !== "function") {
     throw new Error(
@@ -101,9 +99,7 @@ const ConfirmDialog = React.forwardRef(function ConfirmDialog(
             <Button
               onClick={(event) => {
                 event.stopPropagation();
-                if (onConfirm) {
-                  onConfirm();
-                }
+                onConfirm();
                 close();
               }}
             >
