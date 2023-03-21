@@ -35,6 +35,20 @@ export default function ArticleTextEditor() {
   const initialValue = form.formIsResetting ? "" : htmlFieled.value;
   return (
     <>
+      {meta.error && (
+        <Paper
+          sx={{
+            my: 1,
+            mx: 0.5,
+            px: 1.5,
+            color: "#d80000",
+            fontWeight: 600,
+            fontSize: "14pt",
+          }}
+        >
+          * {meta.error}
+        </Paper>
+      )}
       <Box
         sx={{
           border: "none",
@@ -49,11 +63,6 @@ export default function ArticleTextEditor() {
           },
         }}
       >
-        {meta.error && (
-          <Box sx={{ color: "#d80000", fontWeight: 600, fontSize: "14pt" }}>
-            * {meta.error}
-          </Box>
-        )}
         {form.formIsResetting ? null : (
           <TinyMCE
             initialValue={initialValue}

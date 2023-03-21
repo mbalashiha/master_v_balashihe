@@ -7,11 +7,14 @@ export const articleDraftFragment = gql`
     id
     title
     handle
+    absURL
     text
     textHtml
     textRawDraftContentState
     autoHandleSlug
-    published
+    unPublished
+    notSearchable
+    notInList
     orderNumber
     blogCategoryId
     createdAt

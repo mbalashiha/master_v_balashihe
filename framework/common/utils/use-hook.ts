@@ -1,8 +1,9 @@
 import { useManagementApiProvider } from "@common/management/utils";
 import { API } from "@common/types";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { unstable_serialize, useSWRConfig } from "swr";
 import useSWR from "swr";
+import { useSnackbar } from "notistack";
 
 export const useHook = <H>(hookHandler: (apiHooks: API.Hooks) => H) => {
   const { hooks } = useManagementApiProvider();
@@ -79,6 +80,7 @@ const useData = (
   request: API.Graphql.RequestFunction<any, any>,
   ctx: API.Graphql.UseDataContext<any, any, any>
 ) => {
+  const { enqueueSnackbar } = useSnackbar();
   const { input, key } = useSWROptions(hook, ctx);
   const hookRequest = async () => {
     try {
@@ -93,6 +95,13 @@ const useData = (
     }
   };
   const response = useSWR(key, hookRequest, ctx?.swrOptions);
+  const { error } = response;
+  const errorMessage = (error && error.message) || null;
+  useEffect(() => {
+    if (errorMessage && enqueueSnackbar) {
+      enqueueSnackbar(errorMessage, { variant: "error" });
+    }
+  }, [errorMessage, enqueueSnackbar]);
   return response;
 };
 

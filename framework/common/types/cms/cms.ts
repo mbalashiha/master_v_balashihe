@@ -46,9 +46,12 @@ export namespace Blog {
     id: ID;
     title: string;
     url: string;
+    absURL: string;
     textHtml: string;
     renderHtml: String;
-    published: Boolean;
+    unPublished: Boolean;
+    notSearchable: Boolean;
+    notInList: Boolean;
     orderNumber: Int;
     category: BlogCategory;
     createdAt: Date;
@@ -64,10 +67,13 @@ export namespace Blog {
     title: String | null;
     handle: String | null;
     autoHandleSlug: String | null;
+    absURL: String | null;
     text: String;
     textHtml: String;
     textRawDraftContentState: String | null;
-    published: Boolean;
+    unPublished: Boolean;
+    notSearchable: Boolean;
+    notInList: Boolean;
     orderNumber: Int | null;
     blogCategoryId: ID | null;
     createdAt: Date;

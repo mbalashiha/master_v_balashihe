@@ -21,6 +21,7 @@ export default function MuiSnackbarProvider({ children, ...props }: Props) {
       )}
       autoHideDuration={40000}
       anchorOrigin={{ horizontal: "center", vertical: "top" }}
+      preventDuplicate
       {...props}
     >
       {children}

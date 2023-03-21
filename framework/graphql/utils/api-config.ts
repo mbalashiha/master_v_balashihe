@@ -36,7 +36,11 @@ class Config {
             await delay(1000);
           }
         }
-        throw apiError && apiError === "string" ? new Error(apiError) : e;
+        if (apiError && typeof apiError === "string") {
+          throw new Error(apiError);
+        } else {
+          throw e;
+        }
       }
     };
     const axInstance = axios.create({

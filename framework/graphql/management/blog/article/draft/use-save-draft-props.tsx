@@ -48,7 +48,10 @@ export const handler: API.Graphql.MutationHook<UseSaveArtDraftPropsHook> = {
           title: all?.title || null,
           handle: all?.handle || null,
           autoHandleSlug: all?.title ? slugify(all?.title) : null,
-          published: !!all?.published,
+          absURL: all?.absURL || null,
+          unPublished: Boolean(all?.unPublished),
+          notSearchable: Boolean(all?.notSearchable),
+          notInList: Boolean(all?.notInList),
           orderNumber: all?.orderNumber || null,
           blogCategoryId: all?.blogCategoryId || null,
           imageId: all?.imageId || null,
@@ -59,8 +62,11 @@ export const handler: API.Graphql.MutationHook<UseSaveArtDraftPropsHook> = {
         (draft.title || "") != (initial.title || "") ||
         (draft.autoHandleSlug || "") != (initial.autoHandleSlug || "") ||
         (draft.handle || "") != (initial.handle || "") ||
+        (draft.absURL || "") != (initial.absURL || "") ||
         (draft.blogCategoryId || "") != (initial.blogCategoryId || "") ||
-        (draft.published || "") != (initial.published || "") ||
+        Boolean(draft.unPublished) != Boolean(initial.unPublished) ||
+        Boolean(draft.notSearchable) != Boolean(initial.notSearchable) ||
+        Boolean(draft.notInList) != Boolean(initial.notInList) ||
         (draft.orderNumber || "") != (initial.orderNumber || "") ||
         (draft.imageId || "") != (initial.imageId || "");
       if (needToUpdate) {

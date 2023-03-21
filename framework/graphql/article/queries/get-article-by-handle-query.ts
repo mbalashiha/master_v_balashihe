@@ -21,8 +21,11 @@ export const getArticleByHandleQuery = gql`
     id
     title
     handle
+    absURL
     renderHtml
-    published
+    unPublished
+    notSearchable
+    notInList
     orderNumber
     blogCategoryId
     createdAt

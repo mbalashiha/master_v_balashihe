@@ -1,8 +1,18 @@
+const extractFieldMessage = (err: string) => {
+  const indexOfCurly = err.lastIndexOf("};");
+  if (indexOfCurly >= 0) {
+    const part = err.substring(indexOfCurly + 2);
+    if (part) {
+      err = part.trim() + " " + err;
+    }
+  }
+  return err;
+};
 export default function extractGraphQLError(
   graphqErrorCandidate: any
 ): string | null {
   let err = graphqErrorCandidate;
-  const graphqlError: any =
+  let graphqlError: any =
     (err &&
       err.response &&
       err.response.errors &&
@@ -11,13 +21,16 @@ export default function extractGraphQLError(
     null;
   if (!graphqlError) {
     return graphqErrorCandidate;
-  } else if (typeof graphqlError !== "string") {
-    if (typeof graphqlError === "object") {
-      return JSON.stringify(graphqlError, null, 2);
-    } else {
-      return graphqlError.toString();
-    }
   } else {
-    return graphqlError;
+    switch (typeof graphqlError) {
+      case "string":
+        break;
+      case "object":
+        graphqlError = JSON.stringify(graphqlError, null, 2);
+        break;
+      default:
+        graphqlError = graphqlError.toString();
+    }
+    return extractFieldMessage(graphqlError as string);
   }
 }

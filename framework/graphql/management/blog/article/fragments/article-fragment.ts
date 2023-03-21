@@ -9,7 +9,9 @@ const articleFragment = gql`
     textHtml
     textRawDraftContentState
     autoHandleSlug
-    published
+    unPublished
+    notSearchable
+    notInList
     orderNumber
     blogCategoryId
     createdAt

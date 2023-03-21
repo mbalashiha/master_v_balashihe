@@ -33,6 +33,7 @@ import {
 } from "@components/ui";
 import { blueGrey } from "@mui/material/colors";
 import { ImagePanel, UploaderComponent } from "./Article";
+import { ArticleFormParameters } from "./ArticleFormParameters";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -70,8 +71,10 @@ export const ArticleTabs = () => {
     <>
       <Paper
         sx={{
-          borderRadius: "24px",
+          background: blueGrey[100],
+          borderRadius: "12px",
         }}
+        elevation={4}
       >
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
@@ -82,19 +85,20 @@ export const ArticleTabs = () => {
               "& .MuiTabs-flexContainer": {
                 alignItems: "flex-end",
                 justifyContent: "end",
+                background: (theme) => theme.palette.background.paper,
+                borderRadius: "12px 12px 0 0",
               },
             }}
           >
             <Tab label="Публикация" {...a11yProps(0)} />
-            <Tab label="Параметры" {...a11yProps(1)} />
-            <Tab label="Редактор" {...a11yProps(2)} />
+            <Tab label="Изображение" {...a11yProps(1)} />
+            <Tab label="Параметры" {...a11yProps(2)} />
+            <Tab label="Текст" {...a11yProps(3)} />
           </Tabs>
         </Box>
         <Box
           sx={{
-            background: blueGrey[100],
             minHeight: "65vh",
-            borderRadius: "0 0 24px 24px",
             "& .mainImage": {
               marginLeft: { sm: "-5px", md: "-9px" },
               borderRadius: "8px",
@@ -107,7 +111,7 @@ export const ArticleTabs = () => {
               <Grid item xs={12} sm={4} lg={2} pr={0} mr={0}>
                 <UploaderComponent />
               </Grid>
-              <Grid item xs={12} sm={8} lg={10} >
+              <Grid item xs={12} sm={8} lg={10}>
                 <Grid container spacing={0}>
                   <Grid item xs={12} md={12}>
                     <ArticleTitle />
@@ -137,7 +141,10 @@ export const ArticleTabs = () => {
           <TabPanel value={value} index={1}>
             <ImagePanel />
           </TabPanel>
-          <Box sx={{ display: [0, 2].includes(value) ? "inherit" : "none" }}>
+          <TabPanel value={value} index={2}>
+            <ArticleFormParameters />
+          </TabPanel>
+          <Box sx={{ display: [0, 3].includes(value) ? "inherit" : "none" }}>
             <ArticleTextEditor />
           </Box>
         </Box>
