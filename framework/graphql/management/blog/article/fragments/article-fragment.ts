@@ -5,6 +5,7 @@ const articleFragment = gql`
     id
     title
     handle
+    absURL
     text
     textHtml
     textRawDraftContentState

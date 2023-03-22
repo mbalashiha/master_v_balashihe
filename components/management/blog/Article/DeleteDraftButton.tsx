@@ -24,17 +24,15 @@ const DeleteDraftButton = () => {
   return (
     <>
       {data && data.id && (
-        <ConfirmDialog message="Очистить черновик?">
-          <Button
-            sx={{ background: "black" }}
-            onClick={() => {
-              if (data.id) {
-                deleteDraft({ id: data.id });
-              }
-            }}
-          >
-            Удалить черновик
-          </Button>
+        <ConfirmDialog
+          message="Очистить черновик?"
+          onConfirm={() => {
+            if (data.id) {
+              deleteDraft({ id: data.id });
+            }
+          }}
+        >
+          <Button sx={{ background: "black" }}>Удалить черновик</Button>
         </ConfirmDialog>
       )}
     </>

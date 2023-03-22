@@ -7,6 +7,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
+import { slugifyAbsUrl } from "@lib";
 import SaveIcon from "@mui/icons-material/Save";
 import { ArticleTabs } from "./ArticleTabs";
 import {
@@ -160,7 +161,7 @@ export default function ArticleForm({}: Props) {
           handle,
           autoHandleSlug:
             (title ? slugify(title) : null) || autoHandleSlug || null,
-          absURL: !absURL ? "" : absURL.startsWith("/") ? absURL : `/${absURL}`,
+          absURL: slugifyAbsUrl(absURL || ""),
           text,
           textHtml,
           renderHtml,
