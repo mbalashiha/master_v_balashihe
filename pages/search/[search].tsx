@@ -9,6 +9,7 @@ import { HugeContainer } from "@components/ui";
 import getArticlesCards from "@framework/article/get-articles-cards";
 import { ArticleCard } from "@components/common/Article";
 import { SearchPageLayout } from "@components/site/Layout";
+import { BlogRootSidebar } from "@components/common/Article/Sidebars";
 
 export default function SearchPage({
   search,
@@ -23,11 +24,7 @@ export default function SearchPage({
           content={`Страница поиска - Мастер в Балашихе`}
         />
       </Head>
-      <HugeContainer
-        leftSidebar={
-          <Card elevation={0} sx={{ width: "100%", height: "800px" }}></Card>
-        }
-      >
+      <HugeContainer leftSidebar={<BlogRootSidebar />}>
         <Search search={search} sx={{ mb: 4 }} />
         <Grid container spacing={{ xs: 2, lg: 3 }}>
           {articles.map((article) => (

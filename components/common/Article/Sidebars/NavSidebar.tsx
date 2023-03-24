@@ -1,51 +1,31 @@
 import { Box, Typography, Paper, Grid, Stack, Button } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import SidebarLink from "@components/common/Article/Sidebars/SidebarLink";
 
 import { Blog } from "@common/types/cms";
+import { SidebarPaper } from "@components/common/Sidebar";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import { LinkListItem } from "@components/common/LinkListItem";
+
 interface Props {
   navigation: Blog.BlogArticleNavigation;
 }
 export default function NavSidebar({ navigation }: Props) {
   return (
-    <Paper
-      elevation={0}
-      component="ul"
-      sx={{
-        width: "100%",
-        minHeight: "400px",
-        pl: "6px",
-        pr: "6px",
-        "& > li, & a, & div": {
-          wordBreak: "keep-all",
-          overflow: "hidden",
-          textOverflow: "ellipsis !important",
-          whiteSpace: "nowrap",
-          "&:hover": {
-            backgroundColor: "transparent",
-            color: "red",
-          },
-        },
-      }}
-    >
-      <Box>
-        <Typography
-          component="h6"
-          variant="h6"
-          sx={{ textAlign: "center", mb: "10px", color: "grey.700" }}
-        >
-          Информация
-        </Typography>
-      </Box>
-      {navigation.nearestSiblings?.map((el) => (
-        <SidebarLink
-          key={el.url.toString() + (el.active || "null").toString()}
-          title={el.title}
-          url={el.url}
-          active={el.active}
-        />
-      ))}
-    </Paper>
+    <SidebarPaper title={"Навигация"}>
+      <nav aria-label="navigation articles">
+        <List sx={{}}>
+          {navigation.nearestSiblings?.map((el) => (
+            <LinkListItem key={(el.url || "") + "_" + el.title} {...el}>
+              <ListItemText primary={el.title} />
+            </LinkListItem>
+          ))}
+        </List>
+      </nav>
+    </SidebarPaper>
   );
 }

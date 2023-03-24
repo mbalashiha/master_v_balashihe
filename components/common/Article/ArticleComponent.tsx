@@ -9,6 +9,7 @@ import { NavSidebar } from "./Sidebars";
 import { HugeContainer } from "@components/ui";
 import { Blog } from "@common/types/cms";
 import util from "util";
+import SpecialHeader from "./SpecialHeader";
 type NextImageType = typeof Image;
 type NextImageTypeProps = React.ComponentProps<NextImageType>;
 
@@ -32,21 +33,7 @@ export default function Article({ title, children, image, navigation }: Props) {
           </>
         )}
       </Grid>
-      <Box component="header">
-        <Typography
-          component="h1"
-          variant="h1"
-          sx={{
-            color: "primary.main",
-            fontSize: "25px",
-            lineHeight: "30px",
-            fontWeight: 600,
-            pb: "35px",
-          }}
-        >
-          {title}
-        </Typography>
-      </Box>
+      <SpecialHeader>{title}</SpecialHeader>
       <Box
         component="article"
         sx={{

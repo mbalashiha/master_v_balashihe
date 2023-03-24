@@ -23,6 +23,7 @@ specifiers:
   graphql-request: 5.1.0
   html-react-parser: ^3.0.9
   js-cookie: 3.0.1
+  material-icons: ^1.13.3
   moment: ^2.29.4
   next: 13.2.4
   notistack: 2.0.8
@@ -58,6 +59,7 @@ dependencies:
   graphql-request: 5.1.0_graphql@16.6.0
   html-react-parser: 3.0.9_react@18.2.0
   js-cookie: 3.0.1
+  material-icons: 1.13.3
   moment: 2.29.4
   next: 13.2.4_wiv434v7erz4aedd5whhdwmpv4
   notistack: 2.0.8_s7gt3hmdzws52jopa6grz5igdq
@@ -2298,6 +2300,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
+    dev: false
+
+  /material-icons/1.13.3:
+    resolution: {integrity: sha512-fYn9X3mp20I79YoFTvIlJBkwmkyV9NEBVR6rlKXSVtGiGL6J16/jF+/R7C8ZrY+fjyRYPj9BUlhYXD2lFZzmxQ==}
     dev: false
 
   /merge2/1.4.1:

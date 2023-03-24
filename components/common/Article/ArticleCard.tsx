@@ -7,6 +7,7 @@ import { HugeContainer, LinkButton } from "@components/ui";
 import getArticlesCards from "@framework/article/get-articles-cards";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { Blog } from "@common/types/cms";
+import { grey, blueGrey } from "@mui/material/colors";
 
 interface Props {
   article: Blog.ArticleCard;
@@ -37,34 +38,65 @@ const ArticleCard = ({ article }: Props) => {
           },
         }}
       >
-        <Typography>{article.createdAt}</Typography>
         <Link href={article.url}>
           <Typography component="h5" variant="h5" gutterBottom>
             {article.title}
           </Typography>
         </Link>
         {article.fragment && (
-          <Box>
+          <Box sx={{ mb: "6px" }}>
             <Typography>{article.fragment}</Typography>
           </Box>
         )}
+
         <Stack
           direction={{ xs: "column", sm: "row" }}
-          spacing={{ xs: 1, sm: 2, xl: 3 }}
+          spacing={{ xs: 0, sm: 1 }}
           alignItems="center"
+          sx={{ width: "100%" }}
         >
-          <Box>
-            <LinkButton
-              href={article.url}
-              endIcon={<ArrowForwardIosRoundedIcon />}
-            >
-              Перейти к статье
-            </LinkButton>
-          </Box>
-          {(typeof article.score === "number" ||
-            typeof article.score === "string") && (
-            <Box color="primary.main">{`Релевантность: ${article.score.toString()}`}</Box>
-          )}
+          <Stack
+            sx={{
+              flexGrow: 1,
+            }}
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 0, sm: 2, xl: 3 }}
+            alignItems="center"
+          >
+            <Box>
+              <LinkButton
+                href={article.url}
+                endIcon={<ArrowForwardIosRoundedIcon />}
+              >
+                Перейти к статье
+              </LinkButton>
+            </Box>
+            {(typeof article.score === "number" ||
+              typeof article.score === "string") && (
+              <Box color="primary.main">{`Релевантность: ${article.score.toString()}`}</Box>
+            )}
+          </Stack>
+          <Stack
+            direction={"row"}
+            sx={{
+              fontWeight: 400,
+              fontSize: "15px",
+              lineHeight: "18px",
+              color: "#787d92",
+              justifyContent: "center",
+              alignItems: "center",
+              "& .material-icons-round": {
+                fontSize: "21px",
+                lineHeight: "21px",
+              },
+            }}
+            spacing={"6px"}
+          >
+            <Box className="material-icons-round" aria-hidden="true">
+              schedule
+            </Box>
+            <Box>{article.createdAt}</Box>
+          </Stack>
         </Stack>
       </Card>
     </Grid>

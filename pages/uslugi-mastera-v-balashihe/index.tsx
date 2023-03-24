@@ -5,10 +5,12 @@ import { InferGetStaticPropsType } from "next/types";
 import { HugeContainer } from "@components/ui";
 import getArticlesCards from "@framework/article/get-articles-cards";
 import { ArticleCard } from "@components/common/Article";
+import { SidebarPaper } from "@components/common/Sidebar";
+import { BlogRootSidebar } from "@components/common/Article/Sidebars";
 
-export default function Page(
-  { articles }: InferGetStaticPropsType<typeof getStaticProps>
-) {
+export default function Page({
+  articles,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
@@ -20,7 +22,7 @@ export default function Page(
       </Head>
       <HugeContainer
         leftSidebar={
-          <Card elevation={0} sx={{ width: "100%", height: "800px" }}></Card>
+          <BlogRootSidebar />
         }
       >
         <Grid container spacing={{ xs: 2, lg: 3 }}>

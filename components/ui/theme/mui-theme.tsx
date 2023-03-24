@@ -151,6 +151,13 @@ const getMuiTheme = (): Theme => {
           },
         },
       },
+      MuiListItem: {
+        styleOverrides: {
+          root: {
+            borderRadius: "0.75rem",
+          },
+        },
+      },
       // Name of the component
       MuiAlert: {
         styleOverrides: {
