@@ -4,12 +4,14 @@ import Head from "next/head";
 import { InferGetStaticPropsType } from "next/types";
 import { HugeContainer } from "@components/ui";
 import getArticlesCards from "@framework/article/get-articles-cards";
+import getRecentArticles from "@framework/article/get-recent-articles";
 import { ArticleCard } from "@components/common/Article";
 import { SidebarPaper } from "@components/common/Sidebar";
 import { BlogRootSidebar } from "@components/common/Article/Sidebars";
 
 export default function Page({
   articles,
+  recentArticles,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -20,11 +22,7 @@ export default function Page({
           content="Ремонт материнских плат в Балашихе и Московской области"
         />
       </Head>
-      <HugeContainer
-        leftSidebar={
-          <BlogRootSidebar />
-        }
-      >
+      <HugeContainer leftSidebar={<BlogRootSidebar recentArticles={recentArticles} />}>
         <Grid container spacing={{ xs: 2, lg: 3 }}>
           {articles.map((article) => (
             <ArticleCard key={article.url} article={article} />
@@ -39,6 +37,7 @@ export async function getStaticProps() {
   return {
     props: {
       articles: await getArticlesCards(),
+      recentArticles: (await getRecentArticles()),
     },
   };
 }

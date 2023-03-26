@@ -5,6 +5,7 @@ import { StyledPaper } from "./StyledPaper";
 type PaperProps = React.ComponentProps<typeof Paper>;
 type Props = PaperProps & {
   title?: React.ReactNode | React.ReactNode[];
+  ellipsis?: boolean;
 };
 export const SidebarPaper = ({ title, children, ...rest }: Props) => {
   return (

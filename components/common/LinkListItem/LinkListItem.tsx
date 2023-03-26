@@ -11,6 +11,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import { grey } from "@mui/material/colors";
 interface LinkProps extends Blog.NavigationItem {
   children: React.ReactNode | React.ReactNode[];
 }
@@ -25,7 +26,7 @@ export const LinkListItem = ({ children, active, url, title }: LinkProps) => {
             "&, &:hover": {
               cursor: "default",
               background: (theme) =>
-                `linear-gradient(198deg, rgb(228, 13, 85), ${theme.palette.primary.main})`,
+                `linear-gradient(195deg, rgb(30, 30, 54), ${grey[900]})`,
               "& .MuiTypography-root": {
                 color: "white",
               },
@@ -33,7 +34,7 @@ export const LinkListItem = ({ children, active, url, title }: LinkProps) => {
           }}
         >
           <ListItemIcon>
-            <ArrowForwardIosRoundedIcon sx={{ color: "red" }} />
+            <ArrowForwardIosRoundedIcon sx={{ color: "white" }} />
           </ListItemIcon>
           {children}
         </ListItemButton>

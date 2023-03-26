@@ -34,7 +34,7 @@ export const normalizeBlogRow = (
     }),
   };
 };
-const normalizeArtNavItem = (
+export const normalizeArtNavItem = (
   item: Schema.NavigationItem
 ): Blog.NavigationItem => {
   item = item || {};

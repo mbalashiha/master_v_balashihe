@@ -1,6 +1,9 @@
 import { styled, Paper } from "@mui/material";
 
-export const StyledPaper = styled(Paper)(({ theme }) => ({
+type StyledPaperProps = {
+  ellipsis?: boolean;
+}
+export const StyledPaper = styled(Paper)<StyledPaperProps>(({ theme, ellipsis }) => ({
   color: "#000000de",
   transition: "box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
   display: "flex",
@@ -23,10 +26,10 @@ export const StyledPaper = styled(Paper)(({ theme }) => ({
     "& div span": {
       color: "black",
       fontWeight: 500,
-      display: "block",
-      overflow: "hidden",
-      whiteSpace: "nowrap",
-      textOverflow: "ellipsis",
+      display: ellipsis && "block",
+      overflow: ellipsis && "hidden",
+      whiteSpace: ellipsis && "nowrap",
+      textOverflow: ellipsis && "ellipsis",
     },
   },
   "& .MuiListItemIcon-root": {
@@ -34,5 +37,5 @@ export const StyledPaper = styled(Paper)(({ theme }) => ({
   },
   "& .MuiListItemButton-root": {
     paddingLeft: "4px",
-  }
+  },
 }));

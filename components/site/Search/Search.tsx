@@ -6,6 +6,7 @@ import {
   Paper,
   SxProps,
 } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import * as React from "react";
@@ -64,11 +65,12 @@ export default function Search({ search, sx, onSubmit }: Props) {
               height: "48px",
               border: "2px solid transparent",
               borderRadius: 1,
-              padding: "5px",
-              paddingLeft: "20px",
-              paddingRight: hasSearchString ? "109px" : "63px",
+              padding: "5px 0px 5px 15px",
               "&.Mui-focused": {
                 borderColor: (theme) => theme.palette.primary.main,
+              },
+              "& .MuiSvgIcon-root": {
+                transform: "scale(1.7)",
               },
             },
           }}
@@ -78,43 +80,58 @@ export default function Search({ search, sx, onSubmit }: Props) {
           InputProps={{
             disableUnderline: true,
             endAdornment: (
-              <IconButton
-                sx={{ visibility: searchString ? "visible" : "hidden" }}
-                onClick={clearValue}
-              >
-                <ClearIcon />
-              </IconButton>
+              <>
+                <IconButton
+                  sx={{ visibility: searchString ? "visible" : "hidden" }}
+                  onClick={clearValue}
+                >
+                  <ClearIcon />
+                </IconButton>
+                <Button
+                  disabled={!hasSearchString}
+                  type="submit"
+                  sx={{
+                    width: "auto",
+                    background: "transparent",
+                    color: grey[600],
+                    transition: "all ease-in-out .2s",
+                    height: "46px",
+                    px: hasSearchString ? "19px" : "26px",
+                    borderRadius: 1,
+                    mr: "-1px",
+                    border: "none",
+                    fontSize: "22px",
+                    fontWeight: 400,
+                    "&:hover": {
+                      background: (theme) => theme.palette.primary.main,
+                      color: "white",
+                    },
+                    "&:disabled": {
+                      color: grey[600],
+                    },
+                  }}
+                >
+                  {hasSearchString ? (
+                    <Stack
+                      direction="row"
+                      alignItems="center"
+                      justifyContent="center"
+                      spacing={"8px"}
+                    >
+                      <SearchIcon />
+                      <span>Найти</span>
+                    </Stack>
+                  ) : (
+                    <SearchIcon />
+                  )}
+                </Button>
+              </>
             ),
           }}
           onChange={(event) => {
             setSearchString(event.currentTarget.value);
           }}
         />
-        <Button
-          disabled={!hasSearchString}
-          type="submit"
-          sx={{
-            width: "auto",
-            height: "48px",
-            background: "black",
-            color: "white",
-            position: "absolute",
-            right: 0,
-            transition: "all ease-in-out .2s",
-            px: "16px",
-            borderRadius: 1,
-            border: "none",
-            "&:hover": {
-              background: (theme) => theme.palette.primary.main,
-            },
-            "&:disabled": {
-              color: "white",
-            },
-          }}
-          startIcon={hasSearchString && <SearchIcon />}
-        >
-          {hasSearchString ? <span>Найти</span> : <SearchIcon />}
-        </Button>
       </form>
     </Paper>
   );

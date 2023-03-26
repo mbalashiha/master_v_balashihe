@@ -80,13 +80,15 @@ export default function Article({ title, children, image, navigation }: Props) {
           "& a": {
             width: "100%",
             textOverflow: "ellipsis",
-            transition: "all .15s ease .05s",
-            "&, & h6": {
-              textDecoration: "underline",
+            "&, & .MuiSvgIcon-root, & .MuiButtonBase-root, & *, & > *": {
+              transition: "all .3s ease .05s",
+            },
+            "&, &:hover": {
+              textDecoration: "none",
             },
             "&:hover": {
-              "&, & h6": {
-                textDecoration: "underline",
+              "&, & .MuiSvgIcon-root, & *": {
+                color: "red",
               },
             },
             "& > span": {
@@ -95,6 +97,12 @@ export default function Article({ title, children, image, navigation }: Props) {
               alignItems: "center",
               justifyContent: "center",
               position: "relative",
+              background: (theme) => theme.palette.background.paper,
+              borderColor: (theme) => theme.palette.background.paper,
+              borderRadius: "2rem",
+              border: "none",
+              boxShadow:
+                "#0000001a 0rem 0.25rem 0.375rem -0.0625rem, #0000000f 0rem 0.125rem 0.25rem -0.0625rem",
               px: 0,
               "& > *": {
                 display: "flex",
@@ -111,8 +119,8 @@ export default function Article({ title, children, image, navigation }: Props) {
                 position: "absolute",
               },
               "& .MuiSvgIcon-root": {
-                width: "96px",
-                height: "96px",
+                width: "85px",
+                height: "85px",
                 position: "absolute",
               },
             },
@@ -131,7 +139,7 @@ export default function Article({ title, children, image, navigation }: Props) {
                 }}
               >
                 <ArrowBackIosRoundedIcon
-                  sx={{ left: { xs: "-25px", md: "-9px" } }}
+                  sx={{ left: { xs: "-23px", md: "-21px", xl: "-10px" } }}
                 />
                 <h6>{navigation.prev.title}</h6>
               </Button>
@@ -151,7 +159,7 @@ export default function Article({ title, children, image, navigation }: Props) {
               >
                 <h6>{navigation.next.title}</h6>
                 <ArrowForwardIosRoundedIcon
-                  sx={{ right: { xs: "-25px", md: "-9px" } }}
+                  sx={{ right: { xs: "-23px", md: "-21px", xl: "-10px" } }}
                 />
               </Button>
             </Link>

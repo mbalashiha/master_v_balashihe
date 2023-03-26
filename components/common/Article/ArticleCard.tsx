@@ -19,6 +19,8 @@ const ArticleCard = ({ article }: Props) => {
         elevation={0}
         sx={{
           p: 2,
+          boxShadow:
+            "#0000001a 0rem 0.25rem 0.375rem -0.0625rem, #0000000f 0rem 0.125rem 0.25rem -0.0625rem",
           "&, & h5, & p": {
             color: (theme) => theme.palette.articleText.main,
           },
@@ -79,18 +81,20 @@ const ArticleCard = ({ article }: Props) => {
           <Stack
             direction={"row"}
             sx={{
-              fontWeight: 400,
-              fontSize: "15px",
-              lineHeight: "18px",
-              color: "#787d92",
+              "&, & > *": {
+                fontWeight: 400,
+                fontSize: "13px",
+                lineHeight: "23px",
+                textTransform: "uppercase",
+              },
               justifyContent: "center",
               alignItems: "center",
               "& .material-icons-round": {
-                fontSize: "21px",
-                lineHeight: "21px",
+                fontSize: "16px",
+                lineHeight: "23px",
               },
             }}
-            spacing={"6px"}
+            spacing={"4px"}
           >
             <Box className="material-icons-round" aria-hidden="true">
               schedule

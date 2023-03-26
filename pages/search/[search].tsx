@@ -10,10 +10,12 @@ import getArticlesCards from "@framework/article/get-articles-cards";
 import { ArticleCard } from "@components/common/Article";
 import { SearchPageLayout } from "@components/site/Layout";
 import { BlogRootSidebar } from "@components/common/Article/Sidebars";
+import getRecentArticles from "@framework/article/get-recent-articles";
 
 export default function SearchPage({
   search,
   articles,
+  recentArticles,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
@@ -24,7 +26,9 @@ export default function SearchPage({
           content={`Страница поиска - Мастер в Балашихе`}
         />
       </Head>
-      <HugeContainer leftSidebar={<BlogRootSidebar />}>
+      <HugeContainer
+        leftSidebar={<BlogRootSidebar recentArticles={recentArticles} />}
+      >
         <Search search={search} sx={{ mb: 4 }} />
         <Grid container spacing={{ xs: 2, lg: 3 }}>
           {articles.map((article) => (
@@ -44,6 +48,7 @@ export async function getServerSideProps(
     props: {
       search,
       articles: await getArticlesCards({ search }),
+      recentArticles: await getRecentArticles(),
     },
   };
 }
