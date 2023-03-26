@@ -52,6 +52,13 @@ export const handler: API.Graphql.MutationHook<UseSaveArticleHook> = {
     return () => async (input) => {
       try {
         const response = await request(input);
+        if (response.error) {
+          const m = response.error.match(/\s*ER_DUP_ENTRY\:\s+Duplicate entry\s+'([^\'\"]+)'/im)
+          if (m && m[1]) {
+            const duplicateTitle = m[1];
+            response.error = `Статья и именем "${duplicateTitle}" уже существует. Перейти к редактированию существующей статьи?`;
+          }
+        }
         enqueueSnackbar(
           (response.message || response.error || "Error occured").substring(
             0,

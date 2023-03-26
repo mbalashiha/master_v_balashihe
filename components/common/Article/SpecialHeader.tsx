@@ -7,7 +7,7 @@ const StyledBox = styled((props: React.ComponentProps<typeof Paper>) => (
 ))(({ theme }) => ({
   width: "100%",
   padding: "1.3rem 2rem 2rem 2rem",
-  background: `linear-gradient(195deg, rgb(30, 30, 54), ${theme.palette.articleText.main})`,
+  background: `linear-gradient(184deg, ${theme.palette.articleText.main}, rgb(30, 30, 54))`,
   color: `rgb(52, 71, 103)`,
   borderRadius: "0.8rem",
   boxShadow: `rgba(0, 0, 0, 0.14) 0rem 0.25rem 1.25rem 0rem, rgba(64, 64, 64, 0.4) 0rem 0.4375rem 0.625rem -0.3125rem`,

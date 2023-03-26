@@ -18,10 +18,15 @@ import {
 } from "@components/ui";
 import useArticleDraft from "@framework/management/blog/article/draft/use-article-draft";
 import React, { useRef, useEffect, useMemo } from "react";
-import { ArticleProvider } from "./ArticleProvider";
+import {
+  ArticleEditorContext,
+  ArticleProvider,
+  useArticleContext,
+} from "./ArticleProvider";
 import { ArticleTextEditor } from "@components/management/blog";
 import { Title } from "@mui/icons-material";
 import ArticleTitle from "./ArticleTitle";
+import useCheckArticle from "@framework/management/blog/article/draft/use-check-article";
 import useSaveArticle from "@framework/management/blog/article/use-save-article";
 import { ValuesOfCorrectTypeRule } from "graphql";
 import { slugify } from "@lib";
@@ -37,10 +42,14 @@ interface Props {
 
 export default function ArticleForm({}: Props) {
   const router = useRouter();
+  const { setDuplicateArticle } = useArticleContext();
+  const checkArticle = useCheckArticle();
   const { enqueueSnackbar } = useSnackbar();
   const { setCreateButton, unsetCreateButton } = useFabButton();
   const { data } = useArticleDraft();
   const { existingArticleId: articleId, isCreatePage } = data! || {};
+  const providerRef: React.MutableRefObject<ArticleEditorContext | undefined> =
+    useRef<ArticleEditorContext | undefined>();
   useEffect(() => {
     if (!isCreatePage) {
       setCreateButton({ href: "/management/blog/article/create" });
@@ -55,7 +64,7 @@ export default function ArticleForm({}: Props) {
   return data ? (
     <RefFormik
       initialValues={data}
-      validate={(values) => {
+      validate={async (values) => {
         if (typeof values !== "object") {
           throw new Error(
             "Formik form values is not an object. How is that possible?"
@@ -71,11 +80,33 @@ export default function ArticleForm({}: Props) {
             variant: "error",
           });
         }
-        if (!(values.title || "").trim()) {
-          errors.title = "Введите название статьи";
-        }
+        values.title = (values.title || "").trim();
+        values.handle = (values.handle || "").trim();
         const title = values.title;
         const test_autoHandleSlug = title ? slugify(title) : null;
+        if (!values.title) {
+          errors.title = "Введите название статьи";
+        } else {
+          try {
+            const duplicateArticle = await checkArticle({
+              title: values.title || "",
+              handle: test_autoHandleSlug || "",
+            });
+            if (
+              duplicateArticle &&
+              duplicateArticle.id != values.existingArticleId
+            ) {
+              errors.title = `Статья с именем "${duplicateArticle.title}" уже существует.`;
+              if (providerRef.current) {
+                const { setDuplicateArticle } = providerRef.current;
+                setDuplicateArticle(duplicateArticle);
+              }
+            }
+          } catch (e: any) {
+            console.error(e.stack || e.message);
+            errors.title = e.message;
+          }
+        }
         if (!errors.title && !test_autoHandleSlug) {
           errors.title =
             "Введите корректное название статьи для пути URL страницы: " +
@@ -193,7 +224,7 @@ export default function ArticleForm({}: Props) {
         }
       }}
     >
-      <ArticleProvider>
+      <ArticleProvider providerRef={providerRef}>
         <Grid container sx={{ my: 1 }}>
           <Grid
             item

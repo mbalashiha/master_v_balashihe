@@ -191,6 +191,9 @@ export namespace Schema {
         nodes: BlogArticleCard[];
       };
     }
+    export interface ManagementCheckArticle {
+      managementCheckArticle: BlogArticle | undefined | null;
+    }
     export interface SaveArtDraftPropsResponse {
       saveArticleDraft: {
         message: String;

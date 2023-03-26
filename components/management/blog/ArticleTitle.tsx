@@ -1,11 +1,21 @@
-import { useField } from "@components/ui";
+import { Dialog, useField, useRefFormik } from "@components/ui";
 import { TextField } from "@mui/material";
 import useSaveArtDraftProps from "@framework/management/blog/article/draft/use-save-draft-props";
+import useCheckArticle from "@framework/management/blog/article/draft/use-check-article";
+import React from "react";
+import { Blog } from "@common/types/cms";
+import { useRouter } from "next/router";
+import { CMS } from "@common/types";
+import { useArticleContext } from "./ArticleProvider";
 
 export const ArticleTitle = () => {
   const [field, meta] = useField<string>("title");
   const saveDraft = useSaveArtDraftProps();
   const onBlur = field.onBlur;
+  const checkArticle = useCheckArticle();
+  const router = useRouter();
+  const { getValues } = useRefFormik<CMS.Blog.ArticleDraft>();
+  const { setDuplicateArticle } = useArticleContext();
   return (
     <>
       <TextField
@@ -16,8 +26,15 @@ export const ArticleTitle = () => {
         error={!!meta.error}
         helperText={meta.error}
         {...field}
-        onBlur={(ev, ...rest) => {
+        onBlur={async (ev, ...rest) => {
           saveDraft({});
+          const article = await checkArticle({
+            title: ev.target.value,
+            handle: "",
+          });
+          if (article && article.id != getValues()?.existingArticleId) {
+            setDuplicateArticle(article);
+          }
           return onBlur(ev, ...rest);
         }}
       ></TextField>

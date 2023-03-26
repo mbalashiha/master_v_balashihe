@@ -17,12 +17,15 @@ interface Props {
   children: React.ReactNode | React.ReactNode[];
   title: string;
   image?: React.ReactNode;
-  navigation: Blog.BlogArticleNavigation;
+  navigation?: Blog.BlogArticleNavigation;
 }
 
 export default function Article({ title, children, image, navigation }: Props) {
   return (
-    <HugeContainer rightSidebar={<NavSidebar navigation={navigation} />}>
+    <HugeContainer
+      rightSidebar={navigation && <NavSidebar navigation={navigation} />}
+    >
+      <SpecialHeader>{title}</SpecialHeader>
       <Grid container spacing={0}>
         {image && (
           <>
@@ -33,7 +36,6 @@ export default function Article({ title, children, image, navigation }: Props) {
           </>
         )}
       </Grid>
-      <SpecialHeader>{title}</SpecialHeader>
       <Box
         component="article"
         sx={{
@@ -128,7 +130,7 @@ export default function Article({ title, children, image, navigation }: Props) {
         }}
       >
         <Grid component={"strong"} item xs={6}>
-          {navigation.prev?.url && (
+          {navigation?.prev?.url && (
             <Link href={navigation.prev.url}>
               <Button
                 component="span"
@@ -147,7 +149,7 @@ export default function Article({ title, children, image, navigation }: Props) {
           )}
         </Grid>
         <Grid component={"strong"} item xs={6}>
-          {navigation.next?.url && (
+          {navigation?.next?.url && (
             <Link href={navigation.next.url}>
               <Button
                 component="span"

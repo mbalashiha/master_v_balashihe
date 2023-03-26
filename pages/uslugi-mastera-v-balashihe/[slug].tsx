@@ -28,6 +28,9 @@ export const getStaticProps = async (
   const { params } = context;
   const slug = (params && params.slug) || "";
   const article = await getArticleByHandle({ handle: slug });
+  if (!article || !article.title || !article.url) {
+    throw new Error('404');
+  }
   return {
     props: { article, handle: slug },
   };

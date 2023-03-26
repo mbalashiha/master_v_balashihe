@@ -138,7 +138,7 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
             ],
             valid_elements:
               "@[class],p[style],h3,h4,h5,h6,a[href|target],strong/b," +
-              "div[align|data-images-container],br,table,tbody,thead,tr,td,ul,ol,li,img[src|alt|width|height|id|data-name|title|data-original-width|data-original-height],paper,typography",
+              "div[align|data-images-container],br,table,tbody,thead,tr,td,ul,ol,li,img[src|alt|width|height|id|data-id|title|data-original-width|data-original-height]",
           }}
           {...rest}
         />

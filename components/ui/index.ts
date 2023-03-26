@@ -32,6 +32,7 @@ export {
 export { default as RelativeBackdrop } from "./RelativeBackdrop";
 export { default as FullScreenModal } from "./FullScreenModal";
 export { default as SlideInDialog } from "./SlideInDialog";
+export { default as Dialog } from "./Dialog";
 // export { default as StyledPhoneInput } from "./StyledPhoneInput";
 export { default as ClosableAlertt } from "./ClosableAlert";
 

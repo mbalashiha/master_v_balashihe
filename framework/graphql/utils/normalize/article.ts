@@ -94,11 +94,10 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
   if (!id) {
     throw new Error("No id in article row!");
   }
-  const url = id ? normalizeArticleUrl(handle) : null;
   return {
     id,
     title,
-    url: url || `/${handle}`,
+    url: (handle ? normalizeArticleUrl(handle) : "") || "",
     absURL: !absURL ? "" : absURL.startsWith("/") ? absURL : `/${absURL}`,
     navigation: normalizeArticleNavigationItems(navigation),
     textHtml: textHtml || renderHtml || "",

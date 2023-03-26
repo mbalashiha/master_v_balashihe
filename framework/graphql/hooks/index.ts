@@ -11,6 +11,7 @@ import { handler as useDeleteArticleDraft } from "@framework/management/blog/art
 import { handler as useArticleList } from "@framework/management/blog/use-article-list";
 import { handler as useArticleSearch } from "@framework/management/blog/use-articles-search";
 import { handler as useImageUpload } from "@framework/management/image/use-image-upload";
+import { handler as useCheckArticle } from "@framework/management/blog/article/draft/use-check-article";
 import { API } from "@common/types";
 
 export const graphqlHooks: API.Hooks = {
@@ -35,6 +36,7 @@ export const graphqlHooks: API.Hooks = {
           useSaveArticleText,
           useSaveDraftProps: useSaveArticleDraftProps,
           useDeleteDraft: useDeleteArticleDraft,
+          useCheckArticle,
         },
       },
     },
