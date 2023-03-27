@@ -1,6 +1,6 @@
 import { FC } from "react";
 import React, { useContext } from "react";
-import { Container, Box, Dialog, Sidebar, styled } from "@components/ui";
+import { Container, Box, styled } from "@mui/material";
 import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@mui/material/Typography";
@@ -39,10 +39,7 @@ const NavBreadcrumbs = ({ breadcrumbs }: Props) => {
       {breadcrumbs && (
         <StyledBox>
           <Container maxWidth="lg">
-            <StyledBreadcrumbs
-              aria-label="breadcrumb"
-              separator={"\u2014"}
-            >
+            <StyledBreadcrumbs aria-label="breadcrumb" separator={"\u2014"}>
               {breadcrumbs.map(({ name, url }, ind) => {
                 const key = url.toString() + "_" + name.toString();
                 const breadcrumbElement =

@@ -23,6 +23,7 @@ interface Props {
 export default function Article({ title, children, image, navigation }: Props) {
   return (
     <HugeContainer
+      showSearch
       rightSidebar={navigation && <NavSidebar navigation={navigation} />}
     >
       <SpecialHeader>{title}</SpecialHeader>

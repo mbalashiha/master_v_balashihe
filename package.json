@@ -37,6 +37,7 @@
     "notistack": "2.0.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-responsive-carousel": "^3.2.23",
     "sanitize-html": "^2.10.0",
     "sass": "1.58.3",
     "slugify": "^1.6.5",

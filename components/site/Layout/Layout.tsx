@@ -20,15 +20,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
   return (
     <>
       <RootLayout>
-        <Container maxWidth="xl" sx={{ mt: 1.3 }}>
-          <Grid container spacing={{ xs: 1, xl: 3 }}>
-            <Grid item xs={12} md={6} lg={7}></Grid>
-            <Grid item xs={12} md={6} lg={5}>
-              <Search />
-            </Grid>
-          </Grid>
-        </Container>
-        <Box component="main" pb="24rem" mt="4rem">
+        <Box component="main" pb="24rem">
           {children}
           <BottomContactsWithMap />
         </Box>

@@ -1,1 +1,1 @@
-export { default as ProductSlider } from "./ProductSlider";
+export { default as ProductSlider } from "./ProductSlider/index.ts-excluded";

@@ -40,7 +40,9 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "components/product/ProductSlider/ProductSlider.tsx-excluded",
+    "components/product/ProductSlider/index.ts-excluded"
   ],
   "exclude": ["node_modules"]
 }

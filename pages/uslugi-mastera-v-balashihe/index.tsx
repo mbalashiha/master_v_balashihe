@@ -22,7 +22,10 @@ export default function Page({
           content="Ремонт материнских плат в Балашихе и Московской области"
         />
       </Head>
-      <HugeContainer leftSidebar={<BlogRootSidebar recentArticles={recentArticles} />}>
+      <HugeContainer
+        showSearch
+        leftSidebar={<BlogRootSidebar recentArticles={recentArticles} />}
+      >
         <Grid container spacing={{ xs: 2, lg: 3 }}>
           {articles.map((article) => (
             <ArticleCard key={article.url} article={article} />
@@ -37,7 +40,7 @@ export async function getStaticProps() {
   return {
     props: {
       articles: await getArticlesCards(),
-      recentArticles: (await getRecentArticles()),
+      recentArticles: await getRecentArticles(),
     },
   };
 }

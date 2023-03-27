@@ -12,7 +12,7 @@ import {
 } from "react";
 import cn from "classnames";
 import { FullScreenSlider } from "./FullScreenSlider";
-import { styled } from "@components/ui";
+import { styled, theme } from "@components/ui";
 import { Carousel } from "react-responsive-carousel";
 import { Box, Paper } from "@components/ui";
 import { Portal } from "@mui/material";
@@ -170,7 +170,7 @@ const StyledCarousel = styled(Carousel)(({ theme }) => ({
     },
   },
 }));
-const ProductSlider = ({ children }) => {
+const ProductSlider = ({ children }: any) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [paperBackgroud, setPaperBackground] = React.useState<string | null>(
     null
@@ -239,17 +239,15 @@ const ProductSlider = ({ children }) => {
   return (
     <>
       {thumbsContainer && (
-        <Portal node={thumbsContainer}>
+        <Portal>
           <InPageSlideBackBtn
             background={paperBackgroud}
             arrowColor={arrowColor}
-            mode={theme?.palette?.mode}
             onClick={() => carouselRef.current.decrement()}
           ></InPageSlideBackBtn>
           <InPageSlideForwardBtn
             background={paperBackgroud}
             arrowColor={arrowColor}
-            mode={theme?.palette?.mode}
             onClick={() => carouselRef.current.increment()}
           ></InPageSlideForwardBtn>
         </Portal>
@@ -275,13 +273,13 @@ const ProductSlider = ({ children }) => {
             return `${currentItem} из ${total}`;
           }}
           onClickItem={() => setIsOpen(true)}
-          renderThumbs={(children) => {
+          renderThumbs={(children: any) => {
             children = Children.map(children, (child: any) =>
               React.cloneElement(child, { quality: 80 })
             ) as any as React.ReactChild[];
             return children;
           }}
-          renderItem={(item, options) => {
+          renderItem={(item: any, options: any) => {
             return (
               <Paper
                 sx={{
