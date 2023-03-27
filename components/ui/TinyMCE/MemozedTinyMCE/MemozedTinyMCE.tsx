@@ -124,8 +124,8 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
             toolbar:
               "undo redo | casechange blocks | bold italic forecolor | " +
               "insertCodeButton imageUploadButton | " +
-              "alignleft aligncenter alignright alignjustify | " +
-              "bullist numlist checklist outdent indent | removeformat | link image code table help",
+              "alignleft aligncenter alignright alignjustify link | " +
+              "bullist numlist checklist outdent indent | removeformat | image code table help",
             content_style: `body { color: #06060e; font-family: Inter,Arial,sans-serif; font-weight: 500; font-size: 18px; }
                img { 
                 box-shadow: 4px 4px 20px rgb(0 0 0 / 20%);
@@ -137,7 +137,7 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
               { title: "English", code: "en" },
             ],
             valid_elements:
-              "@[class],p[style],h3,h4,h5,h6,a[href|target],strong/b," +
+              "@[class],p[style],h1,h2,h3,h4,h5,h6,a[href|target],strong/b," +
               "div[align|data-images-container],br,table,tbody,thead,tr,td,ul,ol,li,img[src|alt|width|height|id|data-id|title|data-original-width|data-original-height]",
           }}
           {...rest}

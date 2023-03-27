@@ -164,6 +164,7 @@ export default function ArticleForm({}: Props) {
             document.documentElement.querySelector("body")?.innerHTML ||
             textHtml;
         }
+        renderHtml = renderHtml.replace(/\"(\.\.\/+)+/gim, '\"/');
         renderHtml = renderHtml
           .replace(/<table(\s+[^>]*)?>/g, `<div data-component-tag="table"$1>`)
           .replace(/<\/table>/g, `</div>`);

@@ -11,7 +11,7 @@ interface Props {
 const ArticleLayout: FC<Props> = ({ children }: Props) => {
   return (
     <Layout>
-      <Box sx={{ mt: "160px", borderRadius: 0 }}>
+      <Box sx={{ }}>
         <Container
           maxWidth={false}
           sx={{ maxWidth: "1900px", px: { xs: 1, md: 2, lg: 3, xl: 1 } }}

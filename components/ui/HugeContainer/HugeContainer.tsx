@@ -18,7 +18,7 @@ export default function HugeContainer({
   spacing,
 }: Props) {
   return (
-    <Container maxWidth="xl" sx={{ ...sx }}>
+    <Container maxWidth="xl" sx={{ mt: 5, ...sx }}>
       <Grid container spacing={spacing || { xs: 1, xl: 3 }}>
         {leftSidebar && (
           <Grid item xs={12} md={12} lg={3}>

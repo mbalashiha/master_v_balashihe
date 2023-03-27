@@ -10,8 +10,10 @@ import {
   Stack,
   TextField,
   Typography,
+  IconButton,
 } from "@mui/material";
 import useArticleDraft from "@framework/management/blog/article/draft/use-article-draft";
+import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import { ArticleProvider } from "./ArticleProvider";
 import { ArticleTextEditor } from "@components/management/blog";
 import { Title } from "@mui/icons-material";
@@ -122,15 +124,30 @@ export const ArticleTabs = () => {
                         elevation={1}
                         sx={{ width: "100%", p: 1, fontWeight: 600 }}
                       >
-                        Страница на сайте:{" "}
-                        <a
-                          href={data.url}
-                          title={data.url}
-                          rel="noreferrer"
-                          target="_blank"
-                        >
-                          {data.url}
-                        </a>
+                        <Stack direction={"row"}>
+                          <Box sx={{ flexGrow: 1 }}>
+                            Страница на сайте:{" "}
+                            <a
+                              href={data.url}
+                              title={data.url}
+                              rel="noreferrer"
+                              target="_blank"
+                            >
+                              {data.url}
+                            </a>
+                          </Box>
+                          <Box>
+                            <IconButton
+                              onClick={() => {
+                                if (data.url) {
+                                  navigator.clipboard.writeText(data.url);
+                                }
+                              }}
+                            >
+                              <ContentCopyRoundedIcon />
+                            </IconButton>
+                          </Box>
+                        </Stack>
                       </Paper>
                     </Grid>
                   )}

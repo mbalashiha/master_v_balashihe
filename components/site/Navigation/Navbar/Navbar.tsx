@@ -209,7 +209,6 @@ const Navbar: FC = () => {
           </Stack>
         </Toolbar>
       </StyledAppBar>
-      <Box sx={{ mb: 4 }}></Box>
     </>
   );
 };

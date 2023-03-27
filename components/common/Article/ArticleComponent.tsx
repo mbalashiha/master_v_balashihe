@@ -83,14 +83,14 @@ export default function Article({ title, children, image, navigation }: Props) {
             width: "100%",
             textOverflow: "ellipsis",
             "&, & .MuiSvgIcon-root, & .MuiButtonBase-root, & *, & > *": {
-              transition: "all .3s ease .05s",
+              transition: "all ease-in-out .1s",
             },
             "&, &:hover": {
               textDecoration: "none",
             },
             "&:hover": {
-              "&, & .MuiSvgIcon-root, & *": {
-                color: "red",
+              "& .MuiSvgIcon-root, & .MuiButtonBase-root, & *, & > *": {
+                color: "#ff7777",
               },
             },
             "& > span": {

@@ -100,8 +100,8 @@ export default function SearchField({ sx }: Props) {
                     fontSize: "20px",
                     fontWeight: 400,
                     "&:hover": {
-                      background: (theme) => theme.palette.primary.main,
-                      color: "white",
+                      background: "transparent",
+                      color: (theme) => theme.palette.primary.main,
                     },
                     "&:disabled": {
                       color: grey[600],
