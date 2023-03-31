@@ -23,8 +23,9 @@ export function fitWidth(
   srcHeight: number,
   maxWidth: number
 ): { width: number; height: number } {
-  srcWidth = srcWidth || maxWidth || 1;
+  if (!srcWidth) {
+    throw new Error("fit width: no image source width!");
+  }
   const ratio = maxWidth / srcWidth;
-
   return { width: srcWidth * ratio, height: srcHeight * ratio };
 }

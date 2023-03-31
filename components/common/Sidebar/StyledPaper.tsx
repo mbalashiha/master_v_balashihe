@@ -1,9 +1,12 @@
 import { styled, Paper } from "@mui/material";
 
+type PaperProps = React.ComponentProps<typeof Paper>;
 type StyledPaperProps = {
   ellipsis?: boolean;
 }
-export const StyledPaper = styled(Paper)<StyledPaperProps>(({ theme, ellipsis }) => ({
+type Props = PaperProps & StyledPaperProps;
+
+export const StyledPaper = styled(({ellipsis: _, ...props}: Props)=>(<Paper {...props} />))<StyledPaperProps>(({ theme, ellipsis }) => ({
   color: "#000000de",
   transition: "box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
   display: "flex",

@@ -1,3 +1,4 @@
+import { CMS } from "@common/types";
 import useImagePaperDimentions from "@components/hooks/useImagePaperDimentions";
 import {
   GradientBackground1,
@@ -7,12 +8,12 @@ import {
 import { fitWidth } from "@lib/aspect-ration-fit";
 import { Box, Typography, Paper, Grid } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useMemo } from "react";
 type NextImageType = typeof Image;
 type NextImageTypeProps = React.ComponentProps<NextImageType>;
 interface Props {
   gradientBackground?: React.ReactNode;
-  image?: React.ReactNode;
+  image: CMS.Image | null;
 }
 export const ImagePlaceholder = (props: Partial<NextImageTypeProps>) => (
   <Image
@@ -24,19 +25,7 @@ export const ImagePlaceholder = (props: Partial<NextImageTypeProps>) => (
   ></Image>
 );
 
-export default function ImagePaper({
-  gradientBackground,
-  image = <ImagePlaceholder />,
-}: Props) {
-  image = React.useMemo(() => {
-    let cloningImage = image;
-    if (React.isValidElement(cloningImage)) {
-      cloningImage = React.cloneElement(cloningImage, {
-        layout: "responsive",
-      } as any);
-    }
-    return cloningImage;
-  }, [image]);
+export default function ImagePaper({ gradientBackground, image }: Props) {
   const [usingGradientBackground, setGradientBackground] =
     React.useState<React.ReactNode>(gradientBackground);
   React.useEffect(() => {
@@ -57,25 +46,69 @@ export default function ImagePaper({
       setGradientBackground(locGradientBackground);
     }
   }, [gradientBackground]);
-  const { imagePaperRef } = useImagePaperDimentions(image);
+  image = image && image.url && image.width ? image : null;
+  let {
+    src,
+    alt,
+    width,
+    height,
+  }: {
+    src: string | null;
+    alt: string;
+    width: number;
+    height: number;
+  } = image
+    ? {
+        src: image.url,
+        alt: image.alt,
+        width: image.width,
+        height: image.height,
+      }
+    : {
+        src: null,
+        alt: "",
+        width: 0,
+        height: 0,
+      };
+  const imageProps = useMemo(() => {
+    if (!src || !width) {
+      return {
+        src: null,
+        alt: "",
+        width: 0,
+        height: 0,
+      };
+    } else {
+      const fitted = fitWidth(width, height, 500);
+      return {
+        src,
+        alt,
+        width: fitted.width,
+        height: fitted.height,
+      };
+    }
+  }, [src, alt, width, height]);
+  src = imageProps.src;
+  alt = imageProps.alt;
+  width = imageProps.width;
+  height = imageProps.height;
   return (
     <Paper
-      ref={imagePaperRef}
       sx={{
         zIndex: 0,
         position: "relative",
         overflow: "hidden",
-        height: "400px",
-        "&, & img": {
-          width: { xs: "100%", sm: "500px" },
-        },
+        width: "500px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        mb: 5,
       }}
     >
       <>
-        {image}
+        {(src && (
+          <Image src={src} alt={alt} width={width} height={height} />
+        )) || <ImagePlaceholder />}
         <Box
           sx={{
             "& svg": {

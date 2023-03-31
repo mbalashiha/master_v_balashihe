@@ -29,7 +29,7 @@ export const getStaticProps = async (
   const slug = (params && params.slug) || "";
   const article = await getArticleByHandle({ handle: slug });
   if (!article || !article.title || !article.url) {
-    throw new Error('404');
+    throw new Error("404");
   }
   return {
     props: { article, handle: slug },
@@ -39,7 +39,7 @@ export default function Page(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const { article } = props;
-  const { renderHtml } = article;
+  const { renderHtml, image, navigation, title } = article;
   return (
     <>
       <Head>
@@ -49,7 +49,7 @@ export default function Page(
           content={`Мастер по ремонту в Балашихе и Московской области - ${article.title}`}
         />
       </Head>
-      <Article title={article.title} navigation={article.navigation}>
+      <Article image={image} title={title} navigation={navigation}>
         <DescriptionParser descriptionHTML={renderHtml} />
       </Article>
     </>

@@ -10,13 +10,14 @@ import { HugeContainer } from "@components/ui";
 import { Blog } from "@common/types/cms";
 import util from "util";
 import SpecialHeader from "./SpecialHeader";
+import { CMS } from "@common/types";
 type NextImageType = typeof Image;
 type NextImageTypeProps = React.ComponentProps<NextImageType>;
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
   title: string;
-  image?: React.ReactNode;
+  image: CMS.Image | null;
   navigation?: Blog.BlogArticleNavigation;
 }
 
@@ -28,14 +29,10 @@ export default function Article({ title, children, image, navigation }: Props) {
     >
       <SpecialHeader>{title}</SpecialHeader>
       <Grid container spacing={0}>
-        {image && (
-          <>
-            <Grid item xs={12} md={6} lg={6}>
-              <ImagePaper image={image} />
-            </Grid>
-            <Grid item xs={12} md={6} lg={6}></Grid>
-          </>
-        )}
+        <Grid item xs={12} md={6} lg={6}>
+          <ImagePaper image={image} />
+        </Grid>
+        <Grid item xs={12} md={6} lg={6}></Grid>
       </Grid>
       <Box
         component="article"
