@@ -1,4 +1,3 @@
-export { default as styled } from "./styled";
 export { theme, useThemePalette } from "./theme";
 export * from "./ConfirmDialog";
 export {
@@ -16,6 +15,7 @@ export { default as Container } from "./Container";
 export { default as Marquee } from "./Marquee";
 export { default as Sidebar } from "./Sidebar";
 export { default as HugeContainer } from "./HugeContainer";
+export { default as AlertPoper } from "./AlertPoper";
 export { MouseOverPopover } from "./MouseOverPopover";
 
 export { default as MuiSnackbarProvider } from "./MuiSnackbarProvider";
@@ -67,5 +67,6 @@ export { default as SuccessSnackbar } from "./SuccessSnackbar";
 export { GradientCard } from "./GradientCard";
 export { default as EmailLink } from "./EmailLink";
 export { default as PhoneLink } from "./PhoneLink";
+export { default as Tooltip } from "./Tooltip";
 
 export * from "./contexts";

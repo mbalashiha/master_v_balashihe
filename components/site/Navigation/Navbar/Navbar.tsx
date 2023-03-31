@@ -19,7 +19,7 @@ import {
   Toolbar,
   IconButton,
 } from "@mui/material";
-import { styled } from "@components/ui";
+import { styled } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import MasterSvgLogo from "@components/site/Logo/master-svg-logo";
 import dynamic from "next/dynamic";

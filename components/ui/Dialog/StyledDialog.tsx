@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext } from "react";
 import Button from "@mui/material/Button";
-import { styled } from "@components/ui";
+import { styled } from "@mui/material";
 import MuiDialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";

@@ -12,6 +12,7 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
+import { AlertPoper, ConfirmPopover, Tooltip } from "@components/ui";
 import useArticleDraft from "@framework/management/blog/article/draft/use-article-draft";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import { ArticleProvider } from "./ArticleProvider";
@@ -127,25 +128,29 @@ export const ArticleTabs = () => {
                         <Stack direction={"row"}>
                           <Box sx={{ flexGrow: 1 }}>
                             Страница на сайте:{" "}
-                            <a
-                              href={data.url}
-                              title={data.url}
-                              rel="noreferrer"
-                              target="_blank"
-                            >
-                              {data.url}
-                            </a>
+                            <Tooltip title={"Читать статью на сайте"}>
+                              <a
+                                href={data.url}
+                                title={data.url}
+                                rel="noreferrer"
+                                target="_blank"
+                              >
+                                {data.url}
+                              </a>
+                            </Tooltip>
                           </Box>
                           <Box>
-                            <IconButton
-                              onClick={() => {
-                                if (data.url) {
-                                  navigator.clipboard.writeText(data.url);
-                                }
-                              }}
-                            >
-                              <ContentCopyRoundedIcon />
-                            </IconButton>
+                            <AlertPoper message="Ссылка скопирована">
+                              <IconButton
+                                onClick={() => {
+                                  if (data.url) {
+                                    navigator.clipboard.writeText(data.url);
+                                  }
+                                }}
+                              >
+                                <ContentCopyRoundedIcon />
+                              </IconButton>
+                            </AlertPoper>
                           </Box>
                         </Stack>
                       </Paper>
