@@ -23,6 +23,7 @@ export const StyledTooltip = styled("span")`
     border-radius: 0.3rem;
     opacity: 0;
     visibility: none;
+    font-weight: 500;
   }
   &[data-tooltip][aria-label]::after {
     z-index: 3;

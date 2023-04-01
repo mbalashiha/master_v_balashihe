@@ -88,7 +88,7 @@ const ArticleItem = ({ article }: Props) => {
           <Stack width="100%" alignItems={"end"} justifyContent={"end"}>
             <Grid container sx={{ maxWidth: "100px" }} spacing={1}>
               <Grid item xs={6}>
-                <Tooltip title={"Скопировать ссылку"}>
+                <Tooltip title={"Удалить публикацию"}>
                   <ConfirmDialog
                     confirmCaption="Удалить"
                     message={`Удалить публикацию "${article.title}"?`}
