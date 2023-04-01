@@ -14,9 +14,14 @@ interface Props {
 }
 export const BlogRootSidebar = ({ recentArticles }: Props) => {
   return (
-    <SidebarPaper ellipsis title={"Недавние"} sx={{ width: "100%", height: "800px" }}>
+    <SidebarPaper
+      ellipsis
+      title={"Недавние"}
+      sx={{ width: "100%", height: { lg: "800px" } }}
+    >
       {recentArticles && (
-        <NavigationList ariaLabel="recent articles"
+        <NavigationList
+          ariaLabel="recent articles"
           articlesList={recentArticles}
         />
       )}

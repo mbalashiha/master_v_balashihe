@@ -78,7 +78,7 @@ export default function HugeContainer({
     >
       <Grid container spacing={spacing || { xs: 1, xl: 3 }}>
         {leftSidebar && (
-          <Grid item xs={12} md={12} lg={3}>
+          <Grid item xs={12} md={12} lg={3} order={{ xs: 2, lg: 1 }}>
             {leftSidebar}
           </Grid>
         )}
@@ -94,11 +94,12 @@ export default function HugeContainer({
               : 12
           }
           sx={centralGridSX}
+          order={{ xs: 1, lg: 2 }}
         >
           {children}
         </Grid>
         {rightSidebar && (
-          <Grid item xs={12} md={12} lg={3}>
+          <Grid item xs={12} md={12} lg={3} order={{ xs: 3, lg: 3 }}>
             {rightSidebar}
           </Grid>
         )}
