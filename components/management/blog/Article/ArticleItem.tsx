@@ -1,3 +1,4 @@
+import { AlertPoper, ConfirmPopover, Tooltip } from "@components/ui";
 import { CardsLayout } from "@components/site";
 import {
   Typography,
@@ -87,6 +88,7 @@ const ArticleItem = ({ article }: Props) => {
           <Stack width="100%" alignItems={"end"} justifyContent={"end"}>
             <Grid container sx={{ maxWidth: "100px" }} spacing={1}>
               <Grid item xs={6}>
+                <Tooltip title={"Скопировать ссылку"}>
                   <ConfirmDialog
                     confirmCaption="Удалить"
                     message={`Удалить публикацию "${article.title}"?`}
@@ -111,6 +113,7 @@ const ArticleItem = ({ article }: Props) => {
                       />
                     </IconButton>
                   </ConfirmDialog>
+                </Tooltip>
               </Grid>
               <Grid item xs={6}>
                 <Link href={linkUri}>

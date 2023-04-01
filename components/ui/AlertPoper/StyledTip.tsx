@@ -4,7 +4,7 @@ import React from "react";
 export const StyledTooltip = styled("span")`
   /* popover */
   &[data-alert][aria-label] {
-    display: inline;
+    display: inline-block;
     position: relative;
   }
   &[data-alert][aria-label]::before {
@@ -20,7 +20,7 @@ export const StyledTooltip = styled("span")`
     visibility: none;
   }
   &[data-alert^="up"][aria-label]::before {
-    bottom: calc(0.5rem + 100%);
+    bottom: calc(100%);
     right: 50%;
     transform: translateX(50%);
   }
@@ -35,7 +35,7 @@ export const StyledTooltip = styled("span")`
     transform: translateX(50%);
   }
   &[data-alert^="down"][aria-label]::before {
-    top: calc(0.5rem + 100%);
+    top: calc(100%);
     right: 50%;
     transform: translateX(50%);
   }
@@ -50,7 +50,7 @@ export const StyledTooltip = styled("span")`
     transform: translateX(50%);
   }
   &[data-alert^="left"][aria-label]::before {
-    right: calc(1rem + 100%);
+    right: calc(100%);
     bottom: 50%;
     transform: translateY(50%);
   }
@@ -65,7 +65,7 @@ export const StyledTooltip = styled("span")`
     transform: translateY(50%);
   }
   &[data-alert^="right"][aria-label]::before {
-    left: calc(1rem + 100%);
+    left: calc(100%);
     bottom: 50%;
     transform: translateY(50%);
   }

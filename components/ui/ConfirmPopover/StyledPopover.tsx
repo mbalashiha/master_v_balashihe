@@ -1,5 +1,4 @@
-import { styled, Box } from "@mui/material";
-import React from "react";
+import { styled } from "@mui/material";
 
 export const StyledPopover = styled("div")`
   /* popover */
@@ -12,10 +11,10 @@ export const StyledPopover = styled("div")`
     position: absolute;
     color: white;
     background: black;
-    padding: 1.5rem;
-    border-radius: 1.5rem;
+    padding: 0.8rem;
+    border-radius: 0.7rem;
     opacity: 0;
-    visibility: none;
+    visibility: hidden;
   }
   &[data-popover]::after {
     content: "";
@@ -26,7 +25,7 @@ export const StyledPopover = styled("div")`
     border-width: 0;
     border-style: solid;
     opacity: 0;
-    visibility: none;
+    visibility: hidden;
   }
   &[data-popover^="up"] > .popoverChild {
     bottom: calc(0.5rem + 100%);
@@ -91,6 +90,15 @@ export const StyledPopover = styled("div")`
   &[data-popover] > .popoverChild,
   &[data-popover]::after {
     z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+  }
+  &[data-popover].showing > .popoverChild,
+  &[data-popover].showing::after {
     visibility: visible;
     opacity: 1;
     transition-property: opacity;

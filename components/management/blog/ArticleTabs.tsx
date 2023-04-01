@@ -128,7 +128,7 @@ export const ArticleTabs = () => {
                         <Stack direction={"row"}>
                           <Box sx={{ flexGrow: 1 }}>
                             Страница на сайте:{" "}
-                            <Tooltip title={"Читать статью на сайте"}>
+                            <Tooltip title={"Читать статью на сайте"} inline>
                               <a
                                 href={data.url}
                                 title={data.url}
@@ -140,17 +140,22 @@ export const ArticleTabs = () => {
                             </Tooltip>
                           </Box>
                           <Box>
-                            <AlertPoper message="Ссылка скопирована">
-                              <IconButton
-                                onClick={() => {
-                                  if (data.url) {
-                                    navigator.clipboard.writeText(data.url);
-                                  }
-                                }}
-                              >
-                                <ContentCopyRoundedIcon />
-                              </IconButton>
-                            </AlertPoper>
+                            <Tooltip
+                              title={"Скопировать ссылку"}
+                              placement="up"
+                            >
+                              <AlertPoper message="Ссылка скопирована">
+                                <IconButton
+                                  onClick={() => {
+                                    if (data.url) {
+                                      navigator.clipboard.writeText(data.url);
+                                    }
+                                  }}
+                                >
+                                  <ContentCopyRoundedIcon />
+                                </IconButton>
+                              </AlertPoper>
+                            </Tooltip>
                           </Box>
                         </Stack>
                       </Paper>

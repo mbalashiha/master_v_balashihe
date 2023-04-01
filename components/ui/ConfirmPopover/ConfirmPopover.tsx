@@ -42,19 +42,19 @@ export const PopoverButton = ({
       sx={{
         fontFamily: "Roboto",
         fontWeight: 500,
-        fontSize: "10pt",
+        fontSize: "11pt",
         color: "#2d2f43",
         margin: 0,
         marginRight: "8px",
         "&:last-of-type": {
           marginRight: 0,
         },
-        padding: "0.25em 3em",
+        padding: 0,
         outline: "none",
         borderRadius: "0.38em",
         minWidth: "102px",
         background: isConfirm ? "#ff7676" : "#F5F5F5",
-        border: "1px solid gray",
+        border: "1px solid grey",
         borderColor: isConfirm ? "#ff7676" : "#B1B3CF",
         "&:hover": {
           textShadow: "none",
@@ -72,11 +72,11 @@ export const PopoverButton = ({
 };
 export const ConfirmMessage = styled("div")(({ theme }) => ({
   fontFamily: "Roboto",
-  fontWeight: 600,
-  letterSpacing: theme.typography.button.letterSpacing,
+  fontWeight: 500,
   color: "white",
-  fontSize: "11pt",
+  fontSize: "12pt",
   marginBottom: "7px",
+  textAlign: "center",
 }));
 
 const PopoverDialogChild = ({
@@ -153,6 +153,14 @@ const ConfirmPopover = ({
       return element;
     }
   }) as any;
+  const [showing, setShowing] = React.useState(false);
+  React.useEffect(() => {
+    if (isOpen && !showing) {
+      setShowing(true);
+    } else if (!isOpen && showing) {
+      setShowing(false);
+    }
+  }, [isOpen, showing]);
   React.useEffect(() => {
     if (isOpen) {
       const evt = new CustomEvent(NEW_CONFIRM_POPOVER_EVENT_NAME);
@@ -172,7 +180,10 @@ const ConfirmPopover = ({
     <>
       {isOpen ? (
         <ClickAwayListener onClickAway={closePopover}>
-          <StyledPopover data-popover={placement || "down"}>
+          <StyledPopover
+            data-popover={placement || "down"}
+            className={(showing && "showing") || ""}
+          >
             {trigger}
             <PopoverDialogChild
               closePopover={closePopover}

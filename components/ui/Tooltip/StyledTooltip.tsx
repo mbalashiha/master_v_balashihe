@@ -4,10 +4,15 @@ import React from "react";
 export const StyledTooltip = styled("span")`
   /* popover */
   &[data-tooltip][aria-label] {
-    display: inline;
+    z-index: 3;
+    display: inline-block;
     position: relative;
   }
+  &[data-tooltip][aria-label].inline {
+    display: inline;
+  }
   &[data-tooltip][aria-label]::before {
+    z-index: 3;
     content: attr(aria-label);
     pointer-events: none;
     white-space: pre;
@@ -20,6 +25,7 @@ export const StyledTooltip = styled("span")`
     visibility: none;
   }
   &[data-tooltip][aria-label]::after {
+    z-index: 3;
     content: "";
     pointer-events: none;
     width: 0;
