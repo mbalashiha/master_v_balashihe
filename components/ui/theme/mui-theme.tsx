@@ -131,6 +131,10 @@ const getMuiTheme = (): Theme => {
               paddingLeft: "5px",
               paddingRight: "5px",
             },
+            "@media (min-width: 1200px)": {
+              paddingLeft: "5px !important",
+              paddingRight: "5px !important",
+            },
           },
         },
       },

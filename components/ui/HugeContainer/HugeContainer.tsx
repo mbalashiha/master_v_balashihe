@@ -23,37 +23,12 @@ export default function HugeContainer({
 }: Props) {
   const originalChildren: typeof children = children;
   const searchComponent = showSearch && <Search sx={{ mb: 2.2 }} />;
-  let centralGridSX: GridSX = {};
-  children = rightSidebar ? (
-    <Box
-      sx={{
-        maxWidth: { xl: "1094px" },
-      }}
-    >
-      {searchComponent}
-      {originalChildren}
-    </Box>
-  ) : (
+  children = (
     <>
       {searchComponent}
       {originalChildren}
     </>
   );
-  if (rightSidebar) {
-    centralGridSX = {
-      ...centralGridSX,
-      display: { xl: "flex" },
-      flexDirection: { xl: "row" },
-      justifyContent: {
-        xl:
-          (!leftSidebar && !rightSidebar) || (leftSidebar && rightSidebar)
-            ? "center"
-            : leftSidebar
-            ? "flex-start"
-            : "flex-end",
-      },
-    };
-  }
   return (
     <Container
       maxWidth={
@@ -65,41 +40,43 @@ export default function HugeContainer({
       }
       sx={{
         maxWidth: {
-          xl:
-            leftSidebar && rightSidebar
-              ? "2000px"
-              : rightSidebar
-              ? "1800px"
-              : undefined,
+          lg: "1070px",
+          xl: rightSidebar ? "2000px" : "1760px",
         },
         mt: 5,
         ...sx,
       }}
     >
-      <Grid container spacing={spacing || { xs: 1, xl: 3 }}>
-        {leftSidebar && (
-          <Grid item xs={12} md={12} lg={3} order={{ xs: 2, lg: 1 }}>
+      <Grid
+        container
+        spacing={spacing || { xs: 1, lg: 3, xl: rightSidebar ? 1 : 4 }}
+      >
+        {leftSidebar ? (
+          <Grid
+            item
+            xs={12}
+            md={12}
+            lg={3}
+            xl={rightSidebar ? 2.5 : 3}
+            order={{ xs: 2, lg: 1 }}
+          >
             {leftSidebar}
           </Grid>
-        )}
+        ) : rightSidebar ? (
+          <Grid item xs={0} lg={0} xl={2.5} order={{ xs: 2, lg: 1 }}></Grid>
+        ) : null}
         <Grid
           item
           xs={12}
           md={12}
-          lg={
-            rightSidebar && leftSidebar
-              ? 6
-              : rightSidebar || leftSidebar
-              ? 9
-              : 12
-          }
-          sx={centralGridSX}
+          lg={leftSidebar ? 9 : 12}
+          xl={rightSidebar ? 7 : leftSidebar ? 9 : 12}
           order={{ xs: 1, lg: 2 }}
         >
           {children}
         </Grid>
         {rightSidebar && (
-          <Grid item xs={12} md={12} lg={3} order={{ xs: 3, lg: 3 }}>
+          <Grid item xs={12} lg={12} xl={2.5} order={{ xs: 3, lg: 3 }}>
             {rightSidebar}
           </Grid>
         )}

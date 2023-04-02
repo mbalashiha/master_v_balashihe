@@ -1,7 +1,8 @@
 import { FC, default as React } from "react";
 import { useUI } from "@components/ui";
 import Link from "next/link";
-import { grey, blueGrey } from "@mui/material/colors";import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
+import { grey, blueGrey } from "@mui/material/colors";
+import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import {
   Badge,
   Stack,
@@ -88,7 +89,7 @@ const Navbar: FC = () => {
               }}
             >
               <PhoneRoundedIcon sx={{ width: "50px", height: "50px" }} />
-              <Box>8 (926) 212-12-55</Box>
+              <Box>{process.env["NEXT_PUBLIC_CONTACT_PHONE_NUMBER"]}</Box>
             </Stack>
           </Stack>
         </Toolbar>
