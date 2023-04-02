@@ -1,30 +1,32 @@
 import { styled, Box } from "@mui/material";
 import React from "react";
 
-export const StyledTooltip = styled("span")`
+export const StyledHtmlTooltip = styled("span")`
   /* popover */
-  &[data-tooltip][aria-label] {
+  &[data-tooltip] {
     display: inline-block;
     position: relative;
   }
-  &[data-tooltip][aria-label].inline {
+  &[data-tooltip].inline {
     display: inline;
   }
-  &[data-tooltip][aria-label]::before {
+  &[data-tooltip] > strong {
     z-index: 3;
-    content: attr(aria-label);
     pointer-events: none;
     white-space: pre;
     position: absolute;
     color: #fff;
+    & * {
+      color: #fff;
+    }
     background: #555;
     padding: 0.3rem 2rem;
     border-radius: 0.3rem;
     opacity: 0;
-    visibility: none;
+    visibility: hidden;
     font-weight: 500;
   }
-  &[data-tooltip][aria-label]::after {
+  &[data-tooltip]::after {
     z-index: 3;
     content: "";
     pointer-events: none;
@@ -35,14 +37,14 @@ export const StyledTooltip = styled("span")`
     border-width: 0;
     border-style: solid;
     opacity: 0;
-    visibility: none;
+    visibility: hidden;
   }
-  &[data-tooltip^="up"][aria-label]::before {
+  &[data-tooltip^="up"] > strong {
     bottom: calc(0.5rem + 100%);
     right: 50%;
     transform: translateX(50%);
   }
-  &[data-tooltip^="up"][aria-label]::after {
+  &[data-tooltip^="up"]::after {
     border-top-width: 0.5rem;
     border-right-width: 0.5rem;
     border-right-color: #0000;
@@ -52,12 +54,12 @@ export const StyledTooltip = styled("span")`
     right: 50%;
     transform: translateX(50%);
   }
-  &[data-tooltip^="down"][aria-label]::before {
+  &[data-tooltip^="down"] > strong {
     top: calc(0.5rem + 100%);
     right: 50%;
     transform: translateX(50%);
   }
-  &[data-tooltip^="down"][aria-label]::after {
+  &[data-tooltip^="down"]::after {
     border-bottom-width: 0.5rem;
     border-right-width: 0.5rem;
     border-right-color: #0000;
@@ -67,12 +69,12 @@ export const StyledTooltip = styled("span")`
     right: 50%;
     transform: translateX(50%);
   }
-  &[data-tooltip^="left"][aria-label]::before {
+  &[data-tooltip^="left"] > strong {
     right: calc(1rem + 100%);
     bottom: 50%;
     transform: translateY(50%);
   }
-  &[data-tooltip^="left"][aria-label]::after {
+  &[data-tooltip^="left"]::after {
     border-left-width: 0.5rem;
     border-top-width: 0.5rem;
     border-top-color: #0000;
@@ -82,12 +84,12 @@ export const StyledTooltip = styled("span")`
     right: calc(0.5rem + 100%);
     transform: translateY(50%);
   }
-  &[data-tooltip^="right"][aria-label]::before {
+  &[data-tooltip^="right"] > strong {
     left: calc(1rem + 100%);
     bottom: 50%;
     transform: translateY(50%);
   }
-  &[data-tooltip^="right"][aria-label]::after {
+  &[data-tooltip^="right"]::after {
     border-right-width: 0.5rem;
     border-top-width: 0.5rem;
     border-top-color: #0000;
@@ -97,8 +99,8 @@ export const StyledTooltip = styled("span")`
     left: calc(0.5rem + 100%);
     transform: translateY(50%);
   }
-  &[data-tooltip][aria-label]:hover::before,
-  &[data-tooltip][aria-label]:hover::after {
+  &[data-tooltip]:hover > strong,
+  &[data-tooltip]:hover::after {
     visibility: visible;
     opacity: 1;
     transition-property: opacity;
@@ -106,17 +108,17 @@ export const StyledTooltip = styled("span")`
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
   }
-  &[data-tooltip$="100"][aria-label]:hover::before,
-  &[data-tooltip$="100"][aria-label]:hover::after {
+  &[data-tooltip$="100"]:hover > strong,
+  &[data-tooltip$="100"]:hover::after {
     transition-delay: 0.1s;
   }
-  &[data-tooltip$="500"][aria-label]:hover::before,
-  &[data-tooltip$="500"][aria-label]:hover::after {
+  &[data-tooltip$="500"]:hover > strong,
+  &[data-tooltip$="500"]:hover::after {
     transition-delay: 0.5s;
   }
-  &[data-tooltip$="1000"][aria-label]:hover::before,
-  &[data-tooltip$="1000"][aria-label]:hover::after {
+  &[data-tooltip$="1000"]:hover > strong,
+  &[data-tooltip$="1000"]:hover::after {
     transition-delay: 1s;
   }
 `;
-export default StyledTooltip;
+export default StyledHtmlTooltip;

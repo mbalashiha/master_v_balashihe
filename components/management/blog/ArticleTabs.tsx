@@ -12,7 +12,12 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-import { AlertPoper, ConfirmPopover, Tooltip } from "@components/ui";
+import {
+  AlertPoper,
+  ConfirmPopover,
+  Tooltip,
+  HtmlTooltip,
+} from "@components/ui";
 import useArticleDraft from "@framework/management/blog/article/draft/use-article-draft";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import { ArticleProvider } from "./ArticleProvider";
@@ -142,7 +147,7 @@ export const ArticleTabs = () => {
                           <Box>
                             <Tooltip
                               title={"Скопировать ссылку"}
-                              placement="up"
+                              placement="left"
                             >
                               <AlertPoper message="Ссылка скопирована">
                                 <IconButton

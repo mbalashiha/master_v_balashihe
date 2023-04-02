@@ -68,5 +68,6 @@ export { GradientCard } from "./GradientCard";
 export { default as EmailLink } from "./EmailLink";
 export { default as PhoneLink } from "./PhoneLink";
 export { default as Tooltip } from "./Tooltip";
+export { default as HtmlTooltip } from "./HtmlTooltip";
 
 export * from "./contexts";
