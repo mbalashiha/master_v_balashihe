@@ -11,22 +11,34 @@ export const StyledHtmlTooltip = styled("span")`
     display: inline;
   }
   &[data-tooltip] > strong {
+    color: #ffffff;
+    background: #555555;
+    font-weight: 400;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13pt;
+    * {
+      color: #fff;
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+      font-size: 13pt;
+    }
+    & header {
+      color: #bcd9e5;
+      font-size: 14pt;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+    display: block;
     z-index: 3;
     pointer-events: none;
-    max-width: 340px;
+    width: 340px;
     overflow: hidden;
     white-space: normal;
+    overflow-wrap: break-word;
     position: absolute;
-    color: #fff;
-    & * {
-      color: #fff;
-    }
-    background: #555;
     padding: 0.3rem 2rem;
     border-radius: 0.3rem;
     opacity: 0;
     visibility: hidden;
-    font-weight: 500;
   }
   &[data-tooltip]::after {
     z-index: 3;

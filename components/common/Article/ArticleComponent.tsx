@@ -20,6 +20,7 @@ import util from "util";
 import SpecialHeader from "./SpecialHeader";
 import { CMS } from "@common/types";
 import { StyledFab } from "./StyledFab";
+import { blueGrey } from "@mui/material/colors";
 type NextImageType = typeof Image;
 type NextImageTypeProps = React.ComponentProps<NextImageType>;
 
@@ -50,7 +51,15 @@ export default function Article({ title, children, image, navigation }: Props) {
         mb={2}
       >
         {navigation?.prev?.url ? (
-          <Tooltip title={navigation.prev.title}>
+          <Tooltip
+            title={
+              <>
+                <header>Предыдущая страница:</header>
+                {navigation.prev.title}
+              </>
+            }
+            placement="right"
+          >
             <Link href={navigation.prev.url}>
               <StyledFab size="medium" aria-label="Предыдущая страница">
                 <ArrowBackIosRoundedIcon />
@@ -62,7 +71,15 @@ export default function Article({ title, children, image, navigation }: Props) {
         )}
 
         {navigation?.next?.url ? (
-          <Tooltip title={navigation.next.title}>
+          <Tooltip
+            title={
+              <>
+                <header>Следующая страница:</header>
+                {navigation.next.title}
+              </>
+            }
+            placement="left"
+          >
             <Link href={navigation.next.url}>
               <StyledFab size="medium" aria-label="Следующая страница">
                 <ArrowForwardIosRoundedIcon />
