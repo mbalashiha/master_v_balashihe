@@ -1,16 +1,25 @@
 import { GradientBackground1 } from "@components/shared/Gradients/Backgrounds";
-import { Box, Typography, Paper, Grid, Button } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Paper,
+  Grid,
+  Button,
+  Stack,
+  Fab,
+} from "@mui/material";
 import Link from "next/link";
 import ImagePaper from "@components/common/Article/ImagePaper";
 import Image from "next/image";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import { NavSidebar } from "./Sidebars";
-import { HugeContainer } from "@components/ui";
+import { HugeContainer, Tooltip } from "@components/ui";
 import { Blog } from "@common/types/cms";
 import util from "util";
 import SpecialHeader from "./SpecialHeader";
 import { CMS } from "@common/types";
+import { StyledFab } from "./StyledFab";
 type NextImageType = typeof Image;
 type NextImageTypeProps = React.ComponentProps<NextImageType>;
 
@@ -28,12 +37,42 @@ export default function Article({ title, children, image, navigation }: Props) {
       rightSidebar={navigation && <NavSidebar navigation={navigation} />}
     >
       <SpecialHeader>{title}</SpecialHeader>
-      <Grid container spacing={0}>
+      <Grid container spacing={0} mb={2}>
         <Grid item xs={12} md={6} lg={6}>
           <ImagePaper image={image} />
         </Grid>
         <Grid item xs={12} md={6} lg={6}></Grid>
       </Grid>
+      <Stack
+        direction={"row"}
+        alignContent="center"
+        justifyContent="space-between"
+        mb={2}
+      >
+        {navigation?.prev?.url ? (
+          <Tooltip title={navigation.prev.title}>
+            <Link href={navigation.prev.url}>
+              <StyledFab size="medium" aria-label="Предыдущая страница">
+                <ArrowBackIosRoundedIcon />
+              </StyledFab>
+            </Link>
+          </Tooltip>
+        ) : (
+          <div></div>
+        )}
+
+        {navigation?.next?.url ? (
+          <Tooltip title={navigation.next.title}>
+            <Link href={navigation.next.url}>
+              <StyledFab size="medium" aria-label="Следующая страница">
+                <ArrowForwardIosRoundedIcon />
+              </StyledFab>
+            </Link>
+          </Tooltip>
+        ) : (
+          <div></div>
+        )}
+      </Stack>
       <Box
         component="article"
         sx={{

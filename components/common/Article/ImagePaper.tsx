@@ -102,7 +102,6 @@ export default function ImagePaper({ gradientBackground, image }: Props) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        mb: 5,
       }}
     >
       <>

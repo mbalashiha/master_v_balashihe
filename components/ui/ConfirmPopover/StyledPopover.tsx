@@ -7,7 +7,9 @@ export const StyledPopover = styled("div")`
     position: relative;
   }
   &[data-popover] > .popoverChild {
-    white-space: pre;
+    max-width: 340px;
+    overflow: hidden;
+    white-space: normal;
     position: absolute;
     color: white;
     background: black;

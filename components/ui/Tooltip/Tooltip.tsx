@@ -18,10 +18,26 @@ const Tooltip = ({
   delay,
 }: Props) => {
   if (title && typeof title === "string") {
+    if (title.length > 22) {
+      let prevIndex = 0;
+      let newTitle: string = "";
+      do {
+        const nextIndex = title.indexOf(" ", prevIndex + 20);
+        if (nextIndex >= 0) {
+          newTitle += title.substring(prevIndex, nextIndex + 1) + "\n";
+          prevIndex = nextIndex + 1;
+        } else {
+          newTitle += title.substring(prevIndex);
+          prevIndex = -1;
+          break;
+        }
+      } while (prevIndex >= 0);
+      title = newTitle.replaceAll(". ", ". \n");
+    }
     return (
       <StyledTooltip
         data-tooltip={placement || "down" + (delay ? delay.toString() : "")}
-        aria-label={title}
+        aria-label={title as string}
         className={(inline && "inline") || ""}
       >
         {trigger}

@@ -13,8 +13,10 @@ export const StyledTooltip = styled("span")`
   &[data-tooltip][aria-label]::before {
     z-index: 3;
     content: attr(aria-label);
-    pointer-events: none;
+    max-width: 340px;
+    overflow: hidden;
     white-space: pre;
+    pointer-events: none;
     position: absolute;
     color: #fff;
     background: #555;

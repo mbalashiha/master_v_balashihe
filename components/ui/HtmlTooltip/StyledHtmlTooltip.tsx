@@ -13,7 +13,9 @@ export const StyledHtmlTooltip = styled("span")`
   &[data-tooltip] > strong {
     z-index: 3;
     pointer-events: none;
-    white-space: pre;
+    max-width: 340px;
+    overflow: hidden;
+    white-space: normal;
     position: absolute;
     color: #fff;
     & * {
