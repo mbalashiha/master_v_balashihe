@@ -25,7 +25,7 @@ export const StyledHtmlTooltip = styled("span")`
       color: #bcd9e5;
       font-size: 14pt;
       font-weight: 400;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.1rem;
     }
     display: block;
     z-index: 3;
