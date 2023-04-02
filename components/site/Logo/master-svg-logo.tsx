@@ -6,15 +6,14 @@ import logoImage from "/public/images/master-v-balashihe-rf-screwdriver.svg";
 const MasterSvgLogo = () => (
   <Box
     sx={{
-      pr: "0px",
-      pt: "6px",
       overflow: "visible",
+      height: "80px",
     }}
   >
     <Image
       src={logoImage}
-      width={82}
-      height={82}
+      width={80}
+      height={80}
       alt={"Мастер в Балашихе РФ по ремонту компьютеров"}
     />
   </Box>

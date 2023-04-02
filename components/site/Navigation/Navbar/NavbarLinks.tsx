@@ -62,16 +62,15 @@ export const NavbarLinks = ({
     });
     return navLinks;
   }, [pathname]);
-  const stackOrientation: DividerProps["orientation"] = orientation || "row";
-  const displayAs =
-    stackOrientation === "row"
-      ? { xs: "none", md: "flex" }
-      : { xs: "flex", md: "none" };
   return (
     <List
       component="nav"
       sx={{
-        display: displayAs,
+        flexGrow: 1,
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        flexWrap: "wrap",
         padding: 0,
         "& a, & .aLinkPreplacement": {
           p: 1,
