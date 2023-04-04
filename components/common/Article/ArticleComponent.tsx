@@ -137,9 +137,6 @@ export default function Article({ title, children, image, navigation }: Props) {
           "& a": {
             width: "100%",
             textOverflow: "ellipsis",
-            "&, & .MuiSvgIcon-root, & .MuiButtonBase-root, & *, & > *": {
-              ...standartCssTransition,
-            },
             "&, &:hover": {
               textDecoration: "none",
             },
