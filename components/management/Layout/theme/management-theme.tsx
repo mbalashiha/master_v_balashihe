@@ -1,6 +1,7 @@
 import { createTheme, Theme } from "@mui/material/styles";
 import { colors, Palette, PaletteMode } from "@mui/material";
 import { purple, pink, amber, grey, blueGrey, red } from "@mui/material/colors";
+import { standartCssTransition } from "@components/ui/theme/mui-theme";
 const InterFontFamily = `Inter, Arial, sans-serif`;
 
 const getMuiTheme = (): Theme => {
@@ -84,12 +85,12 @@ const getMuiTheme = (): Theme => {
             "& a": {
               color: theme.palette.primary.main,
               textDecoration: "none",
-              transition: "all 0.1s linear",
+              ...standartCssTransition,
               fontWeight: 600,
               "&:hover": {
                 color: "red",
                 textDecoration: "none",
-                transition: "all 0.1s linear",
+                ...standartCssTransition,
               },
             },
             minHeight: "100vh",
@@ -251,7 +252,7 @@ const getMuiTheme = (): Theme => {
             "&, && *": {
               fontFamily,
             },
-            transition: "all .15s linear",
+            ...standartCssTransition,
             border: "none",
             borderColor: "none",
             background: theme.palette.primary.main,

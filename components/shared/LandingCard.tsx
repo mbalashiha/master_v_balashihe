@@ -12,6 +12,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import StartIcon from "@mui/icons-material/Start";
 import Link from "next/link";
+import { standartCssTransition } from "@components/ui/theme/mui-theme";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -54,7 +55,7 @@ export const LandingCard = ({ children, image }: Props) => {
                 padding: "0 14px",
                 border: "none",
                 borderRadius: 1,
-                transition: "all .2s linear",
+                ...standartCssTransition,
                 "&": {
                   background: "rgba(255,255,255,0.75)",
                 },

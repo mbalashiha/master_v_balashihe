@@ -10,6 +10,13 @@ body,
   margin: 0;
   font-family: Gotham, Arial, sans-serif;
 }
+a,
+button {
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
 // .tox-notifications-container {
 //   display: none !important;
 // }

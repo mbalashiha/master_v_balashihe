@@ -21,6 +21,7 @@ import SpecialHeader from "./SpecialHeader";
 import { CMS } from "@common/types";
 import { StyledFab } from "./StyledFab";
 import { blueGrey } from "@mui/material/colors";
+import { standartCssTransition } from "@components/ui/theme/mui-theme";
 type NextImageType = typeof Image;
 type NextImageTypeProps = React.ComponentProps<NextImageType>;
 
@@ -137,7 +138,7 @@ export default function Article({ title, children, image, navigation }: Props) {
             width: "100%",
             textOverflow: "ellipsis",
             "&, & .MuiSvgIcon-root, & .MuiButtonBase-root, & *, & > *": {
-              transition: "all ease-in-out .1s",
+              ...standartCssTransition,
             },
             "&, &:hover": {
               textDecoration: "none",

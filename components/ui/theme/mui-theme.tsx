@@ -6,9 +6,17 @@ import {
   Button,
   Button as MuiButton,
   PaletteColorOptions,
+  CSSInterpolation,
 } from "@mui/material";
 import { purple, pink, amber, grey, blueGrey } from "@mui/material/colors";
 const InterFontFamily = `Inter, Arial, sans-serif`;
+
+export const standartCssTransition = {
+  transitionProperty: "all",
+  transitionDuration: "0.2s",
+  transitionTimingFunction: "ease-in-out",
+  transitionDelay: "0s",
+};
 
 const getMuiTheme = (): Theme => {
   const colorMode: PaletteMode = "light" as any;
@@ -78,6 +86,10 @@ const getMuiTheme = (): Theme => {
       MuiCssBaseline: {
         styleOverrides: {
           body: {
+            "@media (max-width: 1000px)": {
+              maxWidth: "99.5vw",
+              overflowX: "hidden",
+            },
             "& .SnackbarContent-root, & .SnackbarItem-contentRoot": {
               "&&": {
                 fontFamily: InterFontFamily,
@@ -98,12 +110,12 @@ const getMuiTheme = (): Theme => {
             "& a": {
               color: theme.palette.primary.main,
               textDecoration: "none",
-              transition: "all 0.1s linear",
+              ...standartCssTransition,
               fontWeight: 600,
               "&:hover": {
                 color: "red",
                 textDecoration: "none",
-                transition: "all 0.1s linear",
+                ...standartCssTransition,
               },
             },
             minHeight: "100vh",
@@ -184,15 +196,13 @@ const getMuiTheme = (): Theme => {
       },
       MuiButtonBase: {
         styleOverrides: {
-          root: {
-            transition: "all .15s ease .05s",
-          },
+          root: { ...standartCssTransition },
         },
       },
       MuiIconButton: {
         styleOverrides: {
           root: {
-            transition: "all .15s ease .05s",
+            ...standartCssTransition,
           },
         },
       },
@@ -207,7 +217,7 @@ const getMuiTheme = (): Theme => {
         styleOverrides: {
           // Name of the slot
           root: {
-            transition: "all .15s ease .05s",
+            ...standartCssTransition,
             borderRadius: "50px",
             border: "3px solid",
             borderColor: theme.palette.primary.main,
@@ -232,7 +242,7 @@ const getMuiTheme = (): Theme => {
             color: "#10101a",
             padding: "18px 14px 4px 12px",
             borderRadius: "8px 8px 0 0",
-            transition: "all ease-in-out .2s",
+            ...standartCssTransition,
             "&:hover": {
               background: blueGrey[200],
             },

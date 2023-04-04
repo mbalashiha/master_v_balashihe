@@ -8,6 +8,7 @@ import getArticlesCards from "@framework/article/get-articles-cards";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { Blog } from "@common/types/cms";
 import { grey, blueGrey } from "@mui/material/colors";
+import { standartCssTransition } from "@components/ui/theme/mui-theme";
 
 interface Props {
   article: Blog.ArticleCard;
@@ -24,9 +25,7 @@ const ArticleCard = ({ article }: Props) => {
           "&, & h5, & p": {
             color: (theme) => theme.palette.articleText.main,
           },
-          "&, & a, & a > *": {
-            transition: "all .5s ease-in-out",
-          },
+          "&, & a, & a > *": { ...standartCssTransition },
           "&:hover": {
             boxShadow: "0 35px 15px 0 rgba(0,0,0,.0605)",
             "& a": {

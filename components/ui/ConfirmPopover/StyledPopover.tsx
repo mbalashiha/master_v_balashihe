@@ -60,7 +60,7 @@ export const StyledPopover = styled("div")`
     transform: translateX(50%);
   }
   &[data-popover^="left"] > .popoverChild {
-    right: calc(1rem + 100%);
+    right: calc(0.6rem + 100%);
     bottom: 50%;
     transform: translateY(50%);
   }
@@ -71,11 +71,11 @@ export const StyledPopover = styled("div")`
     border-bottom-width: 0.5rem;
     border-bottom-color: #0000;
     bottom: 50%;
-    right: calc(0.5rem + 100%);
+    right: calc(0.1rem + 100%);
     transform: translateY(50%);
   }
   &[data-popover^="right"] > .popoverChild {
-    left: calc(1rem + 100%);
+    left: calc(0.6rem + 100%);
     bottom: 50%;
     transform: translateY(50%);
   }
@@ -86,7 +86,7 @@ export const StyledPopover = styled("div")`
     border-bottom-width: 0.5rem;
     border-bottom-color: #0000;
     bottom: 50%;
-    left: calc(0.5rem + 100%);
+    left: calc(0.1rem + 100%);
     transform: translateY(50%);
   }
   &[data-popover] > .popoverChild,

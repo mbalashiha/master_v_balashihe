@@ -13,6 +13,7 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import { useSearchProvider } from "./SearchProvider";
 import useArticleSearch from "@framework/management/blog/use-articles-search";
+import { standartCssTransition } from "@components/ui/theme/mui-theme";
 
 interface Props {
   sx?: SxProps;
@@ -91,7 +92,7 @@ export default function SearchField({ sx }: Props) {
                     width: "auto",
                     background: "transparent",
                     color: grey[600],
-                    transition: "all ease-in-out .2s",
+                    ...standartCssTransition,
                     height: "46px",
                     px: "23px",
                     borderRadius: 1,

@@ -25,6 +25,7 @@ export const StyledTooltip = styled("span")`
     opacity: 0;
     visibility: none;
     font-weight: 500;
+    font-size: 13pt !important;
   }
   &[data-tooltip][aria-label]::after {
     z-index: 3;
@@ -70,7 +71,7 @@ export const StyledTooltip = styled("span")`
     transform: translateX(50%);
   }
   &[data-tooltip^="left"][aria-label]::before {
-    right: calc(1rem + 100%);
+    right: calc(0.6rem + 100%);
     bottom: 50%;
     transform: translateY(50%);
   }
@@ -81,11 +82,11 @@ export const StyledTooltip = styled("span")`
     border-bottom-width: 0.5rem;
     border-bottom-color: #0000;
     bottom: 50%;
-    right: calc(0.5rem + 100%);
+    right: calc(0.1rem + 100%);
     transform: translateY(50%);
   }
   &[data-tooltip^="right"][aria-label]::before {
-    left: calc(1rem + 100%);
+    left: calc(0.6rem + 100%);
     bottom: 50%;
     transform: translateY(50%);
   }
@@ -96,7 +97,7 @@ export const StyledTooltip = styled("span")`
     border-bottom-width: 0.5rem;
     border-bottom-color: #0000;
     bottom: 50%;
-    left: calc(0.5rem + 100%);
+    left: calc(0.1rem + 100%);
     transform: translateY(50%);
   }
   &[data-tooltip][aria-label]:hover::before,

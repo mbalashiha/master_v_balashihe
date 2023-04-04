@@ -11,6 +11,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import * as React from "react";
 import { useRouter } from "next/router";
+import { standartCssTransition } from "@components/ui/theme/mui-theme";
 
 interface Props {
   search?: string;
@@ -94,7 +95,7 @@ export default function Search({ search, sx, onSubmit }: Props) {
                     width: "auto",
                     background: "transparent",
                     color: grey[600],
-                    transition: "all ease-in-out .2s",
+                    ...standartCssTransition,
                     height: "46px",
                     px: "26px",
                     borderRadius: 1,

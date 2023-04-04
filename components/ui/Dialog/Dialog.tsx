@@ -12,6 +12,7 @@ import { blueGrey } from "@mui/material/colors";
 import { FC, useRef } from "react";
 import StyledDialog from "./StyledDialog";
 import BootstrapDialogTitle from "./DialogTitle";
+import { standartCssTransition } from "../theme/mui-theme";
 
 interface Props {
   // children: React.ReactElement | React.ReactElement[];
@@ -43,9 +44,9 @@ const Dialog = React.forwardRef(function ConfirmDialog(
               right: 4,
               top: 3,
               color: (theme) => theme.palette.grey[500],
-              transition: `all 0.2s ease-in-out`,
+              ...standartCssTransition,
               ":hover": {
-                transition: `all 0.2s ease-in-out`,
+                ...standartCssTransition,
                 color: (theme) => theme.palette.text.primary,
               },
             }}
@@ -60,9 +61,7 @@ const Dialog = React.forwardRef(function ConfirmDialog(
               justifyContent: "center",
             }}
           >
-            <Typography component="div">
-              {message}
-            </Typography>
+            <Typography component="div">{message}</Typography>
           </DialogContent>
           <DialogActions>
             <Button

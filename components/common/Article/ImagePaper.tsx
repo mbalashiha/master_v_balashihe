@@ -79,7 +79,7 @@ export default function ImagePaper({ gradientBackground, image }: Props) {
         height: 0,
       };
     } else {
-      const fitted = fitWidth(width, height, 500);
+      const fitted = fitWidth(width, height, 440);
       return {
         src,
         alt,
@@ -98,7 +98,7 @@ export default function ImagePaper({ gradientBackground, image }: Props) {
         zIndex: 0,
         position: "relative",
         overflow: "hidden",
-        width: "500px",
+        width: "440px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

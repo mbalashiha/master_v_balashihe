@@ -32,7 +32,6 @@ const StyledTextField = styled(ModTextFiled)`
       background: var(--input-bg-color);
       width: 100%;
       box-shadow: none;
-      transition: all 0.1s ease-in-out;
       width: 100%;
       padding: 0;
       margin: 0;
@@ -139,7 +138,6 @@ const StyledTextField = styled(ModTextFiled)`
       pointer-events: none;
       transform-origin: 0 0;
       opacity: 1;
-      transition: all 0.1s ease-in-out;
       transform: translateY(0.85rem) translateX(0);
       &.Mui-focused,
       &.MuiInputLabel-shrink {
@@ -151,7 +149,6 @@ const StyledTextField = styled(ModTextFiled)`
         color: white;
         font-weight: normal;
         opacity: 1;
-        transition: all 0.1s ease-in-out;
         transform: scale(0.66) translateY(-0.62rem) translateX(0);
         text-shadow: 0 0 9px black, 0 0 12px black, 0 0 14px black;
       }

@@ -1,7 +1,6 @@
 import { grey, blueGrey } from "@mui/material/colors";
 import { Box } from "@mui/material";
 import Image from "next/image";
-import logoImage from "/public/images/master-v-balashihe-rf-screwdriver.svg";
 
 const MasterSvgLogo = () => (
   <Box
@@ -11,7 +10,7 @@ const MasterSvgLogo = () => (
     }}
   >
     <Image
-      src={logoImage}
+      src={"/images/master-v-balashihe-rf-screwdriver.svg"}
       width={80}
       height={80}
       alt={"Мастер в Балашихе РФ по ремонту компьютеров"}

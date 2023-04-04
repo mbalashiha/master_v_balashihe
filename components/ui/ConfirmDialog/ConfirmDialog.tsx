@@ -18,6 +18,7 @@ import { blueGrey } from "@mui/material/colors";
 import { FC, useRef } from "react";
 import StyledDialog from "./StyledDialog";
 import BootstrapDialogTitle from "./ConfirmDialogTitle";
+import { standartCssTransition } from "../theme/mui-theme";
 
 type TriggerButton = React.ReactElement | React.ReactElement[];
 interface Props {
@@ -74,9 +75,9 @@ const ConfirmDialog = React.forwardRef(function ConfirmDialog(
               right: 4,
               top: 3,
               color: (theme) => theme.palette.grey[500],
-              transition: `all 0.2s ease-in-out`,
+              ...standartCssTransition,
               ":hover": {
-                transition: `all 0.2s ease-in-out`,
+                ...standartCssTransition,
                 color: (theme) => theme.palette.text.primary,
               },
             }}

@@ -23,6 +23,7 @@ import { blueGrey } from "@mui/material/colors";
 import { ConfirmDialog, MouseOverPopover } from "@components/ui";
 import useDeleteArticle from "@framework/management/blog/article/use-delete-article";
 import Link from "next/link";
+import { standartCssTransition } from "@components/ui/theme/mui-theme";
 interface Props {
   article: CMS.Blog.ArticleCard;
 }
@@ -36,7 +37,7 @@ const ArticleItem = ({ article }: Props) => {
       sx={{
         p: 2,
         "&, & a, & a > *, & .MuiButtonBase-root.MuiIconButton-root": {
-          transition: "all .5s ease-in-out",
+          ...standartCssTransition,
         },
         "&:hover": {
           boxShadow: "0 35px 15px 0 rgba(0,0,0,.0605)",

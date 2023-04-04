@@ -42,7 +42,6 @@ const StyledLabel = styled("label")`
   pointer-events: none;
   transform-origin: 0 0;
   opacity: 1;
-  transition: all 0.1s ease-in-out;
   transform: scale(1.001) translateY(0.75rem) translateX(8.5rem);
   &.Mui-focused,
   &.MuiInputLabel-shrink {
@@ -53,7 +52,6 @@ const StyledLabel = styled("label")`
     opacity: 1;
     color: white;
     font-weight: normal;
-    transition: all 0.1s ease-in-out;
     transform: scale(0.66) translateY(-0.83rem) translateX(0rem);
     text-shadow: 0 0 9px black, 0 0 12px black, 0 0 14px black;
   }
@@ -78,7 +76,6 @@ const StyledContainer = styled(Box)`
       font-family: sans-serif;
       border-radius: 10px;
       box-shadow: none;
-      transition: box-shadow 0.1s ease-in-out, border 0.1s ease-in-out;
       border: 1px solid var(--accents-6);
       &.Mui-focused {
         border: 1px solid rgb(13 110 253);
@@ -167,7 +164,6 @@ const StyledContainer = styled(Box)`
         &:horizontal {
           min-height: auto;
         }
-        transition: all ease-in-out 75ms;
         /* Handle on hover */
         &:hover {
           background: #d80000;

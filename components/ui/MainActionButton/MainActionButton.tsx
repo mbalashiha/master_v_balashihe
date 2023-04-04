@@ -8,6 +8,7 @@ import CircularProgress, {
   CircularProgressProps,
 } from "@mui/material/CircularProgress";
 import { blueGrey, grey } from "@mui/material/colors";
+import { standartCssTransition } from "../theme/mui-theme";
 function MaskedCircularProgress(props: CircularProgressProps) {
   return (
     <>
@@ -79,7 +80,7 @@ const MainActionButton = styled(LoadingButton)<Props>(({ theme, loading }) => ({
       boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
     },
     "&:disabled": {
-      transition: "all .25s linear",
+      ...standartCssTransition,
       background: theme.palette.mode === "dark" ? grey[800] : grey[100],
       borderColor: grey[300],
       color: grey[300],
