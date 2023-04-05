@@ -13,9 +13,10 @@ export const slugify = function slugify(
       }
     | string
 ): string {
-  return originalSlugify(string, options)
-    .replace(/[\/\\_\!\>\<\.]/gim, "-")
+  return originalSlugify(string.replace(/[\[\]]+/gim, "-bracket-"), options)
+    .replace(/[\/\\_\!\>\<\.\(\)]/gim, "-")
     .replace(/\-{2,}/gim, "-")
+    .replace(/[\-]+$/im, "")
     .toLowerCase();
 };
 export const capitalizeFirstLetter = (string: string) => {

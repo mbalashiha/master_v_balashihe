@@ -69,6 +69,7 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
             height: "100%",
             width: "100%",
             menubar: true,
+            content_css: "/additional/css/roboto.css",
             setup: function (editor) {
               /* Basic button that just inserts the date */
               editor.ui.registry.addButton("insertCodeButton", {
@@ -126,7 +127,7 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
               "insertCodeButton imageUploadButton | " +
               "alignleft aligncenter alignright alignjustify link | " +
               "bullist numlist checklist outdent indent | removeformat | image code table help",
-            content_style: `body { color: #06060e; font-family: Inter,Arial,sans-serif; font-weight: 500; font-size: 18px; }
+            content_style: `body { color: #06060e; font-family: Roboto, Helvetica, Arial, sans-serif; font-weight: 500; font-size: 18px; }
                img { 
                 box-shadow: 4px 4px 20px rgb(0 0 0 / 20%);
                 border-radius: 24px; 
