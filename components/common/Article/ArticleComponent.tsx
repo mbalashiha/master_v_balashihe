@@ -135,26 +135,31 @@ export default function Article({ title, children, image, navigation }: Props) {
         sx={{
           mb: { xs: 3, sm: 1 },
           "& a": {
+            padding: 0,
             width: "100%",
             textOverflow: "ellipsis",
-            "&, &:hover": {
-              textDecoration: "none",
-            },
+            display: "block",
+            borderRadius: "2rem",
             "&:hover": {
               "& .MuiSvgIcon-root, & .MuiButtonBase-root, & *, & > *": {
+                textDecoration: "none",
                 color: "#ff7777",
+              },
+              "& > span": {
+                background: (theme) => theme.palette.primary.main,
+                borderColor: (theme) => theme.palette.primary.main,
               },
             },
             "& > span": {
+              borderRadius: "2rem",
+              border: "none",
+              background: (theme) => theme.palette.background.paper,
+              borderColor: (theme) => theme.palette.background.paper,
               height: { xs: "220px", md: "124px" },
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               position: "relative",
-              background: (theme) => theme.palette.background.paper,
-              borderColor: (theme) => theme.palette.background.paper,
-              borderRadius: "2rem",
-              border: "none",
               boxShadow:
                 "#0000001a 0rem 0.25rem 0.375rem -0.0625rem, #0000000f 0rem 0.125rem 0.25rem -0.0625rem",
               px: 0,
