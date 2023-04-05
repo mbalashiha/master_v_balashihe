@@ -150,7 +150,7 @@ export default function Article({ title, children, image, navigation }: Props) {
                 textDecoration: "none",
                 color: "#ff7777",
               },
-              "& > span": {
+              "&, & > span": {
                 background: (theme) => theme.palette.primary.main,
                 borderColor: (theme) => theme.palette.primary.main,
               },
