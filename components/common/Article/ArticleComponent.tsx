@@ -139,7 +139,12 @@ export default function Article({ title, children, image, navigation }: Props) {
             width: "100%",
             textOverflow: "ellipsis",
             display: "block",
-            borderRadius: "2rem",
+            "&, & > span": {
+              borderRadius: "2rem",
+              border: "none",
+              background: (theme) => theme.palette.background.paper,
+              borderColor: (theme) => theme.palette.background.paper,
+            },
             "&:hover": {
               "& .MuiSvgIcon-root, & .MuiButtonBase-root, & *, & > *": {
                 textDecoration: "none",
@@ -151,10 +156,6 @@ export default function Article({ title, children, image, navigation }: Props) {
               },
             },
             "& > span": {
-              borderRadius: "2rem",
-              border: "none",
-              background: (theme) => theme.palette.background.paper,
-              borderColor: (theme) => theme.palette.background.paper,
               height: { xs: "220px", md: "124px" },
               display: "flex",
               alignItems: "center",
