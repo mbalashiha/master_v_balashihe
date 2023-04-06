@@ -26,7 +26,7 @@ import PaletterModeSwitch from "@components/common/paletter/PaletteSwitch";
 import { useRouter } from "next/router";
 import NavbarLinks from "./NavbarLinks";
 import { MainLogo } from "@components/site/MainLogo";
-import { TelegramIcon } from "@components/icons";
+import { PhoneCallIcon, TelegramIcon } from "@components/icons";
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   background: "none",
   backdropFilter: "saturate(180%) blur(15px)",
@@ -85,20 +85,28 @@ const Navbar: FC = () => {
                 "& a": {
                   display: "flex",
                   direction: "row",
-                  justifyContent: "flex-start",
+                  justifyContent: "center",
                   alignItems: "center",
                   flexWrap: "nowrap",
+                  "& > svg": {
+                    width: "66x",
+                    height: "66px",
+                    marginBottom: "-5px",
+                    marginRight: "10px",
+                  },
                 },
               }}
             >
-              <a
-                href={`${process.env["NEXT_PUBLIC_WHATSAPP_LINK"]}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <PhoneRoundedIcon sx={{ width: "50px", height: "50px" }} />
-                <Box>{process.env["NEXT_PUBLIC_CONTACT_PHONE_NUMBER"]}</Box>
-              </a>
+              <Tooltip title="Позвонить WhatsApp">
+                <a
+                  href={`${process.env["NEXT_PUBLIC_WHATSAPP_LINK"]}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <PhoneCallIcon />
+                  <Box>{process.env["NEXT_PUBLIC_CONTACT_PHONE_NUMBER"]}</Box>
+                </a>
+              </Tooltip>
               <Box
                 sx={{ ml: 1, "&, & svg": { width: "70px", height: "70px" } }}
               >

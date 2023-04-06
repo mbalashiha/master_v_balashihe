@@ -108,14 +108,26 @@ const getMuiTheme = (): Theme => {
               marginBottom: "2rem",
             },
             "& a": {
+              ...standartCssTransition,
               color: theme.palette.primary.main,
               textDecoration: "none",
-              ...standartCssTransition,
               fontWeight: 600,
+              "& > .link-icon": {
+                ...standartCssTransition,
+                color: theme.palette.primary.main,
+                fill: theme.palette.primary.main,
+                stroke: theme.palette.primary.light,
+              },
               "&:hover": {
+                ...standartCssTransition,
                 color: "red",
                 textDecoration: "none",
+              },
+              "&:hover > .link-icon": {
                 ...standartCssTransition,
+                color: "red",
+                fill: "red",
+                stroke: "red",
               },
             },
             minHeight: "100vh",

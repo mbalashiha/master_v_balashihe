@@ -6,25 +6,38 @@ import util from "util";
 export const normalizeArticleUrl = (
   handle: string | null,
   autoHandleSlug?: string | null
-): string | null => {
+): string => {
   handle = handle || autoHandleSlug || null;
   if (!handle) {
-    return null;
+    return "";
   } else {
+    if (handle.startsWith("/")) {
+      return handle;
+    }
     return `/uslugi-mastera-v-balashihe/${handle}`;
   }
 };
 export const normalizeBlogRow = (
   data: Schema.BlogArticleCard
 ): Blog.ArticleCard => {
-  const { id, title, handle, createdAt, score, fragment } = data;
-  const url = handle ? normalizeArticleUrl(handle) : null;
+  const {
+    id,
+    title,
+    handle,
+    absURL,
+    createdAt,
+    score,
+    fragment,
+    displayingPageHandle,
+  } = data;
+  const url = absURL || handle ? normalizeArticleUrl(absURL || handle) : "";
   return {
     id: id || (null as any as ID),
     score: typeof score === "number" || score ? score : null,
     fragment: fragment || null,
     title,
-    url: url || `/${handle}`,
+    url,
+    displayingPageUrl: displayingPageHandle,
     createdAt: new Date(createdAt).toLocaleString("ru", {
       year: "numeric",
       month: "long",
@@ -69,12 +82,26 @@ const normalizeArticleNavigationItems = (
     nearestSiblings,
   };
 };
+export const chooseArticleUrl = ({
+  displayingPageHandle,
+  handle,
+}: {
+  displayingPageHandle: string | null;
+  handle: string | null;
+}): string => {
+  let url: string = displayingPageHandle || handle || "";
+  if (url && !url.startsWith("/")) {
+    url = normalizeArticleUrl(url) || "";
+  }
+  return url;
+};
 export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
   const {
     id,
     title,
     handle,
     absURL,
+    displayingPageHandle,
     text,
     textHtml,
     renderHtml,
@@ -97,7 +124,7 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
   return {
     id,
     title,
-    url: (handle ? normalizeArticleUrl(handle) : "") || "",
+    url: chooseArticleUrl({ displayingPageHandle, handle }),
     absURL: !absURL ? "" : absURL.startsWith("/") ? absURL : `/${absURL}`,
     navigation: normalizeArticleNavigationItems(navigation),
     textHtml: textHtml || renderHtml || "",

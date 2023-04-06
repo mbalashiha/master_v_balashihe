@@ -75,6 +75,7 @@ function a11yProps(index: number) {
 export const ArticleTabs = () => {
   const { value, handleChange, setTabNumber } = useTabs();
   const { data } = useArticleDraft();
+  const displayingPageUrl: string = data?.absURL || data?.url || "";
   return (
     <>
       <Paper
@@ -124,7 +125,7 @@ export const ArticleTabs = () => {
                   <Grid item xs={12} md={12}>
                     <ArticleTitle />
                   </Grid>
-                  {data?.url && (
+                  {displayingPageUrl && (
                     <Grid item xs={12}>
                       <Paper
                         elevation={1}
@@ -135,12 +136,12 @@ export const ArticleTabs = () => {
                             Страница на сайте:{" "}
                             <Tooltip title={"Читать статью на сайте"} inline>
                               <a
-                                href={data.url}
-                                title={data.url}
+                                href={displayingPageUrl}
+                                title={displayingPageUrl}
                                 rel="noreferrer"
                                 target="_blank"
                               >
-                                {data.url}
+                                {displayingPageUrl}
                               </a>
                             </Tooltip>
                           </Box>
@@ -152,8 +153,10 @@ export const ArticleTabs = () => {
                               <AlertPoper message="Ссылка скопирована">
                                 <IconButton
                                   onClick={() => {
-                                    if (data.url) {
-                                      navigator.clipboard.writeText(data.url);
+                                    if (displayingPageUrl) {
+                                      navigator.clipboard.writeText(
+                                        displayingPageUrl
+                                      );
                                     }
                                   }}
                                 >

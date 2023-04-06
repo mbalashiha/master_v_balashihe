@@ -6,6 +6,8 @@ export const getArticlesCardsQuery = gql`
       nodes {
         title
         handle
+        absURL
+        displayingPageHandle
         createdAt
         score
         fragment

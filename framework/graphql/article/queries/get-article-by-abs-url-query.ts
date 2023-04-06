@@ -1,22 +1,6 @@
 import { gql } from "graphql-request";
 
-export const getArticleByHandleQuery = gql`
-  fragment NavigationFragment on BlogArticleNavigation {
-    next {
-      title
-      handle
-      itIsloop
-    }
-    prev {
-      title
-      handle
-      itIsloop
-    }
-    nearestSiblings {
-      title
-      handle
-    }
-  }
+export const getArticleByAbsUrlQuery = gql`
   fragment BlogArticleFragment on BlogArticle {
     id
     title
@@ -40,12 +24,9 @@ export const getArticleByHandleQuery = gql`
       altText
     }
   }
-  query ($handle: String) {
-    articleByHandle(handle: $handle) {
+  query ($absURL: String) {
+    articleByAbsUrl(absURL: $absURL) {
       ...BlogArticleFragment
-      navigation {
-        ...NavigationFragment
-      }
     }
   }
 `;

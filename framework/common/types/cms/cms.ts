@@ -27,6 +27,7 @@ export namespace Blog {
     id: ID;
     title: string;
     url: string;
+    displayingPageUrl: string;
     createdAt: string;
     score: Float | null;
     fragment: String | null;

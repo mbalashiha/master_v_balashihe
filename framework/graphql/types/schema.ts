@@ -36,6 +36,8 @@ export namespace Schema {
     id: ID;
     title: String;
     handle: String;
+    displayingPageHandle: String;
+    absURL: String;
     createdAt: Date;
     score: Float | null;
     fragment: String | null;
@@ -55,6 +57,7 @@ export namespace Schema {
     title: String;
     handle: String;
     absURL: String;
+    displayingPageHandle: String;
     text: String;
     textHtml: String;
     textRawDraftContentState: String | null;
@@ -157,6 +160,9 @@ export namespace Schema {
     }
     export interface ArticleByHandleResponse {
       articleByHandle: BlogArticle;
+    }
+    export interface ArticleByAbsUrlResponse {
+      articleByAbsUrl: BlogArticle | null;
     }
     export interface Manager {
       id: ID;

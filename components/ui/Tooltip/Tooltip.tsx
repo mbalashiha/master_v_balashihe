@@ -52,6 +52,7 @@ const Tooltip = ({
       <StyledTooltip
         data-tooltip={placement || "down" + (delay ? delay.toString() : "")}
         aria-label={title as string}
+        role="contentinfo"
         className={(inline && "inline") || ""}
       >
         {trigger}
