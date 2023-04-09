@@ -40,9 +40,10 @@ export default function AboutMaster(
         <Typography
           component="h1"
           variant="h1"
-          mb={0}
+          mb={1}
           pb={0}
           color={(theme) => theme.palette.text.primary}
+          sx={{ textAlign: "right" }}
         >
           Дмитрий,{" "}
           <Box component="strong" color="primary.main">
@@ -53,18 +54,19 @@ export default function AboutMaster(
           <Box component="strong" color="primary.main">
             МГТУ МИРЭА
           </Box>
-          , Российский Технологический Университет
+          , Российский <br /> Технологический Университет
         </Typography>
-        <Grid container sx={{}}>
+        <Grid container>
           <Grid
             item
             xs={12}
-            md={3.5}
+            md={4}
+            lg={3.7}
             sx={{
               zIndex: 0,
               display: "flex",
               alignItems: "flex-start",
-              justifyContent: "center",
+              justifyContent: "flex-end",
             }}
           >
             <Paper
@@ -74,15 +76,19 @@ export default function AboutMaster(
                 marginBottom: { xs: "15px", md: 0 },
                 minHeight: "440px",
                 width: "348px",
-                marginTop: { md: "43px" },
+                minWidth: "348px",
+                marginTop: { md: "60px" },
+                marginRight: { md: "-20px" },
                 borderRadius: (theme) => theme.shape.borderRadius - 5 + "px",
               }}
             ></Paper>
           </Grid>
-          <Grid item xs={12} md={8.5} sx={{ zIndex: -1 }}>
+          <Grid item xs={12} md={8} lg={8.3}>
             <Paper
               sx={{
-                p: 3,
+                p: { xs: 2, md: 3 },
+                pl: { md: 4 },
+                pr: 1.5,
                 width: "100%",
                 fontFamily: `Roboto, "Segoe UI", Tahoma, Verdana, Arial`,
                 fontWeight: 500,
