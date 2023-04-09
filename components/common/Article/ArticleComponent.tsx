@@ -126,7 +126,7 @@ export default function Article({ title, children, image, navigation }: Props) {
           },
         }}
       >
-        {children}
+        <Paper sx={{ p: { xs: 3, md: 4, xl: 5 } }}>{children}</Paper>
       </Box>
       <Grid
         component="nav"

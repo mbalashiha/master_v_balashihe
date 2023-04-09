@@ -128,8 +128,13 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
               "alignleft aligncenter alignright alignjustify link | " +
               "bullist numlist checklist outdent indent | removeformat | image code table help",
             content_style: `body { 
-                  padding: 0 10px 0 10px;
-                  color: #06060e; font-family: Roboto, Helvetica, Arial, sans-serif; font-weight: 500; font-size: 18px; }
+                    padding: 0 10px 0 10px;
+                    font-family: Roboto, "Segoe UI", Tahoma, Verdana, Arial;
+                    font-weight: 500;
+                    font-size: 18px;
+                    line-height: 28px;
+                    color: #0e0e0f;
+                  }
               @media (min-width: 800px) {
                 body {
                   padding: 0 20px 0 20px;

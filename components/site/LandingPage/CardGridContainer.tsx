@@ -8,7 +8,7 @@ import LandingCard from "@components/shared/LandingCard";
 
 export const CardGridContainer = () => {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Typography component="h1" variant="h1">
         <Box component="span" color="primary.main">
           Ремонтирую

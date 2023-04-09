@@ -19,7 +19,6 @@ import getArticleByAbsUrl from "@framework/article/get-article-by-abs-url";
 import React from "react";
 
 export default function Home(
-  props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   return (
     <>
@@ -37,12 +36,3 @@ export default function Home(
   );
 }
 Home.Layout = Layout;
-
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext
-) => {
-  const article = await getArticleByAbsUrl({ absURL: "/" });
-  return {
-    props: { article },
-  };
-};

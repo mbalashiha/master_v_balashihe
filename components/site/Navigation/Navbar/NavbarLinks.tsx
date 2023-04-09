@@ -41,6 +41,7 @@ interface Props extends StackProps {
 const getLinks = () => [
   { href: "/", name: <HomeIcon /> },
   { href: "/uslugi-mastera-v-balashihe", name: "Услуги" },
+  { href: "/computer-master-balashiha", name: "О мастере" },
 ];
 export const NavbarLinks = ({
   orientation,
