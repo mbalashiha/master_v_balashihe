@@ -40,7 +40,7 @@ export default function AboutMaster(
         <Typography
           component="h1"
           variant="h1"
-          mb={1}
+          mb={2}
           pb={0}
           color={(theme) => theme.palette.text.primary}
           sx={{ textAlign: "right" }}
