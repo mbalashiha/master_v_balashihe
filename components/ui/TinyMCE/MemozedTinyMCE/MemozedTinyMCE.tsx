@@ -70,7 +70,6 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
             width: "100%",
             menubar: true,
             content_css: "/additional/css/roboto.css",
-            entities: "38,amp,34,quot,162,cent,8364,euro,163,pound,165,yen,169,copy,174,reg,8482,trade",
             setup: function (editor) {
               /* Basic button that just inserts the date */
               editor.ui.registry.addButton("insertCodeButton", {
