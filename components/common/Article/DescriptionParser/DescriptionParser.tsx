@@ -30,12 +30,22 @@ interface Props {
 const options = {
   trim: true,
   replace: (domNode: any) => {
-    const { attribs, children } = domNode;
-    const Children: string | JSX.Element | JSX.Element[] | undefined =
-      children && <>{domToReact(children, options)}</>;
     if (domNode.name) {
-      const convertedProps = attributesToProps(domNode.attribs);
+      const { attribs, children } = domNode;
+      const convertedProps = attributesToProps(attribs);
       delete convertedProps.children;
+      if (Array.isArray(children) && children.length > 0) {
+        if (domNode.name !== "pre") {
+          /// Cleaning spaces in text nodes:
+          children.forEach((ch) => {
+            if (ch && ch.type === "text" && ch.data) {
+              ch.data = ch.data.replace(/[\s]{2,}/gim, " ");
+            }
+          });
+        }
+      }
+      const Children: string | JSX.Element | JSX.Element[] | undefined =
+        children && <>{domToReact(children, options)}</>;
       switch (domNode.name) {
         case "typography":
           if (typeof convertedProps.gutterBottom === "string") {

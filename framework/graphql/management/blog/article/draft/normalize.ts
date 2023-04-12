@@ -34,13 +34,13 @@ export const normalizeArticleDraft = (
   const url = existingArticleId
     ? normalizeArticleUrl(handle, autoHandleSlug)
     : null;
-  return {
+  const normalizedDraft = {
     id,
     title: title || "",
     handle: handle || "",
     autoHandleSlug: autoHandleSlug || "",
     url,
-    absURL: !absURL ? "" : absURL.startsWith("/") ? absURL : `/${absURL}`,
+    absURL: absURL || "",
     text: text || "",
     textHtml: textHtml || "",
     textRawDraftContentState: textRawDraftContentState || null,
@@ -58,4 +58,5 @@ export const normalizeArticleDraft = (
     imageId: imageId || null,
     image: image ? normalizeImage(image) : null,
   };
+  return normalizedDraft;
 };

@@ -17,6 +17,7 @@ import LandingReasons from "@components/site/LandingPage/LandingReasons";
 import LandingPricesCards from "@components/site/LandingPage/LandingPricesCards";
 import getArticleByAbsUrl from "@framework/article/get-article-by-abs-url";
 import React from "react";
+import { fitWidth } from "@lib/aspect-ration-fit";
 
 export default function AboutMaster(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -25,7 +26,17 @@ export default function AboutMaster(
   if (!article || !article.renderHtml) {
     throw new Error("No article for this page!");
   }
-  const { renderHtml, title } = article;
+  let { renderHtml, title, image } = article;
+  image = React.useMemo(() => {
+    if (image && image.width) {
+      const { width, height } = fitWidth(image.width, image.height, 340);
+      image.width = width;
+      image.height = height;
+      return image;
+    } else {
+      return image;
+    }
+  }, [image]);
   return (
     <>
       <Head>
@@ -57,48 +68,70 @@ export default function AboutMaster(
           , Российский <br /> Технологический Университет
         </Typography>
         <Grid container>
-          <Grid
-            item
-            xs={12}
-            md={4}
-            lg={3.7}
-            sx={{
-              zIndex: 0,
-              display: "flex",
-              alignItems: "flex-start",
-              justifyContent: "flex-end",
-            }}
-          >
-            <Paper
-              elevation={4}
+          {image && (
+            <Grid
+              item
+              xs={12}
+              md={4}
+              lg={3.7}
               sx={{
-                p: 1,
-                marginBottom: { xs: "15px", md: 0 },
-                minHeight: "440px",
-                width: "348px",
-                minWidth: "348px",
-                marginTop: { md: "60px" },
-                marginRight: { md: "-20px" },
-                borderRadius: (theme) => theme.shape.borderRadius - 5 + "px",
+                zIndex: 0,
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "flex-end",
               }}
-            ></Paper>
-          </Grid>
+            >
+              <Paper
+                elevation={1}
+                sx={{
+                  p: 0.7,
+                  pb: 0.1,
+                  marginBottom: { xs: "15px", md: 0 },
+                  marginTop: { md: "60px" },
+                  marginRight: { md: "-26px" },
+                  borderRadius: (theme) => theme.shape.borderRadius - 5 + "px",
+                  "& img": {
+                    borderRadius: (theme) =>
+                      theme.shape.borderRadius - 10 + "px",
+                  },
+                }}
+              >
+                <Image
+                  src={image.url}
+                  width={image.width}
+                  height={image.height}
+                  alt={image.alt}
+                ></Image>
+              </Paper>
+            </Grid>
+          )}
           <Grid item xs={12} md={8} lg={8.3}>
             <Paper
               sx={{
-                p: { xs: 2, md: 3 },
-                pl: { md: 4 },
-                pr: 1.5,
-                width: "100%",
-                fontFamily: `Roboto, "Segoe UI", Tahoma, Verdana, Arial`,
-                fontWeight: 500,
-                fontSize: "18px",
-                lineHeight: "28px",
-                color: (theme) =>
-                  theme.palette.mode === "light" ? "#04040a" : "white",
+                border: "12px solid",
+                borderColor: (theme) => theme.palette.background.paper,
+                borderRadius: (theme) => theme.shape.borderRadius - 5 + "px",
               }}
             >
-              <DescriptionParser descriptionHTML={renderHtml} />
+              <Box
+                sx={{
+                  width: "100%",
+                  border: "3px solid",
+                  borderColor: (theme) => theme.palette.primary.light,
+                  borderRadius: (theme) => theme.shape.borderRadius - 9 + "px",
+                  p: { xs: 1, md: 2 },
+                  pl: { md: 2.5 },
+                  pr: 1,
+                  fontFamily: `Roboto, "Segoe UI", Tahoma, Verdana, Arial`,
+                  fontWeight: 500,
+                  fontSize: "18px",
+                  lineHeight: "28px",
+                  color: (theme) =>
+                    theme.palette.mode === "light" ? "#04040a" : "white",
+                }}
+              >
+                <DescriptionParser descriptionHTML={renderHtml} />
+              </Box>
             </Paper>
           </Grid>
         </Grid>
@@ -116,6 +149,21 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   const article = await getArticleByAbsUrl({
     absURL: "/computer-master-balashiha",
   });
+  if (article) {
+    article.image = {
+      ...article.image,
+      url: `/images/computer_master_photo_balashikha.webp`,
+      width: 2301,
+      height: 3071,
+      alt: `Дмитрий, компьютерный мастер в Балашихе, выпускник МГТУ МИРЭА (РТУ МИРЭА)`,
+      orderNumber: null,
+      originalWidth: null,
+      originalHeight: null,
+      createdAt: null,
+      updatedAt: null,
+      imageId: `/images/computer_master_photo_balashikha.webp`,
+    };
+  }
   return {
     props: { article },
   };

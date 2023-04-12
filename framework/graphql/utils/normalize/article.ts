@@ -125,7 +125,7 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     id,
     title,
     url: chooseArticleUrl({ displayingPageHandle, handle }),
-    absURL: !absURL ? "" : absURL.startsWith("/") ? absURL : `/${absURL}`,
+    absURL: absURL || "",
     navigation: normalizeArticleNavigationItems(navigation),
     textHtml: textHtml || renderHtml || "",
     renderHtml: renderHtml || "",

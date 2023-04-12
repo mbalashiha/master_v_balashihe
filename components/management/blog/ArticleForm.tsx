@@ -164,7 +164,7 @@ export default function ArticleForm({}: Props) {
             document.documentElement.querySelector("body")?.innerHTML ||
             textHtml;
         }
-        renderHtml = renderHtml.replace(/\"(\.\.\/+)+/gim, '\"/');
+        renderHtml = renderHtml.replace(/\"(\.\.\/+)+/gim, '"/');
         renderHtml = renderHtml
           .replace(/<table(\s+[^>]*)?>/g, `<div data-component-tag="table"$1>`)
           .replace(/<\/table>/g, `</div>`);
@@ -190,7 +190,7 @@ export default function ArticleForm({}: Props) {
         const article = {
           id,
           title,
-          handle,
+          handle: (handle || "").trim(),
           autoHandleSlug:
             (title ? slugify(title) : null) || autoHandleSlug || null,
           absURL: slugifyAbsUrl(absURL || ""),
@@ -206,6 +206,9 @@ export default function ArticleForm({}: Props) {
           existingArticleId,
           imageId: imageId || null,
         };
+        if (!article.handle) {
+          article.handle = autoHandleSlug || "";
+        }
         const { success, articleId, articleDraft } = await saveArticle({
           article,
         });
@@ -234,8 +237,8 @@ export default function ArticleForm({}: Props) {
             sx={{ display: "flex", justifyContent: "flex-end" }}
           >
             <Stack spacing={"3px"} direction="row">
-              <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
               <DeleteDraftButton />
+              <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
             </Stack>
           </Grid>
         </Grid>
