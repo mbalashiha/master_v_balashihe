@@ -61,6 +61,7 @@ export namespace Schema {
     text: String;
     textHtml: String;
     textRawDraftContentState: String | null;
+    keyTextHtml: String | null;
     renderHtml: String;
     unPublished: Boolean;
     notSearchable: Boolean;
@@ -85,6 +86,7 @@ export namespace Schema {
       text: String | null;
       textHtml: String | null;
       textRawDraftContentState: String | null;
+      keyTextHtml: String | null;
       renderHtml: String;
       unPublished: Boolean;
       notSearchable: Boolean;
@@ -114,6 +116,11 @@ export namespace Schema {
       textRawDraftContentState: String | null;
       existingArticleId: ID | null;
     }
+    export interface ArticleKeyTextDraftInput {
+      id: ID | null;
+      keyTextHtml: String;
+      existingArticleId: ID | null;
+    }
     export interface ArticleDraft {
       id: ID | null;
       title: String;
@@ -122,6 +129,7 @@ export namespace Schema {
       absURL: String | null;
       text: String;
       textHtml: String;
+      keyTextHtml: String | null;
       textRawDraftContentState: String | null;
       unPublished: Boolean;
       notSearchable: Boolean;
@@ -185,6 +193,14 @@ export namespace Schema {
     export interface SaveArticleTextDraftResponse {
       saveArticleTextDraft: {
         message: String;
+        updatedDraft: Article.ArticleDraft;
+      };
+    }
+    export interface SaveArticleKeyTextDraftResponse {
+      saveArticleKeyTextDraft: {
+        message: String;
+        error?: string | null;
+        success?: boolean;
         updatedDraft: Article.ArticleDraft;
       };
     }

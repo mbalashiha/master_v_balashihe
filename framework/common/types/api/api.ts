@@ -31,6 +31,7 @@ export interface Hooks {
         draft: {
           useArticleDraft: Graphql.SWRHook<any>;
           useSaveArticleText: Graphql.MutationHook<any>;
+          useSaveArticleKeyText: Graphql.MutationHook<any>;
           useSaveDraftProps: Graphql.MutationHook<any>;
           useDeleteDraft: Graphql.MutationHook<any>;
           useCheckArticle: Graphql.MutationHook<any>;

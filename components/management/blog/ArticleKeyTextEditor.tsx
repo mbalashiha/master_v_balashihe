@@ -12,57 +12,56 @@ import dynamic from "next/dynamic";
 import { useRefFormik } from "@components/ui";
 import { CMS } from "@common/types";
 import { useArticleContext } from "./ArticleProvider";
-import useSaveArticleText from "@framework/management/blog/article/draft/use-save-article-text";
+import useSaveArticleKeyText from "@framework/management/blog/article/draft/use-save-article-key-text";
 import { useField } from "formik";
-import TinyMCE from "@components/management/TinyMCE";
+import { ShortTinyMCE } from "@components/management/TinyMCE";
 import { useRouter } from "next/router";
 
-export default function ArticleTextEditor() {
+export default function ArticleKeyTextEditor() {
   const form = useRefFormik<CMS.Blog.ArticleDraft>();
-  const saveDraftText = useSaveArticleText();
+  const saveDraftKeyText = useSaveArticleKeyText();
   const [timeoutId, setTimeoutId] = React.useState<number | null>(null);
   const doTimeout = () => {
     if (!timeoutId) {
       const timeoutId = window.setTimeout(async () => {
         try {
-          await saveDraftText({});
+          await saveDraftKeyText({});
         } catch (e: any) {
           console.error("do-Timeout:", e.stack || e.message || e);
         } finally {
           setTimeoutId(null);
         }
-      }, 13000);
+      }, 3000);
       setTimeoutId(timeoutId);
     }
   };
-  const mutRef = React.useRef({ form, doTimeout, timeoutId, saveDraftText });
+  const mutRef = React.useRef({ form, doTimeout, timeoutId, saveDraftKeyText });
   mutRef.current = {
     ...mutRef.current,
     form,
     doTimeout,
     timeoutId,
-    saveDraftText,
+    saveDraftKeyText,
   };
   React.useEffect(() => {
     const { timeoutId } = mutRef.current;
     return () => {
       if (timeoutId) {
-        window.clearTimeout(timeoutId);
+        clearTimeout(timeoutId);
       }
     };
   }, []);
   const onBlur = React.useCallback(() => {
-    const { saveDraftText } = mutRef.current;
-    saveDraftText({});
+    const { saveDraftKeyText } = mutRef.current;
+    saveDraftKeyText({});
   }, []);
-  const onEditorChange = React.useCallback((textHtml: string, text: string) => {
+  const onEditorChange = React.useCallback((keyTextHtml: string) => {
     const { form, doTimeout } = mutRef.current;
-    form.setFieldValue("textHtml", textHtml);
-    form.setFieldValue("text", text);
+    form.setFieldValue("keyTextHtml", keyTextHtml);
     doTimeout();
   }, []);
-  const [htmlFieled, meta] = useField("textHtml");
-  const initialValue = form.formIsResetting ? "" : htmlFieled.value;
+  const [keyTextHtmlFieled, meta] = useField("keyTextHtml");
+  const initialValue = form.formIsResetting ? "" : keyTextHtmlFieled.value;
   return (
     <>
       {meta.error && (
@@ -88,13 +87,13 @@ export default function ArticleTextEditor() {
           },
           "&, & > *, & .tox.tox-tinymce": {
             borderRadius: "0 0 8px 8px",
-            height: "105vh",
+            height: "600px",
             background: "white",
           },
         }}
       >
         {form.formIsResetting ? null : (
-          <TinyMCE
+          <ShortTinyMCE
             initialValue={initialValue}
             onBlur={onBlur}
             onEditorChange={onEditorChange}

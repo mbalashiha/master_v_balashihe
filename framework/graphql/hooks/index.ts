@@ -4,6 +4,7 @@ import { handler as useTokenOneTime } from "@framework/management/auth/use-token
 import { handler as useSignOut } from "@framework/management/auth/use-sign-out";
 import { handler as useArticleDraft } from "@framework/management/blog/article/draft/use-article-draft";
 import { handler as useSaveArticleText } from "@framework/management/blog/article/draft/use-save-article-text";
+import { handler as useSaveArticleKeyText } from "@framework/management/blog/article/draft/use-save-article-key-text";
 import { handler as useSaveArticleDraftProps } from "@framework/management/blog/article/draft/use-save-draft-props";
 import { handler as useSaveArticle } from "@framework/management/blog/article/use-save-article";
 import { handler as useDeleteArticle } from "@framework/management/blog/article/use-delete-article";
@@ -34,6 +35,7 @@ export const graphqlHooks: API.Hooks = {
         draft: {
           useArticleDraft,
           useSaveArticleText,
+          useSaveArticleKeyText,
           useSaveDraftProps: useSaveArticleDraftProps,
           useDeleteDraft: useDeleteArticleDraft,
           useCheckArticle,

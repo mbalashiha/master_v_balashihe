@@ -1,4 +1,4 @@
-import { GradientBackground1 } from "@components/shared/Gradients/Backgrounds";
+
 import {
   Box,
   Typography,
@@ -22,8 +22,6 @@ import { CMS } from "@common/types";
 import { StyledFab } from "./StyledFab";
 import { blueGrey } from "@mui/material/colors";
 import { standartCssTransition } from "@components/ui/theme/mui-theme";
-type NextImageType = typeof Image;
-type NextImageTypeProps = React.ComponentProps<NextImageType>;
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];

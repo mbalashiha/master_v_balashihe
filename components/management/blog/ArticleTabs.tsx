@@ -21,7 +21,7 @@ import {
 import useArticleDraft from "@framework/management/blog/article/draft/use-article-draft";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import { ArticleProvider } from "./ArticleProvider";
-import { ArticleTextEditor } from "@components/management/blog";
+import { ArticleKeyTextEditor, ArticleTextEditor } from "@components/management/blog";
 import { Title } from "@mui/icons-material";
 import ArticleTitle from "./ArticleTitle";
 import useSaveArticle from "@framework/management/blog/article/use-save-article";
@@ -102,7 +102,8 @@ export const ArticleTabs = () => {
             <Tab label="Публикация" {...a11yProps(0)} />
             <Tab label="Изображение" {...a11yProps(1)} />
             <Tab label="Параметры" {...a11yProps(2)} />
-            <Tab label="Текст" {...a11yProps(3)} />
+            <Tab label="Шапка" {...a11yProps(3)} />
+            <Tab label="Текст" {...a11yProps(4)} />
           </Tabs>
         </Box>
         <Box
@@ -179,7 +180,10 @@ export const ArticleTabs = () => {
           <TabPanel value={value} index={2}>
             <ArticleFormParameters />
           </TabPanel>
-          <Box sx={{ display: [0, 3].includes(value) ? "inherit" : "none" }}>
+          <TabPanel value={value} index={3}>
+            <ArticleKeyTextEditor />
+          </TabPanel>
+          <Box sx={{ display: [0, 4].includes(value) ? "inherit" : "none" }}>
             <ArticleTextEditor />
           </Box>
         </Box>

@@ -9,6 +9,7 @@ const articleFragment = gql`
     text
     textHtml
     textRawDraftContentState
+    keyTextHtml
     autoHandleSlug
     unPublished
     notSearchable

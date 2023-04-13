@@ -1,10 +1,9 @@
-import { ArticleLayout } from "@components/site";
 import { Container, Grid, Card, Paper } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Article, DescriptionParser } from "@components/common/Article";
+import { DescriptionParser } from "@components/common/Article";
 import {
   GetStaticProps,
   GetStaticPropsContext,

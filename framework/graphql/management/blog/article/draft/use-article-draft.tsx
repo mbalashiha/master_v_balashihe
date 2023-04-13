@@ -1,10 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useManagementApiProvider } from "@common/management";
 import { useArticleDraft } from "@common/management/blog/article/draft/use-article-draft";
 import { UseArticleDraft } from "@common/management/blog/article/draft/use-article-draft";
 import { API, CMS } from "@common/types";
-import { Management } from "@common/types/cms";
-import { useRefFormik } from "@components/ui";
 import { Schema } from "@framework/types";
 import { useRouter } from "next/router";
 import { normalizeArticleDraft } from "./normalize";

@@ -11,6 +11,7 @@ export const articleDraftFragment = gql`
     text
     textHtml
     textRawDraftContentState
+    keyTextHtml
     autoHandleSlug
     unPublished
     notSearchable

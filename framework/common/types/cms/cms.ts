@@ -45,11 +45,12 @@ export namespace Blog {
   }
   export interface Article {
     id: ID;
-    title: string;
-    url: string;
-    absURL: string;
-    textHtml: string;
+    title: String;
+    url: String;
+    absURL: String;
+    textHtml: String;
     renderHtml: String;
+    keyTextHtml: String;
     unPublished: Boolean;
     notSearchable: Boolean;
     notInList: Boolean;
@@ -72,6 +73,7 @@ export namespace Blog {
     text: String;
     textHtml: String;
     textRawDraftContentState: String | null;
+    keyTextHtml: String;
     unPublished: Boolean;
     notSearchable: Boolean;
     notInList: Boolean;

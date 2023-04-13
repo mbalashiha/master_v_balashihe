@@ -1,7 +1,6 @@
 import { CMS } from "@common/types";
 import { Blog } from "@common/types/cms";
 import { ID, Schema } from "@framework/types";
-import util from "util";
 
 export const normalizeArticleUrl = (
   handle: string | null,
@@ -105,6 +104,7 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     text,
     textHtml,
     renderHtml,
+    keyTextHtml,
     unPublished,
     notSearchable,
     notInList,
@@ -129,6 +129,7 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     navigation: normalizeArticleNavigationItems(navigation),
     textHtml: textHtml || renderHtml || "",
     renderHtml: renderHtml || "",
+    keyTextHtml: keyTextHtml || "",
     unPublished: Boolean(unPublished),
     notSearchable: Boolean(notSearchable),
     notInList: Boolean(notInList),
