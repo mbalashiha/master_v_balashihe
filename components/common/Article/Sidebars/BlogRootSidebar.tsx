@@ -15,7 +15,6 @@ interface Props {
 export const BlogRootSidebar = ({ recentArticles }: Props) => {
   return (
     <SidebarPaper
-      ellipsis
       title={"Недавние"}
       sx={{ width: "100%", height: { lg: "800px" } }}
     >

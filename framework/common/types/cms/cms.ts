@@ -14,12 +14,12 @@ export interface Image {
   alt: string;
   height: number;
   width: number;
-  orderNumber: Int | null;
-  originalWidth: number | null;
-  originalHeight: number | null;
-  createdAt: Date | null;
-  updatedAt: Date | null;
-  imageId: ID;
+  orderNumber?: Int | null;
+  originalWidth?: number | null;
+  originalHeight?: number | null;
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
+  imageId?: ID;
 }
 export namespace Blog {
   export type BlogCategory = any;
@@ -31,12 +31,14 @@ export namespace Blog {
     createdAt: string;
     score: Float | null;
     fragment: String | null;
+    image: Image | null;
   }
   export interface NavigationItem {
     title: String;
     url: String;
     active: true | null;
     itIsloop: Boolean | null;
+    image: Image | null;
   }
   export interface BlogArticleNavigation {
     prev: NavigationItem | null;

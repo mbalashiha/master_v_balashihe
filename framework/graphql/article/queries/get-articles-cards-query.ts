@@ -11,6 +11,13 @@ export const getArticlesCardsQuery = gql`
         createdAt
         score
         fragment
+        image {
+          imageId
+          imgSrc
+          width
+          height
+          altText
+        }
       }
     }
   }

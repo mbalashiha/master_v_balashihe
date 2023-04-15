@@ -29,9 +29,9 @@ export const GradientCard = ({
         zIndex: 0,
         minHeight: "200px",
         width: "inherit",
-        position: "relative",
-        "& ul": {
-          "&, & li": {},
+        position: "relative",        
+        "& p": {
+          margin: 0,
         },
         backgroundPosition: "top center",
         backgroundSize: "fit",
@@ -75,7 +75,7 @@ export const GradientCard = ({
         </Stack>
       </Box>
       <Stack
-        component="ul"
+        component="div"
         width="100%"
         px={{ xs: "1.5rem", md: "2.5rem", lg: "3.5rem" }}
         pt="2.5rem"

@@ -4,38 +4,72 @@ import { styled, Paper } from "@mui/material";
 type PaperProps = React.ComponentProps<typeof Paper>;
 type StyledPaperProps = {
   ellipsis?: boolean;
-}
+};
 type Props = PaperProps & StyledPaperProps;
 
 export const StyledPaper = styled(({ ellipsis: _, ...props }: Props) => (
   <Paper {...props} />
 ))<StyledPaperProps>(({ theme, ellipsis }) => ({
-  color: "#000000de",
   ...standartCssTransition,
+  background: "none",
   display: "flex",
   flexDirection: "column",
   position: "relative",
   minWidth: "0px",
   overflowWrap: "break-word",
   backgroundClip: "border-box",
-  border: "0px solid #00000020",
+  border: "none",
   borderRadius: "0.75rem",
-  boxShadow:
-    "#0000001a 0rem 0.25rem 0.375rem -0.0625rem, #0000000f 0rem 0.125rem 0.25rem -0.0625rem",
+  boxShadow: "none",
   overflow: "visible",
   "& li": {
     padding: 0,
-    "&, & a, & div": {
+    borderRadius: "0.6rem",
+    overflow: "hidden",
+    "&.MuiDivider-root": {
+      marginRight: "0.7rem",
+    },
+    "& .MuiListItemText-root": {
+      maxHeight: "54px",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      color: theme.palette.articleText.main,
+      paddingLeft: "8px",
+    },
+    "& .MuiListItemIcon-root": {
+      height: "76px",
+      width: "76px",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      justifyContent: "center",
+      position: "relative",
+      "&.active": {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      },
+      "& img": {
+        borderRadius: "0.6rem",
+      },
+    },
+    "&, & a, & div, & div span": {
       borderRadius: "0.6rem",
-      fontWeight: 500,
+      fontWeight: 600,
+      fontSize: "11pt",
+      lineHeight: "18px",
     },
     "& div span": {
-      color: "black",
-      fontWeight: 500,
       display: ellipsis && "block",
       overflow: ellipsis && "hidden",
       whiteSpace: ellipsis && "nowrap",
       textOverflow: ellipsis && "ellipsis",
+    },
+    "& > *, & > .MuiButtonBase-root": {
+      padding: 0,
+      paddingLeft: 0,
+      height: "76px",
+      overflow: "hidden",
     },
   },
   "& .MuiListItemIcon-root": {

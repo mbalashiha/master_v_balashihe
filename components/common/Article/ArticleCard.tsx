@@ -25,15 +25,16 @@ const ArticleCard = ({ article }: Props) => {
           "&, & h5, & p": {
             color: (theme) => theme.palette.articleText.main,
           },
-          "&, & a, & a > *": { ...standartCssTransition },
           "&:hover": {
+            ...standartCssTransition,
             boxShadow: "0 35px 15px 0 rgba(0,0,0,.0605)",
+            color: (theme) => theme.palette.primary.dark,
             "& a": {
               "& button": {
-                color: (theme) => theme.palette.articleText.main,
+                color: (theme) => theme.palette.primary.dark,
               },
               "&, & > *": {
-                color: (theme) => theme.palette.primary.main,
+                color: (theme) => theme.palette.primary.dark,
               },
             },
           },

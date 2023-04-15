@@ -41,11 +41,13 @@ export namespace Schema {
     createdAt: Date;
     score: Float | null;
     fragment: String | null;
+    image: Image | null;
   }
   export interface NavigationItem {
     title: String;
     handle: String;
     itIsloop: Boolean | null;
+    image: Image | null;
   }
   export interface BlogArticleNavigation {
     prev: NavigationItem | null;

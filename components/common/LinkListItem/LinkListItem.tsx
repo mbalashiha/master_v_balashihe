@@ -1,16 +1,22 @@
 import Link from "next/link";
-
+import Image from "next/image";
 import { Blog } from "@common/types/cms";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import { EnhImage } from "@components/ui";
 import { grey } from "@mui/material/colors";
 interface LinkProps extends Blog.NavigationItem {
   children: React.ReactNode | React.ReactNode[];
 }
-
-export const LinkListItem = ({ children, active, url, title }: LinkProps) => {
+export const LinkListItem = ({
+  children,
+  active,
+  url,
+  title,
+  image,
+}: LinkProps) => {
   if (active || !url) {
     return (
       <ListItem>
@@ -26,7 +32,7 @@ export const LinkListItem = ({ children, active, url, title }: LinkProps) => {
             },
           }}
         >
-          <ListItemIcon>
+          <ListItemIcon className={"active"}>
             <ArrowForwardIosRoundedIcon sx={{ color: "white" }} />
           </ListItemIcon>
           {children}
@@ -44,7 +50,16 @@ export const LinkListItem = ({ children, active, url, title }: LinkProps) => {
           )}
         >
           <ListItemIcon>
-            <ArrowForwardIosRoundedIcon />
+            {image && (
+              <EnhImage
+                width={image.width}
+                height={image.height}
+                fitWidth={76}
+                fitHeight={76}
+                src={image.url}
+                alt={image.alt}
+              />
+            )}
           </ListItemIcon>
           {children}
         </ListItemButton>

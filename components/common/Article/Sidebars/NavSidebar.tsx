@@ -17,7 +17,7 @@ interface Props {
 }
 export default function NavSidebar({ navigation }: Props) {
   return (
-    <SidebarPaper ellipsis title={"Навигация"}>
+    <SidebarPaper title={"Навигация"}>
       {navigation.nearestSiblings && (
         <NavigationList articlesList={navigation.nearestSiblings} />
       )}

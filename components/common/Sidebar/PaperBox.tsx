@@ -4,6 +4,6 @@ export const PaperBox = styled(Box)(({ theme }) => ({
   padding: "1rem",
   opacity: "1",
   background: "transparent",
-  color: "#344767",
+  color: theme.palette.articleText.main,
   boxShadow: "none",
 }));

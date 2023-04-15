@@ -25,6 +25,7 @@ const getRecentArticles = async (
         handle: el.handle,
         title: el.title,
         itIsloop: false,
+        image: el.image,
       })
     )
   );

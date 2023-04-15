@@ -60,7 +60,7 @@ export const LandingPricesCards = () => {
             <PriceRow title={"Замена видеокарты"} amount={800} />
             <PriceRow title={"Замена кулера"} amount={1070} />
             <PriceRow title={"Замена разъёмов"} amount={1900} />
-            <PriceRow title={"Замена матрицы"} amount={1700} />
+            <PriceRow title={"Замена матрицы экрана в Балашихе"} amount={1700} />
             <PriceRow title={"Замена батарейки BIOS"} amount={200} />
           </GradientCard>
         </Grid>
@@ -95,12 +95,17 @@ export const LandingPricesCards = () => {
               href={`/uslugi-mastera-v-balashihe/remont-kompyuterov-s-horoshymi-otzyvami`}
               title={"Ремонт в Балашихе с хорошими отзывами"}
               amount={900}
-            />            
+            />
             <PriceRow
               href="/uslugi-mastera-v-balashihe/ustanovka-windows"
               title={"Установка Windows в Балашихе"}
               amount={470}
             />
+            <PriceRow title={"Компьютерная помощь в Балашихе"} />
+            <PriceRow title={"Балашиха бесплатная диагностика"} />
+            <PriceRow title={"Ремонт рядом с Шоссе Энтузиастов"} />
+            <PriceRow title={"Ремонт ноутбуков недорого в Балашихе"} />
+            <PriceRow title={"Диагностика техники в центре Балашихи"} />
           </GradientCard>
         </Grid>
       </Grid>

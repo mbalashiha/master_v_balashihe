@@ -8,7 +8,7 @@ import Link from "next/link";
 type NextLinkProps = React.ComponentProps<typeof Link>;
 interface Props {
   title: React.ReactNode;
-  amount: string | number;
+  amount?: string | number;
   href?: NextLinkProps["href"];
 }
 const StyledLink = styled(Link)(({ theme }) => ({
@@ -25,11 +25,7 @@ const StyledLink = styled(Link)(({ theme }) => ({
 }));
 const UpperLink = ({ href, children }: any) => {
   if (href) {
-    return (
-      <b>
-        <StyledLink href={href}>{children}</StyledLink>
-      </b>
-    );
+    return <StyledLink href={href}>{children}</StyledLink>;
   } else {
     return <>{children}</>;
   }
@@ -38,7 +34,7 @@ const UpperLink = ({ href, children }: any) => {
 export const PriceRow = ({ href, title, amount }: Props) => {
   return (
     <Stack
-      component={"li"}
+      component={"p"}
       direction="row"
       spacing={2}
       width="100%"
@@ -50,15 +46,17 @@ export const PriceRow = ({ href, title, amount }: Props) => {
         },
       }}
     >
-      <Typography component="span" sx={{ flexGrow: 1 }}>
+      <Typography component="strong" sx={{ flexGrow: 1 }}>
         <UpperLink href={href}>{title}</UpperLink>
       </Typography>
-      <Typography
-        component="span"
-        sx={{ minWidth: { xs: "90px", sm: "80px" } }}
-      >
-        от {amount} &#x20bd;
-      </Typography>
+      {amount && (
+        <Typography
+          component="span"
+          sx={{ minWidth: { xs: "90px", sm: "80px" } }}
+        >
+          от {amount} &#x20bd;
+        </Typography>
+      )}
     </Stack>
   );
 };

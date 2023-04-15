@@ -9,6 +9,13 @@ export const getRecentArticlesQuery = gql`
         createdAt
         score
         fragment
+        image {
+          imageId
+          imgSrc
+          width
+          height
+          altText
+        }
       }
     }
   }

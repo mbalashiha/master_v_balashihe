@@ -8,7 +8,7 @@ import {
   PaletteColorOptions,
   CSSInterpolation,
 } from "@mui/material";
-import { purple, pink, amber, grey, blueGrey } from "@mui/material/colors";
+import { grey, blueGrey } from "@mui/material/colors";
 const InterFontFamily = `Inter, Arial, sans-serif`;
 
 export const standartCssTransition = {

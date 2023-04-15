@@ -1,20 +1,30 @@
 import { gql } from "graphql-request";
 
 export const getArticleByHandleQuery = gql`
+  fragment ImageFragment on Image {
+    imageId
+    imgSrc
+    width
+    height
+    altText
+  }
+  fragment NavigationItemFragment on NavigationItem {
+    title
+    handle
+    itIsloop
+    image {
+      ...ImageFragment
+    }
+  }
   fragment NavigationFragment on BlogArticleNavigation {
     next {
-      title
-      handle
-      itIsloop
+      ...NavigationItemFragment
     }
     prev {
-      title
-      handle
-      itIsloop
+      ...NavigationItemFragment
     }
     nearestSiblings {
-      title
-      handle
+      ...NavigationItemFragment
     }
   }
   fragment BlogArticleFragment on BlogArticle {
@@ -33,11 +43,7 @@ export const getArticleByHandleQuery = gql`
     updatedAt
     publishedAt
     image {
-      imageId
-      imgSrc
-      width
-      height
-      altText
+      ...ImageFragment
     }
   }
   query ($handle: String) {

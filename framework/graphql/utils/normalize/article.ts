@@ -28,10 +28,12 @@ export const normalizeBlogRow = (
     score,
     fragment,
     displayingPageHandle,
+    image,
   } = data;
   const url = absURL || handle ? normalizeArticleUrl(absURL || handle) : "";
   return {
     id: id || (null as any as ID),
+    image: image && image.imgSrc ? normalizeImage(image) : null,
     score: typeof score === "number" || score ? score : null,
     fragment: fragment || null,
     title,
@@ -50,13 +52,14 @@ export const normalizeArtNavItem = (
   item: Schema.NavigationItem
 ): Blog.NavigationItem => {
   item = item || {};
-  const { title, handle, itIsloop } = item;
+  const { title, handle, itIsloop, image } = item;
   const url = (handle && normalizeArticleUrl(handle)) || "";
   return {
-    title: title || "",
+    title: (title || "").replace(/[\.!]+\s*/gim, " ").trim(),
     url,
     active: handle === "" ? true : null,
     itIsloop: Boolean(itIsloop),
+    image: image && image.imgSrc ? normalizeImage(image) : null,
   };
 };
 const normalizeArticleNavigationItems = (
