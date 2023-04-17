@@ -34,6 +34,7 @@ export const getArticleByHandleQuery = gql`
     absURL
     displayingPageHandle
     renderHtml
+    keyTextHtml
     unPublished
     notSearchable
     notInList

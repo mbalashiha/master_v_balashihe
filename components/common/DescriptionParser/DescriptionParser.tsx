@@ -15,7 +15,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Article } from "@components/common/Article";
 
 import parse, {
   attributesToProps,
@@ -31,6 +30,13 @@ const options = {
   trim: true,
   replace: (domNode: any) => {
     if (domNode.name) {
+      switch (domNode.name) {
+        case "svg":
+          return domNode;
+          break;
+        default:
+          break;
+      }
       const { attribs, children } = domNode;
       const convertedProps = attributesToProps(attribs);
       delete convertedProps.children;
@@ -47,6 +53,24 @@ const options = {
       const Children: string | JSX.Element | JSX.Element[] | undefined =
         children && <>{domToReact(children, options)}</>;
       switch (domNode.name) {
+        case "p":
+          return <p {...(convertedProps as any)}>{Children}</p>;
+          break;
+        case "pre":
+          return <pre {...(convertedProps as any)}>{Children}</pre>;
+          break;
+        case "code":
+          return <code {...(convertedProps as any)}>{Children}</code>;
+          break;
+        case "strong":
+          return <strong {...(convertedProps as any)}>{Children}</strong>;
+          break;
+        case "b":
+          return <b {...(convertedProps as any)}>{Children}</b>;
+          break;
+        case "i":
+          return <i {...(convertedProps as any)}>{Children}</i>;
+          break;
         case "typography":
           if (typeof convertedProps.gutterBottom === "string") {
             convertedProps.gutterBottom = true as any;
@@ -61,12 +85,6 @@ const options = {
               {Children}
             </Paper>
           );
-          break;
-        case "p":
-        case "strong":
-        case "b":
-        case "i":
-          return domNode;
           break;
         case "h1":
         case "h2":
@@ -93,6 +111,22 @@ const options = {
               <ul {...(convertedProps as any)}>{Children}</ul>
             </Paper>
           );
+          break;
+        case "li":
+          return <li {...(convertedProps as any)}>{Children}</li>;
+          break;
+        case "ol":
+          return (
+            <Paper component="div">
+              <ol {...(convertedProps as any)}>{Children}</ol>
+            </Paper>
+          );
+          break;
+        case "sub":
+          return <sub {...(convertedProps as any)}>{Children}</sub>;
+          break;
+        case "sup":
+          return <sup {...(convertedProps as any)}>{Children}</sup>;
           break;
         case "tbody":
           return <>{Children}</>;
@@ -245,12 +279,24 @@ const options = {
                 break;
             }
           }
-          return domNode;
+          return <div {...(convertedProps as any)}>{Children}</div>;
+          break;
+
+        case "frame":
+        case "iframe":
+          return <></>;
+          break;
+        case "script":
+        case "style":
+        case "form":
+        case "input":
+        case "textarea":
+          return <code>{Children}</code>;
           break;
         default:
-          return <code>{Children}</code>;
+          return <pre>{Children}</pre>;
       }
-      return <code>{Children}</code>;
+      return <pre>{Children}</pre>;
     }
     return domNode;
   },

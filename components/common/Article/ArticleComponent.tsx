@@ -1,4 +1,3 @@
-
 import {
   Box,
   Typography,
@@ -22,15 +21,22 @@ import { CMS } from "@common/types";
 import { StyledFab } from "./StyledFab";
 import { blueGrey } from "@mui/material/colors";
 import { standartCssTransition } from "@components/ui/theme/mui-theme";
+import { HeaderTextParser } from "@components/common/HeaderTextParser";
 
-interface Props {
+interface Props extends CMS.Blog.Article {
   children: React.ReactNode | React.ReactNode[];
-  title: string;
-  image: CMS.Image | null;
-  navigation?: Blog.BlogArticleNavigation;
 }
 
-export default function Article({ title, children, image, navigation }: Props) {
+export default function Article({
+  title,
+  children,
+  image,
+  navigation,
+  keyTextHtml,
+}: Props) {
+  // if (!keyTextHtml) {
+  //   throw new Error("Why is not keyTextHtml?");
+  // }
   return (
     <HugeContainer
       showSearch
@@ -41,7 +47,31 @@ export default function Article({ title, children, image, navigation }: Props) {
         <Grid item xs={12} md={6} lg={6}>
           <ImagePaper image={image} />
         </Grid>
-        <Grid item xs={12} md={6} lg={6}></Grid>
+        <Grid item xs={12} md={6} lg={6}>
+          {keyTextHtml && (
+            <Box
+              sx={{
+                "& > *": {
+                  p: 0,
+                  m: 0,
+                  ml: "30px",
+                  "&::before": {
+                    display: "inline-block",
+                    content: `"\\2605"`,
+                    fontSize: "24px",
+                    lineHeight: "20px",
+                    transform: "translate(-30px,2px)",
+                    width: 0,
+                    overflow: "visible",
+                    color: "orange",
+                  },
+                },
+              }}
+            >
+              <HeaderTextParser htmlText={keyTextHtml} />
+            </Box>
+          )}
+        </Grid>
       </Grid>
       <Stack
         direction={"row"}
@@ -124,7 +154,13 @@ export default function Article({ title, children, image, navigation }: Props) {
           },
         }}
       >
-        <Paper sx={{ p: { xs: 3, md: 4, xl: 5 } }}>{children}</Paper>
+        <Paper
+          sx={{
+            p: { xs: 3, md: 4, xl: 5 },
+          }}
+        >
+          {children}
+        </Paper>
       </Box>
       <Grid
         component="nav"

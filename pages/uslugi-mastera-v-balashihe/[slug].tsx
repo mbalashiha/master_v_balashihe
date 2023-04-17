@@ -49,7 +49,7 @@ export default function Page(
           content={`Мастер по ремонту в Балашихе и Московской области - ${article.title}`}
         />
       </Head>
-      <Article image={image} title={title} navigation={navigation}>
+      <Article {...article}>
         <DescriptionParser descriptionHTML={renderHtml} />
       </Article>
     </>
