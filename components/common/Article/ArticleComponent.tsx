@@ -22,6 +22,7 @@ import { StyledFab } from "./StyledFab";
 import { blueGrey } from "@mui/material/colors";
 import { standartCssTransition } from "@components/ui/theme/mui-theme";
 import { HeaderTextParser } from "@components/common/HeaderTextParser";
+import CallButton from "./CallButton";
 
 interface Props extends CMS.Blog.Article {
   children: React.ReactNode | React.ReactNode[];
@@ -47,7 +48,17 @@ export default function Article({
         <Grid item xs={12} md={6} lg={6}>
           <ImagePaper image={image} />
         </Grid>
-        <Grid item xs={12} md={6} lg={6}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          lg={6}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
           {keyTextHtml && (
             <Box
               sx={{
@@ -71,6 +82,7 @@ export default function Article({
               <HeaderTextParser htmlText={keyTextHtml} />
             </Box>
           )}
+          <CallButton />
         </Grid>
       </Grid>
       <Stack
