@@ -20,7 +20,7 @@ interface Props {
 export default function NavigationList({ articlesList, ariaLabel }: Props) {
   return (
     <nav aria-label={ariaLabel || "navigation articles"}>
-      <List>
+      <Stack component="ul" spacing="3px">
         {articlesList.map((el, indx) => (
           <>
             <LinkListItem key={(el.url || "") + "_" + el.title} {...el}>
@@ -31,7 +31,7 @@ export default function NavigationList({ articlesList, ariaLabel }: Props) {
             )}
           </>
         ))}
-      </List>
+      </Stack>
     </nav>
   );
 }

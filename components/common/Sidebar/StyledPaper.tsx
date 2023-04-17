@@ -22,12 +22,17 @@ export const StyledPaper = styled(({ ellipsis: _, ...props }: Props) => (
   borderRadius: "0.75rem",
   boxShadow: "none",
   overflow: "visible",
+  "& ul": {
+    padding: 0,
+  },
   "& li": {
     padding: 0,
     borderRadius: "0.6rem",
     overflow: "hidden",
     "&.MuiDivider-root": {
-      marginRight: "0.7rem",
+      marginLeft: "5px",
+      marginRight: "5px",
+      maxHeight: "1px",
     },
     "& .MuiListItemText-root": {
       maxHeight: "54px",

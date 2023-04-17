@@ -55,12 +55,31 @@ export const NavbarLinks = ({
       name: string | React.ReactNode;
       href: string;
       active?: boolean;
+      hideHrefLink?: boolean;
     }> = getLinks();
+    let activeSetted = false;
     navLinks.forEach((elem) => {
       if (elem.href === pathname) {
         elem.active = true;
+        elem.hideHrefLink = true;
+        activeSetted = true;
       }
     });
+    if (!activeSetted) {
+      const pathnamePrefix =
+        "/" +
+        pathname
+          .split("/")
+          .filter((el) => el)
+          .shift();
+      navLinks.forEach((elem) => {
+        if (elem.href === pathnamePrefix) {
+          elem.active = true;
+          elem.hideHrefLink = false;
+          activeSetted = true;
+        }
+      });
+    }
     return navLinks;
   }, [pathname]);
   return (
@@ -83,10 +102,20 @@ export const NavbarLinks = ({
           "&:hover": {
             background: (theme) => theme.palette.primary.main,
           },
-          "&.active": {
+        },
+        "& a.active": {
+          background: (theme) => theme.palette.primary.main,
+          cursor: "pointer",
+          color: "white",
+          "&:hover": {
             background: (theme) => theme.palette.primary.main,
-            cursor: "default",
+            boxShadow: "0 0 30px rgb(13 70 144 / 50%)",
+            color: "white",
           },
+        },
+        "& .aLinkPreplacement": {
+          background: (theme) => theme.palette.primary.main,
+          color: "white",
         },
         ...sx,
       }}

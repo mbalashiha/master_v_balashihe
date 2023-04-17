@@ -39,18 +39,12 @@ export default function HugeContainer({
           : "md"
       }
       sx={{
-        maxWidth: {
-          lg: "1070px",
-          xl: rightSidebar ? "2000px" : "1760px",
-        },
+        maxWidth: leftSidebar && rightSidebar && "1900px" || undefined,
         mt: 5,
         ...sx,
       }}
     >
-      <Grid
-        container
-        spacing={spacing || { xs: 1, lg: 3, xl: rightSidebar ? 1 : 4 }}
-      >
+      <Grid container spacing={spacing || { xs: 1, lg: 3, xl: 4 }}>
         {leftSidebar ? (
           <Grid
             item
@@ -60,7 +54,7 @@ export default function HugeContainer({
             xl={rightSidebar ? 2.5 : 3}
             order={{ xs: 2, lg: 1 }}
           >
-            {leftSidebar}
+            <Box sx={{ pl: { xs: "5px", xl: 0 } }}>{leftSidebar}</Box>
           </Grid>
         ) : rightSidebar ? (
           <Grid item xs={0} lg={0} xl={2.5} order={{ xs: 2, lg: 1 }}></Grid>

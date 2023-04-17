@@ -27,6 +27,7 @@ interface Props
     name: string | React.ReactNode;
     href: string;
     active?: boolean | undefined;
+    hideHrefLink?: boolean;
   };
 }
 
@@ -37,13 +38,22 @@ export default function NavigationLink({
 }: Props) {
   return (
     <>
-      {linkProps.active ? (
+      {linkProps.active && linkProps.hideHrefLink ? (
         <div
           className={cn(className, "active", "aLinkPreplacement")}
           {...props}
         >
           {linkProps.name}
         </div>
+      ) : linkProps.active ? (
+        <Link
+          href={linkProps.href}
+          className={cn(className, "active")}
+          passHref
+          {...(props as any)}
+        >
+          {linkProps.name}
+        </Link>
       ) : (
         <Link
           href={linkProps.href}

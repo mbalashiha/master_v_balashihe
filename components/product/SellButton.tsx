@@ -1,5 +1,5 @@
-import { Button, Box, styled, Stack, LoadingCircle } from "@components/ui";
-import { CircularProgress } from "@mui/material";
+import { Button, Box, Stack, LoadingCircle } from "@components/ui";
+import { CircularProgress, styled } from "@mui/material";
 import { grey, blueGrey } from "@mui/material/colors";
 import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
