@@ -34,7 +34,7 @@ const options = {
       const { attribs, children } = domNode;
       const convertedProps = attributesToProps(attribs);
       delete convertedProps.children;
-      if (Array.isArray(children) && children.length > 0) {
+      /** if (Array.isArray(children) && children.length > 0) {
         if (domNode.name !== "pre") {
           /// Cleaning spaces in text nodes:
           children.forEach((ch) => {
@@ -43,7 +43,7 @@ const options = {
             }
           });
         }
-      }
+      } **/
       const Children: string | JSX.Element | JSX.Element[] | undefined =
         children && <>{domToReact(children, options)}</>;
       switch (domNode.name) {
@@ -57,13 +57,13 @@ const options = {
             convertedProps.gutterBottom = true as any;
           }
           return (
-              <Typography
-                {...(convertedProps as any)}
-                component={domNode.name}
-                variant={domNode.name}
-              >
-                {Children}
-              </Typography>
+            <Typography
+              {...(convertedProps as any)}
+              component={domNode.name}
+              variant={domNode.name}
+            >
+              {Children}
+            </Typography>
           );
           break;
         case "ul":
@@ -80,6 +80,9 @@ const options = {
         default:
           return <p {...(convertedProps as any)}>{Children}</p>;
       }
+    } else if (domNode && domNode.type === "text" && domNode.data) {
+      domNode.data = domNode.data.replace(/[\s]{2,}/gim, " ");
+      return domNode;
     }
     return domNode;
   },
