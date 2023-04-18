@@ -5,6 +5,7 @@ import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRound
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import HandymanIcon from "@mui/icons-material/Handyman";
 import React, { FC } from "react";
+import { WhatsappLink } from "@components/site/contacts";
 type SpanForStylingProps = React.ComponentProps<typeof Box> & {
   zIndex?: number;
   isLoading?: boolean;
@@ -19,6 +20,7 @@ const SpanForStyling = ({
     {children}
   </Box>
 );
+/** 
 const StyledSpan = styled(SpanForStyling)<{
   zIndex: number;
   isLoading: boolean;
@@ -45,6 +47,7 @@ const StyledSpan = styled(SpanForStyling)<{
     },
   },
 }));
+**/
 type ButtonForStylingProps = React.ComponentProps<typeof Button> & {
   zIndex?: number;
   isLoading?: boolean;
@@ -111,14 +114,16 @@ type Props = {
 };
 const CallButton = ({ isLoading, disabled }: Props) => {
   return (
-    <StyledButton
-      zIndex={0}
-      isLoading={isLoading || false}
-      disabled={isLoading || disabled}
-      startIcon={<HandymanIcon />}
-    >
-      {`Вызвать мастера`}
-    </StyledButton>
+    <WhatsappLink>
+      <StyledButton
+        zIndex={0}
+        isLoading={isLoading || false}
+        disabled={isLoading || disabled}
+        startIcon={<HandymanIcon />}
+      >
+        {`Вызвать мастера`}
+      </StyledButton>
+    </WhatsappLink>
   );
 };
 

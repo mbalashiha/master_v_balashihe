@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import StartIcon from "@mui/icons-material/Start";
 import Link from "next/link";
 import { standartCssTransition } from "@components/ui/theme/mui-theme";
+import { WhatsappLink } from "@components/site/contacts";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -49,7 +50,7 @@ export const LandingCard = ({ children, image }: Props) => {
           spacing={1}
         >
           {children}
-          <Link href="/uslugi-mastera-v-balashihe/pc-sistemnye-bloki-balashiha">
+          <WhatsappLink>
             <Button
               sx={{
                 padding: "0 14px",
@@ -78,7 +79,7 @@ export const LandingCard = ({ children, image }: Props) => {
             >
               Вызвать мастера
             </Button>
-          </Link>
+          </WhatsappLink>
         </Stack>
         <CardMedia
           sx={{

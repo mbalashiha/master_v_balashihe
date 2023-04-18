@@ -27,6 +27,12 @@ import { useRouter } from "next/router";
 import NavbarLinks from "./NavbarLinks";
 import { MainLogo } from "@components/site/MainLogo";
 import { PhoneCallIcon, TelegramIcon } from "@components/icons";
+import {
+  NEXT_PUBLIC_WHATSAPP_LINK,
+  NEXT_PUBLIC_CONTACT_PHONE_NUMBER,
+  NEXT_PUBLIC_TELEGRAM_LINK,
+} from "@framework/const";
+import { WhatsappLink } from "@components/site/contacts";
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   background: "none",
   backdropFilter: "saturate(180%) blur(15px)",
@@ -98,20 +104,16 @@ const Navbar: FC = () => {
               }}
             >
               <Tooltip title="Позвонить WhatsApp">
-                <a
-                  href={`${process.env["NEXT_PUBLIC_WHATSAPP_LINK"]}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <WhatsappLink>
                   <PhoneCallIcon />
-                  <Box>{process.env["NEXT_PUBLIC_CONTACT_PHONE_NUMBER"]}</Box>
-                </a>
+                  <Box>{NEXT_PUBLIC_CONTACT_PHONE_NUMBER}</Box>
+                </WhatsappLink>
               </Tooltip>
               <Box
                 sx={{ ml: 1, "&, & svg": { width: "70px", height: "70px" } }}
               >
                 <a
-                  href={`${process.env["NEXT_PUBLIC_TELEGRAM_LINK"]}`}
+                  href={NEXT_PUBLIC_TELEGRAM_LINK}
                   target="_blank"
                   rel="noreferrer"
                 >

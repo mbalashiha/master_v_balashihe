@@ -76,7 +76,8 @@ export const GradientCard = ({
       <Stack
         component="div"
         width="100%"
-        px={{ xs: "1.5rem", md: "2.5rem", lg: "3.5rem" }}
+        pl={{ xs: "2.5rem", md: "3rem", lg: "4.5rem" }}
+        pr={{ xs: "1.5rem", md: "2.5rem", lg: "3.5rem" }}
         pt="2.5rem"
         pb="1.5rem"
         direction="column"
@@ -100,7 +101,7 @@ export const GradientCard = ({
                 md: "20px",
               },
               transform: {
-                xs: "translate(-20px,0)",
+                xs: "translate(-27px,0)",
                 sm: "translate(-19px,0)",
                 md: "translate(-30px,0)",
               },
