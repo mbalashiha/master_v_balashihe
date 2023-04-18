@@ -43,7 +43,7 @@ const getMuiTheme = (): Theme => {
       fontWeightRegular: 400,
       fontWeightMedium: 500,
       allVariants: {
-        color: "#303B44",
+        color: colorMode === "light" ? "#303B44" : grey[100],
       },
       button: {
         fontFamily,

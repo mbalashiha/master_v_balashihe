@@ -1,9 +1,3 @@
-import { Layout } from "@components/site";
-import { Container, Grid, Card, Paper, Stack, styled } from "@mui/material";
-import Head from "next/head";
-import Image from "next/image";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Link from "next/link";
 type NextLinkProps = React.ComponentProps<typeof Link>;
 interface Props {
@@ -11,21 +5,20 @@ interface Props {
   amount?: string | number;
   href?: NextLinkProps["href"];
 }
-const StyledLink = styled(Link)(({ theme }) => ({
-  "&, & *": {
-    color: theme.palette.text.primary,
-    textDecoration: "underline",
-  },
-  "&:hover": {
-    "&, & *": {
-      color: theme.palette.primary.main,
-      textDecoration: "none",
-    },
-  },
-}));
-const UpperLink = ({ href, children }: any) => {
+
+const MyLink = ({
+  href,
+  children,
+}: {
+  href?: NextLinkProps["href"];
+  children: React.ReactNode | React.ReactNode[];
+}) => {
   if (href) {
-    return <StyledLink href={href}>{children}</StyledLink>;
+    return (
+      <Link href={href} as={href}>
+        {children}
+      </Link>
+    );
   } else {
     return <>{children}</>;
   }
@@ -33,31 +26,12 @@ const UpperLink = ({ href, children }: any) => {
 
 export const PriceRow = ({ href, title, amount }: Props) => {
   return (
-    <Stack
-      component={"p"}
-      direction="row"
-      spacing={2}
-      width="100%"
-      sx={{
-        "& .MuiTypography-root": {
-          fontSize: { xs: "18px", sm: "12px", md: "16px" },
-          lineHeight: { xs: "24px", sm: "16px", md: "20px" },
-          fontWeight: 600,
-        },
-      }}
-    >
-      <Typography component="strong" sx={{ flexGrow: 1 }}>
-        <UpperLink href={href}>{title}</UpperLink>
-      </Typography>
-      {amount && (
-        <Typography
-          component="span"
-          sx={{ minWidth: { xs: "90px", sm: "80px" } }}
-        >
-          от {amount} &#x20bd;
-        </Typography>
-      )}
-    </Stack>
+    <p>
+      <strong>
+        <MyLink href={href}>{title}</MyLink>
+      </strong>
+      {amount && <span>от {amount} &#x20bd;</span>}
+    </p>
   );
 };
 export default PriceRow;

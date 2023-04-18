@@ -26,10 +26,9 @@ export const GradientCard = ({
     <Card
       elevation={8}
       sx={{
-        zIndex: 0,
-        minHeight: "200px",
+        minHeight: { xs: "inherit", sm: "520px", lg: "inherit" },
         width: "inherit",
-        position: "relative",        
+        position: "relative",
         "& p": {
           margin: 0,
         },
@@ -82,6 +81,33 @@ export const GradientCard = ({
         pb="1.5rem"
         direction="column"
         spacing={{ xs: "17px", sm: "8px", md: "17px" }}
+        sx={{
+          "& p": {
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            "&, & strong, & span": {
+              fontSize: { xs: "18px", sm: "12px", md: "16px" },
+              lineHeight: { xs: "24px", sm: "16px", md: "20px" },
+              fontWeight: 600,
+              color: (theme) => theme.typography.allVariants.color,
+            },
+            "& strong": {
+              flexGrow: 1,
+            },
+            "& span": {
+              minWidth: { xs: "90px", sm: "80px" },
+            },
+            "& a": {
+              color: "inherit",
+              textDecoration: "underline",
+              "&:hover": {
+                color: (theme) => theme.palette.primary.main,
+                textDecoration: "none",
+              },
+            },
+          },
+        }}
       >
         {children}
       </Stack>
