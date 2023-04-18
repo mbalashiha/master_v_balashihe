@@ -86,6 +86,28 @@ export const GradientCard = ({
             display: "flex",
             flexDirection: "row",
             width: "100%",
+            "&::before": {
+              display: "inline-block",
+              content: `"\\2605"`,
+              fontSize: {
+                xs: "20px",
+                sm: "16px",
+                md: "24px",
+              },
+              lineHeight: {
+                xs: "20px",
+                sm: "16px",
+                md: "20px",
+              },
+              transform: {
+                xs: "translate(-20px,0)",
+                sm: "translate(-19px,0)",
+                md: "translate(-30px,0)",
+              },
+              width: 0,
+              overflow: "visible",
+              color: "orange",
+            },
             "&, & strong, & span": {
               fontSize: { xs: "18px", sm: "12px", md: "16px" },
               lineHeight: { xs: "24px", sm: "16px", md: "20px" },
