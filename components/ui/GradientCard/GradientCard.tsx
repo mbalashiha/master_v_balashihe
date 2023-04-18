@@ -120,6 +120,7 @@ export const GradientCard = ({
             },
             "& span": {
               minWidth: { xs: "90px", sm: "80px" },
+              textAlign: "right",
             },
             "& a": {
               color: "inherit",
