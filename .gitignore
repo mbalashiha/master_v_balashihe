@@ -22,8 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-.env.local
 .vercel
 *.tsbuildinfo
-next-env.d.ts
 *.secret.sql
+.env.local
