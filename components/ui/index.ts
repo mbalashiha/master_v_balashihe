@@ -1,10 +1,5 @@
 export { theme, useThemePalette } from "./theme";
 export * from "./ConfirmDialog";
-export {
-  AlertsProvider,
-  useAlertsProvider,
-  AlertsViewer,
-} from "./AlertsProvider";
 export { default as LinkButton } from "./LinkButton";
 export { default as AppBar } from "./AppBar";
 export { default as MySwitch } from "./MySwitch";
@@ -55,7 +50,6 @@ export { default as IconButton } from "./IconButton";
 export type { IconButtonProps } from "./IconButton";
 export { default as Typography } from "./Typography";
 export { default as Box } from "./Box";
-export { default as AddButton } from "./AddButton";
 export { default as TextField } from "./TextField";
 export { default as ConfirmPopover } from "./ConfirmPopover";
 export { default as Select } from "./Select";

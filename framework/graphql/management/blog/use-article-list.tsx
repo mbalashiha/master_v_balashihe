@@ -10,7 +10,6 @@ import {
   normalizeBlogRow,
 } from "@framework/utils/normalize/article";
 import { useSnackbar } from "notistack";
-import { useMemo } from "react";
 import { managementArticlesCards } from "./queries/management-get-articles-cards";
 
 export default useArticleList as UseArticleList<typeof handler>;
@@ -34,7 +33,7 @@ export const handler: API.Graphql.SWRHook<UseArticleListHook> = {
   },
   useHook: ({ useData }) => {
     const ctx = useSearchProvider();
-    return (initial) => {
+    return () => {
       const search = ctx?.search || "";
       const { data, isValidating, error, ...rest } = useData({
         variables: {

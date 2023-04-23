@@ -1,5 +1,5 @@
-import { Button, IconButton, Box, styled, Typography } from "@components/ui";
-import { Price as PriceType } from "@common/types/product/product";
+import { Button, IconButton, Box, Typography } from "@components/ui";
+import { styled } from "@mui/material";
 import { ComponentProps } from "react";
 const StyledPriceAmount = styled(Typography)(({ theme, sx }) => ({
   "&&": {
@@ -11,7 +11,7 @@ const StyledPriceAmount = styled(Typography)(({ theme, sx }) => ({
   },
 }));
 interface Props extends ComponentProps<typeof StyledPriceAmount> {
-  price: PriceType;
+  price: any;
 }
 export const PriceNode = ({ price, ...rest }: Props) => {
   let currencySymbol: string = price.currencyCode;

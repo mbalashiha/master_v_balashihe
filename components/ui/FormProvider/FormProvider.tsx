@@ -66,12 +66,12 @@ export const FormProvider: FC<Props<any>> = <T,>({
   }, [providerMethods, initialValues]);
   return (
     <Formik
-      innerRef={formikRef}
+      innerRef={formikRef as any}
       initialValues={
         initialValues && typeof initialValues === "object" ? initialValues : {}
       }
-      validate={validate}
-      onSubmit={onSubmit}
+      validate={validate as any}
+      onSubmit={onSubmit as any}
     >
       <FormContext.Provider value={providerConfig}>
         {children}

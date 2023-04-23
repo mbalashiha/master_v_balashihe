@@ -11,36 +11,25 @@ import {
   Button,
 } from "@mui/material";
 const Modal = MuiModal as any;
-import { ModalBody } from "@components/ui";
 import { FormProvider } from "@components/ui/FormProvider";
 import { simpleEncrypt } from "@framework/management/utils/encryption/message-hmac-private-key";
-import useErrorsProvider from "@components/ui/contexts/use-errors-context";
-import { useProductView } from "@components/product";
 
 interface Props {
   open: boolean;
   handleClose: () => void;
 }
 const OneClickSellModal = ({ open, handleClose }: Props) => {
-  const { errors, addError, resetErrors, removeErrorAlert } =
-    useErrorsProvider();
   const onClose = handleClose;
-  const { oneClickSended, setOneClickSended } = useProductView();
   return (
     <>
-      {oneClickSended ? (
-        <Modal
+      <Modal
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-order-in-click"
           aria-describedby="modal-fast-request-for-master"
           disableEnforceFocus
         >
-          <ModalBody onClose={onClose} titleText="Заявка отправлена">
-            <></>
-          </ModalBody>
         </Modal>
-      ) : (
         <FormProvider
           validate={(values: any) => {
             return true;
@@ -63,8 +52,6 @@ const OneClickSellModal = ({ open, handleClose }: Props) => {
               if (res.ok) {
                 const jsonObj = await res.json();
                 if (jsonObj.response && /^250\s+/im.test(jsonObj.response)) {
-                  setOneClickSended();
-                  resetErrors();
                 } else {
                   throw { message: jsonObj.response, status: res.status };
                 }
@@ -104,7 +91,6 @@ const OneClickSellModal = ({ open, handleClose }: Props) => {
                   ? e.message
                   : (e.status ? `${e.status}: ` : ``) +
                     (e.stack || e.message || e || "");
-              addError(errorText);
             }
           }}
           initialValues={{ name: "", email: "", phoneNumber: "", comment: "" }}
@@ -116,11 +102,8 @@ const OneClickSellModal = ({ open, handleClose }: Props) => {
             aria-describedby="modal-fast-request-for-master"
             disableEnforceFocus
           >
-            <ModalBody onClose={onClose} titleText="Быстрая заявка">
-            </ModalBody>
           </Modal>
         </FormProvider>
-      )}
     </>
   );
 };

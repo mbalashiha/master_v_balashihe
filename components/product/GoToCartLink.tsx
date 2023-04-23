@@ -1,12 +1,9 @@
 import { FC } from "react";
 import Link from "next/link";
 import cn from "classnames";
-import { Container, useUI, Box, Paper, styled, Stack } from "@components/ui";
-import { useShopProvider } from "@common/commerce/use-shop-provider";
-import { useCurrencies } from "@common/commerce";
-import { LineItem } from "@common/types/product/product";
+import { Container, useUI, Box, Paper } from "@components/ui";
 import ShoppingCartCheckoutRoundedIcon from "@mui/icons-material/ShoppingCartCheckoutRounded";
-import { Button } from "@mui/material";
+import { Button, styled } from "@mui/material";
 
 const GoToCartLink = styled((props: React.ComponentProps<typeof Button>) => {
   const { sx, className, children } = props;

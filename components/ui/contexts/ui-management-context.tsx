@@ -9,8 +9,6 @@ import React, {
 } from "react";
 import { useRouter } from "next/router";
 import { SuccessSnackbar } from "@components/ui";
-import Schema from "@framework/types/schema";
-import { ManagementDialogSwitch } from "@components/management";
 
 export interface StateModifiers {
   openSidebar: () => void;
@@ -26,7 +24,7 @@ export const dialogTypesManagement: { [key: string]: DialogType } = {
 };
 export interface Snackbars {
   PRODUCT_CATEGORY_CREATED: {
-    createdCategory: Schema.ProductCategory;
+    createdCategory: any;
   };
 }
 export interface StateValues {
@@ -108,11 +106,11 @@ function uiReducer(state: StateValues, action: Action): StateValues {
   }
   return { ...state };
 }
-const UIManagementProvider = (props) => {
+const UIManagementProvider = (props: any) => {
   const [state, dispatch] = useReducer(uiReducer, { ...initialState });
   const router = useRouter();
   useEffect(() => {
-    const handleRouteChange = (url) => {
+    const handleRouteChange = (url: string) => {
       dispatch({ type: "RESET" });
     };
     router.events.on("routeChangeStart", handleRouteChange);
@@ -146,7 +144,6 @@ const UIManagementProvider = (props) => {
     <>
       <UIManagementContext.Provider value={value}>
         {props.children}
-        <ManagementDialogSwitch />
       </UIManagementContext.Provider>
       {Object.entries(value.snackbars).map(
         ([snackbarType, snapbarArguments]) => {

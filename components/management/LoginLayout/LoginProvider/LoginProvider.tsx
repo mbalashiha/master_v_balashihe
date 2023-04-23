@@ -1,6 +1,6 @@
 import useFromLogin from "@common/management/utils/hooks/use-from-login";
 import { API } from "@common/types";
-import { ID, Management } from "@common/types/cms";
+import { Management } from "@common/types/cms";
 import useTokenInfo from "@framework/management/auth/use-token-info";
 import { createContext, useContext, useMemo } from "react";
 

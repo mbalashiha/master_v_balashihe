@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, styled } from "@mui/material";
-import { useGridTypeProvider } from "@components/management/product/GridTypeProvider";
 
 interface MainSvgIconProps extends React.SVGProps<SVGSVGElement> {}
 const SvgIconList = styled(({ children, ...props }: MainSvgIconProps) => {
@@ -128,12 +127,8 @@ const InnerBox = ({ active, children, sx, ...props }: InnerBoxProps) => {
             
 */
 export const ProductsListViewSwitcher = () => {
-  const { viewGridType, chooseGrid, chooseList } = useGridTypeProvider();
   return (
     <Box
-      onClick={() => {
-        viewGridType === "list" ? chooseGrid() : chooseList();
-      }}
       sx={{ cursor: "pointer", outline: "none", width: "92px", height: "40px" }}
     >
       <Box
@@ -147,14 +142,13 @@ export const ProductsListViewSwitcher = () => {
           overflow: "hidden",
         }}
       >
-        <OneSideBox side={viewGridType}></OneSideBox>
         <Box>
-          <InnerBox active={viewGridType === "list"}>
+          <InnerBox active={false}>
             <SvgIconList />
           </InnerBox>
         </Box>
         <Box>
-          <InnerBox active={viewGridType === "grid"}>
+          <InnerBox active={false}>
             <SvgIconGrid />
           </InnerBox>
         </Box>

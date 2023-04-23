@@ -13,10 +13,6 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import cn from "classnames";
-import { useShopProvider } from "@common/commerce/use-shop-provider";
-import { useCurrencies } from "@common/commerce";
-import { LineItem } from "@common/types/product/product";
-import ShoppingCartCheckoutRoundedIcon from "@mui/icons-material/ShoppingCartCheckoutRounded";
 
 const BaseButton = styled(MuiButton)(({ theme }) => ({
   "&&": {
