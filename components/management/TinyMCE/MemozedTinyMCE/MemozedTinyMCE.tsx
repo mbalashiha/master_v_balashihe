@@ -155,8 +155,8 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
               { title: "English", code: "en" },
             ],
             valid_elements:
-              "@[class],p[style],h1,h2,h3,h4,h5,h6,a[href|target],strong/b," +
-              "div[align|data-images-container],br,table,tbody,thead,tr,td,ul,ol,li,img[src|alt|width|height|id|data-id|title|data-original-width|data-original-height]",
+              "@[class],p[style],h1[style],h2[style],h3[style],h4,h5,h6,a[href|target],strong/b," +
+              "div[align|data-images-container],br,span[style],table[style],caption[style],tbody[style],thead[style],tr[style],td[style],ul,ol,li,img[src|alt|width|height|id|data-id|title|data-original-width|data-original-height]",
           }}
           {...rest}
         />

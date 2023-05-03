@@ -1,3 +1,5 @@
+#!/bin/bash
+
 rsync -avv --progress --password-file=/home/yoo/rsync_pass /home/yoo/cms/master_v_balashihe/ rsync_d1@192.168.0.50::master_v_balashihe
 rsync -avv --progress --password-file=/home/yoo/rsync_pass /home/yoo/cms/master_v_balashihe_graphql_api/ rsync_d1@192.168.0.50::master_v_balashihe_graphql_api
 ssh 'safeuser@192.168.0.50' << EOF
