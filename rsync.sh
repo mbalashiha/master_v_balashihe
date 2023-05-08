@@ -8,3 +8,4 @@ cd /var/www/master_v_balashihe_graphql_api && /home/safeuser/.local/share/pnpm/p
 cd /var/www/master_v_balashihe_graphql_api && /home/safeuser/.local/share/pnpm/pnpm build
 EOF
 rsync -avv --progress --password-file=/home/yoo/rsync_pass rsync_d1@192.168.0.50::master_v_balashihe/public/ /home/yoo/cms/master_v_balashihe/public
+rsync -avv --progress --password-file=/home/yoo/rsync_pass rsync_d1@192.168.0.50::master_v_balashihe_graphql_api/mysql-full-dump/ /home/yoo/cms/master_v_balashihe_graphql_api/mysql-full-dump
