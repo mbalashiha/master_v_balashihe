@@ -16,7 +16,7 @@ export default function Hero({ article }: Props) {
   let { renderHtml, title, image } = article;
   image = React.useMemo(() => {
     if (image && image.width) {
-      const { width, height } = fitWidth(image.width, image.height, 230);
+      const { width, height } = fitWidth(image.width, image.height, 600);
       image.width = width;
       image.height = height;
       return image;
@@ -30,23 +30,23 @@ export default function Hero({ article }: Props) {
         <Typography
           component="h1"
           variant="h1"
-          mb={2}
+          mb={{ xs: "4px", xl: 2 }}
           pb={0}
           sx={{ textAlign: "center" }}
         >
           Давайте познакомимся
         </Typography>
-        <Grid container>
+        <Grid container spacing={{ xs: "1.2rem", xl: 0 }}>
           {image && (
             <Grid
               item
               xs={12}
-              md={4.12}
+              xl={4.12}
               sx={{
                 zIndex: 0,
                 display: "flex",
-                alignItems: "flex-start",
-                justifyContent: "flex-end",
+                alignItems: { xs: "center", xl: "flex-start" },
+                justifyContent: { xs: "center", xl: "flex-end" },
               }}
             >
               <Paper
@@ -54,8 +54,8 @@ export default function Hero({ article }: Props) {
                 sx={{
                   p: 0.7,
                   pb: 0.1,
-                  marginBottom: { xs: "15px", md: 0 },
-                  marginTop: { md: "20px" },
+                  marginBottom: { xs: 0, xl: 0 },
+                  marginTop: { xs: 0, xl: "20px" },
                   marginRight: { md: "-26px" },
                   borderRadius: (theme) => theme.shape.borderRadius - 5 + "px",
                   "& img": {
@@ -73,7 +73,7 @@ export default function Hero({ article }: Props) {
               </Paper>
             </Grid>
           )}
-          <Grid item xs={12} md={7.88}>
+          <Grid item xs={12} xl={7.88}>
             <Paper
               sx={{
                 border: "12px solid",

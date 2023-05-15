@@ -1,7 +1,9 @@
-export const API_HOST: string = process.env.NEXT_PUBLIC_API_HOST!;
-if (!API_HOST) {
-  throw new Error("No enviroment variable NEXT_PUBLIC_API_HOST");
-}
+export const API_HOST: string = (
+  process.env.BUILD_TIME_API_HOST || 
+  process.env.PRODUCTION_API_HOST ||
+  process.env.NEXT_PUBLIC_API_HOST ||
+  ""
+).trim();
 if (!process.env.NEXT_PUBLIC_LOGIN_API_TEST_AUTH_URL) {
   throw new Error("No enviroment variable NEXT_PUBLIC_LOGIN_API_TEST_AUTH_URL");
 }

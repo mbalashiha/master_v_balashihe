@@ -40,12 +40,21 @@ export default function Article({
   // }
   return (
     <HugeContainer
-      showSearch
       rightSidebar={navigation && <NavSidebar navigation={navigation} />}
     >
       <SpecialHeader>{title}</SpecialHeader>
-      <Grid container spacing={0} mb={2}>
-        <Grid item xs={12} md={6} lg={6}>
+      <Grid container spacing={{ xs: 1, md: 2 }} mb={2}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          lg={6}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: { xs: "center", md: "flex-start" },
+          }}
+        >
           <ImagePaper image={image} />
         </Grid>
         <Grid
@@ -59,9 +68,10 @@ export default function Article({
             justifyContent: "space-between",
           }}
         >
-          {keyTextHtml && (
+          {(keyTextHtml && (
             <Box
               sx={{
+                flexGrow: 1,
                 "& > *": {
                   p: 0,
                   m: 0,
@@ -81,7 +91,7 @@ export default function Article({
             >
               <HeaderTextParser htmlText={keyTextHtml} />
             </Box>
-          )}
+          )) || <Box sx={{ flexGrow: 1 }}></Box>}
           <CallButton />
         </Grid>
       </Grid>

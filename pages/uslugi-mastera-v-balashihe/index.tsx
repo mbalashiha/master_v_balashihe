@@ -23,8 +23,8 @@ export default function Page({
         />
       </Head>
       <HugeContainer
-        showSearch
         leftSidebar={<BlogRootSidebar recentArticles={recentArticles} />}
+        sx={{ background: "transparent" }}
       >
         <Grid container spacing={{ xs: 2, lg: 3 }}>
           {articles.map((article) => (

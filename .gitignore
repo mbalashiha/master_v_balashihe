@@ -26,3 +26,5 @@ yarn-error.log*
 *.tsbuildinfo
 *.secret.sql
 .env.local
+.env.development
+.env.production

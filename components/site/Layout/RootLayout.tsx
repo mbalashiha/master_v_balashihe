@@ -11,6 +11,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
 import { Search } from "@components/site";
 import { theme as getMuiTheme, useThemePalette } from "@components/ui";
+import { blueGrey } from "@mui/material/colors";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -29,6 +30,9 @@ const RootLayout: FC<Props> = ({ children }: Props) => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Navbar />
+        <HugeContainer sx={{ background: blueGrey[100] }}>
+          <Search />
+        </HugeContainer>
         {/* {(router.asPath === "/" && <IndexHeader />) || (
             <Box sx={{ width: "100%", height: "6rem" }}></Box>
           )} */}

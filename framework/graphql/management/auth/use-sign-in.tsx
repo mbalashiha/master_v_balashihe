@@ -4,6 +4,7 @@ import { API } from "@common/types";
 import { Management } from "@common/types/cms";
 import { useLoginProvider } from "@components/management/LoginLayout";
 import { MANAGEMENT_LOGIN_API_URL } from "@framework/const";
+import Cookies from "js-cookie";
 
 export default useSignIn as UseSignIn<typeof handler>;
 
@@ -37,6 +38,7 @@ export const handler: API.RestApi.RestApiHook<SignInHook> = {
     return () => async (input) => {
       const response = await restRequest(input);
       if (response.success) {
+        Cookies.set("manager_signed_in", "1", { expires: 90 });
         authData.mutate({ ...response }, false);
       }
       return response;

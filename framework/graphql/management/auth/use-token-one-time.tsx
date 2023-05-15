@@ -7,6 +7,7 @@ import { Management } from "@common/types/cms";
 import { Schema } from "@framework/types";
 import { normalizeManagerTokenInfo } from "./normalize";
 import { verifyManagementToken } from "./queries/get-token-info";
+import Cookies from "js-cookie";
 
 export default useTokenOneTime as UseTokenOneTime<typeof handler>;
 
@@ -27,6 +28,10 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
   useHook: ({ useData }) => {
     const { toLoginPage } = useLoginRoute();
     return () => {
+      const hasCookie = Cookies.get("manager_signed_in");
+      if (!hasCookie) {
+        toLoginPage();
+      }
       const { data, ...rest } = useData({
         swrOptions: {
           revalidateOnFocus: false,
@@ -34,6 +39,7 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
           focusThrottleInterval: 8 * 60 * 1000,
         },
       });
+      const { isValidating, isLoading } = rest;
       const isEmpty = !(
         data &&
         data.success &&
@@ -42,7 +48,11 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
       );
       const managerWasNotAuthorized = isEmpty;
       if (data && managerWasNotAuthorized) {
+        Cookies.remove("manager_signed_in");
         toLoginPage();
+      }
+      if (!isEmpty && !isValidating && !isLoading) {
+        Cookies.set("manager_signed_in", "1", { expires: 90 });
       }
       return { data, isEmpty, ...rest };
     };

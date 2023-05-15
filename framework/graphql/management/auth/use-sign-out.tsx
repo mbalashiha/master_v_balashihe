@@ -4,6 +4,7 @@ import { useManagementLayoutProvider } from "@common/management/utils";
 import useLoginRoute from "@common/management/utils/hooks/use-login-route";
 import { API } from "@common/types";
 import { LOGIN_SIGN_OUT_API_URL } from "@framework/const";
+import Cookies from "js-cookie";
 
 export default useSignOut as UseSignOut<typeof handler>;
 
@@ -35,6 +36,7 @@ export const handler: API.RestApi.RestApiHook<SignOutHook> = {
     return () => async (input) => {
       const response = await restRequest(input);
       if (response.success) {
+        Cookies.remove("manager_signed_in");
         mutateAuthInfo(undefined, false);
         toLoginPage();
       }
