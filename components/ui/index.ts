@@ -1,7 +1,6 @@
 export { theme, useThemePalette } from "./theme";
 export * from "./ConfirmDialog";
 export { default as LinkButton } from "./LinkButton";
-export { default as AppBar } from "./AppBar";
 export { default as MySwitch } from "./MySwitch";
 export { default as Toolbar } from "./Toolbar";
 export { default as Grid } from "./Grid";

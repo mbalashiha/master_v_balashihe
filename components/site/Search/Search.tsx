@@ -37,12 +37,15 @@ export default function Search({ search, sx, onSubmit }: Props) {
       }
     }
   };
+  const themeGreyColor = "rgba(25, 23, 21, 0.16)";
   return (
     <Paper
-      elevation={4}
+      elevation={0}
       sx={{
+        width: "100%",
         display: "flex",
         position: "relative",
+        maxWidth: "1190px",
         "& form": {
           width: "100%",
           display: "flex",
@@ -61,17 +64,24 @@ export default function Search({ search, sx, onSubmit }: Props) {
             "& .MuiFormLabel-root": {
               paddingLeft: "10px",
             },
-            "& .Mui-focused .MuiIconButton-root": { color: "primary.main" },
             "& .MuiInputBase-root": {
-              height: "48px",
-              border: "2px solid transparent",
+              height: "46px",
+              border: `2px solid ${themeGreyColor}`,
               borderRadius: 1,
               padding: "5px 0px 5px 15px",
               "&.Mui-focused": {
                 borderColor: (theme) => theme.palette.primary.main,
               },
-              "& .MuiSvgIcon-root": {
-                transform: "scale(1.7)",
+              "& .MuiButtonBase-root": {
+                "& .MuiSvgIcon-root": {
+                  transform: "scale(1.3)",
+                  color: grey[600],
+                },
+                "&:disabled": {
+                  "& .MuiSvgIcon-root": {
+                    color: grey[400],
+                  },
+                },
               },
             },
           }}
@@ -92,11 +102,11 @@ export default function Search({ search, sx, onSubmit }: Props) {
                   disabled={!hasSearchString}
                   type="submit"
                   sx={{
-                    width: "auto",
                     background: "transparent",
-                    color: grey[600],
+                    color: themeGreyColor,
                     ...standartCssTransition,
                     height: "46px",
+                    width: "46px",
                     px: "26px",
                     borderRadius: 1,
                     mr: "-1px",
@@ -105,26 +115,11 @@ export default function Search({ search, sx, onSubmit }: Props) {
                     fontWeight: 400,
                     "&:hover": {
                       background: "transparent",
-                      color: (theme) => theme.palette.primary.main,
-                    },
-                    "&:disabled": {
-                      color: grey[600],
+                      color: (theme) => theme.palette.text.primary,
                     },
                   }}
                 >
-                  {hasSearchString ? (
-                    <Stack
-                      direction="row"
-                      alignItems="center"
-                      justifyContent="center"
-                      spacing={"8px"}
-                    >
-                      <SearchIcon />
-                      <span>Найти</span>
-                    </Stack>
-                  ) : (
-                    <SearchIcon />
-                  )}
+                  <SearchIcon />
                 </Button>
               </>
             ),

@@ -34,10 +34,6 @@ import {
 } from "@framework/const";
 import { WhatsappLink } from "@components/site/contacts";
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  background: "none",
-  backdropFilter: "saturate(180%) blur(15px)",
-  backgroundColor: "rgba(241, 243, 245, 0.75)",
-  boxShadow: "0px 4px 10px 0px rgb(48 59 68 / 20%)",
   minHeight: "83px",
   "& a": {
     textDecoration: "none",
@@ -53,10 +49,6 @@ const Navbar: FC = () => {
         {/* <PaletterModeSwitch sx={{ right: "auto", left: 0 }} /> */}
         <Toolbar
           sx={{
-            boxShadow: (theme) =>
-              theme.palette.mode === "light"
-                ? "0 0 40px rgb(80 80 110 / 60%)"
-                : "0 0 90px rgb(90 90 90 / 70%)",
             p: 0,
             display: "flex",
             flexDirection: "row",
@@ -103,12 +95,10 @@ const Navbar: FC = () => {
                 },
               }}
             >
-              <Tooltip title="Позвонить WhatsApp">
-                <WhatsappLink>
-                  <PhoneCallIcon />
-                  <Box>{NEXT_PUBLIC_CONTACT_PHONE_NUMBER}</Box>
-                </WhatsappLink>
-              </Tooltip>
+              <WhatsappLink>
+                <PhoneCallIcon />
+                <Box>{NEXT_PUBLIC_CONTACT_PHONE_NUMBER}</Box>
+              </WhatsappLink>
               <Box
                 sx={{ ml: 1, "&, & svg": { width: "70px", height: "70px" } }}
               >

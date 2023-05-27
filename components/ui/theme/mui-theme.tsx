@@ -21,6 +21,7 @@ export const standartCssTransition = {
 const getMuiTheme = (): Theme => {
   const colorMode: PaletteMode = "light" as any;
   const fontFamily = "Gotham, Arial, sans-serif";
+  const themeGreyColor = "rgba(40, 39, 37, 0.94)";
   let theme = createTheme({
     palette: {
       mode: colorMode,
@@ -114,9 +115,9 @@ const getMuiTheme = (): Theme => {
               fontWeight: 600,
               "& > .link-icon": {
                 ...standartCssTransition,
-                color: theme.palette.primary.main,
-                fill: theme.palette.primary.main,
-                stroke: theme.palette.primary.light,
+                color: themeGreyColor,
+                fill: themeGreyColor,
+                stroke: themeGreyColor,
               },
               "&:hover": {
                 ...standartCssTransition,
@@ -191,6 +192,27 @@ const getMuiTheme = (): Theme => {
         styleOverrides: {
           icon: {
             display: "none",
+          },
+        },
+      },
+      MuiAppBar: {
+        styleOverrides: {
+          root: {
+            background: "none",
+            boxShadow: "none",
+            "& a": {
+              color: themeGreyColor,
+              fontWeight: 600,
+            },
+          },
+        },
+      },
+      MuiToolbar: {
+        styleOverrides: {
+          root: {
+            backdropFilter: "saturate(180%) blur(15px)",
+            backgroundColor: "rgba(241, 243, 245, 0.75)",
+            boxShadow: `rgba(0, 0, 0, 0.05) 0px -1px 0px inset`,
           },
         },
       },

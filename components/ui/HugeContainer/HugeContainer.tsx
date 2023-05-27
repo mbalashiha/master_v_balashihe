@@ -30,10 +30,10 @@ export default function HugeContainer({
         ...sx,
       }}
     >
-      <Container maxWidth={"xl"}>
+      <Container maxWidth={"lg"}>
         <Grid container spacing={spacing || { xs: 1, lg: 3, xl: 4 }}>
           {leftSidebar && (
-            <Grid item xs={12} md={12} lg={3} order={{ xs: 2, lg: 1 }}>
+            <Grid item xs={12} md={12} lg={4} order={{ xs: 2, lg: 1 }}>
               <Box sx={{ pl: { xs: "5px", xl: 0 } }}>{leftSidebar}</Box>
             </Grid>
           )}
@@ -41,19 +41,13 @@ export default function HugeContainer({
             item
             xs={12}
             md={12}
-            lg={
-              leftSidebar && rightSidebar
-                ? 6
-                : leftSidebar || rightSidebar
-                ? 9
-                : 12
-            }
+            lg={leftSidebar ? 8 : 12}
             order={{ xs: 1, lg: 2 }}
           >
             {children}
           </Grid>
           {rightSidebar && (
-            <Grid item xs={12} lg={3} order={{ xs: 3, lg: 3 }}>
+            <Grid item xs={12} order={3}>
               {rightSidebar}
             </Grid>
           )}

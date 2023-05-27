@@ -54,8 +54,8 @@ export const LinkListItem = ({
               <EnhImage
                 width={image.width}
                 height={image.height}
-                fitWidth={76}
-                fitHeight={76}
+                fitWidth={50}
+                fitHeight={50}
                 src={image.url}
                 alt={image.alt}
               />

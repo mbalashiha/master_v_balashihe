@@ -174,11 +174,17 @@ export default function Article({
             fontWeight: 500,
             marginBottom: "1.5rem",
           },
+          marginBottom: "1.5rem",
         }}
       >
         <Paper
+          elevation={0}
           sx={{
             p: { xs: 3, md: 4, xl: 5 },
+            boxShadow: "none",
+            boxSizing: "border-box",
+            overflow: "hidden",
+            border: "2px solid rgb(235, 235, 234)",
           }}
         >
           {children}
@@ -217,27 +223,25 @@ export default function Article({
               alignItems: "center",
               justifyContent: "center",
               position: "relative",
-              boxShadow:
-                "#0000001a 0rem 0.25rem 0.375rem -0.0625rem, #0000000f 0rem 0.125rem 0.25rem -0.0625rem",
-              px: 0,
+              boxShadow: "none",
+              boxSizing: "border-box",
+              overflow: "hidden",
+              border: "2px solid rgb(235, 235, 234)",
+              "& .MuiSvgIcon-root": {
+                width: { xs: "30px", md: "75px" },
+                height: { xs: "30px", md: "75px" },
+                color: "rgb(235, 235, 234)",
+              },
+              p: 0,
               "& > *": {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               },
-              "& > h6": {
+              "& h6": {
                 fontSize: "14px",
-                width: "80%",
-                maxWidth: "80%",
-                maxHeight: "100%",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
-                position: "absolute",
-              },
-              "& .MuiSvgIcon-root": {
-                width: "85px",
-                height: "85px",
-                position: "absolute",
               },
             },
           },
@@ -246,18 +250,13 @@ export default function Article({
         <Grid component={"strong"} item xs={6}>
           {navigation?.prev?.url && (
             <Link href={navigation.prev.url}>
-              <Button
-                component="span"
-                sx={{
-                  "& h6": {
-                    right: { xs: "-2px", sm: "4px", md: "30px" },
-                  },
-                }}
-              >
-                <ArrowBackIosRoundedIcon
-                  sx={{ left: { xs: "-23px", md: "-21px", xl: "-10px" } }}
-                />
-                <h6>{navigation.prev.title}</h6>
+              <Button component="span">
+                <Stack component="span" direction={"row"}>
+                  <ArrowBackIosRoundedIcon />
+                  <Box component="h6" sx={{ flexGrow: 1, mr: 1 }}>
+                    {navigation.prev.title}
+                  </Box>
+                </Stack>
               </Button>
             </Link>
           )}
@@ -265,18 +264,13 @@ export default function Article({
         <Grid component={"strong"} item xs={6}>
           {navigation?.next?.url && (
             <Link href={navigation.next.url}>
-              <Button
-                component="span"
-                sx={{
-                  "& h6": {
-                    left: { xs: "2px", sm: "4px", md: "30px" },
-                  },
-                }}
-              >
-                <h6>{navigation.next.title}</h6>
-                <ArrowForwardIosRoundedIcon
-                  sx={{ right: { xs: "-23px", md: "-21px", xl: "-10px" } }}
-                />
+              <Button component="span">
+                <Stack component="span" direction={"row"}>
+                  <Box component="h6" sx={{ flexGrow: 1, ml: 1 }}>
+                    {navigation.next.title}
+                  </Box>
+                  <ArrowForwardIosRoundedIcon />
+                </Stack>
               </Button>
             </Link>
           )}
