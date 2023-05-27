@@ -6,6 +6,7 @@ import {
   Stack,
   Paper,
   SxProps,
+  Divider,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -34,16 +35,11 @@ export default function SearchField({ sx }: Props) {
       searchArticles({ search: searchString });
     }
   };
+  const themeGreyColor = "rgba(25, 23, 21, 0.16)";
   return (
     <Paper
-      elevation={4}
+      elevation={0}
       sx={{
-        display: "flex",
-        position: "relative",
-        "& form": {
-          width: "100%",
-          display: "flex",
-        },
         ...sx,
       }}
     >
@@ -58,70 +54,86 @@ export default function SearchField({ sx }: Props) {
             "& .MuiFormLabel-root": {
               paddingLeft: "10px",
             },
-            "& .Mui-focused .MuiIconButton-root": { color: "primary.main" },
             "& .MuiInputBase-root": {
-              height: "48px",
-              border: "2px solid transparent",
+              height: "46px",
+              border: `2px solid ${themeGreyColor}`,
               borderRadius: 1,
               padding: "5px 0px 5px 15px",
               "&.Mui-focused": {
                 borderColor: (theme) => theme.palette.primary.main,
               },
-              "& .MuiSvgIcon-root": {
-                transform: "scale(1.3)",
+              "& .MuiButtonBase-root": {
+                "& .MuiSvgIcon-root": {
+                  color: grey[500],
+                },
+                "&:disabled": {
+                  "&, & .MuiSvgIcon-root": {
+                    color: grey[500],
+                  },
+                },
               },
             },
           }}
           variant="filled"
-          placeholder="Поиск по статьям"
+          placeholder="Поиск по сайту"
           value={searchString}
           InputProps={{
             disableUnderline: true,
             endAdornment: (
               <>
                 <IconButton
-                  sx={{ visibility: searchString ? "visible" : "hidden" }}
+                  sx={{
+                    visibility: searchString ? "visible" : "hidden",
+                    "& .MuiSvgIcon-root": {
+                      transform: "scale(1.05)",
+                    },
+                  }}
                   onClick={clearValue}
                 >
                   <ClearIcon />
                 </IconButton>
+                <Divider
+                  orientation="vertical"
+                  sx={{
+                    visibility: searchString ? "visible" : "hidden",
+                  }}
+                />
                 <Button
                   disabled={!hasSearchString}
                   type="submit"
                   sx={{
+                    height: "46px",
+                    minWidth: "46px",
                     width: "auto",
                     background: "transparent",
-                    color: grey[600],
+                    color: themeGreyColor,
                     ...standartCssTransition,
-                    height: "46px",
-                    px: "23px",
-                    borderRadius: 1,
-                    mr: "-1px",
-                    border: "none",
+                    pl: "10px",
+                    pr: "18px",
                     fontSize: "20px",
                     fontWeight: 400,
+                    boxShadow: "none",
+                    border: "none",
                     "&:hover": {
                       background: "transparent",
-                      color: (theme) => theme.palette.primary.main,
+                      border: "none",
+                      color: (theme) => theme.palette.text.primary,
+                      boxShadow: "none",
+                      "&, & svg, & svg path": {
+                        ...standartCssTransition,
+                        color: grey[800],
+                      },
                     },
                     "&:disabled": {
-                      color: grey[600],
+                      background: "transparent",
+                    },
+                    "& .MuiSvgIcon-root": {
+                      transform: "scale(1.3)",
+                      color: grey[500],
                     },
                   }}
                 >
-                  {hasSearchString ? (
-                    <Stack
-                      direction="row"
-                      alignItems="center"
-                      justifyContent="center"
-                      spacing={"8px"}
-                    >
-                      <SearchIcon />
-                      <span>Найти</span>
-                    </Stack>
-                  ) : (
-                    <SearchIcon />
-                  )}
+                  <SearchIcon />
                 </Button>
               </>
             ),

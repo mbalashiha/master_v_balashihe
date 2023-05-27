@@ -5,6 +5,7 @@ import {
   Stack,
   Paper,
   SxProps,
+  Divider,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import SearchIcon from "@mui/icons-material/Search";
@@ -74,12 +75,11 @@ export default function Search({ search, sx, onSubmit }: Props) {
               },
               "& .MuiButtonBase-root": {
                 "& .MuiSvgIcon-root": {
-                  transform: "scale(1.3)",
-                  color: grey[600],
+                  color: grey[500],
                 },
                 "&:disabled": {
-                  "& .MuiSvgIcon-root": {
-                    color: grey[400],
+                  "&, & .MuiSvgIcon-root": {
+                    color: grey[500],
                   },
                 },
               },
@@ -93,29 +93,54 @@ export default function Search({ search, sx, onSubmit }: Props) {
             endAdornment: (
               <>
                 <IconButton
-                  sx={{ visibility: searchString ? "visible" : "hidden" }}
+                  sx={{
+                    visibility: searchString ? "visible" : "hidden",
+                    "& .MuiSvgIcon-root": {
+                      transform: "scale(1.05)",
+                    },
+                  }}
                   onClick={clearValue}
                 >
                   <ClearIcon />
                 </IconButton>
+                <Divider
+                  orientation="vertical"
+                  sx={{
+                    visibility: searchString ? "visible" : "hidden",
+                  }}
+                />
                 <Button
                   disabled={!hasSearchString}
                   type="submit"
                   sx={{
+                    height: "46px",
+                    minWidth: "46px",
+                    width: "auto",
                     background: "transparent",
                     color: themeGreyColor,
                     ...standartCssTransition,
-                    height: "46px",
-                    width: "46px",
-                    px: "26px",
-                    borderRadius: 1,
-                    mr: "-1px",
-                    border: "none",
+                    pl: "10px",
+                    pr: "18px",
                     fontSize: "20px",
                     fontWeight: 400,
+                    boxShadow: "none",
+                    border: "none",
                     "&:hover": {
                       background: "transparent",
+                      border: "none",
                       color: (theme) => theme.palette.text.primary,
+                      boxShadow: "none",
+                      "&, & svg, & svg path": {
+                        ...standartCssTransition,
+                        color: grey[800],
+                      },
+                    },
+                    "&:disabled": {
+                      background: "transparent",
+                    },
+                    "& .MuiSvgIcon-root": {
+                      transform: "scale(1.3)",
+                      color: grey[500],
                     },
                   }}
                 >
