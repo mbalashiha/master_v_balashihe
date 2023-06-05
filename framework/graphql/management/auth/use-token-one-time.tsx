@@ -32,29 +32,33 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
       if (!hasCookie) {
         toLoginPage();
       }
-      const { data, ...rest } = useData({
-        swrOptions: {
-          revalidateOnFocus: false,
-          revalidateOnReconnect: false,
-          focusThrottleInterval: 8 * 60 * 1000,
-        },
-      });
-      const { isValidating, isLoading } = rest;
-      const isEmpty = !(
+      const { data, isValidating, isLoading, ...rest } = useData();
+      const managerWasNotAuthorized = !(
         data &&
         data.success &&
         data.manager &&
         data.manager.id
       );
-      const managerWasNotAuthorized = isEmpty;
-      if (data && managerWasNotAuthorized) {
-        Cookies.remove("manager_signed_in");
-        toLoginPage();
+      if (!isValidating && !isLoading) {
+        try {
+          if (managerWasNotAuthorized) {
+            Cookies.remove("manager_signed_in");
+            toLoginPage();
+          };
+        } catch (e) {
+          console.error(e);
+        }
       }
-      if (!isEmpty && !isValidating && !isLoading) {
+      if (!managerWasNotAuthorized && !isValidating && !isLoading) {
         Cookies.set("manager_signed_in", "1", { expires: 90 });
       }
-      return { data, isEmpty, ...rest };
+      return {
+        data,
+        isEmpty: managerWasNotAuthorized,
+        isValidating,
+        isLoading,
+        ...rest,
+      };
     };
   },
 };

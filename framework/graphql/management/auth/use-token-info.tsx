@@ -38,13 +38,12 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
         toLoginPage();
       }
       const { data, isValidating, isLoading, ...rest } = useData();
-      const isEmpty = !(
+      const managerWasNotAuthorized = !(
         data &&
         data.success &&
         data.manager &&
         data.manager.id
       );
-      const managerWasNotAuthorized = isEmpty;
       if (!isValidating && !isLoading) {
         try {
           if (managerWasNotAuthorized) {
@@ -57,10 +56,16 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
           console.error(e);
         }
       }
-      if (!isEmpty && !isValidating && !isLoading) {
+      if (!managerWasNotAuthorized && !isValidating && !isLoading) {
         Cookies.set("manager_signed_in", "1", { expires: 90 });
       }
-      return { data, isEmpty, isValidating, isLoading, ...rest };
+      return {
+        data,
+        isEmpty: managerWasNotAuthorized,
+        isValidating,
+        isLoading,
+        ...rest,
+      };
     };
   },
 };
