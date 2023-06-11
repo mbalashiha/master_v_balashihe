@@ -12,4 +12,4 @@ chown -R safeuser /var/www/cms
 chmod -R 755 /var/www/cms
 ENDSSH
 rsync -a --password-file=/home/yoo/rsync_pass rsync_master@192.168.0.50::cms/master_v_balashihe/public/ /home/yoo/cms/master_v_balashihe/public
-rsync -a --password-file=/home/yoo/rsync_pass rsync_master@192.168.0.50::cms/master_v_balashihe_graphql_api/mysql-full-dump/ /home/yoo/cms/master_v_balashihe_graphql_api/mysql-full-dump
+###rsync -a --password-file=/home/yoo/rsync_pass rsync_master@192.168.0.50::cms/master_v_balashihe_graphql_api/mysql-full-dump/ /home/yoo/cms/master_v_balashihe_graphql_api/mysql-full-dump
