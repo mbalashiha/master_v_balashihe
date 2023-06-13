@@ -69,6 +69,7 @@ export default function Hero({ article }: Props) {
                   width={image.width}
                   height={image.height}
                   alt={image.alt}
+                  quality={100}
                 ></Image>
               </Paper>
             </Grid>
