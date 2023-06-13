@@ -17,6 +17,12 @@ button {
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
 }
+body {
+  style,
+  script {
+    display: none !important;
+  }
+}
 // .tox-notifications-container {
 //   display: none !important;
 // }

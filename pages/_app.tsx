@@ -1,13 +1,20 @@
 import "@styles/globals.scss";
 import "material-icons/iconfont/material-icons.css";
+import { CacheProvider, EmotionCache } from "@emotion/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import React, { useEffect, FC, useContext, useRef } from "react";
-
+import createEmotionCache from "@common/utils/emotion-cache";
+const clientSideEmotionCache = createEmotionCache();
 const Noop: FC<any> = ({ children }) => <>{children}</>;
 
-function MyMasterApp(ctx: AppProps & { Component: { Layout: FC<any> } }) {
-  const { Component, pageProps } = ctx;
+function MyMasterApp(
+  ctx: AppProps & {
+    emotionCache?: EmotionCache;
+    Component: { Layout: FC<any> };
+  }
+) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = ctx;
   const hasLayout = !!Component.Layout;
   const Layout = hasLayout ? Component.Layout : Noop;
   const title = pageProps?.product?.title;
@@ -24,9 +31,11 @@ function MyMasterApp(ctx: AppProps & { Component: { Layout: FC<any> } }) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout {...pageProps}>
-        <Component {...pageProps} />
-      </Layout>
+      <CacheProvider value={emotionCache}>
+        <Layout {...pageProps}>
+          <Component {...pageProps} />
+        </Layout>
+      </CacheProvider>
     </>
   );
 }
