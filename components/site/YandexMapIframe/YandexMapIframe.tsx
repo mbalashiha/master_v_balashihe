@@ -113,6 +113,7 @@ const YandexMapIframe = () => {
               src={MapStaticPic}
               alt="Карта Мастер в Балашихе Центр города Балашиха"
               loading="lazy"
+              quality={100}
             />
             <iframe
               src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad7f99cfb2e4d2c1792e2ab48d50953d7910caad42f04a49772fcba177c53d91a&amp;source=constructor"
