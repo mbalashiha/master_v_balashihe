@@ -14,13 +14,13 @@ const getRecentArticles = async (
   config = config || getConfig();
   const data = await config.request<
     { search: string },
-    Schema.Response.ArticlesCardsConnection
+    Schema.Response.RecentArticlesConnection
   >({
     query: getRecentArticlesQuery,
     variables: { search: (search || "").trim() },
   });
   return shuffle(
-    data.articlesCards.nodes.map((el) =>
+    data.recentArticles.nodes.map((el) =>
       normalizeArtNavItem({
         handle: el.handle,
         title: el.title,

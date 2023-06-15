@@ -163,6 +163,11 @@ export namespace Schema {
         nodes: BlogArticleCard[];
       };
     }
+    export interface RecentArticlesConnection {
+      recentArticles: {
+        nodes: BlogArticleCard[];
+      };
+    }
     export interface ArticlesPathesResponse {
       articlesPathes: {
         nodes: PathHandle[];

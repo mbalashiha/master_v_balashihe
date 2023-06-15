@@ -1,10 +1,9 @@
 import "@styles/globals.scss";
-import "material-icons/iconfont/material-icons.css";
 import { CacheProvider, EmotionCache } from "@emotion/react";
+import createEmotionCache from "@common/utils/emotion-cache";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import React, { useEffect, FC, useContext, useRef } from "react";
-import createEmotionCache from "@common/utils/emotion-cache";
 const clientSideEmotionCache = createEmotionCache();
 const Noop: FC<any> = ({ children }) => <>{children}</>;
 
