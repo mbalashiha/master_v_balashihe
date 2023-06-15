@@ -16,8 +16,6 @@ const MyDocument = () => {
   return (
     <Html lang="ru">
       <Head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <body>
         <Main />

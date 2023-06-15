@@ -1,9 +1,5 @@
 import { FC } from "react";
-import React, { useContext } from "react";
-import { useRouter } from "next/router";
-import Footer from "@components/site/Footer";
-
-import { HugeContainer } from "@components/ui";
+import React from "react";
 import { Navbar, NavBreadcrumbs } from "@components/site/Navigation";
 import { Grid, ThemeProvider, Container, Box, Stack } from "@mui/material";
 import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";

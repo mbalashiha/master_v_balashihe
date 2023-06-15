@@ -20,6 +20,8 @@ function MyMasterApp(
   return (
     <>
       <Head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
         {/* <meta name="theme-color" content={theme.palette.primary.main} /> */}
         <title>{`Мастер в Балашихе - ${
           title ? title : "Закажите ремонт компьютера сегодня"
