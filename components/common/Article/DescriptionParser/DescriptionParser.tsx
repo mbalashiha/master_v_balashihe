@@ -35,6 +35,7 @@ const options = {
       let passThroughFlag = false;
       switch (domNode.name) {
         case "p":
+        case "br":
         case "span":
         case "strong":
         case "b":
@@ -58,6 +59,18 @@ const options = {
         children && <>{domToReact(children, options)}</>;
       delete convertedProps.children;
       const styleSX = convertedProps.style || undefined;
+      if (
+        styleSX &&
+        typeof styleSX.width === "string" &&
+        styleSX.width.endsWith("%")
+      ) {
+        let roundedWidth = parseInt(styleSX.width);
+        if (roundedWidth > 100) {
+          roundedWidth = 100;
+        }
+        styleSX.width = roundedWidth + "%";
+        console.log(styleSX);
+      }
       if (typeof convertedProps.style !== "undefined") {
         delete (convertedProps as any).style;
       }
@@ -181,55 +194,6 @@ const options = {
             </Paper>
           );
           break;
-        case "tbody":
-          return <>{Children}</>;
-          break;
-        case "thead":
-          return <>{Children}</>;
-          break;
-        case "tfoot":
-          return <>{Children}</>;
-          break;
-        case "table":
-          return (
-            <Paper
-              component="div"
-              sx={{
-                "&, & > table": {
-                  width: "100%",
-                  "& td": {
-                    px: 2,
-                    py: 0.5,
-                  },
-                },
-                ...styleSX,
-              }}
-            >
-              <Grid container component="div">
-                {Children}
-              </Grid>
-            </Paper>
-          );
-          break;
-        case "tr":
-        case "th":
-          // eslint-disable-next-line react/jsx-no-undef
-          return (
-            <Grid item xs={12} component="div">
-              <Grid container component="div">
-                {Children}
-              </Grid>
-            </Grid>
-          );
-          break;
-        case "td":
-          // eslint-disable-next-line react/jsx-no-undef
-          return (
-            <Grid item xs={12} md={6} component="div" px={1} py={0.5}>
-              {Children}
-            </Grid>
-          );
-          break;
         case "a":
         case "link":
           if (hasStyle) {
@@ -298,48 +262,51 @@ const options = {
                 {Children}
               </Box>
             );
-          } else if (convertedProps["data-component-tag"]) {
-            switch (convertedProps["data-component-tag"]) {
-              case "table":
-                return (
-                  <Paper sx={{ p: 1, m: 0, "&&": { marginBottom: "1.3rem" } }}>
-                    {Children}
-                  </Paper>
-                );
-                break;
-              case "tbody":
-                return <>{Children}</>;
-                break;
-              case "thead":
-                return <h4>{Children}</h4>;
-                break;
-              case "tfoot":
-                return <h4>{Children}</h4>;
-                break;
-              case "tr":
-                return (
-                  <Grid container spacing={1}>
-                    {Children}
-                  </Grid>
-                );
-                break;
-              case "td":
-                return (
-                  <Grid item xs={12} sm={6}>
-                    {Children}
-                  </Grid>
-                );
-                break;
-              case "th":
-                return (
-                  <Grid item xs={12} sm={6}>
-                    {Children}
-                  </Grid>
-                );
-                break;
-            }
           }
-          return <div {...(convertedProps as any)}>{Children}</div>;
+          break;
+        case "table":
+          return (
+            <Paper
+              sx={{
+                p: 1,
+                m: 0,
+                "&&": { marginBottom: "1.3rem" },
+                ...styleSX,
+              }}
+            >
+              {Children}
+            </Paper>
+          );
+          break;
+        case "tbody":
+          return <>{Children}</>;
+          break;
+        case "thead":
+          return <h4>{Children}</h4>;
+          break;
+        case "tfoot":
+          return <h4>{Children}</h4>;
+          break;
+        case "tr":
+          return (
+            <Grid container spacing={1} sx={{ ...styleSX }}>
+              {Children}
+            </Grid>
+          );
+          break;
+        case "td":
+          return (
+            <Grid item xs={12} sm={6} sx={{ ...styleSX }}>
+              {Children}
+            </Grid>
+          );
+          break;
+        case "th":
+          return (
+            <Grid item xs={12} sm={6} sx={{ ...styleSX }}>
+              {Children}
+            </Grid>
+          );
           break;
         case "frame":
         case "iframe":
@@ -364,9 +331,7 @@ const options = {
             return (
               <code>
                 <div>{`<${domNode.name}>`}</div>
-                <div>
-                  <pre>{Children}</pre>
-                </div>
+                <pre>{Children}</pre>
                 <div>{`</${domNode.name}>`}</div>
               </code>
             );
@@ -374,21 +339,17 @@ const options = {
           break;
         default:
           return (
-            <Box component="div" sx={{ ...styleSX }}>
+            <Box component="section" sx={{ ...styleSX }}>
               <div>{`<${domNode.name}>`}</div>
-              <div>
-                <pre>{Children}</pre>
-              </div>
+              <pre>{Children}</pre>
               <div>{`</${domNode.name}>`}</div>
             </Box>
           );
       }
       return (
-        <Box component="div" sx={{ ...styleSX }}>
+        <Box component="section" sx={{ ...styleSX }}>
           <div>{`<${domNode.name}>`}</div>
-          <div>
-            <pre>{Children}</pre>
-          </div>
+          <pre>{Children}</pre>
           <div>{`</${domNode.name}>`}</div>
         </Box>
       );

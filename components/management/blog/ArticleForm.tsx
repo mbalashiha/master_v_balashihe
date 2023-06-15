@@ -166,28 +166,6 @@ export default function ArticleForm({}: Props) {
             textHtml;
         }
         renderHtml = renderHtml.replace(/\"(\.\.\/+)+/gim, '"/');
-        renderHtml = renderHtml
-          .replace(/<table(\s+[^>]*)?>/g, `<div data-component-tag="table"$1>`)
-          .replace(/<\/table>/g, `</div>`);
-        renderHtml = renderHtml
-          .replace(/<tbody(\s+[^>]*)?>/g, `<div data-component-tag="tbody"$1>`)
-          .replace(/<\/tbody>/g, `</div>`);
-        renderHtml = renderHtml
-          .replace(/<thead(\s+[^>]*)?>/g, `<div data-component-tag="thead"$1>`)
-          .replace(/<\/thead>/g, `</div>`);
-        renderHtml = renderHtml
-          .replace(/<tfoot(\s+[^>]*)?>/g, `<div data-component-tag="tfoot"$1>`)
-          .replace(/<\/tfoot>/g, `</div>`);
-        renderHtml = renderHtml
-          .replace(/<tr(\s+[^>]*)?>/g, `<div data-component-tag="tr"$1>`)
-          .replace(/<\/tr>/g, `</div>`);
-        renderHtml = renderHtml
-          .replace(/<th(\s+[^>]*)?>/g, `<div data-component-tag="th"$1>`)
-          .replace(/<\/th>/g, `</div>`);
-        renderHtml = renderHtml
-          .replace(/<td(\s+[^>]*)?>/g, `<div data-component-tag="td"$1>`)
-          .replace(/<\/td>/g, `</div>`);
-
         const article = {
           id,
           title,
