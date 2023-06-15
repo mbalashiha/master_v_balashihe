@@ -30,8 +30,12 @@ const options = {
   trim: true,
   replace: (domNode: any) => {
     if (domNode.name) {
+      const { attribs, children } = domNode;
+      const hasStyle = !!attribs.style;
+      let passThroughFlag = false;
       switch (domNode.name) {
         case "p":
+        case "span":
         case "strong":
         case "b":
         case "i":
@@ -40,14 +44,42 @@ const options = {
         case "code":
         case "sub":
         case "sup":
-          return domNode;
+          if (!hasStyle) {
+            return domNode;
+          } else {
+            passThroughFlag = true;
+          }
           break;
         default:
           break;
       }
-      const { attribs, children } = domNode;
       const convertedProps = attributesToProps(attribs);
+      const Children: string | JSX.Element | JSX.Element[] | undefined =
+        children && <>{domToReact(children, options)}</>;
       delete convertedProps.children;
+      const styleSX = convertedProps.style || undefined;
+      if (typeof convertedProps.style !== "undefined") {
+        delete (convertedProps as any).style;
+      }
+      if (passThroughFlag && hasStyle) {
+        if (domNode.name === "p") {
+          return (
+            <Typography component={"p"} {...convertedProps} sx={{ ...styleSX }}>
+              {Children}
+            </Typography>
+          );
+        } else {
+          return (
+            <Box
+              {...convertedProps}
+              component={domNode.name}
+              sx={{ ...styleSX }}
+            >
+              {Children}
+            </Box>
+          );
+        }
+      }
       /** if (Array.isArray(children) && children.length > 0) {
         if (domNode.name !== "pre") {
           /// Cleaning spaces in text nodes:
@@ -58,20 +90,24 @@ const options = {
           });
         }
       } **/
-      const Children: string | JSX.Element | JSX.Element[] | undefined =
-        children && <>{domToReact(children, options)}</>;
       switch (domNode.name) {
         case "typography":
           if (typeof convertedProps.gutterBottom === "string") {
             convertedProps.gutterBottom = true as any;
           }
           return (
-            <Typography {...(convertedProps as any)}>{Children}</Typography>
+            <Typography {...(convertedProps as any)} sx={{ ...styleSX }}>
+              {Children}
+            </Typography>
           );
           break;
         case "paper":
           return (
-            <Paper {...(convertedProps as any)} component="div">
+            <Paper
+              {...(convertedProps as any)}
+              component="div"
+              sx={{ ...styleSX }}
+            >
               {Children}
             </Paper>
           );
@@ -90,6 +126,7 @@ const options = {
               {...(convertedProps as any)}
               component={domNode.name}
               variant={domNode.name}
+              sx={{ ...styleSX }}
             >
               {Children}
             </Typography>
@@ -98,17 +135,49 @@ const options = {
         case "ul":
           return (
             <Paper component="div">
-              <ul {...(convertedProps as any)}>{Children}</ul>
+              {hasStyle ? (
+                <Box
+                  component={"ul"}
+                  {...(convertedProps as any)}
+                  sx={{ ...styleSX }}
+                >
+                  {Children}
+                </Box>
+              ) : (
+                <ul {...(convertedProps as any)}>{Children}</ul>
+              )}
             </Paper>
           );
           break;
         case "li":
-          return <li {...(convertedProps as any)}>{Children}</li>;
+          if (hasStyle) {
+            return (
+              <Box
+                component={"li"}
+                {...(convertedProps as any)}
+                sx={{ ...styleSX }}
+              >
+                {Children}
+              </Box>
+            );
+          } else {
+            return <li {...(convertedProps as any)}>{Children}</li>;
+          }
           break;
         case "ol":
           return (
             <Paper component="div">
-              <ol {...(convertedProps as any)}>{Children}</ol>
+              {hasStyle ? (
+                <Box
+                  component={"ol"}
+                  {...(convertedProps as any)}
+                  sx={{ ...styleSX }}
+                >
+                  {Children}
+                </Box>
+              ) : (
+                <ol {...(convertedProps as any)}>{Children}</ol>
+              )}
             </Paper>
           );
           break;
@@ -133,6 +202,7 @@ const options = {
                     py: 0.5,
                   },
                 },
+                ...styleSX,
               }}
             >
               <Grid container component="div">
@@ -162,7 +232,13 @@ const options = {
           break;
         case "a":
         case "link":
-          return <Link {...(convertedProps as any)}>{Children}</Link>;
+          if (hasStyle) {
+            <Box component="span" sx={{ ...styleSX }}>
+              <Link {...(convertedProps as any)}>{Children}</Link>
+            </Box>;
+          } else {
+            return <Link {...(convertedProps as any)}>{Children}</Link>;
+          }
           break;
         case "img":
         case "image":
@@ -274,12 +350,48 @@ const options = {
         case "form":
         case "input":
         case "textarea":
-          return <code>{Children}</code>;
+          if (hasStyle) {
+            return (
+              <Box component="code" sx={{ ...styleSX }}>
+                <div>{`<${domNode.name}>`}</div>
+                <div>
+                  <pre>{Children}</pre>
+                </div>
+                <div>{`</${domNode.name}>`}</div>
+              </Box>
+            );
+          } else {
+            return (
+              <code>
+                <div>{`<${domNode.name}>`}</div>
+                <div>
+                  <pre>{Children}</pre>
+                </div>
+                <div>{`</${domNode.name}>`}</div>
+              </code>
+            );
+          }
           break;
         default:
-          return <pre>{Children}</pre>;
+          return (
+            <Box component="div" sx={{ ...styleSX }}>
+              <div>{`<${domNode.name}>`}</div>
+              <div>
+                <pre>{Children}</pre>
+              </div>
+              <div>{`</${domNode.name}>`}</div>
+            </Box>
+          );
       }
-      return <pre>{Children}</pre>;
+      return (
+        <Box component="div" sx={{ ...styleSX }}>
+          <div>{`<${domNode.name}>`}</div>
+          <div>
+            <pre>{Children}</pre>
+          </div>
+          <div>{`</${domNode.name}>`}</div>
+        </Box>
+      );
     } else if (domNode && domNode.type === "text" && domNode.data) {
       domNode.data = domNode.data.replace(/[\s]{2,}/gim, " ");
       return domNode;
