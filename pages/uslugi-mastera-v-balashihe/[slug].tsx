@@ -4,7 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Article, DescriptionParser } from "@components/common/Article";
+import { Article } from "@components/common/Article";
 import getArticlesPathes from "@framework/article/get-articles-pathes";
 import {
   GetStaticProps,
@@ -13,6 +13,7 @@ import {
 } from "next";
 import getArticleByHandle from "@framework/article/get-article-by-handle";
 import util from "util";
+import { renderToString } from "react-dom/server";
 
 export async function getStaticPaths() {
   const paths = await getArticlesPathes();
@@ -49,9 +50,7 @@ export default function Page(
           content={`Мастер по ремонту в Балашихе и Московской области - ${article.title}`}
         />
       </Head>
-      <Article {...article}>
-        <DescriptionParser descriptionHTML={renderHtml} />
-      </Article>
+      <Article {...article} />
     </>
   );
 }

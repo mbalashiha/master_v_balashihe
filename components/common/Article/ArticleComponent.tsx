@@ -9,32 +9,26 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import ImagePaper from "@components/common/Article/ImagePaper";
-import Image from "next/image";
+import DescriptionParser from "./DescriptionParser";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import { NavSidebar } from "./Sidebars";
 import { HugeContainer, Tooltip } from "@components/ui";
-import { Blog } from "@common/types/cms";
-import util from "util";
 import SpecialHeader from "./SpecialHeader";
 import { CMS } from "@common/types";
 import { StyledFab } from "./StyledFab";
-import { blueGrey } from "@mui/material/colors";
-import { standartCssTransition } from "@components/ui/theme/mui-theme";
 import { HeaderTextParser } from "@components/common/HeaderTextParser";
 import CallButton from "./CallButton";
 import NavigationButtons from "./NavigationButtons/NavigationButtons";
 
-interface Props extends CMS.Blog.Article {
-  children: React.ReactNode | React.ReactNode[];
-}
+interface Props extends CMS.Blog.Article {}
 
 export default function Article({
   title,
-  children,
   image,
   navigation,
   keyTextHtml,
+  renderHtml,
 }: Props) {
   // if (!keyTextHtml) {
   //   throw new Error("Why is not keyTextHtml?");
@@ -188,7 +182,7 @@ export default function Article({
             border: "2px solid rgb(235, 235, 234)",
           }}
         >
-          {children}
+          <DescriptionParser descriptionHTML={renderHtml} />
         </Paper>
       </Box>
       <NavigationButtons navigation={navigation} />

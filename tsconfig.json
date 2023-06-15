@@ -1,14 +1,8 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "types": [
-      "react/next"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["react/next"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -23,63 +17,25 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@common": [
-        "framework/common"
-      ],
-      "@encryption": [
-        "framework/graphql/management/utils/encryption"
-      ],
-      "@encryption/*": [
-        "framework/graphql/management/utils/encryption/*"
-      ],
-      "@common/*": [
-        "framework/common/*"
-      ],
-      "@framework": [
-        "framework/graphql"
-      ],
-      "@framework/*": [
-        "framework/graphql/*"
-      ],
-      "@components": [
-        "components"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@lib": [
-        "lib"
-      ],
-      "@lib/*": [
-        "lib/*"
-      ],
-      "@src": [
-        "src"
-      ],
-      "@src/*": [
-        "src/*"
-      ],
-      "@images": [
-        "public/images"
-      ],
-      "@images/*": [
-        "public/images/*"
-      ],
-      "@styles": [
-        "styles"
-      ],
-      "@styles/*": [
-        "styles/*"
-      ],
-      "@/*": [
-        "./*"
-      ],
-      "@root": [
-        "."
-      ],
-      "@root/*": [
-        "./*"
-      ]
+      "@common": ["framework/common"],
+      "@encryption": ["framework/graphql/management/utils/encryption"],
+      "@encryption/*": ["framework/graphql/management/utils/encryption/*"],
+      "@common/*": ["framework/common/*"],
+      "@framework": ["framework/graphql"],
+      "@framework/*": ["framework/graphql/*"],
+      "@components": ["components"],
+      "@components/*": ["components/*"],
+      "@lib": ["lib"],
+      "@lib/*": ["lib/*"],
+      "@src": ["src"],
+      "@src/*": ["src/*"],
+      "@images": ["public/images"],
+      "@images/*": ["public/images/*"],
+      "@styles": ["styles"],
+      "@styles/*": ["styles/*"],
+      "@/*": ["./*"],
+      "@root": ["."],
+      "@root/*": ["./*"]
     },
     "plugins": [
       {
@@ -87,15 +43,6 @@
       }
     ]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "components/product/ProductSlider/ProductSlider.tsx-excluded",
-    "components/product/ProductSlider/index.ts-excluded",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", ".next", "html-archives", ".history"]
 }

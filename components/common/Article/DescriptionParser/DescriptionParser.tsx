@@ -287,12 +287,8 @@ const options = {
     return domNode;
   },
 };
-const DescriptionParser = memo<Props>(function HtmlDescriptionParser({
+export default memo<Props>(function HtmlDescriptionParser({
   descriptionHTML,
 }: Props) {
-  // if (typeof window !== "undefined") {
-  //   throw new Error("It is server side only component!");
-  // }
   return <>{parse(descriptionHTML, options)}</>;
 });
-export default DescriptionParser;
