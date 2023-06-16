@@ -59,6 +59,9 @@ const options = {
         children && <>{domToReact(children, options)}</>;
       delete convertedProps.children;
       const styleSX = convertedProps.style || undefined;
+      if (typeof convertedProps.style !== "undefined") {
+        delete (convertedProps as any).style;
+      }
       if (
         styleSX &&
         typeof styleSX.width === "string" &&
@@ -70,9 +73,6 @@ const options = {
         }
         styleSX.width = roundedWidth + "%";
         console.log(styleSX);
-      }
-      if (typeof convertedProps.style !== "undefined") {
-        delete (convertedProps as any).style;
       }
       if (passThroughFlag && hasStyle) {
         if (domNode.name === "p") {
@@ -265,6 +265,9 @@ const options = {
           }
           break;
         case "table":
+          if (styleSX && styleSX.height) {
+            delete styleSX.height;
+          }
           return (
             <Paper
               sx={{
