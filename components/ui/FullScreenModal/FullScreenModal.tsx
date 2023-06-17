@@ -70,7 +70,7 @@ export default function FullScreenModal({
         <Dialog
           fullScreen
           sx={{
-            "& .MuiPaper-root": {},
+            "& .Paper-root": {},
           }}
           onClick={(event: React.MouseEvent<HTMLDivElement>) => {
             if (event) {

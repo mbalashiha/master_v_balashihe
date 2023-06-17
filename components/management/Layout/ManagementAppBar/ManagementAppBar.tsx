@@ -41,7 +41,7 @@ export default function ManagementAppBar() {
         <Toolbar
           sx={{
             "& *": {
-              "&, &.MuiTypography-root": {
+              "&, &.Typography-root": {
                 color: "white",
               },
             },

@@ -29,6 +29,8 @@
       "@lib/*": ["lib/*"],
       "@src": ["src"],
       "@src/*": ["src/*"],
+      "@utils": ["utils"],
+      "@utils/*": ["utils/*"],
       "@images": ["public/images"],
       "@images/*": ["public/images/*"],
       "@styles": ["styles"],

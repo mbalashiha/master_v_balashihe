@@ -43,8 +43,8 @@ const StyledLabel = styled("label")`
   transform-origin: 0 0;
   opacity: 1;
   transform: scale(1.001) translateY(0.75rem) translateX(8.5rem);
-  &.Mui-focused,
-  &.MuiInputLabel-shrink {
+  &.-focused,
+  &.InputLabel-shrink {
     background: none;
     border: none;
     text-shadow: none;
@@ -68,7 +68,7 @@ const StyledContainer = styled(Box)`
     max-height: 70px;
     padding-bottom: 2px;
     transition: none;
-    & .MuiBox-root {
+    & .Box-root {
       height: 50px;
       padding: 0;
       display: block;
@@ -77,7 +77,7 @@ const StyledContainer = styled(Box)`
       border-radius: 10px;
       box-shadow: none;
       border: 1px solid var(--accents-6);
-      &.Mui-focused {
+      &.-focused {
         border: 1px solid rgb(13 110 253);
         box-shadow: none;
       }
@@ -192,11 +192,11 @@ const StyledContainer = styled(Box)`
     font-size: 0.94rem;
     line-height: 1.4rem;
   }
-  &&& .Mui-error {
+  &&& .-error {
     & {
       border-color: #dc3545;
       box-shadow: 0 0 0.1rem 0.2rem rgba(220, 53, 69, 0.1);
-      &.Mui-focused {
+      &.-focused {
         box-shadow: 0 0 0.25rem 0.25rem rgba(220, 53, 69, 0.4);
         border: 1px solid #dc3545;
       }
@@ -209,9 +209,9 @@ const StyledContainer = styled(Box)`
     }
   }
 `;
-const PhoneInput = (props: any)=>{
+const PhoneInput = (props: any) => {
   return <></>;
-}
+};
 const StyledPhoneInput: React.FC<Props> = ({
   labelText,
   errorMessage,

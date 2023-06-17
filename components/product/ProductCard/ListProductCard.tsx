@@ -27,12 +27,12 @@ const ProductCard: FC<Props> = ({ key, product }) => {
             width: "100%",
             borderRadius: 2,
             position: "relative",
-            "& .MuiCardMedia-root": {
+            "& .CardMedia-root": {
               transform: "scale(1.0001)",
               transition: "transform .7s linear",
             },
             "&:hover": {
-              "& .MuiCardMedia-root": {
+              "& .CardMedia-root": {
                 transition: "all 1s",
                 transform: "scale(1.1)",
               },

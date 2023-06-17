@@ -138,7 +138,7 @@ export default function ImagePanel() {
                     textTransform: "uppercase",
                     position: "relative",
                     px: "3.4rem",
-                    "& .MuiButton-endIcon": {
+                    "& .Button-endIcon": {
                       position: "absolute",
                       right: "1.5rem",
                       transform: "scale(2)",

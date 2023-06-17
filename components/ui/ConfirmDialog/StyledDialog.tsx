@@ -13,10 +13,10 @@ import { Alert, AlertTitle } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 
 export const StyledDialog = styled(MuiDialog)(({ theme }) => ({
-  "& .MuiDialog-paperScrollPaper": {
+  "& .Dialog-paperScrollPaper": {
     overflowX: "hidden",
   },
-  "& .MuiDialog-paper, & .MuiDialog-paperScrollPaper": {
+  "& .Dialog-paper, & .Dialog-paperScrollPaper": {
     backgroundColor: "white",
     margin: 0,
     width: "99.5vw",
@@ -28,7 +28,7 @@ export const StyledDialog = styled(MuiDialog)(({ theme }) => ({
     },
     [theme.breakpoints.up("md")]: { width: "90vw" },
     [theme.breakpoints.up("lg")]: { width: "70vw" },
-    "& .MuiTypography-root": {
+    "& .Typography-root": {
       color: "black",
       textOverflow: "ellipsis",
       maxWidth: "90%",

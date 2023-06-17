@@ -24,7 +24,7 @@ const RelativeBackdrop = ({ isSubmitting, sx, ...rest }: Props) => {
         height: "100%",
         zIndex: 2,
         backgroundColor: "rgba(255,255,255,0.2)",
-        "& .MuiCircularProgress-root svg": {
+        "& .CircularProgress-root svg": {
           color: (theme) => theme.palette.primary.main,
           transform: "scale(2)",
         },

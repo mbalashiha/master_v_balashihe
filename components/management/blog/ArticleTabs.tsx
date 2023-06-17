@@ -21,7 +21,10 @@ import {
 import useArticleDraft from "@framework/management/blog/article/draft/use-article-draft";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import { ArticleProvider } from "./ArticleProvider";
-import { ArticleKeyTextEditor, ArticleTextEditor } from "@components/management/blog";
+import {
+  ArticleKeyTextEditor,
+  ArticleTextEditor,
+} from "@components/management/blog";
 import { Title } from "@mui/icons-material";
 import ArticleTitle from "./ArticleTitle";
 import useSaveArticle from "@framework/management/blog/article/use-save-article";
@@ -91,7 +94,7 @@ export const ArticleTabs = () => {
             onChange={handleChange}
             aria-label="article editor tabs"
             sx={{
-              "& .MuiTabs-flexContainer": {
+              "& .Tabs-flexContainer": {
                 alignItems: "flex-end",
                 justifyContent: "end",
                 background: (theme) => theme.palette.background.paper,

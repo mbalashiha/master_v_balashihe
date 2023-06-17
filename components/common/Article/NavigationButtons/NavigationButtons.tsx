@@ -36,7 +36,7 @@ export default function NavigationButtons({ navigation }: Props) {
             borderColor: (theme) => theme.palette.background.paper,
           },
           "&:hover": {
-            "& .MuiSvgIcon-root, & .MuiButtonBase-root, & *, & > *": {
+            "& .SvgIcon-root, & .ButtonBase-root, & *, & > *": {
               textDecoration: "none",
               color: "#ff7777",
             },
@@ -55,7 +55,7 @@ export default function NavigationButtons({ navigation }: Props) {
             boxSizing: "border-box",
             overflow: "hidden",
             border: "2px solid rgb(235, 235, 234)",
-            "& .MuiSvgIcon-root": {
+            "& .SvgIcon-root": {
               width: { xs: "30px", md: "75px" },
               height: { xs: "30px", md: "75px" },
               color: "rgb(235, 235, 234)",

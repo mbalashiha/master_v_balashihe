@@ -20,10 +20,10 @@ export default function LoginPage() {
         sx={{
           width: { xs: "97vw", sm: "460px" },
           padding: { xs: 2, sm: 3, md: 4 },
-          "&, & .MuiFormLabel-root.MuiInputLabel-shrink": {
+          "&, & .FormLabel-root.InputLabel-shrink": {
             background: grey[50],
           },
-          "& .MuiInputBase-root": {
+          "& .InputBase-root": {
             "& legend": {
               width: 0,
             },
@@ -34,15 +34,15 @@ export default function LoginPage() {
           "& *": {
             color: "#3D3357",
           },
-          "& .MuiOutlinedInput-notchedOutline": {
+          "& .OutlinedInput-notchedOutline": {
             borderWidth: "2px",
             borderColor: "#3D3357",
           },
-          "& .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl:not(.Mui-focused):not(.Mui-error)":
+          "& .FormLabel-root.InputLabel-root.InputLabel-formControl:not(.-focused):not(.-error)":
             {
               color: "#3D3357",
             },
-          "&& .MuiInputBase-input.MuiOutlinedInput-input": {
+          "&& .InputBase-input.OutlinedInput-input": {
             color: "black",
           },
         }}

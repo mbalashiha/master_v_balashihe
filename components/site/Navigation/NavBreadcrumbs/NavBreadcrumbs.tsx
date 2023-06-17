@@ -13,11 +13,11 @@ const StyledBox = styled(Box)(({ theme }) => ({
   width: "100%",
   minHeight: "3.5rem",
   backgroundColor: theme.palette.mode === "dark" ? "#000000" : "#ffffff",
-  "& .MuiContainer-root": {
+  "& .Container-root": {
     paddingLeft: "1rem",
     paddingRight: "1rem",
     paddingTop: "0.5rem",
-    "& a, & .currentPage, & .MuiBreadcrumbs-separator": {
+    "& a, & .currentPage, & .Breadcrumbs-separator": {
       fontFamily: "Roboto, Helvetica, Arial, sans-serif",
       color: "#474747",
       padding: "1rem 0",

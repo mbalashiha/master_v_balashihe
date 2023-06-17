@@ -36,7 +36,7 @@ const ArticleItem = ({ article }: Props) => {
       elevation={0}
       sx={{
         p: 2,
-        "&, & a, & a > *, & .MuiButtonBase-root.MuiIconButton-root": {
+        "&, & a, & a > *, & .ButtonBase-root.IconButton-root": {
           ...standartCssTransition,
         },
         "&:hover": {

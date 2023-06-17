@@ -12,7 +12,7 @@ import { standartCssTransition } from "../theme/mui-theme";
 function MaskedCircularProgress(props: CircularProgressProps) {
   return (
     <>
-      <CircularProgress 
+      <CircularProgress
         variant="determinate"
         sx={{
           zIndex: 2,
@@ -86,7 +86,7 @@ const MainActionButton = styled(LoadingButton)<Props>(({ theme, loading }) => ({
       color: grey[300],
       boxShadow: "none",
     },
-    "& .MuiCircularProgress-root": {
+    "& .CircularProgress-root": {
       "& svg": {
         transform: "scale(2.2)",
       },

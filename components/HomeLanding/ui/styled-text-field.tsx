@@ -11,8 +11,8 @@ const ModTextFiled = ({ children, ...rest }: TextFieldProps) => {
 const StyledTextField = styled(ModTextFiled)`
   &&&&& {
     &,
-    & .MuiInputBase-root,
-    & .MuiInputBase-root input {
+    & .InputBase-root,
+    & .InputBase-root input {
       font-family: sans-serif;
       z-index: 0;
       box-sizing: border-box;
@@ -25,7 +25,7 @@ const StyledTextField = styled(ModTextFiled)`
       border: none;
       box-shadow: none;
     }
-    & .MuiInputBase-root {
+    & .InputBase-root {
       border-radius: 10px;
       color: var(--accents-1);
       background-color: var(--input-bg-color);
@@ -61,7 +61,7 @@ const StyledTextField = styled(ModTextFiled)`
       &::after {
         display: none;
       }
-      & .MuiOutlinedInput-notchedOutline {
+      & .OutlinedInput-notchedOutline {
         border: 1px solid var(--accents-6);
         font-size: 0.99em;
         & > legend > span {
@@ -70,18 +70,18 @@ const StyledTextField = styled(ModTextFiled)`
           font-size: 0.99em;
         }
       }
-      &.Mui-focused {
-        & .MuiOutlinedInput-notchedOutline {
+      &.-focused {
+        & .OutlinedInput-notchedOutline {
           border-color: rgb(13 110 253);
           box-shadow: none;
         }
       }
       &::hover {
-        & .MuiOutlinedInput-notchedOutline {
+        & .OutlinedInput-notchedOutline {
         }
       }
-      &.Mui-error {
-        & .MuiOutlinedInput-notchedOutline {
+      &.-error {
+        & .OutlinedInput-notchedOutline {
           border-color: #dc3545;
           box-shadow: 0 0 0.1rem 0.2rem rgba(220, 53, 69, 0.1);
         }
@@ -92,8 +92,8 @@ const StyledTextField = styled(ModTextFiled)`
           background-position: right calc(0.375em + 0.1875rem) center;
           background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
         }
-        &.Mui-focused {
-          & .MuiOutlinedInput-notchedOutline {
+        &.-focused {
+          & .OutlinedInput-notchedOutline {
             box-shadow: 0 0 0.25rem 0.25rem rgba(220, 53, 69, 0.4);
           }
         }
@@ -104,18 +104,18 @@ const StyledTextField = styled(ModTextFiled)`
         transform: scaleX(0);
       }
     }
-    & .MuiFormHelperText-root {
+    & .FormHelperText-root {
       font-family: sans-serif;
       padding: 0;
       margin: 0;
       font-size: 0.845rem;
       margin-top: 0.22rem;
-      &.Mui-error {
+      &.-error {
         color: red;
         opacity: 1;
       }
     }
-    & .MuiInputLabel-root,
+    & .InputLabel-root,
     & label {
       z-index: 1;
       font-family: var(--theme-font);
@@ -139,8 +139,8 @@ const StyledTextField = styled(ModTextFiled)`
       transform-origin: 0 0;
       opacity: 1;
       transform: translateY(0.85rem) translateX(0);
-      &.Mui-focused,
-      &.MuiInputLabel-shrink {
+      &.-focused,
+      &.InputLabel-shrink {
         padding: 0;
         height: auto;
         background: none;

@@ -29,19 +29,19 @@ export const StyledPaper = styled(({ ellipsis: _, ...props }: Props) => (
     padding: 0,
     borderRadius: "0.6rem",
     overflow: "hidden",
-    "&.MuiDivider-root": {
+    "&.Divider-root": {
       marginLeft: "5px",
       marginRight: "5px",
       maxHeight: "1px",
     },
-    "& .MuiListItemText-root": {
+    "& .ListItemText-root": {
       maxHeight: "54px",
       overflow: "hidden",
       textOverflow: "ellipsis",
       color: theme.palette.articleText.main,
       paddingLeft: "8px",
     },
-    "& .MuiListItemIcon-root": {
+    "& .ListItemIcon-root": {
       height: "76px",
       width: "76px",
       display: "flex",
@@ -70,17 +70,17 @@ export const StyledPaper = styled(({ ellipsis: _, ...props }: Props) => (
       whiteSpace: ellipsis && "nowrap",
       textOverflow: ellipsis && "ellipsis",
     },
-    "& > *, & > .MuiButtonBase-root": {
+    "& > *, & > .ButtonBase-root": {
       padding: 0,
       paddingLeft: 0,
       height: "76px",
       overflow: "hidden",
     },
   },
-  "& .MuiListItemIcon-root": {
+  "& .ListItemIcon-root": {
     minWidth: "28px",
   },
-  "& .MuiListItemButton-root": {
+  "& .ListItemButton-root": {
     paddingLeft: "4px",
   },
 }));

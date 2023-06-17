@@ -32,10 +32,10 @@ const GoToCartLink = styled((props: React.ComponentProps<typeof Button>) => {
     paddingTop: "0.3rem",
     fontSize: "0.8rem",
     lineHeight: "0.8rem",
-    "& .MuiSvgIcon-root": {
+    "& .SvgIcon-root": {
       fontSize: "1.8rem",
     },
-    "& .MuiButton-endIcon, & .MuiButton-iconSizeMedium": {
+    "& .Button-endIcon, & .Button-iconSizeMedium": {
       padding: 0,
       marginLeft: "0.2rem",
     },

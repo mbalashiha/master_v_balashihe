@@ -263,7 +263,7 @@ const getMuiTheme = (): Theme => {
               color: "#ffffff",
               boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
             },
-            "& .MuiButton-iconSizeMedium": {
+            "& .Button-iconSizeMedium": {
               transform: "scale(1.2)",
             },
           },
@@ -280,7 +280,7 @@ const getMuiTheme = (): Theme => {
             "&:hover": {
               background: blueGrey[200],
             },
-            "&.Mui-focused": {
+            "&.-focused": {
               background: "white",
               color: "black",
             },
@@ -300,16 +300,16 @@ const getMuiTheme = (): Theme => {
             fontFamily,
           },
           outlined: {
-            "&:not(.MuiInputLabel-shrink)": {
+            "&:not(.InputLabel-shrink)": {
               transform: "translate(14px, 10px)",
             },
           },
           filled: {
             color: theme.palette.primary.main,
-            "&:not(.MuiInputLabel-shrink)": {
+            "&:not(.InputLabel-shrink)": {
               transform: "translate(12px, 14px)",
             },
-            "&.MuiInputLabel-shrink": {
+            "&.InputLabel-shrink": {
               transform: "translate(12px, 1px) scale(0.8)",
             },
           },

@@ -67,7 +67,7 @@ export const LandingCard = ({ children, image }: Props) => {
                   color: "black",
                   background: "rgba(255,255,255,0.9)",
                 },
-                "& .MuiButton-startIcon": {
+                "& .Button-startIcon": {
                   pr: 0,
                   mr: "3px",
                 },

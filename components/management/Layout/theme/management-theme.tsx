@@ -140,7 +140,7 @@ const getMuiTheme = (): Theme => {
             "&:hover": {
               background: blueGrey[50],
             },
-            "&.Mui-focused": {
+            "&.-focused": {
               background: "white",
               color: "black",
             },
@@ -163,7 +163,7 @@ const getMuiTheme = (): Theme => {
             transform: "translate(14px, 10px)",
             background: "transparent",
             padding: "0 8px",
-            "&.MuiInputLabel-shrink": {
+            "&.InputLabel-shrink": {
               transform: "translate(12px, -8px) scale(0.835)",
               background: theme.palette.background.paper,
             },
@@ -171,7 +171,7 @@ const getMuiTheme = (): Theme => {
           filled: {
             color: theme.palette.primary.main,
             transform: "translate(12px, 12px)",
-            "&.MuiInputLabel-shrink": {
+            "&.InputLabel-shrink": {
               transform: "translate(12px, 1px) scale(0.8)",
             },
           },
@@ -180,16 +180,16 @@ const getMuiTheme = (): Theme => {
       MuiPopover: {
         styleOverrides: {
           root: {
-            "& .MuiPaper-rounded": {
+            "& .Paper-rounded": {
               borderRadius: "6px",
             },
-            "&.MuiMenu-root": {
-              "& .MuiPaper-root": {
+            "&.Menu-root": {
+              "& .Paper-root": {
                 backgroundColor: blueGrey["100"],
               },
-              "& .MuiMenu-list": {
+              "& .Menu-list": {
                 padding: 0,
-                "& .MuiMenuItem-root": {
+                "& .MenuItem-root": {
                   padding: "10px 20px",
                 },
               },
@@ -269,7 +269,7 @@ const getMuiTheme = (): Theme => {
               color: "#ffffff",
               boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
             },
-            "& .MuiButton-iconSizeMedium": {
+            "& .Button-iconSizeMedium": {
               transform: "scale(1.2)",
             },
           },

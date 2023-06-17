@@ -90,18 +90,18 @@ const StyledButton: any = styled(ButtonForStyling)<{
     height: "61px",
     maxWidth: "220px",
     minWidth: "190px",
-    ".MuiButton-startIcon": {
+    ".Button-startIcon": {
       margin: 0,
       marginRight: "0.6rem",
       padding: 0,
     },
-    ".MuiButton-endIcon": {
+    ".Button-endIcon": {
       margin: 0,
       marginLeft: "0.3rem",
       padding: 0,
       marginTop: "-0.5rem",
     },
-    "& .MuiSvgIcon-root": {
+    "& .SvgIcon-root": {
       fontSize: "2rem",
     },
   },

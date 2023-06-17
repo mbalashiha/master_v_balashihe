@@ -26,7 +26,7 @@ export const LinkListItem = ({
             "&, &:hover": {
               cursor: "default",
               background: grey[900],
-              "& .MuiTypography-root": {
+              "& .Typography-root": {
                 color: "white",
               },
             },

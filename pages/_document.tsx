@@ -8,15 +8,14 @@ import Document, {
 import React, { FC } from "react";
 import { Head } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
-import createEmotionCache from "@common/utils/emotion-cache";
+import createEmotionCache from "@utils/emotion-cache";
 import { AppProps, AppType } from "next/app";
 import { EmotionCache } from "@emotion/cache";
 
 const MyDocument = () => {
   return (
     <Html lang="ru">
-      <Head>
-      </Head>
+      <Head></Head>
       <body>
         <Main />
         <NextScript />
@@ -59,9 +58,7 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   /* eslint-disable */
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (
-        App: any
-      ) =>
+      enhanceApp: (App: any) =>
         function EnhanceApp(props) {
           return <App emotionCache={cache} {...props} />;
         },
@@ -74,7 +71,7 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   const emotionStyles = extractCriticalToChunks(initialProps.html);
   const emotionStyleTags = emotionStyles.styles.map((style) => (
     <style
-      data-emotion={`${style.key} ${style.ids.join(' ')}`}
+      data-emotion={`${style.key} ${style.ids.join(" ")}`}
       key={style.key}
       // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: style.css }}

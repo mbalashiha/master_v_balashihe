@@ -4,9 +4,9 @@ import RussianFlagStyle from "./RussianFlagStyle";
 import NoCountryCodeStyle from "./NoCountryCodeStyle";
 import { styled } from "@mui/material";
 const PrestyledMuiTelInput = styled(MuiTelInput)(({ theme }) => ({
-  "& .MuiButtonBase-root.MuiIconButton-root.MuiTelInput-IconButton": {
+  "& .ButtonBase-root.IconButton-root.TelInput-IconButton": {
     borderRadius: "5px",
-    "& .MuiTelInput-Flag": {
+    "& .TelInput-Flag": {
       boxShadow: "0 1px 5px rgb(0 0 0 / 35%)",
     },
   },
@@ -38,7 +38,7 @@ const StyledPhoneInput: React.FC<Props> = ({
         typeof innerRef.current.querySelector === "function"
       ) {
         const flagNode = innerRef.current.querySelector(
-          ".MuiTelInput-Flag"
+          ".TelInput-Flag"
         ) as HTMLSpanElement;
         if (flagNode && flagNode.style) {
           flagNode.setAttribute("style", flagStyleToSet);

@@ -48,26 +48,26 @@ export default function SearchField({ sx }: Props) {
           sx={{
             width: "100%",
             "& input": {},
-            "& .MuiInputLabel-shrink": {
+            "& .InputLabel-shrink": {
               display: "none",
             },
-            "& .MuiFormLabel-root": {
+            "& .FormLabel-root": {
               paddingLeft: "10px",
             },
-            "& .MuiInputBase-root": {
+            "& .InputBase-root": {
               height: "46px",
               border: `2px solid ${themeGreyColor}`,
               borderRadius: 1,
               padding: "5px 0px 5px 15px",
-              "&.Mui-focused": {
+              "&.-focused": {
                 borderColor: (theme) => theme.palette.primary.main,
               },
-              "& .MuiButtonBase-root": {
-                "& .MuiSvgIcon-root": {
+              "& .ButtonBase-root": {
+                "& .SvgIcon-root": {
                   color: grey[500],
                 },
                 "&:disabled": {
-                  "&, & .MuiSvgIcon-root": {
+                  "&, & .SvgIcon-root": {
                     color: grey[500],
                   },
                 },
@@ -84,7 +84,7 @@ export default function SearchField({ sx }: Props) {
                 <IconButton
                   sx={{
                     visibility: searchString ? "visible" : "hidden",
-                    "& .MuiSvgIcon-root": {
+                    "& .SvgIcon-root": {
                       transform: "scale(1.05)",
                     },
                   }}
@@ -127,7 +127,7 @@ export default function SearchField({ sx }: Props) {
                     "&:disabled": {
                       background: "transparent",
                     },
-                    "& .MuiSvgIcon-root": {
+                    "& .SvgIcon-root": {
                       transform: "scale(1.3)",
                       color: grey[500],
                     },

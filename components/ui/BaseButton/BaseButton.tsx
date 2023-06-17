@@ -27,10 +27,10 @@ const BaseButton = styled(MuiButton)(({ theme }) => ({
     paddingTop: "0.35rem",
     fontSize: "0.8rem",
     lineHeight: "0.8rem",
-    "& .MuiSvgIcon-root": {
+    "& .SvgIcon-root": {
       fontSize: "1.8rem",
     },
-    "& .MuiButton-endIcon, & .MuiButton-startIcon": {
+    "& .Button-endIcon, & .Button-startIcon": {
       padding: 0,
       paddingBottom: "0.3rem",
       marginLeft: "0.2rem",

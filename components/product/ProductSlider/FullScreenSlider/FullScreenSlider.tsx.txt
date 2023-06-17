@@ -54,7 +54,7 @@ const StyledIconBtn = styled(
       backgroundColor: "var(--hover-2)",
     },
   },
-  "&&& .MuiSvgIcon-root": {
+  "&&& .SvgIcon-root": {
     color: "white",
   },
   padding: "1rem",

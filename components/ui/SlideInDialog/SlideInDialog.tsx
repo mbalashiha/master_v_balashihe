@@ -66,7 +66,7 @@ export default function SlideInDialog({
       <Portal>
         <Dialog
           sx={{
-            "& .MuiPaper-root": {
+            "& .Paper-root": {
               minWidth: { xs: "98vw", md: "80vw", xl: "50vw" },
             },
           }}

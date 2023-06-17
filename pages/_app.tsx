@@ -1,6 +1,7 @@
+import "@utils/MuiClassNameSetup";
 import "@styles/globals.scss";
 import { CacheProvider, EmotionCache } from "@emotion/react";
-import createEmotionCache from "@common/utils/emotion-cache";
+import createEmotionCache from "@utils/emotion-cache";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import React, { useEffect, FC, useContext, useRef } from "react";

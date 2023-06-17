@@ -65,7 +65,7 @@ const LoadingButton = styled(ForwardedButton)<Props>(({ theme, loading }) => ({
       color: grey[300],
       boxShadow: "none",
     },
-    "& .MuiCircularProgress-root": {
+    "& .CircularProgress-root": {
       "& svg": {
         transform: "scale(1.4)",
       },

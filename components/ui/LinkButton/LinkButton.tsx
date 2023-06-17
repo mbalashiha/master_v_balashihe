@@ -27,13 +27,13 @@ export default React.forwardRef(function LinkButton(
             boxShadow: "none",
             color: "primary.main",
           },
-          "& .MuiButton-startIcon": {
+          "& .Button-startIcon": {
             margin: 0,
             marginLeft: 0,
             marginRight: "4px",
             transform: "scale(0.75)",
           },
-          "& .MuiButton-endIcon": {
+          "& .Button-endIcon": {
             margin: 0,
             transform: "scale(0.75)",
           },

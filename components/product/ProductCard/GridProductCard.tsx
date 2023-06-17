@@ -1,4 +1,3 @@
-
 import {
   Stack,
   Card,
@@ -42,13 +41,13 @@ const GridProductCard: FC<Props> = ({ key, product }) => {
           borderRadius: 4,
           position: "relative",
           height: "100%",
-          "& .MuiCardMedia-root": {
+          "& .CardMedia-root": {
             transform: "scale(1.0001)",
             transition: "transform .7s linear",
             zIndex: 0,
           },
           "&:hover": {
-            "& .MuiCardMedia-root": {
+            "& .CardMedia-root": {
               transform: "scale(1.13)",
             },
           },
@@ -101,7 +100,7 @@ const GridProductCard: FC<Props> = ({ key, product }) => {
             readOnly
             sx={{
               fontSize: "1.8rem",
-              "& .MuiRating-iconEmpty svg": { fill: "grey" },
+              "& .Rating-iconEmpty svg": { fill: "grey" },
             }}
           />
           <PriceNode price={product.price!}></PriceNode>

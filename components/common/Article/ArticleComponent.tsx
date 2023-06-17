@@ -139,7 +139,7 @@ export default function Article({
       <Box
         component="article"
         sx={{
-          "&, & p, & .MuiPaper-root": {
+          "&, & p, & .Paper-root": {
             fontFamily: 'Roboto, "Segoe UI", Tahoma, Verdana, Arial',
             fontWeight: 500,
             fontSize: "18px",
@@ -147,7 +147,7 @@ export default function Article({
             color: (theme) =>
               theme.palette.mode === "light" ? "#0e0e0f" : "white",
           },
-          "& img, & .MuiPaper-elevation1": {
+          "& img, & .Paper-elevation1": {
             fontSize: "17px",
             lineHeight: "25px",
             marginBottom: "2rem",
