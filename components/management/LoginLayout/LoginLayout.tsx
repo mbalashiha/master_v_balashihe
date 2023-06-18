@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import Head from "next/head";
 import CssBaseline from "@mui/material/CssBaseline";
 import { theme as getMuiTheme } from "@components/management/Layout/theme";
-import { MuiSnackbarProvider, useThemePalette } from "@components/ui";
+import { useThemePalette } from "@components/ui";
 import { ThemeProvider } from "@mui/material";
 import { ManagementApiProvider } from "@framework/management";
 import { LoginProvider } from "@components/management/LoginLayout";
@@ -22,13 +22,7 @@ const LoginLayout: FC<Props> = ({ children }: Props) => {
       <ManagementApiProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <MuiSnackbarProvider
-            autoHideDuration={48 * 1000}
-            anchorOrigin={{ horizontal: "center", vertical: "top" }}
-            maxSnack={1}
-          >
             <LoginProvider>{children}</LoginProvider>
-          </MuiSnackbarProvider>
         </ThemeProvider>
       </ManagementApiProvider>
     </>

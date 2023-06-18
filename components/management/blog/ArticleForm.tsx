@@ -35,6 +35,7 @@ import { useFabButton } from "../Layout";
 import DeleteDraftButton from "./Article/DeleteDraftButton";
 import { useSnackbar } from "notistack";
 import { TabsProvider } from "@components/common/Tabs/TabsProvider";
+import { locale } from "@utils/locale";
 
 interface Props {
   // children?: React.ReactNode | React.ReactNode[];

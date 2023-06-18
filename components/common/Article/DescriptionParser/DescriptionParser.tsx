@@ -188,6 +188,21 @@ const options = {
             </Paper>
           );
           break;
+        case "ol":
+          if (hasStyle) {
+            return (
+              <Box
+                component={"ol"}
+                {...(convertedProps as any)}
+                sx={{ ...styleSX }}
+              >
+                {Children}
+              </Box>
+            );
+          } else {
+            return <ol {...(convertedProps as any)}>{Children}</ol>;
+          }
+          break;
         case "li":
           if (hasStyle) {
             return (
@@ -202,23 +217,6 @@ const options = {
           } else {
             return <li {...(convertedProps as any)}>{Children}</li>;
           }
-          break;
-        case "ol":
-          return (
-            <Paper component="div">
-              {hasStyle ? (
-                <Box
-                  component={"ol"}
-                  {...(convertedProps as any)}
-                  sx={{ ...styleSX }}
-                >
-                  {Children}
-                </Box>
-              ) : (
-                <ol {...(convertedProps as any)}>{Children}</ol>
-              )}
-            </Paper>
-          );
           break;
         case "a":
         case "link":

@@ -4,6 +4,7 @@ import React, { useCallback, useEffect } from "react";
 import { unstable_serialize, useSWRConfig } from "swr";
 import useSWR from "swr";
 import { useSnackbar } from "notistack";
+import { locale } from "@utils/locale";
 
 export const useHook = <H>(hookHandler: (apiHooks: API.Hooks) => H) => {
   const { hooks } = useManagementApiProvider();
@@ -99,7 +100,7 @@ const useData = (
   const errorMessage = (error && error.message) || null;
   useEffect(() => {
     if (errorMessage && enqueueSnackbar) {
-      enqueueSnackbar(errorMessage, { variant: "error" });
+      enqueueSnackbar(locale(errorMessage), { variant: "error" });
     }
   }, [errorMessage, enqueueSnackbar]);
   return response;

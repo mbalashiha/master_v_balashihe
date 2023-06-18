@@ -11,6 +11,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { LinkListItem } from "@components/common/LinkListItem";
+import React from "react";
 
 interface Props {
   articlesList: Blog.NavigationItem[];
@@ -21,16 +22,19 @@ export default function NavigationList({ articlesList, ariaLabel }: Props) {
   return (
     <nav aria-label={ariaLabel || "navigation articles"}>
       <Stack component="ul" spacing="3px">
-        {articlesList.map((el, indx) => (
-          <>
-            <LinkListItem key={(el.url || "") + "_" + el.title} {...el}>
-              <ListItemText primary={el.title} />
-            </LinkListItem>
-            {indx < articlesList.length - 1 && (
-              <Divider variant="inset" component="li" />
-            )}
-          </>
-        ))}
+        {articlesList.map((el, indx) => {
+          const prefixKey = (el.url || "") + "_" + (el.title || "");
+          return (
+            <React.Fragment key={prefixKey}>
+              <LinkListItem {...el}>
+                <ListItemText primary={el.title} />
+              </LinkListItem>
+              {indx < articlesList.length - 1 && (
+                <Divider variant="inset" component="li" />
+              )}
+            </React.Fragment>
+          );
+        })}
       </Stack>
     </nav>
   );

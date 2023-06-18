@@ -187,7 +187,8 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
       <Formik
         innerRef={formikRef as any}
         initialValues={formikInitialValues}
-        validateOnChange
+        validateOnChange={false}
+        validateOnBlur={false}
         {...formikProps}
         onSubmit={(
           values: FormProps,

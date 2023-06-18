@@ -19,7 +19,7 @@ export default function MuiSnackbarProvider({ children, ...props }: Props) {
       action={(snackbarKey) => (
         <SnackbarCloseButton snackbarKey={snackbarKey} />
       )}
-      autoHideDuration={40000}
+      autoHideDuration={8000}
       anchorOrigin={{ horizontal: "center", vertical: "top" }}
       preventDuplicate
       {...props}

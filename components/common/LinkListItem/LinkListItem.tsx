@@ -41,29 +41,25 @@ export const LinkListItem = ({
     );
   } else {
     return (
-      <ListItem>
-        <ListItemButton
-          component={({ children, ...rest }) => (
-            <Link {...rest} href={url} as={url}>
-              {children}
-            </Link>
-          )}
-        >
-          <ListItemIcon>
-            {image && (
-              <EnhImage
-                width={image.width}
-                height={image.height}
-                fitWidth={50}
-                fitHeight={50}
-                src={image.url}
-                alt={image.alt}
-              />
-            )}
-          </ListItemIcon>
-          {children}
-        </ListItemButton>
-      </ListItem>
+      <Link href={url} as={url}>
+        <ListItem>
+          <ListItemButton>
+            <ListItemIcon>
+              {image && (
+                <EnhImage
+                  width={image.width}
+                  height={image.height}
+                  fitWidth={50}
+                  fitHeight={50}
+                  src={image.url}
+                  alt={image.alt}
+                />
+              )}
+            </ListItemIcon>
+            {children}
+          </ListItemButton>
+        </ListItem>
+      </Link>
     );
   }
 };

@@ -21,6 +21,7 @@ import Cookies from "js-cookie";
 import useFromLogin from "@common/management/utils/hooks/use-from-login";
 import { useSnackbar } from "notistack";
 import { useLoginProvider } from "@components/management/LoginLayout/LoginProvider";
+import { locale } from "@utils/locale";
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
     .min(2, "Введите значение от 2 символов")
@@ -54,21 +55,24 @@ const LoginFormFormik = () => {
                 : !success
                 ? "Аутентификация не удалась"
                 : "Нет сообщения об ошибке ((";
-            enqueueSnackbar(errorAlertMessage.substring(0, 512), {
+            enqueueSnackbar(locale(errorAlertMessage.substring(0, 512)), {
               variant: "error",
             });
             formikRef.current
               ?.getFieldHelpers("login")
-              .setError(errorAlertMessage.substring(0, 512));
+              .setError(locale(errorAlertMessage.substring(0, 512)));
           } else {
             closeSnackbar();
             doRedirectAuthorized();
           }
         } catch (e: any) {
           console.error(e.stack || e.message || e);
-          enqueueSnackbar((e.stack || e.message || e).substring(0, 512), {
-            variant: "error",
-          });
+          enqueueSnackbar(
+            locale((e.stack || e.message || e).substring(0, 512)),
+            {
+              variant: "error",
+            }
+          );
         }
       }}
       // validationSchema={SignupSchema}

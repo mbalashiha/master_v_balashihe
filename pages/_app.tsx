@@ -1,5 +1,6 @@
 import "@utils/MuiClassNameSetup";
 import "@styles/globals.scss";
+import { MuiSnackbarProvider } from "@components/ui";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "@utils/emotion-cache";
 import type { AppProps } from "next/app";
@@ -34,9 +35,14 @@ function MyMasterApp(
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CacheProvider value={emotionCache}>
-        <Layout {...pageProps}>
-          <Component {...pageProps} />
-        </Layout>
+        <MuiSnackbarProvider
+          autoHideDuration={8000}
+          anchorOrigin={{ horizontal: "center", vertical: "top" }}
+        >
+          <Layout {...pageProps}>
+            <Component {...pageProps} />
+          </Layout>
+        </MuiSnackbarProvider>
       </CacheProvider>
     </>
   );

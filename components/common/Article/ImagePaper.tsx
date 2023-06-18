@@ -5,6 +5,7 @@ import {
   GradientBackground2,
   GradientBackground3,
 } from "@components/shared/Gradients/Backgrounds";
+import { EnhImage } from "@components/ui";
 import { fitWidth } from "@lib/aspect-ration-fit";
 import { Box, Typography, Paper, Grid } from "@mui/material";
 import Image from "next/image";
@@ -70,28 +71,6 @@ export default function ImagePaper({ gradientBackground, image }: Props) {
         width: 0,
         height: 0,
       };
-  const imageProps = useMemo(() => {
-    if (!src || !width) {
-      return {
-        src: null,
-        alt: "",
-        width: 0,
-        height: 0,
-      };
-    } else {
-      const fitted = fitWidth(width, height, 540);
-      return {
-        src,
-        alt,
-        width: fitted.width,
-        height: fitted.height,
-      };
-    }
-  }, [src, alt, width, height]);
-  src = imageProps.src;
-  alt = imageProps.alt;
-  width = imageProps.width;
-  height = imageProps.height;
   return (
     <Paper
       sx={{
@@ -107,7 +86,14 @@ export default function ImagePaper({ gradientBackground, image }: Props) {
     >
       <>
         {(src && (
-          <Image src={src} alt={alt} width={width} height={height} />
+          <EnhImage
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            fitWidth={540}
+            fitHeight={540}
+          />
         )) || <ImagePlaceholder />}
         <Box
           sx={{

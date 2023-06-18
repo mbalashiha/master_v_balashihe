@@ -1,11 +1,6 @@
 import { FC } from "react";
 import React, { useContext } from "react";
-import { useRouter } from "next/router";
-import Footer from "@components/site/Footer";
-import { Navbar, NavBreadcrumbs } from "@components/site/Navigation";
 import { Container, styled } from "@mui/material";
-import { MuiSnackbarProvider } from "@components/ui";
-import { SnackbarProvider } from "notistack";
 import { Box } from "@mui/material";
 import Head from "next/head";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -32,25 +27,20 @@ const ManagementLayout: FC<Props> = ({ children }: Props) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <MuiSnackbarProvider
-          autoHideDuration={2 * 60 * 1000}
-          anchorOrigin={{ horizontal: "center", vertical: "top" }}
-        >
-          <ManagementApiProvider>
-            <ManagementLayoutProvider>
-              <ManagementAppBar />
-              <Container
-                sx={{
-                  position: "relative",
-                  minHeight: "100vh",
-                }}
-                maxWidth="lg"
-              >
+        <ManagementApiProvider>
+          <ManagementLayoutProvider>
+            <ManagementAppBar />
+            <Container
+              sx={{
+                position: "relative",
+                minHeight: "100vh",
+              }}
+              maxWidth="lg"
+            >
                 {children}
-              </Container>
-            </ManagementLayoutProvider>
-          </ManagementApiProvider>
-        </MuiSnackbarProvider>
+            </Container>
+          </ManagementLayoutProvider>
+        </ManagementApiProvider>
       </ThemeProvider>
     </>
   );

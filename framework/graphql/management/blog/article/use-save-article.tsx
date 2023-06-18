@@ -3,6 +3,7 @@ import { useSaveArticle } from "@common/management/blog/article/use-save-article
 import { UseSaveArticle } from "@common/management/blog/article/use-save-article";
 import { API, CMS } from "@common/types";
 import { ID, Schema } from "@framework/types";
+import { locale } from "@utils/locale";
 import { slugify } from "lib";
 import { useSnackbar } from "notistack";
 import { normalize } from "path";
@@ -52,6 +53,9 @@ export const handler: API.Graphql.MutationHook<UseSaveArticleHook> = {
     return () => async (input) => {
       try {
         const response = await request(input);
+        if (response.message) {
+          response.message = locale(response.message as any);
+        }
         if (response.error) {
           const m = response.error.match(/\s*ER_DUP_ENTRY\:\s+Duplicate entry\s+'([^\'\"]+)'/im)
           if (m && m[1]) {
