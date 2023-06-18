@@ -91,6 +91,19 @@ const getMuiTheme = (): Theme => {
               maxWidth: "99.5vw",
               overflowX: "hidden",
             },
+            minHeight: "100vh",
+            position: "relative",
+            paddingBottom: "27rem",
+            backgroundColor:
+              theme.palette.mode === "dark" ? "#212529" : "#F1F3F5",
+            color: theme.palette.mode === "dark" ? "#f1f3f5" : "#10101a",
+            "& > footer": {
+              height: "24rem",
+              width: "100%",
+            },
+            "& button": {
+              background: theme.palette.secondary.light,
+            },
             "& .SnackbarContent-root, & .SnackbarItem-contentRoot": {
               "&&": {
                 fontFamily: InterFontFamily,
@@ -130,19 +143,6 @@ const getMuiTheme = (): Theme => {
                 fill: "red",
                 stroke: "red",
               },
-            },
-            minHeight: "100vh",
-            position: "relative",
-            paddingBottom: "27rem",
-            backgroundColor:
-              theme.palette.mode === "dark" ? "#212529" : "#F1F3F5",
-            color: theme.palette.mode === "dark" ? "#f1f3f5" : "#10101a",
-            "& > footer": {
-              height: "24rem",
-              width: "100%",
-            },
-            "& button": {
-              background: theme.palette.secondary.light,
             },
           },
         },

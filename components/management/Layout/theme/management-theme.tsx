@@ -64,6 +64,18 @@ const getMuiTheme = (): Theme => {
       MuiCssBaseline: {
         styleOverrides: {
           body: {
+            minHeight: "100vh",
+            position: "relative",
+            backgroundColor:
+              theme.palette.mode === "dark" ? "#212529" : "#F1F3F5",
+            color: theme.palette.mode === "dark" ? "#f1f3f5" : "#10101a",
+            "& > footer": {
+              height: "24rem",
+              width: "100%",
+            },
+            "& button": {
+              background: theme.palette.secondary.light,
+            },
             "& .SnackbarContent-root, & .SnackbarItem-contentRoot": {
               "& .SnackbarItem-message": {
                 color: "black",
@@ -92,18 +104,6 @@ const getMuiTheme = (): Theme => {
                 textDecoration: "none",
                 ...standartCssTransition,
               },
-            },
-            minHeight: "100vh",
-            position: "relative",
-            backgroundColor:
-              theme.palette.mode === "dark" ? "#212529" : "#F1F3F5",
-            color: theme.palette.mode === "dark" ? "#f1f3f5" : "#10101a",
-            "& > footer": {
-              height: "24rem",
-              width: "100%",
-            },
-            "& button": {
-              background: theme.palette.secondary.light,
             },
           },
         },

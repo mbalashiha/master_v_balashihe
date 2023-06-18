@@ -15,25 +15,51 @@ import Image from "next/image";
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import type { Element, DOMNode, Text } from "html-react-parser";
 
 import parse, {
   attributesToProps,
   HTMLReactParserOptions,
-  Element,
   domToReact,
 } from "html-react-parser";
+import TableStructure from "./TableStructure";
 
 interface Props {
   descriptionHTML: string;
 }
 const options = {
   trim: true,
-  replace: (domNode: any) => {
-    if (domNode.name) {
+  replace: (in_domNode: DOMNode) => {
+    if (in_domNode.type === "text") {
+      const domNode: Text = in_domNode as Text;
+      if (typeof domNode.data === "string") {
+        domNode.data = domNode.data.replace(/[\s]{2,}/gim, " ");
+      }
+      return domNode;
+    } else if (in_domNode.type === "script") {
+      return <></>;
+    } else if (in_domNode.type === "style") {
+      return <></>;
+    } else if (in_domNode.type === "tag" && (in_domNode as Element).name) {
+      const domNode: Element = in_domNode as Element;
       const { attribs, children } = domNode;
       const hasStyle = !!attribs.style;
       let passThroughFlag = false;
       switch (domNode.name) {
+        case "table":
+          return (
+            <Paper
+              sx={{
+                p: { xs: 0, sm: 1 },
+                m: 0,
+                marginBottom: "2rem",
+                boxShadow: { xs: "none", sm: "inherit" },
+              }}
+            >
+              <TableStructure tableNode={domNode} options={options} />
+            </Paper>
+          );
+          break;
         case "p":
         case "br":
         case "span":
@@ -85,7 +111,7 @@ const options = {
           return (
             <Box
               {...convertedProps}
-              component={domNode.name}
+              component={domNode.name as any}
               sx={{ ...styleSX }}
             >
               {Children}
@@ -264,23 +290,6 @@ const options = {
             );
           }
           break;
-        case "table":
-          if (styleSX && styleSX.height) {
-            delete styleSX.height;
-          }
-          return (
-            <Paper
-              sx={{
-                p: 1,
-                m: 0,
-                "&&": { marginBottom: "1.3rem" },
-                ...styleSX,
-              }}
-            >
-              {Children}
-            </Paper>
-          );
-          break;
         case "tbody":
           return <>{Children}</>;
           break;
@@ -356,11 +365,9 @@ const options = {
           <div>{`</${domNode.name}>`}</div>
         </Box>
       );
-    } else if (domNode && domNode.type === "text" && domNode.data) {
-      domNode.data = domNode.data.replace(/[\s]{2,}/gim, " ");
-      return domNode;
+    } else {
+      return in_domNode;
     }
-    return domNode;
   },
 };
 export default memo<Props>(function HtmlDescriptionParser({
