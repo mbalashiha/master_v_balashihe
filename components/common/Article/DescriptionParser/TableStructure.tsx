@@ -96,6 +96,34 @@ const getCells = (tableNode: Element) => {
   });
   return allCells;
 };
+interface SwitcherProps {
+  children: React.ReactNode | React.ReactNode[];
+  isHeader: boolean;
+  colSpan: any;
+  paragraphsLength: number;
+}
+const CellContainerSwither = ({
+  children,
+  isHeader,
+  colSpan,
+  paragraphsLength,
+}: SwitcherProps) => {
+  if (isHeader) {
+    return <h4>{children}</h4>;
+  } else if (paragraphsLength <= 0 && colSpan) {
+    return (
+      <p>
+        <strong>{children}</strong>
+      </p>
+    );
+  } else if (paragraphsLength <= 0) {
+    return <p>{children}</p>;
+  } else if (colSpan) {
+    return <strong>{children}</strong>;
+  } else {
+    return <>{children}</>;
+  }
+};
 function TableStructure({ tableNode, options }: Props) {
   const { gridColumnsPercentage } = getColumnsInfo(tableNode);
   const allCells = getCells(tableNode);
@@ -104,7 +132,9 @@ function TableStructure({ tableNode, options }: Props) {
       {allCells.map((cell, ind) => {
         const attribs: any = attributesToProps(cell.node.attribs);
         const { colSpan, rowSpan, style, ...rest } = attribs;
-        const parsedCells = domToReact(cell.node.children, options);
+        const paragraphs = cell.node.children.filter(
+          (child: any) => child.name === "p"
+        );
         return (
           <Box
             {...rest}
@@ -114,9 +144,16 @@ function TableStructure({ tableNode, options }: Props) {
               background: colSpan ? "#EFDDD1" : "#D9E3EF",
               gridColumn: colSpan && `span ${colSpan}`,
               gridRow: rowSpan && `span ${rowSpan}`,
+              textAlign: colSpan && "center",
             }}
           >
-            {cell.isHeader ? <h4>{parsedCells}</h4> : <>{parsedCells}</>}
+            <CellContainerSwither
+              isHeader={cell.isHeader}
+              paragraphsLength={paragraphs.length}
+              colSpan={colSpan}
+            >
+              {domToReact(cell.node.children, options)}
+            </CellContainerSwither>
           </Box>
         );
       })}

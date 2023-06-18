@@ -176,8 +176,8 @@ const options = {
             <Paper component="div">
               {hasStyle ? (
                 <Box
-                  component={"ul"}
                   {...(convertedProps as any)}
+                  component={"ul"}
                   sx={{ ...styleSX }}
                 >
                   {Children}
@@ -189,19 +189,20 @@ const options = {
           );
           break;
         case "ol":
-          if (hasStyle) {
-            return (
+          return (
+            <Paper
+              elevation={0}
+              sx={{ px: 2, py: 1.2, mb: 2, background: "#EFDDD1" }}
+            >
               <Box
-                component={"ol"}
                 {...(convertedProps as any)}
+                component={"ol"}
                 sx={{ ...styleSX }}
               >
                 {Children}
               </Box>
-            );
-          } else {
-            return <ol {...(convertedProps as any)}>{Children}</ol>;
-          }
+            </Paper>
+          );
           break;
         case "li":
           if (hasStyle) {

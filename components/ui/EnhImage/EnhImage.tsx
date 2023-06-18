@@ -13,7 +13,7 @@ type ImageInProps = React.ComponentProps<typeof Image> & {
     height: number;
     srcWidth: number;
     srcHeight: number;
-    allAuto: boolean;
+    allAuto?: boolean;
   };
 };
 const StyledImage = styled(({ targetDims: _, alt, ...props }: ImageInProps) => (
@@ -24,7 +24,7 @@ const StyledImage = styled(({ targetDims: _, alt, ...props }: ImageInProps) => (
     height: number;
     srcWidth: number;
     srcHeight: number;
-    allAuto: boolean;
+    allAuto?: boolean;
   };
 }>(
   ({ theme, targetDims: { width, height, srcWidth, srcHeight, allAuto } }) => ({

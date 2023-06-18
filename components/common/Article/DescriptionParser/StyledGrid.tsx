@@ -4,14 +4,17 @@ const StyledGrid = styled("div")<{ gridColumnsPercentage: string }>(
   ({ theme, gridColumnsPercentage }) => ({
     borderRadius: theme.shape.borderRadius * 0.65,
     overflow: "hidden",
-    display: "inline-grid",
+    display: "grid",
     gap: "3px",
     gridTemplateColumns: gridColumnsPercentage,
     "& > div": {
       padding: "12px",
-      "& p, & span": {
-        fontSize: "9pt",
-        lineHeight: "13pt",
+      "& p": {
+        fontSize: "17px",
+        lineHeight: "25px",
+        maxWidth: "100%",
+        margin: 0,
+        padding: 0,
       },
     },
   })
