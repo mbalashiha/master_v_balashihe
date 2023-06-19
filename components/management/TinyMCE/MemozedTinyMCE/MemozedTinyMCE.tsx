@@ -155,6 +155,10 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
                }
                td[colspan] {
                   text-align: center;
+               }
+               td p {
+                  margin: 0 0 1px 0;
+                  padding: 0;
                }`,
             content_langs: [
               { title: "Русский", code: "ru" },
