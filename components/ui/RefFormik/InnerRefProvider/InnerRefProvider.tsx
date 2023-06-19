@@ -164,24 +164,15 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
       destroyForm,
     };
   }, [destroyForm]);
-  const providerConfig = useMemo(() => {
-    return {
-      ...providerMethods,
-      formikRef,
-      getInitialValues,
-      setInitialValues,
-      setFormWasSubmited,
-      formWasSubmited,
-      formIsResetting,
-    };
-  }, [
-    providerMethods,
+  const providerConfig = {
+    ...providerMethods,
+    formikRef,
     getInitialValues,
     setInitialValues,
     setFormWasSubmited,
     formWasSubmited,
     formIsResetting,
-  ]);
+  };
   return (
     <FormContext.Provider value={providerConfig}>
       <Formik

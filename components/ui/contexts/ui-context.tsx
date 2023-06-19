@@ -130,17 +130,15 @@ const UIProvider = (props: any) => {
     dispatch({ type: "OPEN_SNACKBAR", snackbars });
   const closeSnackbar = (snackbarType: keyof Snackbars) =>
     dispatch({ type: "CLOSE_SNACKBAR", snackbarType });
-  const value = useMemo(() => {
-    return {
-      ...state,
-      openSidebar,
-      closeSidebar,
-      openDialog,
-      closeDialog,
-      openSnackbar,
-      closeSnackbar,
-    };
-  }, [state]);
+  const value = {
+    ...state,
+    openSidebar,
+    closeSidebar,
+    openDialog,
+    closeDialog,
+    openSnackbar,
+    closeSnackbar,
+  };
   return (
     <>
       <UIContext.Provider value={value}>{props.children}</UIContext.Provider>

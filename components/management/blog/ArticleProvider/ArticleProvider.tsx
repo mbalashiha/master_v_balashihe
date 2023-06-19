@@ -56,9 +56,7 @@ export const ArticleProvider = ({ children, providerRef }: Props) => {
   const [duplicateArticle, setDuplicateArticle] = React.useState<
     CMS.Blog.Article | undefined
   >();
-  const providerConfig = useMemo<ArticleEditorContext>(() => {
-    return { editorRef, duplicateArticle, setDuplicateArticle };
-  }, [duplicateArticle, setDuplicateArticle]);
+  const providerConfig = { editorRef, duplicateArticle, setDuplicateArticle };
   if (providerRef) {
     providerRef.current = providerConfig;
   }

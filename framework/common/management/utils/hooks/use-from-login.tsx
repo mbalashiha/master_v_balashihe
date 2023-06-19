@@ -6,8 +6,11 @@ import util from "util";
 
 const useFromLogin = () => {
   const router = useRouter();
+  const routerRef = React.useRef(router);
+  routerRef.current = router;
   const doRedirectAuthorized = React.useCallback(async () => {
     try {
+      const router = routerRef.current;
       let redirectUrl = Cookies.get(AFTER_LOGIN_BACKTO_URI) || "/management";
       redirectUrl = Array.isArray(redirectUrl)
         ? redirectUrl.join("/")
@@ -16,8 +19,11 @@ const useFromLogin = () => {
     } catch (e) {
       console.error(e);
     }
-  }, [router]);
-  return { doRedirectAuthorized };
+  }, []);
+  return React.useMemo(
+    () => ({ doRedirectAuthorized }),
+    [doRedirectAuthorized]
+  );
 };
 
 export default useFromLogin;

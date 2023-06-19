@@ -16,7 +16,7 @@ import LandingReasons from "@components/site/LandingPage/LandingReasons";
 import LandingPricesCards from "@components/site/LandingPage/LandingPricesCards";
 import getArticleByAbsUrl from "@framework/article/get-article-by-abs-url";
 import React from "react";
-import { fitWidth } from "@lib/aspect-ration-fit";
+import { EnhImage } from "@components/ui";
 
 export default function AboutMaster(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -25,17 +25,7 @@ export default function AboutMaster(
   if (!article || !article.renderHtml) {
     throw new Error("No article for this page!");
   }
-  let { renderHtml, title, image } = article;
-  image = React.useMemo(() => {
-    if (image && image.width) {
-      const { width, height } = fitWidth(image.width, image.height, 340);
-      image.width = width;
-      image.height = height;
-      return image;
-    } else {
-      return image;
-    }
-  }, [image]);
+  const { renderHtml, title, image } = article;
   return (
     <>
       <Head>
@@ -95,12 +85,13 @@ export default function AboutMaster(
                   },
                 }}
               >
-                <Image
+                <EnhImage
                   src={image.url}
                   width={image.width}
                   height={image.height}
                   alt={image.alt}
-                ></Image>
+                  fitWidth={340}
+                ></EnhImage>
               </Paper>
             </Grid>
           )}

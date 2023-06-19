@@ -6,6 +6,7 @@ import { DescriptionParser } from "@components/common/Article";
 import React from "react";
 import { fitWidth } from "@lib/aspect-ration-fit";
 import { Blog } from "@common/types/cms";
+import { EnhImage } from "@components/ui";
 interface Props {
   article: Blog.Article;
 }
@@ -14,16 +15,6 @@ export default function Hero({ article }: Props) {
     throw new Error("No article for this page!");
   }
   let { renderHtml, title, image } = article;
-  image = React.useMemo(() => {
-    if (image && image.width) {
-      const { width, height } = fitWidth(image.width, image.height, 600);
-      image.width = width;
-      image.height = height;
-      return image;
-    } else {
-      return image;
-    }
-  }, [image]);
   return (
     <>
       <Container maxWidth="lg" sx={{ mt: 4 }}>
@@ -64,13 +55,14 @@ export default function Hero({ article }: Props) {
                   },
                 }}
               >
-                <Image
+                <EnhImage
                   src={image.url}
                   width={image.width}
                   height={image.height}
                   alt={image.alt}
                   quality={100}
-                ></Image>
+                  fitWidth={600}
+                ></EnhImage>
               </Paper>
             </Grid>
           )}

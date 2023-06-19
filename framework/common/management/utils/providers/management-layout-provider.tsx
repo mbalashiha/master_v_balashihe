@@ -26,17 +26,14 @@ export const ManagementLayoutProvider = ({
   manager,
   mutateAuthInfo,
 }: Props) => {
-  const providing = useMemo<ManagementLayoutValue>(
-    () => ({
-      manager: {
-        friendlyName: manager?.friendlyName || "",
-        id: manager?.id || "",
-        isAdmin: manager?.isAdmin || false,
-      },
-      mutateAuthInfo,
-    }),
-    [mutateAuthInfo, manager?.friendlyName, manager?.id, manager?.isAdmin]
-  );
+  const providing = {
+    manager: {
+      friendlyName: manager?.friendlyName || "",
+      id: manager?.id || "",
+      isAdmin: manager?.isAdmin || false,
+    },
+    mutateAuthInfo,
+  };
   return (
     <ManagementLayoutContext.Provider value={providing}>
       <FabButtonProvider>{children}</FabButtonProvider>

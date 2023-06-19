@@ -12,14 +12,11 @@ interface Props {
 }
 
 export const ManagementApiProvider = ({ children, config, hooks }: Props) => {
-  const coreConfig = useMemo<API.ApiProviderContext>(
-    () => ({
-      request: config.request,
-      restRequest: config.restRequest,
-      hooks,
-    }),
-    [config.request, config.restRequest, hooks]
-  );
+  const coreConfig = {
+    request: config.request,
+    restRequest: config.restRequest,
+    hooks,
+  };
   return (
     <ManagementApiContext.Provider value={coreConfig}>
       {children}

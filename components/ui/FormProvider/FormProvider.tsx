@@ -57,13 +57,11 @@ export const FormProvider: FC<Props<any>> = <T,>({
       getFieldProps,
     };
   }, []);
-  const providerConfig = useMemo(() => {
-    return {
-      ...providerMethods,
-      formikRef,
-      initialValues,
-    };
-  }, [providerMethods, initialValues]);
+  const providerConfig = {
+    ...providerMethods,
+    formikRef,
+    initialValues,
+  };
   return (
     <Formik
       innerRef={formikRef as any}

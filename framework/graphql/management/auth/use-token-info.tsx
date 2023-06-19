@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import useFromLogin from "@common/management/utils/hooks/use-from-login";
 import Cookies from "js-cookie";
 import { MANAGER_LOGIN_URL, PAGE_MANAGER_LOGIN_URL } from "@framework/const";
+import React from "react";
 
 export default useTokenInfo as UseTokenInfo<typeof handler>;
 
@@ -44,21 +45,23 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
         data.manager &&
         data.manager.id
       );
-      if (!isValidating && !isLoading) {
-        try {
-          if (managerWasNotAuthorized) {
-            Cookies.remove("manager_signed_in");
-            toLoginPage();
-          } else if (router.pathname === PAGE_MANAGER_LOGIN_URL) {
-            doRedirectAuthorized();
+      React.useMemo(() => {
+        if (!isValidating && !isLoading) {
+          try {
+            if (managerWasNotAuthorized) {
+              Cookies.remove("manager_signed_in");
+              toLoginPage();
+            } else if (router.pathname === PAGE_MANAGER_LOGIN_URL) {
+              doRedirectAuthorized();
+            }
+          } catch (e) {
+            console.error(e);
           }
-        } catch (e) {
-          console.error(e);
         }
-      }
-      if (!managerWasNotAuthorized && !isValidating && !isLoading) {
-        Cookies.set("manager_signed_in", "1", { expires: 90 });
-      }
+        if (!managerWasNotAuthorized && !isValidating && !isLoading) {
+          Cookies.set("manager_signed_in", "1", { expires: 90 });
+        }
+      }, [managerWasNotAuthorized, isValidating, isLoading]);
       return {
         data,
         isEmpty: managerWasNotAuthorized,

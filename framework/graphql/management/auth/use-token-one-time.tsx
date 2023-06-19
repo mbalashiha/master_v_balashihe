@@ -8,6 +8,7 @@ import { Schema } from "@framework/types";
 import { normalizeManagerTokenInfo } from "./normalize";
 import { verifyManagementToken } from "./queries/get-token-info";
 import Cookies from "js-cookie";
+import React from "react";
 
 export default useTokenOneTime as UseTokenOneTime<typeof handler>;
 
@@ -39,19 +40,21 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
         data.manager &&
         data.manager.id
       );
-      if (!isValidating && !isLoading) {
-        try {
-          if (managerWasNotAuthorized) {
-            Cookies.remove("manager_signed_in");
-            toLoginPage();
-          };
-        } catch (e) {
-          console.error(e);
+      React.useMemo(() => {
+        if (!isValidating && !isLoading) {
+          try {
+            if (managerWasNotAuthorized) {
+              Cookies.remove("manager_signed_in");
+              toLoginPage();
+            }
+          } catch (e) {
+            console.error(e);
+          }
         }
-      }
-      if (!managerWasNotAuthorized && !isValidating && !isLoading) {
-        Cookies.set("manager_signed_in", "1", { expires: 90 });
-      }
+        if (!managerWasNotAuthorized && !isValidating && !isLoading) {
+          Cookies.set("manager_signed_in", "1", { expires: 90 });
+        }
+      }, [managerWasNotAuthorized, isValidating, isLoading]);
       return {
         data,
         isEmpty: managerWasNotAuthorized,
