@@ -12,7 +12,6 @@ const StyledGrid = styled("div")<{ gridColumnsPercentage: string }>(
       "& p": {
         fontSize: "17px",
         lineHeight: "25px",
-        maxWidth: "100%",
         margin: 0,
         padding: 0,
       },

@@ -149,7 +149,13 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
                 box-shadow: 4px 4px 20px rgb(0 0 0 / 20%);
                 border-radius: 24px; 
                 margin: 6px;
-               } `,
+               } 
+               td {
+                  padding: 12px;
+               }
+               td[colspan] {
+                  text-align: center;
+               }`,
             content_langs: [
               { title: "Русский", code: "ru" },
               { title: "English", code: "en" },
