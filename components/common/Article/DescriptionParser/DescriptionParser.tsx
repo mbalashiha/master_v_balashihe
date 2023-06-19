@@ -36,10 +36,22 @@ const options = {
         domNode.data = domNode.data.replace(/[\s]{2,}/gim, " ");
       }
       return domNode;
-    } else if (in_domNode.type === "script") {
-      return <></>;
-    } else if (in_domNode.type === "style") {
-      return <></>;
+    } else if (in_domNode.type === "script" || in_domNode.type === "style") {
+      const domNode: Element = in_domNode as Element;
+      const { attribs, children } = domNode;
+      const convertedProps = attributesToProps(attribs);
+      const Children: string | JSX.Element | JSX.Element[] | undefined =
+        children && <>{domToReact(children, options)}</>;
+      delete convertedProps.children;
+      const styleSX = convertedProps.style || undefined;
+      if (typeof convertedProps.style !== "undefined") {
+        delete (convertedProps as any).style;
+      }
+      return (
+        <Box component="code" sx={{ ...styleSX }}>
+          <pre>{Children}</pre>
+        </Box>
+      );
     } else if (in_domNode.type === "tag" && (in_domNode as Element).name) {
       const domNode: Element = in_domNode as Element;
       const { attribs, children } = domNode;
@@ -88,18 +100,17 @@ const options = {
       if (typeof convertedProps.style !== "undefined") {
         delete (convertedProps as any).style;
       }
-      if (
-        styleSX &&
-        typeof styleSX.width === "string" &&
-        styleSX.width.endsWith("%")
-      ) {
-        let roundedWidth = parseInt(styleSX.width);
-        if (roundedWidth > 100) {
-          roundedWidth = 100;
-        }
-        styleSX.width = roundedWidth + "%";
-        console.log(styleSX);
-      }
+      // if (
+      //   styleSX &&
+      //   typeof styleSX.width === "string" &&
+      //   styleSX.width.endsWith("%")
+      // ) {
+      //   let roundedWidth = parseInt(styleSX.width);
+      //   if (roundedWidth > 100) {
+      //     roundedWidth = 100;
+      //   }
+      //   styleSX.width = roundedWidth + "%";
+      // }
       if (passThroughFlag && hasStyle) {
         if (domNode.name === "p") {
           return (
@@ -278,15 +289,26 @@ const options = {
           if (convertedProps["data-images-container"]) {
             return (
               <Box
+                {...(convertedProps as any)}
                 width="100%"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
                 flexWrap="wrap"
+                sx={{ ...styleSX }}
               >
                 {Children}
               </Box>
             );
+          }
+          if (styleSX) {
+            return (
+              <Box {...(convertedProps as any)} sx={{ ...styleSX }}>
+                {Children}
+              </Box>
+            );
+          } else {
+            return <div {...(convertedProps as any)}>{Children}</div>;
           }
           break;
         case "tbody":
@@ -325,6 +347,12 @@ const options = {
           break;
         case "script":
         case "style":
+          return (
+            <Box component="code" sx={{ ...styleSX }}>
+              <pre>{Children}</pre>
+            </Box>
+          );
+          break;
         case "form":
         case "input":
         case "textarea":
