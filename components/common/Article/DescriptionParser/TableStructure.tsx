@@ -79,6 +79,20 @@ const getCells = (tableNode: Element) => {
   if (!arr_ch.length) {
     arr_ch.push({ isHeader: false, node: tableNode });
   }
+  /*const captions: Array<any> = [];
+  arr_ch.forEach(
+    (elem: any) =>
+      elem &&
+      elem.children &&
+      elem.children
+        .filter((child: any) => child.name === "caption")
+        .forEach((inChild: any) => {
+          captions.push(inChild);
+        })
+  );
+  if (captions.length) {
+    console.l//og(captions);
+  }*/
   const allCells: typeof arr_ch = [];
   arr_ch.forEach((bodyElem) => {
     const trs: Element[] = bodyElem.node.children.filter(

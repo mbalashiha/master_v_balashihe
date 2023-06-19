@@ -341,6 +341,13 @@ const options = {
             </Grid>
           );
           break;
+        case "caption":
+          return (
+            <Typography component="h5" sx={{ p: 0, m: 0, pl: 1, ...styleSX }}>
+              {Children}
+            </Typography>
+          );
+          break;
         case "frame":
         case "iframe":
           return <></>;
