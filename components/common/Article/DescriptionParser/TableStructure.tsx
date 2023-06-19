@@ -99,18 +99,18 @@ const getCells = (tableNode: Element) => {
 interface SwitcherProps {
   children: React.ReactNode | React.ReactNode[];
   isHeader: boolean;
-  colSpan: any;
   paragraphsLength: number;
+  shouldAddStrongTag: boolean;
 }
 const CellContainerSwither = ({
   children,
   isHeader,
-  colSpan,
   paragraphsLength,
+  shouldAddStrongTag,
 }: SwitcherProps) => {
   if (isHeader) {
     return <h4>{children}</h4>;
-  } else if (paragraphsLength <= 0 && colSpan) {
+  } else if (shouldAddStrongTag) {
     return (
       <p>
         <strong>{children}</strong>
@@ -118,8 +118,6 @@ const CellContainerSwither = ({
     );
   } else if (paragraphsLength <= 0) {
     return <p>{children}</p>;
-  } else if (colSpan) {
-    return <strong>{children}</strong>;
   } else {
     return <>{children}</>;
   }
@@ -135,6 +133,13 @@ function TableStructure({ tableNode, options }: Props) {
         const paragraphs = cell.node.children.filter(
           (child: any) => child.name === "p"
         );
+        const shouldAddStrongTag =
+          colSpan &&
+          paragraphs.length <= 0 &&
+          cell.node.children.filter((child: any) => child.name === "strong")
+            .length <= 0
+            ? true
+            : false;
         return (
           <Box
             {...rest}
@@ -150,7 +155,7 @@ function TableStructure({ tableNode, options }: Props) {
             <CellContainerSwither
               isHeader={cell.isHeader}
               paragraphsLength={paragraphs.length}
-              colSpan={colSpan}
+              shouldAddStrongTag={shouldAddStrongTag}
             >
               {domToReact(cell.node.children, options)}
             </CellContainerSwither>
