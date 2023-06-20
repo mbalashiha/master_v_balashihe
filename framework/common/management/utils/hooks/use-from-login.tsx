@@ -8,7 +8,10 @@ const useFromLogin = () => {
   const router = useRouter();
   const routerRef = React.useRef(router);
   routerRef.current = router;
-  const doRedirectAuthorized = React.useCallback(async () => {
+  const doRedirectAuthorized = React.useCallback(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
     try {
       const router = routerRef.current;
       let redirectUrl = Cookies.get(AFTER_LOGIN_BACKTO_URI) || "/management";
