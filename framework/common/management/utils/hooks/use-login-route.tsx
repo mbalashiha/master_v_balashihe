@@ -12,6 +12,9 @@ const useLoginRoute = () => {
   const routerRef = React.useRef(router);
   routerRef.current = router;
   const toLoginPage = React.useCallback(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
     const router = routerRef.current;
     try {
       const fullCurrentPath = router.asPath;

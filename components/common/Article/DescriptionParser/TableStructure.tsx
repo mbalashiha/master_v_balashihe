@@ -40,7 +40,7 @@ const getColumnsInfo = (tableNode: Element) => {
       if (!colspan) {
         // gridColumnsNumber = tds.length;
         gridColumnsPercentage = [];
-        let allIsPercents = true;
+        // let allIsPercents = true;
         for (const td of tds) {
           let styleWidth = "auto";
           if (td.attribs && td.attribs.style) {
@@ -50,13 +50,11 @@ const getColumnsInfo = (tableNode: Element) => {
             }
           }
           gridColumnsPercentage.push(styleWidth);
-          if (!styleWidth.endsWith("%")) {
-            allIsPercents = false;
-          }
+          // if (!styleWidth.endsWith("%")) {
+          //   allIsPercents = false;
+          // }
         }
-        if (allIsPercents) {
-          gridColumnsPercentage[gridColumnsPercentage.length - 1] = "auto";
-        }
+        gridColumnsPercentage[gridColumnsPercentage.length - 1] = "auto";
         break;
       }
     }
