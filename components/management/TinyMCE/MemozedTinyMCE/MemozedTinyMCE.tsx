@@ -1,27 +1,77 @@
 import React, { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { Portal, styled } from "@mui/material";
+import { Box, Button, Portal, styled } from "@mui/material";
 import util from "util";
 import InsertCodeIcon from "./InsertCodeIcon";
 import useImageUpload from "@framework/management/image/use-image-upload";
 import { useSnackbar } from "notistack";
 import { useUploaderOnChange } from "./use-uploader-onchange";
+import CodeIcon from "@mui/icons-material/Code";
+import CodeMirrorDialog from "./CodeMirror/CodeMirrorDialog";
 export interface MemoizedTinyMCEProps {
   initialValue: string;
   onEditorChange: (textHtml: string, text: string) => void;
   onBlur: (event: any) => void;
 }
-const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
-  function MemoizedTinyMCE({
+interface CustomMenubarProps {
+  children: React.ReactNode | React.ReactNode[];
+  menuElement: HTMLDivElement | null;
+}
+const CustomMenubarContainer = ({
+  children,
+  menuElement,
+}: CustomMenubarProps) => {
+  return (
+    <>
+      {menuElement ? (
+        <Portal container={menuElement}>{children}</Portal>
+      ) : (
+        <Box
+          sx={{
+            height: 0,
+            overflow: "visible",
+            width: "100%",
+            textAlign: "right",
+            "& .Button-startIcon": {
+              transform: "scale(1.4)",
+            },
+            "& > *": {
+              zIndex: 2,
+            },
+          }}
+        >
+          {children}
+        </Box>
+      )}
+    </>
+  );
+};
+const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> =
+  React.memo<MemoizedTinyMCEProps>(function MemoizedTinyMCE({
     initialValue,
     onEditorChange,
     ...rest
   }: MemoizedTinyMCEProps) {
+    const htmlRef = useRef(initialValue);
     const [insertCodeIcon, setInsertCodeIcon] =
       React.useState<HTMLElement | null>(null);
+    const [menuElement, setMenuElement] = React.useState<HTMLDivElement | null>(
+      null
+    );
     const uploaderRef = useRef<HTMLInputElement>(null);
     const editorRef: React.LegacyRef<Editor> = useRef<any>(null);
     const uploaderOnChange = useUploaderOnChange({ editorRef });
+    const [codeMirrorOpened, setCodeMirrorOpened] = React.useState(false);
+
+    const openCodeMirror = () => {
+      setCodeMirrorOpened(true);
+    };
+    const closeCodeMirror = React.useCallback(() => {
+      setCodeMirrorOpened(false);
+    }, []);
+    const onCodeMirrorSave = React.useCallback((savingHtml: string) => {
+      editorRef.current?.editor?.setContent(savingHtml);
+    }, []);
     return (
       <>
         <input
@@ -37,16 +87,36 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
         <Portal container={insertCodeIcon}>
           <InsertCodeIcon />
         </Portal>
+        <CustomMenubarContainer menuElement={menuElement}>
+          <Button startIcon={<CodeIcon />} onClick={openCodeMirror}>
+            Редактор кода
+          </Button>
+        </CustomMenubarContainer>
+        {codeMirrorOpened && (
+          <CodeMirrorDialog
+            onSave={onCodeMirrorSave}
+            close={closeCodeMirror}
+            html={htmlRef.current}
+          />
+        )}
         <Editor
           tinymceScriptSrc="/tinymce/tinymce.min.js"
           initialValue={initialValue || ""}
           ref={editorRef}
           onInit={(evt, editor) => {
+            const menubar: HTMLDivElement =
+              editor.editorContainer.querySelector(
+                `[role="menubar"]`
+              ) as HTMLDivElement;
+            // if (menubar && menubar.style) {
+            //   (menubar.style as any)["margin-right"] = "200px";
+            // }
             const button = editor.editorContainer.querySelector(
               `[role="group"] button[title="Вставить текст из буфера обмена"]`
             );
             const svgIcon = button?.querySelector("svg");
             setInsertCodeIcon(svgIcon?.parentElement || null);
+            setMenuElement(menubar);
             svgIcon?.remove();
             button?.parentElement?.querySelectorAll("*").forEach((elem) => {
               if (elem && elem.classList && elem.classList.add) {
@@ -56,6 +126,7 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
           }}
           onEditorChange={(__textHtml, editor) => {
             const textHtml = editor.getContent({ format: "html" });
+            htmlRef.current = textHtml;
             const text = editor
               .getContent({ format: "text" })
               .replace(/\s+/gim, " ");
@@ -172,6 +243,5 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> = React.memo(
         />
       </>
     );
-  }
-) as any;
+  }) as any;
 export default MemoizedTinyMCE;
