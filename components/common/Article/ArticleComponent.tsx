@@ -35,6 +35,7 @@ export default function Article({
   // }
   return (
     <HugeContainer
+      sx={{ mb: "10px" }}
       rightSidebar={navigation && <NavSidebar navigation={navigation} />}
     >
       <SpecialHeader>{title}</SpecialHeader>
