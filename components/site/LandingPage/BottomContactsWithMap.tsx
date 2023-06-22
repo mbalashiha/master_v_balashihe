@@ -6,7 +6,7 @@ import YandexMapIframe from "@components/site/YandexMapIframe";
 
 export const BottomContactsWithMap = () => {
   return (
-    <Container maxWidth={"lg"} sx={{ pt: "100px" }}>
+    <Container maxWidth={"lg"}>
       <Typography
         component="h3"
         variant="h1"

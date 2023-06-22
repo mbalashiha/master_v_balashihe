@@ -100,7 +100,7 @@ export default function Article({
           <Tooltip
             title={
               <>
-                <header>Предыдущая страница:</header>
+                <header>Предыдущая страница</header>
                 {navigation.prev.title}
               </>
             }
@@ -120,7 +120,7 @@ export default function Article({
           <Tooltip
             title={
               <>
-                <header>Следующая страница:</header>
+                <header>Следующая страница</header>
                 {navigation.next.title}
               </>
             }
@@ -170,6 +170,9 @@ export default function Article({
             marginBottom: "1.5rem",
           },
           marginBottom: "1.5rem",
+          "& h3": {
+            marginBottom: "0.7rem",
+          },
         }}
       >
         <Paper

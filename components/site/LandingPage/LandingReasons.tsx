@@ -13,17 +13,20 @@ import ReasonItem from "./ReasonItem";
 
 export const LandingReasons = () => {
   return (
-    <Container maxWidth="lg" sx={{ pt: "120px" }}>
-      <Typography component="h3" variant="h1" gutterBottom sx={{ mb: 0 }}>
+    <Container maxWidth="lg" sx={{ pb: "70px" }}>
+      <Typography component="h3" variant="h1" sx={{ pb: 0, mb: "30px"}}>
         <Box component="span" color="primary.main">
           Несколько причин
-        </Box>{" "} обратиться ко мне отремонтировать и настроить 
-        <Box component="span" color="primary.main">{" "}компьютер в Балашихе{" "}</Box>
+        </Box>{" "}
+        обратиться ко мне отремонтировать и настроить
+        <Box component="span" color="primary.main">
+          {" "}
+          компьютер в Балашихе{" "}
+        </Box>
       </Typography>
-      <Grid container sx={{ mt: 0 }} spacing={3}>
+      <Grid container spacing={3}>
         <ReasonItem svgIcon={<IconOne />} title={<>Гарантия 60 дней</>}>
-          Я несу ответственность за оказанные мною услуги и после ремонта. 
-          На 
+          Я несу ответственность за оказанные мною услуги и после ремонта. На
           все работы можно оформить гарантию.
         </ReasonItem>
         <ReasonItem svgIcon={<IconTwo />} title={<>Озвучиваю цену</>}>
@@ -36,10 +39,9 @@ export const LandingReasons = () => {
           центра.
         </ReasonItem>
         <ReasonItem svgIcon={<IconFoo />} title={<>Электронный чек</>}>
-          После окончания ремонта мы произведём оплату с помощью электронного чека.
-          У Вас будет
-          право на бесплатный вызов мастера, в случае повторного
-          возникновения поломки.
+          После окончания ремонта мы произведём оплату с помощью электронного
+          чека. У Вас будет право на бесплатный вызов мастера, в случае
+          повторного возникновения поломки.
         </ReasonItem>
       </Grid>
     </Container>

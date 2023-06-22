@@ -203,7 +203,7 @@ const options = {
           return (
             <Paper
               elevation={0}
-              sx={{ px: 2, py: 1.2, mb: 2, background: "#EFDDD1" }}
+              sx={{ px: 2, py: 1.2, mt: 0, mb: 2, background: "#D9E3EF" }}
             >
               <Box
                 {...(convertedProps as any)}

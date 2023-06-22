@@ -1,19 +1,11 @@
 import { CMS } from "@common/types";
-import useImagePaperDimentions from "@components/hooks/useImagePaperDimentions";
-import {
-  GradientBackground1,
-  GradientBackground2,
-  GradientBackground3,
-} from "@components/shared/Gradients/Backgrounds";
-import { EnhImage } from "@components/ui";
-import { fitWidth } from "@lib/aspect-ration-fit";
-import { Box, Typography, Paper, Grid } from "@mui/material";
 import Image from "next/image";
+import { EnhImage } from "@components/ui";
+import { Box, Typography, Paper, Grid } from "@mui/material";
 import React, { useMemo } from "react";
 type NextImageType = typeof Image;
 type NextImageTypeProps = React.ComponentProps<NextImageType>;
 interface Props {
-  gradientBackground?: React.ReactNode;
   image: CMS.Image | null;
 }
 export const ImagePlaceholder = (props: Partial<NextImageTypeProps>) => (
@@ -26,8 +18,8 @@ export const ImagePlaceholder = (props: Partial<NextImageTypeProps>) => (
   ></Image>
 );
 
-export default function ImagePaper({ gradientBackground, image }: Props) {
-  const [usingGradientBackground, setGradientBackground] =
+export default function ImagePaper({ image }: Props) {
+  /*const [usingGradientBackground, setGradientBackground] =
     React.useState<React.ReactNode>(gradientBackground);
   React.useEffect(() => {
     let locGradientBackground: React.ReactNode = gradientBackground;
@@ -46,9 +38,8 @@ export default function ImagePaper({ gradientBackground, image }: Props) {
       }
       setGradientBackground(locGradientBackground);
     }
-  }, [gradientBackground]);
-  image = image && image.url && image.width ? image : null;
-  let {
+  }, [gradientBackground]);*/
+  const {
     src,
     alt,
     width,
@@ -74,11 +65,8 @@ export default function ImagePaper({ gradientBackground, image }: Props) {
   return (
     <Paper
       sx={{
-        zIndex: 0,
         position: "relative",
         overflow: "hidden",
-        width: "540px",
-        maxWidth: "100%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -95,22 +83,6 @@ export default function ImagePaper({ gradientBackground, image }: Props) {
             fitHeight={540}
           />
         )) || <ImagePlaceholder />}
-        <Box
-          sx={{
-            "& svg": {
-              zIndex: -1,
-              position: "absolute",
-              top: "auto",
-              right: "auto",
-              width: "auto",
-              height: "100%",
-              bottom: 0,
-              left: 0,
-            },
-          }}
-        >
-          {usingGradientBackground}
-        </Box>
       </>
     </Paper>
   );

@@ -23,7 +23,7 @@ export const StyledHtmlTooltip = styled("span")`
     }
     & header {
       color: #bcd9e5;
-      font-size: 14pt;
+      font-size: 13pt;
       font-weight: 400;
       margin-bottom: 0.1rem;
     }

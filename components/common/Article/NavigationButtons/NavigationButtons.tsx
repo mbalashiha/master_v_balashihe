@@ -70,6 +70,7 @@ export default function NavigationButtons({ navigation }: Props) {
               fontSize: "14px",
               overflow: "hidden",
               textOverflow: "ellipsis",
+              textAlign: "center",
             },
           },
         },
@@ -79,7 +80,7 @@ export default function NavigationButtons({ navigation }: Props) {
         {navigation?.prev?.url && (
           <Link href={navigation.prev.url}>
             <Button component="span">
-              <Stack component="span" direction={"row"}>
+              <Stack component="span" width={"100%"} direction={"row"}>
                 <ArrowBackIosRoundedIcon />
                 <Box component="h6" sx={{ flexGrow: 1, mr: 1 }}>
                   {navigation.prev.title}
@@ -93,7 +94,7 @@ export default function NavigationButtons({ navigation }: Props) {
         {navigation?.next?.url && (
           <Link href={navigation.next.url}>
             <Button component="span">
-              <Stack component="span" direction={"row"}>
+              <Stack component="span" width={"100%"} direction={"row"}>
                 <Box component="h6" sx={{ flexGrow: 1, ml: 1 }}>
                   {navigation.next.title}
                 </Box>

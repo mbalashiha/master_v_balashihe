@@ -42,18 +42,13 @@ export const StyledPaper = styled(({ ellipsis: _, ...props }: Props) => (
       paddingLeft: "8px",
     },
     "& .ListItemIcon-root": {
-      height: "76px",
-      width: "76px",
-      display: "flex",
+      height: "64px",
+      width: "64px",
       flexDirection: "column",
-      alignItems: "flex-start",
-      justifyContent: "center",
       position: "relative",
-      "&.active": {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      },
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
       "& img": {
         borderRadius: "0.6rem",
       },

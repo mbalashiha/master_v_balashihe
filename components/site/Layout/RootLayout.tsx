@@ -11,6 +11,7 @@ import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContac
 import { Search } from "@components/site";
 import { theme as getMuiTheme, useThemePalette } from "@components/ui";
 import { blueGrey } from "@mui/material/colors";
+import Image from "next/image";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];

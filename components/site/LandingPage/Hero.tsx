@@ -17,7 +17,7 @@ export default function Hero({ article }: Props) {
   let { renderHtml, title, image } = article;
   return (
     <>
-      <Container maxWidth="lg" sx={{ mt: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 4, pb: "55px" }}>
         <Typography
           component="h1"
           variant="h1"

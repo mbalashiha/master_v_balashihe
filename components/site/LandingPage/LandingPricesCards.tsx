@@ -13,7 +13,7 @@ import Link from "next/link";
 
 export const LandingPricesCards = () => {
   return (
-    <Container maxWidth={"lg"} sx={{ pt: "100px" }}>
+    <Container maxWidth={"lg"} sx={{ pb: "90px" }}>
       <Typography component="h3" variant="h1" gutterBottom mb="2rem">
         <Box component="span" color="primary.main">
           Оживлю любой компьютер
@@ -60,7 +60,10 @@ export const LandingPricesCards = () => {
             <PriceRow title={"Замена видеокарты"} amount={800} />
             <PriceRow title={"Замена кулера"} amount={1070} />
             <PriceRow title={"Замена разъёмов"} amount={1900} />
-            <PriceRow title={"Замена матрицы экрана в Балашихе"} amount={1700} />
+            <PriceRow
+              title={"Замена матрицы экрана в Балашихе"}
+              amount={1700}
+            />
             <PriceRow title={"Замена батарейки BIOS"} amount={200} />
           </GradientCard>
         </Grid>

@@ -17,5 +17,10 @@ export const StyledFab = styled(Fab)(({ theme }) => ({
   color: theme.palette.mode === "light" ? "black" : "white",
   "&:hover": {
     color: theme.palette.mode === "light" ? "white" : "black",
+    background: theme.palette.primary.main,
+    borderColor: theme.palette.primary.main,
+    boxShadow: "none",
   },
+  boxShadow: "none",
+  border: "2px solid rgb(235, 235, 234)",
 }));
