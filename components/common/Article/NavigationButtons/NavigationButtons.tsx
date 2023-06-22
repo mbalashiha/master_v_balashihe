@@ -61,16 +61,11 @@ export default function NavigationButtons({ navigation }: Props) {
               color: "rgb(235, 235, 234)",
             },
             p: 0,
-            "& > *": {
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            },
             "& h6": {
               fontSize: "14px",
               overflow: "hidden",
               textOverflow: "ellipsis",
-              textAlign: "center",
+              textAlign: "left",
             },
           },
         },
@@ -80,9 +75,15 @@ export default function NavigationButtons({ navigation }: Props) {
         {navigation?.prev?.url && (
           <Link href={navigation.prev.url}>
             <Button component="span">
-              <Stack component="span" width={"100%"} direction={"row"}>
+              <Stack
+                component="span"
+                width={"100%"}
+                direction={"row"}
+                alignItems="center"
+                justifyContent={"flex-start"}
+              >
                 <ArrowBackIosRoundedIcon />
-                <Box component="h6" sx={{ flexGrow: 1, mr: 1 }}>
+                <Box component="h6" sx={{ mr: 1 }}>
                   {navigation.prev.title}
                 </Box>
               </Stack>
@@ -94,8 +95,14 @@ export default function NavigationButtons({ navigation }: Props) {
         {navigation?.next?.url && (
           <Link href={navigation.next.url}>
             <Button component="span">
-              <Stack component="span" width={"100%"} direction={"row"}>
-                <Box component="h6" sx={{ flexGrow: 1, ml: 1 }}>
+              <Stack
+                component="span"
+                width={"100%"}
+                direction={"row"}
+                alignItems="center"
+                justifyContent={"flex-end"}
+              >
+                <Box component="h6" sx={{ ml: 1 }}>
                   {navigation.next.title}
                 </Box>
                 <ArrowForwardIosRoundedIcon />

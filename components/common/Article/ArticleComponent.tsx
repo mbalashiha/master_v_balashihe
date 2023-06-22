@@ -95,43 +95,35 @@ export default function Article({
         alignContent="center"
         justifyContent="space-between"
         mb={2}
+        sx={{
+          "& a[href]": {
+            "&, & > span": {
+              display: "block",
+              borderRadius: "100%",
+            },
+          },
+        }}
       >
         {navigation?.prev?.url ? (
-          <Tooltip
-            title={
-              <>
-                <header>Предыдущая страница</header>
-                {navigation.prev.title}
-              </>
-            }
-            placement="right"
-          >
-            <Link href={navigation.prev.url}>
+          <Link href={navigation.prev.url}>
+            <Tooltip title={<>{navigation.prev.title}</>} placement="right">
               <StyledFab size="medium" aria-label="Предыдущая страница">
                 <ArrowBackIosRoundedIcon />
               </StyledFab>
-            </Link>
-          </Tooltip>
+            </Tooltip>
+          </Link>
         ) : (
           <div></div>
         )}
 
         {navigation?.next?.url ? (
-          <Tooltip
-            title={
-              <>
-                <header>Следующая страница</header>
-                {navigation.next.title}
-              </>
-            }
-            placement="left"
-          >
-            <Link href={navigation.next.url}>
+          <Link href={navigation.next.url}>
+            <Tooltip title={<>{navigation.next.title}</>} placement="left">
               <StyledFab size="medium" aria-label="Следующая страница">
                 <ArrowForwardIosRoundedIcon />
               </StyledFab>
-            </Link>
-          </Tooltip>
+            </Tooltip>
+          </Link>
         ) : (
           <div></div>
         )}
