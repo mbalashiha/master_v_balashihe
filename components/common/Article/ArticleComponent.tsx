@@ -129,14 +129,14 @@ export default function Article({
           <div></div>
         )}
       </Stack>
-      <Box
+      <Paper
         component="article"
         sx={{
           "&, & p, & .Paper-root": {
             fontFamily: 'Roboto, "Segoe UI", Tahoma, Verdana, Arial',
             fontWeight: 500,
             fontSize: "18px",
-            lineHeight: "28px",
+            lineHeight: "27px",
             color: (theme) =>
               theme.palette.mode === "light" ? "#0e0e0f" : "white",
           },
@@ -166,21 +166,16 @@ export default function Article({
           "& h3": {
             marginBottom: "0.7rem",
           },
+          p: { xs: 3, md: 4, xl: 5 },
+          boxShadow: "none",
+          boxSizing: "border-box",
+          overflow: "hidden",
+          border: "2px solid rgb(235, 235, 234)",
+          borderRadius: 1,
         }}
       >
-        <Paper
-          elevation={0}
-          sx={{
-            p: { xs: 3, md: 4, xl: 5 },
-            boxShadow: "none",
-            boxSizing: "border-box",
-            overflow: "hidden",
-            border: "2px solid rgb(235, 235, 234)",
-          }}
-        >
-          <DescriptionParser descriptionHTML={renderHtml} />
-        </Paper>
-      </Box>
+        <DescriptionParser descriptionHTML={renderHtml} />
+      </Paper>
       <NavigationButtons navigation={navigation} />
     </HugeContainer>
   );
