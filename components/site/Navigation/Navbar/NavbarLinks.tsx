@@ -40,6 +40,10 @@ interface Props extends StackProps {
 }
 const getLinks = () => [
   { href: "/", name: <HomeIcon /> },
+  {
+    href: "/uslugi-mastera-v-balashihe/remont-kompyuterov-bystro-balashiha-na-domu-ili-v-ofise",
+    name: "Ремонт компьютера",
+  },
   { href: "/uslugi-mastera-v-balashihe", name: "Услуги" },
   { href: "/computer-master-balashiha", name: "О мастере" },
 ];
@@ -49,7 +53,7 @@ export const NavbarLinks = ({
   sx,
   ...props
 }: Props) => {
-  const { pathname } = useRouter();
+  const { pathname, asPath } = useRouter();
   const navLinks = React.useMemo(() => {
     const navLinks: Array<{
       name: string | React.ReactNode;
@@ -59,7 +63,7 @@ export const NavbarLinks = ({
     }> = getLinks();
     let activeSetted = false;
     navLinks.forEach((elem) => {
-      if (elem.href === pathname) {
+      if (elem.href === asPath) {
         elem.active = true;
         elem.hideHrefLink = true;
         activeSetted = true;
@@ -68,7 +72,7 @@ export const NavbarLinks = ({
     if (!activeSetted) {
       const pathnamePrefix =
         "/" +
-        pathname
+        asPath
           .split("/")
           .filter((el) => el)
           .shift();
@@ -81,7 +85,7 @@ export const NavbarLinks = ({
       });
     }
     return navLinks;
-  }, [pathname]);
+  }, [asPath]);
   return (
     <List
       component="nav"

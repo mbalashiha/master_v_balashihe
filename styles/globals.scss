@@ -45,13 +45,13 @@ button {
       flex: 0 0 auto;
       font-size: 14px;
       font-style: normal;
-      font-weight: 400;
+      font-weight: 500 !important;
       height: 28px;
       justify-content: center;
       margin: 5px 1px 6px 0;
       outline: 0;
       overflow: hidden;
-      padding: 0 4px;
+      padding: 0 7px 0 4px !important;
       text-transform: none;
       width: auto;
       cursor: pointer;
@@ -65,7 +65,7 @@ button {
         padding: 0;
       }
       svg {
-        margin: 4px;
+        margin: 0 4px 0 0;
       }
     }
     button:not(.ButtonBase-root),
@@ -74,6 +74,10 @@ button {
       & * {
         font-family: Roboto, Arial, sans-serif !important;
         font-weight: 500 !important;
+        transition-property: all;
+        transition-duration: 0.1s;
+        transition-timing-function: ease-in-out;
+        transition-delay: 0s;
         &:hover {
           background: #d3e8f1 !important;
         }
