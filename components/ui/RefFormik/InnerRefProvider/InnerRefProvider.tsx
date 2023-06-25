@@ -26,7 +26,7 @@ export interface FormContextType<FormProps extends FormikValues> {
   formIsResetting: Boolean;
   setFormWasSubmited: () => void;
   resetForm: FormikProps<FormProps>["resetForm"];
-  destroyForm: () => any;
+  readonly destroyForm: () => void;
 }
 export interface MyFormikHelpers<FormProps extends FormikValues>
   extends FormikHelpers<FormProps> {
@@ -68,6 +68,8 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
   if (!passedOnSubmit) {
     throw new Error("Formkik onSubmit event handler shoud be provided!");
   }
+  const destroyFormRef = useRef(destroyForm);
+  destroyFormRef.current = destroyForm;
   const [formWasSubmited, innerSetFormWasSubmited] = React.useState(false);
   const setFormWasSubmited = React.useCallback(() => {
     innerSetFormWasSubmited(true);
@@ -83,8 +85,10 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
     return { ...initialValues };
   }, []);
   const setInitialValues = useCallback((newVals: Partial<FormProps>): void => {
-    const initialValues = initialValuesRef.current;
-    return __set_initialValues({ ...initialValues, ...newVals });
+    return __set_initialValues((initialValues) => ({
+      ...initialValues,
+      ...newVals,
+    }));
   }, []);
 
   const [formIsResetting, setFormIsResetting] = useState(false);
@@ -161,9 +165,11 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
       getFieldProps,
       getValues,
       resetForm,
-      destroyForm,
+      get destroyForm() {
+        return destroyFormRef.current;
+      },
     };
-  }, [destroyForm]);
+  }, []);
   const providerConfig = {
     ...providerMethods,
     formikRef,

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { memo, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Box, Button, Portal, styled } from "@mui/material";
 import util from "util";
@@ -46,8 +46,8 @@ const CustomMenubarContainer = ({
     </>
   );
 };
-const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> =
-  React.memo<MemoizedTinyMCEProps>(function MemoizedTinyMCE({
+const MemoizedTinyMCE = memo<MemoizedTinyMCEProps>(
+  function MemoizedTinyMCE({
     initialValue,
     onEditorChange,
     ...rest
@@ -243,5 +243,9 @@ const MemoizedTinyMCE: React.FC<MemoizedTinyMCEProps> =
         />
       </>
     );
-  }) as any;
+  },
+  (oldProps, newProps) => {
+    return true;
+  }
+);
 export default MemoizedTinyMCE;

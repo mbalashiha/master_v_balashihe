@@ -33,21 +33,26 @@ import {
   NEXT_PUBLIC_TELEGRAM_LINK,
 } from "@framework/const";
 import { WhatsappLink } from "@components/site/contacts";
-const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  minHeight: "83px",
-  "& a": {
-    textDecoration: "none",
-  },
-}));
+
 const Navbar: FC = () => {
   // const { pathname } = useRouter();
   // const isIndexPage = pathname === "/";
   // const cartPage = pathname === "/market/cart";
   return (
     <>
-      <StyledAppBar position="static">
+      <AppBar
+        component={"div"}
+        position="static"
+        sx={{
+          minHeight: "83px",
+          "& a": {
+            textDecoration: "none",
+          },
+        }}
+      >
         {/* <PaletterModeSwitch sx={{ right: "auto", left: 0 }} /> */}
         <Toolbar
+          component="div"
           sx={{
             p: 0,
             display: "flex",
@@ -115,7 +120,7 @@ const Navbar: FC = () => {
             </Stack>
           </Stack>
         </Toolbar>
-      </StyledAppBar>
+      </AppBar>
     </>
   );
 };

@@ -5,7 +5,7 @@ import type {
   HTMLReactParserOptions,
 } from "html-react-parser";
 import StyledGrid from "./StyledGrid";
-import { Box } from "@mui/material";
+import { Box, SxProps } from "@mui/material";
 interface Props {
   tableNode: Element;
   options: HTMLReactParserOptions;
@@ -152,6 +152,16 @@ function TableStructure({ tableNode, options }: Props) {
             .length <= 0
             ? true
             : false;
+        const flexCentered: SxProps =
+          colSpan || rowSpan
+            ? {
+                display: "flex",
+                flexDirection: rowSpan ? "column" : "row",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "1rem",
+              }
+            : {};
         return (
           <Box
             {...rest}
@@ -162,6 +172,7 @@ function TableStructure({ tableNode, options }: Props) {
               gridColumn: colSpan && `span ${colSpan}`,
               gridRow: rowSpan && `span ${rowSpan}`,
               textAlign: colSpan && "center",
+              ...flexCentered,
             }}
           >
             <CellContainerSwither

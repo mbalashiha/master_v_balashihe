@@ -35,6 +35,7 @@ export const ArticleProvider = ({ children, providerRef }: Props) => {
     ...formRef.current,
     form,
     saveArticleTextDraft,
+    saveDraftProps,
     saveKeyText,
   };
   const editorRef = useRef<any>(null);
@@ -51,6 +52,7 @@ export const ArticleProvider = ({ children, providerRef }: Props) => {
     return () => {
       window.removeEventListener("beforeunload", beforeunloadListener);
       window.removeEventListener("blur", beforeunloadListener);
+      beforeunloadListener();
     };
   }, []);
   const [duplicateArticle, setDuplicateArticle] = React.useState<
