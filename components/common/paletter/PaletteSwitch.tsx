@@ -14,7 +14,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     margin: 1,
     padding: 0,
     transform: "translateX(6px)",
-    "&.-checked": {
+    "&.Mui-checked": {
       color: "#fff",
       transform: "translateX(22px)",
       "& .Switch-thumb:before": {

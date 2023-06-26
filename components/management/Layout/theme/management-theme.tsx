@@ -140,7 +140,7 @@ const getMuiTheme = (): Theme => {
             "&:hover": {
               background: blueGrey[50],
             },
-            "&.-focused": {
+            "&.Mui-focused": {
               background: "white",
               color: "black",
             },

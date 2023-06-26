@@ -14,7 +14,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     margin: 1,
     padding: 0,
     transform: "translateX(6px)",
-    "&.-checked": {
+    "&.Mui-checked": {
       color: "#fff",
       transform: "translateX(22px)",
       "& .Switch-thumb:before": {
@@ -89,7 +89,7 @@ const Android12Switch = styled((props: SwitchProps) => (
 }));
 
 const IOSSwitch = styled((props: SwitchProps) => (
-  <Switch focusVisibleClassName=".-focusVisible" disableRipple {...props} />
+  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
   width: 42,
   height: 26,
@@ -98,7 +98,7 @@ const IOSSwitch = styled((props: SwitchProps) => (
     padding: 0,
     margin: 2,
     transitionDuration: "300ms",
-    "&.-checked": {
+    "&.Mui-checked": {
       transform: "translateX(16px)",
       color: "#fff",
       "& + .Switch-track": {
@@ -106,21 +106,21 @@ const IOSSwitch = styled((props: SwitchProps) => (
         opacity: 1,
         border: 0,
       },
-      "&.-disabled + .Switch-track": {
+      "&.Mui-disabled + .Switch-track": {
         opacity: 0.5,
       },
     },
-    "&.-focusVisible .Switch-thumb": {
+    "&.Mui-focusVisible .Switch-thumb": {
       color: "#33cf4d",
       border: "6px solid #fff",
     },
-    "&.-disabled .Switch-thumb": {
+    "&.Mui-disabled .Switch-thumb": {
       color:
         theme.palette.mode === "light"
           ? theme.palette.grey[100]
           : theme.palette.grey[600],
     },
-    "&.-disabled + .Switch-track": {
+    "&.Mui-disabled + .Switch-track": {
       opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
     },
   },
@@ -148,13 +148,13 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
     "& .Switch-thumb": {
       width: 15,
     },
-    "& .Switch-switchBase.-checked": {
+    "& .Switch-switchBase.Mui-checked": {
       transform: "translateX(9px)",
     },
   },
   "& .Switch-switchBase": {
     padding: 2,
-    "&.-checked": {
+    "&.Mui-checked": {
       transform: "translateX(12px)",
       color: "#fff",
       "& + .Switch-track": {

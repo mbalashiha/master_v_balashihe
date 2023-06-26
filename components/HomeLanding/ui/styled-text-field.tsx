@@ -70,7 +70,7 @@ const StyledTextField = styled(ModTextFiled)`
           font-size: 0.99em;
         }
       }
-      &.-focused {
+      &.Mui-focused {
         & .OutlinedInput-notchedOutline {
           border-color: rgb(13 110 253);
           box-shadow: none;
@@ -80,7 +80,7 @@ const StyledTextField = styled(ModTextFiled)`
         & .OutlinedInput-notchedOutline {
         }
       }
-      &.-error {
+      &.Mui-error {
         & .OutlinedInput-notchedOutline {
           border-color: #dc3545;
           box-shadow: 0 0 0.1rem 0.2rem rgba(220, 53, 69, 0.1);
@@ -92,7 +92,7 @@ const StyledTextField = styled(ModTextFiled)`
           background-position: right calc(0.375em + 0.1875rem) center;
           background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
         }
-        &.-focused {
+        &.Mui-focused {
           & .OutlinedInput-notchedOutline {
             box-shadow: 0 0 0.25rem 0.25rem rgba(220, 53, 69, 0.4);
           }
@@ -110,7 +110,7 @@ const StyledTextField = styled(ModTextFiled)`
       margin: 0;
       font-size: 0.845rem;
       margin-top: 0.22rem;
-      &.-error {
+      &.Mui-error {
         color: red;
         opacity: 1;
       }
@@ -139,7 +139,7 @@ const StyledTextField = styled(ModTextFiled)`
       transform-origin: 0 0;
       opacity: 1;
       transform: translateY(0.85rem) translateX(0);
-      &.-focused,
+      &.Mui-focused,
       &.InputLabel-shrink {
         padding: 0;
         height: auto;

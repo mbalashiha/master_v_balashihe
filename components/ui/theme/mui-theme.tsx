@@ -278,9 +278,10 @@ const getMuiTheme = (): Theme => {
             borderRadius: "8px 8px 0 0",
             ...standartCssTransition,
             "&:hover": {
-              background: blueGrey[200],
+              borderColor: blueGrey[200],
+              background: "white",
             },
-            "&.-focused": {
+            "&.Mui-focused": {
               background: "white",
               color: "black",
             },

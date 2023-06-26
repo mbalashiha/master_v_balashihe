@@ -59,7 +59,7 @@ export default function SearchField({ sx }: Props) {
               border: `2px solid ${themeGreyColor}`,
               borderRadius: 1,
               padding: "5px 0px 5px 15px",
-              "&.-focused": {
+              "&.Mui-focused": {
                 borderColor: (theme) => theme.palette.primary.main,
               },
               "& .ButtonBase-root": {

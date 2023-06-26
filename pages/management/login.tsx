@@ -38,7 +38,7 @@ export default function LoginPage() {
             borderWidth: "2px",
             borderColor: "#3D3357",
           },
-          "& .FormLabel-root.InputLabel-root.InputLabel-formControl:not(.-focused):not(.-error)":
+          "& .FormLabel-root.InputLabel-root.InputLabel-formControl:not(.Mui-focused):not(.Mui-error)":
             {
               color: "#3D3357",
             },
