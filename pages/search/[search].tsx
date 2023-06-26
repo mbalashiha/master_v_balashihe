@@ -30,11 +30,17 @@ export default function SearchPage({
         leftSidebar={<BlogRootSidebar recentArticles={recentArticles} />}
       >
         <Search search={search} sx={{ mb: 4 }} />
-        <Grid container spacing={{ xs: 2, lg: 3 }}>
-          {articles.map((article) => (
-            <ArticleCard key={article.url} article={article} />
-          ))}
-        </Grid>
+        {articles.length ? (
+          <Grid container spacing={{ xs: 2, lg: 3 }}>
+            {articles.map((article) => (
+              <ArticleCard key={article.url} article={article} />
+            ))}
+          </Grid>
+        ) : (
+          <Typography component="h1" variant="h1">
+            Ничего не найдено
+          </Typography>
+        )}
       </HugeContainer>
     </>
   );

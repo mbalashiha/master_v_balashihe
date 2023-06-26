@@ -48,7 +48,7 @@ const RootLayout: FC<Props> = ({ children }: Props) => {
               py: "10px",
             }}
           >
-            <Search />
+            <Search navbarSearch />
           </Container>
         </Toolbar>
         {/* {(router.asPath === "/" && <IndexHeader />) || (

@@ -40,12 +40,18 @@ export default function ManagementHomePage() {
         <Grid item xs={12} md={6}>
           <SearchField />
         </Grid>
-        {!isEmpty &&
+        {(!isEmpty &&
           articles &&
+          articles.length &&
           articles.map((elem) => (
             <Grid key={elem.id} item xs={12}>
               <ArticleItem article={elem} />
             </Grid>
+          ))) ||
+          (search && (
+            <Typography component="h1" variant="h1">
+              {`По запросу "${search}" ничего не найдено.`}
+            </Typography>
           ))}
       </Grid>
     </SearchProvider>
