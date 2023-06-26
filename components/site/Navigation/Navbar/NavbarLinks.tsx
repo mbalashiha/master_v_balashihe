@@ -44,6 +44,10 @@ const getLinks = () => [
     href: "/uslugi-mastera-v-balashihe/remont-kompyuterov-bystro-balashiha-na-domu-ili-v-ofise",
     name: "Ремонт компьютера",
   },
+  {
+    href: "/uslugi-mastera-v-balashihe/remont-noutbuka-mfc-balashiha",
+    name: "Ремонт ноутбука",
+  },
   { href: "/uslugi-mastera-v-balashihe", name: "Услуги" },
   { href: "/computer-master-balashiha", name: "О мастере" },
 ];
@@ -96,7 +100,11 @@ export const NavbarLinks = ({
         alignItems: "center",
         flexWrap: "wrap",
         padding: 0,
-        "& a, & .aLinkPreplacement": {
+        "& > *": {
+          margin: "0 0.5px",
+          fontWeight: 600,
+        },
+        "& a, & .menuLink": {
           p: 1,
           borderRadius: 1,
           minWidth: "3rem",
@@ -117,7 +125,7 @@ export const NavbarLinks = ({
             color: "white",
           },
         },
-        "& .aLinkPreplacement": {
+        "& .menuLink": {
           background: (theme) => theme.palette.primary.main,
           color: "white",
         },

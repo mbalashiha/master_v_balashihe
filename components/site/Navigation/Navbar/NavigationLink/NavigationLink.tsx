@@ -39,10 +39,7 @@ export default function NavigationLink({
   return (
     <>
       {linkProps.active && linkProps.hideHrefLink ? (
-        <div
-          className={cn(className, "active", "aLinkPreplacement")}
-          {...props}
-        >
+        <div className={cn(className, "active", "menuLink")} {...props}>
           {linkProps.name}
         </div>
       ) : linkProps.active ? (

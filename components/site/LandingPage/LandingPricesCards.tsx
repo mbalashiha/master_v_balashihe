@@ -27,11 +27,7 @@ export const LandingPricesCards = () => {
             title={"Настройка компьютера"}
             titleIcon={<PriceIcon1 />}
           >
-            <PriceRow
-              href="/uslugi-mastera-v-balashihe/ustanovka-windows"
-              title={"Установка Windows"}
-              amount={470}
-            />
+            <PriceRow title={"Установка Windows"} amount={470} />
             <PriceRow title={"Установка другой ОС"} amount={740} />
             <PriceRow title={"Установка программ"} amount={330} />
             <PriceRow title={"Чистка компьютера"} amount={700} />
@@ -74,17 +70,13 @@ export const LandingPricesCards = () => {
             titleIcon={<PriceIcon3 />}
             gradientNumber={3}
           >
-            <PriceRow
-              href={`/uslugi-mastera-v-balashihe/remont-kompyuterov-s-horoshymi-otzyvami`}
-              title={"Ремонт с хорошими отзывами"}
-              amount={900}
-            />
             <PriceRow title={"Ремонт мат платы"} amount={900} />
             <PriceRow title={"Пайка элементов мат платы"} amount={1900} />
             <PriceRow title={"Ремонт цепи питания"} amount={700} />
             <PriceRow title={"Ремонт корпуса"} amount={400} />
             <PriceRow title={"Ремонт системы охлаждения"} amount={730} />
             <PriceRow title={"Ремонт клавиатуры"} amount={400} />
+            <PriceRow title={"Перепрошивка BIOS ноутбука"} amount={500} />
           </GradientCard>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -95,15 +87,10 @@ export const LandingPricesCards = () => {
             gradientNumber={4}
           >
             <PriceRow
-              href={`/uslugi-mastera-v-balashihe/remont-kompyuterov-s-horoshymi-otzyvami`}
               title={"Ремонт в Балашихе с хорошими отзывами"}
               amount={900}
             />
-            <PriceRow
-              href="/uslugi-mastera-v-balashihe/ustanovka-windows"
-              title={"Установка Windows в Балашихе"}
-              amount={470}
-            />
+            <PriceRow title={"Установка Windows в Балашихе"} amount={470} />
             <PriceRow title={"Компьютерная помощь в Балашихе"} />
             <PriceRow title={"Балашиха бесплатная диагностика"} />
             <PriceRow title={"Ремонт рядом с Шоссе Энтузиастов"} />
