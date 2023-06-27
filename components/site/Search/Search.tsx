@@ -25,6 +25,10 @@ interface Props {
 
 export default function Search({ search, sx, onSubmit, navbarSearch }: Props) {
   const router = useRouter();
+  const isSearchPage = useMemo(
+    () => router.pathname === "/search/[search]",
+    [router.pathname]
+  );
   const routerSearchQuery = useMemo(
     () =>
       router.query.search
@@ -55,7 +59,7 @@ export default function Search({ search, sx, onSubmit, navbarSearch }: Props) {
   const themeGreyColor = "rgba(25, 23, 21, 0.16)";
   return (
     <>
-      {routerSearchQuery && navbarSearch ? (
+      {navbarSearch && isSearchPage ? (
         <Typography component="h1" variant="h1">
           Поиск по сайту
         </Typography>
