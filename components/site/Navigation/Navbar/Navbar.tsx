@@ -1,6 +1,7 @@
 import { FC, default as React } from "react";
 import { useUI } from "@components/ui";
 import { Tooltip } from "@components/ui";
+import { Search } from "@components/site";
 import Link from "next/link";
 import { grey, blueGrey } from "@mui/material/colors";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
@@ -18,6 +19,7 @@ import {
   AppBar,
   Toolbar,
   IconButton,
+  Container,
 } from "@mui/material";
 import { styled } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -50,7 +52,6 @@ const Navbar: FC = () => {
           },
         }}
       >
-        {/* <PaletterModeSwitch sx={{ right: "auto", left: 0 }} /> */}
         <Toolbar
           component="div"
           sx={{
@@ -58,6 +59,7 @@ const Navbar: FC = () => {
             display: "flex",
             flexDirection: "row",
             justifyContent: "center",
+            zIndex: 1,
           }}
         >
           <Stack
@@ -119,6 +121,28 @@ const Navbar: FC = () => {
               </Box>
             </Stack>
           </Stack>
+        </Toolbar>
+        <Toolbar
+          sx={{
+            zIndex: 0,
+            boxShadow:
+              "#0000001a 0rem 0.25rem 0.375rem -0.0625rem, #0000000f 0rem 0.125rem 0.25rem -0.0625rem",
+
+            backgroundColor: "rgba(237, 239, 245, 0.75)",
+          }}
+        >
+          <Container
+            maxWidth={"lg"}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              px: 0,
+              py: "10px",
+            }}
+          >
+            <Search navbarSearch />
+          </Container>
         </Toolbar>
       </AppBar>
     </>

@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { Container, styled } from "@mui/material";
 import { Box, Typography, Paper, Grid, Button } from "@mui/material";
 import React from "react";
 
@@ -6,11 +6,11 @@ const StyledBox = styled((props: React.ComponentProps<typeof Paper>) => (
   <Paper component="header" {...props} />
 ))(({ theme }) => ({
   width: "100%",
-  padding: "1.3rem 2rem 2rem 2rem",
+  padding: "2.3rem 3rem 3rem 3rem",
   background: `linear-gradient(184deg, ${theme.palette.articleText.main}, rgb(30, 30, 54))`,
   color: `rgb(52, 71, 103)`,
-  borderRadius: "0.8rem",
-  marginBottom: "2rem",
+  borderRadius: 0,
+  marginBottom: 0,
 }));
 
 interface Props {
@@ -18,18 +18,20 @@ interface Props {
 }
 export const SpecialHeader = ({ children }: Props) => (
   <StyledBox>
-    <Typography
-      component="h1"
-      variant="h1"
-      sx={{
-        color: "white",
-        fontSize: "30px",
-        lineHeight: "42px",
-        fontWeight: 500,
-      }}
-    >
-      {children}
-    </Typography>
+    <Container maxWidth={"lg"}>
+      <Typography
+        component="h1"
+        variant="h1"
+        sx={{
+          color: "white",
+          fontSize: "30px",
+          lineHeight: "42px",
+          fontWeight: 500,
+        }}
+      >
+        {children}
+      </Typography>
+    </Container>
   </StyledBox>
 );
 export default SpecialHeader;

@@ -22,6 +22,7 @@ import {
   Theme,
 } from "@mui/material";
 import { NavigationLink } from "./NavigationLink";
+import { NavLinkProps } from "./NavigationLink";
 
 type DividerProps = {
   orientation: "row" | "column";
@@ -38,7 +39,7 @@ interface Props extends StackProps {
   handleClose?: ItemProps["handleClose"];
   orientation?: DividerProps["orientation"];
 }
-const getLinks = () => [
+const getLinks = (): Array<NavLinkProps> => [
   { href: "/", name: <HomeIcon /> },
   {
     href: "/uslugi-mastera-v-balashihe/remont-kompyuterov-bystro-balashiha-na-domu-ili-v-ofise",
@@ -47,6 +48,23 @@ const getLinks = () => [
   {
     href: "/uslugi-mastera-v-balashihe/remont-noutbuka-mfc-balashiha",
     name: "Ремонт ноутбука",
+  },
+  {
+    href: "/uslugi-mastera-v-balashihe/remont-noutbuka-mfc-balashiha",
+    name: "Компьютерная помощь",
+    submenu: [
+      {
+        href: "#",
+        name: "Установка программ",
+      },
+      {
+        href: "#",
+        name: "Удаление вирусов",
+      },
+      {
+        name: "Установка ОС",
+      },
+    ],
   },
   { href: "/uslugi-mastera-v-balashihe", name: "Услуги" },
   { href: "/computer-master-balashiha", name: "О мастере" },
@@ -59,12 +77,7 @@ export const NavbarLinks = ({
 }: Props) => {
   const { pathname, asPath } = useRouter();
   const navLinks = React.useMemo(() => {
-    const navLinks: Array<{
-      name: string | React.ReactNode;
-      href: string;
-      active?: boolean;
-      hideHrefLink?: boolean;
-    }> = getLinks();
+    const navLinks: Array<NavLinkProps> = getLinks();
     let activeSetted = false;
     navLinks.forEach((elem) => {
       if (elem.href === asPath) {
@@ -100,20 +113,36 @@ export const NavbarLinks = ({
         alignItems: "center",
         flexWrap: "wrap",
         padding: 0,
-        "& > *": {
+        "& > *, & > .dropdown": {
           margin: "0 0.5px",
-          fontWeight: 600,
         },
-        "& a, & .menuLink": {
+        "& .dropbtn, & button": {
+          margin: 0,
+          color: "auto",
+          border: "none",
+          background: "none",
+          "&:hover": {
+            background: (theme) => theme.palette.primary.main,
+            color: "white",
+          },
+        },
+        "& a, & button, & .menuLink, & > .dropdown > .dropbtn": {
+          fontWeight: 600,
           p: 1,
           borderRadius: 1,
           minWidth: "3rem",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          fontSize: "16px",
+          lineHeight: "24px",
           "&:hover": {
             background: (theme) => theme.palette.primary.main,
           },
+        },
+        "& .active": {
+          background: (theme) => theme.palette.primary.main,
+          color: "white",
         },
         "& a.active": {
           background: (theme) => theme.palette.primary.main,
@@ -124,10 +153,6 @@ export const NavbarLinks = ({
             boxShadow: "0 0 30px rgb(13 70 144 / 50%)",
             color: "white",
           },
-        },
-        "& .menuLink": {
-          background: (theme) => theme.palette.primary.main,
-          color: "white",
         },
         ...sx,
       }}

@@ -20,15 +20,18 @@ import {
   SxProps,
   Theme,
 } from "@mui/material";
+import DropDownMenu from "./DropDownMenu";
 
+export interface NavLinkProps {
+  name: string | React.ReactNode;
+  href?: string;
+  active?: boolean;
+  hideHrefLink?: boolean;
+  submenu?: Array<NavLinkProps>;
+}
 interface Props
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  linkProps: {
-    name: string | React.ReactNode;
-    href: string;
-    active?: boolean | undefined;
-    hideHrefLink?: boolean;
-  };
+  linkProps: NavLinkProps;
 }
 
 export default function NavigationLink({
@@ -36,31 +39,42 @@ export default function NavigationLink({
   className,
   ...props
 }: Props) {
-  return (
-    <>
-      {linkProps.active && linkProps.hideHrefLink ? (
-        <div className={cn(className, "active", "menuLink")} {...props}>
-          {linkProps.name}
-        </div>
-      ) : linkProps.active ? (
-        <Link
-          href={linkProps.href}
-          className={cn(className, "active")}
-          passHref
-          {...(props as any)}
-        >
-          {linkProps.name}
-        </Link>
-      ) : (
-        <Link
-          href={linkProps.href}
-          className={cn(className)}
-          passHref
-          {...(props as any)}
-        >
-          {linkProps.name}
-        </Link>
-      )}
-    </>
-  );
+  if (linkProps.submenu?.length) {
+    return <DropDownMenu {...linkProps} />;
+  } else {
+    return (
+      <>
+        {linkProps.active && linkProps.hideHrefLink ? (
+          <div className={cn(className, "active", "menuLink")} {...props}>
+            {linkProps.name}
+          </div>
+        ) : linkProps.active && linkProps.href ? (
+          <Link
+            href={linkProps.href}
+            className={cn(className, "active")}
+            passHref
+            {...(props as any)}
+          >
+            {linkProps.name}
+          </Link>
+        ) : linkProps.href ? (
+          <Link
+            href={linkProps.href}
+            className={cn(className)}
+            passHref
+            {...(props as any)}
+          >
+            {linkProps.name}
+          </Link>
+        ) : linkProps.active && linkProps.name ? (
+          <div
+            className={cn(className, linkProps.active && "active", "menuLink")}
+            {...props}
+          >
+            {linkProps.name}
+          </div>
+        ) : null}
+      </>
+    );
+  }
 }
