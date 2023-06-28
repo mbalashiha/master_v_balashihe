@@ -62,6 +62,7 @@ const getLinks = (): Array<NavLinkProps> => [
         name: "Удаление вирусов",
       },
       {
+        href: "/uslugi-mastera-v-balashihe/kompyuternye-sistemnye-bloki-v-balashihe-remont-pk",
         name: "Установка ОС",
       },
     ],
