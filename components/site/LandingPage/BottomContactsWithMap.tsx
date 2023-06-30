@@ -15,6 +15,7 @@ export const BottomContactsWithMap = () => {
           sx={{
             p: 1,
             backgroundColor: (theme) => theme.palette.secondaryBackground.main,
+            border: `4px solid #EBEBEA`,
           }}
         >
           <Typography

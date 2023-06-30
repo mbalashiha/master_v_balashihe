@@ -33,7 +33,7 @@ const getMuiTheme = (): Theme => {
         main: "#302f5c",
       },
       secondaryBackground: {
-        main: "#D9E3EF",
+        main: "#F3F5FE",
       },
     },
     spacing: 12,
