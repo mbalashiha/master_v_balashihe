@@ -59,7 +59,7 @@ export { default as Stack } from "./Stack";
 export { default as SuccessSnackbar } from "./SuccessSnackbar";
 export { GradientCard } from "./GradientCard";
 export { default as EmailLink } from "./EmailLink";
-export { default as PhoneLink } from "./PhoneLink";
+export { default as PhoneLink } from "../site/PhoneLink";
 export { default as Tooltip } from "./Tooltip";
 export { default as HtmlTooltip } from "./HtmlTooltip";
 export { default as EnhImage } from "./EnhImage";

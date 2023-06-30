@@ -32,6 +32,9 @@ const getMuiTheme = (): Theme => {
       articleText: {
         main: "#302f5c",
       },
+      secondaryBackground: {
+        main: "#D9E3EF",
+      },
     },
     spacing: 12,
     shape: {

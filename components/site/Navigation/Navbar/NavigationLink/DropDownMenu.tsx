@@ -12,11 +12,13 @@ const DropDownMenu = ({ submenu, ...link }: Props) => {
       sx={{
         position: "relative",
         display: "inline-block",
-        transitionProperty: "none",
-        transitionDuration: "0",
+        transitionProperty: "background, background-color",
+        "&, & > button, && > .dropbtn, && > button.dropbtn": {
+          borderRadius: `8px 8px 0 0`,
+        },
         "& > .dropdown-content": {
-          transitionProperty: "none",
-          transitionDuration: "0",
+          transitionProperty: "background, background-color",
+
           display: "none",
           //   transformOrigin: "top center",
           //   transform: "scale(0)",
@@ -43,15 +45,12 @@ const DropDownMenu = ({ submenu, ...link }: Props) => {
           },
         },
         "& .dropbtn, & button.dropbtn": {
-          transitionProperty: "none",
-          transitionDuration: "0",
+          transitionProperty: "background, background-color",
           borderRadius: `8px 8px 0 0`,
         },
         "&:hover": {
           "& > .dropbtn, & > button.dropbtn": {
-            transitionProperty: "none",
-            transitionDuration: "0",
-            borderRadius: `8px 8px 0 0`,
+            transitionProperty: "background, background-color",
             background: (theme) => theme.palette.primary.main,
             color: "white",
           },

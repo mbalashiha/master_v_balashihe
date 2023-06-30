@@ -17,6 +17,9 @@ const getMuiTheme = (): Theme => {
       articleText: {
         main: "#302f5c",
       },
+      secondaryBackground: {
+        main: "#D9E3EF",
+      },
     },
     shape: {
       borderRadius: 24,

@@ -168,7 +168,9 @@ function TableStructure({ tableNode, options }: Props) {
             key={ind}
             component="div"
             sx={{
-              background: colSpan ? "#EFDDD1" : "#D9E3EF",
+              background: colSpan
+                ? "#EFDDD1"
+                : (theme) => theme.palette.secondaryBackground.main,
               gridColumn: colSpan && `span ${colSpan}`,
               gridRow: rowSpan && `span ${rowSpan}`,
               textAlign: colSpan && "center",

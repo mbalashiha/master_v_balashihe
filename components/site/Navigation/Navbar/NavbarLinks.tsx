@@ -54,7 +54,7 @@ const getLinks = (): Array<NavLinkProps> => [
     name: "Компьютерная помощь",
     submenu: [
       {
-        href: "#",
+        href: "/uslugi-mastera-v-balashihe/ustanovka-programm-balashiha",
         name: "Установка программ",
       },
       {
