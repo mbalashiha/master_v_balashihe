@@ -36,17 +36,16 @@ export const Footer = () => {
             textDecoration: "none",
           },
         },
+        "& > div > div": {
+          background: "#1C1F21",
+          border: `2px solid ${grey[800]}`,
+          padding: "10px",
+          borderRadius: "8px",
+        },
       }}
     >
       <div>
-        <Box
-          sx={{
-            border: `2px solid ${grey[800]}`,
-            padding: "10px",
-            marginTop: "8px",
-            borderRadius: "8px",
-          }}
-        >
+        <Box sx={{}}>
           <p>
             <Link href="/">© {new Date().getFullYear()} Мастер в Балашихе</Link>
           </p>
@@ -55,10 +54,7 @@ export const Footer = () => {
         <Box
           sx={{
             color: grey[400],
-            border: `2px solid ${grey[800]}`,
-            padding: "10px",
             marginTop: "8px",
-            borderRadius: "8px",
           }}
         >
           <p>
