@@ -8,6 +8,7 @@ import { PriceIcon1 } from "@components/icons/Landing/PriceIcon1";
 import { PriceIcon2 } from "@components/icons/Landing/PriceIcon2";
 import { PriceIcon3 } from "@components/icons/Landing/PriceIcon3";
 import { GradientCard } from "components/ui/GradientCard";
+import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import PriceRow from "./PriceRow";
 import Link from "next/link";
 
@@ -83,14 +84,11 @@ export const LandingPricesCards = () => {
           <GradientCard
             key={"3"}
             title={"Балашиха"}
-            titleIcon={<PriceIcon3 />}
+            titleIcon={<PrecisionManufacturingIcon />}
             gradientNumber={4}
           >
-            <PriceRow
-              title={"Ремонт в Балашихе с хорошими отзывами"}
-              amount={900}
-            />
-            <PriceRow title={"Установка Windows в Балашихе"} amount={470} />
+            <PriceRow title={"Ремонт в Балашихе с хорошими отзывами"} />
+            <PriceRow title={"Установка Windows в Балашихе"} />
             <PriceRow title={"Компьютерная помощь в Балашихе"} />
             <PriceRow title={"Балашиха бесплатная диагностика"} />
             <PriceRow title={"Ремонт рядом с Шоссе Энтузиастов"} />

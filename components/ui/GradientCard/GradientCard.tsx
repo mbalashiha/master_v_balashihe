@@ -57,7 +57,7 @@ export const GradientCard = ({
           <Box
             sx={{
               width: { xs: "50px", lg: "62px" },
-              "& svg": { width: "41px", height: "41px" },
+              "& svg": { width: "41px", height: "41px", color: "white" },
             }}
           >
             {titleIcon}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PaletterModeSwitch from "@components/common/paletter/PaletteSwitch";
 import { Container, Box } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { blueGrey, grey } from "@mui/material/colors";
 export const Footer = () => {
   return (
     <Container
@@ -38,17 +38,24 @@ export const Footer = () => {
         },
       }}
     >
-      <Box>
-        <p>
-          <Link href="/" passHref>
-            © {new Date().getFullYear()} Мастер в Балашихе
-          </Link>
-        </p>
-        <p>143912, Балашиха центр города, Шоссе Энтузиастов М-7</p>
+      <div>
+        <Box
+          sx={{
+            border: `2px solid ${grey[800]}`,
+            padding: "10px",
+            marginTop: "8px",
+            borderRadius: "8px",
+          }}
+        >
+          <p>
+            <Link href="/">© {new Date().getFullYear()} Мастер в Балашихе</Link>
+          </p>
+          <p>143912, Балашиха центр города, Шоссе Энтузиастов М-7</p>
+        </Box>
         <Box
           sx={{
             color: grey[400],
-            border: `1px solid ${grey[400]}`,
+            border: `2px solid ${grey[800]}`,
             padding: "10px",
             marginTop: "8px",
             borderRadius: "8px",
@@ -58,11 +65,9 @@ export const Footer = () => {
             Вызвать мастера в Балашихе для ремонта компьютера или ноутбука на
             дом или в офис
           </p>
-          <Box component={"p"}>
-            Время работы: с 9:00 до 24:00 | Без выходных
-          </Box>
+          <p>Время работы: с 9:00 до 24:00 | Без выходных</p>
         </Box>
-      </Box>
+      </div>
       {/* <PaletterModeSwitch sx={{ bottom: 0, right: "0.5rem" }} /> */}
     </Container>
   );
