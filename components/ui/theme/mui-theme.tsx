@@ -35,6 +35,9 @@ const getMuiTheme = (): Theme => {
       secondaryBackground: {
         main: "#F3F5FE",
       },
+      cellHeaderBackground: {
+        main: "#EFDDD1",
+      },
     },
     spacing: 12,
     shape: {

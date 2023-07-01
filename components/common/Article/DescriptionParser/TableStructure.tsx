@@ -169,7 +169,7 @@ function TableStructure({ tableNode, options }: Props) {
             component="div"
             sx={{
               background: colSpan
-                ? "#EFDDD1"
+                ? (theme) => theme.palette.cellHeaderBackground.main
                 : (theme) => theme.palette.secondaryBackground.main,
               gridColumn: colSpan && `span ${colSpan}`,
               gridRow: rowSpan && `span ${rowSpan}`,

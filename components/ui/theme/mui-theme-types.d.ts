@@ -8,7 +8,7 @@ declare module "@mui/material/styles" {
     secondaryBackground: {
       main: React.CSSProperties["color"];
     };
-    articleText: {
+    cellHeaderBackground: {
       main: React.CSSProperties["color"];
     };
   }
@@ -19,7 +19,7 @@ declare module "@mui/material/styles" {
     secondaryBackground: {
       main: React.CSSProperties["color"];
     };
-    articleText: {
+    cellHeaderBackground: {
       main: React.CSSProperties["color"];
     };
   }

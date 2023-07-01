@@ -8,7 +8,11 @@ export const Footer = () => {
       maxWidth={false}
       component={"footer"}
       sx={{
-        background: "black",
+        backgroundColor: "black",
+        backgroundImage: "url(/mir-logo.svg)",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "4px -185px",
+        backgroundSize: "650px auto",
         color: "white",
         position: "absolute",
         minHeight: "20rem",
@@ -37,7 +41,7 @@ export const Footer = () => {
           },
         },
         "& > div > div": {
-          background: "#1C1F21",
+          background: "rgba(28,31,33,50%)",
           border: `2px solid ${grey[800]}`,
           padding: "10px",
           borderRadius: "8px",

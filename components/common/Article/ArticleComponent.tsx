@@ -20,6 +20,7 @@ import { StyledFab } from "./StyledFab";
 import { HeaderTextParser } from "@components/common/HeaderTextParser";
 import CallButton from "./CallButton";
 import NavigationButtons from "./NavigationButtons/NavigationButtons";
+import { CallMeForFree } from "@components/site/LandingPage";
 
 interface Props extends CMS.Blog.Article {}
 
@@ -176,6 +177,13 @@ export default function Article({
           }}
         >
           <DescriptionParser descriptionHTML={renderHtml} />
+          <CallMeForFree
+            sx={{
+              color: "rgba(0, 0, 0, 0.87)",
+              fontSize: "24px",
+              lineHeight: "30px",
+            }}
+          />
         </Paper>
         <NavigationButtons navigation={navigation} />
       </HugeContainer>

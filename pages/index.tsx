@@ -12,7 +12,7 @@ import LandingReasons from "@components/site/LandingPage/LandingReasons";
 import LandingPricesCards from "@components/site/LandingPage/LandingPricesCards";
 import getArticleByAbsUrl from "@framework/article/get-article-by-abs-url";
 import React from "react";
-import { Hero } from "@components/site/LandingPage";
+import { CallMeForFree, Hero } from "@components/site/LandingPage";
 
 export default function Home(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -31,6 +31,7 @@ export default function Home(
       <CardGridContainer />
       <LandingReasons />
       <LandingPricesCards />
+      <CallMeForFree />
     </>
   );
 }

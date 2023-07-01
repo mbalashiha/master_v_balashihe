@@ -20,6 +20,9 @@ const getMuiTheme = (): Theme => {
       secondaryBackground: {
         main: "#D9E3EF",
       },
+      cellHeaderBackground: {
+        main: "#EFDDD1",
+      },
     },
     shape: {
       borderRadius: 24,

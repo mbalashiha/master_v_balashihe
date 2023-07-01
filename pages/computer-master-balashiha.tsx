@@ -17,6 +17,7 @@ import LandingPricesCards from "@components/site/LandingPage/LandingPricesCards"
 import getArticleByAbsUrl from "@framework/article/get-article-by-abs-url";
 import React from "react";
 import { EnhImage } from "@components/ui";
+import { CallMeForFree } from "@components/site/LandingPage";
 
 export default function AboutMaster(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -56,7 +57,7 @@ export default function AboutMaster(
           </Box>
           , Российский <br /> Технологический Университет
         </Typography>
-        <Grid container>
+        <Grid container sx={{ mb: "26px" }}>
           {image && (
             <Grid
               item
@@ -126,7 +127,7 @@ export default function AboutMaster(
           </Grid>
         </Grid>
       </Container>
-
+      <CallMeForFree containerSx={{ mb: "14px" }} />
       <CardGridContainer />
       <LandingReasons />
       <LandingPricesCards />

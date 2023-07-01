@@ -65,7 +65,7 @@ const YandexMapIframe = () => {
                 />
                 <ContactInfoRow
                   svgIcon={<IconLocationCircle />}
-                  label={"Локация:"}
+                  label={"На карте:"}
                   infoText={<>{locationPlace}</>}
                 />
                 <ContactInfoRow
