@@ -16,7 +16,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
   return (
     <>
       <RootLayout>
-        <Box component="main" pb="24rem">
+        <Box component="main" pb="26rem">
           {children}
           <BottomContactsWithMap />
         </Box>

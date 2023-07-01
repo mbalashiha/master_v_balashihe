@@ -7,11 +7,5 @@ import { PhoneLink } from "@components/ui";
 import { blueGrey, grey } from "@mui/material/colors";
 
 export const BottomContactsWithMap = () => {
-  return (
-    <>
-      <Container maxWidth={"lg"}>
-        <YandexMapIframe></YandexMapIframe>
-      </Container>
-    </>
-  );
+  return <YandexMapIframe></YandexMapIframe>;
 };
