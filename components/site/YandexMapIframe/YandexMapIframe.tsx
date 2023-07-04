@@ -20,6 +20,7 @@ const YandexMapIframe = () => {
             paddingTop: "30px",
           },
           position: "relative",
+          marginBottom: { xs: 0, xl: "30px" },
         }}
       >
         <Container
@@ -44,7 +45,7 @@ const YandexMapIframe = () => {
               top: 0,
               marginBottom: { xs: "15px", md: 0 },
               minHeight: "440px",
-              width: { xs: "100%", sm: "520px", md: "420px" },
+              width: { xs: "100%", lg: "420px" },
               marginLeft: { lg: "-15px", xl: "-55px" },
               marginTop: { md: "43px" },
               border: "12px solid",
@@ -93,23 +94,20 @@ const YandexMapIframe = () => {
             </Box>
           </Paper>
         </Container>
-        <Box
+        <Paper
+          elevation={3}
           sx={{
             zIndex: 0,
             height: "555px",
             width: "100%",
+            maxWidth: "1760px",
             marginLeft: "auto",
-            marginRight: 0,
+            marginRight: "auto",
             border: "11px solid",
             borderColor: (theme) => theme.palette.background.paper,
-            borderRadius: 0,
-            borderLeftWidth: 0,
-            borderRightWidth: 0,
+            borderRadius: { xs: 0, xl: "20px" },
             position: "relative",
             overflow: "hidden",
-            "& img": {
-              zIndex: 0,
-            },
             "& iframe": {
               zIndex: 1,
               height: "535px",
@@ -137,7 +135,7 @@ const YandexMapIframe = () => {
             title="Карта Мастер в Балашихе Центр города Балашиха"
             sandbox="allow-scripts"
           ></iframe>
-        </Box>
+        </Paper>
       </Container>
     </>
   );
