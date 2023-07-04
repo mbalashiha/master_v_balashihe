@@ -8,7 +8,7 @@ import { Schema } from "@framework/types";
 import {
   normalizeArticle,
   normalizeBlogRow,
-} from "@framework/utils/normalize/article";
+} from "@framework/utils/normalize/normalize-article";
 import { useSnackbar } from "notistack";
 import { managementArticlesCards } from "./queries/management-get-articles-cards";
 

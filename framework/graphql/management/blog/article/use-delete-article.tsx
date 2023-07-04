@@ -6,7 +6,7 @@ import { Schema } from "@framework/types";
 import {
   normalizeArticle,
   normalizeBlogRow,
-} from "@framework/utils/normalize/article";
+} from "@framework/utils/normalize/normalize-article";
 import { locale } from "@utils/locale";
 import { slugify } from "lib";
 import { useSnackbar } from "notistack";
@@ -53,10 +53,12 @@ export const handler: API.Graphql.MutationHook<UseDeleteArticleHook> = {
       const response = await request(input);
       if (!response.success || !response.articleList) {
         enqueueSnackbar(
-          locale((response.message || response.error || "Error occured").substring(
-            0,
-            312
-          )),
+          locale(
+            (response.message || response.error || "Error occured").substring(
+              0,
+              312
+            )
+          ),
           {
             variant: "error",
           }

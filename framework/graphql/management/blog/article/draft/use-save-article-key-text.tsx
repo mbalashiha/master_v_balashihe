@@ -5,7 +5,7 @@ import { API, CMS } from "@common/types";
 import { useRefFormik } from "@components/ui";
 import { Schema } from "@framework/types";
 import { articleKeyTextDraft } from "./mutations/save-article-key-text-draft";
-import { normalizeArticleDraft } from "./normalize";
+import { normalizeArticleDraft } from "../../../../utils/normalize/normalize-article-draft";
 import useArticleDraft from "./use-article-draft";
 
 export default useSaveArticleKeyText as UseSaveArticleKeyText<typeof handler>;

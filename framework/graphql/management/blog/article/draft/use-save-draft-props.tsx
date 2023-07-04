@@ -6,7 +6,7 @@ import { useRefFormik } from "@components/ui";
 import { Schema } from "@framework/types";
 import { slugify } from "lib";
 import { saveArticleDraft } from "./mutations/save-draft-props";
-import { normalizeArticleDraft } from "./normalize";
+import { normalizeArticleDraft } from "../../../../utils/normalize/normalize-article-draft";
 import useArticleDraft from "./use-article-draft";
 
 export default useSaveArtDraftProps as UseSaveArtDraftProps<typeof handler>;
@@ -55,20 +55,22 @@ export const handler: API.Graphql.MutationHook<UseSaveArtDraftPropsHook> = {
           orderNumber: all?.orderNumber || null,
           blogCategoryId: all?.blogCategoryId || null,
           imageId: all?.imageId || null,
+          publishedAt: all?.publishedAt || null,
         },
       };
       const draft = inputObj.articleDraft;
       const needToUpdate =
-        (draft.title || "") != (initial.title || "") ||
-        (draft.autoHandleSlug || "") != (initial.autoHandleSlug || "") ||
-        (draft.handle || "") != (initial.handle || "") ||
-        (draft.absURL || "") != (initial.absURL || "") ||
-        (draft.blogCategoryId || "") != (initial.blogCategoryId || "") ||
+        (draft.title || null) != (initial.title || null) ||
+        (draft.autoHandleSlug || null) != (initial.autoHandleSlug || null) ||
+        (draft.handle || null) != (initial.handle || null) ||
+        (draft.absURL || null) != (initial.absURL || null) ||
+        (draft.blogCategoryId || null) != (initial.blogCategoryId || null) ||
         Boolean(draft.unPublished) != Boolean(initial.unPublished) ||
         Boolean(draft.notSearchable) != Boolean(initial.notSearchable) ||
         Boolean(draft.notInList) != Boolean(initial.notInList) ||
-        (draft.orderNumber || "") != (initial.orderNumber || "") ||
-        (draft.imageId || "") != (initial.imageId || "");
+        (draft.orderNumber || null) != (initial.orderNumber || null) ||
+        (draft.imageId || null) != (initial.imageId || null) ||
+        (draft.publishedAt || null) != (initial.publishedAt || null);
       if (needToUpdate) {
         const response = await request(inputObj);
         form.setInitialValues({ ...response });

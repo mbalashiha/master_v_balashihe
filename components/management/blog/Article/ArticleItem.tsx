@@ -71,7 +71,7 @@ const ArticleItem = ({ article }: Props) => {
               <Grid item xs={12}>
                 <Stack direction="row" spacing={2}>
                   <Box color="primary.main" sx={{ fontSize: "9pt" }}>
-                    {article.createdAt}
+                    {article.publishedAt}
                   </Box>
                   {(typeof article.score === "number" ||
                     typeof article.score === "string") && (

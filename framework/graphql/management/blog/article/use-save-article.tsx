@@ -7,7 +7,7 @@ import { locale } from "@utils/locale";
 import { slugify } from "lib";
 import { useSnackbar } from "notistack";
 import { normalize } from "path";
-import { normalizeArticleDraft } from "./draft/normalize";
+import { normalizeArticleDraft } from "../../../utils/normalize/normalize-article-draft";
 import useArticleDraft from "./draft/use-article-draft";
 import { saveArticle } from "./mutations/save-article";
 export default useSaveArticle as UseSaveArticle<typeof handler>;
@@ -57,7 +57,9 @@ export const handler: API.Graphql.MutationHook<UseSaveArticleHook> = {
           response.message = locale(response.message as any);
         }
         if (response.error) {
-          const m = response.error.match(/\s*ER_DUP_ENTRY\:\s+Duplicate entry\s+'([^\'\"]+)'/im)
+          const m = response.error.match(
+            /\s*ER_DUP_ENTRY\:\s+Duplicate entry\s+'([^\'\"]+)'/im
+          );
           if (m && m[1]) {
             const duplicateTitle = m[1];
             response.error = `Статья и именем "${duplicateTitle}" уже существует. Перейти к редактированию существующей статьи?`;

@@ -1,6 +1,9 @@
 import { default as MuiTextField } from "@mui/material/TextField";
+import React from "react";
 
-const TextField: typeof MuiTextField = ({ children, sx, ...rest }) => {
+type Props = React.ComponentProps<typeof MuiTextField>;
+
+const TextField = ({ children, sx, ...rest }: Props) => {
   return (
     <MuiTextField sx={{ width: "100%", ...sx }} variant="filled" {...rest}>
       {children}

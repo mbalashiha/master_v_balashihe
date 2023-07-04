@@ -6,7 +6,7 @@ export const getRecentArticlesQuery = gql`
       nodes {
         title
         handle
-        createdAt
+        publishedAt
         score
         fragment
         image {

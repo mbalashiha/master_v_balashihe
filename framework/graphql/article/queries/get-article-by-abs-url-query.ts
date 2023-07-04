@@ -13,7 +13,6 @@ export const getArticleByAbsUrlQuery = gql`
     notInList
     orderNumber
     blogCategoryId
-    createdAt
     updatedAt
     publishedAt
     image {

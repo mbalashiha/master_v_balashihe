@@ -4,12 +4,13 @@ import {
   normalizeArticle,
   normalizeArticleUrl,
   normalizeImage,
-} from "@framework/utils/normalize/article";
+} from "@framework/utils/normalize/normalize-article";
+import convertDate from "./convert-date";
 
 export const normalizeArticleDraft = (
   draft: Schema.Article.ArticleDraft
 ): CMS.Blog.ArticleDraft => {
-  const {
+  let {
     id,
     title,
     handle,
@@ -51,9 +52,9 @@ export const normalizeArticleDraft = (
     notInList: Boolean(notInList),
     orderNumber: orderNumber || null,
     blogCategoryId: blogCategoryId || null,
-    createdAt,
-    updatedAt,
-    publishedAt,
+    createdAt: createdAt || null,
+    updatedAt: updatedAt || null,
+    publishedAt: convertDate(publishedAt),
     existingArticleId,
     isCreatePage: !Boolean(existingArticleId && existingArticle),
     existingArticle: existingArticle ? normalizeArticle(existingArticle) : null,

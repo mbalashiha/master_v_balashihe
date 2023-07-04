@@ -8,6 +8,7 @@ import {
   FormikValues,
   Form,
   FormikHelpers,
+  FormikErrors,
 } from "formik";
 
 type InnerRef<T> = React.MutableRefObject<FormikProps<T> | null>;
@@ -131,7 +132,7 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
       field: string,
       value: any,
       shouldValidate?: boolean | undefined
-    ): void => {
+    ): Promise<void | FormikErrors<FormProps>> => {
       if (
         formikRef.current &&
         typeof formikRef.current.getFieldProps === "function"
@@ -143,6 +144,9 @@ export const InnerRefFormik = <FormProps extends FormikValues>({
           formikRef.current.setFieldValue(field, value, shouldValidate);
         }
       }
+      return new Promise((resolve, reject) =>
+        console.warn("Formik has not been initialized yet.")
+      );
     };
     const getValues = (): FormProps => {
       if (formikRef.current && formikRef.current.values) {

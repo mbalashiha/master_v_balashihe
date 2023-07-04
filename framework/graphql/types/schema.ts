@@ -38,7 +38,7 @@ export namespace Schema {
     handle: String;
     displayingPageHandle: String;
     absURL: String;
-    createdAt: Date;
+    publishedAt: Date;
     score: Float | null;
     fragment: String | null;
     image: Image | null;
@@ -73,7 +73,7 @@ export namespace Schema {
     category: CategoryId;
     createdAt: Date;
     updatedAt: Date;
-    publishedAt: Date;
+    publishedAt: Date | String;
     breadcrumbs: Breadcrumb[];
     navigation: BlogArticleNavigation | null;
     imageId: ID | null;
@@ -141,7 +141,7 @@ export namespace Schema {
       category: CategoryId;
       createdAt: Date;
       updatedAt: Date;
-      publishedAt: Date;
+      publishedAt: String | Date;
       existingArticleId: ID | null;
       existingArticle: BlogArticle | null;
       imageId: ID | null;

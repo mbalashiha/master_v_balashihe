@@ -8,7 +8,7 @@ export const getArticlesCardsQuery = gql`
         handle
         absURL
         displayingPageHandle
-        createdAt
+        publishedAt
         score
         fragment
         image {

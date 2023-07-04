@@ -10,7 +10,7 @@ export const getAllArticlesQuery = gql`
     published
     orderNumber
     blogCategoryId
-    createdAt
+    publishedAt
     updatedAt
     publishedAt
   }

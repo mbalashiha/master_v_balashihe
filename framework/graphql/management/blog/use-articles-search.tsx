@@ -8,7 +8,7 @@ import { Schema } from "@framework/types";
 import {
   normalizeArticle,
   normalizeBlogRow,
-} from "@framework/utils/normalize/article";
+} from "@framework/utils/normalize/normalize-article";
 import { useMemo } from "react";
 import { managementArticlesCards } from "./queries/management-get-articles-cards";
 import useArticleList from "./use-article-list";

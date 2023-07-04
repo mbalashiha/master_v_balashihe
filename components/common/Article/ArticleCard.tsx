@@ -99,7 +99,7 @@ const ArticleCard = ({ article }: Props) => {
             <Box className="material-icons-round" aria-hidden="true">
               schedule
             </Box>
-            <Box>{article.createdAt}</Box>
+            <Box>{article.publishedAt}</Box>
           </Stack>
         </Stack>
       </Card>

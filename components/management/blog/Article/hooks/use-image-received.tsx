@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import useImageUpload from "@framework/management/image/use-image-upload";
 import { getFileIdName } from "@common/utils/get-file-id-name";
 import { useRefFormik } from "@components/ui";
-import { normalizeImage } from "@framework/utils/normalize/article";
+import { normalizeImage } from "@framework/utils/normalize/normalize-article";
 
 export function useImageReceived() {
   const form = useRefFormik();

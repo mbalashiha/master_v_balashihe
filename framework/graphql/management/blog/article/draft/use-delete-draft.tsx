@@ -3,7 +3,7 @@ import { useDeleteDraft } from "@common/management/blog/article/draft/use-delete
 import { UseDeleteDraft } from "@common/management/blog/article/draft/use-delete-draft";
 import { API, CMS } from "@common/types";
 import { ID, Schema } from "@framework/types";
-import { normalizeArticleDraft } from "./normalize";
+import { normalizeArticleDraft } from "../../../../utils/normalize/normalize-article-draft";
 import { slugify } from "lib";
 import { useSnackbar } from "notistack";
 import useArticleDraft from "./use-article-draft";

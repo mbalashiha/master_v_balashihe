@@ -1,4 +1,4 @@
-import { Formik, FormikProps, FieldInputProps } from "formik";
+import { Formik, FormikProps, FieldInputProps, FormikErrors } from "formik";
 import React, { useMemo, useContext, FC } from "react";
 
 export type FormContextType<FormType> = {
@@ -37,12 +37,15 @@ export const FormProvider: FC<Props<any>> = <T,>({
       field: string,
       value: any,
       shouldValidate?: boolean | undefined
-    ): void => {
+    ): Promise<void | FormikErrors<T>> => {
       if (formikRef.current) {
         if (formikRef.current?.getFieldProps(field).value !== value) {
-          formikRef.current?.setFieldValue(field, value, shouldValidate);
+          return formikRef.current?.setFieldValue(field, value, shouldValidate);
         }
       }
+      return new Promise((resolve, reject) =>
+        console.warn("Formik has not been initialized yet.")
+      );
     };
     const handleSubmit: FormikProps<T>["handleSubmit"] = (
       e?: React.FormEvent<HTMLFormElement> | undefined

@@ -28,7 +28,7 @@ export namespace Blog {
     title: string;
     url: string;
     displayingPageUrl: string;
-    createdAt: string;
+    publishedAt: string;
     score: Float | null;
     fragment: String | null;
     image: Image | null;
@@ -60,7 +60,7 @@ export namespace Blog {
     category: BlogCategory;
     createdAt: Date;
     updatedAt: Date;
-    publishedAt: Date;
+    publishedAt: Date | string;
     breadcrumbs?: Breadcrumb[];
     navigation: BlogArticleNavigation;
     imageId: ID | null;

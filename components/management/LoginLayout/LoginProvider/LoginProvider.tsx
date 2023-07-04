@@ -6,7 +6,7 @@ import { createContext, useContext, useMemo } from "react";
 
 export interface LoginValue {
   authData: API.Graphql.ModSWRResponse<Management.ManagerTokenResponse>;
-  doRedirectAuthorized: () => Promise<void>;
+  doRedirectAuthorized: () => void;
 }
 export const LoginContext = createContext<Partial<LoginValue>>({});
 

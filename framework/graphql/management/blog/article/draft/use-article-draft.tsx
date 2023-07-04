@@ -4,7 +4,7 @@ import { UseArticleDraft } from "@common/management/blog/article/draft/use-artic
 import { API, CMS } from "@common/types";
 import { Schema } from "@framework/types";
 import { useRouter } from "next/router";
-import { normalizeArticleDraft } from "./normalize";
+import { normalizeArticleDraft } from "../../../../utils/normalize/normalize-article-draft";
 import { getArticleDraft } from "./queries/get-article-draft";
 import React from "react";
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import PaletterModeSwitch from "@components/common/paletter/PaletteSwitch";
-import { Container, Box } from "@mui/material";
+import KeyboardDoubleArrowUpRoundedIcon from "@mui/icons-material/KeyboardDoubleArrowUpRounded";
+import { Container, Box, IconButton } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 export const Footer = () => {
   return (
@@ -11,7 +11,7 @@ export const Footer = () => {
         backgroundColor: "black",
         backgroundImage: "url(/mir-logo.svg)",
         backgroundRepeat: "no-repeat",
-        backgroundPosition: "4px -110px",
+        backgroundPosition: "4px -96px",
         backgroundSize: "650px auto",
         color: "white",
         position: "absolute",
@@ -68,6 +68,27 @@ export const Footer = () => {
           <p>Время работы: с 9:00 до 24:00 | Без выходных</p>
         </Box>
       </div>
+      <IconButton
+        sx={{
+          zIndex: 1,
+          color: "grey.200",
+          position: "absolute",
+          right: { xs: "5px", lg: "10px" },
+          bottom: { xs: "5px", md: "50%" },
+          transform: { xs: "inherit", md: "translate(0, 60%)" },
+          background: "rgba(28,31,33,50%)",
+          "&:hover": {
+            background: "rgb(28,31,33)",
+          },
+          "& svg": {
+            width: "60px",
+            height: "60px",
+          },
+        }}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        <KeyboardDoubleArrowUpRoundedIcon />
+      </IconButton>
       {/* <PaletterModeSwitch sx={{ bottom: 0, right: "0.5rem" }} /> */}
     </Container>
   );

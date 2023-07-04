@@ -9,7 +9,6 @@ export const ListArticleFragment = gql`
     published
     orderNumber
     blogCategoryId
-    createdAt
     updatedAt
     publishedAt
   }

@@ -10,13 +10,12 @@ import {
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import type { AliasesCSSProperties } from "@mui/system/styleFunctionSx/AliasesCSSProperties";
 import { PhoneLink } from "@components/ui";
 import { blueGrey, grey } from "@mui/material/colors";
 import React from "react";
 interface Props {
-  sx?: AliasesCSSProperties | SxProps;
-  containerSx?: AliasesCSSProperties | SxProps;
+  sx?: SxProps;
+  containerSx?: SxProps;
 }
 export const CallMeForFree = ({ sx, containerSx }: Props) => {
   return (

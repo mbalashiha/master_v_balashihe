@@ -8,7 +8,7 @@ export const managementArticlesCards = gql`
         id
         title
         handle
-        createdAt
+        publishedAt
         score
         fragment
       }

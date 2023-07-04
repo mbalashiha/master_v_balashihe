@@ -1,6 +1,7 @@
 import { CMS } from "@common/types";
 import { Blog } from "@common/types/cms";
 import { ID, Schema } from "@framework/types";
+import convertDate from "./convert-date";
 
 export const normalizeArticleUrl = (
   handle: string | null,
@@ -24,7 +25,7 @@ export const normalizeBlogRow = (
     title,
     handle,
     absURL,
-    createdAt,
+    publishedAt,
     score,
     fragment,
     displayingPageHandle,
@@ -39,7 +40,7 @@ export const normalizeBlogRow = (
     title,
     url,
     displayingPageUrl: displayingPageHandle,
-    createdAt: new Date(createdAt).toLocaleString("ru", {
+    publishedAt: new Date(publishedAt).toLocaleString("ru", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -98,7 +99,7 @@ export const chooseArticleUrl = ({
   return url;
 };
 export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
-  const {
+  let {
     id,
     title,
     handle,
@@ -140,9 +141,9 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     category: {
       ...category,
     },
-    createdAt,
-    updatedAt,
-    publishedAt,
+    createdAt: createdAt || null,
+    updatedAt: updatedAt || null,
+    publishedAt: convertDate(publishedAt),
     breadcrumbs: {
       ...breadcrumbs,
     },

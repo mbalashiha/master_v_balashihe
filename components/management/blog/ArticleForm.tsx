@@ -133,6 +133,7 @@ export default function ArticleForm({}: Props) {
           blogCategoryId,
           existingArticleId,
           imageId,
+          publishedAt,
         } = values;
         let renderHtml = textHtml;
         if (window.DOMParser) {
@@ -186,6 +187,7 @@ export default function ArticleForm({}: Props) {
           blogCategoryId,
           existingArticleId,
           imageId: imageId || null,
+          publishedAt: publishedAt || null,
         };
         if (!article.handle) {
           article.handle = autoHandleSlug || "";

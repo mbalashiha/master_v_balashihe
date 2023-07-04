@@ -2,7 +2,7 @@ import { API } from "@common/types";
 import { Blog } from "@common/types/cms";
 import { Schema } from "@framework/types";
 import { getConfig } from "@framework/utils";
-import { normalizeBlogRow } from "@framework/utils/normalize/article";
+import { normalizeBlogRow } from "@framework/utils/normalize/normalize-article";
 import { getArticlesCardsQuery } from "./queries";
 
 const getArticlesCards = async (

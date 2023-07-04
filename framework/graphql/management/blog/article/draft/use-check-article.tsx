@@ -8,14 +8,14 @@ import { Schema } from "@framework/types";
 import {
   normalizeArticle,
   normalizeBlogRow,
-} from "@framework/utils/normalize/article";
+} from "@framework/utils/normalize/normalize-article";
 import { useMemo } from "react";
 import { managementCheckArticleQuery } from "./queries/check-article-with-same-name";
 
 export default useCheckArticle as UseCheckArticle<typeof handler>;
 
 export interface UseCheckArticleHook {
-  requestInput: { title: string, handle: string };
+  requestInput: { title: string; handle: string };
   requestOutput: Schema.Response.ManagementCheckArticle;
   data: CMS.Blog.Article | undefined;
 }
