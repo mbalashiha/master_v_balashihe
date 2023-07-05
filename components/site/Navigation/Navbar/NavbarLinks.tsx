@@ -58,7 +58,7 @@ const getLinks = (): Array<NavLinkProps> => [
         name: "Установка программ",
       },
       {
-        href: "#",
+        href: "/uslugi-mastera-v-balashihe/udalit-virusy-v-kompyutere-po-nizkoj-cene-v-balashihe-ili-poprobovat-udalit-virusy-samomu",
         name: "Удаление вирусов",
       },
       {

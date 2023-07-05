@@ -36,67 +36,19 @@ export default function Article({
   // }
   return (
     <>
-      <SpecialHeader>{title}</SpecialHeader>
+      <SpecialHeader image={image} keyTextHtml={keyTextHtml}>
+        {title}
+      </SpecialHeader>
       <HugeContainer
         sx={{ mb: "10px" }}
         rightSidebar={navigation && <NavSidebar navigation={navigation} />}
       >
-        <Grid container spacing={{ xs: 1, md: 2 }} mb={2}>
-          <Grid
-            item
-            xs={12}
-            md={6}
-            lg={6}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: { xs: "center", md: "flex-start" },
-            }}
-          >
-            <ImagePaper image={image} />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            md={6}
-            lg={6}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            {(keyTextHtml && (
-              <Box
-                sx={{
-                  flexGrow: 1,
-                  "& > *": {
-                    p: 0,
-                    m: 0,
-                    ml: "30px",
-                    "&::before": {
-                      display: "inline-block",
-                      content: `"\\2605"`,
-                      fontSize: "24px",
-                      lineHeight: "20px",
-                      transform: "translate(-30px,2px)",
-                      width: 0,
-                      overflow: "visible",
-                      color: "orange",
-                    },
-                  },
-                }}
-              >
-                <HeaderTextParser htmlText={keyTextHtml} />
-              </Box>
-            )) || <Box sx={{ flexGrow: 1 }}></Box>}
-            <CallButton />
-          </Grid>
-        </Grid>
         <Stack
           direction={"row"}
           alignContent="center"
           justifyContent="space-between"
+          justifyItems={"center"}
+          alignItems="center"
           mb={2}
           sx={{
             "& a[href]": {
@@ -119,6 +71,7 @@ export default function Article({
             <div></div>
           )}
 
+          <CallButton />
           {navigation?.next?.url ? (
             <Link href={navigation.next.url}>
               <Tooltip title={<>{navigation.next.title}</>} placement="left">

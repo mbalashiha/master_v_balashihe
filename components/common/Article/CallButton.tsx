@@ -65,7 +65,6 @@ const StyledButton: any = styled(ButtonForStyling)<{
   "&&": {
     zIndex,
     padding: "1.5rem",
-    marginTop: "30px",
     // position: "relative",
     display: "flex",
     alignItems: "center",
