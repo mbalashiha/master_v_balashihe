@@ -37,7 +37,6 @@ export const ArticleCreatedAt = () => {
   const onBlur = field.onBlur;
   const { setFieldValue } = useRefFormik();
   const dayjsValue = React.useMemo(() => dayjs(field.value), [field.value]);
-  console.log(field.value);
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
       <DateTimePicker
