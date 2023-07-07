@@ -31,10 +31,12 @@ import { MainLogo } from "@components/site/MainLogo";
 import { PhoneCallIcon, TelegramIcon } from "@components/icons";
 import {
   NEXT_PUBLIC_WHATSAPP_LINK,
-  NEXT_PUBLIC_CONTACT_PHONE_NUMBER,
+  NEXT_PUBLIC_CONTACT_PHONE,
   NEXT_PUBLIC_TELEGRAM_LINK,
+  NEXT_PUBLIC_CONTACT_PHONE_TEXT,
 } from "@framework/const";
 import { WhatsappLink } from "@components/site/contacts";
+import ContactDialog from "@components/site/contacts/ContactDialog";
 
 const Navbar: FC = () => {
   // const { pathname } = useRouter();
@@ -87,7 +89,7 @@ const Navbar: FC = () => {
                 fontWeight: 700,
                 letterSpacing: "0.001rem",
                 height: "75px",
-                "& a": {
+                "& a, & > div": {
                   display: "flex",
                   direction: "row",
                   justifyContent: "center",
@@ -102,10 +104,10 @@ const Navbar: FC = () => {
                 },
               }}
             >
-              <WhatsappLink>
+              <ContactDialog>
                 <PhoneCallIcon />
-                <Box>{NEXT_PUBLIC_CONTACT_PHONE_NUMBER}</Box>
-              </WhatsappLink>
+                <Box>{NEXT_PUBLIC_CONTACT_PHONE_TEXT}</Box>
+              </ContactDialog>
               <Box
                 sx={{ ml: 1, "&, & svg": { width: "70px", height: "70px" } }}
               >

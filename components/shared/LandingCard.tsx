@@ -14,6 +14,7 @@ import StartIcon from "@mui/icons-material/Start";
 import Link from "next/link";
 import { standartCssTransition } from "@components/ui/theme/mui-theme";
 import { WhatsappLink } from "@components/site/contacts";
+import ContactDialog from "@components/site/contacts/ContactDialog";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -50,7 +51,7 @@ export const LandingCard = ({ children, image }: Props) => {
           spacing={1}
         >
           {children}
-          <WhatsappLink>
+          <ContactDialog>
             <Button
               sx={{
                 padding: "0 14px",
@@ -79,7 +80,7 @@ export const LandingCard = ({ children, image }: Props) => {
             >
               Вызвать мастера
             </Button>
-          </WhatsappLink>
+          </ContactDialog>
         </Stack>
         <CardMedia
           sx={{

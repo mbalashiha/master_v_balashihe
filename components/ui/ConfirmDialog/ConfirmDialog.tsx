@@ -16,9 +16,9 @@ import {
   Typography,
 } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";
-import { FC, useRef } from "react";
+import { FC, useMemo, useRef } from "react";
 import StyledDialog from "./StyledDialog";
-import BootstrapDialogTitle from "./ConfirmDialogTitle";
+import BaseDialogHeader from "../BaseDialogHeader/BaseDialogHeader";
 import { standartCssTransition } from "../theme/mui-theme";
 
 type TriggerButton = React.ReactElement | React.ReactElement[];
@@ -50,19 +50,25 @@ const ConfirmDialog = React.forwardRef(function ConfirmDialog(
     confirmCaption = confirmCaption || "OK";
     const [isOpen, setIsOpen] = React.useState(false);
     const close = () => setIsOpen(false);
-    trigger = React.Children.map(trigger, (element: any) => {
-      if (React.isValidElement(element)) {
-        const onClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
-          event.stopPropagation();
-          setIsOpen(true);
-        };
-        return React.cloneElement(element, {
-          onClick,
-        } as any);
-      } else {
-        return element;
-      }
-    }) as any;
+    trigger = useMemo(
+      () =>
+        React.Children.map(trigger, (element: any) => {
+          if (React.isValidElement(element)) {
+            const onClick: React.MouseEventHandler<HTMLButtonElement> = (
+              event
+            ) => {
+              event.stopPropagation();
+              setIsOpen(true);
+            };
+            return React.cloneElement(element, {
+              onClick,
+            } as any);
+          } else {
+            return element;
+          }
+        }) as any,
+      [trigger]
+    );
     if (typeof onConfirm !== "function") {
       throw new Error(
         "No trigger button on-click event handler (used in onConfirm action)."
@@ -79,24 +85,7 @@ const ConfirmDialog = React.forwardRef(function ConfirmDialog(
         {trigger}
         {isOpen ? (
           <StyledDialog ref={ref} open={isOpen} onClose={close}>
-            <IconButton
-              aria-label="close"
-              onClick={close}
-              sx={{
-                position: "absolute",
-                right: 4,
-                top: 3,
-                color: (theme) => theme.palette.grey[500],
-                ...standartCssTransition,
-                ":hover": {
-                  ...standartCssTransition,
-                  color: (theme) => theme.palette.text.primary,
-                },
-              }}
-            >
-              <CloseIcon sx={{ transform: "scale(1.2)" }} />
-            </IconButton>
-            {title && <BootstrapDialogTitle>{title}</BootstrapDialogTitle>}
+            <BaseDialogHeader close={close}>{title}</BaseDialogHeader>
             <DialogContent
               sx={{
                 display: "flex",

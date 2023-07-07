@@ -10,16 +10,18 @@ import {
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { PhoneLink } from "@components/ui";
 import { blueGrey, grey } from "@mui/material/colors";
 import React from "react";
+import { ContactPhone } from "../contacts";
+import ContactDialog from "../contacts/ContactDialog";
+import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
 interface Props {
   sx?: SxProps;
   containerSx?: SxProps;
 }
 export const CallMeForFree = ({ sx, containerSx }: Props) => {
   return (
-    <Container maxWidth={"lg"} sx={{ "&&&": { p: 0 }, ...containerSx }}>
+    <Container maxWidth={"lg"} sx={{ "&&": { p: 0, ...(containerSx as any) } }}>
       <Paper
         elevation={0}
         sx={{
@@ -42,7 +44,10 @@ export const CallMeForFree = ({ sx, containerSx }: Props) => {
         }}
       >
         <Typography component="p" variant="h1" mb={0} pb={0}>
-          Звоните <PhoneLink />
+          Звоните{" "}
+          <ContactDialog component="span">
+            {NEXT_PUBLIC_CONTACT_PHONE_TEXT}
+          </ContactDialog>
         </Typography>
         <Typography component="h2" variant="h1" mb={0} pb={0}>
           Консультация компьютерного мастера в Балашихе

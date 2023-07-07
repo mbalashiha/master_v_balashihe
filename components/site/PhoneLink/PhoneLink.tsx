@@ -1,30 +1,29 @@
-import { styled, Link } from "@mui/material";
-import { useMemo } from "react";
+import { styled, Link, SxProps } from "@mui/material";
+import React from "react";
 
-interface Props extends Omit<React.ComponentProps<typeof Link>, "children"> {
-  value?: string;
+interface Props
+  extends Omit<Omit<React.ComponentProps<typeof Link>, "children">, "href"> {
+  phoneText?: React.ReactNode | React.ReactNode[];
+  phoneNumber: string;
+  children?: React.ReactNode | React.ReactNode[];
+  sx?: SxProps;
 }
-const PhoneLink = ({ value, underline, ...rest }: Props) => {
-  const { phoneText, phoneNumber } = useMemo(() => {
-    const phoneText =
-      value || process.env["NEXT_PUBLIC_CONTACT_PHONE_NUMBER_CONTRY"];
-    if (!phoneText) {
-      throw new Error("PhoneLink: No phone number!");
-    }
-    const phoneNumber = phoneText
-      .replace(/[^\+\d]/gim, "")
-      .replace(/^[8]/, "+7");
-    if (!phoneNumber) {
-      throw new Error("PhoneLink: No phone number!");
-    }
-    return { phoneText, phoneNumber };
-  }, [value]);
+const PhoneLink = ({
+  children,
+  phoneNumber,
+  phoneText,
+  underline,
+  sx,
+  ...rest
+}: Props) => {
+  phoneText = children || phoneText || phoneNumber;
   return (
     <>
       <Link
+        {...rest}
         href={`tel:${phoneNumber}`}
         underline={underline || "none"}
-        {...rest}
+        sx={{ ...sx }}
       >
         {phoneText}
       </Link>

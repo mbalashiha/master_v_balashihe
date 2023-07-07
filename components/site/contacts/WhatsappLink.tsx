@@ -1,17 +1,19 @@
-import {
-  NEXT_PUBLIC_WHATSAPP_LINK,
-  NEXT_PUBLIC_CONTACT_PHONE_NUMBER,
-  NEXT_PUBLIC_TELEGRAM_LINK,
-} from "@framework/const";
+import { NEXT_PUBLIC_WHATSAPP_LINK } from "@framework/const";
+import { Link } from "@mui/material";
+import React from "react";
+type Props = React.ComponentProps<typeof Link>;
 
-interface Props {
-  children: React.ReactNode | React.ReactNode[];
-}
-export const WhatsappLink = ({ children }: Props) => {
+export const WhatsappLink = ({ children, href: _, ...rest }: Props) => {
   return (
-    <a href={NEXT_PUBLIC_WHATSAPP_LINK} target="_blank" rel="noreferrer">
+    <Link
+      href={NEXT_PUBLIC_WHATSAPP_LINK}
+      target="_blank"
+      rel="noreferrer"
+      underline="none"
+      {...rest}
+    >
       {children}
-    </a>
+    </Link>
   );
 };
 export default WhatsappLink;

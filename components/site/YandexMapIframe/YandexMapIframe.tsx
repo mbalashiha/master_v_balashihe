@@ -1,13 +1,14 @@
+import {
+  NEXT_PUBLIC_CONTACT_PHONE_TEXT,
+  NEXT_PUBLIC_CONTACT_EMAIL,
+  NEXT_PUBLIC_LOCATION_PLACE,
+} from "@framework/const";
 import { IconEmailCircle } from "@components/icons";
 import { Box, Container, Grid, Paper, Stack, Typography } from "@mui/material";
-import Image from "next/image";
 import ContactInfoRow from "@components/site/LandingPage/ContactInfoRow";
-import { EmailLink, PhoneLink } from "@components/ui";
 import IconPhoneCircle from "@components/icons/IconPhoneCircle";
 import IconLocationCircle from "@components/icons/IconLocationCircle";
-import MapStaticPic from "/public/images/map.png";
-import { email, phoneNumber, locationPlace } from "@/const/contacts";
-import RenderNbsp from "./RenderNbsp";
+import ContactDialog from "../contacts/ContactDialog";
 
 const YandexMapIframe = () => {
   return (
@@ -75,6 +76,10 @@ const YandexMapIframe = () => {
                 py: "30px",
                 pl: "30px",
                 pr: 0,
+                "& svg": {
+                  width: "44px",
+                  height: "44px",
+                },
               }}
             >
               <Stack direction={"column"} spacing={3}>
@@ -90,17 +95,23 @@ const YandexMapIframe = () => {
                 <ContactInfoRow
                   svgIcon={<IconPhoneCircle />}
                   label={"Телефон:"}
-                  infoText={<PhoneLink value={phoneNumber} />}
+                  infoText={
+                    <ContactDialog>
+                      {NEXT_PUBLIC_CONTACT_PHONE_TEXT}
+                    </ContactDialog>
+                  }
                 />
                 <ContactInfoRow
                   svgIcon={<IconEmailCircle />}
                   label={"Почта:"}
-                  infoText={<EmailLink email={email} />}
+                  infoText={
+                    <ContactDialog>{NEXT_PUBLIC_CONTACT_EMAIL}</ContactDialog>
+                  }
                 />
                 <ContactInfoRow
                   svgIcon={<IconLocationCircle />}
                   label={"На карте:"}
-                  infoText={locationPlace}
+                  infoText={NEXT_PUBLIC_LOCATION_PLACE}
                 />
               </Stack>
             </Box>

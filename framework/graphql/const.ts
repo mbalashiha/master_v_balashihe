@@ -1,5 +1,5 @@
 export const API_HOST: string = (
-  process.env.BUILD_TIME_API_HOST || 
+  process.env.BUILD_TIME_API_HOST ||
   process.env.PRODUCTION_API_HOST ||
   process.env.NEXT_PUBLIC_API_HOST ||
   ""
@@ -47,7 +47,13 @@ export const CURRENT_SYSTEM_PALETTE_MODE_COOKIE =
 export const MANUAL_PALETTE_MODE_COOKIE = "MANUAL_PALETTE_MODE_COOKIE";
 export const NEXT_PUBLIC_WHATSAPP_LINK =
   process.env["NEXT_PUBLIC_WHATSAPP_LINK"] || "";
-export const NEXT_PUBLIC_CONTACT_PHONE_NUMBER =
-  process.env["NEXT_PUBLIC_CONTACT_PHONE_NUMBER"] || "";
+export const NEXT_PUBLIC_CONTACT_PHONE =
+  process.env["NEXT_PUBLIC_CONTACT_PHONE"] || "";
+export const NEXT_PUBLIC_CONTACT_PHONE_TEXT =
+  process.env["NEXT_PUBLIC_CONTACT_PHONE_TEXT"] || "";
 export const NEXT_PUBLIC_TELEGRAM_LINK =
   process.env["NEXT_PUBLIC_TELEGRAM_LINK"] || "";
+export const NEXT_PUBLIC_LOCATION_PLACE =
+  process.env["NEXT_PUBLIC_LOCATION_PLACE"] || "";
+export const NEXT_PUBLIC_CONTACT_EMAIL =
+  process.env["NEXT_PUBLIC_CONTACT_EMAIL"] || "";

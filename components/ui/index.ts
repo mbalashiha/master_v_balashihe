@@ -1,5 +1,6 @@
 export { theme, useThemePalette } from "./theme";
 export * from "./ConfirmDialog";
+export { default as BaseDialog } from "./BaseDialog";
 export { default as LinkButton } from "./LinkButton";
 export { default as MySwitch } from "./MySwitch";
 export { default as Toolbar } from "./Toolbar";

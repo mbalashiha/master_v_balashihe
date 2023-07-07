@@ -20,6 +20,14 @@ button {
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
 }
+svg,
+div,
+span {
+  transition-property: color fill;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
 // .tox-notifications-container {
 //   display: none !important;
 // }

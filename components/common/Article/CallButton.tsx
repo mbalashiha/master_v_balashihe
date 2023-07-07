@@ -6,6 +6,7 @@ import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import HandymanIcon from "@mui/icons-material/Handyman";
 import React, { FC } from "react";
 import { WhatsappLink } from "@components/site/contacts";
+import ContactDialog from "@components/site/contacts/ContactDialog";
 type SpanForStylingProps = React.ComponentProps<typeof Box> & {
   zIndex?: number;
   isLoading?: boolean;
@@ -113,7 +114,7 @@ type Props = {
 };
 const CallButton = ({ isLoading, disabled }: Props) => {
   return (
-    <WhatsappLink>
+    <ContactDialog noContainer={true}>
       <StyledButton
         zIndex={0}
         isLoading={isLoading || false}
@@ -122,7 +123,7 @@ const CallButton = ({ isLoading, disabled }: Props) => {
       >
         {`Вызвать мастера`}
       </StyledButton>
-    </WhatsappLink>
+    </ContactDialog>
   );
 };
 

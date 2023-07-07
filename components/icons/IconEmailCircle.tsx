@@ -16,8 +16,6 @@ const IconEmailCircle = ({
       sx={
         {
           "& svg": {
-            width: "44px",
-            height: "44px",
             ...sx,
           },
         } as any
@@ -25,19 +23,17 @@ const IconEmailCircle = ({
       {...props}
     >
       <svg
-        width="100"
-        height="100"
         viewBox="0 0 100 100"
         fill="none"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
       >
         <rect
-          x="6"
-          y="6"
-          width="90"
-          height="90"
-          rx="45"
+          x="0"
+          y="0"
+          width="100"
+          height="100"
+          rx="50"
           style={{ fill, fillOpacity: 1 }}
         />
         <path
