@@ -135,6 +135,7 @@ export default function Article({
               color: "rgba(0, 0, 0, 0.87)",
               fontSize: "24px",
               lineHeight: "30px",
+              p: 0,
             }}
           />
         </Paper>

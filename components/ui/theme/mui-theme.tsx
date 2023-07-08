@@ -38,6 +38,9 @@ const getMuiTheme = (): Theme => {
       cellHeaderBackground: {
         main: "#EFDDD1",
       },
+      text: {
+        primary: "#303B44",
+      },
     },
     spacing: 12,
     shape: {

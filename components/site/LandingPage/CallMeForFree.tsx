@@ -17,11 +17,11 @@ import ContactDialog from "../contacts/ContactDialog";
 import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
 interface Props {
   sx?: SxProps;
-  containerSx?: SxProps;
+  paperSx?: SxProps;
 }
-export const CallMeForFree = ({ sx, containerSx }: Props) => {
+export const CallMeForFree = ({ sx, paperSx }: Props) => {
   return (
-    <Container maxWidth={"lg"} sx={{ "&&": { p: 0, ...(containerSx as any) } }}>
+    <Container maxWidth={"lg"} sx={{ "&&": { ...(sx as any) } }}>
       <Paper
         elevation={0}
         sx={{
@@ -30,7 +30,10 @@ export const CallMeForFree = ({ sx, containerSx }: Props) => {
           border: `4px solid #EBEBEA`,
           textAlign: "center",
           "&, & p, & h2": {
-            color: "rgba(0, 0, 0, 0.87)",
+            color: (theme) => theme.palette.text.primary,
+          },
+          "& p span": {
+            color: (theme) => theme.palette.primary.main,
           },
           "&&& a, &&& p:last-of-type": {
             color: (theme) => theme.palette.primary.main,
@@ -39,7 +42,7 @@ export const CallMeForFree = ({ sx, containerSx }: Props) => {
             margin: 0,
             fontSize: "40px",
             lineHeight: "52px",
-            ...(sx as any),
+            ...(paperSx as any),
           },
         }}
       >
