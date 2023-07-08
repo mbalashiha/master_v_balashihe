@@ -22,13 +22,15 @@ import BaseDialogHeader from "../BaseDialogHeader/BaseDialogHeader";
 import { standartCssTransition } from "../theme/mui-theme";
 
 type TriggerButton = React.ReactNode | React.ReactNode[];
-interface Props {
+export interface BaseDialogProps {
   children: TriggerButton;
   content: React.ReactNode | React.ReactNode[];
   title?: React.ReactNode | React.ReactNode[];
+  dialogActions?: React.ReactNode | React.ReactNode[];
   sx?: SxProps;
   component?: React.ComponentProps<typeof Box>["component"];
   noContainer?: boolean;
+  maxWidth?: React.ComponentProps<typeof Dialog>["maxWidth"];
 }
 
 const BaseDialog = React.forwardRef(function BaseDialog(
@@ -39,7 +41,9 @@ const BaseDialog = React.forwardRef(function BaseDialog(
     sx,
     component = "div",
     noContainer,
-  }: Props,
+    maxWidth = "lg",
+    dialogActions,
+  }: BaseDialogProps,
   ref: any
 ) {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -107,7 +111,7 @@ const BaseDialog = React.forwardRef(function BaseDialog(
       )}
       {isOpen ? (
         <Dialog
-          maxWidth={"lg"}
+          maxWidth={maxWidth}
           ref={ref}
           open={isOpen}
           onClose={close}
@@ -131,7 +135,7 @@ const BaseDialog = React.forwardRef(function BaseDialog(
           <BaseDialogHeader close={close}>{title}</BaseDialogHeader>
           <DialogContent>{content}</DialogContent>
           <DialogActions>
-            <Button onClick={() => close()}>Закрыть</Button>
+            {dialogActions || <Button onClick={() => close()}>Закрыть</Button>}
           </DialogActions>
         </Dialog>
       ) : null}

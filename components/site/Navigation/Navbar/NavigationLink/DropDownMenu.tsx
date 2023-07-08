@@ -72,7 +72,10 @@ const DropDownMenu = ({ submenu, ...link }: Props) => {
         },
       }}
     >
-      <button className="dropbtn">{link.name}</button>
+      <button className="dropbtn">
+        {link.name}
+        <span className="material-icons">keyboard_arrow_down</span>
+      </button>
       <Box className="dropdown-content">
         {submenu?.map((item) => (
           <>

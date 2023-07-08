@@ -3,33 +3,13 @@ import { FC, useMemo, useRef } from "react";
 import { IconEmailCircle } from "@components/icons";
 import Image from "next/image";
 import ContactInfoRow from "./ContactInfoRow";
+import { Grid, Box, Stack } from "@mui/material";
 import { Link as MuiLink } from "@mui/material";
 import { EmailLink, EnhImage, PhoneLink } from "@components/ui";
 import IconPhoneCircle from "@components/icons/IconPhoneCircle";
-import IconLocationCircle from "@components/icons/IconLocationCircle";
-import MapStaticPic from "/public/images/map.png";
 import { email, phoneNumber, locationPlace } from "@/const/contacts";
 import { ContactPhone } from "../contacts";
 import { grey } from "@mui/material/colors";
-import {
-  Badge,
-  Divider,
-  Grid,
-  Box,
-  List,
-  Menu,
-  MenuItem,
-  MenuList,
-  AppBar,
-  Toolbar,
-  Container,
-} from "@mui/material";
-import { styled } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import dynamic from "next/dynamic";
-import PaletterModeSwitch from "@components/common/paletter/PaletteSwitch";
-import { useRouter } from "next/router";
-import { MainLogo } from "@components/site/MainLogo";
 import { PhoneCallIcon, TelegramIcon } from "@components/icons";
 import {
   NEXT_PUBLIC_WHATSAPP_LINK,
@@ -38,25 +18,10 @@ import {
   NEXT_PUBLIC_CONTACT_PHONE_TEXT,
 } from "@framework/const";
 import { WhatsappLink } from "@components/site/contacts";
-import {
-  DialogActions,
-  DialogContent,
-  IconButton,
-  Button,
-  ExtendButtonBase,
-  Typography,
-  Dialog,
-  SxProps,
-  Stack,
-} from "@mui/material";
-type TriggerButton = React.ReactNode | React.ReactNode[];
-interface Props {
-  children: TriggerButton;
-  component?: React.ComponentProps<typeof BaseDialog>["component"];
-  sx?: SxProps;
-  noContainer?: boolean;
-}
 import { BaseDialog } from "@components/ui";
+import { BaseDialogProps } from "@components/ui/BaseDialog";
+type Props = Omit<BaseDialogProps, "content">;
+
 const ContactsContent = () => {
   return (
     <Stack
