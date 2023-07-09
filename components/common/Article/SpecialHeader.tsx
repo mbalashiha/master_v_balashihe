@@ -7,13 +7,21 @@ import React, { useMemo } from "react";
 import { blueGrey } from "@mui/material/colors";
 import cn from "classnames";
 import a from "@components/scss/animation.module.scss";
+import GradientSVG from "public/gradient.svg";
 
-const StyledBox = styled((props: React.ComponentProps<typeof Paper>) => (
-  <Paper component="header" {...props} />
-))(({ theme }) => ({
+const StyledBox = styled(
+  ({ children, sx, ...props }: React.ComponentProps<typeof Paper>) => (
+    <Paper component="header" {...props} sx={{ ...sx }}>
+      {children}
+    </Paper>
+  )
+)(({ theme }) => ({
   width: "100%",
   padding: "0 4px",
-  background: `linear-gradient(184deg, ${theme.palette.articleText.main}, rgb(30, 30, 54))`,
+  backgroundColor: "#DFDDDB",
+  backgroundImage: `url(/rect111611.webp)`,
+  backgroundSize: "100% 100%",
+  backgroundPosition: "center center",
   color: `rgb(52, 71, 103)`,
   borderRadius: 0,
   marginBottom: 0,
@@ -67,15 +75,15 @@ export const SpecialHeader = ({
               component="h1"
               variant="h1"
               sx={{
-                color: "white",
-                fontSize: "46px",
-                lineHeight: "70px",
+                fontSize: { xs: "28px", sm: "44px" },
+                lineHeight: { xs: "39px", sm: "62px" },
                 fontWeight: 700,
+                px: { xs: "9px", sm: 0 },
                 "&:after": {
                   content: `"${afterContent}"`,
                   color: "#F24570",
-                  fontSize: "72px",
-                  lineHeight: "70px",
+                  fontSize: { xs: "28px", sm: "44px" },
+                  lineHeight: { xs: "39px", sm: "62px" },
                 },
               }}
             >
@@ -89,7 +97,6 @@ export const SpecialHeader = ({
                     p: 0,
                     m: 0,
                     ml: "30px",
-                    color: blueGrey[200],
                     "&::before": {
                       display: "inline-block",
                       content: `"\\2605"`,
@@ -128,8 +135,8 @@ export const SpecialHeader = ({
               alt={(image.alt || "Компьютерный мастер в Балашихе") + " МФЦ"}
               width={image.width}
               height={image.height}
-              fitWidth={400}
-              fitHeight={400}
+              fitWidth={300}
+              fitHeight={300}
               className={cn(a.animated, a.infinite, a.slower, a.pulse)}
               quality={100}
             />

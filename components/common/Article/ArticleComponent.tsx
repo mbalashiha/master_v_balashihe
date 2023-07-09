@@ -40,7 +40,12 @@ export default function Article({
         {title}
       </SpecialHeader>
       <HugeContainer
-        sx={{ mb: "10px" }}
+        sx={{
+          mb: "10px",
+          background: "#DFE7EB",
+          boxShadow:
+            "#0000001a 0rem 0.25rem 0.375rem -0.0625rem, #0000000f 0rem 0.125rem 0.25rem -0.0625rem",
+        }}
         rightSidebar={navigation && <NavSidebar navigation={navigation} />}
       >
         <Stack

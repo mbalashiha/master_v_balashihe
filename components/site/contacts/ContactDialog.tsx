@@ -26,7 +26,7 @@ const ContactsContent = () => {
   return (
     <Stack
       direction={"column"}
-      spacing={1}
+      spacing={{ xs: 2, xl: 3 }}
       sx={{
         color: "#2E2D58",
         letterSpacing: "0.001rem",
@@ -44,6 +44,12 @@ const ContactsContent = () => {
         svgIcon={<IconPhoneCircle fill="#2e2d58" />}
         label={"Телефон:"}
         infoText={<ContactPhone />}
+        sx={{
+          "& a": {
+            fontSize: "40px",
+            lineHeight: "40px",
+          },
+        }}
       />
       <ContactInfoRow
         svgIcon={<IconEmailCircle fill="#2e2d58" />}

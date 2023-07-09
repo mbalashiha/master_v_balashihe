@@ -31,6 +31,7 @@ export const MainLogo = () => {
         alignItems: "center",
         justifyContent: "center",
         height: "82px",
+        px: { xs: "10px", sm: 0 },
       }}
     >
       <Link href="/" passHref>

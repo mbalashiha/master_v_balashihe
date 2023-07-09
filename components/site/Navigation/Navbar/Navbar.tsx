@@ -89,6 +89,7 @@ const Navbar: FC = () => {
                 fontWeight: 700,
                 letterSpacing: "0.001rem",
                 height: "75px",
+                px: { xs: "24px", sm: 0 },
                 "& a, & > div": {
                   display: "flex",
                   direction: "row",
