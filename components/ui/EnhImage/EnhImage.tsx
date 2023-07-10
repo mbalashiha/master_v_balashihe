@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useMemo } from "react";
 import { styled } from "@mui/material";
 import {
   calculateAspectRatioFit,
@@ -39,6 +39,7 @@ type Props = ImageProps & {
   width: number;
   height: number;
   allAuto?: boolean;
+  fitParent?: boolean;
 };
 export default function EnhImage({
   fitWidth,
@@ -48,11 +49,18 @@ export default function EnhImage({
   alt,
   src,
   allAuto,
+  fitParent,
   ...rest
 }: Props) {
   const targetDims = React.useMemo(() => {
     if (!width || !height) {
-      return { width, height, srcWidth: width, srcHeight: height, allAuto };
+      return {
+        width,
+        height,
+        srcWidth: width,
+        srcHeight: height,
+        allAuto,
+      };
     } else if (fitWidth && fitHeight) {
       return {
         ...calculateAspectRatioFit(
@@ -74,9 +82,27 @@ export default function EnhImage({
         allAuto,
       };
     } else {
-      return { width, height, srcWidth: width, srcHeight: height, allAuto };
+      return {
+        width,
+        height,
+        srcWidth: width,
+        srcHeight: height,
+        allAuto,
+      };
     }
   }, [fitWidth, fitHeight, width, height, allAuto]);
+  const onLoad = useMemo(() => {
+    if (fitParent) {
+      return (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        const target: HTMLImageElement = (event.target ||
+          event.currentTarget) as HTMLImageElement;
+        target.setAttribute("width", "auto");
+        target.setAttribute("height", "auto");
+        target.style.width = "100%";
+        target.style.height = "auto";
+      };
+    }
+  }, [fitParent]);
   return (
     <StyledImage
       targetDims={targetDims}
@@ -84,6 +110,7 @@ export default function EnhImage({
       height={targetDims.height}
       alt={alt || ""}
       src={src}
+      onLoad={onLoad}
       {...rest}
     />
   );

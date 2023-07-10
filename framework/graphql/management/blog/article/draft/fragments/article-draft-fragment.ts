@@ -11,6 +11,7 @@ export const articleDraftFragment = gql`
     text
     textHtml
     textRawDraftContentState
+    h2
     keyTextHtml
     autoHandleSlug
     unPublished
@@ -27,6 +28,14 @@ export const articleDraftFragment = gql`
     }
     imageId
     image {
+      imageId
+      imgSrc
+      width
+      height
+      altText
+    }
+    secondImageId
+    secondImage {
       imageId
       imgSrc
       width

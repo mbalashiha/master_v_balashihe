@@ -135,10 +135,11 @@ export const SpecialHeader = ({
               alt={(image.alt || "Компьютерный мастер в Балашихе") + " МФЦ"}
               width={image.width}
               height={image.height}
-              fitWidth={300}
-              fitHeight={300}
+              fitWidth={600}
+              fitHeight={600}
               className={cn(a.animated, a.infinite, a.slower, a.pulse)}
               quality={100}
+              fitParent
             />
           </Grid>
         </Grid>

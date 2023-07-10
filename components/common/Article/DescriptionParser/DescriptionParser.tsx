@@ -273,8 +273,8 @@ const options = {
                 title={title}
                 width={width}
                 height={height}
-                onLoad={(event: any) => {
-                  const target = (event.target ||
+                onLoad={(event) => {
+                  const target: HTMLImageElement = (event.target ||
                     event.currentTarget) as HTMLImageElement;
                   if (
                     target.parentElement?.offsetWidth &&

@@ -109,6 +109,7 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     textHtml,
     renderHtml,
     keyTextHtml,
+    h2,
     unPublished,
     notSearchable,
     notInList,
@@ -121,6 +122,8 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     navigation,
     imageId,
     image,
+    secondImageId,
+    secondImage,
   } = data;
   if (!id) {
     throw new Error("No id in article row!");
@@ -134,6 +137,7 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     textHtml: textHtml || renderHtml || "",
     renderHtml: renderHtml || "",
     keyTextHtml: keyTextHtml || "",
+    h2: h2 || "",
     unPublished: Boolean(unPublished),
     notSearchable: Boolean(notSearchable),
     notInList: Boolean(notInList),
@@ -149,6 +153,8 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     },
     imageId: imageId || null,
     image: image ? normalizeImage(image) : null,
+    secondImageId: secondImageId || null,
+    secondImage: secondImage ? normalizeImage(secondImage) : null,
   };
 };
 

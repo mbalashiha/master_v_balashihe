@@ -9,6 +9,7 @@ const articleFragment = gql`
     text
     textHtml
     textRawDraftContentState
+    h2
     keyTextHtml
     autoHandleSlug
     unPublished
@@ -20,6 +21,13 @@ const articleFragment = gql`
     updatedAt
     publishedAt
     image {
+      imageId
+      imgSrc
+      width
+      height
+      altText
+    }
+    secondImage {
       imageId
       imgSrc
       width

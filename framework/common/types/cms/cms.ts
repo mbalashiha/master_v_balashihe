@@ -53,6 +53,7 @@ export namespace Blog {
     textHtml: String;
     renderHtml: String;
     keyTextHtml: String;
+    h2: String;
     unPublished: Boolean;
     notSearchable: Boolean;
     notInList: Boolean;
@@ -65,6 +66,8 @@ export namespace Blog {
     navigation: BlogArticleNavigation;
     imageId: ID | null;
     image: Image | null;
+    secondImageId: ID | null;
+    secondImage: Image | null;
   }
   export interface ArticleDraft {
     id: ID | null;
@@ -76,6 +79,7 @@ export namespace Blog {
     textHtml: String;
     textRawDraftContentState: String | null;
     keyTextHtml: String;
+    h2: String;
     unPublished: Boolean;
     notSearchable: Boolean;
     notInList: Boolean;
@@ -90,6 +94,8 @@ export namespace Blog {
     isCreatePage: Boolean;
     imageId: ID | null;
     image: Image | null;
+    secondImageId: ID | null;
+    secondImage: Image | null;
   }
 }
 export namespace Management {

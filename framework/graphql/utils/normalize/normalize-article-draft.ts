@@ -20,6 +20,7 @@ export const normalizeArticleDraft = (
     textHtml,
     textRawDraftContentState,
     keyTextHtml,
+    h2,
     unPublished,
     notSearchable,
     notInList,
@@ -32,6 +33,8 @@ export const normalizeArticleDraft = (
     existingArticle,
     imageId,
     image,
+    secondImageId,
+    secondImage,
   } = draft;
   const url = existingArticleId
     ? normalizeArticleUrl(handle, autoHandleSlug)
@@ -47,6 +50,7 @@ export const normalizeArticleDraft = (
     textHtml: textHtml || "",
     textRawDraftContentState: textRawDraftContentState || null,
     keyTextHtml: keyTextHtml || "",
+    h2: h2 || "",
     unPublished: Boolean(unPublished),
     notSearchable: Boolean(notSearchable),
     notInList: Boolean(notInList),
@@ -60,6 +64,8 @@ export const normalizeArticleDraft = (
     existingArticle: existingArticle ? normalizeArticle(existingArticle) : null,
     imageId: imageId || null,
     image: image ? normalizeImage(image) : null,
+    secondImageId: secondImageId || null,
+    secondImage: secondImage ? normalizeImage(secondImage) : null,
   };
   return normalizedDraft;
 };

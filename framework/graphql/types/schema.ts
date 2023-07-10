@@ -64,6 +64,7 @@ export namespace Schema {
     textHtml: String;
     textRawDraftContentState: String | null;
     keyTextHtml: String | null;
+    h2: String | null;
     renderHtml: String;
     unPublished: Boolean;
     notSearchable: Boolean;
@@ -78,6 +79,8 @@ export namespace Schema {
     navigation: BlogArticleNavigation | null;
     imageId: ID | null;
     image: Image | null;
+    secondImageId: ID | null;
+    secondImage: Image | null;
   }
   export namespace Article {
     export interface ArticleInput {
@@ -88,6 +91,7 @@ export namespace Schema {
       text: String | null;
       textHtml: String | null;
       textRawDraftContentState: String | null;
+      h2: String | null;
       keyTextHtml: String | null;
       renderHtml: String;
       unPublished: Boolean;
@@ -97,12 +101,14 @@ export namespace Schema {
       blogCategoryId: ID | null;
       existingArticleId: ID | null;
       imageId: ID | null;
+      secondImageId: ID | null;
     }
     export interface ArticleDraftInput {
       id: ID | null;
       title: String | null;
       handle: String | null;
       autoHandleSlug: String | null;
+      h2: String | null;
       unPublished: Boolean;
       notSearchable: Boolean;
       notInList: Boolean;
@@ -110,6 +116,7 @@ export namespace Schema {
       blogCategoryId: ID | null;
       existingArticleId: ID | null;
       imageId: ID | null;
+      secondImageId: ID | null;
     }
     export interface TextDraftInput {
       id: ID | null;
@@ -133,6 +140,7 @@ export namespace Schema {
       textHtml: String;
       keyTextHtml: String | null;
       textRawDraftContentState: String | null;
+      h2: String | null;
       unPublished: Boolean;
       notSearchable: Boolean;
       notInList: Boolean;
@@ -146,6 +154,8 @@ export namespace Schema {
       existingArticle: BlogArticle | null;
       imageId: ID | null;
       image: Image | null;
+      secondImageId: ID | null;
+      secondImage: Image | null;
     }
   }
   export interface BlogArticlesConnection {
