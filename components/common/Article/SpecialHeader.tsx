@@ -8,6 +8,7 @@ import { blueGrey } from "@mui/material/colors";
 import cn from "classnames";
 import a from "@components/scss/animation.module.scss";
 import GradientSVG from "public/gradient.svg";
+import { RequestComputerMaster } from "@components/site";
 
 const StyledBox = styled(
   ({ children, sx, ...props }: React.ComponentProps<typeof Paper>) => (
@@ -59,16 +60,37 @@ export const SpecialHeader = ({
   }, [inChildren]);
   return (
     <StyledBox>
-      <Container maxWidth={"lg"}>
-        <Grid container>
+      <Container
+        maxWidth={"lg"}
+        sx={{
+          position: "relative",
+          "& > img": {
+            position: "absolute",
+            zIndex: 0,
+            maxHeight: "100%",
+            right: { xs: "auto", md: 0, xl: "-350px" },
+            left: { xs: 0, md: "auto" },
+            top: 0,
+            padding: "0 0 45px 0",
+          },
+        }}
+      >
+        <Grid
+          container
+          sx={{
+            position: "relative",
+            paddingBottom: { xs: "135px", md: "60px" },
+          }}
+        >
           <Grid
             item
             xs={12}
             md={6}
             sx={{
               minWidth: "400px",
-              display: "block",
-              padding: "60px 0",
+              display: "flex",
+              padding: { xs: "60px 0 0 0", md: "60px 0 60px 0" },
+              alignItems: "center",
             }}
           >
             <Typography
@@ -79,6 +101,7 @@ export const SpecialHeader = ({
                 lineHeight: { xs: "39px", sm: "62px" },
                 fontWeight: 700,
                 px: { xs: "9px", sm: 0 },
+                zIndex: 1,
                 "&:after": {
                   content: `"${afterContent}"`,
                   color: "#F24570",
@@ -89,32 +112,35 @@ export const SpecialHeader = ({
             >
               {children}
             </Typography>
-            {keyTextHtml && (
-              <Box
-                sx={{
-                  marginTop: "20px",
-                  "& > *": {
-                    p: 0,
-                    m: 0,
-                    ml: "30px",
-                    "&::before": {
-                      display: "inline-block",
-                      content: `"\\2605"`,
-                      fontSize: "24px",
-                      lineHeight: "20px",
-                      transform: "translate(-30px,2px)",
-                      width: 0,
-                      overflow: "visible",
-                      color: "orange",
-                    },
-                  },
-                }}
-              >
-                <HeaderTextParser htmlText={keyTextHtml} />
-              </Box>
-            )}
           </Grid>
-
+          {keyTextHtml && (
+            <Grid
+              item
+              xs={12}
+              order={2}
+              sx={{
+                paddingTop: 0,
+                paddingBottom: "47px",
+                "& > *": {
+                  p: 0,
+                  m: 0,
+                  ml: "30px",
+                  "&::before": {
+                    display: "inline-block",
+                    content: `"\\2605"`,
+                    fontSize: "24px",
+                    lineHeight: "20px",
+                    transform: "translate(-30px,2px)",
+                    width: 0,
+                    overflow: "visible",
+                    color: "orange",
+                  },
+                },
+              }}
+            >
+              <HeaderTextParser htmlText={keyTextHtml} />
+            </Grid>
+          )}
           <Grid
             item
             xs={12}
@@ -123,7 +149,8 @@ export const SpecialHeader = ({
               display: "flex",
               justifyContent: "center",
               alignItems: "flex-start",
-              padding: "60px",
+              padding: "60px 60px 0 60px",
+              zIndex: 2,
               "& img": {
                 borderRadius: "10px",
               },
@@ -142,7 +169,15 @@ export const SpecialHeader = ({
               fitParent
             />
           </Grid>
+          <RequestComputerMaster />
         </Grid>
+        <EnhImage
+          width={1498}
+          height={784}
+          fitHeight={500}
+          src="/images/my-computer-repair-bg.webp"
+          alt="Компьютерный мастер Балашиха МФЦ остановка Горсовет"
+        />
       </Container>
     </StyledBox>
   );

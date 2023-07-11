@@ -26,7 +26,7 @@ export interface BaseDialogProps {
   children: TriggerButton;
   content: React.ReactNode | React.ReactNode[];
   title?: React.ReactNode | React.ReactNode[];
-  dialogActions?: React.ReactNode | React.ReactNode[];
+  dialogActions?: boolean | React.ReactNode | React.ReactNode[];
   sx?: SxProps;
   component?: React.ComponentProps<typeof Box>["component"];
   noContainer?: boolean;
@@ -117,9 +117,10 @@ const BaseDialog = React.forwardRef(function BaseDialog(
           onClose={close}
           sx={{
             "& .Dialog-container": {
-              "& > *": {
+              "& > *:first-child": {
                 borderRadius: (theme) => theme.shape.borderRadius / 2 + "px",
                 margin: { xs: "2px", sm: "6px", md: "inherit" },
+                ...(sx as any),
               },
               "& .DialogContent-root": {
                 p: {
@@ -127,16 +128,22 @@ const BaseDialog = React.forwardRef(function BaseDialog(
                   sm: "0px 8px 20px 8px",
                   md: "0px 24px 20px 24px",
                 },
+                overflowX: "hidden",
               },
             },
-            ...sx,
           }}
         >
           <BaseDialogHeader close={close}>{title}</BaseDialogHeader>
           <DialogContent>{content}</DialogContent>
-          <DialogActions>
-            {dialogActions || <Button onClick={() => close()}>Закрыть</Button>}
-          </DialogActions>
+          {dialogActions === false ? null : (
+            <DialogActions>
+              {dialogActions && dialogActions !== true ? (
+                dialogActions
+              ) : (
+                <Button onClick={() => close()}>Закрыть</Button>
+              )}
+            </DialogActions>
+          )}
         </Dialog>
       ) : null}
     </>

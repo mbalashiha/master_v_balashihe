@@ -5,3 +5,4 @@ export { default as CardsLayout } from "./CardsLayout";
 export { ArticleLayout } from "./ArticlePage";
 export { default as YandexMapIframe } from "./YandexMapIframe";
 export { default as Search } from "./Search";
+export { default as RequestComputerMaster } from "./RequestComputerMaster";

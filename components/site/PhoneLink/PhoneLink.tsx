@@ -1,8 +1,8 @@
-import { styled, Link, SxProps } from "@mui/material";
+import { styled, Link as MuiLink, SxProps } from "@mui/material";
 import React from "react";
 
-interface Props
-  extends Omit<Omit<React.ComponentProps<typeof Link>, "children">, "href"> {
+export interface PhoneLinkProps
+  extends Omit<Omit<React.ComponentProps<typeof MuiLink>, "children">, "href"> {
   phoneText?: React.ReactNode | React.ReactNode[];
   phoneNumber: string;
   children?: React.ReactNode | React.ReactNode[];
@@ -15,19 +15,17 @@ const PhoneLink = ({
   underline,
   sx,
   ...rest
-}: Props) => {
+}: PhoneLinkProps) => {
   phoneText = children || phoneText || phoneNumber;
   return (
-    <>
-      <Link
+      <MuiLink
         {...rest}
         href={`tel:${phoneNumber}`}
-        underline={underline || "none"}
+        underline={underline || "hover"}
         sx={{ ...sx }}
       >
         {phoneText}
-      </Link>
-    </>
+      </MuiLink>
   );
 };
 

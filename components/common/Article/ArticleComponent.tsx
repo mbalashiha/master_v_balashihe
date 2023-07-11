@@ -41,6 +41,7 @@ export default function Article({
       </SpecialHeader>
       <HugeContainer
         sx={{
+          paddingTop: { xs: "200px", sm: "140px", md: "120px" },
           mb: "10px",
           background: "#DFE7EB",
           boxShadow:

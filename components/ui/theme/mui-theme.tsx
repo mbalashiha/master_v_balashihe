@@ -231,7 +231,14 @@ const getMuiTheme = (): Theme => {
       },
       MuiButtonBase: {
         styleOverrides: {
-          root: { ...standartCssTransition },
+          root: {
+            ...standartCssTransition,
+            "&:disabled": {
+              borderColor: "#adadad",
+              color: "#adadad",
+            },
+            "& svg.SvgIcon-root": {},
+          },
         },
       },
       MuiIconButton: {
@@ -263,9 +270,22 @@ const getMuiTheme = (): Theme => {
               background: theme.palette.primary.main,
               color: "#ffffff",
               boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
+              "& svg.SvgIcon-root": {
+                fill: "red",
+              },
             },
             "& .Button-iconSizeMedium": {
               transform: "scale(1.2)",
+            },
+            "&:disabled": {
+              borderColor: "#adadad",
+              color: "#adadad",
+              "& svg.SvgIcon-root": {
+                fill: "#adadad",
+              },
+            },
+            "& svg.SvgIcon-root": {
+              fill: theme.palette.primary.main,
             },
           },
         },

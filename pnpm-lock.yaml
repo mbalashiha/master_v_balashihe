@@ -115,6 +115,9 @@ dependencies:
   react-responsive-carousel:
     specifier: ^3.2.23
     version: 3.2.23
+  react-step-wizard:
+    specifier: ^5.3.11
+    version: 5.3.11(react@18.2.0)
   sanitize-html:
     specifier: ^2.10.0
     version: 2.10.0
@@ -5552,6 +5555,14 @@ packages:
       classnames: 2.3.2
       prop-types: 15.8.1
       react-easy-swipe: 0.0.21
+    dev: false
+
+  /react-step-wizard@5.3.11(react@18.2.0):
+    resolution: {integrity: sha512-TD3ocUdt4XWvisTNEiATh+cFuh1RK0LgvYqOResTIhLtFmdWnXzFVaNIZJ3qzW5Bm6yeotzZ4KAmRjmsqBXnWQ==}
+    peerDependencies:
+      react: '>=15.0.1'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-transition-group@4.4.5(react-dom@18.2.0)(react@18.2.0):
