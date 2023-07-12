@@ -45,8 +45,8 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     article.image = {
       ...article.image,
       url: `/images/computer_master_balashikha_hero.webp`,
-      width: 3072,
-      height: 2007,
+      width: 600,
+      height: 392,
       alt: `Дмитрий, компьютерный мастер в Балашихе, выпускник МГТУ МИРЭА (РТУ МИРЭА)`,
       orderNumber: null,
       originalWidth: null,

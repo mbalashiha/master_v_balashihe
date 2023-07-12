@@ -4,9 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { DescriptionParser } from "@components/common/Article";
 import React from "react";
-import { fitWidth } from "@lib/aspect-ration-fit";
 import { Blog } from "@common/types/cms";
-import { EnhImage } from "@components/ui";
 interface Props {
   article: Blog.Article;
 }
@@ -55,14 +53,13 @@ export default function Hero({ article }: Props) {
                   },
                 }}
               >
-                <EnhImage
+                <Image
                   src={image.url}
                   width={image.width}
                   height={image.height}
                   alt={image.alt}
                   quality={100}
-                  fitWidth={600}
-                ></EnhImage>
+                ></Image>
               </Paper>
             </Grid>
           )}

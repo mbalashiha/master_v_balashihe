@@ -26,6 +26,8 @@ const StyledBox = styled(
   color: `rgb(52, 71, 103)`,
   borderRadius: 0,
   marginBottom: 0,
+  overflow: "visible",
+  boxShadow: "none",
 }));
 
 interface Props {
@@ -59,22 +61,21 @@ export const SpecialHeader = ({
     return { children: inChildren, afterContent: "." };
   }, [inChildren]);
   return (
-    <StyledBox>
-      <Container
-        maxWidth={"lg"}
-        sx={{
-          position: "relative",
-          "& > img": {
-            position: "absolute",
-            zIndex: 0,
-            maxHeight: "100%",
-            right: { xs: "auto", md: 0, xl: "-350px" },
-            left: { xs: 0, md: "auto" },
-            top: 0,
-            padding: "0 0 45px 0",
-          },
-        }}
-      >
+    <StyledBox
+      sx={{
+        position: "relative",
+        "& > img": {
+          position: "absolute",
+          zIndex: 0,
+          maxHeight: "100%",
+          right: { xs: "auto", md: 0, xl: 0 },
+          left: { xs: 0, md: "auto" },
+          top: 0,
+          padding: "0 0 45px 0",
+        },
+      }}
+    >
+      <Container maxWidth={"lg"}>
         <Grid
           container
           sx={{
@@ -171,14 +172,15 @@ export const SpecialHeader = ({
           </Grid>
           <RequestComputerMaster />
         </Grid>
-        <EnhImage
-          width={1498}
-          height={784}
-          fitHeight={500}
-          src="/images/my-computer-repair-bg.webp"
-          alt="Компьютерный мастер Балашиха МФЦ остановка Горсовет"
-        />
       </Container>
+      <EnhImage
+        width={1498}
+        height={784}
+        fitHeight={500}
+        src="/images/my-computer-repair-bg.webp"
+        alt="Компьютерный мастер Балашиха МФЦ остановка Горсовет"
+        quality={90}
+      />
     </StyledBox>
   );
 };
