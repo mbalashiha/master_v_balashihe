@@ -20,43 +20,42 @@ interface DialogTitleProps extends React.ComponentProps<typeof DialogTitle> {
 export const BaseDialogHeader = ({
   children,
   close,
+  sx,
   ...other
 }: DialogTitleProps) => {
   return (
-    <DialogTitle sx={{ m: 0, p: 0, display: "flex" }} {...other}>
-      <Box
+    <DialogTitle
+      sx={{
+        m: 0,
+        position: "relative",
+        p: {
+          xs: children ? "20px 52px 20px 8px" : 0,
+          md: children ? "20px 52px 24px 20px" : 0,
+        },
+        ...sx,
+      }}
+      {...other}
+    >
+      {children}
+      <IconButton
+        aria-label="close"
+        onClick={close}
         sx={{
-          flexGrow: 1,
-          p: { xs: children ? "20px 8px" : 0, md: children ? "20px 24px" : 0 },
-        }}
-      >
-        {children}
-      </Box>
-      <Box
-        sx={{
-          height: "100%",
-          width: "54px",
-          display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "flex-end",
-          padding: "4px",
-        }}
-      >
-        <IconButton
-          aria-label="close"
-          onClick={close}
-          sx={{
-            color: (theme) => theme.palette.grey[500],
+          color: (theme) => theme.palette.grey[500],
+          ...standartCssTransition,
+          m: "4px",
+          "& svg": { transform: "scale(1)", width: "28px", height: "28px" },
+          position: "absolute",
+          right: 0,
+          top: 0,
+          "&:hover": {
             ...standartCssTransition,
-            "&:hover": {
-              ...standartCssTransition,
-              color: (theme) => theme.palette.text.primary,
-            },
-          }}
-        >
-          <CloseIcon sx={{ transform: "scale(1.2)" }} />
-        </IconButton>
-      </Box>
+            color: (theme) => theme.palette.text.primary,
+          },
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
     </DialogTitle>
   );
 };

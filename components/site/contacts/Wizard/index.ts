@@ -1,2 +1,2 @@
-export { default as Step } from "./StyledStep";
-export { default as WizardNav} from "./WizardNav";
+export { default as Step } from "./WizFormControl";
+export { default as WizardNav } from "./WizardNav";

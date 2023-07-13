@@ -28,7 +28,6 @@ const WizardNav: FC<any> = (props: StepWizardChildProps) => {
       <Btn
         endIcon={<EastIcon />}
         disabled={props.currentStep === props.totalSteps}
-        onClick={() => props.nextStep()}
       >
         Вперёд
       </Btn>

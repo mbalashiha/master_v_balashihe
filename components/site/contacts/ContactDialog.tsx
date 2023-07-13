@@ -20,7 +20,10 @@ import {
 import { WhatsappLink } from "@components/site/contacts";
 import { BaseDialog } from "@components/ui";
 import { BaseDialogProps } from "@components/ui/BaseDialog";
-import { Step} from "@components/site/contacts/Wizard";
+import Step1 from "./Wizard/Step1";
+import Step1_2 from "./Wizard/Step1_2";
+import Step1_3 from "./Wizard/Step1_3";
+import Step4 from "./Wizard/Step4";
 
 type Props = Omit<BaseDialogProps, "content">;
 
@@ -90,12 +93,14 @@ const ContactsContent = () => {
           </WhatsappLink>
         </Stack>
       </Stack>
-      <Typography sx={{ fontSize: "18px", fontWeight: 500, color: `#24263F` }}>
+      <Typography sx={{ fontSize: "18px", fontWeight: 500 }}>
         Ответьте на 4 вопроса и получите скидку 25%
       </Typography>
       <ContactWizard>
-        <Step title={"Какое у Вас устройство?"}></Step>
-        <Step title={"Что за устройство? С чем нужна помощь?"}></Step>
+        <Step1 stepName="Какое у вас устройство?" />
+        <Step1_2 stepName="Что сейчас с вашей техникой?" />
+        <Step1_3 stepName="Ремонтировали ли ранее устройство?" />
+        <Step4 stepName="Как срочно нужен мастер?" />
       </ContactWizard>
     </>
   );
@@ -115,6 +120,12 @@ export default function ContactDialog({
       sx={{
         ...sx,
         background: "#EFEFF4",
+        "& .Typography-root, & .Typography-body1, & .FormControlLabel-label": {
+          "&, & *": {
+            color: `#24263F`,
+            fontWeight: 500,
+          },
+        },
       }}
       noContainer={noContainer}
     >
