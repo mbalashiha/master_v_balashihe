@@ -6,18 +6,20 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import WizFormControl from "./WizFormControl";
+import { EnhImage } from "@components/ui";
+import WizRadio from "./WizRadio";
 import { StepWizardChildProps } from "react-step-wizard";
 import RadioString from "./RadioString";
 
-const Step1: React.FC<Partial<StepWizardChildProps>> = (({
+const Step2_1_3: React.FC<Partial<StepWizardChildProps>> = (({
   stepName,
   ...props
 }: StepWizardChildProps) => {
-  stepName = stepName || "Как срочно нужен мастер?";
+  stepName = stepName || "Что хотите сделать с вашим Mac?";
   const [field, meta] = useField(stepName);
   return (
     <WizFormControl>
-      <FormLabel id="step4">{stepName}</FormLabel>
+      <FormLabel id="step1_2">{stepName}</FormLabel>
       <RadioGroup
         aria-labelledby=""
         sx={{ gap: "12px" }}
@@ -25,20 +27,23 @@ const Step1: React.FC<Partial<StepWizardChildProps>> = (({
         onChange={(event) => {
           field.onChange(event);
           if (event.target.value) {
-            props.nextStep();
+            props.goToNamedStep("Ремонтировали ли ранее устройство?");
           }
         }}
         onClick={(event) => {
           if (field.value) {
-            props.nextStep();
+            props.goToNamedStep("Ремонтировали ли ранее устройство?");
           }
         }}
       >
-        <RadioString value="В ближайшие 1-2 часа" />
-        <RadioString value="Можно вечером" />
-        <RadioString value="Не важно, можно не сегодня" />
+        <RadioString value="Починить Mac, а то не работает" />
+        <RadioString value="Исправить ошибки или глюки" />
+        <RadioString value="Установить Windows на Mac для работы и игр" />
+        <RadioString value="Ускорить работу Mac" />
+        <RadioString value="Настроить или проконсультироваться" />
+        <RadioString value="Другое" />
       </RadioGroup>
     </WizFormControl>
   );
 }) as React.FC<Partial<StepWizardChildProps>>;
-export default Step1;
+export default Step2_1_3;

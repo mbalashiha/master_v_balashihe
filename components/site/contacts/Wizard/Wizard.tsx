@@ -8,18 +8,11 @@ import StepWizard, {
 } from "react-step-wizard";
 import { WizardNav } from ".";
 import { Formik } from "formik";
-import { WizValues } from "./wiztypes";
-const StyledWizard = styled(StepWizard)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column-reverse",
-}));
+import { WizValues } from "./WizardProvider/wiztypes";
+import { StyledWizard } from "./WizardProvider";
+
 export default function ContactWizard({ children, ...props }: StepWizardProps) {
-  const initialValues: WizValues = {
-    "Какое у вас устройство?": null,
-    "Что сейчас с вашей техникой?": null,
-    "Ремонтировали ли ранее устройство?": null,
-    "Как срочно нужен мастер?": null,
-  };
+  const initialValues: Partial<WizValues> = {};
   return (
     <Formik initialValues={initialValues} onSubmit={(values, ctx) => {}}>
       <StyledWizard nav={<WizardNav />} {...props}>

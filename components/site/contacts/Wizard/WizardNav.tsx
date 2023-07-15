@@ -7,6 +7,7 @@ import StepWizard, {
   StepWizardProps,
   StepWizardChildProps,
 } from "react-step-wizard";
+import { useWizard } from "./WizardProvider/WizardProvider";
 
 const Btn = styled(Button)(({ theme }) => ({
   "& svg, & svg.SvgIcon-root": {
@@ -17,11 +18,11 @@ const Btn = styled(Button)(({ theme }) => ({
 
 const WizardNav: FC<any> = (props: StepWizardChildProps) => {
   return (
-    <Stack direction={"row"} sx={{ alignSelf: "flex-end" }} spacing={"4px"}>
+    <Stack direction={"row"} sx={{ alignSelf: "flex-end", mt: "20px" }} spacing={"4px"}>
       <Btn
         startIcon={<WestIcon />}
-        disabled={props.currentStep === 1}
-        onClick={() => props.previousStep()}
+        disabled={props.currentStep <= 1}
+        onClick={() => props.goToStep(1)}
       >
         Назад
       </Btn>

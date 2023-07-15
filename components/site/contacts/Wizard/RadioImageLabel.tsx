@@ -12,7 +12,7 @@ type Props = Omit<Omit<FormControlLabelProps, "control">, "label"> & {
   value: string;
   image: JSX.Element;
 };
-export default function RadioLabel({
+export default function RadioImageLabel({
   sx,
   value,
   label,

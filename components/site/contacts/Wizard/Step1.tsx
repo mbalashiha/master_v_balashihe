@@ -8,15 +8,37 @@ import FormLabel from "@mui/material/FormLabel";
 import WizFormControl from "./WizFormControl";
 import { EnhImage } from "@components/ui";
 import WizRadio from "./WizRadio";
-import RadioLabel from "./RadioLabel";
 import { StepWizardChildProps } from "react-step-wizard";
+import { WizValues } from "./WizardProvider/wiztypes";
+import { useWizard } from "./WizardProvider/WizardProvider";
+import RadioImageLabel from "./RadioImageLabel";
 
+const getNextStep = (
+  value: WizValues["Какое у вас устройство?"]
+): string | null => {
+  switch (value) {
+    case "Настольный ПК":
+    case "Ноутбук":
+      return "Что сейчас с вашей техникой?";
+      break;
+    case "Apple Mac":
+      return "Что хотите сделать с вашим Mac?";
+      break;
+    case "Другая техника":
+      return "Что за устройство? С чем нужна помощь?";
+      break;
+    default:
+      return null;
+      break;
+  }
+};
 const Step1: React.FC<Partial<StepWizardChildProps>> = (({
   stepName,
   ...props
 }: StepWizardChildProps) => {
   stepName = stepName || "Какое у вас устройство?";
-  const [field, meta] = useField(stepName);
+  const [field, meta] =
+    useField<WizValues["Какое у вас устройство?"]>(stepName);
   return (
     <WizFormControl>
       <FormLabel id="step1">{stepName}</FormLabel>
@@ -27,17 +49,19 @@ const Step1: React.FC<Partial<StepWizardChildProps>> = (({
         {...field}
         onChange={(event) => {
           field.onChange(event);
-          if (event.target.value) {
-            props.goToNamedStep("Что сейчас с вашей техникой?");
+          const nextName = getNextStep(event.target.value as any);
+          if (nextName) {
+            props.goToNamedStep(nextName);
           }
         }}
         onClick={(event) => {
-          if (field.value) {
-            props.goToNamedStep("Что сейчас с вашей техникой?");
+          const nextName = getNextStep(field.value);
+          if (nextName) {
+            props.goToNamedStep(nextName);
           }
         }}
       >
-        <RadioLabel
+        <RadioImageLabel
           value="Настольный ПК"
           image={
             <EnhImage
@@ -49,7 +73,7 @@ const Step1: React.FC<Partial<StepWizardChildProps>> = (({
             />
           }
         />
-        <RadioLabel
+        <RadioImageLabel
           value="Ноутбук"
           image={
             <EnhImage
@@ -61,7 +85,7 @@ const Step1: React.FC<Partial<StepWizardChildProps>> = (({
             />
           }
         />
-        <RadioLabel
+        <RadioImageLabel
           value="Apple Mac"
           image={
             <EnhImage
@@ -73,7 +97,7 @@ const Step1: React.FC<Partial<StepWizardChildProps>> = (({
             />
           }
         />
-        <RadioLabel
+        <RadioImageLabel
           value="Другая техника"
           image={
             <EnhImage

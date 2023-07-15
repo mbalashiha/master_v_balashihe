@@ -31,6 +31,7 @@ export interface BaseDialogProps {
   component?: React.ComponentProps<typeof Box>["component"];
   noContainer?: boolean;
   maxWidth?: React.ComponentProps<typeof Dialog>["maxWidth"];
+  noPadding?: boolean;
 }
 
 const BaseDialog = React.forwardRef(function BaseDialog(
@@ -43,6 +44,7 @@ const BaseDialog = React.forwardRef(function BaseDialog(
     noContainer,
     maxWidth = "lg",
     dialogActions,
+    noPadding,
   }: BaseDialogProps,
   ref: any
 ) {
@@ -118,15 +120,16 @@ const BaseDialog = React.forwardRef(function BaseDialog(
           sx={{
             "& .Dialog-container": {
               "& > *:first-child": {
+                position: "relative",
                 borderRadius: (theme) => theme.shape.borderRadius / 2 + "px",
                 margin: { xs: "2px", sm: "6px", md: "inherit" },
                 ...(sx as any),
               },
               "& .DialogContent-root": {
-                p: {
-                  xs: "0px 4px 20px 4px",
-                  sm: "0px 8px 20px 8px",
-                  md: "0px 24px 20px 24px",
+                p: noPadding ? 0 : {
+                  xs: "20px 4px 20px 4px",
+                  sm: "20px 8px 20px 8px",
+                  md: "20px 24px 20px 24px",
                 },
                 overflowX: "hidden",
               },

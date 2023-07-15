@@ -6,9 +6,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import WizFormControl from "./WizFormControl";
-import { EnhImage } from "@components/ui";
-import WizRadio from "./WizRadio";
-import RadioLabel from "./RadioLabel";
 import { StepWizardChildProps } from "react-step-wizard";
 import RadioString from "./RadioString";
 

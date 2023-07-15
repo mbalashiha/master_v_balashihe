@@ -9,24 +9,14 @@ import {
   Stack,
   SxProps,
 } from "@mui/material";
-import FormControl from "@mui/material/FormControl";
+import FormControl, { FormControlProps } from "@mui/material/FormControl";
 import React from "react";
-import { WizValues } from "./wiztypes";
+import { WizValues } from "./WizardProvider/wiztypes";
 
-const WizFormControl = styled(FormControl)(({ theme }) => ({
+const StyledFormControl = styled(FormControl)(({ theme }) => ({
   "&, & > p, & > *": {
     fontWeight: 500,
     color: `#24263F`,
-  },
-  [theme.breakpoints.down("md")]: {
-    minHeight: "300px",
-    minWidth: "90vw",
-    maxHeight: "70vh",
-  },
-  [theme.breakpoints.up("md")]: {
-    minHeight: "500px",
-    minWidth: "800px",
-    maxHeight: "70vh",
   },
   "& label": {
     fontSize: "21px",
@@ -36,5 +26,12 @@ const WizFormControl = styled(FormControl)(({ theme }) => ({
     fontSize: "21px",
     fontWeight: 500,
   },
+  width: "100%",
+  height: "520px",
+  maxHeight: "60vh",
+  overflow: "auto",
 }));
-export default WizFormControl;
+type Props = FormControlProps;
+export default function WizFormControl({ children, ...rest }: Props) {
+  return <StyledFormControl {...rest}>{children}</StyledFormControl>;
+}

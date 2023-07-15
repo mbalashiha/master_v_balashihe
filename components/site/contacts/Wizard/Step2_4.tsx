@@ -8,35 +8,38 @@ import FormLabel from "@mui/material/FormLabel";
 import WizFormControl from "./WizFormControl";
 import { StepWizardChildProps } from "react-step-wizard";
 import RadioString from "./RadioString";
+import { WizValues } from "./WizardProvider/wiztypes";
 
 const Step1: React.FC<Partial<StepWizardChildProps>> = (({
   stepName,
   ...props
 }: StepWizardChildProps) => {
-  stepName = stepName || "Как срочно нужен мастер?";
+  stepName = stepName || "Что за устройство? С чем нужна помощь?";
   const [field, meta] = useField(stepName);
   return (
     <WizFormControl>
-      <FormLabel id="step4">{stepName}</FormLabel>
+      <FormLabel id="step2_4">{stepName}</FormLabel>
       <RadioGroup
-        aria-labelledby=""
+        aria-labelledby="выберите"
         sx={{ gap: "12px" }}
         {...field}
         onChange={(event) => {
           field.onChange(event);
           if (event.target.value) {
-            props.nextStep();
+            props.goToNamedStep("Ремонтировали ли ранее устройство?");
           }
         }}
         onClick={(event) => {
           if (field.value) {
-            props.nextStep();
+            props.goToNamedStep("Ремонтировали ли ранее устройство?");
           }
         }}
       >
-        <RadioString value="В ближайшие 1-2 часа" />
-        <RadioString value="Можно вечером" />
-        <RadioString value="Не важно, можно не сегодня" />
+        <RadioString value="Принтер или МФУ" />
+        <RadioString value="Игровая приставка Sony PlayStation / Microsoft Xbox" />
+        <RadioString value="Всё работает, но надо что-то установить или настроить" />
+        <RadioString value="Настроить Интернет или WI-FI" />
+        <RadioString value="Другое" />
       </RadioGroup>
     </WizFormControl>
   );
