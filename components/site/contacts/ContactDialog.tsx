@@ -3,7 +3,7 @@ import { FC, useMemo, useRef } from "react";
 import { IconEmailCircle } from "@components/icons";
 import Image from "next/image";
 import ContactInfoRow from "./ContactInfoRow";
-import { Grid, Box, Stack, Typography } from "@mui/material";
+import { Grid, Box, Stack, Typography, Divider } from "@mui/material";
 import { Link as MuiLink } from "@mui/material";
 import { EmailLink, EnhImage, PhoneLink } from "@components/ui";
 import IconPhoneCircle from "@components/icons/IconPhoneCircle";
@@ -39,7 +39,6 @@ const ContactsContent = () => {
           spacing={{ xs: xsSpacing, md: 2 }}
           sx={{
             letterSpacing: "0.001rem",
-            mb: 2,
           }}
         >
           <Stack direction={"column"} spacing={{ xs: xsSpacing, md: 2 }}>
@@ -99,6 +98,13 @@ const ContactsContent = () => {
             </WhatsappLink>
           </Stack>
         </Stack>
+        <Divider
+          sx={{
+            transform: "scaleY(2)",
+            mt: { xs: "10px", md: "18px" },
+            mb: { xs: "4px", md: "10px" },
+          }}
+        />
         <Typography
           sx={{
             fontSize: "18px",
@@ -124,6 +130,12 @@ const ContactsContent = () => {
         sx={{
           p: "10px",
           background: (theme) => theme.palette.background.paper,
+          "& img": {
+            borderRadius: "100%",
+          },
+          display: "flex",
+          flexDirection: "column",
+          gap: "12px",
         }}
       >
         <Typography
@@ -142,6 +154,25 @@ const ContactsContent = () => {
         >
           Ваша скидка 25%
         </Typography>
+        <Stack direction={"row"} spacing={1}>
+          <Image
+            src={"/images/tiny_computer_master_balashikha.webp"}
+            alt=""
+            width={60}
+            height={60}
+            quality={100}
+          ></Image>
+          <Box>
+            <Typography component="div">Дмитрий</Typography>
+            <Typography
+              component="div"
+              sx={{ fontSize: "14px", lineHeight: "16px" }}
+            >
+              IT специалист
+            </Typography>
+          </Box>
+        </Stack>
+        <Divider light sx={{ transform: "scaleY(2)", my: "10px" }} />
       </Grid>
     </Grid>
   );

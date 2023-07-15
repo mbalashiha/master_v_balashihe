@@ -36,7 +36,7 @@ export default function RadioImageLabel({
         borderRadius: 1 / 2,
         boxShadow: 0,
         pt: 3,
-        "& > span": {
+        "& > span:not(:first-of-type)": {
           pt: 1 / 2,
           pb: 0.6,
           px: 1,
