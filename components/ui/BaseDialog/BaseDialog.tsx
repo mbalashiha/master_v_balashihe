@@ -1,9 +1,11 @@
-// import {
-//   disableBodyScroll as __disableBodyScroll,
-//   enableBodyScroll,
-//   clearAllBodyScrollLocks,
-// } from "b//ody-scroll-lock";
-// import type { BodyScrollOptions } from "b//ody-scroll-lock";import { FC, useRef, useEffect } from "react";
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from "body-scroll-lock";
+import cn from "classnames";
+import a from "@components/ui/Transitions/animation.module.scss";
+import type { BodyScrollOptions } from "body-scroll-lock";
 import * as React from "react";
 import {
   DialogActions,
@@ -15,25 +17,37 @@ import {
   Dialog,
   SxProps,
   Box,
+  DialogProps,
 } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";
 import { FC, useMemo, useRef } from "react";
 import BaseDialogHeader from "../BaseDialogHeader/BaseDialogHeader";
 import { standartCssTransition } from "../theme/mui-theme";
-
+type MuiDialogProps = React.ComponentProps<typeof Dialog>;
 type TriggerButton = React.ReactNode | React.ReactNode[];
-export interface BaseDialogProps {
+export interface BaseDialogProps extends Omit<DialogProps, "open"> {
   children: TriggerButton;
   content: React.ReactNode | React.ReactNode[];
-  title?: React.ReactNode | React.ReactNode[];
   dialogActions?: boolean | React.ReactNode | React.ReactNode[];
-  sx?: SxProps;
   component?: React.ComponentProps<typeof Box>["component"];
   noContainer?: boolean;
-  maxWidth?: React.ComponentProps<typeof Dialog>["maxWidth"];
   noPadding?: boolean;
-}
-
+};
+const InDialog = (props: React.ComponentProps<typeof Dialog>) => {
+  const contentRef = useRef<HTMLDivElement>();
+  React.useEffect(() => {
+    process.nextTick(() => {
+      const dialog = contentRef && contentRef.current;
+      if (props.open && dialog) {
+        enableBodyScroll(dialog);
+      } else if (!props.open) {
+        clearAllBodyScrollLocks();
+      }
+    });
+    return () => clearAllBodyScrollLocks();
+  }, [props.open]);
+  return <Dialog {...props} ref={contentRef as any} />;
+};
 const BaseDialog = React.forwardRef(function BaseDialog(
   {
     children: inTrigger,
@@ -45,6 +59,7 @@ const BaseDialog = React.forwardRef(function BaseDialog(
     maxWidth = "lg",
     dialogActions,
     noPadding,
+    ...rest
   }: BaseDialogProps,
   ref: any
 ) {
@@ -112,9 +127,8 @@ const BaseDialog = React.forwardRef(function BaseDialog(
         </Box>
       )}
       {isOpen ? (
-        <Dialog
+        <InDialog
           maxWidth={maxWidth}
-          ref={ref}
           open={isOpen}
           onClose={close}
           sx={{
@@ -126,18 +140,21 @@ const BaseDialog = React.forwardRef(function BaseDialog(
                 ...(sx as any),
               },
               "& .DialogContent-root": {
-                p: noPadding ? 0 : {
-                  xs: "20px 4px 20px 4px",
-                  sm: "20px 8px 20px 8px",
-                  md: "20px 24px 20px 24px",
-                },
+                p: noPadding
+                  ? 0
+                  : {
+                      xs: "20px 4px 20px 4px",
+                      sm: "20px 8px 20px 8px",
+                      md: "20px 24px 20px 24px",
+                    },
                 overflowX: "hidden",
               },
             },
           }}
+          {...rest}
         >
           <BaseDialogHeader close={close}>{title}</BaseDialogHeader>
-          <DialogContent>{content}</DialogContent>
+          <DialogContent ref={ref}>{content}</DialogContent>
           {dialogActions === false ? null : (
             <DialogActions>
               {dialogActions && dialogActions !== true ? (
@@ -147,7 +164,7 @@ const BaseDialog = React.forwardRef(function BaseDialog(
               )}
             </DialogActions>
           )}
-        </Dialog>
+        </InDialog>
       ) : null}
     </>
   );

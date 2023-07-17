@@ -9,8 +9,7 @@ import WizFormControl from "./WizFormControl";
 import { EnhImage } from "@components/ui";
 import WizRadio from "./WizRadio";
 import { StepWizardChildProps } from "react-step-wizard";
-import { WizValues } from "./WizardProvider/wiztypes";
-import { useWizard } from "./WizardProvider/WizardProvider";
+import { WizValues } from "./Step/wiztypes";
 import RadioImageLabel from "./RadioImageLabel";
 
 const getNextStep = (

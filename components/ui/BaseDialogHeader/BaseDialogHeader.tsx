@@ -21,6 +21,7 @@ const CloseButton = ({ close }: { close: () => void }) => (
     aria-label="close"
     onClick={close}
     sx={{
+      zIndex: 2,
       color: (theme) => theme.palette.grey[500],
       ...standartCssTransition,
       m: "4px",

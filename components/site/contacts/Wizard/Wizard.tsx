@@ -8,16 +8,13 @@ import StepWizard, {
 } from "react-step-wizard";
 import { WizardNav } from ".";
 import { Formik } from "formik";
-import { WizValues } from "./WizardProvider/wiztypes";
-import { StyledWizard } from "./WizardProvider";
+import { WizValues } from "./Step/wiztypes";
+import { StyledWizard } from "./Step";
 
 export default function ContactWizard({ children, ...props }: StepWizardProps) {
-  const initialValues: Partial<WizValues> = {};
   return (
-    <Formik initialValues={initialValues} onSubmit={(values, ctx) => {}}>
       <StyledWizard nav={<WizardNav />} {...props}>
         {children}
       </StyledWizard>
-    </Formik>
   );
 }

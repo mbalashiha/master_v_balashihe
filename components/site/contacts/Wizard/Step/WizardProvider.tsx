@@ -1,21 +1,25 @@
 import React, { useContext, useState } from "react";
-import { WizValues } from "../WizardProvider/wiztypes";
+import { Button, Box, styled } from "@mui/material";
+import util from "util";
+import { Formik } from "formik";
+import { WizValues } from "./wiztypes";
 interface WizardContextType {
-  prevStep: string | null | undefined;
-  setPrevStep: React.Dispatch<React.SetStateAction<string | null | undefined>>;
+  isLastStep: boolean;
+  setIsLastStep: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const WizardContext = React.createContext<Partial<WizardContextType>>({
-  prevStep: null,
-});
+const WizardContext = React.createContext<Partial<WizardContextType>>({});
 interface Props {
   children: React.ReactNode | React.ReactNode[];
 }
 export const WizardProvider = ({ children }: Props) => {
-  const [prevStep, setPrevStep] = useState<WizardContextType["prevStep"]>(null);
+  const [isLastStep, setIsLastStep] = useState<boolean>(false);
+  const initialValues: Partial<WizValues> = {};
   return (
-    <WizardContext.Provider value={{ prevStep, setPrevStep }}>
-      {children}
-    </WizardContext.Provider>
+    <Formik initialValues={initialValues} onSubmit={(values, ctx) => {}}>
+      <WizardContext.Provider value={{ isLastStep, setIsLastStep }}>
+        {children}
+      </WizardContext.Provider>
+    </Formik>
   );
 };
 export const useWizard = () => {

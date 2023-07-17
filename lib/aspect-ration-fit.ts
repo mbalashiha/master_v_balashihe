@@ -16,8 +16,8 @@ export function calculateAspectRatioFit(
   srcHeight = srcHeight || maxHeight;
   const ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
   return {
-    width: fractionFloor(srcWidth * ratio),
-    height: fractionFloor(srcHeight * ratio),
+    width: Math.round(srcWidth * ratio),
+    height: Math.round(srcHeight * ratio),
     srcWidth,
     srcHeight,
   };
@@ -32,8 +32,8 @@ export function fitWidth(
   }
   const ratio = maxWidth / srcWidth;
   return {
-    width: fractionFloor(srcWidth * ratio),
-    height: fractionFloor(srcHeight * ratio),
+    width: Math.round(srcWidth * ratio),
+    height: Math.round(srcHeight * ratio),
     srcWidth,
     srcHeight,
   };
@@ -48,8 +48,8 @@ export function fitHeight(
   }
   const ratio = maxHeight / srcHeight;
   return {
-    width: fractionFloor(srcWidth * ratio),
-    height: fractionFloor(srcHeight * ratio),
+    width: Math.round(srcWidth * ratio),
+    height: Math.round(srcHeight * ratio),
     srcWidth,
     srcHeight,
   };

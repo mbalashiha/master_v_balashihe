@@ -6,7 +6,7 @@ import { HeaderTextParser } from "@components/common/HeaderTextParser";
 import React, { useMemo } from "react";
 import { blueGrey } from "@mui/material/colors";
 import cn from "classnames";
-import a from "@components/scss/animation.module.scss";
+import a from "@components/ui/Transitions/animation.module.scss";
 import GradientSVG from "public/gradient.svg";
 import { RequestComputerMaster } from "@components/site";
 

@@ -36,7 +36,9 @@ export const ContactInfoRow = ({ svgIcon, label, infoText, sx }: Props) => {
               lineHeight: "16px",
               fontWeight: 400,
               fontFamily: "Arial",
-              color: "grey.600",
+              "&&&&&": {
+                color: "grey.600",
+              },
             }}
           >
             {label}
