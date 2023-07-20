@@ -1,4 +1,6 @@
 export interface WizValues {
+  "Имя клиента": string;
+  "Телефон": string;
   "Какое у вас устройство?":
     | null
     | "Настольный ПК"

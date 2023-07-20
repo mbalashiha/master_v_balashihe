@@ -114,14 +114,12 @@ const getMuiTheme = (): Theme => {
               background: theme.palette.secondary.light,
             },
             "& .SnackbarContent-root, & .SnackbarItem-contentRoot": {
-              "&&": {
-                fontFamily: InterFontFamily,
-                fontWeight: 500,
-                background: "white",
-                "&.SnackbarItem-variantError": {
-                  color: "white",
-                  backgroundColor: "red",
-                },
+              fontFamily: InterFontFamily,
+              fontWeight: 500,
+              background: "white",
+              "&.SnackbarItem-variantError": {
+                color: "white",
+                backgroundColor: "red",
               },
             },
             "& h1, & h2, & h3": {
@@ -222,9 +220,9 @@ const getMuiTheme = (): Theme => {
           root: {
             backgroundColor: colors.red[900],
             color: "white",
-            ":hover": {
+            "&:hover": {
               backgroundColor: colors.red.A700,
-              boxShadow: "-1px 6px 12px 6px rgba(130, 0, 0, 0.3)",
+              boxShadow: "none",
             },
           },
         },
@@ -293,17 +291,19 @@ const getMuiTheme = (): Theme => {
       MuiFilledInput: {
         styleOverrides: {
           root: {
-            background: "white",
+            backgroundColor: theme.palette.mode === "light" ? "white" : "black",
             color: "#10101a",
             padding: "18px 14px 4px 12px",
             borderRadius: "8px 8px 0 0",
             ...standartCssTransition,
             "&:hover": {
               borderColor: blueGrey[200],
-              background: "white",
+              backgroundColor:
+                theme.palette.mode === "light" ? "white" : "black",
             },
             "&.Mui-focused": {
-              background: "white",
+              backgroundColor:
+                theme.palette.mode === "light" ? "white" : "black",
               color: "black",
             },
           },
@@ -339,19 +339,23 @@ const getMuiTheme = (): Theme => {
       },
       MuiOutlinedInput: {
         styleOverrides: {
-          notchedOutline: {
-            fontFamily,
-          },
           input: {
             padding: 0,
           },
           root: {
-            padding: "12px 14px 8px 14px",
+            padding: "12px",
           },
         },
       },
       MuiInputBase: {
         styleOverrides: {
+          root: {
+            backgroundColor: theme.palette.mode === "light" ? "white" : "black",
+            padding: "10px",
+            "&:hover": {
+              borderColor: blueGrey[200],
+            },
+          },
           input: {
             fontWeight: 500,
             color: "#10101a",
@@ -362,9 +366,6 @@ const getMuiTheme = (): Theme => {
       MuiTextField: {
         styleOverrides: {
           root: {
-            "&&, && *": {
-              fontFamily,
-            },
             "& textarea": {
               padding: 0,
             },

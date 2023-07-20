@@ -163,12 +163,13 @@ export default function ContactDialog({
         ...sx,
         background: "#EFEFF4",
         maxHeight: "100%",
-        "& .Typography-root, & .Typography-body1, & .FormControlLabel-label": {
-          "&, & *": {
-            color: `#24263F`,
-            fontWeight: 500,
+        "& .FormControl-root, & .Typography-root, & .Typography-body1, & .FormControlLabel-label":
+          {
+            "&, & *": {
+              color: `#24263F`,
+              fontWeight: 500,
+            },
           },
-        },
       }}
       noContainer={noContainer}
       PaperProps={{

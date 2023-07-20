@@ -36,10 +36,7 @@ const WizardNav: FC<any> = (props: StepWizardChildProps) => {
       >
         Назад
       </Btn>
-      <Btn
-        endIcon={<EastIcon />}
-        disabled={props.currentStep === props.totalSteps}
-      >
+      <Btn endIcon={<EastIcon />} onClick={() => setIsLastStep(true)}>
         Вперёд
       </Btn>
     </Stack>
