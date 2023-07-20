@@ -57,3 +57,5 @@ export const NEXT_PUBLIC_LOCATION_PLACE =
   process.env["NEXT_PUBLIC_LOCATION_PLACE"] || "";
 export const NEXT_PUBLIC_CONTACT_EMAIL =
   process.env["NEXT_PUBLIC_CONTACT_EMAIL"] || "";
+export const CONTACT_API_URL: string =
+  API_HOST + "/site/contact";

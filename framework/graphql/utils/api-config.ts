@@ -114,9 +114,11 @@ class Config {
           }
           const { data, status, statusText, headers: responseHeaders } = resp;
           responseResult = {
+            ok: status === 200,
             data,
             status,
             statusText,
+            response: resp,
           };
         } catch (catchedE: any) {
           const e: AxiosError = catchedE;
@@ -134,6 +136,7 @@ class Config {
           console.error(e.stack || e.message || e);
           const status: number = e.response?.status || e.request.status || 0;
           responseResult = {
+            ok: false,
             error:
               data ||
               e.stack ||
@@ -149,6 +152,7 @@ class Config {
               "Axios Error with status: " + status.toString(),
             status,
             statusText: e.response?.statusText,
+            response: e.response!,
           };
         }
       } else {
@@ -159,18 +163,22 @@ class Config {
           body,
           headers,
         });
+        const { ok, status, statusText } = resp;
         let data;
+        // const responseHeaders = Array.from(resp.headers.entries());
+        // console.l//og(responseHeaders);
         const text = await resp.text();
         try {
           data = JSON.parse(text);
         } catch (e: any) {
           data = text;
         }
-        const { status, statusText, headers: responseHeaders } = resp;
         responseResult = {
           data,
           status,
           statusText,
+          response: resp,
+          ok,
         };
       }
       return responseResult;

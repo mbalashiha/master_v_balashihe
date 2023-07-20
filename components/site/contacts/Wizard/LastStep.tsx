@@ -49,8 +49,8 @@ const ColBox = ({ sx, ...rest }: React.ComponentProps<typeof Stack>) => (
   <Stack
     sx={{
       ...sx,
-      "&, & .InputBase-root": {
-        minWidth: "283px",
+      "& .InputBase-root": {
+        width: "283px",
       },
       display: "flex",
       flexDirection: "column",

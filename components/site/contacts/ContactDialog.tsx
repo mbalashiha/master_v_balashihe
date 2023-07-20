@@ -32,6 +32,7 @@ import SidebarPhone from "./Wizard/SidebarPhoneNumber";
 import LastStep from "./Wizard/LastStep";
 import { useWizard, WizardProvider } from "./Wizard/Step/WizardProvider";
 import ModalContacts from "./ModalContacts";
+import { ApiProvider } from "@framework/index";
 
 type Props = Omit<BaseDialogProps, "content">;
 type GridContainerProps = React.ComponentProps<typeof Grid>;
@@ -151,9 +152,11 @@ export default function ContactDialog({
   return (
     <BaseDialog
       content={
-        <WizardProvider>
-          <ContactsContent />
-        </WizardProvider>
+        <ApiProvider>
+          <WizardProvider>
+            <ContactsContent />
+          </WizardProvider>
+        </ApiProvider>
       }
       component={component}
       dialogActions={false}

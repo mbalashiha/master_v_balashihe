@@ -6,7 +6,7 @@ import useSWR from "swr";
 import { useSnackbar } from "notistack";
 import { locale } from "@utils/locale";
 
-export const useHook = <H>(hookHandler: (apiHooks: API.Hooks) => H) => {
+export const useHook = <H>(hookHandler: (apiHooks: API.ManagementHooks) => H) => {
   const { hooks } = useManagementApiProvider();
   return hookHandler(hooks);
 };
@@ -76,7 +76,7 @@ const useSWROptions = (
   return { input, key };
 };
 
-const useData = (
+export const useData = (
   hook: API.Graphql.SWRHook<any>,
   request: API.Graphql.RequestFunction<any, any>,
   ctx: API.Graphql.UseDataContext<any, any, any>

@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Button, Box, styled } from "@mui/material";
 import util from "util";
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
 import { WizValues } from "./wiztypes";
+import useSendEmail from "@framework/site/contact/use-send-email";
 interface WizardContextType {
   isLastStep: boolean;
   setIsLastStep: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,11 +15,19 @@ interface Props {
 export const WizardProvider = ({ children }: Props) => {
   const [isLastStep, setIsLastStep] = useState<boolean>(false);
   const initialValues: Partial<WizValues> = {};
+  const sendEmail = useSendEmail();
   return (
-    <Formik initialValues={initialValues} onSubmit={(values, ctx) => {}}>
-      <WizardContext.Provider value={{ isLastStep, setIsLastStep }}>
-        {children}
-      </WizardContext.Provider>
+    <Formik
+      initialValues={initialValues as WizValues}
+      onSubmit={(values, ctx) => {
+        return sendEmail(values);
+      }}
+    >
+      <Form>
+        <WizardContext.Provider value={{ isLastStep, setIsLastStep }}>
+          {children}
+        </WizardContext.Provider>
+      </Form>
     </Formik>
   );
 };

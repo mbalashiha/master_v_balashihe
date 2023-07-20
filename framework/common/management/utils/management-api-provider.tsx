@@ -1,14 +1,13 @@
 import { API } from "@common/types";
 import React from "react";
 import { createContext, useContext, useMemo } from "react";
-export const ManagementApiContext = createContext<
-  Partial<API.ApiProviderContext>
->({});
+type ProviderContext = API.ApiProviderContext<API.ManagementHooks>;
+export const ManagementApiContext = createContext<Partial<ProviderContext>>({});
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
   config: API.Config;
-  hooks: API.Hooks;
+  hooks: API.ManagementHooks;
 }
 
 export const ManagementApiProvider = ({ children, config, hooks }: Props) => {
@@ -25,5 +24,5 @@ export const ManagementApiProvider = ({ children, config, hooks }: Props) => {
 };
 
 export const useManagementApiProvider = () => {
-  return useContext(ManagementApiContext) as API.ApiProviderContext;
+  return useContext(ManagementApiContext) as ProviderContext;
 };

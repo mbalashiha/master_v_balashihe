@@ -11,7 +11,12 @@ export type Hook =
   | Graphql.SWRHook<any>
   | RestApi.RestApiHook<any>;
 
-export interface Hooks {
+export interface SiteHooks {
+  site: {
+    contact: { useSendEmail: RestApi.RestApiHook<any> };
+  };
+}
+export interface ManagementHooks {
   management: {
     auth: {
       useSignIn: RestApi.RestApiHook<any>;
@@ -40,7 +45,7 @@ export interface Hooks {
     };
   };
 }
-export interface ApiProviderContext {
+export interface ApiProviderContext<Hooks> {
   hooks: Hooks;
   request: Graphql.RequestFunction;
   restRequest: RestApi.RequestFunction;

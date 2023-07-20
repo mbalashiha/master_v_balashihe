@@ -15,7 +15,7 @@ import { handler as useImageUpload } from "@framework/management/image/use-image
 import { handler as useCheckArticle } from "@framework/management/blog/article/draft/use-check-article";
 import { API } from "@common/types";
 
-export const graphqlHooks: API.Hooks = {
+export const graphqlHooks: API.ManagementHooks = {
   management: {
     auth: {
       useSignIn,

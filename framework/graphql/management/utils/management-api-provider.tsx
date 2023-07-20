@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from "react";
 import { getConfig } from "@framework/utils";
-import { graphqlHooks } from "@framework/hooks";
+import { graphqlHooks } from "@framework/management/hooks";
 
 import {
   ManagementApiProvider as CoreApiProvider,

@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import { HookDescriptor } from "./hook";
 
 export namespace RestApi {
@@ -31,6 +32,8 @@ export namespace RestApi {
     status?: number;
     statusText?: string;
     error?: string;
+    response: Response | AxiosResponse;
+    ok: boolean;
   }
   export interface RestApiHookContext<Input, Data> {
     restRequest: (input: Input) => Promise<Data>;
