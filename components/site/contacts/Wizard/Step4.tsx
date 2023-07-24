@@ -8,7 +8,7 @@ import FormLabel from "@mui/material/FormLabel";
 import WizFormControl from "./WizFormControl";
 import { StepWizardChildProps } from "react-step-wizard";
 import RadioString from "./RadioString";
-import { useWizard } from "./Step/WizardProvider";
+import { useWizard } from "./Providers/WizardProvider";
 
 const Step1: React.FC<Partial<StepWizardChildProps>> = (({
   stepName,

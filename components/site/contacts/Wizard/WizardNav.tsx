@@ -7,7 +7,7 @@ import StepWizard, {
   StepWizardProps,
   StepWizardChildProps,
 } from "react-step-wizard";
-import { useWizard } from "./Step/WizardProvider";
+import { useWizard } from "./Providers/WizardProvider";
 
 const Btn = styled(Button)(({ theme }) => ({
   "& svg, & svg.SvgIcon-root": {

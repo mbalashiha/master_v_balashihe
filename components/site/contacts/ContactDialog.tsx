@@ -1,25 +1,11 @@
 import * as React from "react";
 import { FC, useMemo, useRef } from "react";
-import { IconEmailCircle } from "@components/icons";
 import Image from "next/image";
-import ContactInfoRow from "./ContactInfoRow";
 import { Grid, Box, Stack, Typography, Divider } from "@mui/material";
-import { Link as MuiLink } from "@mui/material";
-import { EmailLink, EnhImage, PhoneLink } from "@components/ui";
-import IconPhoneCircle from "@components/icons/IconPhoneCircle";
-import { email, phoneNumber, locationPlace } from "@/const/contacts";
-import { ContactPhone, ContactWizard } from "../contacts";
-import { grey } from "@mui/material/colors";
-import { PhoneCallIcon, TelegramIcon } from "@components/icons";
+import { ContactWizard } from "../contacts";
+import Slide from "@mui/material/Slide";
 import cn from "classnames";
 import a from "@components/ui/Transitions/animation.module.scss";
-import {
-  NEXT_PUBLIC_WHATSAPP_LINK,
-  NEXT_PUBLIC_CONTACT_PHONE,
-  NEXT_PUBLIC_TELEGRAM_LINK,
-  NEXT_PUBLIC_CONTACT_PHONE_TEXT,
-} from "@framework/const";
-import { WhatsappLink } from "@components/site/contacts";
 import { BaseDialog } from "@components/ui";
 import { BaseDialogProps } from "@components/ui/BaseDialog";
 import Step1 from "./Wizard/Step1";
@@ -30,9 +16,13 @@ import Step4 from "./Wizard/Step4";
 import Step2_1_3 from "./Wizard/Step2_3";
 import SidebarPhone from "./Wizard/SidebarPhoneNumber";
 import LastStep from "./Wizard/LastStep";
-import { useWizard, WizardProvider } from "./Wizard/Step/WizardProvider";
-import ModalContacts from "./ModalContacts";
+import { useWizard, WizardProvider } from "./Wizard/Providers/WizardProvider";
+import ModalContacts, { xsSpacing } from "./Wizard/ModalContacts/ModalContacts";
 import { ApiProvider } from "@framework/index";
+import PhoneRow from "./Wizard/ModalContacts/PhoneRow";
+import WhatsappRow from "./Wizard/ModalContacts/WhatsappRow";
+import EmailRow from "./Wizard/ModalContacts/EmailRow";
+import TelegramRow from "./Wizard/ModalContacts/TelegramRow";
 
 type Props = Omit<BaseDialogProps, "content">;
 type GridContainerProps = React.ComponentProps<typeof Grid>;
@@ -133,12 +123,42 @@ const ContactsContent = () => {
           </Grid>
         </GridContainer>
       ) : (
-        <GridContainer className={cn(a.animated, a.fadeIn)}>
-          <Grid item xs={12}>
-            <ModalContacts />
-            <LastStep stepName="Оставьте заявку на ремонт со скидкой" />
-          </Grid>
-        </GridContainer>
+          <GridContainer className={cn(a.animated, a.bounceInRight)}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyItems: "center",
+                alignItems: "center",
+              }}
+            >
+              <Box sx={{ alignSelf: "flex-start" }}>
+                <Stack
+                  direction={{ xs: "column", md: "row" }}
+                  spacing={{ xs: xsSpacing, md: 2 }}
+                  sx={{
+                    letterSpacing: "0.001rem",
+                  }}
+                >
+                  <EmailRow />
+                  <TelegramRow />
+                  <WhatsappRow />
+                </Stack>
+                <Divider
+                  sx={{
+                    mt: { xs: "10px", md: "18px" },
+                    mb: { xs: "4px", md: "10px" },
+                  }}
+                />
+              </Box>
+              <LastStep stepName="Оставьте заявку на ремонт со скидкой" />
+              <Box sx={{ pr: "15px" }}>
+                <PhoneRow />
+              </Box>
+            </Grid>
+          </GridContainer>
       )}
     </>
   );
@@ -168,7 +188,7 @@ export default function ContactDialog({
         maxHeight: "100%",
         "& .FormControl-root, & .Typography-root, & .Typography-body1, & .FormControlLabel-label":
           {
-            "&, & *": {
+            "&, & *:not(.Mui-error)": {
               color: `#24263F`,
               fontWeight: 500,
             },

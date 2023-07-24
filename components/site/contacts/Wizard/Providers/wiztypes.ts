@@ -1,6 +1,11 @@
 export interface WizValues {
+  timestamp: number;
   "Имя клиента": string;
-  "Телефон": string;
+  Телефон: string;
+  telephoneDigits?: string;
+  promo?: string;
+  submitError?: string | boolean;
+  privacyChecked?: boolean;
   "Какое у вас устройство?":
     | null
     | "Настольный ПК"

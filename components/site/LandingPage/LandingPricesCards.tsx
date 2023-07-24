@@ -26,7 +26,7 @@ export const LandingPricesCards = () => {
           <GradientCard
             key={"1"}
             title={"Настройка компьютера"}
-            titleIcon={<PriceIcon1 />}
+            titleIcon={<PrecisionManufacturingIcon />}
           >
             <PriceRow title={"Установка Windows"} amount={470} />
             <PriceRow title={"Установка другой ОС"} amount={740} />
@@ -45,7 +45,7 @@ export const LandingPricesCards = () => {
           <GradientCard
             key={"2"}
             title={"Модернизация"}
-            titleIcon={<PriceIcon2 />}
+            titleIcon={<PriceIcon1 />}
             gradientNumber={2}
           >
             <PriceRow title={"Замена HDD или SSD"} amount={900} />
@@ -84,7 +84,7 @@ export const LandingPricesCards = () => {
           <GradientCard
             key={"3"}
             title={"Балашиха"}
-            titleIcon={<PrecisionManufacturingIcon />}
+            titleIcon={<PriceIcon2 />}
             gradientNumber={4}
           >
             <PriceRow title={"Ремонт в Балашихе с хорошими отзывами"} />

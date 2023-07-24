@@ -1,8 +1,9 @@
-
-import useSendEmail, { UseSendEmail } from "@common/site/contact/use-send-email";
+import useSendEmail, {
+  UseSendEmail,
+} from "@common/site/contact/use-send-email";
 import { API } from "@common/types";
 import { Management } from "@common/types/cms";
-import { WizValues } from "@components/site/contacts/Wizard/Step";
+import { WizValues } from "@components/site/contacts/Wizard/Providers";
 import { CONTACT_API_URL } from "@framework/const";
 import Cookies from "js-cookie";
 
@@ -20,11 +21,12 @@ export const handler: API.RestApi.RestApiHook<SendEmailHook> = {
   },
   restRequest: async ({ restRequest, input, options }) => {
     try {
+      const variables = { ...input, timestamp: new Date().getTime() };
+      delete variables.privacyChecked;
       const { data, status } = await restRequest({
         ...options,
-        variables: input,
+        variables,
       });
-      debugger;
       return data;
     } catch (e: any) {
       console.error(e.stack || e.message || e);

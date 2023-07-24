@@ -1,5 +1,6 @@
 import "@utils/MuiClassNameSetup";
 import "@styles/globals.scss";
+// import "animate.css/animate.css";
 import { MuiSnackbarProvider } from "@components/ui";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "@utils/emotion-cache";

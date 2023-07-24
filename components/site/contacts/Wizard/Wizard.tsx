@@ -8,13 +8,13 @@ import StepWizard, {
 } from "react-step-wizard";
 import { WizardNav } from ".";
 import { Formik } from "formik";
-import { WizValues } from "./Step/wiztypes";
-import { StyledWizard } from "./Step";
+import { WizValues } from "./Providers/wiztypes";
+import { StyledWizard } from "./Providers";
 
 export default function ContactWizard({ children, ...props }: StepWizardProps) {
   return (
-      <StyledWizard nav={<WizardNav />} {...props}>
-        {children}
-      </StyledWizard>
+    <StyledWizard nav={<WizardNav />} {...props}>
+      {children}
+    </StyledWizard>
   );
 }

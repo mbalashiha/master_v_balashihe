@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import FormControl, { FormControlProps } from "@mui/material/FormControl";
 import React from "react";
-import { StyledContainer } from "./Step";
+import { StyledContainer } from "./Providers";
 
 type Props = FormControlProps;
 export default function WizFormControl({ children, sx, ...rest }: Props) {

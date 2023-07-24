@@ -11,8 +11,6 @@
 /out
 /build
 /build/**
-.env
-.env.*
 /.pnp
 .pnp.js
 /coverage
@@ -26,6 +24,8 @@ yarn-error.log*
 .vercel
 *.tsbuildinfo
 *.secret.sql
+.env
+.env.*
 .env.local
 .env.development
 .env.production

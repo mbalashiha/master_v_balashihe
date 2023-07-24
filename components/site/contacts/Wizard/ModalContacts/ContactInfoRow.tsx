@@ -27,7 +27,11 @@ export const ContactInfoRow = ({ svgIcon, label, infoText, sx }: Props) => {
       >
         {svgIcon}
       </Box>
-      <Stack direction="column" spacing={0} justifyContent="flex-end">
+      <Stack
+        direction="column"
+        spacing={0}
+        justifyContent={label ? "space-between" : "flex-end"}
+      >
         {label && (
           <Typography
             component="span"
