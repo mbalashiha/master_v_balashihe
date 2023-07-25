@@ -6,6 +6,7 @@ import {
   Paper,
 } from "@mui/material";
 import React from "react";
+import ContactDialog from "./contacts/ContactDialog";
 type Props = React.ComponentProps<typeof Card>;
 export default function RequestComputerMaster({ sx, ...rest }: Props) {
   return (
@@ -29,10 +30,14 @@ export default function RequestComputerMaster({ sx, ...rest }: Props) {
         }}
       ></CardHeader>
       <CardContent sx={{ px: "30px", pt: 0 }}>
-        Напишите мне в WhatsApp. Расскажите о симптомах, а я назову примерную
-        причину неполадки Вашего компьютера и варианты её устранения, а также мы
-        выберем удобное время выезда мастера для ремонта. Работаю в Балашихе по
-        выходным дням. Звоните или оставьте заявку на выезд мастера по Email.
+        <ContactDialog component={"strong"}>
+          Напишите мне в WhatsApp.
+        </ContactDialog> Расскажите о симптомах, а я назову примерную причину неполадки Вашего
+        компьютера и варианты её устранения, а также мы выберем удобное время
+        выезда мастера для ремонта. Работаю в Балашихе по выходным дням.{" "}
+        <ContactDialog component={"strong"}>
+          Звоните или оставьте заявку на выезд мастера.
+        </ContactDialog>
       </CardContent>
     </Card>
   );

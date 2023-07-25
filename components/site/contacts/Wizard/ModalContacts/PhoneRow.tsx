@@ -23,7 +23,7 @@ export default function PhoneRow() {
     <LinkContactPhone>
       <ContactInfoRow
         svgIcon={<IconPhoneCircle fill="#2e2d58" />}
-        label={"Телефон:"}
+        label={"Мой телефон:"}
         infoText={NEXT_PUBLIC_CONTACT_PHONE_TEXT}
         sx={{
           "& a": {

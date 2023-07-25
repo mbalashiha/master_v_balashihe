@@ -18,6 +18,7 @@ import {
   SxProps,
   Box,
   DialogProps,
+  Theme,
 } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";
 import { FC, useMemo, useRef } from "react";
@@ -25,14 +26,15 @@ import BaseDialogHeader from "../BaseDialogHeader/BaseDialogHeader";
 import { standartCssTransition } from "../theme/mui-theme";
 type MuiDialogProps = React.ComponentProps<typeof Dialog>;
 type TriggerButton = React.ReactNode | React.ReactNode[];
-export interface BaseDialogProps extends Omit<DialogProps, "open"> {
+export interface BaseDialogProps
+  extends Omit<Omit<DialogProps, "open">, "color"> {
   children: TriggerButton;
   content: React.ReactNode | React.ReactNode[];
   dialogActions?: boolean | React.ReactNode | React.ReactNode[];
   component?: React.ComponentProps<typeof Box>["component"];
   noContainer?: boolean;
   noPadding?: boolean;
-};
+}
 const InDialog = (props: React.ComponentProps<typeof Dialog>) => {
   const contentRef = useRef<HTMLDivElement>();
   React.useEffect(() => {
@@ -63,6 +65,7 @@ const BaseDialog = React.forwardRef(function BaseDialog(
   }: BaseDialogProps,
   ref: any
 ) {
+  const color = "#2e2d58";
   const [isOpen, setIsOpen] = React.useState(false);
   const close = () => setIsOpen(false);
   const trigger: TriggerButton = useMemo(
@@ -110,10 +113,10 @@ const BaseDialog = React.forwardRef(function BaseDialog(
               },
             },
             "& > *": {
-              color: "#2e2d58",
+              color: color,
             },
             "& > svg": {
-              fill: "#2e2d58",
+              fill: color,
             },
           }}
           onClick={(event: any) => {

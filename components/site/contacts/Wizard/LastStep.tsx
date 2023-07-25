@@ -31,6 +31,7 @@ import DiscountIcon from "@mui/icons-material/Discount";
 import PhoneRow from "./ModalContacts/PhoneRow";
 import EmailRow from "./ModalContacts/EmailRow";
 import { xsSpacing } from "./ModalContacts/ModalContacts";
+import StyledMainStack from "./StyledMainStack";
 
 interface PhoneMaskProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
@@ -86,17 +87,7 @@ const LastStep = ({ stepName }: { stepName?: string }) => {
   const [phoneField, phoneMeta] = useField("Телефон");
   const [privacyChecked, privacyCheckedMeta] = useField("privacyChecked");
   return (
-    <Stack
-      sx={{
-        width: "100%",
-        minHeight: "596px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-      spacing={2}
-    >
+    <StyledMainStack>
       <ColBox
         sx={{
           "& h3": {
@@ -112,6 +103,9 @@ const LastStep = ({ stepName }: { stepName?: string }) => {
           Оставьте здесь заявку на ремонт со скидкой
         </Typography>
       </ColBox>
+      <Box sx={{ pr: "15px" }}>
+        <PhoneRow />
+      </Box>
       <ColBox spacing={1}>
         {formik.values.submitError && (
           <Alert severity={!submitDisabled ? "error" : "warning"}>
@@ -154,6 +148,48 @@ const LastStep = ({ stepName }: { stepName?: string }) => {
             disabled={submitDisabled}
           >
             Сохранить скидку!
+          </Button>
+          <Button
+            type="submit"
+            disabled={submitDisabled}
+            sx={{
+              width: "100%",
+              fontWeight: 500,
+              "&, &:hover": {
+                background: "#FFE684",
+              },
+              borderRadius: "8px",
+              padding: "6px 28px",
+              textAlign: "left",
+              border: "none",
+              textTransform: "none",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: "13px",
+                lineHeight: "17px",
+                "&&&&&": {
+                  color: "grey",
+                  fontWeight: 400,
+                },
+              }}
+              component="div"
+            >
+              Ваш промокод
+            </Typography>
+            <Typography
+              component="div"
+              sx={{
+                fontSize: "18px",
+                lineHeight: "21px",
+              }}
+            >
+              {formik.values.promo}
+            </Typography>
           </Button>
           <FormControl>
             {privacyCheckedMeta.error && (
@@ -205,50 +241,8 @@ const LastStep = ({ stepName }: { stepName?: string }) => {
             />
           </FormControl>
         </ColBox>
-        <Button
-          type="submit"
-          disabled={submitDisabled}
-          sx={{
-            width: "100%",
-            fontWeight: 500,
-            "&, &:hover": {
-              background: "#FFE684",
-            },
-            borderRadius: "8px",
-            padding: "6px 28px",
-            textAlign: "left",
-            border: "none",
-            textTransform: "none",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: "13px",
-              lineHeight: "17px",
-              "&&&&&": {
-                color: "grey",
-                fontWeight: 400,
-              },
-            }}
-            component="div"
-          >
-            Ваш промокод
-          </Typography>
-          <Typography
-            component="div"
-            sx={{
-              fontSize: "18px",
-              lineHeight: "21px",
-            }}
-          >
-            {formik.values.promo}
-          </Typography>
-        </Button>
       </ColBox>
-    </Stack>
+    </StyledMainStack>
   );
 };
 export default LastStep;

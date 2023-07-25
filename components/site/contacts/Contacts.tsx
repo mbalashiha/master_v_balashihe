@@ -1,5 +1,4 @@
 import PhoneLink from "../PhoneLink";
-import WhatsappLink from "./WhatsappLink";
 import {
   NEXT_PUBLIC_CONTACT_PHONE,
   NEXT_PUBLIC_CONTACT_PHONE_TEXT,

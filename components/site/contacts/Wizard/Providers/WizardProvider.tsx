@@ -6,7 +6,9 @@ import { WizValues } from "./wiztypes";
 import useSendEmail from "@framework/site/contact/use-send-email";
 interface WizardContextType {
   isLastStep: boolean;
+  emailSuccess: boolean;
   setIsLastStep: React.Dispatch<React.SetStateAction<boolean>>;
+  setEmailSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const WizardContext = React.createContext<Partial<WizardContextType>>({});
 interface Props {
@@ -24,6 +26,7 @@ function daysIntoYear(date: Date = new Date()) {
 }
 export const WizardProvider = ({ children }: Props) => {
   const [isLastStep, setIsLastStep] = useState<boolean>(false);
+  const [emailSuccess, setEmailSuccess] = useState<boolean>(false);
   const initialValues: Partial<WizValues> = {
     privacyChecked: true,
     "Имя клиента": "",
@@ -63,6 +66,7 @@ export const WizardProvider = ({ children }: Props) => {
               : submitResult.error
           );
         } else {
+          setEmailSuccess(true);
           if (values.submitError) {
             ctx.setFieldValue("submitError", null);
           }
@@ -74,6 +78,8 @@ export const WizardProvider = ({ children }: Props) => {
           value={{
             isLastStep,
             setIsLastStep,
+            emailSuccess,
+            setEmailSuccess,
           }}
         >
           {children}

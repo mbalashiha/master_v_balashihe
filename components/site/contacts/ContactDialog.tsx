@@ -23,6 +23,7 @@ import PhoneRow from "./Wizard/ModalContacts/PhoneRow";
 import WhatsappRow from "./Wizard/ModalContacts/WhatsappRow";
 import EmailRow from "./Wizard/ModalContacts/EmailRow";
 import TelegramRow from "./Wizard/ModalContacts/TelegramRow";
+import LastStepSended from "./Wizard/LastStepSended";
 
 type Props = Omit<BaseDialogProps, "content">;
 type GridContainerProps = React.ComponentProps<typeof Grid>;
@@ -44,7 +45,7 @@ const GridContainer = ({ children, sx, ...rest }: GridContainerProps) => {
 };
 
 const ContactsContent = () => {
-  const { isLastStep, setIsLastStep } = useWizard();
+  const { isLastStep, setIsLastStep, emailSuccess } = useWizard();
   return (
     <>
       {!isLastStep ? (
@@ -123,42 +124,58 @@ const ContactsContent = () => {
           </Grid>
         </GridContainer>
       ) : (
-          <GridContainer className={cn(a.animated, a.bounceInRight)}>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyItems: "center",
-                alignItems: "center",
-              }}
-            >
-              <Box sx={{ alignSelf: "flex-start" }}>
-                <Stack
-                  direction={{ xs: "column", md: "row" }}
-                  spacing={{ xs: xsSpacing, md: 2 }}
-                  sx={{
-                    letterSpacing: "0.001rem",
-                  }}
-                >
-                  <EmailRow />
-                  <TelegramRow />
-                  <WhatsappRow />
-                </Stack>
-                <Divider
-                  sx={{
-                    mt: { xs: "10px", md: "18px" },
-                    mb: { xs: "4px", md: "10px" },
-                  }}
-                />
-              </Box>
-              <LastStep stepName="Оставьте заявку на ремонт со скидкой" />
-              <Box sx={{ pr: "15px" }}>
-                <PhoneRow />
-              </Box>
-            </Grid>
-          </GridContainer>
+        <>
+          {emailSuccess ? (
+            <GridContainer className={cn(a.animated, a.bounceInRight)}>
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyItems: "center",
+                  alignItems: "center",
+                }}
+              >
+                <LastStepSended />
+              </Grid>
+            </GridContainer>
+          ) : (
+            <GridContainer className={cn(a.animated, a.bounceInRight)}>
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyItems: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Box sx={{ alignSelf: "flex-start" }}>
+                  <Stack
+                    direction={{ xs: "column", md: "row" }}
+                    spacing={{ xs: xsSpacing, md: 2 }}
+                    sx={{
+                      letterSpacing: "0.001rem",
+                    }}
+                  >
+                    <EmailRow />
+                    <TelegramRow />
+                    <WhatsappRow />
+                  </Stack>
+                  <Divider
+                    sx={{
+                      mt: { xs: "10px", md: "18px" },
+                      mb: { xs: "4px", md: "10px" },
+                    }}
+                  />
+                </Box>
+                <LastStep stepName="Оставьте заявку на ремонт со скидкой" />
+              </Grid>
+            </GridContainer>
+          )}
+        </>
       )}
     </>
   );
