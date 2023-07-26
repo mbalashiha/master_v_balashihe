@@ -53,7 +53,7 @@ const ContactsContent = () => {
       sx={{
         width: { xs: "100%", md: "920px", lg: "1090px" },
         height: { md: "812px" },
-        minHeight: { xs: "97vh", md: "auto" },
+        minHeight: { xs: "80vh", md: "auto" },
         minWidth: { xs: "99.5vw", md: "auto" },
       }}
     >
