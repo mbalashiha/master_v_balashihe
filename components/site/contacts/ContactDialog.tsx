@@ -34,8 +34,9 @@ const GridContainer = ({ children, sx, ...rest }: GridContainerProps) => {
     <Grid
       container
       sx={{
-        "& > *": { p: "20px" },
-        width: { xs: "100%", md: "880px", lg: "1000px" },
+        "& > *": { p: { xs: "7px", lg: "20px" } },
+        width: "100%",
+        height: "100%",
         ...sx,
       }}
       {...rest}
@@ -48,7 +49,14 @@ const GridContainer = ({ children, sx, ...rest }: GridContainerProps) => {
 const ContactsContent = () => {
   const { isLastStep, setIsLastStep, emailSuccess } = useWizard();
   return (
-    <>
+    <Box
+      sx={{
+        width: { xs: "100%", md: "920px", lg: "1090px" },
+        height: { md: "812px" },
+        minHeight: { xs: "97vh", md: "auto" },
+        minWidth: { xs: "99.5vw", md: "auto" },
+      }}
+    >
       {!isLastStep ? (
         <GridContainer>
           <Grid item xs={12} md={9}>
@@ -179,7 +187,7 @@ const ContactsContent = () => {
           )}
         </>
       )}
-    </>
+    </Box>
   );
 };
 export default function ContactDialog({
