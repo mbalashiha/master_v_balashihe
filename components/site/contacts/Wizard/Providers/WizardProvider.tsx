@@ -52,7 +52,7 @@ export const WizardProvider = ({ children }: Props) => {
           errors.privacyChecked = "Примите политику конфиденциальности";
         }
         if (!values.telephoneDigits || values.telephoneDigits.length < 11) {
-          errors["Телефон"] = "Введите все цифры номера телефона";
+          errors["Телефон"] = "Введите все цифры Вашего телефона";
         }
         return errors;
       }}

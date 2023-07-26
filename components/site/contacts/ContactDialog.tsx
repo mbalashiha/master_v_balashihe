@@ -185,6 +185,7 @@ export default function ContactDialog({
   sx,
   component,
   noContainer,
+  hideTrigger,
 }: Props) {
   return (
     <BaseDialog
@@ -195,6 +196,7 @@ export default function ContactDialog({
           </WizardProvider>
         </ApiProvider>
       }
+      hideTrigger
       component={component}
       dialogActions={false}
       maxWidth={"xl"}

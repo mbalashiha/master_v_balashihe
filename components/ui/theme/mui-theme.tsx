@@ -41,6 +41,9 @@ const getMuiTheme = (): Theme => {
       text: {
         primary: "#303B44",
       },
+      dialogClickColor: {
+        main: "#2e2d58",
+      },
     },
     spacing: 12,
     shape: {

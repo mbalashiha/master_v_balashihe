@@ -37,7 +37,9 @@
       "@styles/*": ["styles/*"],
       "@/*": ["./*"],
       "@root": ["."],
-      "@root/*": ["./*"]
+      "@root/*": ["./*"],
+      "@public": ["public"],
+      "@public/*": ["public/*"]
     },
     "plugins": [
       {

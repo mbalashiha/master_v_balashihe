@@ -11,6 +11,9 @@ declare module "@mui/material/styles" {
     cellHeaderBackground: {
       main: React.CSSProperties["color"];
     };
+    dialogClickColor: {
+      main: React.CSSProperties["color"];
+    };
   }
   export interface Palette {
     articleText: {
@@ -20,6 +23,9 @@ declare module "@mui/material/styles" {
       main: React.CSSProperties["color"];
     };
     cellHeaderBackground: {
+      main: React.CSSProperties["color"];
+    };
+    dialogClickColor: {
       main: React.CSSProperties["color"];
     };
   }
