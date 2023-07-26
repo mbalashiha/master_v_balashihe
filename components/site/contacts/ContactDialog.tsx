@@ -24,6 +24,7 @@ import WhatsappRow from "./Wizard/ModalContacts/WhatsappRow";
 import EmailRow from "./Wizard/ModalContacts/EmailRow";
 import TelegramRow from "./Wizard/ModalContacts/TelegramRow";
 import LastStepSended from "./Wizard/LastStepSended";
+import { WizardCircularProgress } from "./Wizard/WizardCircularProgress";
 
 type Props = Omit<BaseDialogProps, "content">;
 type GridContainerProps = React.ComponentProps<typeof Grid>;
@@ -59,7 +60,7 @@ const ContactsContent = () => {
                 "&&&&&": { color: (theme) => theme.palette.primary.main },
               }}
             >
-              Ответьте на 4 вопроса и получите скидку 25%
+              Ответьте на пару вопросов и получите скидку 25%
             </Typography>
             <ContactWizard>
               <Step1 stepName="Какое у вас устройство?" />
@@ -121,6 +122,7 @@ const ContactsContent = () => {
               </Box>
             </Stack>
             <Divider light sx={{ transform: "scaleY(2)", my: "10px" }} />
+            <WizardCircularProgress />
           </Grid>
         </GridContainer>
       ) : (

@@ -17,7 +17,11 @@ const Btn = styled(Button)(({ theme }) => ({
 }));
 
 const WizardNav: FC<any> = (props: StepWizardChildProps) => {
-  const { isLastStep, setIsLastStep } = useWizard();
+  const { isLastStep, setIsLastStep, setProgress } = useWizard();
+  const { currentStep, totalSteps } = props;
+  React.useEffect(() => {
+    setProgress({ currentStep, totalSteps });
+  }, [currentStep, totalSteps, setProgress]);
   return (
     <Stack
       direction={"row"}

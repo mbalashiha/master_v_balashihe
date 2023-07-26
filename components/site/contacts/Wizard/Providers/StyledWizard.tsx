@@ -12,6 +12,7 @@ const StyledWizard = styled(StepWizard)(({ theme }) => ({
   flexDirection: "column-reverse",
   width: "100%",
   minHeight: "596px",
+  overflowX: "hidden",
   "& > div:last-of-type": {
     flexGrow: 1,
   },

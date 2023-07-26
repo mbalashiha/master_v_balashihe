@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Button, Box, styled } from "@mui/material";
 import util from "util";
 import { Form, Formik, FormikProps } from "formik";
@@ -9,6 +15,16 @@ interface WizardContextType {
   emailSuccess: boolean;
   setIsLastStep: React.Dispatch<React.SetStateAction<boolean>>;
   setEmailSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+  currentStep: number;
+  totalSteps: number;
+  progressPercents: number;
+  setProgress: ({
+    currentStep,
+    totalSteps,
+  }: {
+    currentStep: number;
+    totalSteps: number;
+  }) => void;
 }
 const WizardContext = React.createContext<Partial<WizardContextType>>({});
 interface Props {
@@ -27,6 +43,29 @@ function daysIntoYear(date: Date = new Date()) {
 export const WizardProvider = ({ children }: Props) => {
   const [isLastStep, setIsLastStep] = useState<boolean>(false);
   const [emailSuccess, setEmailSuccess] = useState<boolean>(false);
+  const [{ currentStep, totalSteps, progressPercents }, __setProgress] =
+    useState<{
+      currentStep: number;
+      totalSteps: number;
+      progressPercents: number;
+    }>({} as any);
+  const setProgress = useCallback(
+    ({
+      currentStep,
+      totalSteps,
+    }: {
+      currentStep: number;
+      totalSteps: number;
+    }) => {
+      totalSteps = totalSteps + 1;
+      __setProgress({
+        currentStep,
+        totalSteps: totalSteps + 1,
+        progressPercents: (currentStep / totalSteps) * 100,
+      });
+    },
+    []
+  );
   const initialValues: Partial<WizValues> = {
     privacyChecked: true,
     "Имя клиента": "",
@@ -80,6 +119,10 @@ export const WizardProvider = ({ children }: Props) => {
             setIsLastStep,
             emailSuccess,
             setEmailSuccess,
+            currentStep,
+            totalSteps,
+            progressPercents,
+            setProgress,
           }}
         >
           {children}
