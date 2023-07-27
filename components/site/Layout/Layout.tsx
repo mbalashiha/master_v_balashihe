@@ -50,6 +50,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
                 height: "40px",
                 mr: "2px",
               },
+              boxShadow: `0px 0px 8px 8px rgba(255,255,255,0.06), 0px 0px 2px 1px rgba(255,255,255,0.1), 0px 0px 6px 4px rgba(255,255,255,0.12)`,
             }}
             className={s.button}
           >
