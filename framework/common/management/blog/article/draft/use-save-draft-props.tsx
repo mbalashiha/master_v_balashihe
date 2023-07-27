@@ -6,7 +6,7 @@ export type UseSaveArtDraftProps<
 > = ReturnType<H["useHook"]>;
 
 export const useSaveArtDraftProps: UseSaveArtDraftProps = () => {
-  const hook = useHook((hook: API.Hooks) => {
+  const hook = useHook((hook: API.ManagementHooks) => {
     return hook.management.blog.article.draft.useSaveDraftProps;
   });
   return useMutationHook({ ...hook })();

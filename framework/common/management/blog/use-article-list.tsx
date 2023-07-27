@@ -6,7 +6,7 @@ export type UseArticleList<
 > = ReturnType<H["useHook"]>;
 
 export const useArticleList: UseArticleList = (initial: any) => {
-  const hook = useHook((hook: API.Hooks) => {
+  const hook = useHook((hook: API.ManagementHooks) => {
     return hook.management.blog.useArticleList;
   });
   return useSWRHook({ ...hook })(initial);

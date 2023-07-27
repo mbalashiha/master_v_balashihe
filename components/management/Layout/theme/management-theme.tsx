@@ -23,6 +23,9 @@ const getMuiTheme = (): Theme => {
       cellHeaderBackground: {
         main: "#EFDDD1",
       },
+      dialogClickColor: {
+        main: "#2e2d58",
+      },
     },
     shape: {
       borderRadius: 24,

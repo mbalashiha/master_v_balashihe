@@ -134,6 +134,8 @@ export default function ArticleForm({}: Props) {
           existingArticleId,
           imageId,
           publishedAt,
+          h2,
+          secondImageId,
         } = values;
         let renderHtml = textHtml;
         if (window.DOMParser) {
@@ -188,6 +190,8 @@ export default function ArticleForm({}: Props) {
           existingArticleId,
           imageId: imageId || null,
           publishedAt: publishedAt || null,
+          h2: h2 || null,
+          secondImageId: secondImageId || null,
         };
         if (!article.handle) {
           article.handle = autoHandleSlug || "";

@@ -6,7 +6,7 @@ export type UseTokenOneTime<
 > = ReturnType<H["useHook"]>;
 
 export const useTokenOneTime: UseTokenOneTime = (initial: any) => {
-  const hook = useHook((hook: API.Hooks) => {
+  const hook = useHook((hook: API.ManagementHooks) => {
     return hook.management.auth.useTokenOneTime;
   });
   return useSWRHook({ ...hook })(initial);

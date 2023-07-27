@@ -6,7 +6,7 @@ export type UseTokenInfo<
 > = ReturnType<H["useHook"]>;
 
 export const useTokenInfo: UseTokenInfo = (initial: any) => {
-  const hook = useHook((hook: API.Hooks) => {
+  const hook = useHook((hook: API.ManagementHooks) => {
     return hook.management.auth.useTokenInfo;
   });
   return useSWRHook({ ...hook })(initial);

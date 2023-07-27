@@ -6,7 +6,7 @@ export type UseArticleDraft<
 > = ReturnType<H["useHook"]>;
 
 export const useArticleDraft: UseArticleDraft = (initial: any) => {
-  const hook = useHook((hook: API.Hooks) => {
+  const hook = useHook((hook: API.ManagementHooks) => {
     return hook.management.blog.article.draft.useArticleDraft;
   });
   return useSWRHook({ ...hook })(initial);

@@ -12,7 +12,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { blueGrey, grey } from "@mui/material/colors";
 import React from "react";
-import { ContactPhone } from "../contacts";
 import ContactDialog from "../contacts/ContactDialog";
 import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
 interface Props {

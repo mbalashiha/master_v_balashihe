@@ -6,7 +6,7 @@ export type UseDeleteDraft<
 > = ReturnType<H["useHook"]>;
 
 export const useDeleteDraft: UseDeleteDraft = () => {
-  const hook = useHook((hook: API.Hooks) => {
+  const hook = useHook((hook: API.ManagementHooks) => {
     return hook.management.blog.article.draft.useDeleteDraft;
   });
   return useMutationHook({ ...hook })();

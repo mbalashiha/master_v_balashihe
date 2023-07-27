@@ -6,7 +6,7 @@ export type UseSaveArticle<
 > = ReturnType<H["useHook"]>;
 
 export const useSaveArticle: UseSaveArticle = () => {
-  const hook = useHook((hook: API.Hooks) => {
+  const hook = useHook((hook: API.ManagementHooks) => {
     return hook.management.blog.article.useSaveArticle;
   });
   return useMutationHook({ ...hook })();

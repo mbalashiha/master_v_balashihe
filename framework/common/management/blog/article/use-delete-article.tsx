@@ -6,7 +6,7 @@ export type UseDeleteArticle<
 > = ReturnType<H["useHook"]>;
 
 export const useDeleteArticle: UseDeleteArticle = () => {
-  const hook = useHook((hook: API.Hooks) => {
+  const hook = useHook((hook: API.ManagementHooks) => {
     return hook.management.blog.article.useDeleteArticle;
   });
   return useMutationHook({ ...hook })();

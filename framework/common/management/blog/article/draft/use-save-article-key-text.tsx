@@ -6,7 +6,7 @@ export type UseSaveArticleKeyText<
 > = ReturnType<H["useHook"]>;
 
 export const useSaveArticleKeyText: UseSaveArticleKeyText = () => {
-  const hook = useHook((hook: API.Hooks) => {
+  const hook = useHook((hook: API.ManagementHooks) => {
     return hook.management.blog.article.draft.useSaveArticleKeyText;
   });
   return useMutationHook({ ...hook })();
