@@ -2,6 +2,7 @@ import { Button, Stack, Box, styled } from "@mui/material";
 import React, { useRef, useEffect, FC } from "react";
 import WestIcon from "@mui/icons-material/West";
 import EastIcon from "@mui/icons-material/East";
+import ModalContacts, { xsSpacing } from "./ModalContacts/ModalContacts";
 import util from "util";
 import StepWizard, {
   StepWizardProps,
@@ -23,26 +24,29 @@ const WizardNav: FC<any> = (props: StepWizardChildProps) => {
     setProgress({ currentStep, totalSteps });
   }, [currentStep, totalSteps, setProgress]);
   return (
-    <Stack
-      direction={"row"}
-      sx={{ alignSelf: "flex-end", mt: "20px" }}
-      spacing={"4px"}
-    >
-      <Btn
-        startIcon={<WestIcon />}
-        disabled={props.currentStep <= 1}
-        onClick={() => {
-          if (isLastStep) {
-            setIsLastStep(false);
-          }
-          props.goToStep(1);
-        }}
+    <Stack direction={"column"}>
+      <ModalContacts />
+      <Stack
+        direction={"row"}
+        sx={{ alignSelf: "flex-end", mt: "7px" }}
+        spacing={"4px"}
       >
-        Назад
-      </Btn>
-      <Btn endIcon={<EastIcon />} onClick={() => setIsLastStep(true)}>
-        Вперёд
-      </Btn>
+        <Btn
+          startIcon={<WestIcon />}
+          disabled={props.currentStep <= 1}
+          onClick={() => {
+            if (isLastStep) {
+              setIsLastStep(false);
+            }
+            props.goToStep(1);
+          }}
+        >
+          Назад
+        </Btn>
+        <Btn endIcon={<EastIcon />} onClick={() => setIsLastStep(true)}>
+          Вперёд
+        </Btn>
+      </Stack>
     </Stack>
   );
 };

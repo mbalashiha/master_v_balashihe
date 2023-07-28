@@ -24,7 +24,16 @@ import { blueGrey } from "@mui/material/colors";
 import { FC, useMemo, useRef } from "react";
 import BaseDialogHeader from "../BaseDialogHeader/BaseDialogHeader";
 import { standartCssTransition } from "../theme/mui-theme";
-const getTriggerSx = (color?: string): SxProps<Theme> => {
+// type ButtonProps = React.ComponentProps<typeof Button>;
+const getTriggerSx = ({
+  color,
+  fill,
+  opacity,
+}: {
+  color?: React.CSSProperties["color"];
+  fill?: React.CSSProperties["color"];
+  opacity?: React.CSSProperties["opacity"];
+}): SxProps<Theme> => {
   const sx: SxProps<Theme> = {
     ...standartCssTransition,
     cursor: "pointer",
@@ -37,11 +46,12 @@ const getTriggerSx = (color?: string): SxProps<Theme> => {
       },
     },
     "& > *": {
-      color: (theme) => color || theme.palette.dialogClickColor.main,
+      color: (theme) => color || theme.palette.primary.main,
     },
     "& > svg": {
-      fill: color,
+      fill: (theme) => fill || color || theme.palette.primary.main,
     },
+    opacity: typeof opacity !== "undefined" ? opacity : 1,
   };
   return sx;
 };
@@ -56,6 +66,10 @@ export interface BaseDialogProps
   noContainer?: boolean;
   noPadding?: boolean;
   hideTrigger?: boolean;
+  TriggerProps?: {
+    color?: React.CSSProperties["color"];
+    fill?: React.CSSProperties["color"];
+  };
 }
 const InDialog = (props: React.ComponentProps<typeof Dialog>) => {
   const contentRef = useRef<HTMLDivElement>();
@@ -84,26 +98,37 @@ const BaseDialog = React.forwardRef(function BaseDialog(
     dialogActions,
     noPadding,
     hideTrigger,
+    TriggerProps,
     ...rest
   }: BaseDialogProps,
   ref: any
 ) {
-  const triggerSx = useMemo(() => getTriggerSx(), []);
   const [isOpen, setIsOpen] = React.useState(false);
+  const shouldHideTrigger = isOpen && hideTrigger;
+  const triggerSx = useMemo(
+    () =>
+      getTriggerSx({
+        color: TriggerProps?.color || undefined,
+        fill: TriggerProps?.fill || undefined,
+        opacity: shouldHideTrigger ? 0 : 1,
+      }),
+    [TriggerProps?.color, TriggerProps?.fill, shouldHideTrigger]
+  );
   const close = () => setIsOpen(false);
   const hasMuiComponent = useRef(false);
+  const onClick: React.MouseEventHandler<HTMLButtonElement> = React.useCallback(
+    (event) => {
+      if (event && typeof event.stopPropagation === "function") {
+        event.stopPropagation();
+      }
+      setIsOpen(true);
+    },
+    []
+  );
   const trigger: TriggerButton = useMemo(
     () =>
       React.Children.map(inTrigger, (element: any) => {
         if (React.isValidElement(element)) {
-          const onClick: React.MouseEventHandler<HTMLButtonElement> = (
-            event
-          ) => {
-            if (event && typeof event.stopPropagation === "function") {
-              event.stopPropagation();
-            }
-            setIsOpen(true);
-          };
           const newProps: any = {
             onClick,
           };
@@ -112,7 +137,7 @@ const BaseDialog = React.forwardRef(function BaseDialog(
             elementProps &&
             (React.isValidElement(elementProps.startIcon) ||
               React.isValidElement(elementProps.endIcon) ||
-              typeof elementProps.sx === "object")
+              (elementProps.sx && typeof elementProps.sx === "object"))
           ) {
             hasMuiComponent.current = true;
             newProps.sx = { ...triggerSx, ...elementProps.sx };
@@ -127,7 +152,7 @@ const BaseDialog = React.forwardRef(function BaseDialog(
           return element;
         }
       }) as any,
-    [inTrigger, triggerSx, component]
+    [inTrigger, triggerSx, component, onClick]
   );
   React.useEffect(() => {
     if (isOpen) {
@@ -137,26 +162,19 @@ const BaseDialog = React.forwardRef(function BaseDialog(
   }, [isOpen]);
   return (
     <>
-      {isOpen && hideTrigger ? null : (
-        <>
-          {noContainer || hasMuiComponent.current ? (
-            <>{trigger}</>
-          ) : (
-            <Box
-              component={component || undefined}
-              sx={triggerSx}
-              onClick={(event: any) => {
-                if (event && typeof event.stopPropagation === "function") {
-                  event.stopPropagation();
-                }
-                setIsOpen(true);
-              }}
-            >
-              {trigger}
-            </Box>
-          )}
-        </>
-      )}
+      <>
+        {noContainer || hasMuiComponent.current ? (
+          <>{trigger}</>
+        ) : (
+          <Box
+            component={component || "div"}
+            sx={{ ...triggerSx }}
+            onClick={onClick}
+          >
+            {trigger}
+          </Box>
+        )}
+      </>
       {isOpen ? (
         <InDialog
           maxWidth={maxWidth}

@@ -103,6 +103,12 @@ const Navbar: FC = () => {
                     marginRight: "10px",
                   },
                 },
+                "&&& svg": {
+                  fill: (theme) => theme.palette.dialogClickColor.main,
+                },
+                "& div": {
+                  color: (theme) => theme.palette.dialogClickColor.main,
+                },
               }}
             >
               <ContactDialog>

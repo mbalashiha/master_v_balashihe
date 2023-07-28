@@ -34,7 +34,7 @@ const GridContainer = ({ children, sx, ...rest }: GridContainerProps) => {
     <Grid
       container
       sx={{
-        "& > *": { p: { xs: "7px", lg: "20px" } },
+        "& > *": { p: { xs: "7px 7px 7px 7px", lg: "20px 20px 7px 20px" } },
         width: "100%",
         height: "100%",
         ...sx,
@@ -53,19 +53,19 @@ const ContactsContent = () => {
       sx={{
         width: { xs: "100%", md: "920px", lg: "1090px" },
         height: { md: "812px" },
-        minHeight: { xs: "80vh", md: "auto" },
+        minHeight: { xs: "86vh", md: "auto" },
         minWidth: { xs: "99.5vw", md: "auto" },
       }}
     >
       {!isLastStep ? (
         <GridContainer>
           <Grid item xs={12} md={9}>
-            <ModalContacts />
             <Typography
               sx={{
-                fontSize: "18px",
+                fontSize: { xs: "20px", md: "25px" },
+                lineHeight: { xs: "23px", md: "28px" },
+                pr: { xs: "20px", sm: "inherit" },
                 fontWeight: 500,
-                "&&&&&": { color: (theme) => theme.palette.primary.main },
               }}
             >
               Ответьте на пару вопросов и получите скидку 25%
@@ -165,13 +165,12 @@ const ContactsContent = () => {
                 <Box sx={{ alignSelf: "flex-start" }}>
                   <Stack
                     direction={{ xs: "column", md: "row" }}
-                    spacing={{ xs: xsSpacing, md: 2 }}
-                    sx={{
-                      letterSpacing: "0.001rem",
-                    }}
+                    spacing={{ xs: 0.5, md: 2 }}
                   >
-                    <EmailRow />
-                    <TelegramRow />
+                    <Stack direction={"row"} spacing={{ xs: 0.5, md: 2 }}>
+                      <EmailRow />
+                      <TelegramRow />
+                    </Stack>
                     <WhatsappRow />
                   </Stack>
                   <Divider

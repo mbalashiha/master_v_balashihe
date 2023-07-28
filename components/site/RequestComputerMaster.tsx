@@ -18,6 +18,9 @@ export default function RequestComputerMaster({ sx, ...rest }: Props) {
         right: 0,
         zIndex: 1,
         transform: "translateY(50%)",
+        "& strong": {
+          color: (theme) => theme.palette.primary.main,
+        },
         ...sx,
       }}
       {...rest}
@@ -32,7 +35,8 @@ export default function RequestComputerMaster({ sx, ...rest }: Props) {
       <CardContent sx={{ px: "30px", pt: 0 }}>
         <ContactDialog component={"strong"}>
           Напишите мне в WhatsApp.
-        </ContactDialog> Расскажите о симптомах, а я назову примерную причину неполадки Вашего
+        </ContactDialog>{" "}
+        Расскажите о симптомах, а я назову примерную причину неполадки Вашего
         компьютера и варианты её устранения, а также мы выберем удобное время
         выезда мастера для ремонта. Работаю в Балашихе по выходным дням.{" "}
         <ContactDialog component={"strong"}>
