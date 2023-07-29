@@ -15,7 +15,7 @@ import {
   FormHelperText,
 } from "@mui/material";
 
-export default function StyledMainStack({
+export default function StyledLastStepStack({
   sx,
   children,
   ...rest
@@ -24,11 +24,11 @@ export default function StyledMainStack({
     <Stack
       sx={{
         width: "100%",
-        minHeight: "596px",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
+        py: 2,
         ...sx,
       }}
       spacing={2}

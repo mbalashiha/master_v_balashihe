@@ -10,6 +10,7 @@ import util from "util";
 import { Form, Formik, FormikProps } from "formik";
 import { WizValues } from "./wiztypes";
 import useSendEmail from "@framework/site/contact/use-send-email";
+import { StepWizardChildProps } from "./MyStepWizard";
 interface WizardContextType {
   isLastStep: boolean;
   emailSuccess: boolean;
@@ -26,10 +27,9 @@ interface WizardContextType {
     totalSteps: number;
   }) => void;
 }
-const WizardContext = React.createContext<Partial<WizardContextType>>({});
-interface Props {
+type Props = StepWizardChildProps & {
   children: React.ReactNode | React.ReactNode[];
-}
+};
 function daysIntoYear(date: Date = new Date()) {
   return (
     (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) -
@@ -40,32 +40,12 @@ function daysIntoYear(date: Date = new Date()) {
     1000
   );
 }
-export const WizardProvider = ({ children }: Props) => {
-  const [isLastStep, setIsLastStep] = useState<boolean>(false);
-  const [emailSuccess, setEmailSuccess] = useState<boolean>(false);
-  const [{ currentStep, totalSteps, progressPercents }, __setProgress] =
-    useState<{
-      currentStep: number;
-      totalSteps: number;
-      progressPercents: number;
-    }>({} as any);
-  const setProgress = useCallback(
-    ({
-      currentStep,
-      totalSteps,
-    }: {
-      currentStep: number;
-      totalSteps: number;
-    }) => {
-      totalSteps = totalSteps + 1;
-      __setProgress({
-        currentStep,
-        totalSteps: totalSteps + 1,
-        progressPercents: (currentStep / totalSteps) * 100,
-      });
-    },
-    []
-  );
+export const FormikForWizard: React.FC<any> = ({
+  children,
+  goToNamedStep,
+  goToStep,
+  currentStep,
+}: Props) => {
   const initialValues: Partial<WizValues> = {
     privacyChecked: true,
     "Имя клиента": "",
@@ -75,12 +55,12 @@ export const WizardProvider = ({ children }: Props) => {
   const sendEmail = useSendEmail();
   const formikRef = useRef<FormikProps<WizValues>>(null);
   useEffect(() => {
-    if (isLastStep) {
+    if (currentStep && Object.entries(formikRef.current?.errors || {}).length) {
       process.nextTick(() => {
         formikRef.current?.setErrors({});
       });
     }
-  }, [isLastStep]);
+  }, [currentStep]);
   return (
     <Formik
       initialValues={initialValues as WizValues}
@@ -105,32 +85,15 @@ export const WizardProvider = ({ children }: Props) => {
               : submitResult.error
           );
         } else {
-          setEmailSuccess(true);
+          goToNamedStep("Сейчас перезвоним и предложим выезд мастера");
           if (values.submitError) {
             ctx.setFieldValue("submitError", null);
           }
         }
       }}
     >
-      <Form>
-        <WizardContext.Provider
-          value={{
-            isLastStep,
-            setIsLastStep,
-            emailSuccess,
-            setEmailSuccess,
-            currentStep,
-            totalSteps,
-            progressPercents,
-            setProgress,
-          }}
-        >
-          {children}
-        </WizardContext.Provider>
-      </Form>
+      <Form>{children}</Form>
     </Formik>
   );
 };
-export const useWizard = () => {
-  return useContext(WizardContext) as WizardContextType;
-};
+export default FormikForWizard;

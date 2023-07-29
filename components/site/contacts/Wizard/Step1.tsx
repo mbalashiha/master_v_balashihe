@@ -8,9 +8,9 @@ import FormLabel from "@mui/material/FormLabel";
 import WizFormControl from "./WizFormControl";
 import { EnhImage } from "@components/ui";
 import WizRadio from "./WizRadio";
-import { StepWizardChildProps } from "react-step-wizard";
 import { WizValues } from "./Providers/wiztypes";
 import RadioImageLabel from "./RadioImageLabel";
+import { StepWizardChildProps } from "./Providers/MyStepWizard";
 
 const getNextStep = (
   value: WizValues["Какое у вас устройство?"]

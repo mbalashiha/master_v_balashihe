@@ -4,11 +4,7 @@ import WestIcon from "@mui/icons-material/West";
 import EastIcon from "@mui/icons-material/East";
 import ModalContacts, { xsSpacing } from "./ModalContacts/ModalContacts";
 import util from "util";
-import StepWizard, {
-  StepWizardProps,
-  StepWizardChildProps,
-} from "react-step-wizard";
-import { useWizard } from "./Providers/WizardProvider";
+import { StepWizardChildProps } from "./Providers/MyStepWizard";
 
 const Btn = styled(Button)(({ theme }) => ({
   "& svg, & svg.SvgIcon-root": {
@@ -18,11 +14,6 @@ const Btn = styled(Button)(({ theme }) => ({
 }));
 
 const WizardNav: FC<any> = (props: StepWizardChildProps) => {
-  const { isLastStep, setIsLastStep, setProgress } = useWizard();
-  const { currentStep, totalSteps } = props;
-  React.useEffect(() => {
-    setProgress({ currentStep, totalSteps });
-  }, [currentStep, totalSteps, setProgress]);
   return (
     <Stack direction={"column"}>
       <ModalContacts />
@@ -35,15 +26,17 @@ const WizardNav: FC<any> = (props: StepWizardChildProps) => {
           startIcon={<WestIcon />}
           disabled={props.currentStep <= 1}
           onClick={() => {
-            if (isLastStep) {
-              setIsLastStep(false);
-            }
             props.goToStep(1);
           }}
         >
           Назад
         </Btn>
-        <Btn endIcon={<EastIcon />} onClick={() => setIsLastStep(true)}>
+        <Btn
+          endIcon={<EastIcon />}
+          onClick={() =>
+            props.goToNamedStep("Оставьте заявку на ремонт со скидкой")
+          }
+        >
           Вперёд
         </Btn>
       </Stack>

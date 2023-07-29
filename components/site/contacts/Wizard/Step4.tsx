@@ -6,15 +6,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import WizFormControl from "./WizFormControl";
-import { StepWizardChildProps } from "react-step-wizard";
 import RadioString from "./RadioString";
-import { useWizard } from "./Providers/WizardProvider";
+import { StepWizardChildProps } from "./Providers/MyStepWizard";
 
 const Step1: React.FC<Partial<StepWizardChildProps>> = (({
   stepName,
   ...props
 }: StepWizardChildProps) => {
-  const { isLastStep, setIsLastStep } = useWizard();
   stepName = stepName || "Как срочно нужен мастер?";
   const [field, meta] = useField(stepName);
   return (
@@ -27,14 +25,12 @@ const Step1: React.FC<Partial<StepWizardChildProps>> = (({
         onChange={(event) => {
           field.onChange(event);
           if (event.target.value) {
-            setIsLastStep(true);
-            // props.goToNamedStep("Оставьте заявку на ремонт со скидкой");
+            props.goToNamedStep("Оставьте заявку на ремонт со скидкой");
           }
         }}
         onClick={(event) => {
           if (field.value) {
-            setIsLastStep(true);
-            // props.goToNamedStep("Оставьте заявку на ремонт со скидкой");
+            props.goToNamedStep("Оставьте заявку на ремонт со скидкой");
           }
         }}
       >

@@ -6,7 +6,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import WizFormControl from "./WizFormControl";
-import { StepWizardChildProps } from "react-step-wizard";
 import { IMaskInput } from "react-imask";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
@@ -25,13 +24,15 @@ import {
   Link as MuiLink,
   AlertTitle,
   FormHelperText,
+  Divider,
 } from "@mui/material";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import DiscountIcon from "@mui/icons-material/Discount";
 import PhoneRow from "./ModalContacts/PhoneRow";
 import EmailRow from "./ModalContacts/EmailRow";
-import { xsSpacing } from "./ModalContacts/ModalContacts";
-import StyledMainStack from "./StyledMainStack";
+import StyledLastStepStack from "./StyledLastStepStack";
+import TelegramRow from "./ModalContacts/TelegramRow";
+import WhatsappRow from "./ModalContacts/WhatsappRow";
+import { StepWizardChildProps } from "./Providers/MyStepWizard";
 
 interface PhoneMaskProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
@@ -77,7 +78,9 @@ const ColBox = ({ sx, ...rest }: React.ComponentProps<typeof Stack>) => (
     {...rest}
   />
 );
-const LastStep = ({ stepName }: { stepName?: string }) => {
+const LastStep: React.FC<Partial<StepWizardChildProps>> = (({
+  stepName,
+}: StepWizardChildProps) => {
   stepName = stepName || "Оставьте заявку на ремонт со скидкой";
   const formik = useFormikContext<WizValues>();
   /* const submitDisabled =
@@ -87,20 +90,39 @@ const LastStep = ({ stepName }: { stepName?: string }) => {
   const [phoneField, phoneMeta] = useField("Телефон");
   const [privacyChecked, privacyCheckedMeta] = useField("privacyChecked");
   return (
-    <StyledMainStack>
+    <StyledLastStepStack>
+      <Box sx={{ alignSelf: "center" }}>
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          spacing={{ xs: 0.5, md: 2 }}
+        >
+          <Stack direction={"row"} spacing={{ xs: 0.5, md: 2 }}>
+            <EmailRow />
+            <TelegramRow />
+          </Stack>
+          <WhatsappRow />
+        </Stack>
+        <Divider
+          sx={{
+            mt: { xs: "10px", md: "18px" },
+            mb: { xs: "4px", md: "10px" },
+          }}
+        />
+      </Box>
       <ColBox
         sx={{
+          pt: 3,
           "& h3": {
-            fontSize: { xs: "18px", sm: "21px" },
-            lineHeight: { xs: "23px", sm: "30px" },
+            textAlign: "center",
+            fontSize: { xs: "25px", sm: "30px" },
+            lineHeight: { xs: "29px", sm: "40px" },
           },
         }}
       >
         <Typography variant="h3">
-          Скидка начислена, сохраните промокод :)
-        </Typography>
-        <Typography variant="h3">
-          Оставьте здесь заявку на ремонт со скидкой
+          Скидка начислена, сохраните промокод.
+          <br />
+          Можете оставить здесь заявку на ремонт со скидкой.
         </Typography>
       </ColBox>
       <Box sx={{ pr: "15px" }}>
@@ -242,7 +264,7 @@ const LastStep = ({ stepName }: { stepName?: string }) => {
           </FormControl>
         </ColBox>
       </ColBox>
-    </StyledMainStack>
+    </StyledLastStepStack>
   );
-};
+}) as any;
 export default LastStep;

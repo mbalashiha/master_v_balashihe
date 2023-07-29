@@ -21,16 +21,16 @@ const StyledContainer = styled(Box)(({ theme }) => ({
     fontSize: "21px",
   },
   "& .FormLabel-root.FormLabel-colorPrimary": {
-    padding: "7px 0 12px 0",
+    padding: "4px 0 12px 0",
     fontSize: "18px",
     [theme.breakpoints.up("md")]: {
       fontSize: "21px",
-      marginTop: "4px",
     },
     fontWeight: 500,
   },
   width: "100%",
   maxHeight: "90vh",
   overflow: "auto",
+  paddingBottom: "15px",
 }));
 export default StyledContainer;

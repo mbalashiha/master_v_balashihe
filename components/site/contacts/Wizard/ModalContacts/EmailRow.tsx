@@ -23,7 +23,7 @@ export default function EmailRow() {
     <EmailLink email={email}>
       <ContactInfoRow
         svgIcon={<IconEmailCircle fill="#2e2d58" />}
-        label={"Почта:"}
+        label={"Почта"}
         infoText={email}
         sx={{
           "& span:last-of-type": {

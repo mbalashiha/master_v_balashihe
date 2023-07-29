@@ -3,7 +3,6 @@ import { FC, useMemo, useRef } from "react";
 import Image from "next/image";
 import { Grid, Box, Stack, Typography, Divider } from "@mui/material";
 import { ContactWizard } from "../contacts";
-import Slide from "@mui/material/Slide";
 import cn from "classnames";
 import a from "@components/ui/Transitions/animation.module.scss";
 import { BaseDialog } from "@components/ui";
@@ -14,179 +13,39 @@ import Step1_3 from "./Wizard/Step3";
 import Step1_4_2 from "./Wizard/Step2_4";
 import Step4 from "./Wizard/Step4";
 import Step2_1_3 from "./Wizard/Step2_3";
-import SidebarPhone from "./Wizard/SidebarPhoneNumber";
 import LastStep from "./Wizard/LastStep";
-import { useWizard, WizardProvider } from "./Wizard/Providers/WizardProvider";
-import ModalContacts, { xsSpacing } from "./Wizard/ModalContacts/ModalContacts";
+import { FormikForWizard } from "./Wizard/Providers/FormikForWizard";
 import { ApiProvider } from "@framework/index";
-import PhoneRow from "./Wizard/ModalContacts/PhoneRow";
-import WhatsappRow from "./Wizard/ModalContacts/WhatsappRow";
-import EmailRow from "./Wizard/ModalContacts/EmailRow";
-import TelegramRow from "./Wizard/ModalContacts/TelegramRow";
 import LastStepSended from "./Wizard/LastStepSended";
-import { WizardCircularProgress } from "./Wizard/WizardCircularProgress";
+import WizardSidebar from "./Wizard/WizardSidebar";
 
 type Props = Omit<BaseDialogProps, "content">;
-type GridContainerProps = React.ComponentProps<typeof Grid>;
-
-const GridContainer = ({ children, sx, ...rest }: GridContainerProps) => {
-  return (
-    <Grid
-      container
-      sx={{
-        "& > *": { p: { xs: "7px 7px 7px 7px", lg: "20px 20px 7px 20px" } },
-        width: "100%",
-        height: "100%",
-        ...sx,
-      }}
-      {...rest}
-    >
-      {children}
-    </Grid>
-  );
-};
 
 const ContactsContent = () => {
-  const { isLastStep, setIsLastStep, emailSuccess } = useWizard();
   return (
-    <Box
+    <ContactWizard
+      form={<FormikForWizard />}
       sx={{
         width: { xs: "100%", md: "920px", lg: "1090px" },
+        minHeight: { xs: "82vh", md: "inherit" },
         height: { md: "812px" },
-        minHeight: { xs: "86vh", md: "auto" },
-        minWidth: { xs: "99.5vw", md: "auto" },
+        minWidth: { xs: "99.5vw", md: "inherit" },
       }}
+      title={"Ответьте на пару вопросов и получите скидку 25%"}
+      sidebar={<WizardSidebar />}
     >
-      {!isLastStep ? (
-        <GridContainer>
-          <Grid item xs={12} md={9}>
-            <Typography
-              sx={{
-                fontSize: { xs: "20px", md: "25px" },
-                lineHeight: { xs: "23px", md: "28px" },
-                pr: { xs: "20px", sm: "inherit" },
-                fontWeight: 500,
-              }}
-            >
-              Ответьте на пару вопросов и получите скидку 25%
-            </Typography>
-            <ContactWizard>
-              <Step1 stepName="Какое у вас устройство?" />
-              <Step1_2 stepName="Что сейчас с вашей техникой?" />
-              <Step2_1_3 stepName="Что хотите сделать с вашим Mac?" />
-              <Step1_4_2 stepName="Что за устройство? С чем нужна помощь?" />
-              <Step1_3 stepName="Ремонтировали ли ранее устройство?" />
-              <Step4 stepName="Как срочно нужен мастер?" />
-            </ContactWizard>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            md={3}
-            sx={{
-              p: "10px",
-              background: (theme) => theme.palette.background.paper,
-              "& img": {
-                borderRadius: "100%",
-              },
-              display: "flex",
-              flexDirection: "column",
-              gap: "12px",
-            }}
-          >
-            <Typography
-              sx={{
-                "&&&&": {
-                  fontSize: "17px",
-                  lineHeight: "24px",
-                  fontWeight: 800,
-                  background: "#FFE684",
-                  borderRadius: "5px",
-                  padding: "10px",
-                  marginTop: { xs: 0, md: "35px" },
-                  textAlign: "center",
-                },
-              }}
-            >
-              Ваша скидка 25%
-            </Typography>
-            <Stack direction={"row"} spacing={1}>
-              <Image
-                src={"/images/tiny_computer_master_balashikha.webp"}
-                alt=""
-                width={60}
-                height={60}
-                quality={100}
-              ></Image>
-              <Box>
-                <Typography component="div">Дмитрий</Typography>
-                <Typography
-                  component="div"
-                  sx={{ fontSize: "14px", lineHeight: "16px" }}
-                >
-                  IT специалист
-                </Typography>
-                <SidebarPhone />
-              </Box>
-            </Stack>
-            <Divider light sx={{ transform: "scaleY(2)", my: "10px" }} />
-            <WizardCircularProgress />
-          </Grid>
-        </GridContainer>
-      ) : (
-        <>
-          {emailSuccess ? (
-            <GridContainer className={cn(a.animated, a.bounceInRight)}>
-              <Grid
-                item
-                xs={12}
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyItems: "center",
-                  alignItems: "center",
-                }}
-              >
-                <LastStepSended />
-              </Grid>
-            </GridContainer>
-          ) : (
-            <GridContainer className={cn(a.animated, a.bounceInRight)}>
-              <Grid
-                item
-                xs={12}
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyItems: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Box sx={{ alignSelf: "flex-start" }}>
-                  <Stack
-                    direction={{ xs: "column", md: "row" }}
-                    spacing={{ xs: 0.5, md: 2 }}
-                  >
-                    <Stack direction={"row"} spacing={{ xs: 0.5, md: 2 }}>
-                      <EmailRow />
-                      <TelegramRow />
-                    </Stack>
-                    <WhatsappRow />
-                  </Stack>
-                  <Divider
-                    sx={{
-                      mt: { xs: "10px", md: "18px" },
-                      mb: { xs: "4px", md: "10px" },
-                    }}
-                  />
-                </Box>
-                <LastStep stepName="Оставьте заявку на ремонт со скидкой" />
-              </Grid>
-            </GridContainer>
-          )}
-        </>
-      )}
-    </Box>
+      <Step1 stepName="Какое у вас устройство?" />
+      <Step1_2 stepName="Что сейчас с вашей техникой?" />
+      <Step2_1_3 stepName="Что хотите сделать с вашим Mac?" />
+      <Step1_4_2 stepName="Что за устройство? С чем нужна помощь?" />
+      <Step1_3 stepName="Ремонтировали ли ранее устройство?" />
+      <Step4 stepName="Как срочно нужен мастер?" />
+      <LastStep showOnlyStep stepName="Оставьте заявку на ремонт со скидкой" />
+      <LastStepSended
+        showOnlyStep
+        stepName="Сейчас перезвоним и предложим выезд мастера"
+      />
+    </ContactWizard>
   );
 };
 export default function ContactDialog({
@@ -200,9 +59,7 @@ export default function ContactDialog({
     <BaseDialog
       content={
         <ApiProvider>
-          <WizardProvider>
-            <ContactsContent />
-          </WizardProvider>
+          <ContactsContent />
         </ApiProvider>
       }
       hideTrigger

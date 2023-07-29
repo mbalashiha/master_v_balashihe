@@ -2,16 +2,15 @@ import * as React from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { CircularProgressWithLabel } from "./CircularProgressWithLabel";
-import { useWizard } from "./Providers/WizardProvider";
+import { StepWizardChildProps } from "./Providers/MyStepWizard";
 
-export function WizardCircularProgress() {
-  const { currentStep, totalSteps, progressPercents } = useWizard();
+export function WizardCircularProgress(props: StepWizardChildProps) {
   return (
     <CircularProgressWithLabel
       size={180}
-      value={progressPercents}
-      label={`Вопрос ${currentStep}`}
-      centerInfo={`из ${totalSteps}`}
+      value={props.progressPercents}
+      label={`Вопрос ${props.currentStep}`}
+      centerInfo={`из ${props.totalSteps}`}
     />
   );
 }

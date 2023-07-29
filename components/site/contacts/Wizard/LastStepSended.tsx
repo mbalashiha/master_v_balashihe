@@ -15,8 +15,9 @@ import {
   Alert,
   FormHelperText,
 } from "@mui/material";
-import StyledMainStack from "./StyledMainStack";
+import StyledLastStepStack from "./StyledLastStepStack";
 import LinkContactPhone from "../LinkContactPhone";
+import { StepWizardChildProps } from "./Providers/MyStepWizard";
 
 const ColBox = ({ sx, ...rest }: React.ComponentProps<typeof Stack>) => (
   <Stack
@@ -30,12 +31,18 @@ const ColBox = ({ sx, ...rest }: React.ComponentProps<typeof Stack>) => (
     {...rest}
   />
 );
-const LastStepSended = ({ stepName }: { stepName?: string }) => {
+const LastStepSended: React.FC<Partial<StepWizardChildProps>> = (({
+  stepName,
+}: StepWizardChildProps) => {
   stepName = stepName || "Сейчас перезвоним и предложим выезд мастера";
   const formik = useFormikContext<WizValues>();
   return (
-    <StyledMainStack
-      sx={{ textAlign: "center", px: { sm: "20px", md: "50px", lg: "70px" } }}
+    <StyledLastStepStack
+      sx={{
+        textAlign: "center",
+        py: { xs: "150px", sm: "200px" },
+        px: { sm: "20px", md: "50px", lg: "120px" },
+      }}
     >
       <ColBox>
         <Typography variant="h1">{`Спасибо. Скидка `}</Typography>
@@ -56,7 +63,7 @@ const LastStepSended = ({ stepName }: { stepName?: string }) => {
           <LinkContactPhone />
         </Typography>
       </ColBox>
-    </StyledMainStack>
+    </StyledLastStepStack>
   );
-};
+}) as any;
 export default LastStepSended;
