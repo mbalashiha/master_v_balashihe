@@ -27,8 +27,8 @@ export default function Home(
           content="Мастер в Балашихе - Закажите ремонт компьютера сегодня"
         />
       </Head>
-      <Hero article={article!} />
       <CardGridContainer />
+      <Hero article={article!} />
       <LandingReasons />
       <LandingPricesCards />
       <CallMeForFree elevation={8} />
