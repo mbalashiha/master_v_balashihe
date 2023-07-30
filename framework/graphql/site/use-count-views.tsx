@@ -1,7 +1,5 @@
 import useCountViews, { UseCountViews } from "@common/site/use-count-views";
 import { API } from "@common/types";
-import { Management } from "@common/types/cms";
-import { WizValues } from "@components/site/contacts/Wizard/Providers";
 import { COUNT_PAGE_VIEWS_API_URL } from "@framework/const";
 import { ID } from "@framework/types";
 

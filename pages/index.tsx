@@ -31,7 +31,7 @@ export default function Home(
       <CardGridContainer />
       <LandingReasons />
       <LandingPricesCards />
-      <CallMeForFree />
+      <CallMeForFree elevation={8} />
     </>
   );
 }

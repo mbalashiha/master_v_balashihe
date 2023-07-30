@@ -139,7 +139,7 @@ export default function AboutMaster(
           </Grid>
         </Grid>
       </Container>
-      <CallMeForFree sx={{ mb: "18px" }} />
+      <CallMeForFree elevation={8} sx={{ my: "38px" }} />
       <CardGridContainer />
       <LandingReasons />
       <LandingPricesCards />

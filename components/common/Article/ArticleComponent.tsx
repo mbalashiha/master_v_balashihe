@@ -23,6 +23,8 @@ import NavigationButtons from "./NavigationButtons/NavigationButtons";
 import { CallMeForFree } from "@components/site/LandingPage";
 import useCountViews from "@framework/site/use-count-views";
 import { useEffect, useRef } from "react";
+import { grey } from "@mui/material/colors";
+import Image from "next/image";
 
 interface Props extends CMS.Blog.Article {}
 
@@ -33,6 +35,8 @@ export default function Article({
   keyTextHtml,
   renderHtml,
   id,
+  h2,
+  secondImage,
 }: Props) {
   const countViews = useCountViews();
   const countViewsRef = useRef(countViews);
@@ -123,22 +127,39 @@ export default function Article({
               my: 1,
               mx: { xs: 0.5, md: 1 },
             },
-            "& > h2:first-of-type": {
-              marginTop: 0,
+            "& > img:first-of-type": {
+              width: {
+                xs: "100%",
+                md: "380px",
+              },
+              float: "left",
+              margin: { xs: "0 2em 2em 0", md: "0 2em 1em 0" },
+              height: "auto",
             },
-            "&& h2": {
+            "& > h2:not(:first-of-type)": {
               color: (theme) =>
-                theme.palette.mode === "light" ? "black" : "white",
+                theme.palette.mode === "light" ? grey[600] : grey[400],
               fontSize: "21px",
               lineHeight: "26px",
               fontWeight: 500,
               marginBottom: "1.5rem",
             },
             marginBottom: "1.5rem",
-            "& h3": {
+            "& > h3": {
+              color: (theme) =>
+                theme.palette.mode === "light" ? grey[800] : grey[200],
               marginBottom: "0.7rem",
             },
-            p: { xs: 3, md: 4, xl: 5 },
+            "& > h4": {
+              color: (theme) =>
+                theme.palette.mode === "light" ? grey[900] : grey[100],
+              marginBottom: "0.7rem",
+            },
+            p: {
+              xs: "24px 30px 30px 30px",
+              md: "24px 40px 40px 40px",
+              xl: "27px 50px 50px 50px",
+            },
             boxShadow: "none",
             boxSizing: "border-box",
             overflow: "hidden",
@@ -146,12 +167,30 @@ export default function Article({
             borderRadius: 1,
           }}
         >
+          <Typography
+            variant="h2"
+            component="h2"
+            sx={{
+              color: grey[600],
+              fontSize: "26px",
+              fontWeight: 600,
+              marginTop: 0,
+              marginBottom: "1em",
+            }}
+          >
+            {h2 || title}
+          </Typography>
+          <Image
+            src={
+              secondImage?.url || "/images/busy-business-woman-balashikha.webp"
+            }
+            width={460}
+            height={460}
+            alt={`Балашиха Нужен мастер для ремонта ${h2 || title}`}
+          />
           <DescriptionParser descriptionHTML={renderHtml} />
           <CallMeForFree
             sx={{
-              color: "rgba(0, 0, 0, 0.87)",
-              fontSize: "24px",
-              lineHeight: "30px",
               p: 0,
             }}
           />

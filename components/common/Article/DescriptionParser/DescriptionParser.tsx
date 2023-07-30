@@ -61,11 +61,13 @@ const options = {
         case "table":
           return (
             <Paper
+              elevation={0}
               sx={{
                 p: { xs: 0, sm: 1 },
                 m: 0,
                 marginBottom: "2rem",
-                boxShadow: { xs: "none", sm: "inherit" },
+                boxShadow: "none",
+                border: `2px solid #EBEBEA`,
               }}
             >
               <TableStructure tableNode={domNode} options={options} />
