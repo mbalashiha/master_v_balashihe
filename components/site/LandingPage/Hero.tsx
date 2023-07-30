@@ -3,8 +3,9 @@ import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { DescriptionParser } from "@components/common/Article";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Blog } from "@common/types/cms";
+import useCountViews from "@framework/site/use-count-views";
 interface Props {
   article: Blog.Article;
 }
@@ -13,6 +14,17 @@ export default function Hero({ article }: Props) {
     throw new Error("No article for this page!");
   }
   let { renderHtml, title, image } = article;
+  const countViews = useCountViews();
+  const countViewsRef = useRef(countViews);
+  useEffect(() => {
+    countViewsRef.current = countViews;
+  }, [countViews]);
+  useEffect(() => {
+    if (article.id) {
+      const countViews = countViewsRef.current;
+      countViews({ articleId: article.id });
+    }
+  }, [article.id]);
   return (
     <>
       <Container maxWidth="lg" sx={{ mt: 4, pb: "55px" }}>

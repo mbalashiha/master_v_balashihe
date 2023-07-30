@@ -12,6 +12,7 @@ import { Search } from "@components/site";
 import { theme as getMuiTheme, useThemePalette } from "@components/ui";
 import { blueGrey } from "@mui/material/colors";
 import Image from "next/image";
+import { ApiProvider } from "@framework";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -35,7 +36,8 @@ const RootLayout: FC<Props> = ({ children }: Props) => {
             <Box sx={{ width: "100%", height: "6rem" }}></Box>
           )} */}
         {/* <NavBreadcrumbs breadcrumbs={breadcrumbs}></NavBreadcrumbs> */}
-        {children}
+
+        <ApiProvider>{children}</ApiProvider>
         <Footer />
       </ThemeProvider>
     </>

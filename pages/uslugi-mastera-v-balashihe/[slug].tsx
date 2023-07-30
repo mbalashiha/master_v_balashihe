@@ -14,6 +14,7 @@ import {
 import getArticleByHandle from "@framework/article/get-article-by-handle";
 import util from "util";
 import { renderToString } from "react-dom/server";
+import { ApiProvider } from "@framework";
 
 export async function getStaticPaths() {
   const paths = await getArticlesPathes();

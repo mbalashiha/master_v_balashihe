@@ -15,9 +15,10 @@ import CardGridContainer from "@components/site/LandingPage/CardGridContainer";
 import LandingReasons from "@components/site/LandingPage/LandingReasons";
 import LandingPricesCards from "@components/site/LandingPage/LandingPricesCards";
 import getArticleByAbsUrl from "@framework/article/get-article-by-abs-url";
-import React from "react";
 import { EnhImage } from "@components/ui";
 import { CallMeForFree } from "@components/site/LandingPage";
+import useCountViews from "@framework/site/use-count-views";
+import React, { useEffect, useRef } from "react";
 
 export default function AboutMaster(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -27,6 +28,17 @@ export default function AboutMaster(
     throw new Error("No article for this page!");
   }
   const { renderHtml, title, image } = article;
+  const countViews = useCountViews();
+  const countViewsRef = useRef(countViews);
+  useEffect(() => {
+    countViewsRef.current = countViews;
+  }, [countViews]);
+  useEffect(() => {
+    if (article.id) {
+      const countViews = countViewsRef.current;
+      countViews({ articleId: article.id });
+    }
+  }, [article.id]);
   return (
     <>
       <Head>

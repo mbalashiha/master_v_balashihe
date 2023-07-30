@@ -113,3 +113,9 @@ export namespace Management {
     manager: Manager;
   }
 }
+export namespace Site {
+  export interface ContactEmailResponse {
+    success: boolean;
+    error?: string | null;
+  }
+}

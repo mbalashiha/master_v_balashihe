@@ -14,6 +14,7 @@ export type Hook =
 export interface SiteHooks {
   site: {
     contact: { useSendEmail: RestApi.RestApiHook<any> };
+    useCountViews: RestApi.RestApiHook<any>;
   };
 }
 export interface ManagementHooks {

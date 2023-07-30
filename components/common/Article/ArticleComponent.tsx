@@ -21,6 +21,8 @@ import { HeaderTextParser } from "@components/common/HeaderTextParser";
 import CallButton from "./CallButton";
 import NavigationButtons from "./NavigationButtons/NavigationButtons";
 import { CallMeForFree } from "@components/site/LandingPage";
+import useCountViews from "@framework/site/use-count-views";
+import { useEffect, useRef } from "react";
 
 interface Props extends CMS.Blog.Article {}
 
@@ -30,10 +32,19 @@ export default function Article({
   navigation,
   keyTextHtml,
   renderHtml,
+  id,
 }: Props) {
-  // if (!keyTextHtml) {
-  //   throw new Error("Why is not keyTextHtml?");
-  // }
+  const countViews = useCountViews();
+  const countViewsRef = useRef(countViews);
+  useEffect(() => {
+    countViewsRef.current = countViews;
+  }, [countViews]);
+  useEffect(() => {
+    if (id) {
+      const countViews = countViewsRef.current;
+      countViews({ articleId: id });
+    }
+  }, [id]);
   return (
     <>
       <SpecialHeader image={image} keyTextHtml={keyTextHtml}>
