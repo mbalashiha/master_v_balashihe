@@ -1,6 +1,9 @@
 import { useField, useFormikContext } from "formik";
 import * as React from "react";
-
+import {
+  NEXT_PUBLIC_CONTACT_PHONE,
+  NEXT_PUBLIC_CONTACT_PHONE_TEXT,
+} from "@framework/const";
 import { WizValues } from "./Providers";
 import {
   Stack,
@@ -15,6 +18,7 @@ import {
   Alert,
   FormHelperText,
 } from "@mui/material";
+import IconPhoneCircle from "@components/icons/IconPhoneCircle";
 import StyledLastStepStack from "./StyledLastStepStack";
 import LinkContactPhone from "../LinkContactPhone";
 import { StepWizardChildProps } from "./Providers/MyStepWizard";
@@ -59,9 +63,17 @@ const LastStepSended: React.FC<Partial<StepWizardChildProps>> = (({
         </Typography>
       </ColBox>
       <ColBox>
-        <Typography variant="h1">
-          <LinkContactPhone />
-        </Typography>
+        <LinkContactPhone>
+          <Stack direction="row" justifyContent={"center"} spacing={1}>
+            <IconPhoneCircle
+              sx={{ width: "52px", height: "52px" }}
+              fill="#2e2d58"
+            />
+            <Typography variant="h1">
+              {NEXT_PUBLIC_CONTACT_PHONE_TEXT}
+            </Typography>
+          </Stack>
+        </LinkContactPhone>
       </ColBox>
     </StyledLastStepStack>
   );

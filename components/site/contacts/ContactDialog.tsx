@@ -58,7 +58,9 @@ export default function ContactDialog({
   return (
     <BaseDialog
       content={
+        <ApiProvider>
           <ContactsContent />
+        </ApiProvider>
       }
       hideTrigger
       component={component}
