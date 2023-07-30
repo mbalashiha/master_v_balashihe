@@ -14,7 +14,7 @@ import Link from "next/link";
 
 export const LandingPricesCards = () => {
   return (
-    <Container maxWidth={"lg"} sx={{ pb: "90px" }}>
+    <Container maxWidth={"lg"} sx={{ pb: "30px" }}>
       <Typography component="h3" variant="h1" gutterBottom mb="2rem">
         <Box component="span" color="primary.main">
           Оживлю любой компьютер

@@ -31,7 +31,7 @@ export default function Home(
       <Hero article={article!} />
       <LandingReasons />
       <LandingPricesCards />
-      <CallMeForFree elevation={8} />
+      <CallMeForFree elevation={8} sx={{ mb: "20px" }} />
     </>
   );
 }
