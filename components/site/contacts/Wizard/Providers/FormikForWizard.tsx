@@ -84,6 +84,13 @@ export const FormikForWizard: React.FC<any> = ({
               ? "Это сообщение уже было отправлено ранее"
               : submitResult.error
           );
+        }
+        if (!submitResult.success) {
+          ctx.setFieldValue(
+            "submitError",
+            "Произошла ошибка обращения к серверу: статус " +
+              submitResult.status.toString()
+          );
         } else {
           goToNamedStep("Сейчас перезвоним и предложим выезд мастера");
           if (values.submitError) {

@@ -29,7 +29,7 @@ export namespace RestApi {
 
   export interface RequestResults<T> {
     data: T;
-    status?: number;
+    status: number;
     statusText?: string;
     error?: string;
     response: Response | AxiosResponse;

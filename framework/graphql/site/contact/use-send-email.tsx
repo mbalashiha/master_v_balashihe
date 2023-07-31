@@ -12,7 +12,7 @@ export default useSendEmail as UseSendEmail<typeof handler>;
 export interface SendEmailHook {
   requestInput: WizValues;
   requestOutput: Site.ContactEmailResponse;
-  data: Site.ContactEmailResponse;
+  data: Site.ContactEmailOut;
 }
 export const handler: API.RestApi.RestApiHook<SendEmailHook> = {
   options: {
@@ -27,7 +27,7 @@ export const handler: API.RestApi.RestApiHook<SendEmailHook> = {
         ...options,
         variables,
       });
-      return data;
+      return { ...data, status };
     } catch (e: any) {
       console.error(e.stack || e.message || e);
       throw e;

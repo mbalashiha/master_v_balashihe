@@ -118,4 +118,9 @@ export namespace Site {
     success: boolean;
     error?: string | null;
   }
+  export interface ContactEmailOut {
+    success: boolean;
+    error?: string | null;
+    status: number;
+  }
 }
