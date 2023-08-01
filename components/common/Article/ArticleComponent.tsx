@@ -58,9 +58,7 @@ export default function Article({
         sx={{
           paddingTop: { xs: "200px", sm: "140px", md: "120px" },
           mb: "10px",
-          background: "#DFE7EB",
-          boxShadow:
-            "#0000001a 0rem 0.25rem 0.375rem -0.0625rem, #0000000f 0rem 0.125rem 0.25rem -0.0625rem",
+          background: "linear-gradient(180deg, #DFE7EB 1%, transparent 99%)",
         }}
         rightSidebar={navigation && <NavSidebar navigation={navigation} />}
       >
