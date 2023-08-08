@@ -1,5 +1,5 @@
 import React, { DetailedHTMLProps, HTMLAttributes } from "react";
-import { default as Link, LinkProps } from "next/link";
+import Link from "next/link";
 import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
 import ListItemIcon from "@mui/material/ListItemIcon";

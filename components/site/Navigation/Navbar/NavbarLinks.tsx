@@ -23,6 +23,7 @@ import {
 } from "@mui/material";
 import { NavigationLink } from "./NavigationLink";
 import { NavLinkProps } from "./NavigationLink";
+import { standartCssTransition } from "@components/ui/theme/mui-theme";
 
 type DividerProps = {
   orientation: "row" | "column";
@@ -105,68 +106,100 @@ export const NavbarLinks = ({
     return navLinks;
   }, [asPath]);
   return (
-    <List
-      component="nav"
-      sx={{
-        flexGrow: 1,
-        display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        flexWrap: "wrap",
-        padding: 0,
-        "& > *, & > .dropdown": {
-          margin: "0 0.5px",
-        },
-        "& .dropbtn, & button": {
-          margin: 0,
-          color: "auto",
-          border: "none",
-          background: "none",
-          "&:hover": {
-            background: (theme) => theme.palette.primary.main,
-            color: "white",
-          },
-        },
-        "& a, & button, & .menuLink, & > .dropdown > .dropbtn": {
-          fontWeight: 600,
-          p: 1,
-          borderRadius: 1,
-          minWidth: "3rem",
+    <>
+      <Stack
+        direction="row"
+        spacing="2px"
+        component="nav"
+        sx={{
+          padding: 0,
+          alignSelf: "flex-end",
           display: "flex",
+          justifyContent: "flex-start",
           alignItems: "center",
-          justifyContent: "center",
-          fontSize: "16px",
-          lineHeight: "24px",
-          "&:hover": {
-            background: (theme) => theme.palette.primary.main,
+          flexWrap: "wrap",
+          "& > *, & > .dropdown": {
+            margin: "0 0.5px",
           },
-        },
-        "& .active": {
-          background: (theme) => theme.palette.primary.main,
-          color: "white",
-        },
-        "& a.active": {
-          background: (theme) => theme.palette.primary.main,
-          cursor: "pointer",
-          color: "white",
-          "&:hover": {
-            background: (theme) => theme.palette.primary.main,
-            boxShadow: "0 0 30px rgb(13 70 144 / 50%)",
-            color: "white",
+          "& .dropbtn, & button": {
+            ...standartCssTransition,
+            margin: 0,
+            border: "none",
+            color: (theme) => theme.typography.allVariants.color,
           },
-        },
-        ...sx,
-      }}
-    >
-      {navLinks.map((linkProps) => (
-        <NavigationLink
-          key={linkProps.href + "_" + (linkProps.name || "")}
-          linkProps={linkProps}
-        >
-          {linkProps.name || ""}
-        </NavigationLink>
-      ))}
-    </List>
+          "& a, & button, & .menuLink, & > .dropdown > .dropbtn": {
+            px: "12px",
+            py: "14px",
+            borderRadius: 0,
+            minWidth: "3rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "16px",
+            lineHeight: "24px",
+          },
+          "&:hover": {
+            "& > a, & > div": {
+              "&.active:not(:hover):after": {
+                width: 0,
+                background: "transparent",
+              },
+            },
+          },
+          "& > a, & > div, & > button, & .dropdown .dropbtn, & .dropdown-content > *":
+            {
+              background: "transparent",
+              fontWeight: 600,
+              position: "relative",
+              transition: "color .5s ease, background-color .5s ease",
+              "&:hover, &.clicked": {
+                color: (theme) => theme.palette.primary.main,
+              },
+              "&.active": {
+                color: (theme) => theme.palette.primary.main,
+              },
+              "&:after": {
+                position: "absolute",
+                left: 0,
+                bottom: 0,
+                content: `""`,
+                display: "block",
+                height: "4px",
+                width: 0,
+                background: "transparent",
+                transition: "width .5s ease, background-color .5s ease",
+              },
+              "&:hover:after, &.active:after, &.clicked:after": {
+                width: "100%",
+                background: (theme) => theme.palette.primary.main,
+              },
+            },
+          "& > .dropdown": {
+            "&, & > button, && > .dropbtn, && > button.dropbtn": {
+              borderRadius: `8px 8px 0 0`,
+            },
+          },
+          "& .dropdown-content": {
+            background: "white",
+          },
+          ...sx,
+        }}
+      >
+        {navLinks.map((linkProps) => (
+          <NavigationLink
+            key={linkProps.href + "_" + (linkProps.name || "")}
+            linkProps={linkProps}
+          >
+            {linkProps.name || ""}
+          </NavigationLink>
+        ))}
+      </Stack>
+      <Box
+        sx={{
+          flexGrow: 1,
+        }}
+      ></Box>
+    </>
   );
 };
 export default NavbarLinks;

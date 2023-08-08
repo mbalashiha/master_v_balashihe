@@ -26,6 +26,7 @@ export default function Page({
         leftSidebar={<BlogRootSidebar recentArticles={recentArticles} />}
         sx={{ background: "transparent" }}
       >
+        <h1>Услуги мастера в Балашихе РФ по ремонту ПК</h1>
         <Grid container spacing={{ xs: 2, lg: 3 }}>
           {articles.map((article) => (
             <ArticleCard key={article.url} article={article} />
