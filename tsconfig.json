@@ -47,6 +47,12 @@
       }
     ]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", ".next", "html-archives", ".history"]
+  "include": ["**/*.ts", "**/*.tsx", "pages/api/yandex-map-iframe.js.ts"],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "html-archives",
+    ".history",
+    "webpack-define-plugin"
+  ]
 }

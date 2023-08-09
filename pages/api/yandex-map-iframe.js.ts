@@ -5,5 +5,6 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<string>
 ) {
-  res.status(200).send(process.env.Yandex_Map_dangerouslySetInnerHTML || "");
+  res.setHeader("Content-Type", "text/javascript; charset=utf-8");
+  res.status(200).send(process.env.Yandex_Map_My_JS_Code || "");
 }

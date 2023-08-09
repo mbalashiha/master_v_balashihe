@@ -151,7 +151,7 @@ const YandexMapIframe = () => {
           <iframe
             width="100%"
             height="535px"
-            src="/api/yandex-map-iframe"
+            src="/api/yandex-map-iframe.html"
             loading="lazy"
             name="yandex-map-balashiha-map-iframe"
             title="Карта Мастер в Балашихе Центр города Балашиха"

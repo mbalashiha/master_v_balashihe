@@ -2,9 +2,7 @@
 const fs = require("fs");
 const tryReadFile = function (filepath) {
   try {
-    return fs
-      .readFileSync("webpack-define-plugin/yandex_metrika.html")
-      .toString();
+    return fs.readFileSync(filepath).toString();
   } catch (e) {
     console.error(e.message || e.stack || e);
     return "";
@@ -24,6 +22,9 @@ module.exports = {
         ),
         "process.env.Yandex_Map_dangerouslySetInnerHTML": JSON.stringify(
           tryReadFile("webpack-define-plugin/yandex-map-iframe.html")
+        ),
+        "process.env.Yandex_Map_My_JS_Code": JSON.stringify(
+          tryReadFile("webpack-define-plugin/yandex-map-iframe.js")
         ),
       })
     );
