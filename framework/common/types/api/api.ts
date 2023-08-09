@@ -34,6 +34,7 @@ export interface ManagementHooks {
       article: {
         useSaveArticle: Graphql.MutationHook<any>;
         useDeleteArticle: Graphql.MutationHook<any>;
+        useTemplateList: Graphql.SWRHook<any>;
         draft: {
           useArticleDraft: Graphql.SWRHook<any>;
           useSaveArticleText: Graphql.MutationHook<any>;

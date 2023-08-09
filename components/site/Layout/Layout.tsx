@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
 import { Search } from "@components/site";
-import RootLayout from "./RootLayout";
+import SiteLayout from "./SiteLayout";
 import ContactDialog from "../contacts/ContactDialog";
 
 interface Props {
@@ -25,7 +25,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
   // )?.props?.breadcrumbs;
   return (
     <>
-      <RootLayout>
+      <SiteLayout>
         <Box component="main" pb="26rem">
           {children}
           <BottomContactsWithMap />
@@ -72,7 +72,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
             </Button>
           </ContactDialog>
         </Container>
-      </RootLayout>
+      </SiteLayout>
     </>
   );
 };

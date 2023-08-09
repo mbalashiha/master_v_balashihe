@@ -42,6 +42,7 @@ export namespace Schema {
     score: Float | null;
     fragment: String | null;
     image: Image | null;
+    views: number;
   }
   export interface NavigationItem {
     title: String;
@@ -81,6 +82,8 @@ export namespace Schema {
     image: Image | null;
     secondImageId: ID | null;
     secondImage: Image | null;
+    views: number;
+    templateId: ID;
   }
   export namespace Article {
     export interface ArticleInput {
@@ -102,6 +105,7 @@ export namespace Schema {
       existingArticleId: ID | null;
       imageId: ID | null;
       secondImageId: ID | null;
+      templateId: ID;
     }
     export interface ArticleDraftInput {
       id: ID | null;
@@ -117,6 +121,7 @@ export namespace Schema {
       existingArticleId: ID | null;
       imageId: ID | null;
       secondImageId: ID | null;
+      templateId: ID;
     }
     export interface TextDraftInput {
       id: ID | null;
@@ -156,6 +161,7 @@ export namespace Schema {
       image: Image | null;
       secondImageId: ID | null;
       secondImage: Image | null;
+      templateId: ID;
     }
   }
   export interface BlogArticlesConnection {

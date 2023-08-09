@@ -17,7 +17,7 @@ import { ApiProvider } from "@framework";
 interface Props {
   children: React.ReactNode | React.ReactNode[];
 }
-const RootLayout: FC<Props> = ({ children }: Props) => {
+const SiteLayout: FC<Props> = ({ children }: Props) => {
   // const breadcrumbs: Array<{ name: string; url: string }> | undefined = (
   //   children as any
   // )?.props?.breadcrumbs;
@@ -40,7 +40,12 @@ const RootLayout: FC<Props> = ({ children }: Props) => {
         <ApiProvider>{children}</ApiProvider>
         <Footer />
       </ThemeProvider>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: process.env.Yandex_Metrika_dangerouslySetInnerHTML || "",
+        }}
+      />
     </>
   );
 };
-export default RootLayout;
+export default SiteLayout;

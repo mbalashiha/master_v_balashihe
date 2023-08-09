@@ -35,6 +35,7 @@ export const normalizeArticleDraft = (
     image,
     secondImageId,
     secondImage,
+    templateId,
   } = draft;
   const url = existingArticleId
     ? normalizeArticleUrl(handle, autoHandleSlug)
@@ -66,6 +67,7 @@ export const normalizeArticleDraft = (
     image: image ? normalizeImage(image) : null,
     secondImageId: secondImageId || null,
     secondImage: secondImage ? normalizeImage(secondImage) : null,
+    templateId: templateId || null,
   };
   return normalizedDraft;
 };

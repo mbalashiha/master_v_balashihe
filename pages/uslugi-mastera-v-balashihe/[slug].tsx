@@ -45,10 +45,10 @@ export default function Page(
   return (
     <>
       <Head>
-        <title>{`Мастер в Балашихе - ${article.title}`}</title>
+        <title>{`Мастер по ремонту в Балашихе и Московской области ${article.title}`}</title>
         <meta
           name="description"
-          content={`Мастер по ремонту в Балашихе и Московской области - ${article.title}`}
+          content={`Мастер по ремонту в Балашихе и Московской области ${article.title}`}
         />
       </Head>
       <Article {...article} />

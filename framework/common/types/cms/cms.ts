@@ -32,6 +32,7 @@ export namespace Blog {
     score: Float | null;
     fragment: String | null;
     image: Image | null;
+    views: number;
   }
   export interface NavigationItem {
     title: String;
@@ -68,6 +69,8 @@ export namespace Blog {
     image: Image | null;
     secondImageId: ID | null;
     secondImage: Image | null;
+    views: number;
+    templateId: ID | null;
   }
   export interface ArticleDraft {
     id: ID | null;
@@ -96,6 +99,7 @@ export namespace Blog {
     image: Image | null;
     secondImageId: ID | null;
     secondImage: Image | null;
+    templateId: ID | null;
   }
 }
 export namespace Management {

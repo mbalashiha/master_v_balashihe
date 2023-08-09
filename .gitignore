@@ -29,5 +29,5 @@ yarn-error.log*
 .env.local
 .env.development
 .env.production
-*.Identifier
 *Zone.Identifier
+/webpack-define-plugin/**

@@ -16,7 +16,7 @@ export default function Page({
   return (
     <>
       <Head>
-        <title>Мастер в Балашихе</title>
+        <title>Мастер в Балашихе - все услуги по ремонту</title>
         <meta
           name="description"
           content="Ремонт материнских плат в Балашихе и Московской области"

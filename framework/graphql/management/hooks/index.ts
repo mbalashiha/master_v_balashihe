@@ -13,6 +13,7 @@ import { handler as useArticleList } from "@framework/management/blog/use-articl
 import { handler as useArticleSearch } from "@framework/management/blog/use-articles-search";
 import { handler as useImageUpload } from "@framework/management/image/use-image-upload";
 import { handler as useCheckArticle } from "@framework/management/blog/article/draft/use-check-article";
+import { handler as useArticleTemplateList } from "@framework/management/blog/article/use-template-list";
 import { API } from "@common/types";
 
 export const graphqlHooks: API.ManagementHooks = {
@@ -32,6 +33,7 @@ export const graphqlHooks: API.ManagementHooks = {
       article: {
         useSaveArticle,
         useDeleteArticle,
+        useTemplateList: useArticleTemplateList,
         draft: {
           useArticleDraft,
           useSaveArticleText,

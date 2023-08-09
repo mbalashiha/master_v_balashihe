@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Document, {
   Html,
   Main,

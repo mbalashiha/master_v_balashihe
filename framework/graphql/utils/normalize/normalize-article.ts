@@ -30,6 +30,7 @@ export const normalizeBlogRow = (
     fragment,
     displayingPageHandle,
     image,
+    views,
   } = data;
   const url = absURL || handle ? normalizeArticleUrl(absURL || handle) : "";
   return {
@@ -47,6 +48,7 @@ export const normalizeBlogRow = (
       hour: "numeric",
       minute: "numeric",
     }),
+    views: views || 0,
   };
 };
 export const normalizeArtNavItem = (
@@ -124,6 +126,8 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     image,
     secondImageId,
     secondImage,
+    views,
+    templateId,
   } = data;
   if (!id) {
     throw new Error("No id in article row!");
@@ -155,6 +159,8 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     image: image ? normalizeImage(image) : null,
     secondImageId: secondImageId || null,
     secondImage: secondImage ? normalizeImage(secondImage) : null,
+    views: views || 0,
+    templateId: templateId || null,
   };
 };
 

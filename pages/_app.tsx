@@ -26,12 +26,18 @@ function MyMasterApp(
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         {/* <meta name="theme-color" content={theme.palette.primary.main} /> */}
-        <title>{`Мастер в Балашихе - ${
-          title ? title : "Закажите ремонт компьютера сегодня"
+        <title>{`Частный компьютерный мастер в Балашихе ${
+          title
+            ? title
+            : "в центре города рядом с Шоссе Энтузиастов М-7 Балашиха РФ"
         }`}</title>
         <meta
           name="description"
-          content="Мастер в Балашихе - Закажите ремонт компьютера сегодня"
+          content={`Частный компьютерный мастер в Балашихе ${
+            title
+              ? title
+              : "в центре города рядом с Шоссе Энтузиастов М-7 Балашиха РФ"
+          }`}
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

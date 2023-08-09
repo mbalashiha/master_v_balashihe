@@ -10,11 +10,6 @@ function init() {
     },
     {}
   );
-  /*
-  myMap.balloon.open([55.794831, 37.92264], "Содержимое балуна", {
-    closeButton: true,
-  });
-  */
   var myPlacemark = new ymaps.Placemark(
     [55.794831, 37.92264],
     {
