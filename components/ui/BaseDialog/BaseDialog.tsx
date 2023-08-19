@@ -182,7 +182,9 @@ const BaseDialog = React.forwardRef(function BaseDialog(
           onClose={close}
           sx={{
             "& .Dialog-container": {
-              "& > *:first-child": {
+              maxWidth: "100vw",
+              maxHeight: "100vh",
+              "& > div:first-of-type": {
                 position: "relative",
                 borderRadius: (theme) => theme.shape.borderRadius / 2 + "px",
                 margin: { xs: "2px", sm: "6px", md: "inherit" },

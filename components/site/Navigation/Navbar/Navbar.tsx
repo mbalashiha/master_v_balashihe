@@ -31,7 +31,6 @@ import { MainLogo } from "@components/site/MainLogo";
 import { PhoneCallIcon, TelegramIcon } from "@components/icons";
 import {
   NEXT_PUBLIC_WHATSAPP_LINK,
-  NEXT_PUBLIC_CONTACT_PHONE,
   NEXT_PUBLIC_TELEGRAM_LINK,
   NEXT_PUBLIC_CONTACT_PHONE_TEXT,
 } from "@framework/const";
@@ -61,35 +60,38 @@ const Navbar: FC = () => {
             display: "flex",
             flexDirection: "row",
             justifyContent: "center",
-            zIndex: 1,
+            zIndex: 3,
           }}
         >
           <Stack
-            direction="row"
-            justifyContent="flex-start"
-            alignItems="center"
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: "4px", sm: 2 }}
             flexWrap="wrap"
             sx={{
               width: "100%",
               maxWidth: "1900px",
               overflow: "visible",
+              justifyContent: "space-between",
+              alignItems: "space-between",
             }}
           >
             <MainLogo />
             <NavbarLinks />
             <Stack
-              direction="row"
+              direction={"row"}
               justifyContent="flex-start"
               alignItems="center"
               flexWrap="nowrap"
+              alignSelf={"flex-end"}
               sx={{
                 color: "#2E2D58",
-                fontSize: "30px",
-                lineHeight: "30px",
+                fontSize: "18px",
+                "&, & a, & a > *": {
+                  transitionProperty: "color",
+                },
+                lineHeight: "20px",
                 fontWeight: 700,
                 letterSpacing: "0.001rem",
-                height: "75px",
-                px: { xs: "24px", sm: 0 },
                 "& a, & > div": {
                   display: "flex",
                   direction: "row",
@@ -97,10 +99,10 @@ const Navbar: FC = () => {
                   alignItems: "center",
                   flexWrap: "nowrap",
                   "& > svg": {
-                    width: "66x",
-                    height: "66px",
-                    marginBottom: "-5px",
-                    marginRight: "10px",
+                    width: "34px",
+                    height: "34px",
+                    marginBottom: "-2px",
+                    marginRight: "6px",
                   },
                 },
                 "&&& svg": {
@@ -116,7 +118,14 @@ const Navbar: FC = () => {
                 <Box>{NEXT_PUBLIC_CONTACT_PHONE_TEXT}</Box>
               </ContactDialog>
               <Box
-                sx={{ ml: 1, "&, & svg": { width: "70px", height: "70px" } }}
+                sx={{
+                  ml: 1,
+                  mt: { xs: 0, sm: "4px" },
+                  "& svg": {
+                    width: "36px",
+                    height: "36px",
+                  },
+                }}
               >
                 <a
                   href={NEXT_PUBLIC_TELEGRAM_LINK}

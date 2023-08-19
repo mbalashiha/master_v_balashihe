@@ -29,6 +29,7 @@ const StyledContainer = styled(Box)(({ theme }) => ({
     fontWeight: 500,
   },
   width: "100%",
+  minHeight: "516px",
   maxHeight: "90vh",
   overflow: "auto",
   paddingBottom: "15px",

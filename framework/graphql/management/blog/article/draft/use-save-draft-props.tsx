@@ -58,9 +58,10 @@ export const handler: API.Graphql.MutationHook<UseSaveArtDraftPropsHook> = {
           publishedAt: all?.publishedAt || null,
           h2: all?.h2 || null,
           secondImageId: all?.secondImageId || null,
+          templateId: all?.templateId || null,
         },
       };
-      all?.secondImageId
+      all?.secondImageId;
       const draft = inputObj.articleDraft;
       const needToUpdate =
         (draft.title || null) != (initial.title || null) ||
@@ -75,7 +76,8 @@ export const handler: API.Graphql.MutationHook<UseSaveArtDraftPropsHook> = {
         (draft.imageId || null) != (initial.imageId || null) ||
         (draft.publishedAt || null) != (initial.publishedAt || null) ||
         (draft.h2 || null) != (initial.h2 || null) ||
-        (draft.secondImageId || null) != (initial.secondImageId || null);
+        (draft.secondImageId || null) != (initial.secondImageId || null) ||
+        draft.templateId != initial.templateId;
       if (needToUpdate) {
         const response = await request(inputObj);
         form.setInitialValues({ ...response });

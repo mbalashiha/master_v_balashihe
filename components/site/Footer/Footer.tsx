@@ -2,6 +2,7 @@ import Link from "next/link";
 import KeyboardDoubleArrowUpRoundedIcon from "@mui/icons-material/KeyboardDoubleArrowUpRounded";
 import { Container, Box, IconButton } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
+import GetDiscountButton from "./GetDiscountButton";
 export const Footer = () => {
   return (
     <Container
@@ -89,7 +90,7 @@ export const Footer = () => {
       >
         <KeyboardDoubleArrowUpRoundedIcon />
       </IconButton>
-      {/* <PaletterModeSwitch sx={{ bottom: 0, right: "0.5rem" }} /> */}
+      <GetDiscountButton />
     </Container>
   );
 };

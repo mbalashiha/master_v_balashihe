@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Мастер в Балашихе - ремонт ПК - Карта</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script
+      src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=6c447e7f-32cb-4c7c-abd9-4005cfd15f85"
+      type="text/javascript"
+    ></script>
+    <script src="/scripts/yandex-map-iframe.js" type="text/javascript"></script>
+    <style>
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      [class*="-gototaxi"],
+      [class*="-gotoymaps"],
+      a[href] {
+        display: none !important;
+      }
+      #map {
+        background-image: url("/images/map.webp");
+        background-size: 100%;
+        background-position: center center;
+        background-repeat: repeat;
+      }
+    </style>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+      (function (m, e, t, r, i, k, a) {
+        m[i] =
+          m[i] ||
+          function () {
+            (m[i].a = m[i].a || []).push(arguments);
+          };
+        m[i].l = 1 * new Date();
+        for (var j = 0; j < document.scripts.length; j++) {
+          if (document.scripts[j].src === r) {
+            return;
+          }
+        }
+        (k = e.createElement(t)),
+          (a = e.getElementsByTagName(t)[0]),
+          (k.async = 1),
+          (k.src = r),
+          a.parentNode.insertBefore(k, a);
+      })(
+        window,
+        document,
+        "script",
+        "https://mc.yandex.ru/metrika/tag.js",
+        "ym"
+      );
+
+      ym(94574863, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true,
+        ecommerce: "dataLayer",
+      });
+    </script>
+    <!-- /Yandex.Metrika counter -->
+    <noscript
+      ><div>
+        <img
+          src="https://mc.yandex.ru/watch/94574863"
+          style="position: absolute; left: -9999px"
+          alt=""
+        /></div
+    ></noscript>
+    <!-- /Yandex.Metrika counter -->
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+</html>

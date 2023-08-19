@@ -99,10 +99,6 @@ const getMuiTheme = (): Theme => {
       MuiCssBaseline: {
         styleOverrides: {
           body: {
-            "@media (max-width: 1000px)": {
-              maxWidth: "99.5vw",
-              overflowX: "hidden",
-            },
             minHeight: "100vh",
             position: "relative",
             paddingBottom: "27rem",

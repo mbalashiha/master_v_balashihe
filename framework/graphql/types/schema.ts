@@ -105,7 +105,7 @@ export namespace Schema {
       existingArticleId: ID | null;
       imageId: ID | null;
       secondImageId: ID | null;
-      templateId: ID;
+      templateId: ID | null;
     }
     export interface ArticleDraftInput {
       id: ID | null;
@@ -121,7 +121,7 @@ export namespace Schema {
       existingArticleId: ID | null;
       imageId: ID | null;
       secondImageId: ID | null;
-      templateId: ID;
+      templateId: ID | null;
     }
     export interface TextDraftInput {
       id: ID | null;
@@ -161,7 +161,7 @@ export namespace Schema {
       image: Image | null;
       secondImageId: ID | null;
       secondImage: Image | null;
-      templateId: ID;
+      templateId: ID | null;
     }
   }
   export interface BlogArticlesConnection {

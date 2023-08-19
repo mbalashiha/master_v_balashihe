@@ -64,15 +64,6 @@ export const SpecialHeader = ({
     <StyledBox
       sx={{
         position: "relative",
-        "& > img": {
-          position: "absolute",
-          zIndex: 0,
-          maxHeight: "100%",
-          right: { xs: "auto", md: 0, xl: 0 },
-          left: { xs: 0, md: "auto" },
-          top: 0,
-          padding: "0 0 45px 0",
-        },
       }}
     >
       <Container maxWidth={"lg"}>
@@ -173,14 +164,37 @@ export const SpecialHeader = ({
           <RequestComputerMaster />
         </Grid>
       </Container>
-      <EnhImage
-        width={1498}
-        height={784}
-        fitHeight={500}
-        src="/images/my-computer-repair-bg.webp"
-        alt="Компьютерный мастер Балашиха МФЦ остановка Горсовет"
-        quality={90}
-      />
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          overflow: "hidden",
+          "& > img": {
+            position: "absolute",
+            zIndex: 0,
+            height: "auto",
+            maxHeight: "100%",
+            right: { xs: "auto", md: 0, xl: 0 },
+            left: { xs: 0, md: "auto" },
+            top: 0,
+            padding: "0 0 45px 0",
+          },
+        }}
+      >
+        <EnhImage
+          width={1498}
+          height={784}
+          fitHeight={500}
+          src="/images/my-computer-repair-bg.webp"
+          alt="Компьютерный мастер Балашиха МФЦ остановка Горсовет"
+          quality={90}
+        />
+      </Box>
     </StyledBox>
   );
 };

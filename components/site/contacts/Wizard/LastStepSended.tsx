@@ -1,7 +1,6 @@
 import { useField, useFormikContext } from "formik";
 import * as React from "react";
 import {
-  NEXT_PUBLIC_CONTACT_PHONE,
   NEXT_PUBLIC_CONTACT_PHONE_TEXT,
 } from "@framework/const";
 import { WizValues } from "./Providers";

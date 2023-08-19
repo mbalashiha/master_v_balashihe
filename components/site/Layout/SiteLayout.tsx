@@ -31,12 +31,6 @@ const SiteLayout: FC<Props> = ({ children }: Props) => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Navbar />
-
-        {/* {(router.asPath === "/" && <IndexHeader />) || (
-            <Box sx={{ width: "100%", height: "6rem" }}></Box>
-          )} */}
-        {/* <NavBreadcrumbs breadcrumbs={breadcrumbs}></NavBreadcrumbs> */}
-
         <ApiProvider>{children}</ApiProvider>
         <Footer />
       </ThemeProvider>

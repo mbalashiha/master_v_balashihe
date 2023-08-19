@@ -43,17 +43,17 @@ interface Props extends StackProps {
 const getLinks = (): Array<NavLinkProps> => [
   { href: "/", name: <HomeIcon /> },
   {
-    href: "/uslugi-mastera-v-balashihe/remont-kompyuterov-bystro-balashiha-na-domu-ili-v-ofise",
-    name: "Ремонт компьютера",
-  },
-  {
-    href: "/uslugi-mastera-v-balashihe/remont-noutbuka-mfc-balashiha",
-    name: "Ремонт ноутбука",
-  },
-  {
     href: "/uslugi-mastera-v-balashihe/remont-noutbuka-mfc-balashiha",
     name: "Компьютерная помощь",
     submenu: [
+      {
+        href: "/uslugi-mastera-v-balashihe/remont-kompyuterov-bystro-balashiha-na-domu-ili-v-ofise",
+        name: "Ремонт компьютера",
+      },
+      {
+        href: "/uslugi-mastera-v-balashihe/remont-noutbuka-mfc-balashiha",
+        name: "Ремонт ноутбука",
+      },
       {
         href: "/uslugi-mastera-v-balashihe/ustanovka-programm-balashiha",
         name: "Установка программ",
@@ -68,8 +68,8 @@ const getLinks = (): Array<NavLinkProps> => [
       },
     ],
   },
-  { href: "/uslugi-mastera-v-balashihe", name: "Услуги" },
-  { href: "/computer-master-balashiha", name: "О мастере" },
+  { href: "/uslugi-mastera-v-balashihe", name: "Блог" },
+  { href: "/computer-master-balashiha", name: "Контакты" },
 ];
 export const NavbarLinks = ({
   orientation,
@@ -108,15 +108,16 @@ export const NavbarLinks = ({
   return (
     <>
       <Stack
-        direction="row"
+        direction={{ xs: "column", sm: "row" }}
         spacing="2px"
         component="nav"
         sx={{
-          padding: 0,
-          alignSelf: "flex-end",
+          py: 0,
+          px: { xs: "12px", sm: 0 },
+          alignSelf: { xs: "flex-start", sm: "flex-end" },
           display: "flex",
           justifyContent: "flex-start",
-          alignItems: "center",
+          alignItems: { xs: "flex-start", sm: "center" },
           flexWrap: "wrap",
           "& > *, & > .dropdown": {
             margin: "0 0.5px",
@@ -128,8 +129,8 @@ export const NavbarLinks = ({
             color: (theme) => theme.typography.allVariants.color,
           },
           "& a, & button, & .menuLink, & > .dropdown > .dropbtn": {
-            px: "12px",
-            py: "14px",
+            px: { xs: 0, sm: "12px" },
+            py: { xs: "6px", sm: "14px" },
             borderRadius: 0,
             minWidth: "3rem",
             display: "flex",
@@ -194,11 +195,6 @@ export const NavbarLinks = ({
           </NavigationLink>
         ))}
       </Stack>
-      <Box
-        sx={{
-          flexGrow: 1,
-        }}
-      ></Box>
     </>
   );
 };

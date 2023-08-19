@@ -53,16 +53,19 @@ export default function Hero({ article }: Props) {
               <Paper
                 elevation={1}
                 sx={{
+                  maxWidth: "100vw",
+                  "& > img": {
+                    maxWidth: { xs: "100%", sm: "inherit" },
+                    height: "auto",
+                    borderRadius: (theme) =>
+                      theme.shape.borderRadius - 10 + "px",
+                  },
                   p: 0.7,
                   pb: 0.1,
                   marginBottom: { xs: 0, xl: 0 },
                   marginTop: { xs: 0, xl: "20px" },
-                  marginRight: { md: "-26px" },
+                  marginRight: { xs: 0, md: "-26px" },
                   borderRadius: (theme) => theme.shape.borderRadius - 5 + "px",
-                  "& img": {
-                    borderRadius: (theme) =>
-                      theme.shape.borderRadius - 10 + "px",
-                  },
                 }}
               >
                 <Image

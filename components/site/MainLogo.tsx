@@ -31,7 +31,6 @@ export const MainLogo = () => {
         alignItems: "center",
         justifyContent: "center",
         height: "82px",
-        px: { xs: "10px", sm: 0 },
       }}
     >
       <Link href="/" passHref>
@@ -39,9 +38,6 @@ export const MainLogo = () => {
           direction="row"
           justifyContent="space-between"
           alignItems="center"
-          sx={{
-            width: "300px",
-          }}
         >
           <MasterSvgLogo />
           <Typography
@@ -50,8 +46,8 @@ export const MainLogo = () => {
             sx={{
               fontSize: "1.4rem",
               lineHeight: "1.3rem",
-              px: "0.5rem",
               py: 0,
+              pl: "0.5rem",
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: 0,
@@ -69,7 +65,7 @@ export const MainLogo = () => {
                 color: "#575757",
               }}
             >
-              Компьютерный&nbsp;
+              Компьютерный
             </Box>
             <Box
               component="span"
@@ -82,7 +78,7 @@ export const MainLogo = () => {
                 color: (theme) => theme.palette.primary.main,
               }}
             >
-              Мастер&nbsp;
+              Мастер
             </Box>
             <Box
               component="span"
