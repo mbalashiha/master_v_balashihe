@@ -135,6 +135,19 @@ const getMuiTheme = (): Theme => {
           root: {},
         },
       },
+      MuiInputBase: {
+        styleOverrides: {
+          root: {},
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          select: {
+            minHeight: "inherit",
+            padding: "4px 0 4px 0"
+          },
+        },
+      },
       MuiFilledInput: {
         styleOverrides: {
           root: {
@@ -142,6 +155,7 @@ const getMuiTheme = (): Theme => {
             color: "#10101a",
             padding: "18px 14px 4px 12px",
             borderRadius: "8px 8px 0 0",
+
             "&:hover": {
               background: blueGrey[50],
             },
@@ -158,6 +172,16 @@ const getMuiTheme = (): Theme => {
           },
         },
       },
+      MuiFormLabel: {
+        styleOverrides: {
+          root: {
+            "&.InputLabel-outlined.InputLabel-shrink": {
+              transform: "translate(5.5px, 1px) scale(0.835)",
+              color: theme.palette.primary.main,
+            },
+          },
+        },
+      },
       MuiInputLabel: {
         styleOverrides: {
           root: {
@@ -170,7 +194,6 @@ const getMuiTheme = (): Theme => {
             padding: "0 8px",
             "&.InputLabel-shrink": {
               transform: "translate(12px, -8px) scale(0.835)",
-              background: theme.palette.background.paper,
             },
           },
           filled: {
@@ -212,12 +235,7 @@ const getMuiTheme = (): Theme => {
       },
       MuiMenuItem: {
         styleOverrides: {
-          root: {
-            fontFamily: InterFontFamily,
-            color: "black",
-            fontWeight: 500,
-            fontSize: "1.1rem",
-          },
+          root: {},
         },
       },
       // Name of the component
@@ -233,7 +251,7 @@ const getMuiTheme = (): Theme => {
           root: {
             backgroundColor: colors.red.A700,
             color: "white",
-            ":hover": {
+            "&:hover": {
               backgroundColor: colors.red[900],
               boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
             },
@@ -254,9 +272,6 @@ const getMuiTheme = (): Theme => {
         styleOverrides: {
           // Name of the slot
           root: {
-            "&, && *": {
-              fontFamily,
-            },
             ...standartCssTransition,
             border: "none",
             borderColor: "none",
@@ -282,12 +297,8 @@ const getMuiTheme = (): Theme => {
       },
       MuiOutlinedInput: {
         styleOverrides: {
-          input: {
-            padding: 0,
-          },
-          root: {
-            padding: "12px 14px 8px 14px",
-          },
+          input: {},
+          root: {},
         },
       },
     },

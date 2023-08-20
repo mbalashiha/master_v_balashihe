@@ -43,12 +43,12 @@ interface Props {
 
 export default function ArticleForm({}: Props) {
   const router = useRouter();
-  const { setDuplicateArticle } = useArticleContext();
   const checkArticle = useCheckArticle();
   const { enqueueSnackbar } = useSnackbar();
   const { setCreateButton, unsetCreateButton } = useFabButton();
   const { data } = useArticleDraft();
-  const { existingArticleId: articleId, isCreatePage } = data! || {};
+  const { existingArticleId: articleId } = data! || {};
+  const isCreatePage = Boolean(articleId);
   const providerRef: React.MutableRefObject<ArticleEditorContext | undefined> =
     useRef<ArticleEditorContext | undefined>();
   useEffect(() => {
@@ -112,6 +112,9 @@ export default function ArticleForm({}: Props) {
           errors.title =
             "Введите корректное название статьи для пути URL страницы: " +
             (title || "null").toString().substring(0, 16);
+        }
+        if (!values.templateId) {
+          errors.templateId = "Выберите активный шаблон";
         }
         return errors;
       }}
@@ -201,6 +204,8 @@ export default function ArticleForm({}: Props) {
         const { success, articleId, articleDraft } = await saveArticle({
           article,
         });
+        console.log(articleDraft);
+        debugger;
         if (success && articleId && isCreatePage) {
           helpers.resetForm();
           helpers.destroyForm();

@@ -9,6 +9,8 @@ export const getRecentArticlesQuery = gql`
         publishedAt
         score
         fragment
+        templateId
+        viewed
         image {
           imageId
           imgSrc

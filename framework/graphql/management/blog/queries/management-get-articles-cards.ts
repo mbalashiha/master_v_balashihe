@@ -11,6 +11,7 @@ export const managementArticlesCards = gql`
         publishedAt
         score
         fragment
+        viewed
       }
     }
   }

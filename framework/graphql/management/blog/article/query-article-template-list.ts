@@ -5,6 +5,7 @@ export const managementArticleTemplates = gql`
     managementArticleTemplates {
       templateId
       templateName
+      lastUsed
     }
   }
 `;

@@ -15,6 +15,8 @@ export const getArticleByAbsUrlQuery = gql`
     blogCategoryId
     updatedAt
     publishedAt
+    templateId
+    viewed
     image {
       imageId
       imgSrc

@@ -18,7 +18,7 @@ export const normalizeArticleUrl = (
   }
 };
 export const normalizeBlogRow = (
-  data: Schema.BlogArticleCard
+  data: Schema.ArticleCard
 ): Blog.ArticleCard => {
   const {
     id,
@@ -30,7 +30,7 @@ export const normalizeBlogRow = (
     fragment,
     displayingPageHandle,
     image,
-    views,
+    viewed,
   } = data;
   const url = absURL || handle ? normalizeArticleUrl(absURL || handle) : "";
   return {
@@ -48,7 +48,7 @@ export const normalizeBlogRow = (
       hour: "numeric",
       minute: "numeric",
     }),
-    views: views || 0,
+    viewed: viewed || null,
   };
 };
 export const normalizeArtNavItem = (
@@ -66,7 +66,7 @@ export const normalizeArtNavItem = (
   };
 };
 const normalizeArticleNavigationItems = (
-  nav: Schema.BlogArticleNavigation | null
+  nav: Schema.ArticleNavigation | null
 ): Blog.BlogArticleNavigation => {
   if (!nav) {
     return {
@@ -100,7 +100,7 @@ export const chooseArticleUrl = ({
   }
   return url;
 };
-export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
+export const normalizeArticle = (data: Schema.Article): Blog.Article => {
   let {
     id,
     title,
@@ -126,8 +126,10 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     image,
     secondImageId,
     secondImage,
-    views,
+    viewed,
     templateId,
+    blogCategoryId,
+    autoHandleSlug,
   } = data;
   if (!id) {
     throw new Error("No id in article row!");
@@ -159,8 +161,11 @@ export const normalizeArticle = (data: Schema.BlogArticle): Blog.Article => {
     image: image ? normalizeImage(image) : null,
     secondImageId: secondImageId || null,
     secondImage: secondImage ? normalizeImage(secondImage) : null,
-    views: views || 0,
+    viewed: viewed || null,
     templateId: templateId || null,
+    blogCategoryId: blogCategoryId || null,
+    autoHandleSlug: autoHandleSlug || null,
+    handle: handle || null,
   };
 };
 

@@ -45,6 +45,7 @@ import {
 import { blueGrey } from "@mui/material/colors";
 import { ImagePanel, UploaderComponent } from "./Article";
 import { ArticleFormParameters } from "./ArticleFormParameters";
+import ArticleTemplates from "./Article/ArticleTemplates";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -125,7 +126,7 @@ export const ArticleTabs = () => {
                 <UploaderComponent />
               </Grid>
               <Grid item xs={12} sm={8} lg={10}>
-                <Grid container spacing={0}>
+                <Grid container spacing={1}>
                   <Grid item xs={12} md={12}>
                     <ArticleTitle />
                   </Grid>
@@ -173,6 +174,9 @@ export const ArticleTabs = () => {
                       </Paper>
                     </Grid>
                   )}
+                  <Grid item xs={12} md={12}>
+                    <ArticleTemplates />
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>

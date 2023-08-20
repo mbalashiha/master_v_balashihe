@@ -40,6 +40,9 @@ export const normalizeArticleDraft = (
   const url = existingArticleId
     ? normalizeArticleUrl(handle, autoHandleSlug)
     : null;
+  if (typeof templateId === "undefined") {
+    throw new Error("article templateId is undefined!");
+  }
   const normalizedDraft = {
     id,
     title: title || "",

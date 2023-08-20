@@ -32,7 +32,7 @@ export namespace Schema {
   export interface CategoryId {
     id: ID;
   }
-  export interface BlogArticleCard {
+  export interface ArticleCard {
     id: ID;
     title: String;
     handle: String;
@@ -42,7 +42,7 @@ export namespace Schema {
     score: Float | null;
     fragment: String | null;
     image: Image | null;
-    views: number;
+    viewed: number | null;
   }
   export interface NavigationItem {
     title: String;
@@ -50,16 +50,17 @@ export namespace Schema {
     itIsloop: Boolean | null;
     image: Image | null;
   }
-  export interface BlogArticleNavigation {
+  export interface ArticleNavigation {
     prev: NavigationItem | null;
     next: NavigationItem | null;
     nearestSiblings: NavigationItem[] | null;
   }
-  export interface BlogArticle {
-    id: ID;
+  export interface Article {
+    id: ID | null;
     title: String;
-    handle: String;
-    absURL: String;
+    handle: String | null;
+    autoHandleSlug: String | null;
+    absURL: String | null;
     displayingPageHandle: String;
     text: String;
     textHtml: String;
@@ -71,18 +72,18 @@ export namespace Schema {
     notSearchable: Boolean;
     notInList: Boolean;
     orderNumber: Int;
-    blogCategoryId: ID;
+    blogCategoryId: ID | null;
     category: CategoryId;
     createdAt: Date;
     updatedAt: Date;
     publishedAt: Date | String;
     breadcrumbs: Breadcrumb[];
-    navigation: BlogArticleNavigation | null;
+    navigation: ArticleNavigation | null;
     imageId: ID | null;
     image: Image | null;
     secondImageId: ID | null;
     secondImage: Image | null;
-    views: number;
+    viewed: number | null;
     templateId: ID;
   }
   export namespace Article {
@@ -135,37 +136,15 @@ export namespace Schema {
       keyTextHtml: String;
       existingArticleId: ID | null;
     }
-    export interface ArticleDraft {
-      id: ID | null;
-      title: String;
-      handle: String;
-      autoHandleSlug: String;
-      absURL: String | null;
+    export interface ArticleDraft extends Article {
       text: String;
-      textHtml: String;
-      keyTextHtml: String | null;
       textRawDraftContentState: String | null;
-      h2: String | null;
-      unPublished: Boolean;
-      notSearchable: Boolean;
-      notInList: Boolean;
-      orderNumber: Int;
-      blogCategoryId: ID;
-      category: CategoryId;
-      createdAt: Date;
-      updatedAt: Date;
-      publishedAt: String | Date;
       existingArticleId: ID | null;
-      existingArticle: BlogArticle | null;
-      imageId: ID | null;
-      image: Image | null;
-      secondImageId: ID | null;
-      secondImage: Image | null;
-      templateId: ID | null;
+      existingArticle: Article | null;
     }
   }
   export interface BlogArticlesConnection {
-    nodes: BlogArticle[];
+    nodes: Article[];
   }
   export namespace Response {
     export interface BlogArticles {
@@ -176,12 +155,12 @@ export namespace Schema {
     }
     export interface ArticlesCardsConnection {
       articlesCards: {
-        nodes: BlogArticleCard[];
+        nodes: ArticleCard[];
       };
     }
     export interface RecentArticlesConnection {
       recentArticles: {
-        nodes: BlogArticleCard[];
+        nodes: ArticleCard[];
       };
     }
     export interface ArticlesPathesResponse {
@@ -190,10 +169,10 @@ export namespace Schema {
       };
     }
     export interface ArticleByHandleResponse {
-      articleByHandle: BlogArticle;
+      articleByHandle: Article;
     }
     export interface ArticleByAbsUrlResponse {
-      articleByAbsUrl: BlogArticle | null;
+      articleByAbsUrl: Article | null;
     }
     export interface Manager {
       id: ID;
@@ -228,16 +207,24 @@ export namespace Schema {
       };
     }
     export interface ManagementGetArticles {
-      managementGetArticles: BlogArticle[];
+      managementGetArticles: Article[];
+    }
+    export interface ArticleTemplate {
+      templateId: ID;
+      templateName: String;
+      lastUsed: Int | null;
+    }
+    export interface ManagementArticleTemplates {
+      managementArticleTemplates: ArticleTemplate[];
     }
     export interface ManagementArticlesCards {
       managementArticlesCards: {
         search: String;
-        nodes: BlogArticleCard[];
+        nodes: ArticleCard[];
       };
     }
     export interface ManagementCheckArticle {
-      managementCheckArticle: BlogArticle | undefined | null;
+      managementCheckArticle: Article | undefined | null;
     }
     export interface SaveArtDraftPropsResponse {
       saveArticleDraft: {
@@ -260,7 +247,7 @@ export namespace Schema {
         error?: string | null;
         articleList: {
           search: String;
-          nodes: BlogArticleCard[];
+          nodes: ArticleCard[];
         };
       };
     }

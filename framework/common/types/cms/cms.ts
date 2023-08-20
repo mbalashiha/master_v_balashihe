@@ -32,7 +32,7 @@ export namespace Blog {
     score: Float | null;
     fragment: String | null;
     image: Image | null;
-    views: number;
+    viewed: number | null;
   }
   export interface NavigationItem {
     title: String;
@@ -60,6 +60,7 @@ export namespace Blog {
     notInList: Boolean;
     orderNumber: Int;
     category: BlogCategory;
+    blogCategoryId: ID | null;
     createdAt: Date;
     updatedAt: Date;
     publishedAt: Date | string;
@@ -69,37 +70,43 @@ export namespace Blog {
     image: Image | null;
     secondImageId: ID | null;
     secondImage: Image | null;
-    views: number;
+    viewed: number | null;
     templateId: ID | null;
-  }
-  export interface ArticleDraft {
-    id: ID | null;
-    title: String | null;
     handle: String | null;
     autoHandleSlug: String | null;
-    absURL: String | null;
-    text: String;
+  }
+  export interface ArticleTemplate {
+    templateId: ID;
+    templateName: String;
+    lastUsed: Int | null;
+  }
+  export interface ArticleDraft {
+    existingArticleId: ID | null;
+    existingArticle: Article | null;
+    id: ID | null;
+    title: String;
+    url: String | null;
+    absURL: String;
     textHtml: String;
-    textRawDraftContentState: String | null;
     keyTextHtml: String;
+    textRawDraftContentState: String | null;
+    text: String;
     h2: String;
     unPublished: Boolean;
     notSearchable: Boolean;
     notInList: Boolean;
-    orderNumber: Int | null;
     blogCategoryId: ID | null;
+    handle: string | null;
+    autoHandleSlug: string | null;
     createdAt: Date;
     updatedAt: Date;
-    publishedAt: Date;
-    existingArticleId: ID | null;
-    existingArticle: Article | null;
-    url: string | null;
-    isCreatePage: Boolean;
+    publishedAt: Date | string;
     imageId: ID | null;
     image: Image | null;
     secondImageId: ID | null;
     secondImage: Image | null;
     templateId: ID | null;
+    orderNumber: number | null
   }
 }
 export namespace Management {

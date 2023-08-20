@@ -13,6 +13,7 @@ export const getAllArticlesQuery = gql`
     publishedAt
     updatedAt
     publishedAt
+    viewed
   }
   query getAllArticlesQuery {
     blogArticles {

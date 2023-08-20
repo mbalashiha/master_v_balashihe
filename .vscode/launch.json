@@ -8,7 +8,7 @@
       "name": "Debug client-side",
       "type": "msedge",
       "request": "launch",
-      "url": "http://localhost:3000/management",
+      "url": "http://localhost:5000/management",
       "internalConsoleOptions": "openOnSessionStart",
       "skipFiles": ["${workspaceRoot}/node_modules/**/*.js"]
     },

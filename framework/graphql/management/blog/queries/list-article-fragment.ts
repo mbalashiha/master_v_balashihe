@@ -11,5 +11,6 @@ export const ListArticleFragment = gql`
     blogCategoryId
     updatedAt
     publishedAt
+    viewed
   }
 `;

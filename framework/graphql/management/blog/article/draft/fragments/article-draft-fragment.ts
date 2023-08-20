@@ -19,6 +19,8 @@ export const articleDraftFragment = gql`
     notInList
     orderNumber
     blogCategoryId
+    templateId
+    viewed
     createdAt
     updatedAt
     publishedAt
