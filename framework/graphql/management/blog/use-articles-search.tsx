@@ -11,7 +11,6 @@ import {
 } from "@framework/utils/normalize/normalize-article";
 import { useMemo } from "react";
 import { managementArticlesCards } from "./queries/management-get-articles-cards";
-import useArticleList from "./use-article-list";
 
 export default useArticleSearch as UseArticleSearch<typeof handler>;
 
@@ -31,8 +30,7 @@ export const handler: API.Graphql.MutationHook<UseArticleSearchHook> = {
     return { search: search || "", articles };
   },
   useHook: ({ request }) => {
-    const ctx = useSearchProvider();
-    const { mutate: updateArticleList } = useArticleList();
+    const { updateArticleList, ...ctx } = useSearchProvider();
     return () => async (input) => {
       ctx.setSearchQuery(input.search);
       const response = await request(input);

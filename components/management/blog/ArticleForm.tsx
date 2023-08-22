@@ -10,16 +10,9 @@ import {
 import { slugifyAbsUrl } from "@lib";
 import SaveIcon from "@mui/icons-material/Save";
 import { ArticleTabs } from "./ArticleTabs";
-import {
-  ConfirmDialog,
-  RefFormik,
-  SubmitButton,
-} from "@components/ui";
+import { ConfirmDialog, RefFormik, SubmitButton } from "@components/ui";
 import React, { useRef, useEffect, useMemo } from "react";
-import {
-  ArticleEditorContext,
-  ArticleProvider,
-} from "./ArticleProvider";
+import { ArticleEditorContext, ArticleProvider } from "./ArticleProvider";
 import useCheckArticle from "@framework/management/blog/article/draft/use-check-article";
 import useSaveArticle from "@framework/management/blog/article/use-save-article";
 import { ValuesOfCorrectTypeRule } from "graphql";
@@ -37,12 +30,13 @@ interface Props {
 }
 
 export default function ArticleForm({ article }: Props) {
+  const hasArticle = Boolean(article && article.existingArticleId);
+  const isCreatePage = !hasArticle;
+  const existingArticleId = (hasArticle && article?.existingArticleId) || null;
   const router = useRouter();
   const checkArticle = useCheckArticle();
   const { enqueueSnackbar } = useSnackbar();
   const { setCreateButton, unsetCreateButton } = useFabButton();
-  const { existingArticleId } = article;
-  const isCreatePage = !existingArticleId;
   const providerRef: React.MutableRefObject<ArticleEditorContext | undefined> =
     useRef<ArticleEditorContext | undefined>();
   useEffect(() => {

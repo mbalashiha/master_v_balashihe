@@ -1,12 +1,45 @@
 import { CMS } from "@common/types";
-import { Schema } from "@framework/types";
+import { ID, Schema } from "@framework/types";
 import {
   normalizeArticle,
   normalizeArticleUrl,
   normalizeImage,
 } from "@framework/utils/normalize/normalize-article";
 import convertDate from "./convert-date";
-
+export const getEmptyDraft = ({
+  templateId,
+}: {
+  templateId?: ID | null;
+}): CMS.Blog.ArticleDraft => {
+  return {
+    existingArticleId: null,
+    existingArticle: null,
+    id: null,
+    title: "",
+    url: "",
+    absURL: "",
+    textHtml: "",
+    keyTextHtml: "",
+    textRawDraftContentState: null,
+    text: "",
+    h2: "",
+    unPublished: false,
+    notSearchable: false,
+    notInList: false,
+    blogCategoryId: null,
+    handle: "",
+    autoHandleSlug: null,
+    createdAt: null,
+    updatedAt: null,
+    publishedAt: null,
+    imageId: null,
+    image: null,
+    secondImageId: null,
+    secondImage: null,
+    templateId: templateId || null,
+    orderNumber: null,
+  };
+};
 export const normalizeArticleDraft = (
   draft: Schema.Article.ArticleDraft
 ): CMS.Blog.ArticleDraft => {
@@ -37,12 +70,12 @@ export const normalizeArticleDraft = (
     secondImage,
     templateId,
   } = draft;
+  if (!existingArticleId) {
+    return getEmptyDraft({ templateId });
+  }
   const url = existingArticleId
     ? normalizeArticleUrl(handle, autoHandleSlug)
     : null;
-  if (typeof templateId === "undefined") {
-    throw new Error("article templateId is undefined!");
-  }
   const normalizedDraft = {
     id,
     title: title || "",

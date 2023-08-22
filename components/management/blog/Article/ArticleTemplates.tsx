@@ -19,18 +19,19 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { ID } from "@framework/types";
 
 export const ArticleTitle = () => {
-  const [{ value, ...field }, meta] = useField<ID>("templateId");
+  const [{ value: receivedValue, ...field }, meta] = useField<ID>("templateId");
   const { data: list } = useTemplateList();
   const selected_templateId: ID | null =
-    value ||
+    receivedValue ||
     list?.find((val, ind) => Boolean(val.lastUsed))?.templateId ||
     (list && list[list.length - 1])?.templateId ||
     null;
-  if (selected_templateId != value) {
+  if (selected_templateId != receivedValue) {
     field.onChange({
       target: { name: field.name, value: selected_templateId },
     });
   }
+  const fieldValue = receivedValue || selected_templateId || "1";
   return (
     <FormControl fullWidth error={Boolean(meta.error)}>
       <InputLabel
@@ -49,14 +50,14 @@ export const ArticleTitle = () => {
         sx={{ background: (theme) => theme.palette.background.paper }}
         {...field}
         required
-        value={value}
+        value={fieldValue}
         error={Boolean(meta.error)}
         variant="filled"
       >
         {list?.map((el) => (
           <MenuItem
             key={el.templateId}
-            selected={el.templateId == value}
+            selected={el.templateId == fieldValue}
             value={el.templateId}
           >
             {el.templateName}

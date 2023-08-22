@@ -41,7 +41,7 @@ export namespace Graphql {
     request: (input: Input) => Promise<Data>;
   }
   export interface UseDataInitial<InitialInput, Data> {
-    variables: InitialInput;
+    variables?: InitialInput;
     isReady?: boolean;
     swrOptions?: SWRConfiguration<Data>;
   }

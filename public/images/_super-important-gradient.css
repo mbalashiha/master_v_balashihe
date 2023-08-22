@@ -1,0 +1,21 @@
+#rec598911994 .t396__filter {
+  height: 680px;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(1, 1, 1, 0.7)),
+    to(rgba(1, 1, 1, 1))
+  );
+  background-image: -webkit-linear-gradient(
+    top,
+    rgba(1, 1, 1, 0.7),
+    rgba(1, 1, 1, 1)
+  );
+  background-image: linear-gradient(
+    to bottom,
+    rgba(1, 1, 1, 0.7),
+    rgba(1, 1, 1, 1)
+  );
+  will-change: transform;
+}

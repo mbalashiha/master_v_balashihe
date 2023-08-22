@@ -2,15 +2,14 @@
 import { useDeleteArticle } from "@common/management/blog/article/use-delete-article";
 import { UseDeleteArticle } from "@common/management/blog/article/use-delete-article";
 import { API, CMS } from "@common/types";
+import { useSearchProvider } from "@components/management/blog/Article";
 import { Schema } from "@framework/types";
 import {
   normalizeArticle,
   normalizeBlogRow,
 } from "@framework/utils/normalize/normalize-article";
 import { locale } from "@utils/locale";
-import { slugify } from "lib";
 import { useSnackbar } from "notistack";
-import useArticleList from "../use-article-list";
 import { deleteArticle } from "./mutations/delete-article";
 export default useDeleteArticle as UseDeleteArticle<typeof handler>;
 
@@ -48,7 +47,7 @@ export const handler: API.Graphql.MutationHook<UseDeleteArticleHook> = {
   },
   useHook: ({ request }) => {
     const { enqueueSnackbar } = useSnackbar();
-    const { mutate: updateArticleList } = useArticleList();
+    const { updateArticleList, ...ctx } = useSearchProvider();
     return () => async (input) => {
       const response = await request(input);
       if (!response.success || !response.articleList) {

@@ -21,8 +21,31 @@ import {
 } from "@components/management/blog/Article";
 import { useFabButton } from "@components/management/Layout";
 import { SearchField } from "@components/management/blog/Article";
-export default function ManagementHomePage() {
-  const { data: listData, isEmpty } = useArticleList();
+import Head from "next/head";
+import { ArticleForm } from "@components/management/blog";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import util from "util";
+import { Blog } from "@common/types/cms";
+import { ID } from "@framework/types";
+import getArticleEdit from "@framework/article/get-article-edit";
+import getArticlesCardsProps from "@framework/management/blog/queries/get-articles-cards-props";
+import { CMS } from "@common/types";
+
+export default function ManagementHomePage(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) {
+  if (!props.articles) {
+    throw new Error("No props.articles on management home page!");
+  }
+  const {
+    data: listData,
+    isEmpty,
+    mutate: updateArticleList,
+  } = useArticleList({
+    swrOptions: {
+      fallbackData: props,
+    },
+  });
   const articles = listData?.articles || [];
   const search = listData?.search || "";
   const { setCreateButton } = useFabButton();
@@ -30,7 +53,7 @@ export default function ManagementHomePage() {
     setCreateButton({ href: "/management/blog/article/create" });
   }, [setCreateButton]);
   return (
-    <SearchProvider search={search}>
+    <SearchProvider search={search} updateArticleList={updateArticleList}>
       <Grid container spacing={2} mt={1}>
         <Grid item xs={12} md={6}>
           <Link href="/management/blog/article/create">
@@ -58,3 +81,26 @@ export default function ManagementHomePage() {
   );
 }
 ManagementHomePage.Layout = ManagementLayout;
+
+export const getServerSideProps: GetServerSideProps<{
+  search: string;
+  articles: CMS.Blog.ArticleCard[];
+}> = async (ctx) => {
+  let q = ctx.query.search;
+  const search = Array.isArray(q) ? q[0] : q ? q : null;
+  try {
+    const data = await getArticlesCardsProps({ search }, ctx);
+    return { props: data };
+  } catch (e: any) {
+    if (e.message === "Manager Unauthorized") {
+      return {
+        redirect: {
+          destination: "/management/login",
+          permanent: false,
+        },
+      };
+    } else {
+      throw new Error(e);
+    }
+  }
+};

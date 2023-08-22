@@ -11,12 +11,13 @@ import {
 } from "@framework/utils/normalize/normalize-article";
 import { useSnackbar } from "notistack";
 import { managementArticlesCards } from "./queries/management-get-articles-cards";
+import util from "util";
 
 export default useArticleList as UseArticleList<typeof handler>;
 
 export interface UseArticleListHook {
   input: undefined;
-  requestInput: { search?: string } | undefined;
+  requestInput: { search?: string | null } | undefined;
   requestOutput: Schema.Response.ManagementArticlesCards;
   data: { search: string; articles: CMS.Blog.ArticleCard[] };
 }
@@ -33,7 +34,10 @@ export const handler: API.Graphql.SWRHook<UseArticleListHook> = {
   },
   useHook: ({ useData }) => {
     const ctx = useSearchProvider();
-    return () => {
+    return (initial) => {
+      if (!initial?.swrOptions?.fallbackData) {
+        throw new Error("There should be initial value fallbackData!");
+      }
       const search = ctx?.search || "";
       const { data, isValidating, error, ...rest } = useData({
         variables: {
@@ -41,6 +45,7 @@ export const handler: API.Graphql.SWRHook<UseArticleListHook> = {
         },
         swrOptions: {
           revalidateOnFocus: false,
+          ...initial?.swrOptions,
         },
       });
       const isEmpty = !data || !data.articles?.length;

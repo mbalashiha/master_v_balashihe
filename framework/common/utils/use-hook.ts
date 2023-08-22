@@ -1,3 +1,4 @@
+import util from "util";
 import { useManagementApiProvider } from "@common/management/utils";
 import { API } from "@common/types";
 import React, { useCallback, useEffect } from "react";
@@ -6,8 +7,11 @@ import useSWR from "swr";
 import { useSnackbar } from "notistack";
 import { locale } from "@utils/locale";
 
-export const useHook = <H>(hookHandler: (apiHooks: API.ManagementHooks) => H) => {
+export const useHook = <H>(
+  hookHandler: (apiHooks: API.ManagementHooks) => H
+) => {
   const { hooks } = useManagementApiProvider();
+
   return hookHandler(hooks);
 };
 export const useFetchHook = (hook: API.Graphql.MutationHook<any>) => {
@@ -109,7 +113,7 @@ export const useData = (
 export const useSWRHook = (
   hook: API.Graphql.SWRHook<API.SwrHookDescriptor>
 ) => {
-  const { request } = useManagementApiProvider();
+    const { request } = useManagementApiProvider();
   return hook.useHook({
     useData: (ctx: API.Graphql.UseDataContext<any, any, any>) => {
       const data = useData(hook, request, ctx);

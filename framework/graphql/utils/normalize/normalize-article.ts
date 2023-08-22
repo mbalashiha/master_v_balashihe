@@ -30,17 +30,20 @@ export const normalizeBlogRow = (
     fragment,
     displayingPageHandle,
     image,
+    secondImage,
     viewed,
   } = data;
   const url = absURL || handle ? normalizeArticleUrl(absURL || handle) : "";
   return {
     id: id || (null as any as ID),
     image: image && image.imgSrc ? normalizeImage(image) : null,
+    secondImage:
+      secondImage && secondImage.imgSrc ? normalizeImage(secondImage) : null,
     score: typeof score === "number" || score ? score : null,
     fragment: fragment || null,
     title,
     url,
-    displayingPageUrl: displayingPageHandle,
+    displayingPageUrl: displayingPageHandle || null,
     publishedAt: new Date(publishedAt).toLocaleString("ru", {
       year: "numeric",
       month: "long",

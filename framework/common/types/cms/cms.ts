@@ -27,11 +27,12 @@ export namespace Blog {
     id: ID;
     title: string;
     url: string;
-    displayingPageUrl: string;
+    displayingPageUrl: string | null;
     publishedAt: string;
     score: Float | null;
     fragment: String | null;
     image: Image | null;
+    secondImage: Image | null;
     viewed: number | null;
   }
   export interface NavigationItem {
@@ -98,15 +99,15 @@ export namespace Blog {
     blogCategoryId: ID | null;
     handle: string | null;
     autoHandleSlug: string | null;
-    createdAt: Date;
-    updatedAt: Date;
-    publishedAt: Date | string;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+    publishedAt: Date | string | null;
     imageId: ID | null;
     image: Image | null;
     secondImageId: ID | null;
     secondImage: Image | null;
     templateId: ID | null;
-    orderNumber: number | null
+    orderNumber: number | null;
   }
 }
 export namespace Management {
