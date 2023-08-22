@@ -1,13 +1,10 @@
 import React, { useCallback } from "react";
 import { useState, useRef, useContext, useMemo, ReactNode } from "react";
-import dynamic from "next/dynamic";
 import { CMS } from "@common/types";
 import { Dialog } from "@components/ui";
 import useSaveArticleText from "@framework/management/blog/article/draft/use-save-article-text";
 import { useRefFormik } from "@components/ui";
 import { useRouter } from "next/router";
-import useSaveArtDraftProps from "@framework/management/blog/article/draft/use-save-draft-props";
-import useSaveArticleKeyText from "@framework/management/blog/article/draft/use-save-article-key-text";
 
 export interface ArticleEditorContext {
   editorRef: React.MutableRefObject<any>;
@@ -23,29 +20,21 @@ export const ArticleProvider = ({ children, providerRef }: Props) => {
   const router = useRouter();
   const form = useRefFormik<CMS.Blog.ArticleDraft>();
   const saveArticleTextDraft = useSaveArticleText();
-  const saveDraftProps = useSaveArtDraftProps();
-  const saveKeyText = useSaveArticleKeyText();
   const formRef = useRef<{
     form: typeof form;
     saveArticleTextDraft: typeof saveArticleTextDraft;
-    saveDraftProps: typeof saveDraftProps;
-    saveKeyText: typeof saveKeyText;
-  }>({ form, saveArticleTextDraft, saveDraftProps, saveKeyText });
+  }>({ form, saveArticleTextDraft });
   formRef.current = {
     ...formRef.current,
     form,
     saveArticleTextDraft,
-    saveDraftProps,
-    saveKeyText,
   };
   const editorRef = useRef<any>(null);
   React.useEffect(() => {
     const beforeunloadListener = async () => {
-      const { saveArticleTextDraft, saveDraftProps, saveKeyText } =
+      const { saveArticleTextDraft } =
         formRef.current;
       await saveArticleTextDraft({});
-      await saveDraftProps({});
-      await saveKeyText({});
     };
     window.addEventListener("beforeunload", beforeunloadListener, false);
     window.addEventListener("blur", beforeunloadListener);

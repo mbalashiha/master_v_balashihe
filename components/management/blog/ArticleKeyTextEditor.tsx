@@ -19,46 +19,14 @@ import { useRouter } from "next/router";
 
 export default function ArticleKeyTextEditor() {
   const form = useRefFormik<CMS.Blog.ArticleDraft>();
-  const saveDraftKeyText = useSaveArticleKeyText();
-  const [timeoutId, setTimeoutId] = React.useState<number | null>(null);
-  const doTimeout = () => {
-    if (!timeoutId) {
-      const timeoutId = window.setTimeout(async () => {
-        try {
-          await saveDraftKeyText({});
-        } catch (e: any) {
-          console.error("do-Timeout:", e.stack || e.message || e);
-        } finally {
-          setTimeoutId(null);
-        }
-      }, 3000);
-      setTimeoutId(timeoutId);
-    }
-  };
-  const mutRef = React.useRef({ form, doTimeout, timeoutId, saveDraftKeyText });
+  const mutRef = React.useRef({ form });
   mutRef.current = {
     ...mutRef.current,
     form,
-    doTimeout,
-    timeoutId,
-    saveDraftKeyText,
   };
-  React.useEffect(() => {
-    const { timeoutId } = mutRef.current;
-    return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
-  }, []);
-  const onBlur = React.useCallback(() => {
-    const { saveDraftKeyText } = mutRef.current;
-    saveDraftKeyText({});
-  }, []);
   const onEditorChange = React.useCallback((keyTextHtml: string) => {
-    const { form, doTimeout } = mutRef.current;
+    const { form } = mutRef.current;
     form.setFieldValue("keyTextHtml", keyTextHtml);
-    doTimeout();
   }, []);
   const [keyTextHtmlFieled, meta] = useField("keyTextHtml");
   const initialValue = form.formIsResetting ? "" : keyTextHtmlFieled.value;
@@ -95,7 +63,6 @@ export default function ArticleKeyTextEditor() {
         {form.formIsResetting ? null : (
           <ShortTinyMCE
             initialValue={initialValue}
-            onBlur={onBlur}
             onEditorChange={onEditorChange}
           />
         )}

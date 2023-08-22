@@ -17,11 +17,11 @@ class Config {
       credentials: "include",
     });
     const request: API.Graphql.RequestFunction = async (
-      options: API.Graphql.RequestOptions<any>
+      options: API.Graphql.RequestOptionsVariables<any>
     ): Promise<API.Graphql.RequestResults<any>> => {
       const { query, variables, headers } = options;
       try {
-        const resp = await graphqlClient.request(query, variables, headers);
+        const resp = await graphqlClient.request(query, variables, headers as any);
         return resp;
       } catch (e: any) {
         const apiError = extractGraphQLError(e);

@@ -14,18 +14,12 @@ import {
   ConfirmDialog,
   RefFormik,
   SubmitButton,
-  useRefFormik,
 } from "@components/ui";
-import useArticleDraft from "@framework/management/blog/article/draft/use-article-draft";
 import React, { useRef, useEffect, useMemo } from "react";
 import {
   ArticleEditorContext,
   ArticleProvider,
-  useArticleContext,
 } from "./ArticleProvider";
-import { ArticleTextEditor } from "@components/management/blog";
-import { Title } from "@mui/icons-material";
-import ArticleTitle from "./ArticleTitle";
 import useCheckArticle from "@framework/management/blog/article/draft/use-check-article";
 import useSaveArticle from "@framework/management/blog/article/use-save-article";
 import { ValuesOfCorrectTypeRule } from "graphql";
@@ -36,19 +30,19 @@ import DeleteDraftButton from "./Article/DeleteDraftButton";
 import { useSnackbar } from "notistack";
 import { TabsProvider } from "@components/common/Tabs/TabsProvider";
 import { locale } from "@utils/locale";
+import { Blog } from "@common/types/cms";
 
 interface Props {
-  // children?: React.ReactNode | React.ReactNode[];
+  article: Blog.ArticleDraft;
 }
 
-export default function ArticleForm({}: Props) {
+export default function ArticleForm({ article }: Props) {
   const router = useRouter();
   const checkArticle = useCheckArticle();
   const { enqueueSnackbar } = useSnackbar();
   const { setCreateButton, unsetCreateButton } = useFabButton();
-  const { data } = useArticleDraft();
-  const { existingArticleId: articleId } = data! || {};
-  const isCreatePage = Boolean(articleId);
+  const { existingArticleId } = article;
+  const isCreatePage = !existingArticleId;
   const providerRef: React.MutableRefObject<ArticleEditorContext | undefined> =
     useRef<ArticleEditorContext | undefined>();
   useEffect(() => {
@@ -58,13 +52,10 @@ export default function ArticleForm({}: Props) {
       unsetCreateButton();
     }
   }, [isCreatePage, setCreateButton, unsetCreateButton]);
-  // if (!isValidating && data) {
-  //   formRef?.current?.resetForm({ values: { ...data } });
-  // }
   const saveArticle = useSaveArticle();
-  return data ? (
+  return (
     <RefFormik
-      initialValues={data}
+      initialValues={article}
       validate={async (values) => {
         if (typeof values !== "object") {
           throw new Error(
@@ -204,8 +195,6 @@ export default function ArticleForm({}: Props) {
         const { success, articleId, articleDraft } = await saveArticle({
           article,
         });
-        console.log(articleDraft);
-        debugger;
         if (success && articleId && isCreatePage) {
           helpers.resetForm();
           helpers.destroyForm();
@@ -214,10 +203,6 @@ export default function ArticleForm({}: Props) {
             query: {
               articleId,
             },
-          });
-        } else if (success && articleId) {
-          helpers.resetForm({
-            values: articleDraft,
           });
         }
       }}
@@ -237,9 +222,9 @@ export default function ArticleForm({}: Props) {
           </Grid>
         </Grid>
         <TabsProvider>
-          <ArticleTabs />
+          <ArticleTabs article={article} />
         </TabsProvider>
       </ArticleProvider>
     </RefFormik>
-  ) : null;
+  );
 }

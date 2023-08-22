@@ -7,7 +7,6 @@ import InsertCodeIcon from "../MemozedTinyMCE/InsertCodeIcon";
 export interface MemoizedShortProps {
   initialValue: string;
   onEditorChange: (textHtml: string) => void;
-  onBlur: (event: any) => void;
 }
 const MemoizedShort: React.FC<MemoizedShortProps> = React.memo(
   function MemoizedShort({

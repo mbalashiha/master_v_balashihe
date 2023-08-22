@@ -1,3 +1,4 @@
+import { IncomingHttpHeaders } from "http";
 import { BareFetcher, SWRConfiguration, SWRResponse } from "swr";
 import { PublicConfiguration } from "swr/_internal";
 import { HookDescriptor, SwrHookDescriptor } from "./hook";
@@ -5,7 +6,7 @@ import { HookDescriptor, SwrHookDescriptor } from "./hook";
 export namespace Graphql {
   export interface HookRequestOptions {
     query: string;
-    headers?: HeadersInit;
+    headers?: IncomingHttpHeaders;
   }
   export type RequestOptions<Input> = Input extends
     | void
@@ -24,7 +25,7 @@ export namespace Graphql {
   export type RequestResults<T> = T;
   export interface RequestFunction<Input1 = any, Output1 = any> {
     <Input2 = Input1, Output2 = Output1>(
-      options: RequestOptions<Input2>
+      options: RequestOptionsVariables<Input2>
     ): Promise<RequestResults<Output2>>;
   }
 

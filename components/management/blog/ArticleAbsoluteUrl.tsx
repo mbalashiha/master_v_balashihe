@@ -21,7 +21,6 @@ import {
 export const ArticleAbsoluteUrl = () => {
   const [field, meta] = useField<string>("absURL");
   const absURL = field.value || "";
-  const saveDraft = useSaveArtDraftProps();
   const onBlur = field.onBlur;
   const { setFieldValue } = useRefFormik();
   const setAbsUrl = (value: string) => setFieldValue("absURL", value);
@@ -36,13 +35,12 @@ export const ArticleAbsoluteUrl = () => {
         {...field}
         onBlur={(ev, ...rest) => {
           setAbsUrl(slugifyAbsUrl(ev.target.value));
-          saveDraft({});
           return onBlur(ev, ...rest);
         }}
       ></TextField>
       {absURL && (
         <Paper elevation={1} sx={{ width: "100%", p: 1, fontWeight: 600 }}>
-          Перейти на страницу: {" "}
+          Перейти на страницу:{" "}
           <Tooltip title={"Абсолютный путь на сайте от корня"} inline>
             <a href={absURL} title={absURL} rel="noreferrer" target="_blank">
               {absURL}

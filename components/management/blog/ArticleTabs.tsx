@@ -46,6 +46,7 @@ import { blueGrey } from "@mui/material/colors";
 import { ImagePanel, UploaderComponent } from "./Article";
 import { ArticleFormParameters } from "./ArticleFormParameters";
 import ArticleTemplates from "./Article/ArticleTemplates";
+import { Blog } from "@common/types/cms";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -76,10 +77,12 @@ function a11yProps(index: number) {
   };
 }
 
-export const ArticleTabs = () => {
+interface Props {
+  article: Blog.ArticleDraft;
+}
+export const ArticleTabs = ({article}: Props) => {
   const { value, handleChange, setTabNumber } = useTabs();
-  const { data } = useArticleDraft();
-  const displayingPageUrl: string = data?.absURL || data?.url || "";
+  const displayingPageUrl: string = article.absURL || article.url || "";
   return (
     <>
       <Paper

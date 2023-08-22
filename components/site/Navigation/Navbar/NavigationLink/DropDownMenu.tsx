@@ -4,6 +4,7 @@ import { NavLinkProps } from "./NavigationLink";
 import Link from "next/link";
 import { useState } from "react";
 import cn from "classnames";
+import React from "react";
 
 type Props = NavLinkProps;
 
@@ -79,15 +80,13 @@ const DropDownMenu = ({ submenu, ...link }: Props) => {
         </button>
         <Box className="dropdown-content">
           {submenu?.map((item) => (
-            <>
+            <React.Fragment key={item.name + "_" + item.href}>
               {item.href ? (
-                <Link href={item.href} key={item.name + "_" + item.href}>
-                  {item.name}
-                </Link>
+                <Link href={item.href}>{item.name}</Link>
               ) : (
-                <DropDownMenu {...item} key={item.name + "_" + item.href} />
+                <DropDownMenu {...item} />
               )}
-            </>
+            </React.Fragment>
           ))}
         </Box>
       </Box>

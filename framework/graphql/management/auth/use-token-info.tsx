@@ -45,6 +45,10 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
         data.manager &&
         data.manager.id
       );
+      // if (data) {
+      //   console.log(data);
+      //   debugger;
+      // }
       React.useMemo(() => {
         if (!isValidating && !isLoading) {
           try {

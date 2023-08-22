@@ -27,7 +27,6 @@ export const ArticleTitle = () => {
         helperText={meta.error}
         {...field}
         onBlur={async (ev, ...rest) => {
-          saveDraft({});
           const article = await checkArticle({
             title: ev.target.value,
             handle: "",

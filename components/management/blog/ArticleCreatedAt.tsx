@@ -32,9 +32,6 @@ dayjs.extend(timezone);
 
 export const ArticleCreatedAt = () => {
   const [field, meta] = useField<Date | null>("publishedAt");
-  const absURL = field.value || "";
-  const saveDraft = useSaveArtDraftProps();
-  const onBlur = field.onBlur;
   const { setFieldValue } = useRefFormik();
   const dayjsValue = React.useMemo(() => dayjs(field.value), [field.value]);
   return (
@@ -42,15 +39,8 @@ export const ArticleCreatedAt = () => {
       <DateTimePicker
         label="Время публикации страницы на сайте"
         sx={{ width: "100%" }}
-        // variant="filled"
-        // error={!!meta.error}
-        // helperText={meta.error}
         {...field}
         minDate={dayjs(new Date(0))}
-        // onBlur={(ev, ...rest) => {
-        //   saveDraft({});
-        //   return onBlur(ev, ...rest);
-        // }}
         value={dayjsValue}
         views={["year", "month", "day", "hours", "minutes", "seconds"]}
         timeSteps={{ hours: 1, minutes: 1, seconds: 1 }}
@@ -58,9 +48,6 @@ export const ArticleCreatedAt = () => {
           try {
             if (newValue) {
               setFieldValue("publishedAt", newValue.toDate());
-              process.nextTick(() => {
-                saveDraft({});
-              });
             }
           } catch (e: any) {
             alert(e.message);

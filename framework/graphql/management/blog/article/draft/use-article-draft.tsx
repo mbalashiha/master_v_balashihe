@@ -5,7 +5,7 @@ import { API, CMS } from "@common/types";
 import { Schema } from "@framework/types";
 import { useRouter } from "next/router";
 import { normalizeArticleDraft } from "../../../../utils/normalize/normalize-article-draft";
-import { getArticleDraft } from "./queries/get-article-draft";
+import { getArticleEditQuery } from "../../../../article/queries/get-article-edit";
 import React from "react";
 
 export default useArticleDraft as UseArticleDraft<typeof handler>;
@@ -21,7 +21,7 @@ export interface UseArticleDraftHook {
 }
 export const handler: API.Graphql.SWRHook<UseArticleDraftHook> = {
   requestOptions: {
-    query: getArticleDraft,
+    query: getArticleEditQuery,
   },
   async request({ request, options, input }) {
     try {
