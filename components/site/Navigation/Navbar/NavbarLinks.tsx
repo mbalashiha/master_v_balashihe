@@ -112,6 +112,10 @@ export const NavbarLinks = ({
         spacing="2px"
         component="nav"
         sx={{
+          "&, & *": {
+            fontFamily: "Gotham, Arial, sans-serif",
+            color: "#303b44",
+          },
           py: 0,
           px: { xs: "12px", sm: 0 },
           alignSelf: { xs: "flex-start", sm: "flex-end" },

@@ -36,18 +36,17 @@ import {
 } from "@framework/const";
 import { WhatsappLink } from "@components/site/contacts";
 import ContactDialog from "@components/site/contacts/ContactDialog";
+import IconPhoneCircle from "@components/icons/IconPhoneCircle";
 
 const Navbar: FC = () => {
   // const { pathname } = useRouter();
   // const isIndexPage = pathname === "/";
   // const cartPage = pathname === "/market/cart";
   return (
-    <>
       <AppBar
         component={"div"}
         position="static"
         sx={{
-          minHeight: "83px",
           "& a": {
             textDecoration: "none",
           },
@@ -61,6 +60,8 @@ const Navbar: FC = () => {
             flexDirection: "row",
             justifyContent: "center",
             zIndex: 3,
+            background: "white",
+            color: "black",
           }}
         >
           <Stack
@@ -69,10 +70,16 @@ const Navbar: FC = () => {
             flexWrap="wrap"
             sx={{
               width: "100%",
-              maxWidth: "1900px",
+              maxWidth: "1600px",
+              minHeight: "112px",
               overflow: "visible",
               justifyContent: "space-between",
               alignItems: "space-between",
+              "&, & *, & .logo, & .timeline-typography": {
+                fontFamily: `"Noto Sans", Arial, sans-serif`,
+                color: "black",
+                fontWeight: 400,
+              },
             }}
           >
             <MainLogo />
@@ -82,16 +89,14 @@ const Navbar: FC = () => {
               justifyContent="flex-start"
               alignItems="center"
               flexWrap="nowrap"
-              alignSelf={"flex-end"}
+              alignSelf={"center"}
               sx={{
-                color: "#2E2D58",
-                fontSize: "18px",
+                color: "black",
+                fontSize: "26px",
+                lineHeight: "37px",
                 "&, & a, & a > *": {
                   transitionProperty: "color",
                 },
-                lineHeight: "20px",
-                fontWeight: 700,
-                letterSpacing: "0.001rem",
                 "& a, & > div": {
                   display: "flex",
                   direction: "row",
@@ -99,44 +104,36 @@ const Navbar: FC = () => {
                   alignItems: "center",
                   flexWrap: "nowrap",
                   "& > svg": {
-                    width: "34px",
-                    height: "34px",
                     marginBottom: "-2px",
                     marginRight: "6px",
                   },
                 },
                 "&&& svg": {
-                  fill: (theme) => theme.palette.dialogClickColor.main,
-                },
-                "& div": {
-                  color: (theme) => theme.palette.dialogClickColor.main,
+                  width: "55px",
+                  height: "55px",
+                  marginTop: "5px"
                 },
               }}
             >
               <ContactDialog>
-                <PhoneCallIcon />
-                <Box>{NEXT_PUBLIC_CONTACT_PHONE_TEXT}</Box>
+                <Stack direction={"row"} spacing={1}>
+                  <IconPhoneCircle fill={"black"} />
+                  <Stack direction="column">
+                    <Box>{NEXT_PUBLIC_CONTACT_PHONE_TEXT}</Box>
+                    <Typography
+                      component="div"
+                      className="timeline-typography"
+                      sx={{
+                        fontSize: "16px",
+                        lineHeight: "24px",
+                        alignSelf: "flex-end",
+                      }}
+                    >
+                      Ежедневно с 09:00 до 24:00
+                    </Typography>
+                  </Stack>
+                </Stack>
               </ContactDialog>
-              <Box
-                sx={{
-                  ml: 1,
-                  mt: { xs: 0, sm: "4px" },
-                  "& svg": {
-                    width: "36px",
-                    height: "36px",
-                  },
-                }}
-              >
-                <a
-                  href={NEXT_PUBLIC_TELEGRAM_LINK}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Tooltip title="Telegram" placement="left">
-                    <TelegramIcon />
-                  </Tooltip>
-                </a>
-              </Box>
             </Stack>
           </Stack>
         </Toolbar>
@@ -163,7 +160,6 @@ const Navbar: FC = () => {
           </Container>
         </Toolbar>
       </AppBar>
-    </>
   );
 };
 

@@ -28,9 +28,9 @@ export const MainLogo = () => {
       sx={{
         mr: 0,
         display: "flex",
+        alignSelf: "center",
         alignItems: "center",
         justifyContent: "center",
-        height: "82px",
       }}
     >
       <Link href="/" passHref>
@@ -41,56 +41,18 @@ export const MainLogo = () => {
         >
           <MasterSvgLogo />
           <Typography
-            component="h1"
-            variant="h1"
+            component="div"
+            className="logo"
             sx={{
-              fontSize: "1.4rem",
-              lineHeight: "1.3rem",
+              fontSize: "18px",
+              lineHeight: "26px",
               py: 0,
               pl: "0.5rem",
-              fontWeight: 700,
               textTransform: "uppercase",
-              letterSpacing: 0,
-              display: "block",
               position: "relative",
             }}
           >
-            <Box
-              component="span"
-              letterSpacing={0}
-              fontSize="1.0rem"
-              display="block"
-              pl="0.108rem"
-              sx={{
-                color: "#575757",
-              }}
-            >
-              Компьютерный
-            </Box>
-            <Box
-              component="span"
-              letterSpacing={0}
-              fontSize="1.7rem"
-              display="block"
-              position="relative"
-              top="-0.07rem"
-              sx={{
-                color: (theme) => theme.palette.primary.main,
-              }}
-            >
-              Мастер
-            </Box>
-            <Box
-              component="span"
-              letterSpacing={0}
-              fontSize="1.293rem"
-              display="block"
-              sx={{
-                color: "#010031",
-              }}
-            >
-              в Балашихе
-            </Box>
+            Компьютерный Мастер <br /> в Балашихе
           </Typography>
         </Stack>
       </Link>

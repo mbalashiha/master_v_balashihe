@@ -20,7 +20,6 @@ export default function ModalContacts() {
         direction={{ xs: "column", md: "row" }}
         spacing={{ xs: xsSpacing, md: 2 }}
         sx={{
-          letterSpacing: "0.001rem",
           alignItems: { md: "flex-end" },
           justifyContent: { md: "flex-end" },
         }}

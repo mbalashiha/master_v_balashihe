@@ -12,7 +12,7 @@ import LandingReasons from "@components/site/LandingPage/LandingReasons";
 import LandingPricesCards from "@components/site/LandingPage/LandingPricesCards";
 import getArticleByAbsUrl from "@framework/article/get-article-by-abs-url";
 import React from "react";
-import { CallMeForFree, Hero } from "@components/site/LandingPage";
+import { CallMeForFree, HeroAlt } from "@components/site/LandingPage";
 
 export default function Home(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -20,10 +20,9 @@ export default function Home(
   const { article } = props;
   return (
     <>
-      <Head>
-      </Head>
+      <Head></Head>
+      <HeroAlt article={article!} />
       <CardGridContainer />
-      <Hero article={article!} />
       <LandingReasons />
       <LandingPricesCards />
       <CallMeForFree elevation={8} sx={{ mb: "20px" }} />

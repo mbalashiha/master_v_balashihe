@@ -15,9 +15,10 @@ import FormGroup from "@mui/material/FormGroup";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Link from "next/link";
-import { Fab } from "@mui/material";
+import { Stack, Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useFabButton } from "../FabButtonProvider";
+import { string } from "yup";
 
 export default function ManagementAppBar() {
   const { manager } = useManagementLayoutProvider();
@@ -34,6 +35,22 @@ export default function ManagementAppBar() {
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
+  interface LinkProps {
+    href: string;
+    name: string;
+    target?: React.HTMLAttributeAnchorTarget | undefined;
+  }
+  const AppBarLink = ({ href, name, target }: LinkProps) => (
+    <Link href={href} target={target}>
+      <Typography variant="h6" component="div">
+        {name}
+      </Typography>
+    </Link>
+  );
+  const appbarLinks: Array<LinkProps> = [
+    { href: "/management", name: "CMS" },
+    { href: "/", name: "Сайт", target: "_blank" },
+  ];
   const { buttons } = useFabButton();
   return (
     <>
@@ -56,13 +73,11 @@ export default function ManagementAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Box sx={{ flexGrow: 1 }}>
-            <Link href="/management">
-              <Typography variant="h6" component="div">
-                CMS
-              </Typography>
-            </Link>
-          </Box>
+          <Stack direction="row" spacing={2} sx={{ flexGrow: 1 }}>
+            {appbarLinks.map((el) => (
+              <AppBarLink key={el.href} {...el} />
+            ))}
+          </Stack>
           <Box sx={{ mr: 2, flexGrow: 1 }}></Box>
           {manager && (
             <>

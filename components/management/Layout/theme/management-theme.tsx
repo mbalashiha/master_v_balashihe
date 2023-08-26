@@ -281,7 +281,6 @@ const getMuiTheme = (): Theme => {
             fontWeight: 400,
             fontSize: "16px",
             lineHeight: "16px",
-            letterSpacing: "0.4px",
             height: "38px",
             textTransform: "capitalize",
             "&:hover": {

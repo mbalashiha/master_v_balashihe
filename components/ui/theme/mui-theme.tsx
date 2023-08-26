@@ -45,7 +45,6 @@ const getMuiTheme = (): Theme => {
         main: "#2e2d58",
       },
     },
-    spacing: 12,
     shape: {
       borderRadius: 24,
     },

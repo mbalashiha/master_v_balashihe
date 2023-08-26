@@ -62,7 +62,6 @@ export default function ContactDialog({
           <ContactsContent />
         </ApiProvider>
       }
-      hideTrigger
       component={component}
       dialogActions={false}
       maxWidth={"xl"}

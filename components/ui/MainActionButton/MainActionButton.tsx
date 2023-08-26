@@ -71,7 +71,6 @@ const MainActionButton = styled(LoadingButton)<Props>(({ theme, loading }) => ({
     lineHeight: "1rem",
     height: "auto",
     padding: "0.85rem",
-    letterSpacing: "0.04rem",
     textTransform: "none",
     boxShadow: "0 0 5px rgba(0,0,0, 0.125)",
     border: "none",
