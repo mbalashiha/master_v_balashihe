@@ -86,38 +86,44 @@ export default function Hero({ article }: Props) {
         }}
       >
         <Box sx={{ gridRow: `1`, gridColumn: `1` }}>
-          <Typography
+          <Box
             sx={{
-              pt: { xs: "20px", sm: "60px" },
-              fontSize: { xs: "24px", sm: "42px" },
-              lineHeight: { xs: "42px", sm: "65px" },
-              fontWeight: 600,
-              textTransform: "uppercase",
-              mb: 0,
+              maxWidth: "92vw",
             }}
-            variant="h1"
-            component="h1"
           >
-            <Box>Компьютерный мастер</Box>
-            <Box>на дом или в офис </Box>
-            <Box
+            <Typography
               sx={{
-                my: { xs: "5px", sm: "inherit" },
+                pt: { xs: "20px", sm: "60px" },
+                fontSize: { xs: "32px", sm: "42px" },
+                lineHeight: { xs: "48px", sm: "65px" },
+                fontWeight: 600,
+                textTransform: "uppercase",
+                mb: 0,
               }}
+              variant="h1"
+              component="h1"
             >
+              <Box>Компьютерный мастер</Box>
+              <Box>на дом или в офис </Box>
               <Box
-                component={"span"}
                 sx={{
-                  px: "12px",
-                  py: { xs: "7px", sm: "0" },
-                  background: (theme) => `${theme.palette.primary.main}80`,
-                  borderRadius: "6px",
+                  my: { xs: "5px", sm: "inherit" },
                 }}
               >
-                в Балашихе
+                <Box
+                  component={"span"}
+                  sx={{
+                    px: "12px",
+                    py: { xs: "7px", sm: "0" },
+                    background: (theme) => `${theme.palette.primary.main}80`,
+                    borderRadius: "6px",
+                  }}
+                >
+                  в Балашихе
+                </Box>
               </Box>
-            </Box>
-          </Typography>
+            </Typography>
+          </Box>
         </Box>
         <Stack
           sx={{
