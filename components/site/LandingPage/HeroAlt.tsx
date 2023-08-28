@@ -128,7 +128,7 @@ export default function Hero({ article }: Props) {
             justifyContent: `space-between`,
             alignItems: { xs: "center", lg: "flex-start" },
             gap: "16px",
-            maxWidth: { xs: "89.5vw", sm: "inherit" },
+            maxWidth: { xs: "91vw", sm: "inherit" },
           }}
         >
           <div>
@@ -210,12 +210,17 @@ export default function Hero({ article }: Props) {
           sx={{
             gridRow: { xs: `span 1`, lg: `span 2` },
             gridColumn: { xs: `1`, lg: `2` },
+            textAlign: "center",
+            "& img": {
+              maxWidth: "96vw",
+              height: "auto",
+            },
           }}
         >
           <Image
             alt=""
-            width={478}
-            height={600}
+            width={477}
+            height={610}
             quality={89}
             src="/images/computer-master-landing-balashiha.webp"
           />
