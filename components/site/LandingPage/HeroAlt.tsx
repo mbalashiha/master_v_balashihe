@@ -1,4 +1,4 @@
-import { Container, Grid, Card, Paper } from "@mui/material";
+import { Container, Grid, Card, Paper, Button, Stack } from "@mui/material";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -32,6 +32,7 @@ export default function Hero({ article }: Props) {
         position: "relative",
         minHeight: "680px",
         backgroundColor: "#010101",
+        overflow: "hidden",
       }}
     >
       <Box
@@ -68,14 +69,157 @@ export default function Hero({ article }: Props) {
       ></Box>
       <Container
         maxWidth="lg"
-        sx={{ position: "relative", zIndex: 2, mt: 4, pb: "55px" }}
+        sx={{
+          "&, & *": {
+            fontFamily: `"Noto Sans", Arial, sans-serif`,
+            color: "white",
+            textAlign: { xs: "center", lg: "left" },
+            "& p": { my: 0 },
+          },
+          position: "relative",
+          zIndex: 2,
+          mt: 4,
+          pb: "55px",
+          px: { xs: "15px", sm: 0 },
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
+        }}
       >
-        <Image
-          alt=""
-          width={465}
-          height={600}
-          src="/images/computer-master-landing-balashiha.webp"
-        />
+        <Box sx={{ gridRow: `1`, gridColumn: `1` }}>
+          <Typography
+            sx={{
+              pt: { xs: "20px", sm: "60px" },
+              fontSize: { xs: "24px", sm: "42px" },
+              lineHeight: { xs: "42px", sm: "65px" },
+              fontWeight: 600,
+              textTransform: "uppercase",
+              mb: 0,
+            }}
+            variant="h1"
+            component="h1"
+          >
+            <Box>Компьютерный мастер</Box>
+            <Box>на дом или в офис </Box>
+            <Box
+              sx={{
+                my: { xs: "5px", sm: "inherit" },
+              }}
+            >
+              <Box
+                component={"span"}
+                sx={{
+                  px: "12px",
+                  py: { xs: "7px", sm: "0" },
+                  background: (theme) => `${theme.palette.primary.main}80`,
+                  borderRadius: "6px",
+                }}
+              >
+                в Балашихе
+              </Box>
+            </Box>
+          </Typography>
+        </Box>
+        <Stack
+          sx={{
+            fontSize: "18px",
+            lineHeight: "28px",
+            gridRow: { xs: `3`, lg: `2` },
+            gridColumn: { xs: `1`, lg: `1` },
+            justifyContent: `space-between`,
+            alignItems: { xs: "center", lg: "flex-start" },
+            gap: "16px",
+            maxWidth: { xs: "89.5vw", sm: "inherit" },
+          }}
+        >
+          <div>
+            {`Меня зовут Дмитрий, 
+              я окончил МГТУ МИРЭА со специальностью "Информационные системы и технологии".
+            Если вам нужно решить проблему, связанную с компьютерами и
+            информационными технологиями, или нужно срочно починить ноутбук,
+            компьютер или другую цифровую технику, оставьте заявку и я перезвоню
+            в течение 30 минут, работаю в городе Балашиха и Москве. `}
+          </div>
+          <Grid
+            container
+            sx={{
+              maxWidth: "600px",
+              width: "100%",
+              p: 0,
+              borderRadius: "6px",
+              overflow: "hidden",
+              border: (theme) => `2px solid ${theme.palette.primary.main}`,
+            }}
+          >
+            <Grid
+              item
+              xs={12}
+              md={8}
+              sx={{
+                overflow: "hidden",
+              }}
+            >
+              <Button
+                sx={{
+                  width: "100%",
+                  py: "18px",
+                  px: "40px",
+                  background: (theme) => theme.palette.primary.main,
+                  border: "none",
+                  borderRadius: 0,
+                  m: 0,
+                  fontSize: "22px",
+                  lineHeight: "31px",
+                  color: "black",
+                  "&:hover": {
+                    color: "white",
+                  },
+                }}
+              >
+                Вызвать мастера
+              </Button>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{
+                minHeight: "60px",
+                py: "8px",
+                px: "37px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                component="div"
+                sx={{
+                  width: "auto",
+                  color: "white",
+                  textAlign: "left",
+                  fontSize: "18px",
+                  lineHeight: "25px",
+                }}
+              >
+                Консультация бесплатная
+              </Typography>
+            </Grid>
+          </Grid>
+        </Stack>
+        <Box
+          sx={{
+            gridRow: { xs: `span 1`, lg: `span 2` },
+            gridColumn: { xs: `1`, lg: `2` },
+          }}
+        >
+          <Image
+            alt=""
+            width={478}
+            height={600}
+            quality={89}
+            src="/images/computer-master-landing-balashiha.webp"
+          />
+        </Box>
       </Container>
     </Container>
   );
