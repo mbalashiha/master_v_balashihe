@@ -14,6 +14,8 @@ import getArticleByAbsUrl from "@framework/article/get-article-by-abs-url";
 import React from "react";
 import { CallMeForFree, HeroAlt } from "@components/site/LandingPage";
 import LandingServices from "@components/site/LandingPage/LandingServices";
+import LandingClientSteps from "@components/site/LandingPage/LandingClientSteps";
+import LandingAgeTasks from "@components/site/LandingPage/LandingAgeTasks";
 
 export default function Home(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -23,6 +25,8 @@ export default function Home(
     <>
       <HeroAlt article={article!} />
       <LandingServices></LandingServices>
+      <LandingClientSteps />
+      <LandingAgeTasks />
       <CardGridContainer />
       <LandingReasons />
       <LandingPricesCards />

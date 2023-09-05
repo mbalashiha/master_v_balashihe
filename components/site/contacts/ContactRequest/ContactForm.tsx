@@ -5,14 +5,11 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import WizFormControl from "./WizFormControl";
 import { IMaskInput } from "react-imask";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
 import Alert from "@mui/material/Alert";
 
-import RadioString from "./RadioString";
-import { StyledContainer, WizValues } from "./Providers";
 import {
   Stack,
   Box,
@@ -27,12 +24,12 @@ import {
   Divider,
 } from "@mui/material";
 import DiscountIcon from "@mui/icons-material/Discount";
-import PhoneRow from "./ModalContacts/PhoneRow";
-import EmailRow from "./ModalContacts/EmailRow";
-import StyledLastStepStack from "./StyledLastStepStack";
-import TelegramRow from "./ModalContacts/TelegramRow";
-import WhatsappRow from "./ModalContacts/WhatsappRow";
-import { StepWizardChildProps } from "./Providers/MyStepWizard";
+import StyledLastStepStack from "../Wizard/StyledLastStepStack";
+import WhatsappRow from "../Wizard/ModalContacts/WhatsappRow";
+import EmailRow from "../Wizard/ModalContacts/EmailRow";
+import TelegramRow from "../Wizard/ModalContacts/TelegramRow";
+import PhoneRow from "../Wizard/ModalContacts/PhoneRow";
+import { ContactRequestValues } from "./FormikForRequest";
 
 interface PhoneMaskProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
@@ -78,11 +75,8 @@ const ColBox = ({ sx, ...rest }: React.ComponentProps<typeof Stack>) => (
     {...rest}
   />
 );
-const LastStep: React.FC<Partial<StepWizardChildProps>> = (({
-  stepName,
-}: StepWizardChildProps) => {
-  stepName = stepName || "Оставьте заявку на ремонт со скидкой";
-  const formik = useFormikContext<WizValues>();
+const Form = () => {
+  const formik = useFormikContext<ContactRequestValues>();
   /* const submitDisabled =
     !(formik.isValid && formik.dirty) || formik.isSubmitting; */
   const submitDisabled = formik.isSubmitting;
@@ -171,48 +165,6 @@ const LastStep: React.FC<Partial<StepWizardChildProps>> = (({
           >
             Сохранить скидку!
           </Button>
-          <Button
-            type="submit"
-            disabled={submitDisabled}
-            sx={{
-              width: "100%",
-              fontWeight: 500,
-              "&, &:hover": {
-                background: "#FFE684",
-              },
-              borderRadius: "8px",
-              padding: "6px 28px",
-              textAlign: "left",
-              border: "none",
-              textTransform: "none",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <Typography
-              sx={{
-                fontSize: "13px",
-                lineHeight: "17px",
-                "&&&&&": {
-                  color: "grey",
-                  fontWeight: 400,
-                },
-              }}
-              component="div"
-            >
-              Ваш промокод
-            </Typography>
-            <Typography
-              component="div"
-              sx={{
-                fontSize: "18px",
-                lineHeight: "21px",
-              }}
-            >
-              {formik.values.promo}
-            </Typography>
-          </Button>
           <FormControl>
             {privacyCheckedMeta.error && (
               <FormHelperText
@@ -254,10 +206,7 @@ const LastStep: React.FC<Partial<StepWizardChildProps>> = (({
                     Согласен на обработку
                     <br /> персональных данных и принимаю
                     <br />{" "}
-                    <MuiLink
-                      target={"_blank"}
-                      href="https://ru.envybox.io/agreement/quiz/52973/35829/"
-                    >
+                    <MuiLink target={"_blank"} href="https://ru.envybox.io/agreement/quiz/52973/35829/">
                       условия соглашения
                     </MuiLink>
                   </Box>
@@ -269,5 +218,5 @@ const LastStep: React.FC<Partial<StepWizardChildProps>> = (({
       </ColBox>
     </StyledLastStepStack>
   );
-}) as any;
-export default LastStep;
+};
+export default Form;

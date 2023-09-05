@@ -13,7 +13,10 @@ export type Hook =
 
 export interface SiteHooks {
   site: {
-    contact: { useSendEmail: RestApi.RestApiHook<any> };
+    contact: {
+      useSendEmail: RestApi.RestApiHook<any>;
+      useSendRequest: RestApi.RestApiHook<any>;
+    };
     useCountViews: RestApi.RestApiHook<any>;
   };
 }

@@ -16,22 +16,8 @@ type ImageInProps = React.ComponentProps<typeof Image> & {
     allAuto?: boolean;
   };
 };
-const StyledImage = styled(({ targetDims: _, alt, ...props }: ImageInProps) => (
+const StyledImage = ({ targetDims: _, alt, ...props }: ImageInProps) => (
   <Image alt={alt} {...props} />
-))<{
-  targetDims: {
-    width: number;
-    height: number;
-    srcWidth: number;
-    srcHeight: number;
-    allAuto?: boolean;
-  };
-}>(
-  ({ theme, targetDims: { width, height, srcWidth, srcHeight, allAuto } }) => ({
-    width: allAuto || !width ? "auto" : width + "px",
-    height: "auto",
-    aspectRatio: srcWidth && srcHeight ? `${srcWidth} / ${srcHeight}` : "auto",
-  })
 );
 type Props = ImageProps & {
   fitWidth?: number;

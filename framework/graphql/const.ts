@@ -57,4 +57,5 @@ export const NEXT_PUBLIC_CONTACT_EMAIL =
   process.env["NEXT_PUBLIC_CONTACT_EMAIL"] || "";
 export const CONTACT_API_URL: string =
   API_HOST + "/site/contact";
+export const CONTACT_REQUEST_API_URL: string = API_HOST + "/site/contact-request";
 export const COUNT_PAGE_VIEWS_API_URL: string = API_HOST + "/site/page-view-count";

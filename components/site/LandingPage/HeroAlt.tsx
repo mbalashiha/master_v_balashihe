@@ -6,6 +6,7 @@ import { DescriptionParser } from "@components/common/Article";
 import React, { useEffect, useRef } from "react";
 import { Blog } from "@common/types/cms";
 import useCountViews from "@framework/site/use-count-views";
+import { useSiteModal } from "../contacts";
 interface Props {
   article: Blog.Article;
 }
@@ -13,7 +14,6 @@ export default function Hero({ article }: Props) {
   if (!article || !article.renderHtml) {
     throw new Error("No article for this page!");
   }
-  let { renderHtml, title, image } = article;
   const countViews = useCountViews();
   const countViewsRef = useRef(countViews);
   useEffect(() => {
@@ -25,14 +25,15 @@ export default function Hero({ article }: Props) {
       countViews({ articleId: article.id });
     }
   }, [article.id]);
+  const { openContactRequest } = useSiteModal();
   return (
     <Container
       maxWidth={false}
       sx={{
         position: "relative",
-        minHeight: "680px",
         backgroundColor: "#010101",
         overflow: "hidden",
+        py: 0,
       }}
     >
       <Box
@@ -79,10 +80,11 @@ export default function Hero({ article }: Props) {
           position: "relative",
           zIndex: 2,
           mt: 4,
-          pb: "55px",
+          pb: 0,
           px: { xs: "15px", sm: 0 },
           display: "grid",
           gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
+          gap: { xs: 0, lg: "20px" },
         }}
       >
         <Box sx={{ gridRow: `1`, gridColumn: `1` }}>
@@ -93,7 +95,7 @@ export default function Hero({ article }: Props) {
           >
             <Typography
               sx={{
-                pt: { xs: "20px", sm: "60px" },
+                pt: { xs: "20px", sm: "40px" },
                 fontSize: { xs: "32px", sm: "42px" },
                 lineHeight: { xs: "48px", sm: "65px" },
                 fontWeight: 600,
@@ -135,6 +137,7 @@ export default function Hero({ article }: Props) {
             alignItems: { xs: "center", lg: "flex-start" },
             gap: "16px",
             maxWidth: { xs: "91vw", sm: "inherit" },
+            pb: { xs: 0, lg: "80px" },
           }}
         >
           <div>
@@ -180,6 +183,7 @@ export default function Hero({ article }: Props) {
                     color: "white",
                   },
                 }}
+                onClick={openContactRequest}
               >
                 Вызвать мастера
               </Button>
@@ -217,6 +221,7 @@ export default function Hero({ article }: Props) {
             gridRow: { xs: `span 1`, lg: `span 2` },
             gridColumn: { xs: `1`, lg: `2` },
             textAlign: "center",
+            pl: { xs: 0, lg: "20px" },
             "& img": {
               maxWidth: "96vw",
               height: "auto",
