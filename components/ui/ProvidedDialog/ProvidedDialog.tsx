@@ -88,12 +88,12 @@ const ProvidedDialog = React.forwardRef(function ProvidedDialog(
     >
       <BaseDialogHeader close={close}>{title}</BaseDialogHeader>
       <DialogContent ref={ref}>{children}</DialogContent>
-      {dialogActions === false ? null : (
+      {dialogActions && (
         <DialogActions>
-          {dialogActions && dialogActions !== true ? (
-            dialogActions
-          ) : (
+          {dialogActions === true ? (
             <Button onClick={close}>Закрыть</Button>
+          ) : (
+            <>{dialogActions}</>
           )}
         </DialogActions>
       )}

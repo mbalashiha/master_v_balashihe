@@ -16,7 +16,7 @@ type Props = {
 export interface ContactRequestValues {
   "Имя клиента": string;
   Телефон: string;
-  comment: string;
+  Комментарий: string;
   privacyChecked?: boolean;
   telephoneDigits: string;
   submitError?: string;
@@ -26,7 +26,7 @@ export const FormikForRequest: React.FC<any> = ({ children }: Props) => {
     privacyChecked: true,
     "Имя клиента": "",
     Телефон: "",
-    comment: "",
+    Комментарий: "",
     telephoneDigits: "",
   };
   const sendEmailRequest = useSendRequest();

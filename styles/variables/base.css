@@ -1,4 +1,5 @@
 :root {
+  --landing-font-family: "Noto Sans", Arial, sans-serif;
   --animate-duration: 1s;
   --animate-delay: 1s;
   --animate-repeat: 1;

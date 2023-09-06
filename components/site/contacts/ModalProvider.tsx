@@ -51,6 +51,8 @@ export const SiteModalProvider = ({ children }: Props) => {
           <ProvidedDialog
             open={contactRequestOpened}
             close={closeContactRequest}
+            maxWidth="sm"
+            dialogActions={false}
           >
             <ContactRequest />
           </ProvidedDialog>

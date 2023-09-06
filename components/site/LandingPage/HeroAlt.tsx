@@ -72,7 +72,7 @@ export default function Hero({ article }: Props) {
         maxWidth="lg"
         sx={{
           "&, & *": {
-            fontFamily: `"Noto Sans", Arial, sans-serif`,
+            fontFamily: `var(--landing-font-family)`,
             color: "white",
             textAlign: { xs: "center", lg: "left" },
             "& p": { my: 0 },

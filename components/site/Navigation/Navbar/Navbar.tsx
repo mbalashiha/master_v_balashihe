@@ -43,123 +43,123 @@ const Navbar: FC = () => {
   // const isIndexPage = pathname === "/";
   // const cartPage = pathname === "/market/cart";
   return (
-      <AppBar
-        component={"div"}
-        position="static"
+    <AppBar
+      component={"div"}
+      position="static"
+      sx={{
+        "& a": {
+          textDecoration: "none",
+        },
+      }}
+    >
+      <Toolbar
+        component="div"
         sx={{
-          "& a": {
-            textDecoration: "none",
-          },
+          p: 0,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          zIndex: 3,
+          background: "white",
+          color: "black",
         }}
       >
-        <Toolbar
-          component="div"
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={{ xs: "4px", sm: 2 }}
+          flexWrap="wrap"
           sx={{
-            p: 0,
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            zIndex: 3,
-            background: "white",
-            color: "black",
+            width: "100%",
+            maxWidth: "1600px",
+            minHeight: "112px",
+            overflow: "visible",
+            justifyContent: "space-between",
+            alignItems: "space-between",
+            "&, & *, & .logo, & .timeline-typography": {
+              fontFamily: `var(--landing-font-family)`,
+              color: "black",
+              fontWeight: 400,
+            },
           }}
         >
+          <MainLogo />
+          <NavbarLinks />
           <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: "4px", sm: 2 }}
-            flexWrap="wrap"
+            direction={"row"}
+            justifyContent="flex-start"
+            alignItems="center"
+            flexWrap="nowrap"
+            alignSelf={"center"}
             sx={{
-              width: "100%",
-              maxWidth: "1600px",
-              minHeight: "112px",
-              overflow: "visible",
-              justifyContent: "space-between",
-              alignItems: "space-between",
-              "&, & *, & .logo, & .timeline-typography": {
-                fontFamily: `"Noto Sans", Arial, sans-serif`,
-                color: "black",
-                fontWeight: 400,
+              color: "black",
+              fontSize: "26px",
+              lineHeight: "37px",
+              "&, & a, & a > *": {
+                transitionProperty: "color",
+              },
+              "& a, & > div": {
+                display: "flex",
+                direction: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                flexWrap: "nowrap",
+                "& > svg": {
+                  marginBottom: "-2px",
+                  marginRight: "6px",
+                },
+              },
+              "&&& svg": {
+                width: "55px",
+                height: "55px",
+                marginTop: "5px",
               },
             }}
           >
-            <MainLogo />
-            <NavbarLinks />
-            <Stack
-              direction={"row"}
-              justifyContent="flex-start"
-              alignItems="center"
-              flexWrap="nowrap"
-              alignSelf={"center"}
-              sx={{
-                color: "black",
-                fontSize: "26px",
-                lineHeight: "37px",
-                "&, & a, & a > *": {
-                  transitionProperty: "color",
-                },
-                "& a, & > div": {
-                  display: "flex",
-                  direction: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexWrap: "nowrap",
-                  "& > svg": {
-                    marginBottom: "-2px",
-                    marginRight: "6px",
-                  },
-                },
-                "&&& svg": {
-                  width: "55px",
-                  height: "55px",
-                  marginTop: "5px"
-                },
-              }}
-            >
-              <ContactDialog>
-                <Stack direction={"row"} spacing={1}>
-                  <IconPhoneCircle fill={"black"} />
-                  <Stack direction="column">
-                    <Box>{NEXT_PUBLIC_CONTACT_PHONE_TEXT}</Box>
-                    <Typography
-                      component="div"
-                      className="timeline-typography"
-                      sx={{
-                        fontSize: "16px",
-                        lineHeight: "24px",
-                        alignSelf: "flex-end",
-                      }}
-                    >
-                      Ежедневно с 09:00 до 24:00
-                    </Typography>
-                  </Stack>
+            <ContactDialog>
+              <Stack direction={"row"} spacing={1}>
+                <IconPhoneCircle fill={"black"} />
+                <Stack direction="column">
+                  <Box>{NEXT_PUBLIC_CONTACT_PHONE_TEXT}</Box>
+                  <Typography
+                    component="div"
+                    className="timeline-typography"
+                    sx={{
+                      fontSize: "16px",
+                      lineHeight: "24px",
+                      alignSelf: "flex-end",
+                    }}
+                  >
+                    Ежедневно с 09:00 до 24:00
+                  </Typography>
                 </Stack>
-              </ContactDialog>
-            </Stack>
+              </Stack>
+            </ContactDialog>
           </Stack>
-        </Toolbar>
-        <Toolbar
-          sx={{
-            zIndex: 0,
-            boxShadow:
-              "#0000001a 0rem 0.25rem 0.375rem -0.0625rem, #0000000f 0rem 0.125rem 0.25rem -0.0625rem",
+        </Stack>
+      </Toolbar>
+      <Toolbar
+        sx={{
+          zIndex: 0,
+          boxShadow:
+            "#0000001a 0rem 0.25rem 0.375rem -0.0625rem, #0000000f 0rem 0.125rem 0.25rem -0.0625rem",
 
-            backgroundColor: "rgba(237, 239, 245, 0.75)",
+          backgroundColor: "rgba(237, 239, 245, 0.75)",
+        }}
+      >
+        <Container
+          maxWidth={"lg"}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            px: 0,
+            py: "10px",
           }}
         >
-          <Container
-            maxWidth={"lg"}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              px: 0,
-              py: "10px",
-            }}
-          >
-            <Search navbarSearch />
-          </Container>
-        </Toolbar>
-      </AppBar>
+          <Search navbarSearch />
+        </Container>
+      </Toolbar>
+    </AppBar>
   );
 };
 
