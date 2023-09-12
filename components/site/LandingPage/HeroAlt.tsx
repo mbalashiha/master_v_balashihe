@@ -2,11 +2,11 @@ import { Container, Grid, Card, Paper, Button, Stack } from "@mui/material";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { DescriptionParser } from "@components/common/Article";
+// import { DescriptionParser } from "@components/common/Article";
 import React, { useEffect, useRef } from "react";
 import { Blog } from "@common/types/cms";
 import useCountViews from "@framework/site/use-count-views";
-import { useSiteModal } from "../contacts";
+import { useSiteModal } from "@components/site/contacts/ModalProvider";
 interface Props {
   article: Blog.Article;
 }

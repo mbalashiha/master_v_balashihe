@@ -11,6 +11,7 @@ import { Form, Formik, FormikProps } from "formik";
 import { WizValues } from "./wiztypes";
 import useSendEmail from "@framework/site/contact/use-send-email";
 import { StepWizardChildProps } from "./MyStepWizard";
+import { daysIntoYear } from "@lib";
 interface WizardContextType {
   isLastStep: boolean;
   emailSuccess: boolean;
@@ -30,16 +31,6 @@ interface WizardContextType {
 type Props = StepWizardChildProps & {
   children: React.ReactNode | React.ReactNode[];
 };
-function daysIntoYear(date: Date = new Date()) {
-  return (
-    (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) -
-      Date.UTC(date.getFullYear(), 0, 0)) /
-    24 /
-    60 /
-    60 /
-    1000
-  );
-}
 export const FormikForWizard: React.FC<any> = ({
   children,
   goToNamedStep,
@@ -84,8 +75,7 @@ export const FormikForWizard: React.FC<any> = ({
               ? "Это сообщение уже было отправлено ранее"
               : submitResult.error
           );
-        }
-        if (!submitResult.success) {
+        } else if (!submitResult.success) {
           ctx.setFieldValue(
             "submitError",
             "Произошла ошибка обращения к серверу: статус " +

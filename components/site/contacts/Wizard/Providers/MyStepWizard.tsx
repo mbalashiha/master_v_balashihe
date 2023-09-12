@@ -13,6 +13,7 @@ import {
 type GridContainerProps = React.ComponentProps<typeof Grid>;
 import util from "util";
 import { FormikProps } from "formik";
+import DefaultWizardNav from "./DefaultWizardNav";
 
 const GridItemSidebar = ({ children, sx, ...rest }: GridContainerProps) => {
   return (
@@ -44,6 +45,7 @@ type PreStepWizardProps = Partial<{
   isHashEnabled: boolean;
   isLazyMount: boolean;
   nav: JSX.Element;
+  StepContainerProps?: React.ComponentProps<typeof Box>;
 
   onStepChange: (stepChange: {
     previousStep: number;
@@ -100,6 +102,7 @@ const MyStepWizard = ({
   title,
   sx,
   form,
+  StepContainerProps,
   ...rest
 }: StepWizardProps) => {
   const collectedStepsNames = new Map<
@@ -172,7 +175,7 @@ const MyStepWizard = ({
   const lastStep = () => {
     setCurrentStep(totalSteps);
   };
-  const selectedStepEntry = collectedSteps.get(currentStep)! || {};
+  const selectedStepEntry = collectedSteps.get(currentStep)! || { props: {} };
   const {
     step: selectedStep,
     props: { noSidebar, noNavigation, noTitle, showOnlyStep, stepName },
@@ -196,10 +199,12 @@ const MyStepWizard = ({
       : undefined;
   title = title && !showOnlyStep && !noTitle ? title : undefined;
   nav =
-    (nav &&
-      !showOnlyStep &&
+    (!showOnlyStep &&
       !noNavigation &&
-      React.cloneElement(nav, getClonedElementProps())) ||
+      React.cloneElement(
+        nav || <DefaultWizardNav />,
+        getClonedElementProps()
+      )) ||
     undefined;
   return (
     <Grid
@@ -239,11 +244,13 @@ const MyStepWizard = ({
           </Typography>
         )}
         <Box
+          {...StepContainerProps}
           sx={{
             flexGrow: 1,
             overflowX: "hidden",
             display: "flex",
             flexDirection: "column",
+            ...StepContainerProps?.sx,
           }}
         >
           {selectedStep && form

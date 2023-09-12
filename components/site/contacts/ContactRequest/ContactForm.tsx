@@ -31,6 +31,8 @@ import EmailRow from "../Wizard/ModalContacts/EmailRow";
 import TelegramRow from "../Wizard/ModalContacts/TelegramRow";
 import PhoneRow from "../Wizard/ModalContacts/PhoneRow";
 import { ContactRequestValues } from "./FormikForRequest";
+import { StepWizardChildProps } from "../Wizard/Providers/MyStepWizard";
+import ColBox from "./ColBox";
 
 interface PhoneMaskProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
@@ -62,41 +64,11 @@ const PhoneMaskCustom = React.forwardRef<HTMLInputElement, PhoneMaskProps>(
     );
   }
 );
-const ColBox = ({ sx, ...rest }: React.ComponentProps<typeof Stack>) => (
-  <Stack
-    spacing={3}
-    sx={{
-      ...sx,
-      width: "100%",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      "& div, & p, & h3, & label": {
-        fontFamily: `var(--landing-font-family)`,
-        color: "black",
-        fontWeight: 400,
-      },
 
-      "& p": {
-        fontSize: "14px",
-        lineHeight: "22px",
-      },
-      "& .TextField-root": {
-        width: "100%",
-        "& .FormHelperText-root.Mui-error": { height: 0, oveflow: "visible" },
-      },
-      "& .TextField-root .InputBase-root": {
-        padding: "18px",
-        "& input": {
-          fontSize: "16px",
-        },
-      },
-    }}
-    {...rest}
-  />
-);
-const Form = () => {
+const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
+  stepName,
+  ...props
+}: StepWizardChildProps) => {
   const formik = useFormikContext<ContactRequestValues>();
   /* const submitDisabled =
     !(formik.isValid && formik.dirty) || formik.isSubmitting; */
@@ -106,149 +78,178 @@ const Form = () => {
   const [commentField, commentMeta] = useField("Комментарий");
   const [privacyChecked, privacyCheckedMeta] = useField("privacyChecked");
   return (
-    <>
-      <ColBox>
-        <Typography
-          variant="h3"
-          sx={{ fontSize: "36px", lineHeight: "44px", textAlign: "center" }}
+    <ColBox>
+      <Typography
+        variant="h3"
+        sx={{ fontSize: "36px", lineHeight: "44px", textAlign: "center" }}
+      >
+        Запись к мастеру на консультацию
+      </Typography>
+      <Typography sx={{ textAlign: "center", "&&&": { marginTop: "6px" } }}>
+        После оформления заявки я перезвоню вам в течение 30 минут в рабочее
+        время
+      </Typography>
+      {formik.values.submitError && (
+        <Alert
+          sx={{ width: "100%" }}
+          severity={!submitDisabled ? "error" : "warning"}
         >
-          Запись к мастеру на консультацию
-        </Typography>
-        <Typography sx={{ textAlign: "center", "&&&": { marginTop: "6px" } }}>
-          После оформления заявки я перезвоню вам в течение 30 минут в рабочее
-          время
-        </Typography>
-        {formik.values.submitError && (
-          <Alert severity={!submitDisabled ? "error" : "warning"}>
-            <div>Произошла ошибка отправки сообщения:</div>
-            <strong>{formik.values.submitError}</strong>
-          </Alert>
-        )}
-        <TextField
-          {...clientNameField}
-          sx={{ "&&&": { marginTop: "6px" } }}
-          error={Boolean(clientNameMeta.error)}
-          helperText={clientNameMeta.error}
-          placeholder="Ваше имя"
-          required
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <PersonOutlineIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-        <TextField
-          {...phoneField}
-          error={Boolean(phoneMeta.error)}
-          helperText={phoneMeta.error}
-          required
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <LocalPhoneRoundedIcon />
-              </InputAdornment>
-            ),
-            inputComponent: PhoneMaskCustom as any,
-          }}
-        />
-        <Box sx={{ width: "100%", "& > div": { width: "100%" } }}>
-          <InputLabel
-            htmlFor="contact-request-comment-field"
-            sx={{ fontSize: "18px", mb: "3px" }}
-          >
-            Комментарий
-          </InputLabel>
-          <TextField
-            {...commentField}
-            multiline
-            minRows={3}
-            error={Boolean(commentMeta.error)}
-            helperText={commentMeta.error}
-            placeholder="Опишите Вашу проблему"
-            InputProps={{ id: "contact-request-comment-field" }}
-          />
-        </Box>
-        <FormControl sx={{ "&&&": { marginTop: 0 } }}>
-          {privacyCheckedMeta.error && (
-            <FormHelperText
-              sx={{ ml: "0px", mt: "0px", fontWeight: 500 }}
-              error={Boolean(privacyCheckedMeta.error)}
-            >
-              {privacyCheckedMeta.error}
-            </FormHelperText>
-          )}
-          <FormControlLabel
-            sx={{
-              alignItems: "flex-start",
-              "& .FormControlLabel-asterisk": {
-                display: "none",
-              },
-            }}
-            control={
-              <Checkbox
-                {...privacyChecked}
-                checked={Boolean(privacyChecked.value)}
-                size="small"
-                required
-                onChange={(event, checked) => {
-                  Object.assign(event.target, { value: checked });
-                  privacyChecked.onChange(event);
-                }}
-              />
-            }
-            label={
-              <>
-                <Box
-                  sx={{
-                    pt: "8px",
-                    fontSize: "13px",
-                    lineHeight: "16px",
-                    fontWeight: 700,
-                  }}
-                >
-                  Согласен на обработку персональных данных и принимаю{" "}
-                  <MuiLink
-                    target={"_blank"}
-                    href="https://ru.envybox.io/agreement/quiz/52973/35829/"
-                  >
-                    {" "}
-                    условия соглашения{" "}
-                  </MuiLink>
-                </Box>
-              </>
-            }
-          />
-        </FormControl>
-        <Button
-          type="submit"
-          disabled={submitDisabled}
+          <div>Произошла ошибка отправки сообщения:</div>
+          <strong>{formik.values.submitError}</strong>
+        </Alert>
+      )}
+      <TextField
+        {...clientNameField}
+        sx={{ "&&&": { marginTop: "6px" } }}
+        error={Boolean(clientNameMeta.error)}
+        helperText={clientNameMeta.error}
+        placeholder="Ваше имя"
+        required
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <PersonOutlineIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
+      <TextField
+        {...phoneField}
+        error={Boolean(phoneMeta.error)}
+        helperText={phoneMeta.error}
+        required
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <LocalPhoneRoundedIcon />
+            </InputAdornment>
+          ),
+          inputComponent: PhoneMaskCustom as any,
+        }}
+      />
+      <Box
+        sx={{
+          width: "100%",
+          "& > div": { width: "100%" },
+          "&&& .FormHelperText-root": {
+            height: "inherit",
+            mimHeight: "10px",
+          },
+        }}
+      >
+        <InputLabel
+          htmlFor="contact-request-comment-field"
           sx={{
-            width: "100%",
-            py: "14px",
-            px: { xs: "6px", md: "40px" },
-            background: (theme) => theme.palette.primary.light,
-            border: "none",
-            borderRadius: "9px",
-            m: 0,
-            fontSize: "16px",
-            lineHeight: "25px",
-            "&, && > *": {
-              color: "white",
+            "&&&": {
+              color: Boolean(commentMeta.error) ? "#d32f2f" : "inherit",
             },
-            "&:hover": {
-              background: (theme) => theme.palette.primary.main,
-              "&, && > *": {
-                color: "black",
-              },
-            },
+            fontSize: "18px",
+            mb: "3px",
           }}
         >
-          Оставить заявку
-        </Button>
-      </ColBox>
-    </>
+          Комментарий
+          <Box
+            component="span"
+            sx={{ opacity: Boolean(commentMeta.error) ? 1 : 0 }}
+          >
+            *
+          </Box>
+        </InputLabel>
+        <TextField
+          {...commentField}
+          multiline
+          minRows={3}
+          maxRows={10}
+          error={Boolean(commentMeta.error)}
+          helperText={commentMeta.error}
+          placeholder="Опишите Вашу проблему"
+          InputProps={{ id: "contact-request-comment-field" }}
+        />
+      </Box>
+      <FormControl sx={{ "&&&": { marginTop: 0 } }}>
+        {privacyCheckedMeta.error && (
+          <FormHelperText
+            sx={{ ml: "0px", mt: "0px", fontWeight: 500 }}
+            error={Boolean(privacyCheckedMeta.error)}
+          >
+            {privacyCheckedMeta.error}
+          </FormHelperText>
+        )}
+        <FormControlLabel
+          sx={{
+            alignItems: "flex-start",
+            "& .FormControlLabel-asterisk": {
+              display: "none",
+            },
+          }}
+          control={
+            <Checkbox
+              {...privacyChecked}
+              checked={Boolean(privacyChecked.value)}
+              size="small"
+              required
+              onChange={(event, checked) => {
+                Object.assign(event.target, { value: checked });
+                privacyChecked.onChange(event);
+              }}
+            />
+          }
+          label={
+            <>
+              <Box
+                sx={{
+                  pt: "8px",
+                  fontSize: "13px",
+                  lineHeight: "16px",
+                  fontWeight: 700,
+                }}
+              >
+                Согласен на обработку персональных данных и принимаю{" "}
+                <MuiLink
+                  target={"_blank"}
+                  href="https://ru.envybox.io/agreement/quiz/52973/35829/"
+                >
+                  {" "}
+                  условия соглашения{" "}
+                </MuiLink>
+              </Box>
+            </>
+          }
+        />
+      </FormControl>
+      <Button
+        type="submit"
+        disabled={submitDisabled}
+        sx={{
+          width: "100%",
+          py: "14px",
+          px: { xs: "6px", md: "40px" },
+          background: (theme) =>
+            !(formik.isValid && formik.dirty)
+              ? theme.palette.primary.light
+              : theme.palette.primary.main,
+          border: "none",
+          borderRadius: "9px",
+          m: 0,
+          fontSize: "16px",
+          lineHeight: "25px",
+          "&, && > *": {
+            color: "white",
+          },
+          "&:hover": {
+            background: (theme) =>
+              !(formik.isValid && formik.dirty)
+                ? theme.palette.primary.light
+                : theme.palette.primary.dark,
+            "&, && > *": {
+              color: "black",
+            },
+          },
+        }}
+      >
+        Оставить заявку
+      </Button>
+    </ColBox>
   );
-};
-export default Form;
+}) as any;
+export default ContactForm;

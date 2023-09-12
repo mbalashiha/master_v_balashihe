@@ -15,8 +15,10 @@ import LandingCard from "./LandingCard";
 import ClientStep from "./ClientStep";
 import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
 import { EnhImage } from "@components/ui";
+import { useSiteModal } from "@components/site/contacts/ModalProvider";
 
 export default function LandingClientSteps() {
+  const { openContactRequest } = useSiteModal();
   return (
     <DarkContainer
       sx={{ zIndex: 2, pb: "90px" }}
@@ -139,6 +141,7 @@ export default function LandingClientSteps() {
               },
             },
           }}
+          onClick={openContactRequest}
         >
           <span>Вызвать мастера</span>
           <Box

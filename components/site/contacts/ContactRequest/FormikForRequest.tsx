@@ -8,9 +8,11 @@ import React, {
 import { Button, Box, styled } from "@mui/material";
 import util from "util";
 import { Form, Formik, FormikProps } from "formik";
+import { StepWizardChildProps } from "../Wizard/Providers/MyStepWizard";
 import useSendRequest from "@framework/site/contact/use-send-request";
+import { daysIntoYear } from "@lib";
 
-type Props = {
+type Props = StepWizardChildProps & {
   children: React.ReactNode | React.ReactNode[];
 };
 export interface ContactRequestValues {
@@ -20,14 +22,20 @@ export interface ContactRequestValues {
   privacyChecked?: boolean;
   telephoneDigits: string;
   submitError?: string;
+  promo: string;
 }
-export const FormikForRequest: React.FC<any> = ({ children }: Props) => {
+export const FormikForRequest: React.FC<Partial<Props>> = (({
+  children,
+  nextStep,
+  currentStep,
+}: Props) => {
   const initialValues: ContactRequestValues = {
     privacyChecked: true,
     "Имя клиента": "",
     Телефон: "",
     Комментарий: "",
     telephoneDigits: "",
+    promo: "Балашиха" + daysIntoYear(),
   };
   const sendEmailRequest = useSendRequest();
   const formikRef = useRef<FormikProps<ContactRequestValues>>(null);
@@ -37,11 +45,17 @@ export const FormikForRequest: React.FC<any> = ({ children }: Props) => {
       innerRef={formikRef}
       validate={(values) => {
         const errors: any = {};
+        if (!(values["Имя клиента"] || "").trim()) {
+          errors["Имя клиента"] = "Введите Ваше имя";
+        }
         if (!values.privacyChecked) {
           errors.privacyChecked = "Примите политику конфиденциальности";
         }
         if (!values.telephoneDigits || values.telephoneDigits.length < 11) {
           errors["Телефон"] = "Введите все цифры Вашего телефона";
+        }
+        if (!(values["Комментарий"] || "").trim()) {
+          errors["Комментарий"] = "Введите комментарий";
         }
         return errors;
       }}
@@ -54,15 +68,14 @@ export const FormikForRequest: React.FC<any> = ({ children }: Props) => {
               ? "Это сообщение уже было отправлено ранее"
               : submitResult.error
           );
-        }
-        if (!submitResult.success) {
+        } else if (!submitResult.success) {
           ctx.setFieldValue(
             "submitError",
             "Произошла ошибка обращения к серверу: статус " +
               submitResult.status.toString()
           );
         } else {
-          // goToNamedStep("Сейчас перезвоним и предложим выезд мастера");
+          nextStep();
           if (values.submitError) {
             ctx.setFieldValue("submitError", null);
           }
@@ -72,5 +85,5 @@ export const FormikForRequest: React.FC<any> = ({ children }: Props) => {
       <Form>{children}</Form>
     </Formik>
   );
-};
+}) as React.FC<Partial<Props>>;
 export default FormikForRequest;

@@ -34,14 +34,14 @@ import {
   NEXT_PUBLIC_TELEGRAM_LINK,
   NEXT_PUBLIC_CONTACT_PHONE_TEXT,
 } from "@framework/const";
-import { WhatsappLink } from "@components/site/contacts";
-import ContactDialog from "@components/site/contacts/ContactDialog";
 import IconPhoneCircle from "@components/icons/IconPhoneCircle";
+import { useSiteModal } from "@components/site/contacts/ModalProvider";
 
 const Navbar: FC = () => {
   // const { pathname } = useRouter();
   // const isIndexPage = pathname === "/";
   // const cartPage = pathname === "/market/cart";
+  const { openContactRequest } = useSiteModal();
   return (
     <AppBar
       component={"div"}
@@ -115,25 +115,28 @@ const Navbar: FC = () => {
               },
             }}
           >
-            <ContactDialog>
-              <Stack direction={"row"} spacing={1}>
-                <IconPhoneCircle fill={"black"} />
-                <Stack direction="column">
-                  <Box>{NEXT_PUBLIC_CONTACT_PHONE_TEXT}</Box>
-                  <Typography
-                    component="div"
-                    className="timeline-typography"
-                    sx={{
-                      fontSize: "16px",
-                      lineHeight: "24px",
-                      alignSelf: "flex-end",
-                    }}
-                  >
-                    Ежедневно с 09:00 до 24:00
-                  </Typography>
-                </Stack>
+            <Stack
+              direction={"row"}
+              spacing={1}
+              sx={{ cursor: "pointer" }}
+              onClick={openContactRequest}
+            >
+              <IconPhoneCircle fill={"black"} />
+              <Stack direction="column">
+                <Box>{NEXT_PUBLIC_CONTACT_PHONE_TEXT}</Box>
+                <Typography
+                  component="div"
+                  className="timeline-typography"
+                  sx={{
+                    fontSize: "16px",
+                    lineHeight: "24px",
+                    alignSelf: "flex-end",
+                  }}
+                >
+                  Ежедневно с 09:00 до 24:00
+                </Typography>
               </Stack>
-            </ContactDialog>
+            </Stack>
           </Stack>
         </Stack>
       </Toolbar>

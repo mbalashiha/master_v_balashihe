@@ -16,8 +16,10 @@ import ClientStep from "./ClientStep";
 import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
 import { EnhImage } from "@components/ui";
 import TaskCard from "./TaskCard";
+import { useSiteModal } from "@components/site/contacts/ModalProvider";
 
 export default function LandingAgeTasks() {
+  const { openContactRequest } = useSiteModal();
   return (
     <DarkContainer sx={{ pt: 0 }}>
       <Container maxWidth="md">
@@ -99,7 +101,8 @@ export default function LandingAgeTasks() {
             />
           }
         >
-          Разборка корпуса системного блока или ноутбука, очистка с помощью кисточки и изопропилового спирта.
+          Разборка корпуса системного блока или ноутбука, очистка с помощью
+          кисточки и изопропилового спирта.
         </TaskCard>
       </Grid>
       <Box
@@ -131,6 +134,7 @@ export default function LandingAgeTasks() {
               },
             },
           }}
+          onClick={openContactRequest}
         >
           Оставить заявку
         </Button>
