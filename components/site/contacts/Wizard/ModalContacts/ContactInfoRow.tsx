@@ -18,10 +18,11 @@ export const ContactInfoRow = ({ svgIcon, label, infoText, sx }: Props) => {
     >
       <Box
         sx={{
-          width: "56px",
+          width: { xs: "60px", md: "70px" },
+          textAlign: "left",
           "& svg": {
-            width: "48px",
-            height: "48px",
+            width: { xs: "48px", md: "58px" },
+            height: { xs: "48px", md: "58px" },
           },
         }}
       >
@@ -50,10 +51,12 @@ export const ContactInfoRow = ({ svgIcon, label, infoText, sx }: Props) => {
         )}
         <Typography
           component="span"
+          className="contactInfoText"
           sx={{
-            fontSize: "24px",
-            lineHeight: "24px",
             fontWeight: 700,
+            wordBreak: "break-word",
+            fontSize: { xs: "25px", md: "30px" },
+            lineHeight: { xs: "25px", md: "30px" },
           }}
         >
           {infoText}

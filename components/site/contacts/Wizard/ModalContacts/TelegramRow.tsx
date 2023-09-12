@@ -26,7 +26,10 @@ export default function TelegramRow() {
       underline="hover"
     >
       <ContactInfoRow
-        sx={{ "& svg": { transform: { xs: "", md: "scale(1.15)" } } }}
+        sx={{
+          "& .contactInfoText": {
+          },
+        }}
         svgIcon={<TelegramIcon />}
         infoText={`Telegram`}
       />

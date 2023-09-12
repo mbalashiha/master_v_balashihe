@@ -78,8 +78,8 @@ const ProvidedDialog = React.forwardRef(function ProvidedDialog(
             p: noPadding
               ? 0
               : {
-                  xs: "20px 4px 20px 4px",
-                  sm: "20px 8px 20px 8px",
+                  xs: "20px 14px 20px 14px",
+                  sm: "20px 14px 20px 14px",
                   md: "20px 24px 20px 24px",
                 },
             overflowX: "hidden",

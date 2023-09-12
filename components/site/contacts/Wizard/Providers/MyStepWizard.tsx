@@ -221,7 +221,6 @@ const MyStepWizard = ({
         sx={{
           display: "flex",
           flexDirection: "column",
-          p: { xs: "7px", lg: "17px 20px" },
           "& form": {
             height: "100%",
             flexGrow: 1,
@@ -230,17 +229,17 @@ const MyStepWizard = ({
       >
         {title && (
           <Typography
+            variant="h1"
             sx={{
               "&&&": {
                 display: "block",
                 fontSize: { xs: "20px", md: "25px" },
                 lineHeight: { xs: "23px", md: "28px" },
-                p: { xs: "0 27px 12px 0", lg: "0 20px 12px 0" },
                 fontWeight: 500,
               },
             }}
           >
-            Ответьте на пару вопросов и получите скидку 25%
+            {title}
           </Typography>
         )}
         <Box

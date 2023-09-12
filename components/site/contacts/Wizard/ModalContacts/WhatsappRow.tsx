@@ -21,7 +21,10 @@ export default function WhatsappRow() {
   return (
     <WhatsappLink underline="hover">
       <ContactInfoRow
-        sx={{ "& svg": { transform: { xs: "scale(1.1)", md: "scale(1.3)" } } }}
+        sx={{
+          "& svg": { transform: "scale(1.1)" },
+          "& .contactInfoText": {},
+        }}
         svgIcon={<WhatsappIcon />}
         infoText={`WhatsApp`}
       />

@@ -1,34 +1,34 @@
-import { Management } from "@common/types/cms";
-import { FabButtonProvider } from "@components/management/Layout";
 import { ProvidedDialog } from "@components/ui";
-import { ApiProvider } from "@framework";
-import { ID } from "@framework/types";
 import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useReducer,
   useState,
 } from "react";
-import { KeyedMutator } from "swr";
-import ContactDialog from "./ContactDialog";
-import { ContactRequest } from "./ContactRequest";
-export interface ModalProviderValue {
+import {
+  ContactRequest,
+  ContactsList,
+} from "@components/site/contacts/ContactRequest";
+
+interface ModalProviderValue {
   toggleModal: React.Dispatch<React.SetStateAction<MODAL_OPEN>>;
   closeModal: () => void;
 }
-export const ModalProviderContext = createContext<Partial<ModalProviderValue>>(
-  {}
-);
+const ModalProviderContext = createContext<Partial<ModalProviderValue>>({
+  toggleModal: () => {},
+  closeModal: () => {},
+});
 interface Props {
   children: React.ReactNode | React.ReactNode[];
 }
-type MODAL_OPEN = undefined | "contact request form" | "contact list";
+type MODAL_OPEN = null | "contact request form" | "contact list";
 
 export const SiteModalProvider = ({ children }: Props) => {
-  const [openedModal, toggleModal] = useState<MODAL_OPEN>(undefined);
-  const closeModal = useCallback(() => toggleModal(undefined), []);
+  const [openedModal, toggleModal] = useState<MODAL_OPEN>(null);
+  const closeModal = useCallback(() => toggleModal(null), []);
   const providing = useMemo(() => ({ toggleModal, closeModal }), [closeModal]);
   const renderModal = useCallback(() => {
     switch (openedModal) {
@@ -42,7 +42,7 @@ export const SiteModalProvider = ({ children }: Props) => {
             <ContactRequest />
           </ProvidedDialog>
         );
-
+        break;
       case "contact list":
         return (
           <ProvidedDialog
@@ -50,9 +50,10 @@ export const SiteModalProvider = ({ children }: Props) => {
             maxWidth="sm"
             dialogActions={false}
           >
-            <ContactRequest />
+            <ContactsList />
           </ProvidedDialog>
         );
+        break;
       default:
         return null;
     }
@@ -60,7 +61,7 @@ export const SiteModalProvider = ({ children }: Props) => {
   return (
     <ModalProviderContext.Provider value={providing}>
       {children}
-      <ApiProvider>{renderModal()}</ApiProvider>
+      {renderModal()}
     </ModalProviderContext.Provider>
   );
 };

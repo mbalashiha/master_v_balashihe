@@ -15,7 +15,7 @@ import LandingCard from "./LandingCard";
 import ClientStep from "./ClientStep";
 import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
 import { EnhImage } from "@components/ui";
-import { useSiteModal } from "@components/site/contacts/ModalProvider";
+import { useSiteModal } from "@components/site/ModalProvider/ModalProvider";
 
 export default function LandingClientSteps() {
   const { toggleModal } = useSiteModal();

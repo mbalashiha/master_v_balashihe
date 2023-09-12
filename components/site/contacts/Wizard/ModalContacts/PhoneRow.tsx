@@ -25,9 +25,7 @@ export default function PhoneRow() {
         label={"Мой телефон"}
         infoText={NEXT_PUBLIC_CONTACT_PHONE_TEXT}
         sx={{
-          "& a": {
-            fontSize: "30px",
-            lineHeight: "30px",
+          "& .contactInfoText": {
           },
         }}
       />

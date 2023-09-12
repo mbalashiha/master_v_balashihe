@@ -35,7 +35,7 @@ import {
   NEXT_PUBLIC_CONTACT_PHONE_TEXT,
 } from "@framework/const";
 import IconPhoneCircle from "@components/icons/IconPhoneCircle";
-import { useSiteModal } from "@components/site/contacts/ModalProvider";
+import { useSiteModal } from "@components/site/ModalProvider/ModalProvider";
 
 const Navbar: FC = () => {
   // const { pathname } = useRouter();
@@ -119,7 +119,7 @@ const Navbar: FC = () => {
               direction={"row"}
               spacing={1}
               sx={{ cursor: "pointer" }}
-              onClick={() => toggleModal("contact request form")}
+              onClick={() => toggleModal("contact list")}
             >
               <IconPhoneCircle fill={"black"} />
               <Stack direction="column">

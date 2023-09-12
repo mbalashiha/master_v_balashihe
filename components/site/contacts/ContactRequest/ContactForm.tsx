@@ -10,9 +10,6 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
-import Alert from "@mui/material/Alert";
-import { InputLabel } from "@mui/material";
-
 import {
   Stack,
   Box,
@@ -25,13 +22,10 @@ import {
   AlertTitle,
   FormHelperText,
   Divider,
+  InputLabel,
+  Container,
+  Alert,
 } from "@mui/material";
-import DiscountIcon from "@mui/icons-material/Discount";
-import StyledLastStepStack from "../Wizard/StyledLastStepStack";
-import WhatsappRow from "../Wizard/ModalContacts/WhatsappRow";
-import EmailRow from "../Wizard/ModalContacts/EmailRow";
-import TelegramRow from "../Wizard/ModalContacts/TelegramRow";
-import PhoneRow from "../Wizard/ModalContacts/PhoneRow";
 import { ContactRequestValues } from "./FormikForRequest";
 import { StepWizardChildProps } from "../Wizard/Providers/MyStepWizard";
 import ColBox from "./ColBox";
@@ -82,16 +76,18 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
   const [privacyChecked, privacyCheckedMeta] = useField("privacyChecked");
   return (
     <ColBox>
-      <Typography
-        variant="h3"
-        sx={{ fontSize: "36px", lineHeight: "44px", textAlign: "center" }}
-      >
-        Запись к мастеру на консультацию
-      </Typography>
-      <Typography sx={{ textAlign: "center", "&&&": { marginTop: "6px" } }}>
-        После оформления заявки я перезвоню вам в течение 30 минут в рабочее
-        время
-      </Typography>
+      <Container maxWidth="sm">
+        <Typography
+          variant="h3"
+          sx={{ fontSize: "36px", lineHeight: "44px", textAlign: "center" }}
+        >
+          Запись к мастеру на консультацию
+        </Typography>
+        <Typography sx={{ textAlign: "center", "&&&": { marginTop: "6px" } }}>
+          После оформления заявки я перезвоню вам в течение 30 минут в рабочее
+          время
+        </Typography>
+      </Container>
       {formik.values.submitError && (
         <Alert
           sx={{ width: "100%" }}
@@ -136,6 +132,11 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
         placeholder={
           Boolean(emailMeta.error) ? "Email" : "Email (можно не указывать)"
         }
+        sx={{
+          "&&& .FormHelperText-root": {
+            height: "17px",
+          },
+        }}
         InputProps={{
           type: "email",
           startAdornment: (
@@ -148,24 +149,21 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
       <Box
         sx={{
           width: "100%",
+          "&&&": { marginTop: "4px" },
           "& > div": { width: "100%" },
           "&&& .FormHelperText-root": {
             height: "inherit",
-            mimHeight: "10px",
           },
         }}
       >
         <InputLabel
           htmlFor="contact-request-comment-field"
           sx={{
-            "&&&": {
-              color: Boolean(commentMeta.error) ? "#d32f2f" : "inherit",
-            },
             fontSize: "18px",
             mb: "3px",
           }}
         >
-          Комментарий
+          Сообщение
           <Box
             component="span"
             sx={{ opacity: Boolean(commentMeta.error) ? 1 : 0 }}
@@ -240,6 +238,7 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
         disabled={submitDisabled}
         sx={{
           width: "100%",
+          "&&&": { marginTop: "12px" },
           py: "14px",
           px: { xs: "6px", md: "40px" },
           background: (theme) =>
@@ -248,7 +247,6 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
               : theme.palette.primary.main,
           border: "none",
           borderRadius: "9px",
-          m: 0,
           fontSize: "16px",
           lineHeight: "25px",
           "&, && > *": {

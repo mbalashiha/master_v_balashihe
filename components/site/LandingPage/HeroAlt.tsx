@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import React, { useEffect, useRef } from "react";
 import { Blog } from "@common/types/cms";
 import useCountViews from "@framework/site/use-count-views";
-import { useSiteModal } from "@components/site/contacts/ModalProvider";
+import { useSiteModal } from "@components/site/ModalProvider/ModalProvider";
 interface Props {
   article: Blog.Article;
 }

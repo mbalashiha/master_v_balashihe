@@ -25,10 +25,7 @@ export default function EmailRow() {
         label={"Почта"}
         infoText={email}
         sx={{
-          "& span:last-of-type": {
-            wordBreak: "break-word",
-            fontSize: "22px",
-            lineHeight: "22px",
+          "& .contactInfoText": {
           },
         }}
       />

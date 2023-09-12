@@ -13,7 +13,7 @@ import { theme as getMuiTheme, useThemePalette } from "@components/ui";
 import { blueGrey } from "@mui/material/colors";
 import Image from "next/image";
 import { ApiProvider } from "@framework";
-import { SiteModalProvider } from "../contacts";
+import { SiteModalProvider } from "../ModalProvider/ModalProvider";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -30,12 +30,14 @@ const SiteLayout: FC<Props> = ({ children }: Props) => {
         <meta name="theme-color" content={theme.palette.primary.main} />
       </Head>
       <ThemeProvider theme={theme}>
-        <SiteModalProvider>
-          <CssBaseline />
-          <Navbar />
-          <ApiProvider>{children}</ApiProvider>
-          <Footer />
-        </SiteModalProvider>
+        <ApiProvider>
+          <SiteModalProvider>
+            <CssBaseline />
+            <Navbar />
+            {children}
+            <Footer />
+          </SiteModalProvider>
+        </ApiProvider>
       </ThemeProvider>
       <div
         dangerouslySetInnerHTML={{
