@@ -154,6 +154,7 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
           "& > div": { width: "100%" },
           "&&& .FormHelperText-root": {
             height: "auto",
+            minHeight: "10px",
           },
         }}
       >
@@ -162,7 +163,7 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
           sx={{
             fontSize: "18px",
             mb: "3px",
-            pl: "20px"
+            pl: "20px",
           }}
         >
           Ваше сообщение
