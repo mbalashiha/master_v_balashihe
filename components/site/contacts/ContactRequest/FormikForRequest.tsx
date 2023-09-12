@@ -17,6 +17,7 @@ type Props = StepWizardChildProps & {
 };
 export interface ContactRequestValues {
   "Имя клиента": string;
+  "Email клиента": string;
   Телефон: string;
   Комментарий: string;
   privacyChecked?: boolean;
@@ -32,6 +33,7 @@ export const FormikForRequest: React.FC<Partial<Props>> = (({
   const initialValues: ContactRequestValues = {
     privacyChecked: true,
     "Имя клиента": "",
+    "Email клиента": "",
     Телефон: "",
     Комментарий: "",
     telephoneDigits: "",
@@ -51,11 +53,31 @@ export const FormikForRequest: React.FC<Partial<Props>> = (({
         if (!values.privacyChecked) {
           errors.privacyChecked = "Примите политику конфиденциальности";
         }
-        if (!values.telephoneDigits || values.telephoneDigits.length < 11) {
-          errors["Телефон"] = "Введите все цифры Вашего телефона";
+        if (values.telephoneDigits && values.telephoneDigits.length > 1) {
+          if (values.telephoneDigits.length < 11) {
+            errors["Телефон"] = "Введите все цифры Вашего телефона";
+          }
+        } else {
+          values.telephoneDigits = "";
         }
         if (!(values["Комментарий"] || "").trim()) {
           errors["Комментарий"] = "Введите комментарий";
+        }
+        if (values["Email клиента"]) {
+          if (
+            !/^\w+[\w\-]*(\.[\w\-]+)*@\w+[\w\-]*(\.[\w\-]+)*\.\w+[\w\-]*$/.test(
+              values["Email клиента"]
+            )
+          ) {
+            errors["Email клиента"] =
+              "Введите корректный адрес Email, либо оставьте поле пустым";
+          } else {
+            delete errors["Телефон"];
+            delete errors["Email клиента"];
+          }
+        }
+        if (!values.telephoneDigits && !values["Email клиента"]) {
+          errors["Email клиента"] = "Введите либо телефон, либо адрес Email";
         }
         return errors;
       }}

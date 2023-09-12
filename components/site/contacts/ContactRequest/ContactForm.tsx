@@ -8,6 +8,8 @@ import FormLabel from "@mui/material/FormLabel";
 import { IMaskInput } from "react-imask";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
+import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
+import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
 import Alert from "@mui/material/Alert";
 import { InputLabel } from "@mui/material";
 
@@ -74,6 +76,7 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
     !(formik.isValid && formik.dirty) || formik.isSubmitting; */
   const submitDisabled = formik.isSubmitting;
   const [clientNameField, clientNameMeta] = useField("Имя клиента");
+  const [emailField, emailMeta] = useField("Email клиента");
   const [phoneField, phoneMeta] = useField("Телефон");
   const [commentField, commentMeta] = useField("Комментарий");
   const [privacyChecked, privacyCheckedMeta] = useField("privacyChecked");
@@ -117,7 +120,6 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
         {...phoneField}
         error={Boolean(phoneMeta.error)}
         helperText={phoneMeta.error}
-        required
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -125,6 +127,22 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
             </InputAdornment>
           ),
           inputComponent: PhoneMaskCustom as any,
+        }}
+      />
+      <TextField
+        {...emailField}
+        error={Boolean(emailMeta.error)}
+        helperText={emailMeta.error}
+        placeholder={
+          Boolean(emailMeta.error) ? "Email" : "Email (можно не указывать)"
+        }
+        InputProps={{
+          type: "email",
+          startAdornment: (
+            <InputAdornment position="start">
+              <MailOutlineRoundedIcon />
+            </InputAdornment>
+          ),
         }}
       />
       <Box
