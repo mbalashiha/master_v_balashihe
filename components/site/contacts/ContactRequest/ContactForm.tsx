@@ -29,6 +29,7 @@ import {
 import { ContactRequestValues } from "./FormikForRequest";
 import { StepWizardChildProps } from "../Wizard/Providers/MyStepWizard";
 import ColBox from "./ColBox";
+import { useRef } from "react";
 
 interface PhoneMaskProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
@@ -45,7 +46,6 @@ const PhoneMaskCustom = React.forwardRef<HTMLInputElement, PhoneMaskProps>(
         mask="+{7} (000) 000-00-00"
         lazy={false}
         inputRef={ref}
-        required
         onAccept={(value) => {
           onChange({ target: { name: props.name, value } });
           telephoneDigitsField.onChange({
@@ -74,6 +74,21 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
   const [phoneField, phoneMeta] = useField("Телефон");
   const [commentField, commentMeta] = useField("Комментарий");
   const [privacyChecked, privacyCheckedMeta] = useField("privacyChecked");
+  const inputRef = useRef<HTMLInputElement>(null);
+  const hasTelInputRef = Boolean(inputRef.current);
+  const hasEmailValue = Boolean(emailField.value);
+  React.useEffect(() => {
+    if (hasTelInputRef) {
+      const telInput = inputRef.current?.querySelector("input");
+      if (telInput) {
+        if (hasEmailValue) {
+          telInput.removeAttribute("pattern");
+        } else {
+          telInput.pattern = "\\+7 \\(\\d\\d\\d\\) \\d\\d\\d-\\d\\d-\\d\\d";
+        }
+      }
+    }
+  }, [hasTelInputRef, hasEmailValue]);
   return (
     <ColBox>
       <Container maxWidth="sm">
@@ -117,6 +132,7 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
         error={Boolean(phoneMeta.error)}
         helperText={phoneMeta.error}
         InputProps={{
+          ref: inputRef,
           startAdornment: (
             <InputAdornment position="start">
               <LocalPhoneRoundedIcon />

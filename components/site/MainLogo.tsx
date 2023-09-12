@@ -52,7 +52,7 @@ export const MainLogo = () => {
               position: "relative",
             }}
           >
-            Компьютерный Мастер <br /> в Балашихе
+            Мастер <br /> в Балашихе <br /> РФ
           </Typography>
         </Stack>
       </Link>
