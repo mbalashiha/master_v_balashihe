@@ -13,7 +13,7 @@ import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 export default function ContactsList() {
   const { toggleModal } = useSiteModal();
   return (
-    <ColBox alignItems={"flex-start"}>
+    <ColBox alignItems={"flex-start"} sx={{ pt: "10px"}}>
       <PhoneRow />
       <EmailRow />
       <TelegramRow />

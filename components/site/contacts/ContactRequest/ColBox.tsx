@@ -14,13 +14,12 @@ import {
 
 const ColBox = ({ sx, ...rest }: React.ComponentProps<typeof Stack>) => (
   <Stack
-    spacing={4}
+    spacing={3}
     flexDirection="column"
     alignItems="center"
     justifyContent="center"
     sx={{
       width: "100%",
-      p: 0,
       "& div, & p, & h3, & label, & h1, & h5": {
         fontFamily: `var(--landing-font-family)`,
         color: "black",

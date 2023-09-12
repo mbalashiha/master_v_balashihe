@@ -134,7 +134,8 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
         }
         sx={{
           "&&& .FormHelperText-root": {
-            height: "17px",
+            height: "auto",
+            minHeight: "10px",
           },
         }}
         InputProps={{
@@ -152,7 +153,7 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
           "&&&": { marginTop: "4px" },
           "& > div": { width: "100%" },
           "&&& .FormHelperText-root": {
-            height: "inherit",
+            height: "auto",
           },
         }}
       >
@@ -161,9 +162,10 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
           sx={{
             fontSize: "18px",
             mb: "3px",
+            pl: "20px"
           }}
         >
-          Сообщение
+          Ваше сообщение
           <Box
             component="span"
             sx={{ opacity: Boolean(commentMeta.error) ? 1 : 0 }}
