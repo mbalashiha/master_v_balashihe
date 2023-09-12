@@ -181,7 +181,7 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
           error={Boolean(commentMeta.error)}
           helperText={commentMeta.error}
           placeholder="Опишите Вашу проблему"
-          InputProps={{ id: "contact-request-comment-field" }}
+          InputProps={{ id: "contact-request-comment-field", required: true }}
         />
       </Box>
       <FormControl sx={{ "&&&": { marginTop: 0 } }}>

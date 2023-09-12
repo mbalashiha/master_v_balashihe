@@ -22,16 +22,17 @@ import { blueGrey } from "@mui/material/colors";
 import { FC, useMemo, useRef } from "react";
 import BaseDialogHeader from "../BaseDialogHeader/BaseDialogHeader";
 
-export interface ProvidedDialogProps extends DialogProps {
+export interface ProvidedDialogProps extends Omit<DialogProps, "open"> {
   children: React.ReactNode | React.ReactNode[];
   dialogActions?: boolean | React.ReactNode | React.ReactNode[];
   noPadding?: boolean;
   close: () => void;
+  opened?: boolean | undefined;
 }
 
 const ProvidedDialog = React.forwardRef(function ProvidedDialog(
   {
-    open,
+    opened,
     close,
     children,
     onClose,
@@ -44,23 +45,24 @@ const ProvidedDialog = React.forwardRef(function ProvidedDialog(
   }: ProvidedDialogProps,
   ref: any
 ) {
+  opened = typeof opened === "undefined" ? true : opened;
   const contentRef = useRef<HTMLDivElement>();
   React.useEffect(() => {
     process.nextTick(() => {
       const dialog = contentRef && contentRef.current;
-      if (open && dialog) {
+      if (opened && dialog) {
         enableBodyScroll(dialog);
-      } else if (!open) {
+      } else if (!opened) {
         clearAllBodyScrollLocks();
       }
     });
     return () => clearAllBodyScrollLocks();
-  }, [open]);
+  }, [opened]);
   return (
     <Dialog
       ref={contentRef as any}
       maxWidth={maxWidth}
-      open={open}
+      open={opened}
       onClose={onClose || (() => close())}
       sx={{
         "& .Dialog-container": {

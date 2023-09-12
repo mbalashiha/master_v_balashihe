@@ -19,7 +19,7 @@ import TaskCard from "./TaskCard";
 import { useSiteModal } from "@components/site/contacts/ModalProvider";
 
 export default function LandingAgeTasks() {
-  const { openContactRequest } = useSiteModal();
+  const { toggleModal } = useSiteModal();
   return (
     <DarkContainer sx={{ pt: 0 }}>
       <Container maxWidth="md">
@@ -134,7 +134,7 @@ export default function LandingAgeTasks() {
               },
             },
           }}
-          onClick={openContactRequest}
+          onClick={() => toggleModal("contact request form")}
         >
           Оставить заявку
         </Button>

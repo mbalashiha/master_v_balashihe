@@ -8,56 +8,59 @@ import {
   useCallback,
   useContext,
   useMemo,
+  useReducer,
   useState,
 } from "react";
 import { KeyedMutator } from "swr";
 import ContactDialog from "./ContactDialog";
 import { ContactRequest } from "./ContactRequest";
 export interface ModalProviderValue {
-  closeContactRequest: () => void;
-  openContactRequest: () => void;
+  toggleModal: React.Dispatch<React.SetStateAction<MODAL_OPEN>>;
+  closeModal: () => void;
 }
 export const ModalProviderContext = createContext<Partial<ModalProviderValue>>(
   {}
 );
-
 interface Props {
   children: React.ReactNode | React.ReactNode[];
 }
+type MODAL_OPEN = undefined | "contact request form" | "contact list";
 
 export const SiteModalProvider = ({ children }: Props) => {
-  const [contactRequestOpened, setContactRequestOpened] =
-    useState<boolean>(false);
-  const openContactRequest = useCallback(
-    () => setContactRequestOpened(true),
-    []
-  );
-  const closeContactRequest = useCallback(
-    () => setContactRequestOpened(false),
-    []
-  );
-  const providing = useMemo(
-    () => ({
-      openContactRequest,
-      closeContactRequest,
-    }),
-    [openContactRequest, closeContactRequest]
-  );
-  return (
-    <ModalProviderContext.Provider value={providing}>
-      {children}
-      <ApiProvider>
-        {contactRequestOpened && (
+  const [openedModal, toggleModal] = useState<MODAL_OPEN>(undefined);
+  const closeModal = useCallback(() => toggleModal(undefined), []);
+  const providing = useMemo(() => ({ toggleModal, closeModal }), [closeModal]);
+  const renderModal = useCallback(() => {
+    switch (openedModal) {
+      case "contact request form":
+        return (
           <ProvidedDialog
-            open={contactRequestOpened}
-            close={closeContactRequest}
+            close={closeModal}
             maxWidth="sm"
             dialogActions={false}
           >
             <ContactRequest />
           </ProvidedDialog>
-        )}
-      </ApiProvider>
+        );
+
+      case "contact list":
+        return (
+          <ProvidedDialog
+            close={closeModal}
+            maxWidth="sm"
+            dialogActions={false}
+          >
+            <ContactRequest />
+          </ProvidedDialog>
+        );
+      default:
+        return null;
+    }
+  }, [openedModal, closeModal]);
+  return (
+    <ModalProviderContext.Provider value={providing}>
+      {children}
+      <ApiProvider>{renderModal()}</ApiProvider>
     </ModalProviderContext.Provider>
   );
 };

@@ -25,7 +25,7 @@ export default function Hero({ article }: Props) {
       countViews({ articleId: article.id });
     }
   }, [article.id]);
-  const { openContactRequest } = useSiteModal();
+  const { toggleModal } = useSiteModal();
   return (
     <Container
       maxWidth={false}
@@ -183,7 +183,7 @@ export default function Hero({ article }: Props) {
                     color: "white",
                   },
                 }}
-                onClick={openContactRequest}
+                onClick={() => toggleModal("contact request form")}
               >
                 Вызвать мастера
               </Button>

@@ -41,7 +41,7 @@ const Navbar: FC = () => {
   // const { pathname } = useRouter();
   // const isIndexPage = pathname === "/";
   // const cartPage = pathname === "/market/cart";
-  const { openContactRequest } = useSiteModal();
+  const { toggleModal } = useSiteModal();
   return (
     <AppBar
       component={"div"}
@@ -119,7 +119,7 @@ const Navbar: FC = () => {
               direction={"row"}
               spacing={1}
               sx={{ cursor: "pointer" }}
-              onClick={openContactRequest}
+              onClick={() => toggleModal("contact request form")}
             >
               <IconPhoneCircle fill={"black"} />
               <Stack direction="column">

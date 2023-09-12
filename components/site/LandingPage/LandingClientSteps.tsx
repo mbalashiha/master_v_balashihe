@@ -18,7 +18,7 @@ import { EnhImage } from "@components/ui";
 import { useSiteModal } from "@components/site/contacts/ModalProvider";
 
 export default function LandingClientSteps() {
-  const { openContactRequest } = useSiteModal();
+  const { toggleModal } = useSiteModal();
   return (
     <DarkContainer
       sx={{ zIndex: 2, pb: "90px" }}
@@ -141,7 +141,7 @@ export default function LandingClientSteps() {
               },
             },
           }}
-          onClick={openContactRequest}
+          onClick={() => toggleModal("contact request form")}
         >
           <span>Вызвать мастера</span>
           <Box

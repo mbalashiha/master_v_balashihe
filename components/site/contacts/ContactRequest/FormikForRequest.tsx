@@ -10,7 +10,7 @@ import util from "util";
 import { Form, Formik, FormikProps } from "formik";
 import { StepWizardChildProps } from "../Wizard/Providers/MyStepWizard";
 import useSendRequest from "@framework/site/contact/use-send-request";
-import { daysIntoYear } from "@lib";
+import { daysIntoYear, isValidEmail } from "@lib";
 
 type Props = StepWizardChildProps & {
   children: React.ReactNode | React.ReactNode[];
@@ -64,11 +64,7 @@ export const FormikForRequest: React.FC<Partial<Props>> = (({
           errors["Комментарий"] = "Введите комментарий";
         }
         if (values["Email клиента"]) {
-          if (
-            !/^\w+[\w\-]*(\.[\w\-]+)*@\w+[\w\-]*(\.[\w\-]+)*\.\w+[\w\-]*$/.test(
-              values["Email клиента"]
-            )
-          ) {
+          if (!isValidEmail(values["Email клиента"])) {
             errors["Email клиента"] =
               "Введите корректный адрес Email, либо оставьте поле пустым";
           } else {
