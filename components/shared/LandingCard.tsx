@@ -13,14 +13,14 @@ import Typography from "@mui/material/Typography";
 import StartIcon from "@mui/icons-material/Start";
 import Link from "next/link";
 import { standartCssTransition } from "@components/ui/theme/mui-theme";
-import { WhatsappLink } from "@components/site/contacts";
-import ContactDialog from "@components/site/contacts/ContactDialog";
+import { useSiteModal } from "@components/site/ModalProvider";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
   image: any | React.ReactNode | React.ReactNode[];
 }
 export const LandingCard = ({ children, image }: Props) => {
+  const { toggleModal } = useSiteModal();
   return (
     <Grid item xs={12} md={6} lg={4}>
       <Card
@@ -51,36 +51,35 @@ export const LandingCard = ({ children, image }: Props) => {
           spacing={1}
         >
           {children}
-          <ContactDialog>
-            <Button
-              sx={{
-                padding: "0 14px",
-                border: "none",
-                borderRadius: 1,
-                ...standartCssTransition,
-                "&": {
-                  background: "rgba(255,255,255,0.75)",
-                },
-                "& svg": {
-                  background: "none",
-                },
-                "&:hover": {
-                  color: "black",
-                  background: "rgba(255,255,255,0.9)",
-                },
-                "& .Button-startIcon": {
-                  pr: 0,
-                  mr: "3px",
-                },
-                position: "absolute",
-                bottom: "15px",
-                right: "14px",
-              }}
-              startIcon={<StartIcon />}
-            >
-              Вызвать мастера
-            </Button>
-          </ContactDialog>
+          <Button
+            onClick={() => toggleModal("get discount wizard")}
+            sx={{
+              padding: "0 14px",
+              border: "none",
+              borderRadius: 1,
+              ...standartCssTransition,
+              "&": {
+                background: "rgba(255,255,255,0.75)",
+              },
+              "& svg": {
+                background: "none",
+              },
+              "&:hover": {
+                color: "black",
+                background: "rgba(255,255,255,0.9)",
+              },
+              "& .Button-startIcon": {
+                pr: 0,
+                mr: "3px",
+              },
+              position: "absolute",
+              bottom: "15px",
+              right: "14px",
+            }}
+            startIcon={<StartIcon />}
+          >
+            Вызвать мастера
+          </Button>
         </Stack>
         <CardMedia
           sx={{

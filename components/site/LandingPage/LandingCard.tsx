@@ -19,6 +19,7 @@ import Image from "next/image";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useRef } from "react";
 import { blueGrey } from "@mui/material/colors";
+import { useSiteModal } from "../ModalProvider";
 
 interface Props {
   header: React.ReactNode | React.ReactNode[];
@@ -26,10 +27,13 @@ interface Props {
   imageUrl: string;
 }
 export default function LandingCard({ header, children, imageUrl }: Props) {
+  const { toggleModal } = useSiteModal();
   return (
     <Grid item xs={12} md={6}>
       <Card
+        onClick={() => toggleModal("contact request form")}
         sx={{
+          cursor: "pointer",
           height: "100%",
           overflow: "hidden",
           borderRadius: "12px",
@@ -87,36 +91,34 @@ export default function LandingCard({ header, children, imageUrl }: Props) {
                 {children}
               </CardContent>
               <CardActions sx={{ px: 0, py: 0, justifySelf: "flex-end" }}>
-                <ContactDialog>
-                  <Button
-                    sx={{
-                      py: "14px",
-                      px: "20px",
-                      background: "black",
+                <Button
+                  sx={{
+                    py: "14px",
+                    px: "20px",
+                    background: "black",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "8px",
+                    ...standartCssTransition,
+                    "&:hover": {
                       color: "white",
-                      border: "none",
-                      borderRadius: "8px",
-                      ...standartCssTransition,
-                      "&:hover": {
-                        color: "white",
-                        background: blueGrey[800],
-                        boxShadow: "none",
-                      },
-                      "& .Button-startIcon": {
-                        p: 0,
-                        m: 0,
-                        mr: "10px",
-                      },
-                      "&& svg": {
-                        color: "white",
-                        fill: "white",
-                      },
-                    }}
-                    startIcon={<StartIcon />}
-                  >
-                    Подробнее
-                  </Button>
-                </ContactDialog>
+                      background: blueGrey[800],
+                      boxShadow: "none",
+                    },
+                    "& .Button-startIcon": {
+                      p: 0,
+                      m: 0,
+                      mr: "10px",
+                    },
+                    "&& svg": {
+                      color: "white",
+                      fill: "white",
+                    },
+                  }}
+                  startIcon={<StartIcon />}
+                >
+                  Подробнее
+                </Button>
               </CardActions>
             </Stack>
           </Grid>

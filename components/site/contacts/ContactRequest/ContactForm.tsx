@@ -25,42 +25,113 @@ import {
   InputLabel,
   Container,
   Alert,
+  InputBaseComponentProps,
 } from "@mui/material";
 import { ContactRequestValues } from "./FormikForRequest";
 import { StepWizardChildProps } from "../Wizard/Providers/MyStepWizard";
 import ColBox from "./ColBox";
-import { useRef } from "react";
-
-interface PhoneMaskProps {
+import { useImperativeHandle, useRef } from "react";
+const MaskContext = React.createContext({ mask: "", hasEmailValue: false });
+const MaskProvider = ({
+  mask,
+  hasEmailValue,
+  children,
+}: {
+  mask: string;
+  hasEmailValue: boolean;
+  children: React.ReactNode | React.ReactNode[];
+}) => {
+  return (
+    <MaskContext.Provider value={{ mask, hasEmailValue }}>
+      {children}
+    </MaskContext.Provider>
+  );
+};
+const useMask = () => {
+  return React.useContext(MaskContext);
+};
+type PhoneMaskProps = InputBaseComponentProps & {
   onChange: (event: { target: { name: string; value: string } }) => void;
   name: string;
-}
-const PhoneMaskCustom = React.forwardRef<HTMLInputElement, PhoneMaskProps>(
-  function PhoneMaskCustom(props, ref) {
-    const { onChange, ...other } = props;
-    const [telephoneDigitsField, telephoneDigitsMeta] =
-      useField("telephoneDigits");
-    return (
-      <IMaskInput
-        {...other}
-        mask="+{7} (000) 000-00-00"
-        lazy={false}
-        inputRef={ref}
-        onAccept={(value) => {
-          onChange({ target: { name: props.name, value } });
-          telephoneDigitsField.onChange({
-            target: {
-              name: telephoneDigitsField.name,
-              value: value.replace(/[^\d]/gim, ""),
-            },
-          });
+};
+const PhoneMaskCustom = React.forwardRef<
+  HTMLInputElement | null,
+  PhoneMaskProps
+>(function PhoneMaskCustom({ onChange, ...other }, ref) {
+  const { mask, hasEmailValue } = useMask();
+  const pattern = React.useMemo(
+    () =>
+      mask
+        .replaceAll(/[\{\}]/gim, "")
+        .replaceAll(/[\+\(\)]/gim, "\\$&")
+        .replaceAll("0", "\\d"),
+    [mask]
+  );
+  const [telephoneDigitsField, telephoneDigitsMeta] =
+    useField("telephoneDigits");
+  const inputRef = useRef<HTMLInputElement>(null);
+  const hasTelInputRef = Boolean(inputRef.current);
+  React.useEffect(() => {
+    if (hasTelInputRef) {
+      const telInput =
+        inputRef.current?.querySelector("input") || inputRef.current;
+      if (telInput) {
+        if (hasEmailValue) {
+          telInput.removeAttribute("pattern");
+        } else {
+          telInput.pattern = pattern;
+        }
+      }
+    }
+  }, [hasTelInputRef, hasEmailValue, pattern]);
+  useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
+    ref,
+    () => {
+      return hasTelInputRef
+        ? inputRef.current?.querySelector("input") || inputRef.current
+        : null;
+    },
+    [hasTelInputRef]
+  );
+  return (
+    <IMaskInput
+      {...other}
+      mask={mask}
+      lazy={false}
+      inputRef={inputRef}
+      onAccept={(value) => {
+        onChange({ target: { name: other.name, value } });
+        telephoneDigitsField.onChange({
+          target: {
+            name: telephoneDigitsField.name,
+            value: value.replace(/[^\d]/gim, ""),
+          },
+        });
+      }}
+      overwrite
+    />
+  );
+});
+const PhoneTextField = ({
+  hasEmailValue,
+  ...props
+}: React.ComponentProps<typeof TextField> & { hasEmailValue: boolean }) => {
+  return (
+    <MaskProvider hasEmailValue={hasEmailValue} mask="+{7} (000) 000-00-00">
+      <TextField
+        {...props}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <LocalPhoneRoundedIcon />
+            </InputAdornment>
+          ),
+          inputComponent: PhoneMaskCustom,
         }}
-        overwrite
       />
-    );
-  }
-);
-
+    </MaskProvider>
+  );
+};
 const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
   stepName,
   ...props
@@ -74,21 +145,6 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
   const [phoneField, phoneMeta] = useField("Телефон");
   const [commentField, commentMeta] = useField("Комментарий");
   const [privacyChecked, privacyCheckedMeta] = useField("privacyChecked");
-  const inputRef = useRef<HTMLInputElement>(null);
-  const hasTelInputRef = Boolean(inputRef.current);
-  const hasEmailValue = Boolean(emailField.value);
-  React.useEffect(() => {
-    if (hasTelInputRef) {
-      const telInput = inputRef.current?.querySelector("input");
-      if (telInput) {
-        if (hasEmailValue) {
-          telInput.removeAttribute("pattern");
-        } else {
-          telInput.pattern = "\\+7 \\(\\d\\d\\d\\) \\d\\d\\d-\\d\\d-\\d\\d";
-        }
-      }
-    }
-  }, [hasTelInputRef, hasEmailValue]);
   return (
     <ColBox>
       <Container maxWidth="sm">
@@ -127,19 +183,11 @@ const ContactForm: React.FC<Partial<StepWizardChildProps>> = (({
           ),
         }}
       />
-      <TextField
+      <PhoneTextField
         {...phoneField}
         error={Boolean(phoneMeta.error)}
         helperText={phoneMeta.error}
-        InputProps={{
-          ref: inputRef,
-          startAdornment: (
-            <InputAdornment position="start">
-              <LocalPhoneRoundedIcon />
-            </InputAdornment>
-          ),
-          inputComponent: PhoneMaskCustom as any,
-        }}
+        hasEmailValue={Boolean(emailField.value)}
       />
       <TextField
         {...emailField}

@@ -3,10 +3,6 @@ import { FC, useMemo, useRef } from "react";
 import Image from "next/image";
 import { Grid, Box, Stack, Typography, Divider } from "@mui/material";
 import { ContactWizard } from "../contacts";
-import cn from "classnames";
-import a from "@components/ui/Transitions/animation.module.scss";
-import { BaseDialog } from "@components/ui";
-import { BaseDialogProps } from "@components/ui/BaseDialog";
 import Step1 from "./Wizard/Step1";
 import Step1_2 from "./Wizard/Step2_1-2";
 import Step1_3 from "./Wizard/Step3";
@@ -19,9 +15,7 @@ import { ApiProvider } from "@framework/index";
 import LastStepSended from "./Wizard/LastStepSended";
 import WizardSidebar from "./Wizard/WizardSidebar";
 
-type Props = Omit<BaseDialogProps, "content">;
-
-const ContactsContent = () => {
+const GetDiscountWizardContent = () => {
   return (
     <ContactWizard
       form={<FormikForWizard />}
@@ -48,42 +42,4 @@ const ContactsContent = () => {
     </ContactWizard>
   );
 };
-export default function ContactDialog({
-  children: trigger,
-  sx,
-  component,
-  noContainer,
-  hideTrigger,
-}: Props) {
-  return (
-    <BaseDialog
-      content={
-        <ApiProvider>
-          <ContactsContent />
-        </ApiProvider>
-      }
-      component={component}
-      dialogActions={false}
-      maxWidth={"xl"}
-      noPadding
-      sx={{
-        ...sx,
-        background: "#EFEFF4",
-        maxHeight: "100%",
-        "& .FormControl-root, & .Typography-root, & .Typography-body1, & .FormControlLabel-label":
-          {
-            "&, & *:not(.Mui-error)": {
-              color: `#24263F`,
-              fontWeight: 500,
-            },
-          },
-      }}
-      noContainer={noContainer}
-      PaperProps={{
-        className: cn(a.animated, a.bounceIn),
-      }}
-    >
-      {trigger}
-    </BaseDialog>
-  );
-}
+export default GetDiscountWizardContent;

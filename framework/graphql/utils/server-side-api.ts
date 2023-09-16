@@ -22,7 +22,7 @@ export class ServerSideApi {
     this.config = getConfig();
   }
   request<Input extends Variables = Variables, Props = any>(
-    options: API.Graphql.RequestOptionsVariables<Input>
+    options: API.Graphql.RequestOptions<Input>
   ): Promise<Props> {
     let { query, variables, headers } = options;
     if (this.headers.cookie) {

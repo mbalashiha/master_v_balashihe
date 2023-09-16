@@ -7,6 +7,7 @@ import HandymanIcon from "@mui/icons-material/Handyman";
 import React, { FC } from "react";
 import { WhatsappLink } from "@components/site/contacts";
 import ContactDialog from "@components/site/contacts/ContactDialog";
+import { useSiteModal } from "@components/site/ModalProvider";
 type SpanForStylingProps = React.ComponentProps<typeof Box> & {
   zIndex?: number;
   isLoading?: boolean;
@@ -113,17 +114,17 @@ type Props = {
   disabled?: boolean;
 };
 const CallButton = ({ isLoading, disabled }: Props) => {
+  const { toggleModal } = useSiteModal();
   return (
-    <ContactDialog noContainer={true}>
-      <StyledButton
-        zIndex={0}
-        isLoading={isLoading || false}
-        disabled={isLoading || disabled}
-        startIcon={<HandymanIcon />}
-      >
-        {`Вызвать мастера`}
-      </StyledButton>
-    </ContactDialog>
+    <StyledButton
+      zIndex={0}
+      isLoading={isLoading || false}
+      disabled={isLoading || disabled}
+      startIcon={<HandymanIcon />}
+      onClick={() => toggleModal("contact request form")}
+    >
+      {`Вызвать мастера`}
+    </StyledButton>
   );
 };
 

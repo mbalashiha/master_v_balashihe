@@ -8,9 +8,10 @@ import { Box, Container, Grid, Paper, Stack, Typography } from "@mui/material";
 import ContactInfoRow from "@components/site/LandingPage/ContactInfoRow";
 import IconPhoneCircle from "@components/icons/IconPhoneCircle";
 import IconLocationCircle from "@components/icons/IconLocationCircle";
-import ContactDialog from "../contacts/ContactDialog";
+import { useSiteModal } from "@components/site/ModalProvider";
 
 const YandexMapIframe = () => {
+  const { toggleModal } = useSiteModal();
   return (
     <>
       <Container
@@ -95,18 +96,12 @@ const YandexMapIframe = () => {
                 <ContactInfoRow
                   svgIcon={<IconPhoneCircle />}
                   label={"Телефон:"}
-                  infoText={
-                    <ContactDialog>
-                      {NEXT_PUBLIC_CONTACT_PHONE_TEXT}
-                    </ContactDialog>
-                  }
+                  infoText={NEXT_PUBLIC_CONTACT_PHONE_TEXT}
                 />
                 <ContactInfoRow
                   svgIcon={<IconEmailCircle />}
                   label={"Почта:"}
-                  infoText={
-                    <ContactDialog>{NEXT_PUBLIC_CONTACT_EMAIL}</ContactDialog>
-                  }
+                  infoText={NEXT_PUBLIC_CONTACT_EMAIL}
                 />
                 <ContactInfoRow
                   svgIcon={<IconLocationCircle />}

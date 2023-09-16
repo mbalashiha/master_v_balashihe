@@ -25,7 +25,7 @@ export namespace Graphql {
   export type RequestResults<T> = T;
   export interface RequestFunction<Input1 = any, Output1 = any> {
     <Input2 = Input1, Output2 = Output1>(
-      options: RequestOptionsVariables<Input2>
+      options: RequestOptions<Input2>
     ): Promise<RequestResults<Output2>>;
   }
 

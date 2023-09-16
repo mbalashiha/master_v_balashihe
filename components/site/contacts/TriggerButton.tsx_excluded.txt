@@ -1,0 +1,42 @@
+import React from "react";
+import { useSiteModal } from "@components/site/ModalProvider";
+import { Box } from "@mui/material";
+
+type BoxProps = React.ComponentProps<typeof Box>;
+type Props = {
+  children: React.ReactNode | React.ReactNode[];
+  component?: BoxProps["component"];
+  sx?: BoxProps["sx"];
+};
+const TriggerButton = React.forwardRef(function BaseDialog(
+  { children, component, sx }: Props,
+  ref: any
+) {
+  const { toggleModal } = useSiteModal();
+  const cloned = React.Children.map(children, (element: any) => {
+    if (React.isValidElement(element)) {
+      const newProps: any = {
+        onClick: () => {
+          toggleModal("get discount wizard");
+        },
+        ref,
+      };
+      return React.cloneElement(element, {
+        ...newProps,
+      });
+    } else {
+      return element;
+    }
+  });
+  if (sx || component) {
+    return (
+      <Box ref={ref} sx={sx} component={component}>
+        {cloned}
+      </Box>
+    );
+  } else {
+    return <>{cloned}</>;
+  }
+});
+
+export default TriggerButton;

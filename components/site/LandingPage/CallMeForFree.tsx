@@ -12,8 +12,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { blueGrey, grey } from "@mui/material/colors";
 import React from "react";
-import ContactDialog from "../contacts/ContactDialog";
 import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
+import { useSiteModal } from "@components/site/ModalProvider";
 type PaperProps = React.ComponentProps<typeof Paper>;
 interface Props {
   sx?: SxProps;
@@ -27,6 +27,7 @@ export const CallMeForFree = ({
   PaperProps,
   paperSx,
 }: Props) => {
+  const { toggleModal } = useSiteModal();
   return (
     <Container maxWidth={"lg"} sx={{ "&&": { ...(sx as any) } }}>
       <Paper
@@ -59,9 +60,13 @@ export const CallMeForFree = ({
       >
         <Typography component="p" variant="h4" mb={0} pb={0}>
           Звоните{" "}
-          <ContactDialog component="span">
+          <Box
+            component="span"
+            onClick={() => toggleModal("get discount wizard")}
+            sx={{ cursor: "pointer" }}
+          >
             {NEXT_PUBLIC_CONTACT_PHONE_TEXT}
-          </ContactDialog>
+          </Box>
         </Typography>
         <Typography component="h4" variant="h4" mb={0} pb={0}>
           Консультация компьютерного мастера в Балашихе

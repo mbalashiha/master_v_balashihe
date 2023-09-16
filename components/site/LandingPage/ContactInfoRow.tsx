@@ -1,13 +1,14 @@
 import { Container, Grid, Card, Paper, Stack } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-
+import { useSiteModal } from "@components/site/ModalProvider";
 interface Props {
   svgIcon: JSX.Element;
   label: React.ReactNode;
   infoText: React.ReactNode | React.ReactNode[];
 }
 export const ContactInfoRow = ({ svgIcon, label, infoText }: Props) => {
+  const { toggleModal } = useSiteModal();
   return (
     <Stack direction="row" spacing={1}>
       <Box>{svgIcon}</Box>
@@ -28,8 +29,10 @@ export const ContactInfoRow = ({ svgIcon, label, infoText }: Props) => {
           {label}
         </Typography>
         <Typography
+          onClick={() => toggleModal("contact list")}
           component="div"
           sx={{
+            cursor: "pointer",
             "&, & a": {
               fontSize: "20px",
               lineHeight: "31px",

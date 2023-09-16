@@ -12,6 +12,9 @@ import {
   ContactRequest,
   ContactsList,
 } from "@components/site/contacts/ContactRequest";
+import cn from "classnames";
+import a from "@components/ui/Transitions/animation.module.scss";
+import { GetDiscountWizardContent } from "../contacts";
 
 interface ModalProviderValue {
   toggleModal: React.Dispatch<React.SetStateAction<MODAL_OPEN>>;
@@ -24,7 +27,11 @@ const ModalProviderContext = createContext<Partial<ModalProviderValue>>({
 interface Props {
   children: React.ReactNode | React.ReactNode[];
 }
-type MODAL_OPEN = null | "contact request form" | "contact list";
+type MODAL_OPEN =
+  | null
+  | "contact request form"
+  | "contact list"
+  | "get discount wizard";
 
 export const SiteModalProvider = ({ children }: Props) => {
   const [openedModal, toggleModal] = useState<MODAL_OPEN>(null);
@@ -54,6 +61,31 @@ export const SiteModalProvider = ({ children }: Props) => {
           </ProvidedDialog>
         );
         break;
+        case "get discount wizard":
+          return (
+            <ProvidedDialog
+              dialogActions={false}
+              maxWidth={"xl"}
+              noPadding
+              close={closeModal}
+              sx={{
+                background: "#EFEFF4",
+                maxHeight: "100%",
+                "& .FormControl-root, & .Typography-root, & .Typography-body1, & .FormControlLabel-label":
+                  {
+                    "&, & *:not(.Mui-error)": {
+                      color: `#24263F`,
+                      fontWeight: 500,
+                    },
+                  },
+              }}
+              PaperProps={{
+                className: cn(a.animated, a.bounceIn),
+              }}
+            >
+              <GetDiscountWizardContent />
+            </ProvidedDialog>
+          );
       default:
         return null;
     }

@@ -17,7 +17,7 @@ class Config {
       credentials: "include",
     });
     const request: API.Graphql.RequestFunction = async (
-      options: API.Graphql.RequestOptionsVariables<any>
+      options: API.Graphql.RequestOptions<any>
     ): Promise<API.Graphql.RequestResults<any>> => {
       const { query, variables, headers } = options;
       try {
