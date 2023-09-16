@@ -28,7 +28,6 @@ export default function StyledLastStepStack({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        py: 2,
         ...sx,
       }}
       spacing={2}

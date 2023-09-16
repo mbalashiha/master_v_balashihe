@@ -65,15 +65,14 @@ const PhoneMaskCustom = React.forwardRef<HTMLInputElement, PhoneMaskProps>(
 );
 const ColBox = ({ sx, ...rest }: React.ComponentProps<typeof Stack>) => (
   <Stack
+    direction={"column"}
     sx={{
-      ...sx,
       "& .InputBase-root": {
         width: "283px",
       },
-      display: "flex",
-      flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
+      ...sx,
     }}
     {...rest}
   />
@@ -90,7 +89,7 @@ const LastStep: React.FC<Partial<StepWizardChildProps>> = (({
   const [phoneField, phoneMeta] = useField("Телефон");
   const [privacyChecked, privacyCheckedMeta] = useField("privacyChecked");
   return (
-    <StyledLastStepStack>
+    <StyledLastStepStack spacing={5}>
       <Box sx={{ alignSelf: "center" }}>
         <Stack
           direction={{ xs: "column", md: "row" }}
@@ -128,7 +127,7 @@ const LastStep: React.FC<Partial<StepWizardChildProps>> = (({
       <Box sx={{ pr: "15px" }}>
         <PhoneRow />
       </Box>
-      <ColBox spacing={1}>
+      <ColBox spacing={2}>
         {formik.values.submitError && (
           <Alert severity={!submitDisabled ? "error" : "warning"}>
             <div>Произошла ошибка отправки сообщения:</div>
@@ -162,110 +161,108 @@ const LastStep: React.FC<Partial<StepWizardChildProps>> = (({
             inputComponent: PhoneMaskCustom as any,
           }}
         />
-        <ColBox spacing={"6px"}>
-          <Button
-            startIcon={<DiscountIcon />}
-            sx={{ width: "100%", p: "7px" }}
-            type="submit"
-            disabled={submitDisabled}
-          >
-            Сохранить скидку!
-          </Button>
-          <Button
-            type="submit"
-            disabled={submitDisabled}
+        <Button
+          startIcon={<DiscountIcon />}
+          sx={{ width: "100%", p: "7px" }}
+          type="submit"
+          disabled={submitDisabled}
+        >
+          Сохранить скидку!
+        </Button>
+        <Button
+          type="submit"
+          disabled={submitDisabled}
+          sx={{
+            width: "100%",
+            fontWeight: 500,
+            "&, &:hover": {
+              background: "#FFE684",
+            },
+            borderRadius: "8px",
+            padding: "6px 28px",
+            textAlign: "left",
+            border: "none",
+            textTransform: "none",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+          }}
+        >
+          <Typography
             sx={{
-              width: "100%",
-              fontWeight: 500,
-              "&, &:hover": {
-                background: "#FFE684",
+              fontSize: "13px",
+              lineHeight: "17px",
+              "&&&&&": {
+                color: "grey",
+                fontWeight: 400,
               },
-              borderRadius: "8px",
-              padding: "6px 28px",
-              textAlign: "left",
-              border: "none",
-              textTransform: "none",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
+            }}
+            component="div"
+          >
+            Ваш промокод
+          </Typography>
+          <Typography
+            component="div"
+            sx={{
+              fontSize: "18px",
+              lineHeight: "21px",
             }}
           >
-            <Typography
-              sx={{
-                fontSize: "13px",
-                lineHeight: "17px",
-                "&&&&&": {
-                  color: "grey",
-                  fontWeight: 400,
-                },
-              }}
-              component="div"
+            {formik.values.promo}
+          </Typography>
+        </Button>
+        <FormControl>
+          {privacyCheckedMeta.error && (
+            <FormHelperText
+              sx={{ ml: "0px", mt: "0px", fontWeight: 500 }}
+              error={Boolean(privacyCheckedMeta.error)}
             >
-              Ваш промокод
-            </Typography>
-            <Typography
-              component="div"
-              sx={{
-                fontSize: "18px",
-                lineHeight: "21px",
-              }}
-            >
-              {formik.values.promo}
-            </Typography>
-          </Button>
-          <FormControl>
-            {privacyCheckedMeta.error && (
-              <FormHelperText
-                sx={{ ml: "0px", mt: "0px", fontWeight: 500 }}
-                error={Boolean(privacyCheckedMeta.error)}
-              >
-                {privacyCheckedMeta.error}
-              </FormHelperText>
-            )}
-            <FormControlLabel
-              sx={{
-                alignItems: "flex-start",
-                "& .FormControlLabel-asterisk": {
-                  display: "none",
-                },
-              }}
-              control={
-                <Checkbox
-                  {...privacyChecked}
-                  checked={Boolean(privacyChecked.value)}
-                  size="small"
-                  required
-                  onChange={(event, checked) => {
-                    Object.assign(event.target, { value: checked });
-                    privacyChecked.onChange(event);
+              {privacyCheckedMeta.error}
+            </FormHelperText>
+          )}
+          <FormControlLabel
+            sx={{
+              alignItems: "flex-start",
+              "& .FormControlLabel-asterisk": {
+                display: "none",
+              },
+            }}
+            control={
+              <Checkbox
+                {...privacyChecked}
+                checked={Boolean(privacyChecked.value)}
+                size="small"
+                required
+                onChange={(event, checked) => {
+                  Object.assign(event.target, { value: checked });
+                  privacyChecked.onChange(event);
+                }}
+              />
+            }
+            label={
+              <>
+                <Box
+                  sx={{
+                    pt: "8px",
+                    fontSize: "13px",
+                    lineHeight: "16px",
+                    fontWeight: 700,
                   }}
-                />
-              }
-              label={
-                <>
-                  <Box
-                    sx={{
-                      pt: "8px",
-                      fontSize: "13px",
-                      lineHeight: "16px",
-                      fontWeight: 700,
-                    }}
+                >
+                  Согласен на обработку
+                  <br /> персональных данных и принимаю
+                  <br />{" "}
+                  <MuiLink
+                    target={"_blank"}
+                    href="https://ru.envybox.io/agreement/quiz/52973/35829/"
                   >
-                    Согласен на обработку
-                    <br /> персональных данных и принимаю
-                    <br />{" "}
-                    <MuiLink
-                      target={"_blank"}
-                      href="https://ru.envybox.io/agreement/quiz/52973/35829/"
-                    >
-                      условия соглашения
-                    </MuiLink>
-                  </Box>
-                </>
-              }
-            />
-          </FormControl>
-        </ColBox>
+                    условия соглашения
+                  </MuiLink>
+                </Box>
+              </>
+            }
+          />
+        </FormControl>
       </ColBox>
     </StyledLastStepStack>
   );

@@ -45,7 +45,7 @@ type PreStepWizardProps = Partial<{
   isHashEnabled: boolean;
   isLazyMount: boolean;
   nav: JSX.Element;
-  StepContainerProps?: React.ComponentProps<typeof Box>;
+  StepContainerProps?: React.ComponentProps<typeof Grid>;
 
   onStepChange: (stepChange: {
     previousStep: number;
@@ -218,6 +218,7 @@ const MyStepWizard = ({
         item
         xs={12}
         md={sidebar ? 9 : 12}
+        {...StepContainerProps}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -225,6 +226,7 @@ const MyStepWizard = ({
             height: "100%",
             flexGrow: 1,
           },
+          ...StepContainerProps?.sx,
         }}
       >
         {title && (
@@ -237,19 +239,18 @@ const MyStepWizard = ({
                 lineHeight: { xs: "23px", md: "28px" },
                 fontWeight: 500,
               },
+              mb: "5px",
             }}
           >
             {title}
           </Typography>
         )}
         <Box
-          {...StepContainerProps}
           sx={{
             flexGrow: 1,
             overflowX: "hidden",
             display: "flex",
             flexDirection: "column",
-            ...StepContainerProps?.sx,
           }}
         >
           {selectedStep && form

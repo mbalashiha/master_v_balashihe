@@ -27,6 +27,7 @@ const GetDiscountWizardContent = () => {
       }}
       title={"Ответьте на пару вопросов и получите скидку 25%"}
       sidebar={<WizardSidebar />}
+      StepContainerProps={{ sx: { p: "15px 10px 5px 25px" } }}
     >
       <Step1 stepName="Какое у вас устройство?" />
       <Step1_2 stepName="Что сейчас с вашей техникой?" />
