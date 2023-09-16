@@ -92,7 +92,12 @@ export default function LandingClientSteps() {
           Вы можете заказать обратный звонок или позвонить по номеру <br />
           <Box
             component="b"
-            sx={{ textDecoration: "underline", fontWeight: 500 }}
+            sx={{
+              cursor: "pointer",
+              textDecoration: "underline",
+              fontWeight: 500,
+            }}
+            onClick={() => toggleModal("contact list")}
           >
             {NEXT_PUBLIC_CONTACT_PHONE_TEXT}
           </Box>
