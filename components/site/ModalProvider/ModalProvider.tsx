@@ -61,31 +61,31 @@ export const SiteModalProvider = ({ children }: Props) => {
           </ProvidedDialog>
         );
         break;
-        case "get discount wizard":
-          return (
-            <ProvidedDialog
-              dialogActions={false}
-              maxWidth={"xl"}
-              noPadding
-              close={closeModal}
-              sx={{
-                background: "#EFEFF4",
-                maxHeight: "100%",
-                "& .FormControl-root, & .Typography-root, & .Typography-body1, & .FormControlLabel-label":
-                  {
-                    "&, & *:not(.Mui-error)": {
-                      color: `#24263F`,
-                      fontWeight: 500,
-                    },
+      case "get discount wizard":
+        return (
+          <ProvidedDialog
+            dialogActions={false}
+            maxWidth={"xl"}
+            noPadding
+            close={closeModal}
+            sx={{
+              background: "#EFEFF4",
+              maxHeight: "100%",
+              "& .FormControl-root, & .Typography-root, & .Typography-body1, & .FormControlLabel-label":
+                {
+                  "&, & *:not(.Mui-error)": {
+                    color: `#24263F`,
+                    fontWeight: 500,
                   },
-              }}
-              PaperProps={{
-                className: cn(a.animated, a.bounceIn),
-              }}
-            >
-              <GetDiscountWizardContent />
-            </ProvidedDialog>
-          );
+                },
+            }}
+            PaperProps={{
+              className: cn(a.animated, a.bounceIn),
+            }}
+          >
+            <GetDiscountWizardContent />
+          </ProvidedDialog>
+        );
       default:
         return null;
     }
