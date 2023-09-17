@@ -6,9 +6,12 @@ import {
   Paper,
 } from "@mui/material";
 import React from "react";
-import ContactDialog from "./contacts/ContactDialog";
+import { useSiteModal } from "./ModalProvider";
+import { Link as MuiLink } from "@mui/material";
+
 type Props = React.ComponentProps<typeof Card>;
 export default function RequestComputerMaster({ sx, ...rest }: Props) {
+  const { toggleModal } = useSiteModal();
   return (
     <Card
       sx={{
@@ -33,10 +36,17 @@ export default function RequestComputerMaster({ sx, ...rest }: Props) {
         }}
       ></CardHeader>
       <CardContent sx={{ px: "30px", pt: 0 }}>
-        Напишите мне в WhatsApp. Расскажите о симптомах, а я назову примерную
-        причину неполадки Вашего компьютера и варианты её устранения, а также мы
-        выберем удобное время выезда мастера для ремонта. Работаю в Балашихе по
-        выходным дням. Звоните или оставьте заявку на выезд мастера.
+        <MuiLink onClick={() => toggleModal("contact list")}>
+          Напишите мне в WhatsApp
+        </MuiLink>
+        . Расскажите о симптомах, а я назову примерную причину неполадки Вашего
+        компьютера и варианты её устранения, а также мы выберем удобное время
+        выезда мастера для ремонта. Работаю в Балашихе по выходным дням. Звоните
+        или{" "}
+        <MuiLink onClick={() => toggleModal("contact request form")}>
+          оставьте заявку на выезд мастера
+        </MuiLink>
+        .
       </CardContent>
     </Card>
   );

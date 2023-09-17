@@ -168,6 +168,13 @@ const getMuiTheme = (): Theme => {
           },
         },
       },
+      MuiLink: {
+        styleOverrides: {
+          root: {
+            cursor: "pointer",
+          },
+        },
+      },
       MuiMenuItem: {
         styleOverrides: {
           root: {

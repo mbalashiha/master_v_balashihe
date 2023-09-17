@@ -17,6 +17,7 @@ import {
   Box,
   DialogProps,
   Theme,
+  Portal,
 } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";
 import { FC, useMemo, useRef } from "react";
@@ -35,7 +36,7 @@ const ProvidedDialog = React.forwardRef(function ProvidedDialog(
     opened,
     close,
     children,
-    onClose,
+    onClose: inOnClose,
     title,
     sx,
     maxWidth = "lg",
@@ -58,21 +59,43 @@ const ProvidedDialog = React.forwardRef(function ProvidedDialog(
     });
     return () => clearAllBodyScrollLocks();
   }, [opened]);
+  const onClose = React.useMemo(() => {
+    return inOnClose || (() => close());
+  }, [inOnClose, close]);
   return (
     <Dialog
       ref={contentRef as any}
       maxWidth={maxWidth}
       open={opened}
-      onClose={onClose || (() => close())}
+      onClose={onClose}
       sx={{
-        "& .Dialog-container": {
+        "&&": {
+          position: "fixed",
+          width: "100%",
+          height: "100%",
+          top: 0,
+          left: 0,
+          bottom: "auto",
+          right: "auto",
+          background: "transparent",
           maxWidth: "100vw",
           maxHeight: "100vh",
+        },
+        "& .Dialog-container": {
+          position: "fixed",
+          width: "100%",
+          height: "100%",
+          left: "",
+          top: "",
+          bottom: "",
+          right: "",
+          maxWidth: "100vw",
+          maxHeight: "100vh",
+          margin: "auto",
           "& > div:first-of-type": {
             position: "relative",
             borderRadius: (theme) => theme.shape.borderRadius / 2 + "px",
-            margin: { xs: "2px", sm: "6px", md: "inherit" },
-            ...(sx as any),
+            margin: 0,
           },
           "& .DialogContent-root": {
             p: noPadding
@@ -83,6 +106,7 @@ const ProvidedDialog = React.forwardRef(function ProvidedDialog(
                   md: "20px 24px 20px 24px",
                 },
             overflowX: "hidden",
+            ...(sx as any),
           },
         },
       }}
