@@ -16,6 +16,7 @@ import { CallMeForFree, HeroAlt } from "@components/site/LandingPage";
 import LandingServices from "@components/site/LandingPage/LandingServices";
 import LandingClientSteps from "@components/site/LandingPage/LandingClientSteps";
 import LandingAgeTasks from "@components/site/LandingPage/LandingAgeTasks";
+import LandingWizard from "@components/site/LandingPage/LandingWizard";
 
 export default function Home(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -27,6 +28,7 @@ export default function Home(
       <LandingServices></LandingServices>
       <LandingClientSteps />
       <LandingAgeTasks />
+      <LandingWizard />
       <CardGridContainer />
       <LandingReasons />
       <LandingPricesCards />

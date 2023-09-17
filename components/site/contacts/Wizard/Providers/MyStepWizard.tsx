@@ -10,32 +10,9 @@ import {
   styled,
 } from "@mui/material";
 
-type GridContainerProps = React.ComponentProps<typeof Grid>;
-import util from "util";
-import { FormikProps } from "formik";
 import DefaultWizardNav from "./DefaultWizardNav";
 
-const GridItemSidebar = ({ children, sx, ...rest }: GridContainerProps) => {
-  return (
-    <Grid
-      item
-      xs={12}
-      md={3}
-      sx={{
-        p: "10px",
-        background: (theme) => theme.palette.background.paper,
-        "& img": {
-          borderRadius: "100%",
-        },
-        display: "flex",
-        flexDirection: "column",
-        gap: "12px",
-      }}
-    >
-      {children}
-    </Grid>
-  );
-};
+
 type PreStepWizardProps = Partial<{
   className: string;
   hashKey: string;

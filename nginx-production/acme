@@ -1,0 +1,4 @@
+# cat /etc/nginx/acme 
+location /.well-known {
+    alias /var/www/html-well-known;
+}

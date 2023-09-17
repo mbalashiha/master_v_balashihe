@@ -14,31 +14,29 @@ const Btn = styled(Button)(({ theme }) => ({
 
 const DefaultWizardNav: FC<any> = (props: StepWizardChildProps) => {
   return (
-    <Stack direction={"column"}>
-      <Stack
-        direction={"row"}
-        sx={{ alignSelf: "flex-end", mt: "7px" }}
-        spacing={"4px"}
+    <Stack
+      direction={"row"}
+      sx={{ width: "100%", mt: "7px" }}
+      justifyContent="space-between"
+    >
+      <Btn
+        startIcon={<WestIcon />}
+        disabled={props.currentStep <= 1}
+        onClick={() => {
+          props.previousStep();
+        }}
       >
-        <Btn
-          startIcon={<WestIcon />}
-          disabled={props.currentStep <= 1}
-          onClick={() => {
-            props.previousStep();
-          }}
-        >
-          Назад
-        </Btn>
-        <Btn
-          endIcon={<EastIcon />}
-          disabled={props.currentStep >= props.totalSteps}
-          onClick={() => {
-            props.nextStep();
-          }}
-        >
-          Вперёд
-        </Btn>
-      </Stack>
+        Назад
+      </Btn>
+      <Btn
+        endIcon={<EastIcon />}
+        disabled={props.currentStep >= props.totalSteps}
+        onClick={() => {
+          props.nextStep();
+        }}
+      >
+        Вперёд
+      </Btn>
     </Stack>
   );
 };
