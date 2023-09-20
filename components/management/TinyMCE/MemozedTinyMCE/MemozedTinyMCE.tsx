@@ -192,12 +192,26 @@ const MemoizedTinyMCE = memo<MemoizedTinyMCEProps>(
               "table",
               "help",
               "wordcount",
+              "codesample",
             ],
             toolbar:
-              "undo redo | casechange blocks | bold italic forecolor | " +
+              "undo redo | casechange blocks | codesample bold italic forecolor | " +
               "insertCodeButton imageUploadButton | " +
               "alignleft aligncenter alignright alignjustify link | " +
               "bullist numlist checklist outdent indent | removeformat | image code table help",
+            codesample_languages: [
+              { text: "HTML/XML", value: "markup" },
+              { text: "React", value: "tsx" },
+              { text: "JavaScript", value: "javascript" },
+              { text: "CSS", value: "css" },
+              { text: "PHP", value: "php" },
+              { text: "Ruby", value: "ruby" },
+              { text: "Python", value: "python" },
+              { text: "Java", value: "java" },
+              { text: "C", value: "c" },
+              { text: "C#", value: "csharp" },
+              { text: "C++", value: "cpp" },
+            ],
             content_style: `body { 
                     padding: 0 10px 0 10px;
                     font-family: Roboto, "Segoe UI", Tahoma, Verdana, Arial;
