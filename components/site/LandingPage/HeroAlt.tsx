@@ -248,10 +248,10 @@ export default function Hero({ article }: Props) {
         >
           <Image
             alt=""
-            width={477}
-            height={610}
-            quality={89}
-            src="/images/computer-master-landing-balashiha.webp"
+            width={478}
+            height={618}
+            quality={85}
+            src="/images/computer-master-landing-balashiha.png"
           />
         </Box>
       </Container>
