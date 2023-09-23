@@ -248,7 +248,7 @@ export default function Hero({ article }: Props) {
         >
           <Image
             alt=""
-            width={478}
+            width={475}
             height={618}
             quality={85}
             src="/images/computer-master-landing-balashiha.png"
