@@ -9,6 +9,7 @@ import cn from "classnames";
 import a from "@components/ui/Transitions/animation.module.scss";
 import GradientSVG from "public/gradient.svg";
 import { RequestComputerMaster } from "@components/site";
+import Head from "next/head";
 
 const StyledBox = styled(
   ({ children, sx, ...props }: React.ComponentProps<typeof Paper>) => (
@@ -66,6 +67,14 @@ export const SpecialHeader = ({
         position: "relative",
       }}
     >
+      <Head>
+        {typeof children === "string" && children && (
+          <meta
+            name="description"
+            content={`${children} - вызвать частного мастера на дом для ремонта ПК в Балашихе РФ`}
+          />
+        )}
+      </Head>
       <Container maxWidth={"lg"}>
         <Grid
           container

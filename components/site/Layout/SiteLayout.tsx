@@ -27,6 +27,7 @@ const SiteLayout: FC<Props> = ({ children }: Props) => {
   return (
     <>
       <Head>
+        <meta name="robots" content="index, follow" />
         <meta name="theme-color" content={theme.palette.primary.main} />
       </Head>
       <ThemeProvider theme={theme}>

@@ -23,7 +23,12 @@ function MyMasterApp(
   return (
     <>
       <Head>
-        <meta charSet="utf-8" />
+        <meta
+          httpEquiv="Content-Type"
+          content="text/html; charset=UTF-8"
+          charSet="utf-8"
+        />
+        <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         {/* <meta name="theme-color" content={theme.palette.primary.main} /> */}
         <title>{`Частный компьютерный мастер в Балашихе ${
@@ -33,13 +38,12 @@ function MyMasterApp(
         }`}</title>
         <meta
           name="description"
-          content={`Частный компьютерный мастер в Балашихе ${
+          content={`Вызвать частного мастера на дом для ремонта ПК в Балашихе - ${
             title
               ? title
-              : "в центре города рядом с Шоссе Энтузиастов М-7 Балашиха РФ"
+              : "в центре города рядом с Шоссе Энтузиастов дом 7 М-7 Балашиха РФ"
           }`}
         />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <CacheProvider value={emotionCache}>
         <MuiSnackbarProvider
