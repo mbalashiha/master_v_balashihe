@@ -62,8 +62,13 @@ export const CallMeForFree = ({
           Звоните{" "}
           <Box
             component="span"
-            onClick={() => toggleModal("get discount wizard")}
-            sx={{ cursor: "pointer" }}
+            onClick={() => toggleModal("contact list")}
+            sx={{
+              cursor: "pointer",
+              "&:hover": {
+                color: "red",
+              },
+            }}
           >
             {NEXT_PUBLIC_CONTACT_PHONE_TEXT}
           </Box>

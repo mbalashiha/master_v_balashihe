@@ -56,18 +56,28 @@ export default function AboutMaster(
           mb={2}
           pb={0}
           color={(theme) => theme.palette.text.primary}
-          sx={{ textAlign: "right" }}
+          sx={{
+            textAlign: "right",
+            fontSize: { xs: "25px", md: "40px" },
+            lineHeight: { xs: "35px", md: "52px" },
+          }}
         >
           Дмитрий,{" "}
           <Box component="strong" color="primary.main">
             {" "}
             компьютерный мастер в Балашихе
           </Box>
-          , <br />
+          ,{" "}
+          <Box component="br" sx={{ display: { xs: "none", md: "inline" } }} />
           <Box component="strong" color="primary.main">
             МГТУ МИРЭА
           </Box>
-          , Российский <br /> Технологический Университет
+          , Российский
+          <Box
+            component="br"
+            sx={{ display: { xs: "none", md: "inline" } }}
+          />{" "}
+          Технологический Университет
         </Typography>
         <Grid container sx={{ mb: "26px" }}>
           {image && (
@@ -80,7 +90,7 @@ export default function AboutMaster(
                 zIndex: 0,
                 display: "flex",
                 alignItems: "flex-start",
-                justifyContent: "flex-end",
+                justifyContent: { xs: "center", md: "flex-end" },
               }}
             >
               <Paper
@@ -95,6 +105,8 @@ export default function AboutMaster(
                   "& img": {
                     borderRadius: (theme) =>
                       theme.shape.borderRadius - 10 + "px",
+                    width: { xs: "460px", md: "inherit" },
+                    height: "auto",
                   },
                 }}
               >
@@ -104,6 +116,7 @@ export default function AboutMaster(
                   height={image.height}
                   alt={image.alt}
                   fitWidth={340}
+                  quality={95}
                 ></EnhImage>
               </Paper>
             </Grid>
@@ -155,16 +168,16 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   if (article) {
     article.image = {
       ...article.image,
-      url: `/images/computer_master_photo_balashikha.webp`,
-      width: 715,
-      height: 969,
+      url: `/images/about/computer_master_photo_balashikha.webp`,
+      width: 1766,
+      height: 2829,
       alt: `Дмитрий, компьютерный мастер в Балашихе, выпускник МГТУ МИРЭА (РТУ МИРЭА)`,
       orderNumber: null,
       originalWidth: null,
       originalHeight: null,
       createdAt: null,
       updatedAt: null,
-      imageId: `/images/computer_master_photo_balashikha.webp`,
+      imageId: `/images/about/computer_master_photo_balashikha.webp`,
     };
   }
   return {
