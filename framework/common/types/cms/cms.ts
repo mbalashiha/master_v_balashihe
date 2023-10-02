@@ -71,6 +71,7 @@ export namespace Blog {
     image: Image | null;
     secondImageId: ID | null;
     secondImage: Image | null;
+    randomImage: Image | null;
     viewed: number | null;
     templateId: ID | null;
     handle: String | null;

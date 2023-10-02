@@ -82,6 +82,7 @@ export namespace Schema {
     navigation: ArticleNavigation | null;
     imageId: ID | null;
     image: Image | null;
+    randomImage?: Image;
     secondImageId: ID | null;
     secondImage: Image | null;
     viewed: number | null;

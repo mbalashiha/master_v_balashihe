@@ -47,6 +47,9 @@ export const getArticleByHandleQuery = gql`
     image {
       ...ImageFragment
     }
+    randomImage {
+      ...ImageFragment
+    }
   }
   query ($handle: String) {
     articleByHandle(handle: $handle) {

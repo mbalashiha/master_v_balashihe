@@ -129,6 +129,7 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
     image,
     secondImageId,
     secondImage,
+    randomImage,
     viewed,
     templateId,
     blogCategoryId,
@@ -161,9 +162,12 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
       ...breadcrumbs,
     },
     imageId: imageId || null,
-    image: image ? normalizeImage(image) : null,
+    image: image && image.imgSrc ? normalizeImage(image) : null,
+    randomImage:
+      randomImage && randomImage.imgSrc ? normalizeImage(randomImage) : null,
     secondImageId: secondImageId || null,
-    secondImage: secondImage ? normalizeImage(secondImage) : null,
+    secondImage:
+      secondImage && secondImage.imgSrc ? normalizeImage(secondImage) : null,
     viewed: viewed || null,
     templateId: templateId || null,
     blogCategoryId: blogCategoryId || null,

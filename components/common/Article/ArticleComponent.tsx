@@ -37,6 +37,7 @@ export default function Article({
   id,
   h2,
   secondImage,
+  randomImage,
 }: Props) {
   const countViews = useCountViews();
   const countViewsRef = useRef(countViews);
@@ -49,6 +50,7 @@ export default function Article({
       countViews({ articleId: id });
     }
   }, [id]);
+  const imgSrc = secondImage?.url || randomImage?.url;
   return (
     <>
       <SpecialHeader image={image} keyTextHtml={keyTextHtml}>
@@ -124,11 +126,13 @@ export default function Article({
             "& img": {
               my: 1,
               mx: { xs: 0.5, md: 1 },
+              maxWidth: "100%",
+              height: "auto",
             },
-            "& > img:first-of-type": {
+            "& > img.firstImage": {
               width: {
                 xs: "100%",
-                md: "380px",
+                md: "480px",
               },
               float: "left",
               margin: { xs: "0 2em 2em 0", md: "0 2em 1em 0" },
@@ -178,14 +182,15 @@ export default function Article({
           >
             {h2 || title}
           </Typography>
-          <Image
-            src={
-              secondImage?.url || "/images/busy-business-woman-balashikha.webp"
-            }
-            width={460}
-            height={460}
-            alt={`Балашиха Нужен мастер для ремонта ${h2 || title}`}
-          />
+          {imgSrc && (
+            <Image
+              src={imgSrc}
+              width={480}
+              height={480}
+              alt={`Балашиха Нужен мастер для ремонта ${h2 || title}`}
+              className={"firstImage"}
+            />
+          )}
           <DescriptionParser descriptionHTML={renderHtml} />
           <CallMeForFree
             sx={{
