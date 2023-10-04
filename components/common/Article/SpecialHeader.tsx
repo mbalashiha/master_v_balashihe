@@ -97,6 +97,7 @@ export const SpecialHeader = ({
             <Typography
               component="h1"
               variant="h1"
+              itemProp="headline"
               sx={{
                 fontSize: { xs: "28px", sm: "44px" },
                 lineHeight: { xs: "39px", sm: "62px" },

@@ -44,7 +44,7 @@ export default function LandingCard({ header, children, imageUrl }: Props) {
           <Grid item xs={12} sm={5} md={5}>
             <CardMedia
               itemScope
-              itemType="http://schema.org/ImageObject"
+              itemType="https://schema.org/ImageObject"
               sx={{
                 height: "100%",
                 width: "100%",

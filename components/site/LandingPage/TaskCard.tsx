@@ -35,9 +35,22 @@ export default function TaskCard({
   title,
   timeAmount,
 }: Props) {
+  let imgSrc = "";
+  React.Children.forEach(image, (img, i) => {
+    if (React.isValidElement(img)) {
+      if (img.props.src && typeof img.props.src === "string") {
+        imgSrc = img.props.src;
+      }
+    }
+  });
   return (
     <Grid item xs={12}>
-      <Grid container spacing={{ xs: "8px", md: "12px", lg: "35px" }}>
+      <Grid
+        itemScope
+        itemType="https://schema.org/Offer"
+        container
+        spacing={{ xs: "8px", md: "12px", lg: "35px" }}
+      >
         <Grid
           item
           xs={12}
@@ -54,6 +67,7 @@ export default function TaskCard({
           <Typography
             component="h5"
             variant="h5"
+            itemProp="name"
             sx={{
               color: "white",
               opacity: 0.5,
@@ -66,6 +80,7 @@ export default function TaskCard({
           </Typography>
           {timeAmount && (
             <Typography
+              component="time"
               sx={{
                 color: "white",
                 textAlign: "left",
@@ -77,6 +92,7 @@ export default function TaskCard({
             </Typography>
           )}
           <Typography
+            itemProp="description"
             sx={{
               color: "white",
               textAlign: "left",
@@ -92,6 +108,9 @@ export default function TaskCard({
           xs={12}
           md={6}
           order={{ xs: 1, md: 2 }}
+          itemProp="image"
+          itemScope
+          itemType="https://schema.org/ImageObject"
           sx={{
             "& img": {
               maxWidth: "100%",
@@ -100,6 +119,7 @@ export default function TaskCard({
             },
           }}
         >
+          <meta itemProp="image" content={imgSrc} />
           {image}
         </Grid>
       </Grid>

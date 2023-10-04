@@ -53,7 +53,9 @@ const Navbar: FC = () => {
       }}
     >
       <Toolbar
-        component="div"
+        component="header"
+        itemScope
+        itemType="https://schema.org/WPHeader"
         sx={{
           p: 0,
           display: "flex",
@@ -65,6 +67,8 @@ const Navbar: FC = () => {
         }}
       >
         <Stack
+          itemScope
+          itemType="http://schema.org/LocalBusiness"
           direction={{ xs: "column", sm: "row" }}
           spacing={{ xs: "4px", sm: 2 }}
           flexWrap="wrap"
@@ -123,9 +127,11 @@ const Navbar: FC = () => {
             >
               <IconPhoneCircle fill={"black"} />
               <Stack direction="column">
-                <Box>{NEXT_PUBLIC_CONTACT_PHONE_TEXT}</Box>
+                <Box itemProp="telephone">{NEXT_PUBLIC_CONTACT_PHONE_TEXT}</Box>
                 <Typography
-                  component="div"
+                  component="time"
+                  itemProp="openingHours"
+                  dateTime="Mo-Su"
                   className="timeline-typography"
                   sx={{
                     fontSize: "16px",
@@ -133,8 +139,30 @@ const Navbar: FC = () => {
                     alignSelf: "flex-end",
                   }}
                 >
-                  Ежедневно с 09:00 до 24:00
+                  Ежедневно с 09:00 до 23:00
                 </Typography>
+                <span
+                  itemProp="address"
+                  itemScope
+                  itemType="https://schema.org/PostalAddress"
+                >
+                  <meta itemProp="postalCode" content="143912" />
+                  <meta itemProp="addressLocality" content="Балашиха" />
+                  <meta
+                    itemProp="streetAddress"
+                    content="шоссе Энтузиастов, 7/1"
+                  />
+                  <meta itemProp="addressRegion" content="Московская область" />
+                  <meta itemProp="addressCountry" content="Россия" />
+                </span>
+                <span
+                  itemProp="geo"
+                  itemScope
+                  itemType="https://schema.org/GeoCoordinates"
+                >
+                  <meta itemProp="latitude" content="55.795469" />
+                  <meta itemProp="longitude" content="37.933977" />
+                </span>
               </Stack>
             </Stack>
           </Stack>

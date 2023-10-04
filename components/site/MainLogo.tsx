@@ -33,7 +33,7 @@ export const MainLogo = () => {
         justifyContent: "center",
       }}
     >
-      <Link href="/" passHref>
+      <Link itemProp="url" href="/" passHref>
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -43,6 +43,7 @@ export const MainLogo = () => {
           <Typography
             component="div"
             className="logo"
+            itemProp="name"
             sx={{
               fontSize: "18px",
               lineHeight: "26px",

@@ -4,6 +4,7 @@ import Image from "next/image";
 
 const MasterSvgLogo = () => (
   <Image
+    itemProp="logo"
     src={"/images/master-v-balashihe-rf-screwdriver.svg"}
     width={80}
     height={80}

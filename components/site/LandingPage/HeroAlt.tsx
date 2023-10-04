@@ -7,6 +7,7 @@ import React, { useEffect, useRef } from "react";
 import { Blog } from "@common/types/cms";
 import useCountViews from "@framework/site/use-count-views";
 import { useSiteModal } from "@components/site/ModalProvider/ModalProvider";
+import Link from "next/link";
 interface Props {
   article: Blog.Article;
 }
@@ -69,6 +70,8 @@ export default function Hero({ article }: Props) {
         }}
       ></Box>
       <Container
+        itemScope
+        itemType="https://schema.org/Person"
         maxWidth="lg"
         sx={{
           "&, & *": {
@@ -140,9 +143,13 @@ export default function Hero({ article }: Props) {
             pb: { xs: 0, lg: "80px" },
           }}
         >
-          <div>
+          <div itemProp="description">
             {`Меня зовут Дмитрий, 
-              я окончил МГТУ МИРЭА со специальностью "Информационные системы и технологии".
+              я окончил МГТУ МИРЭА со специальностью "`}
+            <Link itemProp="url" href="/computer-master-balashiha">
+              Информационные системы и технологии
+            </Link>
+            {`".
             Если вам нужно решить проблему, связанную с работой компьютера или 
             информационными технологиями, или нужно срочно починить ноутбук и другую цифровую и электро технику: `}
             <Box
@@ -166,6 +173,9 @@ export default function Hero({ article }: Props) {
               </Box>
             </Box>
           </div>
+          <meta itemProp="name" content="Дмитрий" />
+          <meta itemProp="alumniOf" content="МГТУ МИРЭА" />
+          <meta itemProp="familyName" content="Мастеров" />
           <Grid
             container
             sx={{
@@ -247,7 +257,8 @@ export default function Hero({ article }: Props) {
           }}
         >
           <Image
-            alt=""
+            itemProp="image"
+            alt="Информационные системы и технологии"
             width={475}
             height={618}
             quality={85}

@@ -25,6 +25,7 @@ import useCountViews from "@framework/site/use-count-views";
 import { useEffect, useRef } from "react";
 import { grey } from "@mui/material/colors";
 import Image from "next/image";
+import { ArticleBreadcrumbs } from "./ArticleBreadcrumbs";
 
 interface Props extends CMS.Blog.Article {}
 
@@ -38,6 +39,8 @@ export default function Article({
   h2,
   secondImage,
   randomImage,
+  url,
+  ...rest
 }: Props) {
   const countViews = useCountViews();
   const countViewsRef = useRef(countViews);
@@ -53,152 +56,175 @@ export default function Article({
   const imgSrc = secondImage?.url || randomImage?.url;
   return (
     <>
-      <SpecialHeader image={image} keyTextHtml={keyTextHtml}>
-        {title}
-      </SpecialHeader>
-      <HugeContainer
-        sx={{
-          paddingTop: { xs: "200px", sm: "140px", md: "120px" },
-          mb: "10px",
-          background: "linear-gradient(180deg, #DFE7EB 1%, transparent 99%)",
-        }}
-        rightSidebar={navigation && <NavSidebar navigation={navigation} />}
+      <Box
+        component={"article"}
+        width="100%"
+        itemScope
+        itemType="https://schema.org/Article"
       >
-        <Stack
-          direction={"row"}
-          alignContent="center"
-          justifyContent="space-between"
-          justifyItems={"center"}
-          alignItems="center"
-          mb={2}
+        <SpecialHeader image={image} keyTextHtml={keyTextHtml}>
+          {title}
+        </SpecialHeader>
+        <HugeContainer
           sx={{
-            "& a[href]": {
-              "&, & > span": {
-                display: "block",
-                borderRadius: "100%",
-              },
-            },
+            paddingTop: { xs: "200px", sm: "140px", md: "120px" },
+            mb: "10px",
+            background: "linear-gradient(180deg, #DFE7EB 1%, transparent 99%)",
           }}
+          rightSidebar={navigation && <NavSidebar navigation={navigation} />}
         >
-          {navigation?.prev?.url ? (
-            <Link href={navigation.prev.url}>
-              <Tooltip title={<>{navigation.prev.title}</>} placement="right">
-                <StyledFab size="medium" aria-label="Предыдущая страница">
-                  <ArrowBackIosRoundedIcon />
-                </StyledFab>
-              </Tooltip>
-            </Link>
-          ) : (
-            <div></div>
-          )}
-
-          <CallButton />
-          {navigation?.next?.url ? (
-            <Link href={navigation.next.url}>
-              <Tooltip title={<>{navigation.next.title}</>} placement="left">
-                <StyledFab size="medium" aria-label="Следующая страница">
-                  <ArrowForwardIosRoundedIcon />
-                </StyledFab>
-              </Tooltip>
-            </Link>
-          ) : (
-            <div></div>
-          )}
-        </Stack>
-        <Paper
-          component="article"
-          sx={{
-            "&, & p, & .Paper-root": {
-              fontFamily: 'Roboto, "Segoe UI", Tahoma, Verdana, Arial',
-              fontWeight: 500,
-              fontSize: "18px",
-              lineHeight: "27px",
-              color: (theme) =>
-                theme.palette.mode === "light" ? "#0e0e0f" : "white",
-            },
-            "& img, & .Paper-elevation1": {
-              fontSize: "17px",
-              lineHeight: "25px",
-              marginBottom: "2rem",
-              boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.2)",
-              borderRadius: 1,
-            },
-            "& img": {
-              my: 1,
-              mx: { xs: 0.5, md: 1 },
-              maxWidth: "100%",
-              height: "auto",
-            },
-            "& > img.firstImage": {
-              width: {
-                xs: "100%",
-                md: "480px",
-              },
-              float: "left",
-              margin: { xs: "0 2em 2em 0", md: "0 2em 1em 0" },
-              height: "auto",
-            },
-            "& > h2:not(:first-of-type)": {
-              color: (theme) =>
-                theme.palette.mode === "light" ? grey[600] : grey[400],
-              fontSize: "21px",
-              lineHeight: "26px",
-              fontWeight: 500,
-              marginBottom: "1.5rem",
-            },
-            marginBottom: "1.5rem",
-            "& > h3": {
-              color: (theme) =>
-                theme.palette.mode === "light" ? grey[800] : grey[200],
-              marginBottom: "0.7rem",
-            },
-            "& > h4": {
-              color: (theme) =>
-                theme.palette.mode === "light" ? grey[900] : grey[100],
-              marginBottom: "0.7rem",
-            },
-            p: {
-              xs: "24px 30px 30px 30px",
-              md: "24px 40px 40px 40px",
-              xl: "27px 50px 50px 50px",
-            },
-            boxShadow: "none",
-            boxSizing: "border-box",
-            overflow: "hidden",
-            border: "2px solid rgb(235, 235, 234)",
-            borderRadius: 1,
-          }}
-        >
-          <Typography
-            variant="h2"
-            component="h2"
+          <Stack
+            direction={"row"}
+            alignContent="center"
+            justifyContent="space-between"
+            justifyItems={"center"}
+            alignItems="center"
+            mb={2}
             sx={{
-              color: grey[600],
-              fontSize: "26px",
-              fontWeight: 600,
-              marginTop: 0,
-              marginBottom: "1em",
+              "& a[href]": {
+                "&, & > span": {
+                  display: "block",
+                  borderRadius: "100%",
+                },
+              },
             }}
           >
-            {h2 || title}
-          </Typography>
-          {imgSrc && (
-            <Image
-              src={imgSrc}
-              width={480}
-              height={480}
-              alt={`Балашиха Нужен мастер для ремонта ${h2 || title}`}
-              className={"firstImage"}
-            />
-          )}
-          <DescriptionParser descriptionHTML={renderHtml} />
-          <CallMeForFree
+            {navigation?.prev?.url ? (
+              <Link href={navigation.prev.url}>
+                <Tooltip title={<>{navigation.prev.title}</>} placement="right">
+                  <StyledFab size="medium" aria-label="Предыдущая страница">
+                    <ArrowBackIosRoundedIcon />
+                  </StyledFab>
+                </Tooltip>
+              </Link>
+            ) : (
+              <div></div>
+            )}
+
+            <CallButton />
+            {navigation?.next?.url ? (
+              <Link href={navigation.next.url}>
+                <Tooltip title={<>{navigation.next.title}</>} placement="left">
+                  <StyledFab size="medium" aria-label="Следующая страница">
+                    <ArrowForwardIosRoundedIcon />
+                  </StyledFab>
+                </Tooltip>
+              </Link>
+            ) : (
+              <div></div>
+            )}
+          </Stack>
+          <Paper
             sx={{
-              p: 0,
+              "&, & p, & .Paper-root": {
+                fontFamily: 'Roboto, "Segoe UI", Tahoma, Verdana, Arial',
+                fontWeight: 500,
+                fontSize: "18px",
+                lineHeight: "27px",
+                color: (theme) =>
+                  theme.palette.mode === "light" ? "#0e0e0f" : "white",
+              },
+              "& img, & .Paper-elevation1": {
+                fontSize: "17px",
+                lineHeight: "25px",
+                marginBottom: "2rem",
+                boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.2)",
+                borderRadius: 1,
+              },
+              "& img": {
+                my: 1,
+                mx: { xs: 0.5, md: 1 },
+                maxWidth: "100%",
+                height: "auto",
+              },
+              "& .firstImage": {
+                width: {
+                  xs: "100%",
+                  md: "480px",
+                },
+                float: "left",
+                height: "auto",
+              },
+              "& div.firstImage": {
+                margin: { xs: "0 2em 2em 0", md: "0 2em 1em 0" },
+              },
+              "& > h2:not(:first-of-type)": {
+                color: (theme) =>
+                  theme.palette.mode === "light" ? grey[600] : grey[400],
+                fontSize: "21px",
+                lineHeight: "26px",
+                fontWeight: 500,
+                marginBottom: "1.5rem",
+              },
+              marginBottom: "1.5rem",
+              "& > h3": {
+                color: (theme) =>
+                  theme.palette.mode === "light" ? grey[800] : grey[200],
+                marginBottom: "0.7rem",
+              },
+              "& > h4": {
+                color: (theme) =>
+                  theme.palette.mode === "light" ? grey[900] : grey[100],
+                marginBottom: "0.7rem",
+              },
+              p: {
+                xs: "24px 30px 30px 30px",
+                md: "24px 40px 40px 40px",
+                xl: "27px 50px 50px 50px",
+              },
+              boxShadow: "none",
+              boxSizing: "border-box",
+              overflow: "hidden",
+              border: "2px solid rgb(235, 235, 234)",
+              borderRadius: 1,
             }}
-          />
-        </Paper>
-        <NavigationButtons navigation={navigation} />
+          >
+            <Typography
+              variant="h2"
+              component="h2"
+              itemProp="description"
+              sx={{
+                color: grey[600],
+                fontSize: "26px",
+                fontWeight: 600,
+                marginTop: 0,
+                marginBottom: "1em",
+              }}
+            >
+              {h2 || title}
+            </Typography>
+            {imgSrc && (
+              <div
+                className={"firstImage"}
+                itemProp="image"
+                itemScope
+                itemType="https://schema.org/ImageObject"
+              >
+                <meta itemProp="image" content={imgSrc} />
+                <Image
+                  itemProp="contentUrl"
+                  src={imgSrc}
+                  width={480}
+                  height={480}
+                  alt={`Балашиха Нужен мастер для ремонта ${h2 || title}`}
+                  className={"firstImage"}
+                />
+              </div>
+            )}
+            <section itemProp="articleBody">
+              <DescriptionParser descriptionHTML={renderHtml} />
+            </section>
+            <CallMeForFree
+              sx={{
+                p: 0,
+              }}
+            />
+          </Paper>
+          <NavigationButtons navigation={navigation} />
+        </HugeContainer>
+      </Box>
+      <HugeContainer>
+        <ArticleBreadcrumbs title={title} url={url} />
       </HugeContainer>
     </>
   );

@@ -3,11 +3,14 @@ import KeyboardDoubleArrowUpRoundedIcon from "@mui/icons-material/KeyboardDouble
 import { Container, Box, IconButton } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 import GetDiscountButton from "./GetDiscountButton";
+import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
 export const Footer = () => {
   return (
     <Container
       maxWidth={false}
       component={"footer"}
+      itemScope
+      itemType="http://schema.org/WPFooter"
       sx={{
         backgroundColor: "black",
         backgroundImage: "url(/mir-logo.svg)",
@@ -49,12 +52,37 @@ export const Footer = () => {
         },
       }}
     >
-      <div>
-        <Box sx={{}}>
+      <div itemScope itemType="https://schema.org/LocalBusiness">
+        <Box>
           <p>
-            <Link href="/">© {new Date().getFullYear()} Мастер в Балашихе</Link>
+            <meta itemProp="name" content="Компьютерный мастер в Балашихе РФ" />
+            <Link
+              itemProp="url"
+              href={`${process.env.NEXT_PUBLIC_SITE_URL || "/"}`}
+            >
+              © {new Date().getFullYear()}{" "}
+              <span itemProp="name">Компьютерный мастер в Балашихе РФ</span>
+            </Link>
           </p>
-          <p>143912, Балашиха центр города, Шоссе Энтузиастов М-7</p>
+          <div
+            itemProp="address"
+            itemScope
+            itemType="https://schema.org/PostalAddress"
+          >
+            <span itemProp="postalCode">143912</span>,{" "}
+            <span itemProp="addressLocality">Балашиха</span>, центр города,{" "}
+            <span itemProp="streetAddress">шоссе Энтузиастов, 7</span>
+            <meta itemProp="addressRegion" content="Московская область" />
+            <meta itemProp="addressCountry" content="Россия" />
+          </div>
+          <span
+            itemProp="geo"
+            itemScope
+            itemType="https://schema.org/GeoCoordinates"
+          >
+            <meta itemProp="latitude" content="55.794831" />
+            <meta itemProp="longitude" content="37.92264" />
+          </span>
         </Box>
         <Box
           sx={{
@@ -64,9 +92,12 @@ export const Footer = () => {
         >
           <p>
             Вызвать мастера в Балашихе для ремонта компьютера или ноутбука на
-            дом или в офис
+            дом или в офис, тел.{" "}
+            <span itemProp="telephone">{NEXT_PUBLIC_CONTACT_PHONE_TEXT}</span>
           </p>
-          <p>Время работы: с 9:00 до 24:00 | Без выходных</p>
+          <time itemProp="openingHours" dateTime="Mo-Su">
+            Время работы: с 9:00 до 23:00 | Без выходных
+          </time>
         </Box>
       </div>
       <IconButton
