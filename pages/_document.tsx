@@ -15,8 +15,13 @@ import { EmotionCache } from "@emotion/cache";
 
 const MyDocument = () => {
   return (
-    <Html lang="ru">
-      <Head></Head>
+    <Html lang="ru" prefix="og: http://ogp.me/ns#">
+      <Head>
+        <meta
+          property="og:site_name"
+          content="Компьютерный мастер в Балашихе"
+        />
+      </Head>
       <body>
         <Main />
         <NextScript />

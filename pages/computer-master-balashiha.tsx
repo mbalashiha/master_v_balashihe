@@ -19,6 +19,7 @@ import { EnhImage } from "@components/ui";
 import { CallMeForFree } from "@components/site/LandingPage";
 import useCountViews from "@framework/site/use-count-views";
 import React, { useEffect, useRef } from "react";
+import { getCanonicalUrl } from "@framework/utils/normalize";
 
 export default function AboutMaster(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -42,13 +43,25 @@ export default function AboutMaster(
   return (
     <>
       <Head>
-        <title>{`Мастер в Балашихе ${title} закажите ремонт компьютера сегодня`}</title>
+        <link rel="canonical" href={article.canonicalUrl} />
+        <title>{`${title} Мастер в Балашихе из МГТУ МИРЭА закажите ремонт компьютера сегодня`}</title>
         <meta
           name="description"
-          content={`Мастер в Балашихе ${title} закажите ремонт компьютера сегодня`}
+          content={`Мастер в Балашихе из МГТУ МИРЭА ${title} закажите ремонт компьютера сегодня`}
+        />
+        <meta property="og:type" content="profile" />
+        <meta property="og:url" content={article.canonicalUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:image" content={image?.canonicalUrl || ""} />
+        <meta
+          property="og:image:width"
+          content={image?.width.toString() || ""}
+        />
+        <meta
+          property="og:image:height"
+          content={image?.height.toString() || ""}
         />
       </Head>
-
       <Container maxWidth="lg" sx={{ mt: 4 }}>
         <Typography
           component="h1"
@@ -165,10 +178,12 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   const article = await getArticleByAbsUrl({
     absURL: "/computer-master-balashiha",
   });
+  const imageUrl = `/images/about/computer_master_photo_balashikha.webp`;
   if (article) {
     article.image = {
       ...article.image,
-      url: `/images/about/computer_master_photo_balashikha.webp`,
+      url: imageUrl,
+      canonicalUrl: getCanonicalUrl({ url: imageUrl }),
       width: 1766,
       height: 2829,
       alt: `Дмитрий, компьютерный мастер в Балашихе, выпускник МГТУ МИРЭА (РТУ МИРЭА)`,

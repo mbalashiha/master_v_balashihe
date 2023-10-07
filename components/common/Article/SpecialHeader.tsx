@@ -10,6 +10,7 @@ import a from "@components/ui/Transitions/animation.module.scss";
 import GradientSVG from "public/gradient.svg";
 import { RequestComputerMaster } from "@components/site";
 import Head from "next/head";
+import { getCanonicalUrl } from "@framework/utils/normalize";
 
 const StyledBox = styled(
   ({ children, sx, ...props }: React.ComponentProps<typeof Paper>) => (
@@ -45,6 +46,7 @@ export const SpecialHeader = ({
     ? inImage
     : {
         url: "/images/mfc-balashikha.webp",
+        canonicalUrl: getCanonicalUrl({ url: "/images/mfc-balashikha.webp" }),
         width: 1024,
         height: 1024,
         alt: "",

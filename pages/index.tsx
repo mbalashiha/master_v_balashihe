@@ -17,6 +17,7 @@ import LandingServices from "@components/site/LandingPage/LandingServices";
 import LandingClientSteps from "@components/site/LandingPage/LandingClientSteps";
 import LandingAgeTasks from "@components/site/LandingPage/LandingAgeTasks";
 import LandingWizard from "@components/site/LandingPage/LandingWizard";
+import { getCanonicalUrl } from "@framework/utils/normalize";
 
 export default function Home(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -42,10 +43,13 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   const article = await getArticleByAbsUrl({
     absURL: "/",
   });
+
+  const imageUrl = `/images/computer_master_balashikha_hero.webp`;
   if (article) {
     article.image = {
       ...article.image,
-      url: `/images/computer_master_balashikha_hero.webp`,
+      url: imageUrl,
+      canonicalUrl: getCanonicalUrl({ url: imageUrl }),
       width: 600,
       height: 392,
       alt: `Дмитрий, компьютерный мастер в Балашихе, выпускник МГТУ МИРЭА (РТУ МИРЭА)`,

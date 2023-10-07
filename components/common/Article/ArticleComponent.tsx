@@ -26,6 +26,7 @@ import { useEffect, useRef } from "react";
 import { grey } from "@mui/material/colors";
 import Image from "next/image";
 import { ArticleBreadcrumbs } from "./ArticleBreadcrumbs";
+import Head from "next/head";
 
 interface Props extends CMS.Blog.Article {}
 
@@ -40,8 +41,12 @@ export default function Article({
   secondImage,
   randomImage,
   url,
+  canonicalUrl,
   ...rest
 }: Props) {
+  const articleImage =
+    secondImage && secondImage?.url ? secondImage : randomImage;
+  const imgSrc = articleImage?.url;
   const countViews = useCountViews();
   const countViewsRef = useRef(countViews);
   useEffect(() => {
@@ -53,9 +58,22 @@ export default function Article({
       countViews({ articleId: id });
     }
   }, [id]);
-  const imgSrc = secondImage?.url || randomImage?.url;
   return (
     <>
+      <Head>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:image" content={articleImage?.canonicalUrl} />
+        <meta
+          property="og:image:width"
+          content={articleImage?.width.toString() || ""}
+        />
+        <meta
+          property="og:image:height"
+          content={articleImage?.height.toString() || ""}
+        />
+      </Head>
       <Box
         component={"article"}
         width="100%"

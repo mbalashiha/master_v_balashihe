@@ -12,6 +12,7 @@ export interface Breadcrumb {
 export interface Image {
   url: string;
   alt: string;
+  canonicalUrl: string;
   height: number;
   width: number;
   orderNumber?: Int | null;
@@ -51,6 +52,7 @@ export namespace Blog {
     id: ID;
     title: String;
     url: String;
+    canonicalUrl: String;
     absURL: String;
     textHtml: String;
     renderHtml: String;

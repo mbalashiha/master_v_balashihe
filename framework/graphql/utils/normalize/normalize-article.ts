@@ -3,6 +3,11 @@ import { Blog } from "@common/types/cms";
 import { ID, Schema } from "@framework/types";
 import convertDate from "./convert-date";
 
+export const getCanonicalUrl = ({ url }: { url: string }) =>
+  `${process.env["NEXT_PUBLIC_SITE_URL"] || ""}${
+    url.startsWith("/") ? url : `/${url}`
+  }`;
+
 export const normalizeArticleUrl = (
   handle: string | null,
   autoHandleSlug?: string | null
@@ -138,10 +143,16 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
   if (!id) {
     throw new Error("No id in article row!");
   }
+  if (!process.env["NEXT_PUBLIC_SITE_URL"]) {
+    throw new Error("No NEXT_PUBLIC_SITE_URL for canonical url!");
+  }
+  const url = chooseArticleUrl({ displayingPageHandle, handle });
+  const canonicalUrl = getCanonicalUrl({ url: absURL || url });
   return {
     id,
     title,
-    url: chooseArticleUrl({ displayingPageHandle, handle }),
+    url,
+    canonicalUrl,
     absURL: absURL || "",
     navigation: normalizeArticleNavigationItems(navigation),
     textHtml: textHtml || renderHtml || "",
@@ -198,9 +209,12 @@ export const normalizeImage = (data: Schema.Image): CMS.Image => {
     createdAt,
     updatedAt,
   } = data;
+  const url = imgSrc.startsWith("/") ? imgSrc : `/${imgSrc}`;
+  const canonicalUrl = getCanonicalUrl({ url });
   return {
     imageId: imageId || "",
-    url: imgSrc.startsWith("/") ? imgSrc : `/${imgSrc}`,
+    url,
+    canonicalUrl,
     alt: altText || "",
     height: height && height > 0 ? height : 1,
     width: width && width > 0 ? width : 1,
