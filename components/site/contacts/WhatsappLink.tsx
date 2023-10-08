@@ -1,19 +1,20 @@
-import { NEXT_PUBLIC_WHATSAPP_LINK } from "@framework/const";
-import { Link } from "@mui/material";
-import React from "react";
-type Props = React.ComponentProps<typeof Link>;
+import { formatWhatsappUrl } from "@components/common/format/format-whatsapp-url";
+import { Link as MuiLink } from "@mui/material";
+import React, { useMemo } from "react";
+type Props = React.ComponentProps<typeof MuiLink>;
 
 export const WhatsappLink = ({ children, href: _, ...rest }: Props) => {
+  const url = useMemo(() => formatWhatsappUrl(), []);
   return (
-    <Link
-      href={NEXT_PUBLIC_WHATSAPP_LINK}
+    <MuiLink
+      href={url}
       target="_blank"
       rel="noreferrer"
       underline="none"
       {...rest}
     >
       {children}
-    </Link>
+    </MuiLink>
   );
 };
 export default WhatsappLink;

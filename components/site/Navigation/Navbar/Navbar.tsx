@@ -30,8 +30,6 @@ import NavbarLinks from "./NavbarLinks";
 import { MainLogo } from "@components/site/MainLogo";
 import { PhoneCallIcon, TelegramIcon } from "@components/icons";
 import {
-  NEXT_PUBLIC_WHATSAPP_LINK,
-  NEXT_PUBLIC_TELEGRAM_LINK,
   NEXT_PUBLIC_CONTACT_PHONE_TEXT,
 } from "@framework/const";
 import IconPhoneCircle from "@components/icons/IconPhoneCircle";

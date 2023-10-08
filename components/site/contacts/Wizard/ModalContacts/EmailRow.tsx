@@ -10,11 +10,6 @@ import {
 } from "@components/icons";
 import { Link as MuiLink } from "@mui/material";
 import { email, phoneNumber, locationPlace } from "@/const/contacts";
-import {
-  NEXT_PUBLIC_WHATSAPP_LINK,
-  NEXT_PUBLIC_TELEGRAM_LINK,
-  NEXT_PUBLIC_CONTACT_PHONE_TEXT,
-} from "@framework/const";
 import ContactInfoRow from "./ContactInfoRow";
 
 export default function EmailRow() {
