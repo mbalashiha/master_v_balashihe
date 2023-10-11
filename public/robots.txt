@@ -1,3 +1,9 @@
-
-User-Agent: *
+# *
+User-agent: *
 Allow: /
+
+# Host
+Host: https://mbalashiha.ru
+
+# Sitemaps
+Sitemap: https://mbalashiha.ru/sitemap.xml

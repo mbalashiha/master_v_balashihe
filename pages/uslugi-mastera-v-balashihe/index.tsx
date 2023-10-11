@@ -5,9 +5,9 @@ import { InferGetStaticPropsType } from "next/types";
 import { HugeContainer } from "@components/ui";
 import getArticlesCards from "@framework/article/get-articles-cards";
 import getRecentArticles from "@framework/article/get-recent-articles";
-import { ArticleCard } from "@components/common/Article";
+import { ArticleCard } from "@components/common/ContactArticle";
 import { SidebarPaper } from "@components/common/Sidebar";
-import { BlogRootSidebar } from "@components/common/Article/Sidebars";
+import { BlogRootSidebar } from "@components/common/ContactArticle/Sidebars";
 
 export default function Page({
   articles,

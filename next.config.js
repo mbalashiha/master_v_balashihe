@@ -17,6 +17,9 @@ module.exports = {
     });
     config.plugins.push(
       new webpack.DefinePlugin({
+        "process.env.DEV_MACHINE_API_HOST": __dirname.startsWith("/var/www")
+          ? JSON.stringify("")
+          : JSON.stringify("http://localhost:4402"),
         "process.env.Yandex_Metrika_dangerouslySetInnerHTML": JSON.stringify(
           tryReadFile("webpack-define-plugin/yandex_metrika.html")
         ),

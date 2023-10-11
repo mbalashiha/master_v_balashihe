@@ -4,7 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Article } from "@components/common/Article";
+import { ContactArticleComponent } from "@components/common/ContactArticle";
 import getArticlesPathes from "@framework/article/get-articles-pathes";
 import {
   GetStaticProps,
@@ -51,7 +51,7 @@ export default function Page(
           content={`Мастер по ремонту в Балашихе и Московской области ${article.title}`}
         />
       </Head>
-      <Article {...article} />
+      <ContactArticleComponent {...article} />
     </>
   );
 }

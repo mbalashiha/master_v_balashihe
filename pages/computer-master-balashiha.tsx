@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { DescriptionParser } from "@components/common/Article";
+import { DescriptionParser } from "@components/common/ContactArticle";
 import {
   GetStaticProps,
   GetStaticPropsContext,

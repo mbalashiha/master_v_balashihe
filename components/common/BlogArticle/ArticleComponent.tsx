@@ -8,7 +8,7 @@ import {
   Fab,
 } from "@mui/material";
 import Link from "next/link";
-import ImagePaper from "@components/common/Article/ImagePaper";
+import ImagePaper from "@components/common/ContactArticle/ImagePaper";
 import DescriptionParser from "./DescriptionParser";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";

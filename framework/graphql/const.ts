@@ -1,8 +1,11 @@
 export const API_HOST: string = (
-  process.env.BUILD_TIME_API_HOST ||
-  process.env.PRODUCTION_API_HOST ||
-  process.env.NEXT_PUBLIC_API_HOST ||
-  ""
+  typeof window === "undefined"
+    ? process.env.DEV_MACHINE_API_HOST ||
+      process.env.BUILD_TIME_API_HOST ||
+      process.env.PRODUCTION_API_HOST ||
+      process.env.NEXT_PUBLIC_API_HOST ||
+      ""
+    : process.env.NEXT_PUBLIC_API_HOST || ""
 ).trim();
 if (!process.env.NEXT_PUBLIC_LOGIN_API_TEST_AUTH_URL) {
   throw new Error("No enviroment variable NEXT_PUBLIC_LOGIN_API_TEST_AUTH_URL");
@@ -55,7 +58,8 @@ export const NEXT_PUBLIC_LOCATION_PLACE =
   process.env["NEXT_PUBLIC_LOCATION_PLACE"] || "";
 export const NEXT_PUBLIC_CONTACT_EMAIL =
   process.env["NEXT_PUBLIC_CONTACT_EMAIL"] || "";
-export const CONTACT_API_URL: string =
-  API_HOST + "/site/contact";
-export const CONTACT_REQUEST_API_URL: string = API_HOST + "/site/contact-request";
-export const COUNT_PAGE_VIEWS_API_URL: string = API_HOST + "/site/page-view-count";
+export const CONTACT_API_URL: string = API_HOST + "/site/contact";
+export const CONTACT_REQUEST_API_URL: string =
+  API_HOST + "/site/contact-request";
+export const COUNT_PAGE_VIEWS_API_URL: string =
+  API_HOST + "/site/page-view-count";
