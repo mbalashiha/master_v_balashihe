@@ -8,17 +8,10 @@ import {
   Fab,
 } from "@mui/material";
 import Link from "next/link";
-import ImagePaper from "@components/common/ContactArticle/ImagePaper";
 import DescriptionParser from "./DescriptionParser";
-import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
-import { NavSidebar } from "./Sidebars";
 import { HugeContainer, Tooltip } from "@components/ui";
-import SpecialHeader from "./SpecialHeader";
 import { CMS } from "@common/types";
-import { StyledFab } from "./StyledFab";
 import { HeaderTextParser } from "@components/common/HeaderTextParser";
-import CallButton from "./CallButton";
 import NavigationButtons from "./NavigationButtons/NavigationButtons";
 import { CallMeForFree } from "@components/site/LandingPage";
 import useCountViews from "@framework/site/use-count-views";
@@ -30,7 +23,7 @@ import Head from "next/head";
 
 interface Props extends CMS.Blog.Article {}
 
-export default function Article({
+export default function BlogArticle({
   title,
   image,
   navigation,
@@ -74,66 +67,34 @@ export default function Article({
           content={articleImage?.height.toString() || ""}
         />
       </Head>
-      <Box
-        component={"article"}
-        width="100%"
-        itemScope
-        itemType="https://schema.org/Article"
-      >
-        <SpecialHeader image={image} keyTextHtml={keyTextHtml}>
-          {title}
-        </SpecialHeader>
-        <HugeContainer
-          sx={{
-            paddingTop: { xs: "200px", sm: "140px", md: "120px" },
-            mb: "10px",
-            background: "linear-gradient(180deg, #DFE7EB 1%, transparent 99%)",
-          }}
-          rightSidebar={navigation && <NavSidebar navigation={navigation} />}
+      <HugeContainer>
+        <ArticleBreadcrumbs title={title} url={url} />
+        <Box
+          component={"article"}
+          width="100%"
+          itemScope
+          itemType="https://schema.org/Article"
         >
-          <Stack
-            direction={"row"}
-            alignContent="center"
-            justifyContent="space-between"
-            justifyItems={"center"}
-            alignItems="center"
-            mb={2}
+          <Typography
+            component="h1"
+            variant="h1"
+            itemProp="headline"
             sx={{
-              "& a[href]": {
-                "&, & > span": {
-                  display: "block",
-                  borderRadius: "100%",
-                },
-              },
+              fontSize: { xs: "28px" },
+              lineHeight: { xs: "35px" },
+              fontWeight: 700,
+              mt: "5px",
+              mb: "15px",
             }}
           >
-            {navigation?.prev?.url ? (
-              <Link href={navigation.prev.url}>
-                <Tooltip title={<>{navigation.prev.title}</>} placement="right">
-                  <StyledFab size="medium" aria-label="Предыдущая страница">
-                    <ArrowBackIosRoundedIcon />
-                  </StyledFab>
-                </Tooltip>
-              </Link>
-            ) : (
-              <div></div>
-            )}
-
-            <CallButton />
-            {navigation?.next?.url ? (
-              <Link href={navigation.next.url}>
-                <Tooltip title={<>{navigation.next.title}</>} placement="left">
-                  <StyledFab size="medium" aria-label="Следующая страница">
-                    <ArrowForwardIosRoundedIcon />
-                  </StyledFab>
-                </Tooltip>
-              </Link>
-            ) : (
-              <div></div>
-            )}
-          </Stack>
+            {title}
+          </Typography>
           <Paper
             sx={{
+              p: 0,
+              boxShadow: "none",
+              boxSizing: "border-box",
+              overflow: "visible",
               "&, & p, & .Paper-root": {
                 fontFamily: 'Roboto, "Segoe UI", Tahoma, Verdana, Arial',
                 fontWeight: 500,
@@ -141,6 +102,9 @@ export default function Article({
                 lineHeight: "27px",
                 color: (theme) =>
                   theme.palette.mode === "light" ? "#0e0e0f" : "white",
+              },
+              "& .Paper-root": {
+                clear: "both",
               },
               "& img, & .Paper-elevation1": {
                 fontSize: "17px",
@@ -151,20 +115,22 @@ export default function Article({
               },
               "& img": {
                 my: 1,
-                mx: { xs: 0.5, md: 1 },
+                mx: 0,
                 maxWidth: "100%",
                 height: "auto",
               },
               "& .firstImage": {
+                my: 0,
                 width: {
                   xs: "100%",
                   md: "480px",
                 },
-                float: "left",
                 height: "auto",
+                float: "left",
+                boxShadow: "none",
               },
               "& div.firstImage": {
-                margin: { xs: "0 2em 2em 0", md: "0 2em 1em 0" },
+                margin: { xs: "0 28px 20px 0", md: "0 28px 10px 0" },
               },
               "& > h2:not(:first-of-type)": {
                 color: (theme) =>
@@ -185,32 +151,8 @@ export default function Article({
                   theme.palette.mode === "light" ? grey[900] : grey[100],
                 marginBottom: "0.7rem",
               },
-              p: {
-                xs: "24px 30px 30px 30px",
-                md: "24px 40px 40px 40px",
-                xl: "27px 50px 50px 50px",
-              },
-              boxShadow: "none",
-              boxSizing: "border-box",
-              overflow: "hidden",
-              border: "2px solid rgb(235, 235, 234)",
-              borderRadius: 1,
             }}
           >
-            <Typography
-              variant="h2"
-              component="h2"
-              itemProp="description"
-              sx={{
-                color: grey[600],
-                fontSize: "26px",
-                fontWeight: 600,
-                marginTop: 0,
-                marginBottom: "1em",
-              }}
-            >
-              {h2 || title}
-            </Typography>
             {imgSrc && (
               <div
                 className={"firstImage"}
@@ -229,6 +171,34 @@ export default function Article({
                 />
               </div>
             )}
+            {keyTextHtml && (
+              <Grid
+                item
+                xs={12}
+                order={2}
+                sx={{
+                  paddingTop: 0,
+                  paddingBottom: "47px",
+                  "& > *": {
+                    p: 0,
+                    m: 0,
+                    ml: "30px",
+                    "&::before": {
+                      display: "inline-block",
+                      content: `"\\2605"`,
+                      fontSize: "24px",
+                      lineHeight: "20px",
+                      transform: "translate(-30px,2px)",
+                      width: 0,
+                      overflow: "visible",
+                      color: "orange",
+                    },
+                  },
+                }}
+              >
+                <HeaderTextParser htmlText={keyTextHtml} />
+              </Grid>
+            )}
             <section itemProp="articleBody">
               <DescriptionParser descriptionHTML={renderHtml} />
             </section>
@@ -239,10 +209,7 @@ export default function Article({
             />
           </Paper>
           <NavigationButtons navigation={navigation} />
-        </HugeContainer>
-      </Box>
-      <HugeContainer>
-        <ArticleBreadcrumbs title={title} url={url} />
+        </Box>
       </HugeContainer>
     </>
   );

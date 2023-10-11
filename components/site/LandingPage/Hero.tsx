@@ -2,10 +2,10 @@ import { Container, Grid, Card, Paper } from "@mui/material";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { DescriptionParser } from "@components/common/ContactArticle";
 import React, { useEffect, useRef } from "react";
 import { Blog } from "@common/types/cms";
 import useCountViews from "@framework/site/use-count-views";
+import { DescriptionParser } from "@components/common/BlogArticle";
 interface Props {
   article: Blog.Article;
 }

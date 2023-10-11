@@ -8,16 +8,12 @@ import {
   Fab,
 } from "@mui/material";
 import Link from "next/link";
-import ImagePaper from "@components/common/ContactArticle/ImagePaper";
-import DescriptionParser from "./DescriptionParser";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
-import { NavSidebar } from "./Sidebars";
 import { HugeContainer, Tooltip } from "@components/ui";
 import SpecialHeader from "./SpecialHeader";
 import { CMS } from "@common/types";
 import { StyledFab } from "./StyledFab";
-import { HeaderTextParser } from "@components/common/HeaderTextParser";
 import CallButton from "./CallButton";
 import NavigationButtons from "./NavigationButtons/NavigationButtons";
 import { CallMeForFree } from "@components/site/LandingPage";
@@ -25,8 +21,10 @@ import useCountViews from "@framework/site/use-count-views";
 import { useEffect, useRef } from "react";
 import { grey } from "@mui/material/colors";
 import Image from "next/image";
-import { ArticleBreadcrumbs } from "./ArticleBreadcrumbs";
 import Head from "next/head";
+import { NavSidebar } from "../BlogArticle/Sidebars";
+import DescriptionParser from "../BlogArticle/DescriptionParser";
+import { ArticleBreadcrumbs } from "../BlogArticle/ArticleBreadcrumbs";
 
 interface Props extends CMS.Blog.Article {}
 

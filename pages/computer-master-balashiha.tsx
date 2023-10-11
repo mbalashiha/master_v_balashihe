@@ -3,7 +3,6 @@ import Head from "next/head";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { DescriptionParser } from "@components/common/ContactArticle";
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -20,6 +19,7 @@ import { CallMeForFree } from "@components/site/LandingPage";
 import useCountViews from "@framework/site/use-count-views";
 import React, { useEffect, useRef } from "react";
 import { getCanonicalUrl } from "@framework/utils/normalize";
+import { DescriptionParser } from "@components/common/BlogArticle";
 
 export default function AboutMaster(
   props: InferGetStaticPropsType<typeof getStaticProps>

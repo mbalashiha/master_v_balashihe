@@ -25,6 +25,8 @@ export default function ArticleBreadcrumbs({ title, url }: Props) {
       sx={{
         px: 0,
         mx: 0,
+        py: 0,
+        my: 0,
         "& li": {
           display: "flex",
           flexDirection: "row",

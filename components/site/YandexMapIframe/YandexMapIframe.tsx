@@ -8,15 +8,14 @@ import { Box, Container, Grid, Paper, Stack, Typography } from "@mui/material";
 import ContactInfoRow from "@components/site/LandingPage/ContactInfoRow";
 import IconPhoneCircle from "@components/icons/IconPhoneCircle";
 import IconLocationCircle from "@components/icons/IconLocationCircle";
-import { useSiteModal } from "@components/site/ModalProvider";
 
 const YandexMapIframe = () => {
-  const { toggleModal } = useSiteModal();
   return (
     <>
       <Container
         maxWidth={false}
         sx={{
+          background: "white",
           "&&": {
             px: 0,
             paddingTop: "30px",
@@ -24,7 +23,6 @@ const YandexMapIframe = () => {
           position: "relative",
           marginBottom: { xs: 0, xl: "30px" },
           display: { xs: "block", md: "flex", lg: "block" },
-          "& > *": {},
         }}
       >
         <Container

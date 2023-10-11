@@ -9,8 +9,8 @@ import { HugeContainer } from "@components/ui";
 import getArticlesCards from "@framework/article/get-articles-cards";
 import { ArticleCard } from "@components/common/ContactArticle";
 import { SearchPageLayout } from "@components/site/Layout";
-import { BlogRootSidebar } from "@components/common/ContactArticle/Sidebars";
 import getRecentArticles from "@framework/article/get-recent-articles";
+import { BlogRootSidebar } from "@components/common/BlogArticle/Sidebars";
 
 export default function SearchPage({
   search,

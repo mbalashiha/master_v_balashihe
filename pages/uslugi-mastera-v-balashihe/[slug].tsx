@@ -15,6 +15,7 @@ import getArticleByHandle from "@framework/article/get-article-by-handle";
 import util from "util";
 import { renderToString } from "react-dom/server";
 import { ApiProvider } from "@framework";
+import { BlogArticle } from "@components/common/BlogArticle";
 
 export async function getStaticPaths() {
   const paths = await getArticlesPathes();
@@ -42,16 +43,23 @@ export default function Page(
 ) {
   const { article } = props;
   const { renderHtml, image, navigation, title } = article;
+  const articleElement = article.templateId ? (
+    <ContactArticleComponent {...article} />
+  ) : (
+    <BlogArticle {...article} />
+  );
   return (
     <>
       <Head>
-        <title>{`Мастер по ремонту в Балашихе и Московской области ${article.title}`}</title>
+        <title>{`${article.title}Мастер по ремонту в Балашихе и Московской области `}</title>
         <meta
           name="description"
-          content={`Мастер по ремонту в Балашихе и Московской области ${article.title}`}
+          content={`${
+            article.h2 || article.title
+          } Мастер по ремонту в Балашихе и Московской области`}
         />
       </Head>
-      <ContactArticleComponent {...article} />
+      {articleElement}
     </>
   );
 }
