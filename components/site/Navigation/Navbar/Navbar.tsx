@@ -66,7 +66,7 @@ const Navbar: FC = () => {
       >
         <Stack
           itemScope
-          itemType="http://schema.org/LocalBusiness"
+          itemType="https://schema.org/LocalBusiness"
           direction={{ xs: "column", sm: "row" }}
           spacing={{ xs: "4px", sm: 2 }}
           flexWrap="wrap"
