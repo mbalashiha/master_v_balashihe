@@ -3,13 +3,14 @@ import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 // import { DescriptionParser } from "@components/common/Article";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { Blog } from "@common/types/cms";
 import useCountViews from "@framework/site/use-count-views";
 import { useSiteModal } from "@components/site/ModalProvider/ModalProvider";
 import Link from "next/link";
 import { getCanonicalUrl } from "@framework/utils/normalize";
 import Head from "next/head";
+import { CMS } from "@common/types";
 interface Props {
   article: Blog.Article;
 }
@@ -30,7 +31,17 @@ export default function Hero({ article }: Props) {
   }, [article.id]);
   const { toggleModal } = useSiteModal();
   const title = `Меня зовут Дмитрий, я окончил МГТУ МИРЭА со специальностью Информационные системы и технологии`;
-  const indexCanonicalUrl = getCanonicalUrl({ url: "/" });
+  const indexCanonicalUrl = useMemo(() => getCanonicalUrl({ url: "/" }), []);
+  const image: CMS.Image = useMemo(() => {
+    const url = "/images/master_v_balashihe.jpg";
+    return {
+      url,
+      canonicalUrl: getCanonicalUrl({ url }),
+      width: 1197,
+      height: 1600,
+      alt: "",
+    };
+  }, []);
   return (
     <>
       <Head>
@@ -41,16 +52,13 @@ export default function Hero({ article }: Props) {
         <meta property="og:title" content={title} />
         <meta
           property="og:description"
-          content={`Нужен компьютерный мастер на дом или в офис? Если Вам нужно решить проблему, связанную с работой компьютера, информационными технологиями или нужно срочно починить ноутбук, моноблок, рабочую станцию или другую электротехнику:
+          content={`Нужен мастер на дом или в офис? Если Вам нужно решить проблему, связанную с работой компьютера, информационными технологиями или нужно срочно починить ноутбук, моноблок, рабочую станцию или другую электротехнику:
 Оставьте заявку и я перезвоню Вам в течение 30 минут,
 работаю в городе Балашиха и Москве`}
         />
-        <meta
-          property="og:image"
-          content={getCanonicalUrl({ url: "/images/og_landing_hero.jpg" })}
-        />
-        <meta property="og:image:width" content={"545"} />
-        <meta property="og:image:height" content={"658"} />
+        <meta property="og:image" content={image.canonicalUrl} />
+        <meta property="og:image:width" content={image.width.toString()} />
+        <meta property="og:image:height" content={image.height.toString()} />
       </Head>
       <Container
         maxWidth={false}
@@ -279,14 +287,15 @@ export default function Hero({ article }: Props) {
               },
             }}
           >
-            <Image
-              itemProp="image"
-              alt="Информационные системы и технологии"
-              width={475}
-              height={618}
-              quality={85}
-              src="/images/computer-master-landing-balashiha.png"
-            />
+            <Link itemProp="image" href={image.canonicalUrl} target="_blank">
+              <Image
+                alt="Информационные системы и технологии"
+                width={475}
+                height={618}
+                quality={85}
+                src="/images/computer-master-landing-balashiha.png"
+              />
+            </Link>
           </Box>
         </Container>
       </Container>

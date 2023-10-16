@@ -22,7 +22,7 @@ const MyDocument = () => {
           content="Компьютерный мастер в Балашихе"
         />
       </Head>
-      <body>
+      <body itemScope itemType="https://schema.org/WebPage">
         <Main />
         <NextScript />
       </body>

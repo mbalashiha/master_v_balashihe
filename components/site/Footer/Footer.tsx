@@ -10,7 +10,7 @@ export const Footer = () => {
       maxWidth={false}
       component={"footer"}
       itemScope
-      itemType="http://schema.org/WPFooter"
+      itemType="https://schema.org/WPFooter"
       sx={{
         backgroundColor: "black",
         backgroundImage: "url(/mir-logo.svg)",

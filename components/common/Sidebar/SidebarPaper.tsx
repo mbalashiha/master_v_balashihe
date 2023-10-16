@@ -9,12 +9,10 @@ type Props = PaperProps & {
 };
 export const SidebarPaper = ({ title, children, ...rest }: Props) => {
   return (
-    <StyledPaper {...rest}>
-      <PaperBox>
-        {title && <StyledHeader>{title}</StyledHeader>}
-        {children}
-      </PaperBox>
-    </StyledPaper>
+    <>
+      {title && <StyledHeader>{title}</StyledHeader>}
+      {children}
+    </>
   );
 };
 export default SidebarPaper;

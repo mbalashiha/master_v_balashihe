@@ -45,7 +45,7 @@
     "html-react-parser": "^3.0.9",
     "js-beautify": "^1.14.8",
     "js-cookie": "3.0.1",
-    "material-icons": "^1.13.3",
+    "material-icons": "^1.13.12",
     "moment": "^2.29.4",
     "next": "13.2.4",
     "next-sitemap": "^4.2.3",

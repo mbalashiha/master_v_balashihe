@@ -1,18 +1,14 @@
 import Breadcrumbs from "@components/common/Breadcrumbs/Breadcrumbs";
 import { useMemo } from "react";
 
-interface Props {
-  title: string;
-  url: string;
-}
+interface Props {}
 
-export default function ArticleBreadcrumbs({ title, url }: Props) {
+export default function BlogListBreadcrumbs({}: Props) {
   const pathArray = useMemo(() => {
     return [
       { href: "/", title: "Главная" },
       { href: "/uslugi-mastera-v-balashihe/", title: "Компьютерный мастер" },
-      { href: url, title: title },
     ];
-  }, [title, url]);
+  }, []);
   return <Breadcrumbs path={pathArray} />;
 }
