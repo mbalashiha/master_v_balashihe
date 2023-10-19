@@ -154,15 +154,23 @@ export default function ContactArticleComponent({
                 height: "auto",
               },
               "& .firstImage": {
+                float: { xs: "none", md: "left" },
+                height: "auto",
+              },
+              "& div.firstImage": {
+                margin: { xs: "0 2em 0.5em 0", md: "0 2em 0em 0" },
                 width: {
                   xs: "100%",
                   md: "480px",
                 },
-                float: "left",
-                height: "auto",
+                maxWidth: { xs: "none", md: "48%" },
               },
-              "& div.firstImage": {
-                margin: { xs: "0 2em 2em 0", md: "0 2em 1em 0" },
+              "& img.firstImage": {
+                mx: 0,
+                width: {
+                  xs: "100%",
+                  md: "480px",
+                },
               },
               "& > h2:not(:first-of-type)": {
                 color: (theme) =>
@@ -195,20 +203,8 @@ export default function ContactArticleComponent({
               borderRadius: 1,
             }}
           >
-            <Typography
-              variant="h2"
-              component="h2"
-              itemProp="description"
-              sx={{
-                color: grey[600],
-                fontSize: "26px",
-                fontWeight: 600,
-                marginTop: 0,
-                marginBottom: "1em",
-              }}
-            >
-              {h2 || title}
-            </Typography>
+            <ArticleBreadcrumbs title={title} url={url} />
+
             {imgSrc && (
               <div
                 className={"firstImage"}
@@ -227,21 +223,32 @@ export default function ContactArticleComponent({
                 />
               </div>
             )}
+            <Typography
+              variant="h2"
+              component="h2"
+              itemProp="description"
+              sx={{
+                color: grey[600],
+                fontSize: "26px",
+                fontWeight: 600,
+                mt: 0,
+                mb: "20px",
+              }}
+            >
+              {h2 || title}
+            </Typography>
             <section itemProp="articleBody">
               <DescriptionParser descriptionHTML={renderHtml} />
             </section>
+            <NavigationButtons navigation={navigation} />
             <CallMeForFree
               sx={{
                 p: 0,
               }}
             />
           </Paper>
-          <NavigationButtons navigation={navigation} />
         </HugeContainer>
       </Box>
-      <HugeContainer>
-        <ArticleBreadcrumbs title={title} url={url} />
-      </HugeContainer>
     </>
   );
 }

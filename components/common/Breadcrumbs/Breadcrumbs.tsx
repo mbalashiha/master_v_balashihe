@@ -23,20 +23,25 @@ export default function Breadcrumbs({ path }: Props) {
         mx: 0,
         py: 0,
         my: 0,
+        mb: "8px",
+        maxWidth: "95vw",
+        overflow: "hidden",
         "& li": {
           display: "flex",
           flexDirection: "row",
           px: 0,
           mx: 0,
+          "&, & > *": {
+            fontWeight: 400,
+            fontSize: "16px",
+            lineHeight: "24px",
+          },
           "&:after": {
             content: `"/"`,
             px: "5px",
             color: grey[600],
           },
           "& > *": {
-            fontWeight: 400,
-            fontSize: "16px",
-            lineHeight: "24px",
             maxWidth: "300px",
             overflow: "hidden",
             textOverflow: "ellipsis",

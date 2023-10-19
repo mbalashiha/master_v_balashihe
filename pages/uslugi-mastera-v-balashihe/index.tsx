@@ -49,7 +49,9 @@ export default function Page({
         sx={{ background: "transparent" }}
       >
         <BlogListBreadcrumbs />
-        <h1>{title}</h1>
+        <Typography variant="h3" component="h3" sx={{ mb: 2 }}>
+          {title}
+        </Typography>
         <Grid container spacing={{ xs: 2, lg: 3 }}>
           {articles.map((article) => (
             <ArticleCard key={article.url} article={article} />
@@ -72,7 +74,7 @@ export async function getStaticProps() {
   };
   return {
     props: {
-      title: `Услуги мастера в Балашихе РФ по ремонту ПК`,
+      title: `Блог мастера в Балашихе РФ по ремонту ПК`,
       canonicalUrl: getCanonicalUrl({ url: `/uslugi-mastera-v-balashihe/` }),
       image,
       articles: await getArticlesCards(),

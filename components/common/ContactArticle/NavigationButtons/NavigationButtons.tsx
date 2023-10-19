@@ -11,6 +11,7 @@ import Link from "next/link";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import { Blog } from "@common/types/cms";
+import { standartCssTransition } from "@components/ui/theme/mui-theme";
 
 interface Props {
   navigation: Blog.BlogArticleNavigation;
@@ -18,99 +19,118 @@ interface Props {
 
 export default function NavigationButtons({ navigation }: Props) {
   return (
-    <Grid
-      component="nav"
-      container
-      spacing={{ xs: 1, sm: 2, md: 3 }}
-      sx={{
-        mb: { xs: 3, sm: 1 },
-        "& a": {
-          padding: 0,
-          width: "100%",
-          textOverflow: "ellipsis",
-          display: "block",
-          "&, & > span": {
-            borderRadius: "2rem",
-            border: "none",
-            background: (theme) => theme.palette.background.paper,
-            borderColor: (theme) => theme.palette.background.paper,
-          },
-          "&:hover": {
-            "& .SvgIcon-root, & .ButtonBase-root, & *, & > *": {
-              textDecoration: "none",
-              color: "#ff7777",
-            },
-            "&, & > span": {
-              background: (theme) => theme.palette.primary.main,
-              borderColor: (theme) => theme.palette.primary.main,
-            },
-          },
-          "& > span": {
-            height: { xs: "220px", md: "124px" },
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative",
-            boxShadow: "none",
-            boxSizing: "border-box",
+    <div itemScope itemType="https://schema.org/SiteNavigationElement">
+      <Grid
+        component="ul"
+        container
+        spacing={{ xs: 0, md: 1, lg: 2 }}
+        itemScope
+        itemType="https://schema.org/ItemList"
+        sx={{
+          listStyleType: "none",
+          m: 0,
+          p: 0,
+          mb: "14px",
+          "& li": {
+            maxWidth: "49vw",
             overflow: "hidden",
-            border: "2px solid rgb(235, 235, 234)",
-            "& .SvgIcon-root": {
-              width: { xs: "30px", md: "75px" },
-              height: { xs: "30px", md: "75px" },
-              color: "rgb(235, 235, 234)",
+          },
+          "& a > *": {
+            border: "none",
+            borderRadius: "6px",
+            padding: 0,
+            textTransform: "none",
+            "&:hover": {
+              background: "none",
+              boxShadow: "none",
+              color: (theme) => theme.palette.primary.main,
             },
-            p: 0,
-            "& h6": {
-              fontSize: "14px",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
+          },
+          "& *[itemProp='name']": {
+            margin: "10px",
+            fontSize: "17px",
+            lineHeight: "24px",
+            maxHeight: "48px",
+            maxWidth: "380px",
+            overflow: "hidden",
+          },
+          "&&& a": {
+            "& svg": {
+              width: "50px",
+              height: "50px",
+              background: "rgba(1,1,1,1)",
+              padding: "10px",
+              borderRadius: "6px",
+              color: "white",
+              fill: "white",
+              ...standartCssTransition,
+            },
+            "& *[itemProp='name']": {
+              color: "rgba(1,1,1,1)",
+            },
+            "&:hover": {
+              background: "none",
+              boxShadow: "none",
+              color: (theme) => theme.palette.primary.main,
+              "& svg": {
+                background: (theme) => theme.palette.primary.main,
+              },
+              "& *[itemProp='name']": {
+                color: (theme) => theme.palette.primary.main,
+              },
+            },
+          },
+        }}
+      >
+        <Grid
+          component={"li"}
+          item
+          xs={6}
+          itemProp="itemListElement"
+          itemScope
+          itemType="https://schema.org/ItemList"
+          sx={{
+            "&, & span, & *": {
               textAlign: "left",
             },
-          },
-        },
-      }}
-    >
-      <Grid component={"strong"} item xs={6}>
-        {navigation?.prev?.url && (
-          <Link href={navigation.prev.url}>
-            <Button component="span">
-              <Stack
-                component="span"
-                width={"100%"}
-                direction={"row"}
-                alignItems="center"
-                justifyContent={"flex-start"}
-              >
+          }}
+        >
+          {navigation?.prev?.url && (
+            <Link itemProp="url" href={navigation.prev.url}>
+              <Button component="span">
                 <ArrowBackIosRoundedIcon />
-                <Box component="h6" sx={{ mr: 1 }}>
+                <Box itemProp="name" component="span" sx={{ mr: 1 }}>
                   {navigation.prev.title}
                 </Box>
-              </Stack>
-            </Button>
-          </Link>
-        )}
-      </Grid>
-      <Grid component={"strong"} item xs={6}>
-        {navigation?.next?.url && (
-          <Link href={navigation.next.url}>
-            <Button component="span">
-              <Stack
-                component="span"
-                width={"100%"}
-                direction={"row"}
-                alignItems="center"
-                justifyContent={"flex-end"}
-              >
-                <Box component="h6" sx={{ ml: 1 }}>
+              </Button>
+            </Link>
+          )}
+        </Grid>
+        <Grid
+          component={"li"}
+          item
+          xs={6}
+          itemProp="itemListElement"
+          itemScope
+          itemType="https://schema.org/ItemList"
+          sx={{
+            "&, & span, & *": {
+              textAlign: "right",
+            },
+          }}
+        >
+          {navigation?.next?.url && (
+            <Link itemProp="url" href={navigation.next.url}>
+              <Button component="span">
+                <Box itemProp="name" component="span" sx={{ ml: 1 }}>
                   {navigation.next.title}
                 </Box>
                 <ArrowForwardIosRoundedIcon />
-              </Stack>
-            </Button>
-          </Link>
-        )}
+              </Button>
+            </Link>
+          )}
+        </Grid>
       </Grid>
-    </Grid>
+    </div>
   );
 }

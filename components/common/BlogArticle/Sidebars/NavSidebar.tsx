@@ -3,18 +3,24 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Blog } from "@common/types/cms";
-import { SidebarPaper } from "@components/common/Sidebar";
 import NavigationList from "./NavigationList";
+import NavSidebarContainer from "./NavSidebarContainer";
 
 interface Props {
   navigation: Blog.BlogArticleNavigation;
+  title?: string;
+  ariaLabel?: string;
 }
-export default function NavSidebar({ navigation }: Props) {
+export default function NavSidebar({
+  title = "Навигация",
+  navigation,
+  ariaLabel,
+}: Props) {
   return (
-    <SidebarPaper title={"Навигация"}>
+    <NavSidebarContainer title={title} ariaLabel={ariaLabel}>
       {navigation.nearestSiblings && (
         <NavigationList articlesList={navigation.nearestSiblings} />
       )}
-    </SidebarPaper>
+    </NavSidebarContainer>
   );
 }

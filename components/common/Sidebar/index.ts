@@ -1,1 +1,2 @@
-export { default as SidebarPaper } from "./SidebarPaper";
+export * from "./PaperBox";
+export * from "./StyledHeader";

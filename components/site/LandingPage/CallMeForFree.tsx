@@ -33,6 +33,8 @@ export const CallMeForFree = ({
       <Paper
         elevation={elevation}
         sx={{
+          maxWidth: "99vw",
+          overflow: "hidden",
           p: 3,
           backgroundColor: (theme) => theme.palette.background.paper,
           border: elevation ? `none` : `2px solid #EBEBEA`,

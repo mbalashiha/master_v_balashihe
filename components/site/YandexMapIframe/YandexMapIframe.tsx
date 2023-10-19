@@ -42,6 +42,8 @@ const YandexMapIframe = () => {
           <Paper
             elevation={3}
             sx={{
+              maxWidth: "95vw",
+              overflow: "hidden",
               zIndex: 2,
               position: { xs: "inherit", lg: "absolute" },
               top: 0,
