@@ -26,7 +26,7 @@ export default function HugeContainer({
         width: "100%",
         background: (theme) => theme.palette.background.paper,
         pt: 1.5,
-        pb: 1.5,
+        pb: 0,
         ...sx,
       }}
     >

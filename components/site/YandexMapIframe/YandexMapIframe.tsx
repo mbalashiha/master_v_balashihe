@@ -8,6 +8,7 @@ import { Box, Container, Grid, Paper, Stack, Typography } from "@mui/material";
 import ContactInfoRow from "@components/site/LandingPage/ContactInfoRow";
 import IconPhoneCircle from "@components/icons/IconPhoneCircle";
 import IconLocationCircle from "@components/icons/IconLocationCircle";
+import { BreaksBySymbol } from "@components/ui/BreaksBySymbol";
 
 const YandexMapIframe = () => {
   return (
@@ -17,11 +18,9 @@ const YandexMapIframe = () => {
         sx={{
           background: "white",
           "&&": {
-            px: 0,
-            paddingTop: "30px",
+            p: { xs: 0, xl: "0 30px 20px 30px" },
           },
           position: "relative",
-          marginBottom: { xs: 0, xl: "30px" },
           display: { xs: "block", md: "flex", lg: "block" },
         }}
       >
@@ -29,28 +28,27 @@ const YandexMapIframe = () => {
           maxWidth={"lg"}
           sx={{
             "&&": {
-              px: 0,
+              px: { xs: 0, md: 0, lg: 0 },
             },
             position: { xs: "inherit", lg: "relative" },
             display: { xs: "flex", lg: "block" },
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "row",
-            width: "100%",
+            width: { xs: "inherit", md: "600px", lg: "inherit" },
           }}
         >
           <Paper
             elevation={3}
             sx={{
               maxWidth: "95vw",
+              minWidth: { xs: "100%", lg: "380px" },
+              height: { xs: "auto", md: "100%", lg: "auto" },
               overflow: "hidden",
               zIndex: 2,
               position: { xs: "inherit", lg: "absolute" },
               top: 0,
               marginBottom: 0,
-              height: { xs: "auto", md: "100%", lg: "auto" },
-              minHeight: { xs: "440px", md: "100%", lg: "440px" },
-              width: { xs: "100%", lg: "420px" },
               marginLeft: { lg: "-15px", xl: "-55px" },
               marginTop: { xs: "43px", md: 0, lg: "43px" },
               border: (theme) => `12px solid ${theme.palette.background.paper}`,
@@ -70,7 +68,7 @@ const YandexMapIframe = () => {
               sx={{
                 width: "100%",
                 height: { xs: "auto", md: "100%", lg: "auto" },
-                minHeight: { xs: "440px", md: "100%", lg: "440px" },
+                minHeight: { xs: "380px", md: "100%", lg: "380px" },
                 border: "3px solid",
                 borderColor: "primary.light",
                 borderRadius: (theme) => theme.shape.borderRadius - 9 + "px",
@@ -83,7 +81,7 @@ const YandexMapIframe = () => {
                 },
               }}
             >
-              <Stack direction={"column"} spacing={3}>
+              <Stack direction={"column"} spacing={3} height="100%">
                 <Typography
                   component="div"
                   variant="h1"
@@ -93,21 +91,35 @@ const YandexMapIframe = () => {
                 >
                   Контакты
                 </Typography>
-                <ContactInfoRow
-                  svgIcon={<IconPhoneCircle />}
-                  label={"Телефон:"}
-                  infoText={NEXT_PUBLIC_CONTACT_PHONE_TEXT}
-                />
-                <ContactInfoRow
-                  svgIcon={<IconEmailCircle />}
-                  label={"Почта:"}
-                  infoText={NEXT_PUBLIC_CONTACT_EMAIL}
-                />
-                <ContactInfoRow
-                  svgIcon={<IconLocationCircle />}
-                  label={"На карте:"}
-                  infoText={NEXT_PUBLIC_LOCATION_PLACE}
-                />
+                <Stack
+                  direction={"column"}
+                  spacing={{ xs: 3, md: 4, lg: 3 }}
+                  sx={{ flexGrow: { xs: "inherit", md: 1, lg: "inherit" } }}
+                  justifyContent={{
+                    xs: "inherit",
+                    md: "center",
+                  }}
+                >
+                  <ContactInfoRow
+                    svgIcon={<IconPhoneCircle />}
+                    label={"Телефон:"}
+                    infoText={NEXT_PUBLIC_CONTACT_PHONE_TEXT}
+                  />
+                  <ContactInfoRow
+                    svgIcon={<IconEmailCircle />}
+                    label={"Почта:"}
+                    infoText={NEXT_PUBLIC_CONTACT_EMAIL}
+                  />
+                  <ContactInfoRow
+                    svgIcon={<IconLocationCircle />}
+                    label={"На карте:"}
+                    infoText={
+                      <BreaksBySymbol>
+                        {NEXT_PUBLIC_LOCATION_PLACE}
+                      </BreaksBySymbol>
+                    }
+                  />
+                </Stack>
               </Stack>
             </Box>
           </Paper>

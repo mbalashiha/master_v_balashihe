@@ -20,6 +20,7 @@ import Image from "next/image";
 import { ArticleBreadcrumbs } from "./ArticleBreadcrumbs";
 import Head from "next/head";
 import NavigationButtons from "../ContactArticle/NavigationButtons/NavigationButtons";
+import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
 
 interface Props extends CMS.Blog.Article {}
 
@@ -212,6 +213,7 @@ export default function BlogArticle({
           />
         </Paper>
       </HugeContainer>
+      <BottomContactsWithMap />
     </>
   );
 }

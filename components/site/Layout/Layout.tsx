@@ -8,9 +8,7 @@ import {
   Stack,
   Button,
 } from "@mui/material";
-import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
 import SiteLayout from "./SiteLayout";
-import GetDiscountButton from "../Footer/GetDiscountButton";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -24,7 +22,6 @@ const Layout: FC<Props> = ({ children }: Props) => {
       <SiteLayout>
         <Box component="main" pb="26rem">
           {children}
-          <BottomContactsWithMap />
         </Box>
       </SiteLayout>
     </>

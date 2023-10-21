@@ -25,6 +25,7 @@ import Head from "next/head";
 import { NavSidebar } from "../BlogArticle/Sidebars";
 import DescriptionParser from "../BlogArticle/DescriptionParser";
 import { ArticleBreadcrumbs } from "../BlogArticle/ArticleBreadcrumbs";
+import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
 
 interface Props extends CMS.Blog.Article {}
 
@@ -249,6 +250,7 @@ export default function ContactArticleComponent({
           </Paper>
         </HugeContainer>
       </Box>
+      <BottomContactsWithMap />
     </>
   );
 }

@@ -18,6 +18,7 @@ import LandingClientSteps from "@components/site/LandingPage/LandingClientSteps"
 import LandingAgeTasks from "@components/site/LandingPage/LandingAgeTasks";
 import LandingWizard from "@components/site/LandingPage/LandingWizard";
 import { getCanonicalUrl } from "@framework/utils/normalize";
+import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
 
 export default function Home(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -34,6 +35,7 @@ export default function Home(
       <LandingReasons />
       <LandingPricesCards />
       <CallMeForFree elevation={8} sx={{ mb: "20px" }} />
+      <BottomContactsWithMap />
     </>
   );
 }
