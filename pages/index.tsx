@@ -1,4 +1,4 @@
-import { Container, Grid, Card, Paper } from "@mui/material";
+import { Container, Grid, Card, Paper, ThemeProvider } from "@mui/material";
 import Head from "next/head";
 import {
   GetStaticProps,
@@ -19,23 +19,38 @@ import LandingAgeTasks from "@components/site/LandingPage/LandingAgeTasks";
 import LandingWizard from "@components/site/LandingPage/LandingWizard";
 import { getCanonicalUrl } from "@framework/utils/normalize";
 import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
+import { useThemePalette } from "@components/ui";
+import getDarkTheme from "@components/ui/theme/dark-theme";
 
 export default function Home(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
+  const { theme } = useThemePalette(getDarkTheme);
   const { article } = props;
   return (
     <>
-      <HeroAlt article={article!} />
-      <LandingServices></LandingServices>
-      <LandingClientSteps />
-      <LandingAgeTasks />
-      <LandingWizard />
-      <CardGridContainer />
-      <LandingReasons />
-      <LandingPricesCards />
-      <CallMeForFree elevation={8} sx={{ mb: "20px" }} />
-      <BottomContactsWithMap />
+      <ThemeProvider theme={theme}>
+        <Container
+          maxWidth={false}
+          sx={{
+            backgroundColor: "#010101",
+            "&&": {
+              px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 },
+            },
+          }}
+        >
+          <HeroAlt article={article!} />
+          <LandingServices></LandingServices>
+          <LandingClientSteps />
+          <LandingAgeTasks />
+          <LandingWizard />
+          <CardGridContainer />
+          <LandingReasons />
+          <LandingPricesCards />
+          <CallMeForFree elevation={8} sx={{ mb: "20px" }} />
+          <BottomContactsWithMap />
+        </Container>
+      </ThemeProvider>
     </>
   );
 }

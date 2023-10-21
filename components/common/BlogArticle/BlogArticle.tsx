@@ -213,7 +213,6 @@ export default function BlogArticle({
           />
         </Paper>
       </HugeContainer>
-      <BottomContactsWithMap />
     </>
   );
 }

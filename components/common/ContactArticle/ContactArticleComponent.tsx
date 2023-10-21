@@ -250,7 +250,6 @@ export default function ContactArticleComponent({
           </Paper>
         </HugeContainer>
       </Box>
-      <BottomContactsWithMap />
     </>
   );
 }

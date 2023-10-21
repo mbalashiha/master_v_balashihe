@@ -1,5 +1,12 @@
 import { Search } from "@components/site";
-import { Grid, Box, Container, styled, Paper } from "@mui/material";
+import {
+  Grid,
+  Box,
+  Container,
+  styled,
+  Paper,
+  PaletteMode,
+} from "@mui/material";
 
 type ContainerProps = React.ComponentProps<typeof Container>;
 type BoxProps = React.ComponentProps<typeof Box>;
@@ -12,6 +19,7 @@ interface Props {
   rightSidebar?: React.ReactNode | React.ReactNode[];
   sx?: BoxProps["sx"];
   spacing?: GridContainerProps["spacing"];
+  colorMode?: PaletteMode;
 }
 export default function HugeContainer({
   children,
@@ -19,12 +27,16 @@ export default function HugeContainer({
   rightSidebar,
   sx,
   spacing,
+  colorMode,
 }: Props) {
   return (
     <Box
       sx={{
         width: "100%",
-        background: (theme) => theme.palette.background.paper,
+        background: (theme) =>
+          colorMode && colorMode === "dark"
+            ? "rgb(1,1,1)"
+            : theme.palette.background.paper,
         pt: 1.5,
         pb: 0,
         ...sx,

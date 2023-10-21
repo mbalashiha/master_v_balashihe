@@ -15,7 +15,11 @@ import LandingCard from "./LandingCard";
 
 export default function LandingServices() {
   return (
-    <DarkContainer sx={{ pt: { xs: "55px", lg: 0 } }}>
+    <DarkContainer
+      sx={{
+        pt: { xs: "55px", lg: 0 },
+      }}
+    >
       <Typography
         variant="h1"
         component={"h2"}
@@ -36,7 +40,8 @@ export default function LandingServices() {
           header="Ремонт компьютеров"
           imageUrl="/images/services_001.webp"
         >
-          Услуги по ремонту компьютерной техники в Балашихинском районе и Москве.
+          Услуги по ремонту компьютерной техники в Балашихинском районе и
+          Москве.
         </LandingCard>
         <LandingCard
           header="Настройка Интернета"

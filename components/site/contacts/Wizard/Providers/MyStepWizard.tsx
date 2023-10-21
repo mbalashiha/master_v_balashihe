@@ -12,7 +12,6 @@ import {
 
 import DefaultWizardNav from "./DefaultWizardNav";
 
-
 type PreStepWizardProps = Partial<{
   className: string;
   hashKey: string;
@@ -184,75 +183,127 @@ const MyStepWizard = ({
       )) ||
     undefined;
   return (
-    <Grid
-      container
-      sx={{
-        ...sx,
-      }}
-      {...rest}
-    >
-      <Grid
-        item
-        xs={12}
-        md={sidebar ? 9 : 12}
-        {...StepContainerProps}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          "& form": {
-            height: "100%",
-            flexGrow: 1,
-          },
-          ...StepContainerProps?.sx,
-        }}
-      >
-        {title && (
-          <Typography
-            variant="h1"
-            sx={{
-              "&&&": {
-                display: "block",
-                fontSize: { xs: "20px", md: "25px" },
-                lineHeight: { xs: "23px", md: "28px" },
-                fontWeight: 500,
-              },
-              mb: "5px",
-            }}
-          >
-            {title}
-          </Typography>
-        )}
+    <>
+      {!sidebar ? (
         <Box
           sx={{
-            flexGrow: 1,
-            overflowX: "hidden",
             display: "flex",
             flexDirection: "column",
+            "& form": {
+              height: "100%",
+              flexGrow: 1,
+            },
+            ...StepContainerProps?.sx,
           }}
         >
-          {selectedStep && form
-            ? React.cloneElement(
-                form,
-                getClonedElementProps(),
-                React.cloneElement(selectedStep, getClonedElementProps())
-              )
-            : selectedStep
-            ? React.cloneElement(selectedStep, getClonedElementProps())
-            : undefined}
+          {title && (
+            <Typography
+              variant="h1"
+              sx={{
+                "&&&": {
+                  display: "block",
+                  fontSize: { xs: "20px", md: "25px" },
+                  lineHeight: { xs: "23px", md: "28px" },
+                  fontWeight: 500,
+                },
+                mb: "5px",
+              }}
+            >
+              {title}
+            </Typography>
+          )}
+          <Box
+            sx={{
+              flexGrow: 1,
+              overflowX: "hidden",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            {selectedStep && form
+              ? React.cloneElement(
+                  form,
+                  getClonedElementProps(),
+                  React.cloneElement(selectedStep, getClonedElementProps())
+                )
+              : selectedStep
+              ? React.cloneElement(selectedStep, getClonedElementProps())
+              : undefined}
+          </Box>
+          {nav}
         </Box>
-        {nav}
-      </Grid>
-      {sidebar && (
+      ) : (
         <Grid
-          item
-          xs={12}
-          md={3}
-          sx={{ background: (theme) => theme.palette.background.paper }}
+          container
+          sx={{
+            ...sx,
+          }}
+          {...rest}
         >
-          {sidebar}
+          <Grid
+            item
+            xs={12}
+            md={sidebar ? 9 : 12}
+            {...StepContainerProps}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              "& form": {
+                height: "100%",
+                flexGrow: 1,
+              },
+              ...StepContainerProps?.sx,
+            }}
+          >
+            {title && (
+              <Typography
+                variant="h1"
+                sx={{
+                  "&&&": {
+                    display: "block",
+                    fontSize: { xs: "20px", md: "25px" },
+                    lineHeight: { xs: "23px", md: "28px" },
+                    fontWeight: 500,
+                  },
+                  mb: "5px",
+                }}
+              >
+                {title}
+              </Typography>
+            )}
+            <Box
+              sx={{
+                flexGrow: 1,
+                overflowX: "hidden",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              {selectedStep && form
+                ? React.cloneElement(
+                    form,
+                    getClonedElementProps(),
+                    React.cloneElement(selectedStep, getClonedElementProps())
+                  )
+                : selectedStep
+                ? React.cloneElement(selectedStep, getClonedElementProps())
+                : undefined}
+            </Box>
+            {nav}
+          </Grid>
+          {sidebar && (
+            <Grid
+              item
+              xs={12}
+              md={3}
+              sx={{ background: (theme) => theme.palette.background.paper }}
+            >
+              {sidebar}
+            </Grid>
+          )}
         </Grid>
       )}
-    </Grid>
+    </>
   );
 };
 export default MyStepWizard;

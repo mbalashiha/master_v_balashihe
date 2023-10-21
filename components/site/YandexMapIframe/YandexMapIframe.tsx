@@ -16,7 +16,6 @@ const YandexMapIframe = () => {
       <Container
         maxWidth={false}
         sx={{
-          background: "white",
           "&&": {
             p: { xs: 0, xl: "0 30px 20px 30px" },
           },
@@ -41,6 +40,11 @@ const YandexMapIframe = () => {
           <Paper
             elevation={3}
             sx={{
+              background: (theme) =>
+                theme.palette.mode === "dark"
+                  ? "#121212"
+                  : theme.palette.background.paper,
+                  p: "12px",
               maxWidth: "95vw",
               minWidth: { xs: "100%", lg: "380px" },
               height: { xs: "auto", md: "100%", lg: "auto" },
@@ -51,9 +55,6 @@ const YandexMapIframe = () => {
               marginBottom: 0,
               marginLeft: { lg: "-15px", xl: "-55px" },
               marginTop: { xs: "43px", md: 0, lg: "43px" },
-              border: (theme) => `12px solid ${theme.palette.background.paper}`,
-              borderBottomWidth: { xs: "3px", md: "10px", lg: "12px" },
-              borderRightWidth: { xs: "12px", md: 0, lg: "12px" },
               borderRadius: {
                 xs: 0,
                 lg: "24px",
@@ -128,27 +129,24 @@ const YandexMapIframe = () => {
           elevation={3}
           sx={{
             zIndex: 0,
-            height: "555px",
             width: "100%",
             maxWidth: "1760px",
             marginLeft: "auto",
             marginRight: "auto",
-            border: (theme) => `11px solid ${theme.palette.background.paper}`,
+            background: (theme) =>
+              theme.palette.mode === "dark"
+                ? "#252525"
+                : theme.palette.background.paper,
+            border: "none",
             borderRadius: { xs: 0, xl: "20px" },
+            p: 0,
             position: "relative",
             overflow: "hidden",
+            height: "535px",
             "& iframe": {
-              zIndex: 1,
-              height: "535px",
+              height: "100%",
               width: "100%",
               border: "none",
-              position: "absolute",
-              top: 0,
-              right: 0,
-              left: "auto",
-              bottom: "auto",
-              marginLeft: "auto",
-              marginRight: 0,
             },
             display: "flex",
             alignItems: "center",

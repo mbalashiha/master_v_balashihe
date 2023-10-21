@@ -21,7 +21,8 @@ export const ContactInfoRow = ({ svgIcon, label, infoText }: Props) => {
               lineHeight: "25px",
               fontWeight: 400,
               fontFamily: "Arial",
-              color: "grey.600",
+              color: (theme) =>
+                theme.palette.mode === "dark" ? "grey.500" : "grey.600",
               marginBottom: "-6px",
             },
           }}
@@ -36,8 +37,10 @@ export const ContactInfoRow = ({ svgIcon, label, infoText }: Props) => {
             "&, & a": {
               fontSize: "20px",
               lineHeight: "31px",
-              fontWeight: 700,
-              color: "text.primary",
+              fontWeight: (theme) =>
+                theme.palette.mode === "dark" ? 500 : 700,
+              color: (theme) =>
+                theme.palette.mode === "dark" ? "grey.200" : "text.primary",
               marginTop: "-6px",
             },
           }}

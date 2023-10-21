@@ -1,3 +1,4 @@
+import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
 import { Container, Grid, Card, Paper } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
@@ -183,6 +184,7 @@ export default function AboutMaster(
       <CardGridContainer />
       <LandingReasons />
       <LandingPricesCards />
+      <BottomContactsWithMap />
     </>
   );
 }

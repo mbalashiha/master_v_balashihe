@@ -1,3 +1,4 @@
+import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
 import { ArticleLayout } from "@components/site";
 import { Container, Grid, Card, Paper } from "@mui/material";
 import Head from "next/head";
@@ -59,7 +60,8 @@ export default function Page(
           } Мастер по ремонту в Балашихе и Московской области`}
         />
       </Head>
-      {articleElement}
+      <>{articleElement}</>
+      <BottomContactsWithMap />
     </>
   );
 }

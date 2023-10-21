@@ -64,7 +64,6 @@ export default function Hero({ article }: Props) {
         maxWidth={false}
         sx={{
           position: "relative",
-          backgroundColor: "#010101",
           overflow: "hidden",
           py: 0,
         }}

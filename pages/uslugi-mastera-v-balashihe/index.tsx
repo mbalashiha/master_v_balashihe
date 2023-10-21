@@ -1,3 +1,4 @@
+import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
 import { CardsLayout } from "@components/site";
 import { Typography, Card, Grid, Button, Box } from "@mui/material";
 import Head from "next/head";

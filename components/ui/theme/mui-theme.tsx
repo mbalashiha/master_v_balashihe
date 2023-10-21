@@ -18,8 +18,8 @@ export const standartCssTransition = {
   transitionDelay: "0s",
 };
 
-const getMuiTheme = (): Theme => {
-  const colorMode: PaletteMode = "light" as any;
+const getMuiTheme = (colorMode?: PaletteMode): Theme => {
+  colorMode = colorMode || "light";
   const fontFamily = "Gotham, Arial, sans-serif";
   const themeGreyColor = "rgba(40, 39, 37, 0.94)";
   let theme = createTheme({

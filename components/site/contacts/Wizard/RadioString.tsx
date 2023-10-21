@@ -25,11 +25,11 @@ export default function RadioString({
       value={value}
       label={label}
       sx={{
+        background: "white",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-start",
-        background: (theme) => theme.palette.background.paper,
         m: 0,
         borderRadius: 1 / 2,
         boxShadow: 0,

@@ -18,8 +18,10 @@ export default function DarkContainer({
       maxWidth={false}
       {...FullWidthProps}
       sx={{
+        "&&": {
+          px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 },
+        },
         position: "relative",
-        background: "#010101",
         ...FullWidthProps?.sx,
       }}
     >

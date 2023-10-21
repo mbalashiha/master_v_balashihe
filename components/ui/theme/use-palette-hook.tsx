@@ -23,7 +23,7 @@ const useThemePalette = (getMuiTheme: () => Theme) => {
   }, []);
   return React.useMemo(() => {
     return {
-      colorMode: "light",
+      colorMode: theme.palette.mode,
       theme,
     };
   }, [theme]);

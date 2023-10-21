@@ -112,8 +112,12 @@ export const GradientCard = ({
             "&, & strong, & span": {
               fontSize: { xs: "18px", sm: "12px", md: "16px" },
               lineHeight: { xs: "24px", sm: "16px", md: "20px" },
-              fontWeight: 600,
-              color: (theme) => theme.typography.allVariants.color,
+              fontWeight: (theme) =>
+                theme.palette.mode === "dark" ? 500 : 600,
+              color: (theme) =>
+                theme.palette.mode === "dark"
+                  ? "grey.200"
+                  : theme.typography.allVariants.color,
             },
             "& strong": {
               flexGrow: 1,

@@ -36,7 +36,10 @@ export const CallMeForFree = ({
           maxWidth: "99vw",
           overflow: "hidden",
           p: 3,
-          backgroundColor: (theme) => theme.palette.background.paper,
+          background: (theme) =>
+            theme.palette.mode === "dark"
+              ? "#121212"
+              : theme.palette.background.paper,
           border: elevation ? `none` : `2px solid #EBEBEA`,
           textAlign: "center",
           "&, & p, & h2": {

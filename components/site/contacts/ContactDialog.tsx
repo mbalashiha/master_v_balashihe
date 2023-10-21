@@ -3,7 +3,6 @@ import { FC, useMemo, useRef } from "react";
 import Image from "next/image";
 import { Grid, Box, Stack, Typography, Divider } from "@mui/material";
 import { ContactWizard } from "../contacts";
-import Step1 from "./Wizard/Step1";
 import Step1_2 from "./Wizard/Step2_1-2";
 import Step1_3 from "./Wizard/Step3";
 import Step1_4_2 from "./Wizard/Step2_4";
@@ -14,6 +13,7 @@ import { FormikForWizard } from "./Wizard/Providers/FormikForWizard";
 import { ApiProvider } from "@framework/index";
 import LastStepSended from "./Wizard/LastStepSended";
 import WizardSidebar from "./Wizard/WizardSidebar";
+import Step1 from "@components/site/LandingPage/LandingWizard/Step1";
 
 const GetDiscountWizardContent = () => {
   return (

@@ -12,7 +12,7 @@ export const Footer = () => {
       itemScope
       itemType="https://schema.org/WPFooter"
       sx={{
-        backgroundColor: "black",
+        backgroundColor: "#010101",
         backgroundImage: "url(/mir-logo.svg)",
         backgroundRepeat: "no-repeat",
         backgroundPosition: { xs: "center", sm: "4px -96px" },

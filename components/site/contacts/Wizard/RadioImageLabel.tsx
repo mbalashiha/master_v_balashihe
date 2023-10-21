@@ -31,7 +31,7 @@ export default function RadioImageLabel({
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "flex-end",
-        background: (theme) => theme.palette.background.paper,
+        background: "white",
         m: 0,
         borderRadius: 1 / 2,
         boxShadow: 0,
@@ -40,6 +40,10 @@ export default function RadioImageLabel({
           pt: 1 / 2,
           pb: 0.6,
           px: 1,
+        },
+        "&, & img": {
+          width: "200px",
+          height: "200px",
         },
         ...sx,
       }}

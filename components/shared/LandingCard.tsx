@@ -36,7 +36,8 @@ export const LandingCard = ({ children, image }: Props) => {
               py: "1px",
               fontSize: "14px",
               lineHeight: "18px",
-              color: "#303B44",
+              color: (theme) =>
+                theme.palette.mode === "dark" ? "white" : "#303B44",
             },
           },
         }}
@@ -54,19 +55,28 @@ export const LandingCard = ({ children, image }: Props) => {
           <Button
             onClick={() => toggleModal("get discount wizard")}
             sx={{
-              padding: "0 14px",
+              padding: (theme) =>
+                theme.palette.mode === "dark" ? "14px" : "14px",
               border: "none",
               borderRadius: 1,
               ...standartCssTransition,
               "&": {
-                background: "rgba(255,255,255,0.75)",
+                color: (theme) => theme.palette.primary.main,
+                background: (theme) =>
+                  theme.palette.mode === "dark"
+                    ? "rgba(0,0,0,0.85)"
+                    : "rgba(255,255,255,0.75)",
               },
               "& svg": {
                 background: "none",
               },
               "&:hover": {
-                color: "black",
-                background: "rgba(255,255,255,0.9)",
+                color: (theme) =>
+                  theme.palette.mode === "dark" ? "white" : "black",
+                background: (theme) =>
+                  theme.palette.mode === "dark"
+                    ? "rgba(0,0,0,0.90)"
+                    : "rgba(255,255,255,0.9)",
               },
               "& .Button-startIcon": {
                 pr: 0,
