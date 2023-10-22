@@ -35,6 +35,7 @@ const InPageWizard = () => {
       <LastStep noTitle stepName="Оставьте заявку на ремонт со скидкой" />
       <LastStepSended
         noTitle
+        noNavigation
         stepName="Сейчас перезвоним и предложим выезд мастера"
       />
     </Wizard>

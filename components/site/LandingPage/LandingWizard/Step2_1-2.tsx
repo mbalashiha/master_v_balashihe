@@ -8,13 +8,25 @@ import FormLabel from "@mui/material/FormLabel";
 import { StepWizardChildProps } from "@components/site/contacts/Wizard/Providers/MyStepWizard";
 import WizFormControl from "@components/site/contacts/Wizard/WizFormControl";
 import RadioString from "@components/site/contacts/Wizard/RadioString";
+import useStepField from "./useStepField";
 
+const getNextStep = (value: string | null): string | null =>
+  "Ремонтировали ли ранее устройство?";
 const Step1: React.FC<Partial<StepWizardChildProps>> = (({
   stepName,
+  setNextStepName,
+  nextStepName,
+  goToNamedStep,
   ...props
 }: StepWizardChildProps) => {
   stepName = stepName || "Что сейчас с вашей техникой?";
-  const [field, meta] = useField(stepName);
+  const { onChange, onClick, name, value, field, meta } = useStepField({
+    stepName,
+    nextStepName,
+    goToNamedStep,
+    setNextStepName,
+    getNextStep,
+  });
   return (
     <WizFormControl>
       <FormLabel id="step1_2">{stepName}</FormLabel>
@@ -22,17 +34,10 @@ const Step1: React.FC<Partial<StepWizardChildProps>> = (({
         aria-labelledby=""
         sx={{ gap: "12px" }}
         {...field}
-        onChange={(event) => {
-          field.onChange(event);
-          if (event.target.value) {
-            props.goToNamedStep("Ремонтировали ли ранее устройство?");
-          }
-        }}
-        onClick={(event) => {
-          if (field.value) {
-            props.goToNamedStep("Ремонтировали ли ранее устройство?");
-          }
-        }}
+        onChange={onChange}
+        name={name}
+        value={value}
+        onClick={onClick}
       >
         <RadioString value="Не включается или не запускается" />
         <RadioString value="Проблемы при работе, глюки и прочее" />

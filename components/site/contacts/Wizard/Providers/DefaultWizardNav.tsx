@@ -13,6 +13,9 @@ const Btn = styled(Button)(({ theme }) => ({
 }));
 
 const DefaultWizardNav: FC<any> = (props: StepWizardChildProps) => {
+  const nextStepButtonDisabled =
+    !(props.nextStepName || props.nextStepIndex) ||
+    props.currentStep >= props.totalSteps;
   return (
     <Stack
       direction={"row"}
@@ -30,9 +33,11 @@ const DefaultWizardNav: FC<any> = (props: StepWizardChildProps) => {
       </Btn>
       <Btn
         endIcon={<EastIcon />}
-        disabled={props.currentStep >= props.totalSteps}
+        disabled={nextStepButtonDisabled}
         onClick={() => {
-          props.nextStep();
+          if (!nextStepButtonDisabled) {
+            props.nextStep();
+          }
         }}
       >
         Вперёд

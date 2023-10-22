@@ -6,11 +6,10 @@ import { WizValues } from "@components/site/contacts/Wizard/Providers";
 import { FormLabel, Grid } from "@mui/material";
 import ImagePaper from "./ImagePaper";
 import Image from "next/image";
+import useStepField from "./useStepField";
 
 type ImageProps = React.ComponentProps<typeof Image>;
-const getNextStep = (
-  value: WizValues["Какое у вас устройство?"]
-): string | null => {
+const getNextStep = (value: string | null): string | null => {
   switch (value) {
     case "Настольный ПК":
     case "Ноутбук":
@@ -35,23 +34,19 @@ const variants: Array<{ title: string; src: ImageProps["src"] }> = [
 ];
 const Step1: React.FC<Partial<StepWizardChildProps>> = (({
   stepName,
+  setNextStepName,
+  nextStepName,
+  goToNamedStep,
   ...props
 }: StepWizardChildProps) => {
-  const [clicked, setClicked] = React.useState(false);
   stepName = stepName || "Какое у вас устройство?";
-  const [field, meta] =
-    useField<WizValues["Какое у вас устройство?"]>(stepName);
-  const { name, value } = field;
-  const onChange: typeof field.onChange = (event: {
-    target: { value: string | null };
-  }) => {
-    const nextStepName = getNextStep(event.target.value as any);
-    if (nextStepName && !clicked) {
-      setClicked(true);
-      field.onChange(event);
-      setTimeout(() => props.goToNamedStep(nextStepName), 300);
-    }
-  };
+  const { onChange, name, value, field, meta } = useStepField({
+    stepName,
+    nextStepName,
+    goToNamedStep,
+    setNextStepName,
+    getNextStep,
+  });
   return (
     <WizFormControl>
       <FormLabel id="step1">{stepName}</FormLabel>
@@ -65,7 +60,7 @@ const Step1: React.FC<Partial<StepWizardChildProps>> = (({
               value={value}
               title={title}
               src={src}
-              tabIndex={ind}
+              tabIndex={ind + 4}
             />
           </Grid>
         ))}

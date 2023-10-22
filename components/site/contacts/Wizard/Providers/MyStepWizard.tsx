@@ -47,6 +47,12 @@ export type StepWizardChildProps<T extends Record<string, any> = {}> = {
   currentStep: number;
   totalSteps: number;
   progressPercents: number;
+  nextStepName: string | null;
+  nextStepIndex: number | null;
+  setNextStepName: React.Dispatch<React.SetStateAction<string | null>>;
+  setNextStepIndex: React.Dispatch<React.SetStateAction<string | null>>;
+  stepsHistory: Array<number>;
+  goBackward: () => void;
   firstStep: () => void;
   lastStep: () => void;
   nextStep: () => void;
@@ -114,20 +120,51 @@ const MyStepWizard = ({
       });
     }
   });
+  const [nextStepName, setNextStepName] = React.useState<string | null>(null);
+  const [nextStepIndex, setNextStepIndex] = React.useState<number | null>(null);
+  const [stepsHistory, setStepsHistory] = React.useState<Array<number>>([]);
   const [currentStep, __setCurrentStep] = React.useState<number>(
     initialStep || 1
   );
   const [progressPercents, setProgressPercents] = React.useState<number>(
     (currentStep / (totalSteps || 1)) * 100
   );
-  const setCurrentStep = (step: number): void => {
-    __setCurrentStep(step);
-    setProgressPercents((step / (totalSteps || 1)) * 100);
+  const setCurrentStep = (nextStepIndex: number): void => {
+    if (nextStepIndex > totalSteps) {
+      return;
+    }
+    setNextStepName(null);
+    setNextStepIndex(null);
+    const newStepHistory = stepsHistory
+      .concat(currentStep)
+      .filter((value, index, array) => {
+        return array.indexOf(value) === index;
+      });
+    newStepHistory.sort();
+    setStepsHistory(newStepHistory);
+    __setCurrentStep(nextStepIndex);
+    setProgressPercents((nextStepIndex / (totalSteps || 1)) * 100);
   };
   const goToNamedStep = (step: string): void => {
     const namedStepIndex = collectedStepsNames.get(step)?.index;
     if (namedStepIndex) {
       setCurrentStep(namedStepIndex);
+    } else {
+      console.error("Incorrect step name: " + step);
+    }
+  };
+  const goBackward = () => {
+    const prevElement = stepsHistory[stepsHistory.length - 1];
+    const backStep =
+      prevElement &&
+      prevElement < currentStep &&
+      collectedSteps.has(prevElement)
+        ? prevElement
+        : currentStep > 1
+        ? 1
+        : false;
+    if (backStep) {
+      setCurrentStep(backStep);
     }
   };
   const goToStep = (step: number): void => {
@@ -136,15 +173,15 @@ const MyStepWizard = ({
     }
   };
   const nextStep = (): void => {
-    if (collectedSteps.get(currentStep + 1)) {
+    if (nextStepName) {
+      goToNamedStep(nextStepName);
+    } else if (nextStepIndex) {
+      setCurrentStep(nextStepIndex);
+    } else {
       setCurrentStep(currentStep + 1);
     }
   };
-  const previousStep = (): void => {
-    if (collectedSteps.get(currentStep - 1)) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
+  const previousStep = goBackward;
   const firstStep = () => {
     setCurrentStep(1);
   };
@@ -158,16 +195,21 @@ const MyStepWizard = ({
   } = selectedStepEntry;
   const getClonedElementProps = () => ({
     isActive: true,
-    currentStep,
     totalSteps,
+    progressPercents,
+    nextStepName,
+    nextStepIndex,
+    setNextStepName,
+    setNextStepIndex,
+    stepsHistory,
+    goBackward,
     firstStep,
     lastStep,
     nextStep,
     previousStep,
     goToStep,
     goToNamedStep,
-    progressPercents,
-    stepName,
+    currentStep,
   });
   sidebar =
     sidebar && !showOnlyStep && !noSidebar

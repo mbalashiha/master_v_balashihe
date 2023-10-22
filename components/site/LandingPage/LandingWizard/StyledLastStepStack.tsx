@@ -27,6 +27,9 @@ export default function StyledLastStepStack({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        "& .InputBase-root": {
+          background: "white",
+        },
         ...sx,
       }}
       spacing={2}
