@@ -2,13 +2,13 @@ import * as React from "react";
 import Image from "next/image";
 import { Paper, Typography, Box } from "@mui/material";
 type ImageProps = React.ComponentProps<typeof Image>;
-interface Props {
+type Props = React.ComponentProps<typeof Paper> & {
   src: ImageProps["src"];
   title: string;
   name: string;
   value: string | null;
   onChange: (event: { target: { name: string; value: string } }) => void;
-}
+};
 
 export default function ImagePaper({
   src,
@@ -16,6 +16,9 @@ export default function ImagePaper({
   onChange,
   name,
   value,
+  sx,
+  onClick: _,
+  ...rest
 }: Props) {
   return (
     <Paper
@@ -47,8 +50,10 @@ export default function ImagePaper({
         "& .title": {
           p: { xs: "30px", sm: 0 },
         },
+        ...sx,
       }}
       onClick={() => onChange({ target: { name, value: title } })}
+      {...rest}
     >
       {value === title && (
         <Paper

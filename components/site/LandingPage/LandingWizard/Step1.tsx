@@ -5,7 +5,9 @@ import WizFormControl from "@components/site/contacts/Wizard/WizFormControl";
 import { WizValues } from "@components/site/contacts/Wizard/Providers";
 import { FormLabel, Grid } from "@mui/material";
 import ImagePaper from "./ImagePaper";
+import Image from "next/image";
 
+type ImageProps = React.ComponentProps<typeof Image>;
 const getNextStep = (
   value: WizValues["Какое у вас устройство?"]
 ): string | null => {
@@ -25,6 +27,12 @@ const getNextStep = (
       break;
   }
 };
+const variants: Array<{ title: string; src: ImageProps["src"] }> = [
+  { title: "Настольный ПК", src: `/images/wizard/computer-desktop.webp` },
+  { title: "Ноутбук", src: `/images/wizard/laptop.webp` },
+  { title: "Apple Mac", src: `/images/wizard/imac.webp` },
+  { title: "Другая техника", src: `/images/wizard/question-mark.webp` },
+];
 const Step1: React.FC<Partial<StepWizardChildProps>> = (({
   stepName,
   ...props
@@ -48,42 +56,19 @@ const Step1: React.FC<Partial<StepWizardChildProps>> = (({
     <WizFormControl>
       <FormLabel id="step1">{stepName}</FormLabel>
       <Grid container spacing={3} sx={{ width: "100%", pl: 2.5, pt: 1 }}>
-        <Grid item xs={12} sm={6} md={3}>
-          <ImagePaper
-            onChange={onChange}
-            name={name}
-            value={value}
-            title="Настольный ПК"
-            src={`/images/wizard/computer-desktop.webp`}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <ImagePaper
-            onChange={onChange}
-            name={name}
-            value={value}
-            title="Ноутбук"
-            src={`/images/wizard/laptop.webp`}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <ImagePaper
-            onChange={onChange}
-            name={name}
-            value={value}
-            title="Apple Mac"
-            src={`/images/wizard/imac.png`}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <ImagePaper
-            onChange={onChange}
-            name={name}
-            value={value}
-            title="Другая техника"
-            src={`/images/wizard/question-mark.webp`}
-          />
-        </Grid>
+        {variants.map(({ title, src }, ind) => (
+          <Grid item xs={12} sm={6} md={3} key={title}>
+            <ImagePaper
+              {...field}
+              onChange={onChange}
+              name={name}
+              value={value}
+              title={title}
+              src={src}
+              tabIndex={ind}
+            />
+          </Grid>
+        ))}
       </Grid>
     </WizFormControl>
   );
