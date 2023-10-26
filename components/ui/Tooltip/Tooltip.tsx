@@ -1,13 +1,19 @@
-import { styled, Box, ClickAwayListener } from "@mui/material";
 import React from "react";
 import HtmlTooltip from "../HtmlTooltip";
 import StyledTooltip from "./StyledTooltip";
+import cn from "classnames";
 
-type Props = {
+type Props = Omit<
+  React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLSpanElement>,
+    HTMLSpanElement
+  >,
+  "title"
+> & {
   children: React.ReactNode | React.ReactNode[];
   placement?: "up" | "down" | "left" | "right";
   delay?: 100 | 500 | 1000;
-  title: string | React.ReactNode | React.ReactNode[];
+  title: React.ReactNode | React.ReactNode[];
   inline?: boolean;
 };
 const Tooltip = ({
@@ -16,6 +22,8 @@ const Tooltip = ({
   title: inTitle,
   inline,
   delay,
+  className,
+  ...rest
 }: Props) => {
   const title = React.useMemo(() => {
     let title = inTitle;
@@ -50,10 +58,11 @@ const Tooltip = ({
   if (title && typeof title === "string") {
     return (
       <StyledTooltip
+        {...rest}
         data-tooltip={placement || "down" + (delay ? delay.toString() : "")}
         aria-label={title as string}
         role="contentinfo"
-        className={(inline && "inline") || ""}
+        className={cn(className, { inline: inline })}
       >
         {trigger}
       </StyledTooltip>
@@ -61,10 +70,12 @@ const Tooltip = ({
   } else {
     return (
       <HtmlTooltip
+        {...rest}
         placement={placement}
         tooltip={title}
         inline={inline}
         delay={delay}
+        className={cn(className)}
       >
         {trigger}
       </HtmlTooltip>

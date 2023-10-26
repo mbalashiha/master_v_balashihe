@@ -41,6 +41,7 @@ export default function ContactArticleComponent({
   randomImage,
   url,
   canonicalUrl,
+  ogDates,
   ...rest
 }: Props) {
   const articleImage =
@@ -72,6 +73,16 @@ export default function ContactArticleComponent({
           property="og:image:height"
           content={articleImage?.height.toString() || ""}
         />
+        <meta property="og:article:author" content="Компьютерный мастер" />
+        <meta property="og:article:tag" content="Балашиха" />
+        <meta
+          property="og:article:modified_time"
+          content={ogDates.modified_time}
+        />
+        <meta
+          property="og:article:published_time"
+          content={ogDates.published_time}
+        />
       </Head>
       <Box
         component={"article"}
@@ -84,53 +95,92 @@ export default function ContactArticleComponent({
         </SpecialHeader>
         <HugeContainer
           sx={{
-            paddingTop: { xs: "200px", sm: "140px", md: "120px" },
+            paddingTop: { xs: "160px", sm: "100px", md: "90px" },
             mb: "10px",
             background: "linear-gradient(180deg, #DFE7EB 1%, transparent 99%)",
           }}
-          rightSidebar={navigation && <NavSidebar navigation={navigation} />}
+          rightSidebar={
+            navigation &&
+            navigation.nearestSiblings && (
+              <NavSidebar title="Навигация" list={navigation.nearestSiblings} />
+            )
+          }
         >
-          <Stack
-            direction={"row"}
-            alignContent="center"
-            justifyContent="space-between"
-            justifyItems={"center"}
-            alignItems="center"
-            mb={2}
-            sx={{
-              "& a[href]": {
-                "&, & > span": {
-                  display: "block",
-                  borderRadius: "100%",
-                },
-              },
-            }}
+          <Box
+            component={"nav"}
+            itemScope
+            itemType="https://schema.org/SiteNavigationElement"
+            sx={{ width: "100%", mb: 1 }}
           >
-            {navigation?.prev?.url ? (
-              <Link href={navigation.prev.url}>
-                <Tooltip title={<>{navigation.prev.title}</>} placement="right">
-                  <StyledFab size="medium" aria-label="Предыдущая страница">
-                    <ArrowBackIosRoundedIcon />
-                  </StyledFab>
-                </Tooltip>
-              </Link>
-            ) : (
-              <div></div>
-            )}
-
-            <CallButton />
-            {navigation?.next?.url ? (
-              <Link href={navigation.next.url}>
-                <Tooltip title={<>{navigation.next.title}</>} placement="left">
-                  <StyledFab size="medium" aria-label="Следующая страница">
-                    <ArrowForwardIosRoundedIcon />
-                  </StyledFab>
-                </Tooltip>
-              </Link>
-            ) : (
-              <div></div>
-            )}
-          </Stack>
+            <Stack
+              component="ul"
+              itemScope
+              itemType="https://schema.org/ItemList"
+              direction={"row"}
+              alignContent="center"
+              justifyContent="space-between"
+              justifyItems={"center"}
+              alignItems="center"
+              mb={2}
+              sx={{
+                listStyleType: "none",
+                m: 0,
+                p: 0,
+                "& a[href]": {
+                  "&, & > span": {
+                    display: "block",
+                    borderRadius: "100%",
+                  },
+                },
+              }}
+            >
+              <li
+                itemProp="itemListElement"
+                itemScope
+                itemType="https://schema.org/ItemList"
+              >
+                {navigation?.prev?.url ? (
+                  <Link href={navigation.prev.url} itemProp="url">
+                    <Tooltip
+                      title={<>{navigation.prev.title}</>}
+                      placement="right"
+                      itemProp="name"
+                    >
+                      <StyledFab size="medium" aria-label="Предыдущая страница">
+                        <ArrowBackIosRoundedIcon />
+                      </StyledFab>
+                    </Tooltip>
+                  </Link>
+                ) : (
+                  <div></div>
+                )}
+              </li>
+              <li>
+                <CallButton zIndex={2} />
+              </li>
+              <li
+                itemProp="itemListElement"
+                itemScope
+                itemType="https://schema.org/ItemList"
+              >
+                {navigation?.next?.url ? (
+                  <Link href={navigation.next.url} itemProp="url">
+                    <Tooltip
+                      title={<>{navigation.next.title}</>}
+                      placement="left"
+                      itemProp="name"
+                    >
+                      <StyledFab size="medium" aria-label="Следующая страница">
+                        <ArrowForwardIosRoundedIcon />
+                      </StyledFab>
+                    </Tooltip>
+                  </Link>
+                ) : (
+                  <div></div>
+                )}
+              </li>
+            </Stack>
+          </Box>
           <Paper
             sx={{
               "&, & p, & .Paper-root": {

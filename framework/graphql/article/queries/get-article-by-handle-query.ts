@@ -44,6 +44,10 @@ export const getArticleByHandleQuery = gql`
     updatedAt
     publishedAt
     templateId
+    ogDates {
+      modified_time
+      published_time
+    }
     image {
       ...ImageFragment
     }

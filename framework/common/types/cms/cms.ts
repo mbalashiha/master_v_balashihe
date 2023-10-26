@@ -37,8 +37,8 @@ export namespace Blog {
     viewed: number | null;
   }
   export interface NavigationItem {
-    title: String;
-    url: String;
+    title: string;
+    url: string;
     active: true | null;
     itIsloop: Boolean | null;
     image: Image | null;
@@ -47,6 +47,10 @@ export namespace Blog {
     prev: NavigationItem | null;
     next: NavigationItem | null;
     nearestSiblings: NavigationItem[] | null;
+  }
+  export interface OpenGraphDates {
+    modified_time: String;
+    published_time: String;
   }
   export interface Article {
     id: ID;
@@ -78,6 +82,7 @@ export namespace Blog {
     templateId: ID | null;
     handle: String | null;
     autoHandleSlug: String | null;
+    ogDates: OpenGraphDates;
   }
   export interface ArticleTemplate {
     templateId: ID;

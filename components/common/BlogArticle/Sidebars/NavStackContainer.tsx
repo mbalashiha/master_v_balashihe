@@ -14,15 +14,13 @@ import cn from "classnames";
 import { Blog } from "@common/types/cms";
 import React from "react";
 
-type Props = React.ComponentProps<typeof Stack>;
+interface Props extends React.ComponentProps<typeof Stack> {}
 
 export default function NavStackContainer({ children, sx, ...rest }: Props) {
   return (
     <Stack
       component="ul"
       spacing="4px"
-      itemScope
-      itemType="https://schema.org/SiteNavigationElement"
       sx={{
         listStyleType: "none",
         m: 0,

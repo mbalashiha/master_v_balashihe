@@ -19,6 +19,10 @@ export const managementCheckArticleQuery = gql`
       createdAt
       updatedAt
       publishedAt
+      ogDates {
+        modified_time
+        published_time
+      }
       image {
         imageId
         imgSrc

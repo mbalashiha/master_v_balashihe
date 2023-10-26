@@ -112,12 +112,13 @@ const StyledButton: any = styled(ButtonForStyling)<{
 type Props = {
   isLoading?: boolean;
   disabled?: boolean;
+  zIndex?: number;
 };
-const CallButton = ({ isLoading, disabled }: Props) => {
+const CallButton = ({ isLoading, disabled, zIndex }: Props) => {
   const { toggleModal } = useSiteModal();
   return (
     <StyledButton
-      zIndex={0}
+      zIndex={zIndex || 0}
       isLoading={isLoading || false}
       disabled={isLoading || disabled}
       startIcon={<HandymanIcon />}

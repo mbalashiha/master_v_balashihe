@@ -2,8 +2,9 @@ import { Box, Typography, Paper, Grid, Stack, Button } from "@mui/material";
 import { StyledHeader } from "@components/common/Sidebar/StyledHeader";
 import React from "react";
 
-interface Props extends React.ComponentProps<typeof Box> {
-  title?: string;
+export interface NavSidebarContainerProps
+  extends React.ComponentProps<typeof Box> {
+  title: string;
   ariaLabel?: string;
   children: React.ReactNode | React.ReactNode[];
 }
@@ -13,11 +14,10 @@ export default function NavSidebarContainer({
   ariaLabel,
   sx,
   ...rest
-}: Props) {
+}: NavSidebarContainerProps) {
   return (
     <Box
       width="100%"
-      component="nav"
       sx={{
         float: "left",
         maxWidth: "382px",

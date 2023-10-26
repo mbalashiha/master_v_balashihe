@@ -24,6 +24,10 @@ export const getArticleByAbsUrlQuery = gql`
       height
       altText
     }
+    ogDates {
+      modified_time
+      published_time
+    }
   }
   query ($absURL: String) {
     articleByAbsUrl(absURL: $absURL) {

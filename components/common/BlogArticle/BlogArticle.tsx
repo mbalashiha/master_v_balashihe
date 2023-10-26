@@ -36,6 +36,7 @@ export default function BlogArticle({
   randomImage,
   url,
   canonicalUrl,
+  ogDates,
   ...rest
 }: Props) {
   const articleImage =
@@ -66,6 +67,16 @@ export default function BlogArticle({
         <meta
           property="og:image:height"
           content={articleImage?.height.toString() || ""}
+        />
+        <meta property="og:article:author" content="Компьютерный мастер" />
+        <meta property="og:article:tag" content="Балашиха" />
+        <meta
+          property="og:article:modified_time"
+          content={ogDates.modified_time}
+        />
+        <meta
+          property="og:article:published_time"
+          content={ogDates.published_time}
         />
       </Head>
       <HugeContainer>

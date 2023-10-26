@@ -13,30 +13,33 @@ import cn from "classnames";
 
 import { Blog } from "@common/types/cms";
 import React from "react";
-import NavStackContainer from "./NavStackContainer";
 
-interface Props {
-  articlesList: Blog.NavigationItem[];
-}
+type Props = React.DetailedHTMLProps<
+  React.LiHTMLAttributes<HTMLLIElement>,
+  HTMLLIElement
+> &
+  Blog.NavigationItem;
 
-export default function NavigationList({ articlesList }: Props) {
-  return (
-    <NavStackContainer>
-      {articlesList.map((el) => (
-        <li
-          itemProp="name"
-          className={cn({ active: Boolean(el.active) })}
-          key={el.title + "_" + (el.url || "")}
-        >
-          {el.active ? (
-            <div>{el.title}</div>
-          ) : (
-            <Link itemProp="url" href={el.url}>
-              {el.title}
-            </Link>
-          )}
-        </li>
-      ))}
-    </NavStackContainer>
-  );
+export default function ListItem({ active, title, url, ...rest }: Props) {
+  if (active) {
+    return (
+      <li className={cn({ active: Boolean(active) })}>
+        <div>{title}</div>
+      </li>
+    );
+  } else {
+    return (
+      <li
+        itemProp="itemListElement"
+        itemScope
+        itemType="https://schema.org/ItemList"
+        className={cn({ active: Boolean(active) })}
+      >
+        <Link itemProp="url" href={url}>
+          {title}
+        </Link>
+        <meta itemProp="name" content={title} />
+      </li>
+    );
+  }
 }

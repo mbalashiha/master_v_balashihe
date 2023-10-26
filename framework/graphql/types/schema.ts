@@ -29,6 +29,10 @@ export namespace Schema {
     handle: String;
     type: String;
   }
+  export interface OpenGraphDates {
+    modified_time: String;
+    published_time: String;
+  }
   export interface CategoryId {
     id: ID;
   }
@@ -87,6 +91,7 @@ export namespace Schema {
     secondImage: Image | null;
     viewed: number | null;
     templateId: ID | null;
+    ogDates: OpenGraphDates;
   }
   export namespace Article {
     export interface ArticleInput {

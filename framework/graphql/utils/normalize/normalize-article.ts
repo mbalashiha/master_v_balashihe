@@ -139,9 +139,19 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
     templateId,
     blogCategoryId,
     autoHandleSlug,
+    ogDates: {
+      published_time,
+      modified_time,
+    }
   } = data;
   if (!id) {
     throw new Error("No id in article row!");
+  }
+  if (!published_time) {
+    throw new Error("No article published_time!");
+  }
+  if (!modified_time) {
+    throw new Error("No article modified_time!");
   }
   if (!process.env["NEXT_PUBLIC_SITE_URL"]) {
     throw new Error("No NEXT_PUBLIC_SITE_URL for canonical url!");
@@ -184,6 +194,10 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
     blogCategoryId: blogCategoryId || null,
     autoHandleSlug: autoHandleSlug || null,
     handle: handle || null,
+    ogDates: {
+      modified_time,
+      published_time,
+    }
   };
 };
 

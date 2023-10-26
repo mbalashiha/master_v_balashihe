@@ -14,6 +14,10 @@ export const getAllArticlesQuery = gql`
     updatedAt
     publishedAt
     viewed
+    ogDates {
+      modified_time
+      published_time
+    }
   }
   query getAllArticlesQuery {
     blogArticles {
