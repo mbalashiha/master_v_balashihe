@@ -76,21 +76,41 @@ const options = {
               language={language}
             >
               {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={className} style={style}>
-                  {tokens.map((line, i) => (
-                    <div key={i} {...getLineProps({ line })}>
+                <Box component={"pre"} className={className} sx={{ ...style }}>
+                  {tokens.map((line, i) => {
+                    const { style, ...restProps } = getLineProps({
+                      line,
+                    });
+                    return (
                       <Box
-                        component="span"
-                        sx={{ display: "inline-block", minWidth: "25px" }}
+                        component="div"
+                        key={i}
+                        sx={{ ...style }}
+                        {...restProps}
                       >
-                        {i + 1}
+                        <Box
+                          component="span"
+                          sx={{ display: "inline-block", minWidth: "25px" }}
+                        >
+                          {i + 1}
+                        </Box>
+                        {line.map((token, key) => {
+                          const { style, ...restProps } = getTokenProps({
+                            token,
+                          });
+                          return (
+                            <Box
+                              component="span"
+                              key={key}
+                              {...restProps}
+                              sx={{ ...style }}
+                            />
+                          );
+                        })}
                       </Box>
-                      {line.map((token, key) => (
-                        <span key={key} {...getTokenProps({ token })} />
-                      ))}
-                    </div>
-                  ))}
-                </pre>
+                    );
+                  })}
+                </Box>
               )}
             </Highlight>
           );
