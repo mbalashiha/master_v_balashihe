@@ -31,8 +31,6 @@ export default function ListItem({ active, title, url, ...rest }: Props) {
     return (
       <li
         itemProp="itemListElement"
-        itemScope
-        itemType="https://schema.org/ItemList"
         className={cn({ active: Boolean(active) })}
       >
         <Link itemProp="url" href={url}>

@@ -44,11 +44,12 @@ export default function Page(
 ) {
   const { article } = props;
   const { renderHtml, image, navigation, title } = article;
-  const articleElement = article.templateId ? (
-    <ContactArticleComponent {...article} />
-  ) : (
-    <BlogArticle {...article} />
-  );
+  const articleElement =
+    article.templateId === 2 ? (
+      <ContactArticleComponent {...article} />
+    ) : (
+      <BlogArticle {...article} />
+    );
   return (
     <>
       <Head>

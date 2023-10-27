@@ -7,11 +7,6 @@ import {
   Button,
   Container,
 } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
-import cn from "classnames";
-
-import { Blog } from "@common/types/cms";
 import React from "react";
 
 interface Props extends React.ComponentProps<typeof Stack> {}

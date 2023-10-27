@@ -16,6 +16,7 @@ import Link from "next/link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { Element, DOMNode, Text } from "html-react-parser";
+import { Highlight, themes } from "prism-react-renderer";
 
 import parse, {
   attributesToProps,
@@ -55,6 +56,46 @@ const options = {
     } else if (in_domNode.type === "tag" && (in_domNode as Element).name) {
       const domNode: Element = in_domNode as Element;
       const { attribs, children } = domNode;
+      if (
+        domNode.name === "pre" &&
+        attribs.class &&
+        attribs.class.startsWith("language-")
+      ) {
+        const language = attribs.class.substring("language-".length);
+        const codeChild: any = children && children[0];
+        const textContent =
+          codeChild &&
+          codeChild.children &&
+          codeChild.children[0] &&
+          codeChild.children[0].data;
+        if (language && textContent) {
+          return (
+            <Highlight
+              theme={themes.vsDark}
+              code={textContent}
+              language={language}
+            >
+              {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <pre className={className} style={style}>
+                  {tokens.map((line, i) => (
+                    <div key={i} {...getLineProps({ line })}>
+                      <Box
+                        component="span"
+                        sx={{ display: "inline-block", minWidth: "25px" }}
+                      >
+                        {i + 1}
+                      </Box>
+                      {line.map((token, key) => (
+                        <span key={key} {...getTokenProps({ token })} />
+                      ))}
+                    </div>
+                  ))}
+                </pre>
+              )}
+            </Highlight>
+          );
+        }
+      }
       const hasStyle = !!attribs.style;
       let passThroughFlag = false;
       switch (domNode.name) {

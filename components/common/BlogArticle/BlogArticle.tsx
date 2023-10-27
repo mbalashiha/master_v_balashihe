@@ -155,6 +155,16 @@ export default function BlogArticle({
                 theme.palette.mode === "light" ? grey[900] : grey[100],
               marginBottom: "0.7rem",
             },
+            "& pre": {
+              fontFamily: "monospace",
+              fontSize: "15px",
+              lineHeight: "18px",
+              clear: "both",
+              px: 1.2,
+              py: 2,
+              overflowX: "auto",
+              borderRadius: "10px",
+            },
           }}
         >
           {imgSrc && (

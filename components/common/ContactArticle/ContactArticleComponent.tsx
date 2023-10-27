@@ -136,8 +136,6 @@ export default function ContactArticleComponent({
             >
               <li
                 itemProp="itemListElement"
-                itemScope
-                itemType="https://schema.org/ItemList"
               >
                 {navigation?.prev?.url ? (
                   <Link href={navigation.prev.url} itemProp="url">
@@ -160,8 +158,6 @@ export default function ContactArticleComponent({
               </li>
               <li
                 itemProp="itemListElement"
-                itemScope
-                itemType="https://schema.org/ItemList"
               >
                 {navigation?.next?.url ? (
                   <Link href={navigation.next.url} itemProp="url">

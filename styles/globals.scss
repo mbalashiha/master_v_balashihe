@@ -1,4 +1,3 @@
-
 @import "@styles/fonts/noto-sans.css";
 @import "@styles/fonts/gotham.css";
 // @import "@styles/fonts/segoe-ui.css";
@@ -9,8 +8,7 @@
 @import "@styles/scrollbars/scrollbars.scss";
 
 html,
-body,
-* {
+body {
   padding: 0;
   margin: 0;
   font-family: Gotham, Arial, sans-serif;

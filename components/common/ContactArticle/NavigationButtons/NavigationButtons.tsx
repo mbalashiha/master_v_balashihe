@@ -87,8 +87,6 @@ export default function NavigationButtons({ navigation }: Props) {
           item
           xs={6}
           itemProp="itemListElement"
-          itemScope
-          itemType="https://schema.org/ItemList"
           sx={{
             "&, & span, & *": {
               textAlign: "left",
@@ -111,8 +109,6 @@ export default function NavigationButtons({ navigation }: Props) {
           item
           xs={6}
           itemProp="itemListElement"
-          itemScope
-          itemType="https://schema.org/ItemList"
           sx={{
             "&, & span, & *": {
               textAlign: "right",

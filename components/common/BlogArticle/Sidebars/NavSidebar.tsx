@@ -1,9 +1,5 @@
 import { Box, Typography, Paper, Grid, Stack, Button } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
-
 import { Blog } from "@common/types/cms";
-import NavigationList from "./NavigationList";
 import NavSidebarContainer from "./NavSidebarContainer";
 import type { NavSidebarContainerProps } from "./NavSidebarContainer";
 import NavStackContainer from "./NavStackContainer";

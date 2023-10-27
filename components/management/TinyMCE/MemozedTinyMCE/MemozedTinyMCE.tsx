@@ -199,9 +199,11 @@ const MemoizedTinyMCE = memo<MemoizedTinyMCEProps>(
               "insertCodeButton imageUploadButton | " +
               "alignleft aligncenter alignright alignjustify link | " +
               "bullist numlist checklist outdent indent | removeformat | image code table help",
+            codesample_global_prismjs: false,
             codesample_languages: [
+              { text: "React.tsx", value: "tsx" },
+              { text: "React.jsx", value: "jsx" },
               { text: "HTML/XML", value: "markup" },
-              { text: "React", value: "tsx" },
               { text: "JavaScript", value: "javascript" },
               { text: "CSS", value: "css" },
               { text: "PHP", value: "php" },
@@ -219,6 +221,11 @@ const MemoizedTinyMCE = memo<MemoizedTinyMCEProps>(
                     font-size: 18px;
                     line-height: 28px;
                     color: #0e0e0f;
+                  }
+                  pre.language-tsx, pre.language-jsx {
+                    color: #000013;
+                    font-size: 14px;
+                    line-height: 16px;
                   }
               @media (min-width: 800px) {
                 body {
