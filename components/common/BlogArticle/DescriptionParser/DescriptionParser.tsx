@@ -24,6 +24,7 @@ import parse, {
   domToReact,
 } from "html-react-parser";
 import TableStructure from "./TableStructure";
+import MyHighlight from "./MyHighlight";
 
 interface Props {
   descriptionHTML: string;
@@ -70,49 +71,7 @@ const options = {
           codeChild.children[0].data;
         if (language && textContent) {
           return (
-            <Highlight
-              theme={themes.vsDark}
-              code={textContent}
-              language={language}
-            >
-              {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <Box component={"pre"} className={className} sx={{ ...style }}>
-                  {tokens.map((line, i) => {
-                    const { style, ...restProps } = getLineProps({
-                      line,
-                    });
-                    return (
-                      <Box
-                        component="div"
-                        key={i}
-                        sx={{ ...style }}
-                        {...restProps}
-                      >
-                        <Box
-                          component="span"
-                          sx={{ display: "inline-block", minWidth: "25px" }}
-                        >
-                          {i + 1}
-                        </Box>
-                        {line.map((token, key) => {
-                          const { style, ...restProps } = getTokenProps({
-                            token,
-                          });
-                          return (
-                            <Box
-                              component="span"
-                              key={key}
-                              {...restProps}
-                              sx={{ ...style }}
-                            />
-                          );
-                        })}
-                      </Box>
-                    );
-                  })}
-                </Box>
-              )}
-            </Highlight>
+            <MyHighlight language={language} code={textContent} />
           );
         }
       }

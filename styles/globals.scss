@@ -31,6 +31,17 @@ span {
 // .tox-notifications-container {
 //   display: none !important;
 // }
+.tox .tox-textarea-wrap {
+  textarea.tox-textarea {
+    &,
+    &:focus {
+      color: #000013;
+      font-size: 14px;
+      line-height: 16px;
+      font-family: monospace;
+    }
+  }
+}
 .tox-editor-container {
   .tox-promotion,
   .tox-statusbar__branding {
