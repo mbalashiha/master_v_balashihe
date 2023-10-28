@@ -43,6 +43,7 @@
     "graphql": "16.6.0",
     "graphql-request": "5.1.0",
     "html-react-parser": "^3.0.9",
+    "htmlparser2": "^9.0.0",
     "js-beautify": "^1.14.8",
     "js-cookie": "3.0.1",
     "material-icons": "^1.13.12",

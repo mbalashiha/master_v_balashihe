@@ -22,6 +22,9 @@ export interface SiteHooks {
 }
 export interface ManagementHooks {
   management: {
+    api: {
+      usePrettierReact: RestApi.RestApiHook<any>;
+    };
     auth: {
       useSignIn: RestApi.RestApiHook<any>;
       useSignOut: RestApi.RestApiHook<any>;

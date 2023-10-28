@@ -70,9 +70,7 @@ const options = {
           codeChild.children[0] &&
           codeChild.children[0].data;
         if (language && textContent) {
-          return (
-            <MyHighlight language={language} code={textContent} />
-          );
+          return <MyHighlight language={language} code={textContent} />;
         }
       }
       const hasStyle = !!attribs.style;

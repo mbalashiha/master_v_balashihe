@@ -24,6 +24,14 @@ import { useSnackbar } from "notistack";
 import { TabsProvider } from "@components/common/Tabs/TabsProvider";
 import { locale } from "@utils/locale";
 import { Blog } from "@common/types/cms";
+import usePrettierReact from "@framework/management/api/use-prettier-react";
+import {
+  escapeHtml,
+  HtmlDecode,
+  HtmlEncode,
+  parseHtml,
+  unescapeHtml,
+} from "./html-parser";
 
 interface Props {
   article: Blog.ArticleDraft;
@@ -37,6 +45,7 @@ export default function ArticleForm({ article }: Props) {
   const checkArticle = useCheckArticle();
   const { enqueueSnackbar } = useSnackbar();
   const { setCreateButton, unsetCreateButton } = useFabButton();
+  const prettierReact = usePrettierReact();
   const providerRef: React.MutableRefObject<ArticleEditorContext | undefined> =
     useRef<ArticleEditorContext | undefined>();
   useEffect(() => {
@@ -104,7 +113,7 @@ export default function ArticleForm({ article }: Props) {
         return errors;
       }}
       onSubmit={async (values, helpers) => {
-        const {
+        let {
           id,
           title,
           handle,
@@ -126,10 +135,55 @@ export default function ArticleForm({ article }: Props) {
           secondImageId,
           templateId,
         } = values;
+        const replacer = async (inStr: string): Promise<string> => {
+          const reg =
+            /\<pre(\s+[^\>]+)?\>\s*\<code\>([^\>\<]+)\<\/code\>\s*\<\/pre\>/gm;
+          let result;
+          while ((result = reg.exec(inStr)) !== null) {
+            const attribsString = result[1];
+            const classNameMatch =
+              attribsString && attribsString.match(/\s+class="([^\"\>]+)"/m);
+            const className = classNameMatch && classNameMatch[1];
+            const language =
+              className?.startsWith("language-") &&
+              className.substring("language-".length);
+            const innerHTML = result[2];
+            if (language && innerHTML) {
+              const innerText = unescapeHtml(innerHTML);
+              const resp = await prettierReact({
+                language,
+                textContent: innerText,
+              });
+              const newStr = escapeHtml(resp.textContent).trim();
+              inStr = inStr.replace(innerHTML, newStr);
+            }
+          }
+          return inStr;
+        };
+        textHtml = await replacer(textHtml);
         let renderHtml = textHtml;
-        if (window.DOMParser) {
+        /*if (window.DOMParser) {
           const parser = new DOMParser();
           const document = parser.parseFromString(renderHtml, "text/html");
+          const pre = document.querySelectorAll<HTMLPreElement>("pre");
+          const codeBlocks: Array<() => Promise<void>> = [];
+          for (const el of Array.from(pre)) {
+            const className = el.getAttribute("class");
+            if (
+              className &&
+              className.startsWith("language-") &&
+              el.textContent
+            ) {
+              const language = className.substring("language-".length);
+              if (language) {
+                const code: HTMLPreElement = (
+                  el.children.length === 1 && el.children[0].tagName === "CODE"
+                    ? el.children[0]
+                    : el
+                ) as any;
+              }
+            }
+          }
           const imgs = document.querySelectorAll<HTMLImageElement>("img");
           imgs.forEach((img) => {
             let first = img;
@@ -157,7 +211,7 @@ export default function ArticleForm({ article }: Props) {
           renderHtml =
             document.documentElement.querySelector("body")?.innerHTML ||
             textHtml;
-        }
+        }*/
         renderHtml = renderHtml.replace(/\"(\.\.\/+)+/gim, '"/');
         const article = {
           id,

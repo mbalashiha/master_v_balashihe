@@ -14,10 +14,14 @@ import { handler as useArticleSearch } from "@framework/management/blog/use-arti
 import { handler as useImageUpload } from "@framework/management/image/use-image-upload";
 import { handler as useCheckArticle } from "@framework/management/blog/article/draft/use-check-article";
 import { handler as useArticleTemplateList } from "@framework/management/blog/article/use-template-list";
+import { handler as usePrettierReact } from "@framework/management/api/use-prettier-react";
 import { API } from "@common/types";
 
 export const graphqlHooks: API.ManagementHooks = {
   management: {
+    api: {
+      usePrettierReact,
+    },
     auth: {
       useSignIn,
       useTokenInfo,
