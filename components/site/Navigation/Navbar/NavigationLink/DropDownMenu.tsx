@@ -30,8 +30,9 @@ const DropDownMenu = ({ submenu, ...link }: Props) => {
             //   transform: "scale(0)",
             //   opacity: 0,
             position: "absolute",
-            right: 0,
+            left: 0,
             minWidth: "100%",
+            width: "auto",
             boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
             zIndex: 1,
             borderRadius: `0 0 8px 8px`,
@@ -58,12 +59,17 @@ const DropDownMenu = ({ submenu, ...link }: Props) => {
             },
           },
           "& .dropdown-content": {
+            width: "auto",
             "& > div": {
-              width: "100%",
+              minWidth: "100%",
+              width: "auto",
               "& > .dropbtn, & > button.dropbtn, & > button": {
                 width: "100%",
                 justifyContent: "flex-start",
               },
+            },
+            "& a": {
+              whiteSpace: "nowrap",
             },
           },
         }}

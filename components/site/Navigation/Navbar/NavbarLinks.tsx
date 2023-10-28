@@ -44,7 +44,7 @@ const getLinks = (): Array<NavLinkProps> => [
   { href: "/", name: <HomeIcon /> },
   {
     href: "/uslugi-mastera-v-balashihe/remont-noutbuka-mfc-balashiha",
-    name: "Компьютерная помощь",
+    name: "Услуги",
     submenu: [
       {
         href: "/uslugi-mastera-v-balashihe/remont-kompyuterov-bystro-balashiha-na-domu-ili-v-ofise",
