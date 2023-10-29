@@ -11,9 +11,5 @@ export const Form: typeof FormikForm = FormikForm;
 import { InnerRefFormik, Props } from "./InnerRefProvider";
 export type { FormContextType } from "./InnerRefProvider";
 
-export const RefFormik = <FormProps extends FormikValues>(
-  props: Props<FormProps>
-) => {
-  return <InnerRefFormik {...props} />;
-};
+export const RefFormik = InnerRefFormik;
 export { useRefFormik } from "./InnerRefProvider";

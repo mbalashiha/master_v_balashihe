@@ -37,7 +37,6 @@ export const handler: API.Graphql.MutationHook<UseSaveArtDraftPropsHook> = {
     const form = useRefFormik<CMS.Blog.ArticleDraft>();
     const { mutate: updateDraft } = useArticleDraft();
     return () => async (input) => {
-      const initial = form.getInitialValues();
       const all = form.getValues();
       const inputObj = {
         ...input,
@@ -62,31 +61,11 @@ export const handler: API.Graphql.MutationHook<UseSaveArtDraftPropsHook> = {
         },
       };
       all?.secondImageId;
-      const draft = inputObj.articleDraft;
-      const needToUpdate =
-        (draft.title || null) != (initial.title || null) ||
-        (draft.autoHandleSlug || null) != (initial.autoHandleSlug || null) ||
-        (draft.handle || null) != (initial.handle || null) ||
-        (draft.absURL || null) != (initial.absURL || null) ||
-        (draft.blogCategoryId || null) != (initial.blogCategoryId || null) ||
-        Boolean(draft.unPublished) != Boolean(initial.unPublished) ||
-        Boolean(draft.notSearchable) != Boolean(initial.notSearchable) ||
-        Boolean(draft.notInList) != Boolean(initial.notInList) ||
-        (draft.orderNumber || null) != (initial.orderNumber || null) ||
-        (draft.imageId || null) != (initial.imageId || null) ||
-        (draft.publishedAt || null) != (initial.publishedAt || null) ||
-        (draft.h2 || null) != (initial.h2 || null) ||
-        (draft.secondImageId || null) != (initial.secondImageId || null) ||
-        draft.templateId != initial.templateId;
-      if (needToUpdate) {
-        const response = await request(inputObj);
-        // form.setInitialValues({ ...response });
-        form.setFieldValue("id", response.id);
-        await updateDraft({ ...response }, false);
-        return response;
-      } else {
-        return initial;
-      }
+      const response = await request(inputObj);
+      // form.setInitialValues({ ...response });
+      form.setFieldValue("id", response.id);
+      await updateDraft({ ...response }, false);
+      return response;
     };
   },
 };

@@ -11,7 +11,7 @@ import { slugifyAbsUrl } from "@lib";
 import SaveIcon from "@mui/icons-material/Save";
 import { ArticleTabs } from "./ArticleTabs";
 import { ConfirmDialog, RefFormik, SubmitButton } from "@components/ui";
-import React, { useRef, useEffect, useMemo } from "react";
+import React, { useRef, useEffect, useMemo, forwardRef } from "react";
 import { ArticleEditorContext, ArticleProvider } from "./ArticleProvider";
 import useCheckArticle from "@framework/management/blog/article/draft/use-check-article";
 import useSaveArticle from "@framework/management/blog/article/use-save-article";
@@ -27,12 +27,16 @@ import { Blog } from "@common/types/cms";
 import usePrettierReact from "@framework/management/api/use-prettier-react";
 import { escapeHtml, unescapeHtml } from "./html-parser";
 import { useArticleContext } from "./ArticleForm";
+import { FormContextType } from "@components/ui/RefFormik";
 
 interface Props {
   article: Blog.ArticleDraft;
 }
 
-export default function ChildArticleForm({ article }: Props) {
+export const ChildArticleForm = forwardRef<
+  FormContextType<Blog.ArticleDraft>,
+  Props
+>(function ChildArticleForm({ article }, ref) {
   const hasArticle = Boolean(article && article.existingArticleId);
   const isCreatePage = !hasArticle;
   const existingArticleId = (hasArticle && article?.existingArticleId) || null;
@@ -54,6 +58,7 @@ export default function ChildArticleForm({ article }: Props) {
   const { mutateArticle } = useArticleContext();
   return (
     <RefFormik
+      ref={ref}
       initialValues={article}
       validate={async (values) => {
         if (typeof values !== "object") {
@@ -266,4 +271,6 @@ export default function ChildArticleForm({ article }: Props) {
       </ArticleProvider>
     </RefFormik>
   );
-}
+});
+
+export default ChildArticleForm;

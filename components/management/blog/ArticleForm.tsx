@@ -6,6 +6,8 @@ import { Blog } from "@common/types/cms";
 import ChildArticleForm from "./ChildArticleForm";
 import { Box, Paper } from "@mui/material";
 import EventEmitter from "events";
+import { FormContextType } from "@components/ui/RefFormik";
+import { FormikValues } from "formik";
 
 export interface ArticleMutationContext {
   mutateArticle: (article: Blog.ArticleDraft) => void;
@@ -20,6 +22,7 @@ interface Props {
   article: Blog.ArticleDraft;
 }
 export const ArticleForm = ({ article: inArticle }: Props) => {
+  const formRef = useRef<FormContextType<Blog.ArticleDraft>>();
   const router = useRouter();
   const [article, setSavedArticle] =
     React.useState<Blog.ArticleDraft>(inArticle);
@@ -33,6 +36,10 @@ export const ArticleForm = ({ article: inArticle }: Props) => {
       setSavedFlag(true);
       setSavedArticle(newSavedArticle);
       emitter.emit("tinymce", newSavedArticle.textHtml);
+      if (typeof formRef.current?.updateFormValues !== "function") {
+        alert("formRef.current?.updateFormValues is not a function!");
+      }
+      formRef.current?.updateFormValues(article);
       if (article.existingArticleId !== newSavedArticle.existingArticleId) {
         router.push({
           pathname: `/management/blog/article/edit/[articleId]`,
@@ -53,12 +60,12 @@ export const ArticleForm = ({ article: inArticle }: Props) => {
   return (
     <ArticleMutationContext.Provider value={value}>
       {savedFlag && (
-        <Paper sx={{ mt: 5, p: 10, width: "100%", textAlign: "center" }}>
-          <h1>Стаья сохранена</h1>
+        <Paper sx={{ mt: 15, p: 10, width: "100%", textAlign: "center" }}>
+          <h1>Статья сохранена</h1>
         </Paper>
       )}
       <Box width="100%" sx={{ display: savedFlag ? "none" : "inherit" }}>
-        <ChildArticleForm article={article} />
+        <ChildArticleForm ref={formRef as any} article={article} />
       </Box>
     </ArticleMutationContext.Provider>
   );
