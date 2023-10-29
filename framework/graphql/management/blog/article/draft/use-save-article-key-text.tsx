@@ -39,7 +39,6 @@ export const handler: API.Graphql.MutationHook<UseSaveArticleKeyTextHook> = {
     const form = useRefFormik<CMS.Blog.ArticleDraft>();
     const { mutate: updateDraft } = useArticleDraft();
     return () => async (input) => {
-      const initial = form.getInitialValues();
       const all = form.getValues();
       const inputObj = {
         ...input,
@@ -50,18 +49,11 @@ export const handler: API.Graphql.MutationHook<UseSaveArticleKeyTextHook> = {
           keyTextHtml: all?.keyTextHtml || "",
         },
       };
-      const draft = inputObj.articleKeyText;
-      const needToUpdate =
-        (draft.keyTextHtml || "") != (initial.keyTextHtml || "");
-      if (needToUpdate) {
-        const response = await request(inputObj);
-        form.setInitialValues({ ...response });
-        form.setFieldValue("id", response.id);
-        await updateDraft({ ...response }, false);
-        return response;
-      } else {
-        return initial;
-      }
+      const response = await request(inputObj);
+      // form.setInitialValues({ ...response });
+      form.setFieldValue("id", response.id);
+      await updateDraft({ ...response }, false);
+      return response;
     };
   },
 };

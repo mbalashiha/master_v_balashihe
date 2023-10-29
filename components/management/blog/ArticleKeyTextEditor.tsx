@@ -8,11 +8,8 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useRef } from "react";
-import dynamic from "next/dynamic";
 import { useRefFormik } from "@components/ui";
 import { CMS } from "@common/types";
-import { useArticleContext } from "./ArticleProvider";
-import useSaveArticleKeyText from "@framework/management/blog/article/draft/use-save-article-key-text";
 import { useField } from "formik";
 import { ShortTinyMCE } from "@components/management/TinyMCE";
 import { useRouter } from "next/router";
@@ -29,7 +26,7 @@ export default function ArticleKeyTextEditor() {
     form.setFieldValue("keyTextHtml", keyTextHtml);
   }, []);
   const [keyTextHtmlFieled, meta] = useField("keyTextHtml");
-  const initialValue = form.formIsResetting ? "" : keyTextHtmlFieled.value;
+  const initialValue = keyTextHtmlFieled.value;
   return (
     <>
       {meta.error && (
@@ -60,12 +57,10 @@ export default function ArticleKeyTextEditor() {
           },
         }}
       >
-        {form.formIsResetting ? null : (
           <ShortTinyMCE
             initialValue={initialValue}
             onEditorChange={onEditorChange}
           />
-        )}
       </Box>
     </>
   );

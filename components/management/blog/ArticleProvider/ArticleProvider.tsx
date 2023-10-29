@@ -30,7 +30,7 @@ export const ArticleProvider = ({ children, providerRef }: Props) => {
     saveArticleTextDraft,
   };
   const editorRef = useRef<any>(null);
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     const beforeunloadListener = async () => {
       const { saveArticleTextDraft } =
         formRef.current;
@@ -43,7 +43,7 @@ export const ArticleProvider = ({ children, providerRef }: Props) => {
       window.removeEventListener("blur", beforeunloadListener);
       beforeunloadListener();
     };
-  }, []);
+  }, []);*/
   const [duplicateArticle, setDuplicateArticle] = React.useState<
     CMS.Blog.Article | undefined
   >();

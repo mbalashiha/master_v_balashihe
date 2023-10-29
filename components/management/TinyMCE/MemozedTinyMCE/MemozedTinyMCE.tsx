@@ -1,4 +1,4 @@
-import React, { memo, useRef } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Box, Button, Portal, styled } from "@mui/material";
 import util from "util";
@@ -8,10 +8,14 @@ import { useSnackbar } from "notistack";
 import { useUploaderOnChange } from "./use-uploader-onchange";
 import CodeIcon from "@mui/icons-material/Code";
 import CodeMirrorDialog from "./CodeMirror/CodeMirrorDialog";
+import EventEmitter from "events";
+
 export interface MemoizedTinyMCEProps {
   initialValue: string;
   onEditorChange: (textHtml: string, text: string) => void;
   onBlur: (event: any) => void;
+  emitter?: EventEmitter;
+  setContentEventName?: string;
 }
 interface CustomMenubarProps {
   children: React.ReactNode | React.ReactNode[];
@@ -50,6 +54,8 @@ const MemoizedTinyMCE = memo<MemoizedTinyMCEProps>(
   function MemoizedTinyMCE({
     initialValue,
     onEditorChange,
+    emitter,
+    setContentEventName,
     ...rest
   }: MemoizedTinyMCEProps) {
     const htmlRef = useRef(initialValue);
@@ -72,6 +78,17 @@ const MemoizedTinyMCE = memo<MemoizedTinyMCEProps>(
     const onCodeMirrorSave = React.useCallback((savingHtml: string) => {
       editorRef.current?.editor?.setContent(savingHtml);
     }, []);
+    useEffect(() => {
+      if (emitter && setContentEventName) {
+        const listener = (textHtml: string) => {
+          editorRef.current?.editor?.setContent(textHtml);
+        };
+        emitter.on(setContentEventName, listener);
+        return () => {
+          emitter && setContentEventName && emitter.off(setContentEventName, listener);
+        };
+      }
+    }, [emitter, setContentEventName]);
     return (
       <>
         <input

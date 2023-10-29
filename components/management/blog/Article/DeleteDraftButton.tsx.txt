@@ -20,10 +20,11 @@ import React, { useRef, useEffect, useMemo } from "react";
 import { grey } from "@mui/material/colors";
 
 const DeleteDraftButton = () => {
-  const { data } = useArticleDraft({ variables: undefined });
-  const deleteDraft = useDeleteDraft();
-  const disabled = !(data && data.id);
-  return (
+  // const { data } = useArticleDraft({ variables: undefined });
+  // const deleteDraft = useDeleteDraft();
+  // const disabled = !(data && data.id);
+  return null;
+  /*return (
     <>
       <ConfirmDialog
         disabled={disabled}
@@ -47,6 +48,6 @@ const DeleteDraftButton = () => {
         </Button>
       </ConfirmDialog>
     </>
-  );
+  );*/
 };
 export default DeleteDraftButton;

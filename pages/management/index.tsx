@@ -21,13 +21,10 @@ import {
 } from "@components/management/blog/Article";
 import { useFabButton } from "@components/management/Layout";
 import { SearchField } from "@components/management/blog/Article";
-import Head from "next/head";
-import { ArticleForm } from "@components/management/blog";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import util from "util";
 import { Blog } from "@common/types/cms";
 import { ID } from "@framework/types";
-import getArticleEdit from "@framework/article/get-article-edit";
 import getArticlesCardsProps from "@framework/management/blog/queries/get-articles-cards-props";
 import { CMS } from "@common/types";
 

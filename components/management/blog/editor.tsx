@@ -11,10 +11,10 @@ import React, { useRef } from "react";
 import dynamic from "next/dynamic";
 import { useRefFormik } from "@components/ui";
 import { CMS } from "@common/types";
-import { useArticleContext } from "./ArticleProvider";
 import useSaveArticleText from "@framework/management/blog/article/draft/use-save-article-text";
 import { useField } from "formik";
 import TinyMCE from "@components/management/TinyMCE";
+import { useArticleContext } from "./ArticleForm";
 import { useRouter } from "next/router";
 
 export default function ArticleTextEditor() {
@@ -61,8 +61,8 @@ export default function ArticleTextEditor() {
     form.setFieldValue("text", text);
     doTimeout();
   }, []);
-  const [htmlFieled, meta] = useField("textHtml");
-  const initialValue = form.formIsResetting ? "" : htmlFieled.value;
+  const [, meta] = useField("textHtml");
+  const { savedArticle, emitter } = useArticleContext();
   return (
     <>
       {meta.error && (
@@ -93,13 +93,13 @@ export default function ArticleTextEditor() {
           },
         }}
       >
-        {form.formIsResetting ? null : (
-          <TinyMCE
-            initialValue={initialValue}
-            onBlur={onBlur}
-            onEditorChange={onEditorChange}
-          />
-        )}
+        <TinyMCE
+          initialValue={savedArticle.textHtml}
+          onBlur={onBlur}
+          onEditorChange={onEditorChange}
+          emitter={emitter}
+          setContentEventName={"tinymce"}
+        />
       </Box>
     </>
   );

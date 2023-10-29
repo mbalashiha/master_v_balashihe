@@ -14,10 +14,6 @@ export type { FormContextType } from "./InnerRefProvider";
 export const RefFormik = <FormProps extends FormikValues>(
   props: Props<FormProps>
 ) => {
-  const [destroyed, __setDestoryed] = useState(false);
-  const destroyForm = React.useCallback(() => __setDestoryed(true), []);
-  return destroyed ? null : (
-    <InnerRefFormik destroyForm={destroyForm} {...props} />
-  );
+  return <InnerRefFormik {...props} />;
 };
 export { useRefFormik } from "./InnerRefProvider";

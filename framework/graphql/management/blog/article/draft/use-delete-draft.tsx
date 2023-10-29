@@ -50,13 +50,9 @@ export const handler: API.Graphql.MutationHook<UseDeleteDraftHook> = {
     const { mutate: updateDraft } = useArticleDraft();
     const form = useRefFormik<CMS.Blog.ArticleDraft>();
     return () => async (input) => {
-      if (typeof form.resetForm !== "function") {
-        throw new Error("form.resetForm is not a function!");
-      }
       const response = await request(input);
       if (response.success && response.draft) {
         await updateDraft(response.draft, false);
-        form.resetForm({ values: response.draft });
       } else {
         enqueueSnackbar(
           (response.error || response.message || "Error occured").substring(

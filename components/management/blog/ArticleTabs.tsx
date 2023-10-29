@@ -32,7 +32,6 @@ import { ValuesOfCorrectTypeRule } from "graphql";
 import { slugify } from "@lib";
 import { useRouter } from "next/router";
 import { useFabButton } from "../Layout";
-import DeleteDraftButton from "./Article/DeleteDraftButton";
 import { useSnackbar } from "notistack";
 import SaveIcon from "@mui/icons-material/Save";
 import { useTabs } from "@components/common/Tabs/TabsProvider";
