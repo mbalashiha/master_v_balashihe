@@ -11,8 +11,8 @@ export default function ArticleBreadcrumbs({ title, url }: Props) {
     return [
       { href: "/", title: "Главная" },
       { href: "/uslugi-mastera-v-balashihe/", title: "Компьютерный мастер" },
-      { href: url, title: title },
+      // { href: url, title: title },
     ];
-  }, [title, url]);
+  }, []);
   return <Breadcrumbs path={pathArray} />;
 }

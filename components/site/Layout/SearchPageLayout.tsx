@@ -1,6 +1,5 @@
 import { FC } from "react";
 import React, { useContext } from "react";
-import { Navbar, NavBreadcrumbs } from "@components/site/Navigation";
 import { ThemeProvider, Container, Box, Stack } from "@mui/material";
 import Head from "next/head";
 import SiteLayout from "./SiteLayout";

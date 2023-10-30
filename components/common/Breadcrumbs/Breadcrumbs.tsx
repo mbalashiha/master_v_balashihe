@@ -33,16 +33,16 @@ export default function Breadcrumbs({ path }: Props) {
           mx: 0,
           "&, & > *": {
             fontWeight: 400,
-            fontSize: "16px",
+            fontSize: "14px",
             lineHeight: "24px",
           },
           "&:after": {
             content: `"/"`,
-            px: "5px",
+            px: "4px",
             color: grey[600],
           },
           "& > *": {
-            maxWidth: "300px",
+            maxWidth: "340px",
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
@@ -64,13 +64,13 @@ export default function Breadcrumbs({ path }: Props) {
             content: `""`,
             px: 0,
           },
-          "& a": {
-            color: grey[600],
-            cursor: "default",
-            "&:hover": {
-              textDecoration: "none",
-            },
-          },
+          // "& a": {
+          //   color: grey[600],
+          //   cursor: "default",
+          //   "&:hover": {
+          //     textDecoration: "none",
+          //   },
+          // },
         },
       }}
     >
