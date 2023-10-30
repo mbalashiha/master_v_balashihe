@@ -40,7 +40,11 @@ export default function BlogArticle({
   ...rest
 }: Props) {
   const articleImage =
-    secondImage && secondImage?.url ? secondImage : randomImage;
+    secondImage && secondImage?.url
+      ? secondImage
+      : image && image?.url
+      ? image
+      : randomImage;
   const imgSrc = articleImage?.url;
   const countViews = useCountViews();
   const countViewsRef = useRef(countViews);
