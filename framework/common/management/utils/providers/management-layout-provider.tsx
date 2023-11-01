@@ -1,8 +1,8 @@
 import { Management } from "@common/types/cms";
-import { FabButtonProvider } from "@components/management/Layout";
 import { ID } from "@framework/types";
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef } from "react";
 import { KeyedMutator } from "swr";
+import { parseArgs } from "util";
 export interface ManagementLayoutValue {
   manager: {
     friendlyName: string;
@@ -26,17 +26,19 @@ export const ManagementLayoutProvider = ({
   manager,
   mutateAuthInfo,
 }: Props) => {
-  const providing = {
-    manager: {
-      friendlyName: manager?.friendlyName || "",
-      id: manager?.id || "",
-      isAdmin: manager?.isAdmin || false,
-    },
-    mutateAuthInfo,
-  };
+  const providing = useMemo(() => {
+    return {
+      manager: {
+        friendlyName: manager?.friendlyName || "",
+        id: manager?.id || "",
+        isAdmin: manager?.isAdmin || false,
+      },
+      mutateAuthInfo,
+    };
+  }, [mutateAuthInfo, manager?.friendlyName, manager?.id, manager?.isAdmin]);
   return (
     <ManagementLayoutContext.Provider value={providing}>
-      <FabButtonProvider>{children}</FabButtonProvider>
+      {children}
     </ManagementLayoutContext.Provider>
   );
 };

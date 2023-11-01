@@ -122,10 +122,10 @@ export namespace Management {
   export interface Manager {
     id: ID;
     friendlyName: string;
-    isManager: boolean;
-    isAdmin: boolean;
-    created: Date;
-    updated: Date;
+    isManager?: boolean;
+    isAdmin?: boolean;
+    created?: Date;
+    updated?: Date;
   }
   export interface ManagerTokenResponse {
     success: boolean;

@@ -27,14 +27,12 @@ export interface FormContextType<
   setFieldValue: FormikProps<FormProps>["setFieldValue"];
   getFieldProps: FormikProps<FormProps>["getFieldProps"];
   handleSubmit: FormikProps<FormProps>["handleSubmit"];
+  setValues: FormikProps<FormProps>["setValues"];
+  resetForm: FormikProps<FormProps>["resetForm"];
   getValues: () => FormProps | undefined;
   formWasSubmited: Boolean;
   setFormWasSubmited: () => void;
   updateFormValues: (nextState?: Partial<FormProps> | undefined) => void;
-}
-export interface MyFormikHelpers<FormProps extends FormikValues>
-  extends FormikHelpers<FormProps> {
-  context: FormContextType<FormProps>;
 }
 const FormContext = React.createContext<Partial<FormContextType<any>>>({});
 type FormikElementProps<FormProps extends FormikValues> = React.ComponentProps<
@@ -47,7 +45,7 @@ export interface Props<FormProps extends FormikValues>
   children: React.ReactNode | React.ReactNode[];
   onSubmit: (
     values: FormProps,
-    formikHelpers: MyFormikHelpers<FormProps>
+    formikHelpers: FormikHelpers<FormProps>
   ) => void | Promise<any>;
 }
 interface InnerRefProps<FormProps extends FormikValues>
@@ -59,7 +57,7 @@ export const InnerRefFormik = forwardRef<
 >(function InnerRefFormik(
   {
     children,
-    onSubmit: passedOnSubmit,
+    onSubmit,
     initialValues: formikInitialValues,
     innerRef: __innerRef,
     ...formikProps
@@ -70,9 +68,6 @@ export const InnerRefFormik = forwardRef<
     throw new Error(
       "Incorrect formik initial values: " + typeof formikInitialValues
     );
-  }
-  if (!passedOnSubmit) {
-    throw new Error("Formkik onSubmit event handler shoud be provided!");
   }
   const [formWasSubmited, innerSetFormWasSubmited] = React.useState(false);
   const setFormWasSubmited = React.useCallback(() => {
@@ -151,6 +146,8 @@ export const InnerRefFormik = forwardRef<
     formikRef,
     setFormWasSubmited,
     formWasSubmited,
+    setValues: (...args) => formikRef.current?.setValues(...args),
+    resetForm: (...args) => formikRef.current?.resetForm(...args),
   };
   useImperativeHandle(
     ref,
@@ -160,6 +157,8 @@ export const InnerRefFormik = forwardRef<
         formikRef,
         setFormWasSubmited,
         formWasSubmited,
+        setValues: (...args) => formikRef.current?.setValues(...args),
+        resetForm: (...args) => formikRef.current?.resetForm(...args),
       };
     },
     [providerMethods, formikRef, setFormWasSubmited, formWasSubmited]
@@ -172,18 +171,7 @@ export const InnerRefFormik = forwardRef<
         validateOnChange={false}
         validateOnBlur={false}
         {...formikProps}
-        onSubmit={(
-          values: FormikValues,
-          origformikHelpers: FormikHelpers<FormikValues>
-        ): void | Promise<any> => {
-          const formikHelpers: MyFormikHelpers<FormikValues> = Object.assign(
-            origformikHelpers,
-            {
-              context: providerConfig,
-            }
-          );
-          return passedOnSubmit(values, formikHelpers);
-        }}
+        onSubmit={onSubmit}
       >
         <Form>{children}</Form>
       </Formik>

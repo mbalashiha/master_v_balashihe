@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Card,
+  Container,
   Grid,
   Paper,
   Stack,
@@ -18,7 +19,6 @@ import useSaveArticle from "@framework/management/blog/article/use-save-article"
 import { ValuesOfCorrectTypeRule } from "graphql";
 import { slugify } from "@lib";
 import { useRouter } from "next/router";
-import { useFabButton } from "../Layout";
 // import DeleteDraftButton from "./Article/DeleteDraftButton";
 import { useSnackbar } from "notistack";
 import { TabsProvider } from "@components/common/Tabs/TabsProvider";
@@ -43,17 +43,16 @@ export const ChildArticleForm = forwardRef<
   const router = useRouter();
   const checkArticle = useCheckArticle();
   const { enqueueSnackbar } = useSnackbar();
-  const { setCreateButton, unsetCreateButton } = useFabButton();
   const prettierReact = usePrettierReact();
   const providerRef: React.MutableRefObject<ArticleEditorContext | undefined> =
     useRef<ArticleEditorContext | undefined>();
-  useEffect(() => {
-    if (!isCreatePage) {
-      setCreateButton({ href: "/management/blog/article/create" });
-    } else {
-      unsetCreateButton();
-    }
-  }, [isCreatePage, setCreateButton, unsetCreateButton]);
+  // useEffect(() => {
+  //   if (!isCreatePage) {
+  //     setCreateButton({ href: "/management/blog/article/create" });
+  //   } else {
+  //     unsetCreateButton();
+  //   }
+  // }, [isCreatePage, setCreateButton, unsetCreateButton]);
   const saveArticle = useSaveArticle();
   const { mutateArticle } = useArticleContext();
   return (
@@ -253,21 +252,52 @@ export const ChildArticleForm = forwardRef<
       }}
     >
       <ArticleProvider providerRef={providerRef}>
-        <Grid container sx={{ my: 1 }}>
+        <Grid container spacing={1}>
           <Grid
             item
             xs={12}
             md={12}
-            sx={{ display: "flex", justifyContent: "flex-end" }}
+            lg={2}
+            xl={1.5}
+            order={{ xs: 1, lg: 2 }}
+            sx={{
+              mt: { xs: 0, lg: "2px" },
+              "& button": {
+                width: { xs: "auto", lg: "100%" },
+                minWidth: "160px",
+              },
+            }}
           >
-            <Stack spacing={"3px"} direction="row">
+            <Stack
+              spacing={1}
+              direction={{ xs: "row", lg: "column" }}
+              justifyContent={"flex-end"}
+            >
               <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
             </Stack>
           </Grid>
+          <Grid
+            item
+            xs={12}
+            md={12}
+            lg={10}
+            xl={10.5}
+            sx={{}}
+            order={{ xs: 2, lg: 1 }}
+          >
+            <Container
+              maxWidth="lg"
+              sx={{
+                float: { xs: "none", lg: "right" },
+                "&&": { px: 0, py: 0 },
+              }}
+            >
+              <TabsProvider>
+                <ArticleTabs article={article} />
+              </TabsProvider>
+            </Container>
+          </Grid>
         </Grid>
-        <TabsProvider>
-          <ArticleTabs article={article} />
-        </TabsProvider>
       </ArticleProvider>
     </RefFormik>
   );

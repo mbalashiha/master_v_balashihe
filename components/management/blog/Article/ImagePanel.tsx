@@ -14,10 +14,9 @@ export default function ImagePanel() {
   const uploaderRef = useRef<HTMLInputElement>(null);
   const [imageField] = useField<CMS.Image>("image");
   const [imageIdField] = useField<CMS.Image>("imageId");
-  const form = useRefFormik();
   const setImageToNull = () => {
-    form.setFieldValue("image", null);
-    form.setFieldValue("imageId", null);
+    imageField.onChange({ target: { name: imageField.name, value: null } });
+    imageIdField.onChange({ target: { name: imageIdField.name, value: null } });
   };
   const image = imageField.value;
   const inputOnChange = useImageReceived();

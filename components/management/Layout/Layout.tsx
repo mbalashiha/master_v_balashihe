@@ -30,15 +30,7 @@ const ManagementLayout: FC<Props> = ({ children }: Props) => {
         <ManagementApiProvider>
           <ManagementLayoutProvider>
             <ManagementAppBar />
-            <Container
-              sx={{
-                position: "relative",
-                minHeight: "100vh",
-              }}
-              maxWidth="lg"
-            >
-                {children}
-            </Container>
+            {children}
           </ManagementLayoutProvider>
         </ManagementApiProvider>
       </ThemeProvider>

@@ -17,7 +17,7 @@ import TinyMCE from "@components/management/TinyMCE";
 import { useArticleContext } from "./ArticleForm";
 import { useRouter } from "next/router";
 
-export default function ArticleTextEditor() {
+export default function ArticleTextHtml() {
   const form = useRefFormik<CMS.Blog.ArticleDraft>();
   const saveDraftText = useSaveArticleText();
   const [timeoutId, setTimeoutId] = React.useState<number | null>(null);

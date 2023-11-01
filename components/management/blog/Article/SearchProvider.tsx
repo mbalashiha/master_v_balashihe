@@ -1,5 +1,4 @@
 import { Blog, Management } from "@common/types/cms";
-import { FabButtonProvider } from "@components/management/Layout";
 import { ID } from "@framework/types";
 import React from "react";
 import { createContext, useContext, useMemo } from "react";
@@ -30,7 +29,7 @@ export const SearchProvider = ({
     <SearchContext.Provider
       value={{ search, setSearchQuery, updateArticleList }}
     >
-      <FabButtonProvider>{children}</FabButtonProvider>
+      {children}
     </SearchContext.Provider>
   );
 };

@@ -51,7 +51,7 @@ export const handler: API.RestApi.RestApiHook<ImageUploadHook> = {
       const formData = new FormData();
       const mapped = new Map<string, { id: string; file: File }>();
       for (const imgObj of input.images) {
-        const { file, fieldname, id} = imgObj;
+        const { file, fieldname, id } = imgObj;
         if (!mapped.has(fieldname)) {
           mapped.set(fieldname, { id, file });
         }
@@ -63,7 +63,7 @@ export const handler: API.RestApi.RestApiHook<ImageUploadHook> = {
       });
       return {
         ...resp.data,
-        images: resp.data.images.map((elem) => {
+        images: resp?.data?.images?.map((elem) => {
           const before = mapped.get(elem.fieldname);
           return {
             ...elem,

@@ -23,7 +23,7 @@ import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import { ArticleProvider } from "./ArticleProvider";
 import {
   ArticleKeyTextEditor,
-  ArticleTextEditor,
+  ArticleTextHtml,
 } from "@components/management/blog";
 import { Title } from "@mui/icons-material";
 import ArticleTitle from "./ArticleTitle";
@@ -31,7 +31,6 @@ import useSaveArticle from "@framework/management/blog/article/use-save-article"
 import { ValuesOfCorrectTypeRule } from "graphql";
 import { slugify } from "@lib";
 import { useRouter } from "next/router";
-import { useFabButton } from "../Layout";
 import { useSnackbar } from "notistack";
 import SaveIcon from "@mui/icons-material/Save";
 import { useTabs } from "@components/common/Tabs/TabsProvider";
@@ -79,7 +78,7 @@ function a11yProps(index: number) {
 interface Props {
   article: Blog.ArticleDraft;
 }
-export const ArticleTabs = ({article}: Props) => {
+export const ArticleTabs = ({ article }: Props) => {
   const { value, handleChange, setTabNumber } = useTabs();
   const displayingPageUrl: string = article.absURL || article.url || "";
   return (
@@ -193,7 +192,7 @@ export const ArticleTabs = ({article}: Props) => {
             <ArticleKeyTextEditor />
           </TabPanel>
           <Box sx={{ display: [0, 4].includes(value) ? "inherit" : "none" }}>
-            <ArticleTextEditor />
+            <ArticleTextHtml />
           </Box>
         </Box>
       </Paper>

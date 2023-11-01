@@ -17,7 +17,6 @@ import Menu from "@mui/material/Menu";
 import Link from "next/link";
 import { Stack, Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { useFabButton } from "../FabButtonProvider";
 import { string } from "yup";
 
 export default function ManagementAppBar() {
@@ -51,7 +50,6 @@ export default function ManagementAppBar() {
     { href: "/management", name: "CMS" },
     { href: "/", name: "Сайт", target: "_blank" },
   ];
-  const { buttons } = useFabButton();
   return (
     <>
       <AppBar position="static" sx={{ background: "#121220" }}>
@@ -112,34 +110,6 @@ export default function ManagementAppBar() {
           )}
         </Toolbar>
       </AppBar>
-      <Box
-        sx={{
-          position: "relative",
-          overflow: "visible",
-          width: "100%",
-          height: { xs: "63px", lg: 0 },
-        }}
-      >
-        {buttons.create?.href && (
-          <Link href={buttons.create?.href}>
-            <Fab
-              color="primary"
-              aria-label="add"
-              sx={{
-                position: "absolute",
-                bottom: 0,
-                right: 0,
-                transform: {
-                  xs: "translate(-10%, 0)",
-                  lg: "translate(-10%, 110%)",
-                },
-              }}
-            >
-              <AddIcon />
-            </Fab>
-          </Link>
-        )}
-      </Box>
     </>
   );
 }

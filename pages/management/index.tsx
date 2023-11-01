@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Card,
+  Container,
   Grid,
   Paper,
   Stack,
@@ -19,7 +20,6 @@ import {
   ArticleItem,
   SearchProvider,
 } from "@components/management/blog/Article";
-import { useFabButton } from "@components/management/Layout";
 import { SearchField } from "@components/management/blog/Article";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import util from "util";
@@ -27,6 +27,7 @@ import { Blog } from "@common/types/cms";
 import { ID } from "@framework/types";
 import getArticlesCardsProps from "@framework/management/blog/queries/get-articles-cards-props";
 import { CMS } from "@common/types";
+import { FabButtons } from "@components/management/blog/FabButtons";
 
 export default function ManagementHomePage(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
@@ -45,35 +46,37 @@ export default function ManagementHomePage(
   });
   const articles = listData?.articles || [];
   const search = listData?.search || "";
-  const { setCreateButton } = useFabButton();
-  useEffect(() => {
-    setCreateButton({ href: "/management/blog/article/create" });
-  }, [setCreateButton]);
+  // useEffect(() => {
+  //   setCreateButton({ href: "/management/blog/article/create" });
+  // }, [setCreateButton]);
   return (
     <SearchProvider search={search} updateArticleList={updateArticleList}>
-      <Grid container spacing={2} mt={1}>
-        <Grid item xs={12} md={6}>
-          <Link href="/management/blog/article/create">
-            <Button>Добавить статью</Button>
-          </Link>
+      <FabButtons />
+      <Container maxWidth="lg">
+        <Grid container spacing={2} mt={1}>
+          <Grid item xs={12} md={6}>
+            <Link href="/management/blog/article/create">
+              <Button>Добавить статью</Button>
+            </Link>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <SearchField />
+          </Grid>
+          {(!isEmpty &&
+            articles &&
+            articles.length &&
+            articles.map((elem) => (
+              <Grid key={elem.id} item xs={12}>
+                <ArticleItem article={elem} />
+              </Grid>
+            ))) ||
+            (search && (
+              <Typography component="h1" variant="h1">
+                {`По запросу "${search}" ничего не найдено.`}
+              </Typography>
+            ))}
         </Grid>
-        <Grid item xs={12} md={6}>
-          <SearchField />
-        </Grid>
-        {(!isEmpty &&
-          articles &&
-          articles.length &&
-          articles.map((elem) => (
-            <Grid key={elem.id} item xs={12}>
-              <ArticleItem article={elem} />
-            </Grid>
-          ))) ||
-          (search && (
-            <Typography component="h1" variant="h1">
-              {`По запросу "${search}" ничего не найдено.`}
-            </Typography>
-          ))}
-      </Grid>
+      </Container>
     </SearchProvider>
   );
 }

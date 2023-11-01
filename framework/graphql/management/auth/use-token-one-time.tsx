@@ -33,7 +33,7 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
       if (!hasCookie) {
         toLoginPage();
       }
-      const { data, isValidating, isLoading, ...rest } = useData({
+      let { data, isValidating, isLoading, ...rest } = useData({
         swrOptions: {
           revalidateIfStale: false,
           revalidateOnFocus: false,
@@ -46,9 +46,18 @@ export const handler: API.Graphql.SWRHook<TokenInfoHook> = {
         data.manager &&
         data.manager.id
       );
-      // if (data) {
-      //   console.l//og(data);
-      // }
+      data = React.useMemo(
+        () => ({
+          ...data,
+          manager: {
+            ...data?.manager,
+            friendlyName: data?.manager?.friendlyName || "",
+            id: data?.manager?.id || "",
+            isAdmin: data?.manager?.isAdmin || false,
+          },
+        }),
+        [data]
+      ) as any;
       React.useMemo(() => {
         if (!isValidating && !isLoading) {
           try {
