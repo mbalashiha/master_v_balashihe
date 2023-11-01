@@ -28,6 +28,7 @@ import usePrettierReact from "@framework/management/api/use-prettier-react";
 import { escapeHtml, unescapeHtml } from "./html-parser";
 import { useArticleContext } from "./ArticleForm";
 import { FormContextType } from "@components/ui/RefFormik";
+import { OpenCodemirrorButton } from "./Article/Buttons";
 
 interface Props {
   article: Blog.ArticleDraft;
@@ -269,11 +270,12 @@ export const ChildArticleForm = forwardRef<
             }}
           >
             <Stack
-              spacing={1}
+              spacing={5}
               direction={{ xs: "row", lg: "column" }}
               justifyContent={"flex-end"}
             >
               <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
+              <OpenCodemirrorButton />
             </Stack>
           </Grid>
           <Grid

@@ -84,8 +84,16 @@ const MemoizedTinyMCE = memo<MemoizedTinyMCEProps>(
           editorRef.current?.editor?.setContent(textHtml);
         };
         emitter.on(setContentEventName, listener);
+        const cmOpenEventName = "textHtml-codemirror-editor-open";
+        const cmOpenlistener = () => {
+          setCodeMirrorOpened(true);
+        };
+        emitter.on(cmOpenEventName, cmOpenlistener);
         return () => {
-          emitter && setContentEventName && emitter.off(setContentEventName, listener);
+          if (emitter && setContentEventName) {
+            emitter.off(setContentEventName, listener);
+            emitter.off(cmOpenEventName, cmOpenlistener);
+          }
         };
       }
     }, [emitter, setContentEventName]);
