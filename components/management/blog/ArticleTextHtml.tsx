@@ -88,8 +88,8 @@ export default function ArticleTextHtml() {
           },
           "&, & > *, & .tox.tox-tinymce": {
             borderRadius: "0 0 8px 8px",
-            minHeight: "90vh",
             height: "1200px",
+            minHeight: "90vh",
             background: "white",
           },
         }}

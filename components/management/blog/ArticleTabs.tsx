@@ -103,7 +103,7 @@ export const ArticleTabs = ({ article }: Props) => {
         </Box>
         <Box
           sx={{
-            minHeight: "1400px",
+            minHeight: "95vh",
           }}
         >
           <TabPanel value={value} index={0}>
