@@ -5,7 +5,7 @@ import {
   DialogContentText,
 } from "@mui/material";
 import { useArticleContext } from "../../ArticleForm";
-import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
+import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
 import { useFormikContext } from "formik";
 import { useState } from "react";
 
@@ -21,7 +21,7 @@ export default function ResetButton() {
           background: (theme) => theme.palette.primary.dark,
           "&:hover": { background: "black" },
         }}
-        startIcon={<CodeRoundedIcon />}
+        startIcon={<RestartAltRoundedIcon />}
         onClick={() => {
           setShowModal(true);
         }}
