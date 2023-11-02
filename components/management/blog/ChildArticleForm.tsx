@@ -275,13 +275,13 @@ export const ChildArticleForm = forwardRef<
             }}
           >
             <Stack
-              spacing={5}
+              spacing={1}
               direction={{ xs: "row", lg: "column" }}
               justifyContent={"flex-end"}
             >
               <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
-              <OpenCodemirrorButton />
               <ResetButton />
+              <OpenCodemirrorButton />
             </Stack>
           </Grid>
           <Grid

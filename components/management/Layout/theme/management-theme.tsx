@@ -144,7 +144,7 @@ const getMuiTheme = (): Theme => {
         styleOverrides: {
           select: {
             minHeight: "inherit",
-            padding: "4px 0 4px 0"
+            padding: "4px 0 4px 0",
           },
         },
       },
@@ -277,12 +277,15 @@ const getMuiTheme = (): Theme => {
             borderColor: "none",
             background: theme.palette.primary.main,
             color: "#ffffff",
-            padding: "0 20px",
             fontWeight: 400,
             fontSize: "16px",
             lineHeight: "16px",
-            height: "38px",
             textTransform: "capitalize",
+            borderRadius: "12px",
+            padding: "10px",
+            "&:disabled": {
+              background: grey[200],
+            },
             "&:hover": {
               background: theme.palette.primary.dark,
               color: "#ffffff",

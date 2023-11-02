@@ -34,9 +34,7 @@ const StyledCodeDialog = styled(Dialog)(({ theme }) => ({
     paddingRight: theme.spacing(1),
     "& button": {
       borderRadius: "8px",
-      padding: 0,
-      paddingLeft: theme.spacing(1),
-      paddingRight: theme.spacing(1),
+      padding: "6px 25px",
       fontSize: "15px",
       lineHeight: "18px",
       fontWeight: 500,
