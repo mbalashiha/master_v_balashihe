@@ -5,12 +5,17 @@ import { useRefFormik } from "@components/ui";
 import { normalizeImage } from "@framework/utils/normalize/normalize-article";
 import { useField } from "formik";
 
-export function useImageReceived() {
-  const [imageIdField] = useField("imageId");
-  const [imageField] = useField("image");
+export function useImageReceived(imageFieldName: string) {
+  const [imageIdField] = useField(imageFieldName + "Id");
+  const [imageField] = useField(imageFieldName);
   const uploadImage = useImageUpload();
-  return async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const input = event.currentTarget;
+  const uploaderRef = useRef<HTMLInputElement>(null);
+  const setImageToNull = () => {
+    imageField.onChange({ target: { name: imageField.name, value: null } });
+    imageIdField.onChange({ target: { name: imageIdField.name, value: null } });
+  };
+  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target;
     const files = input && input.files && input.files.length ? input.files : [];
     const file = files[0];
     if (file) {
@@ -57,5 +62,13 @@ export function useImageReceived() {
         alert("Could not upload image: " + fieldname);
       }
     }
+  };
+  return {
+    imageFieldName,
+    onChange,
+    setImageToNull,
+    uploaderRef,
+    image: imageField.value,
+    imageId: imageIdField.value,
   };
 }

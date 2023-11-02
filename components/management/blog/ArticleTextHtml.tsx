@@ -88,7 +88,8 @@ export default function ArticleTextHtml() {
           },
           "&, & > *, & .tox.tox-tinymce": {
             borderRadius: "0 0 8px 8px",
-            height: "105vh",
+            minHeight: "90vh",
+            height: "1200px",
             background: "white",
           },
         }}
@@ -98,7 +99,7 @@ export default function ArticleTextHtml() {
           onBlur={onBlur}
           onEditorChange={onEditorChange}
           emitter={emitter}
-          setContentEventName={eventNames.articleTextHtmlSetContent}
+          setContentEventName={eventNames.ARTICLE_TEXTHTML_SET_CONTENT}
           openCodeMirrorEventName={eventNames.openCodeMirror}
         />
       </Box>

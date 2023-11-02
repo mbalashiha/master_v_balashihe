@@ -7,20 +7,21 @@ import ChildArticleForm from "./ChildArticleForm";
 import { Box, Container, Fab, Paper } from "@mui/material";
 import EventEmitter from "events";
 import { FormContextType } from "@components/ui/RefFormik";
-import { FormikValues } from "formik";
+import { FormikProps, FormikValues } from "formik";
 import { FabButtons } from "./FabButtons";
 
-export interface ArticleMutationContext {
-  mutateArticle: (article: Blog.ArticleDraft) => void;
-  savedArticle: Blog.ArticleDraft;
+export interface ArticleMutationContext<FormValues> {
+  mutateArticle: (article: FormValues) => void;
+  savedArticle: FormValues;
+  resetArticle: () => void;
   emitter: EventEmitter;
   eventNames: {
     openCodeMirror: string;
-    articleTextHtmlSetContent: string;
+    ARTICLE_TEXTHTML_SET_CONTENT: string;
   };
 }
 const ArticleMutationContext = React.createContext<
-  Partial<ArticleMutationContext>
+  Partial<ArticleMutationContext<Blog.ArticleDraft>>
 >({});
 
 interface Props {
@@ -38,17 +39,25 @@ export const ArticleForm = ({ article: inArticle }: Props) => {
   const eventNames = useMemo(
     () => ({
       openCodeMirror: "textHtml-codemirror-editor-open",
-      articleTextHtmlSetContent: "tinymce",
+      ARTICLE_TEXTHTML_SET_CONTENT: "tinymce_ARTICLE_TEXTHTML_SET_CONTENT",
     }),
     []
   );
+  const resetArticle = useCallback(() => {
+    // const { stateArticle, router } = articleRef.current;
+    emitter.emit(
+      eventNames.ARTICLE_TEXTHTML_SET_CONTENT,
+      formRef.current?.initialValues?.textHtml || ""
+    );
+    return formRef.current?.resetForm();
+  }, [emitter, eventNames.ARTICLE_TEXTHTML_SET_CONTENT]);
   const mutateArticle = useCallback(
     (newSavedArticle: Blog.ArticleDraft) => {
       const { stateArticle, router } = articleRef.current;
       setSavedFlag(true);
       setArticle(newSavedArticle);
       emitter.emit(
-        eventNames.articleTextHtmlSetContent,
+        eventNames.ARTICLE_TEXTHTML_SET_CONTENT,
         newSavedArticle.textHtml
       );
       formRef.current?.setValues(newSavedArticle);
@@ -69,9 +78,15 @@ export const ArticleForm = ({ article: inArticle }: Props) => {
     },
     [emitter, eventNames]
   );
-  const value = useMemo(
-    () => ({ emitter, eventNames, savedArticle: stateArticle, mutateArticle }),
-    [emitter, eventNames, stateArticle, mutateArticle]
+  const value: ArticleMutationContext<Blog.ArticleDraft> = useMemo(
+    () => ({
+      emitter,
+      eventNames,
+      savedArticle: stateArticle,
+      mutateArticle,
+      resetArticle,
+    }),
+    [emitter, eventNames, stateArticle, mutateArticle, resetArticle]
   );
   return (
     <ArticleMutationContext.Provider value={value}>
@@ -91,5 +106,7 @@ export const ArticleForm = ({ article: inArticle }: Props) => {
 };
 
 export const useArticleContext = () => {
-  return useContext(ArticleMutationContext) as ArticleMutationContext;
+  return useContext(
+    ArticleMutationContext
+  ) as ArticleMutationContext<Blog.ArticleDraft>;
 };

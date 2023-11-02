@@ -29,6 +29,7 @@ export interface FormContextType<
   handleSubmit: FormikProps<FormProps>["handleSubmit"];
   setValues: FormikProps<FormProps>["setValues"];
   resetForm: FormikProps<FormProps>["resetForm"];
+  initialValues: FormProps | undefined;
   getValues: () => FormProps | undefined;
   formWasSubmited: Boolean;
   setFormWasSubmited: () => void;
@@ -148,6 +149,9 @@ export const InnerRefFormik = forwardRef<
     formWasSubmited,
     setValues: (...args) => formikRef.current?.setValues(...args),
     resetForm: (...args) => formikRef.current?.resetForm(...args),
+    get initialValues() {
+      return formikRef.current?.initialValues;
+    },
   };
   useImperativeHandle(
     ref,
@@ -159,6 +163,9 @@ export const InnerRefFormik = forwardRef<
         formWasSubmited,
         setValues: (...args) => formikRef.current?.setValues(...args),
         resetForm: (...args) => formikRef.current?.resetForm(...args),
+        get initialValues() {
+          return formikRef.current?.initialValues;
+        },
       };
     },
     [providerMethods, formikRef, setFormWasSubmited, formWasSubmited]

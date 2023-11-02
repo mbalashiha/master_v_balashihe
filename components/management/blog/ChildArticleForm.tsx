@@ -33,7 +33,7 @@ import {
 } from "./html-parser";
 import { useArticleContext } from "./ArticleForm";
 import { FormContextType } from "@components/ui/RefFormik";
-import { OpenCodemirrorButton } from "./Article/Buttons";
+import { OpenCodemirrorButton, ResetButton } from "./Article/Buttons";
 
 interface Props {
   article: Blog.ArticleDraft;
@@ -281,6 +281,7 @@ export const ChildArticleForm = forwardRef<
             >
               <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
               <OpenCodemirrorButton />
+              <ResetButton />
             </Stack>
           </Grid>
           <Grid

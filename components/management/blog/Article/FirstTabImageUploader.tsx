@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
 import { Grid, Paper, Typography, Box } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";
@@ -9,43 +9,39 @@ import { useImageReceived } from "./hooks/use-image-received";
 import { useTabs } from "@components/common/Tabs/TabsProvider";
 type PaperProps = React.ComponentProps<typeof Paper>;
 
-export default function UploaderComponent({ sx, ...rest }: PaperProps) {
+export default function FirstTabImageUploader({ sx, ...rest }: PaperProps) {
   const { value, handleChange, setTabNumber } = useTabs();
-  const uploaderRef = useRef<HTMLInputElement>(null);
-  const [imageField] = useField<CMS.Image>("image");
-  const image = imageField.value;
-  const inputOnChange = useImageReceived();
+  const goToImagesTab = useCallback(() => setTabNumber(3), [setTabNumber]);
+  const imageInput = useImageReceived("image");
   return (
-    <>
-      {!(image && image.url) && (
+    <Box
+      width="100%"
+      sx={{
+        width: "100%",
+        height: "auto",
+        marginLeft: { sm: "-5px", md: "-9px" },
+        borderRadius: "8px",
+        cursor: "pointer",
+      }}
+    >
+      {!(imageInput.image && imageInput.image.url) && (
         <input
-          ref={uploaderRef}
+          ref={imageInput.uploaderRef}
           type="file"
           accept="image/*"
           style={{ display: "none" }}
-          onChange={inputOnChange}
+          onChange={imageInput.onChange}
         />
       )}
 
-      {image && image.url ? (
+      {imageInput.image && imageInput.image.url ? (
         <Image
-          src={image.url}
-          alt={image.alt}
-          width={image.width}
-          height={image.height}
-          style={{ opacity: "0", maxHeight: "189px" }}
+          src={imageInput.image.url}
+          alt={imageInput.image.alt}
+          width={200}
+          height={200}
           className={"mainImage"}
-          onLoad={(event: any) => {
-            const target = (event.target ||
-              event.currentTarget) as HTMLImageElement;
-            target.setAttribute("width", "auto");
-            target.setAttribute("height", "auto");
-            target.style.width = "100%";
-            target.style.height = "100%";
-            target.style.opacity = "1";
-            target.style.maxHeight = "";
-          }}
-          onClick={() => setTabNumber(1)}
+          onClick={goToImagesTab}
         />
       ) : (
         <Paper
@@ -60,7 +56,7 @@ export default function UploaderComponent({ sx, ...rest }: PaperProps) {
             minWidth: "189px",
             ...sx,
           }}
-          onClick={() => uploaderRef.current?.click()}
+          onClick={() => imageInput.uploaderRef.current?.click()}
           {...rest}
         >
           <Box
@@ -78,6 +74,6 @@ export default function UploaderComponent({ sx, ...rest }: PaperProps) {
           </Box>
         </Paper>
       )}
-    </>
+    </Box>
   );
 }

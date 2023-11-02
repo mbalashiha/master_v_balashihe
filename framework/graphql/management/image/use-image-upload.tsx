@@ -61,8 +61,19 @@ export const handler: API.RestApi.RestApiHook<ImageUploadHook> = {
         ...options,
         variables: formData,
       });
+      if (resp.error) {
+        const m = resp.error.match(/\<title\>\s*([^\<\>]+)\s*\<\/title\>/im);
+        const err = m && m[1] ? m[1] : null;
+        if (err) {
+          resp.error = err;
+        }
+      }
+      if (resp.error) {
+        throw new Error(resp.error);
+      }
       return {
         ...resp.data,
+        error: resp.error || null,
         images: resp?.data?.images?.map((elem) => {
           const before = mapped.get(elem.fieldname);
           return {

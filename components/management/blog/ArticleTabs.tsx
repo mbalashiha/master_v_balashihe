@@ -27,24 +27,14 @@ import {
 } from "@components/management/blog";
 import { Title } from "@mui/icons-material";
 import ArticleTitle from "./ArticleTitle";
-import useSaveArticle from "@framework/management/blog/article/use-save-article";
-import { ValuesOfCorrectTypeRule } from "graphql";
-import { slugify } from "@lib";
-import { useRouter } from "next/router";
-import { useSnackbar } from "notistack";
 import SaveIcon from "@mui/icons-material/Save";
 import { useTabs } from "@components/common/Tabs/TabsProvider";
-import {
-  ConfirmDialog,
-  RefFormik,
-  SubmitButton,
-  useRefFormik,
-} from "@components/ui";
 import { blueGrey } from "@mui/material/colors";
-import { ImagePanel, UploaderComponent } from "./Article";
 import { ArticleFormParameters } from "./ArticleFormParameters";
 import ArticleTemplates from "./Article/ArticleTemplates";
 import { Blog } from "@common/types/cms";
+import FirstTabImageUploader from "./Article/FirstTabImageUploader";
+import ImagesTabPanel from "./Article/ImagesTabPanel";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -105,26 +95,21 @@ export const ArticleTabs = ({ article }: Props) => {
             }}
           >
             <Tab label="Публикация" {...a11yProps(0)} />
-            <Tab label="Изображение" {...a11yProps(1)} />
-            <Tab label="Параметры" {...a11yProps(2)} />
-            <Tab label="Шапка" {...a11yProps(3)} />
-            <Tab label="Текст" {...a11yProps(4)} />
+            <Tab label="Текст" {...a11yProps(1)} />
+            <Tab label="Описание" {...a11yProps(2)} />
+            <Tab label="Изображение" {...a11yProps(3)} />
+            <Tab label="Параметры" {...a11yProps(4)} />
           </Tabs>
         </Box>
         <Box
           sx={{
-            minHeight: "65vh",
-            "& .mainImage": {
-              marginLeft: { sm: "-5px", md: "-9px" },
-              borderRadius: "8px",
-              cursor: "pointer",
-            },
+            minHeight: "1400px",
           }}
         >
           <TabPanel value={value} index={0}>
             <Grid container spacing={0}>
               <Grid item xs={12} sm={4} lg={2} pr={0} mr={0}>
-                <UploaderComponent />
+                <FirstTabImageUploader />
               </Grid>
               <Grid item xs={12} sm={8} lg={10}>
                 <Grid container spacing={1}>
@@ -182,16 +167,16 @@ export const ArticleTabs = ({ article }: Props) => {
               </Grid>
             </Grid>
           </TabPanel>
-          <TabPanel value={value} index={1}>
-            <ImagePanel />
-          </TabPanel>
           <TabPanel value={value} index={2}>
-            <ArticleFormParameters />
-          </TabPanel>
-          <TabPanel value={value} index={3}>
             <ArticleKeyTextEditor />
           </TabPanel>
-          <Box sx={{ display: [0, 4].includes(value) ? "inherit" : "none" }}>
+          <TabPanel value={value} index={3}>
+            <ImagesTabPanel />
+          </TabPanel>
+          <TabPanel value={value} index={4}>
+            <ArticleFormParameters />
+          </TabPanel>
+          <Box sx={{ display: [0, 1].includes(value) ? "inherit" : "none" }}>
             <ArticleTextHtml />
           </Box>
         </Box>
