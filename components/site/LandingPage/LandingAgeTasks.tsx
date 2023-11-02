@@ -45,7 +45,7 @@ export default function LandingAgeTasks() {
           title="Сборка компьютера, замена процессора и других комплектующих"
           image={
             <Image
-              src="/images/landing/portfolio004.webp"
+              src="/images/landing/portfolio004.jpg"
               width={1518}
               height={900}
               alt=""

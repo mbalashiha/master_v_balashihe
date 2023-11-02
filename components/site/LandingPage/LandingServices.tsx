@@ -35,17 +35,17 @@ export default function LandingServices() {
       >
         Услуги компьютерного мастера
       </Typography>
-      <Grid container spacing={{ xs: "15px", lg: "35px" }}>
+      <Grid container spacing={{ xs: "15px", lg: "25px" }}>
         <LandingCard
           header="Ремонт компьютеров"
-          imageUrl="/images/services_001.webp"
+          imageUrl="/images/services/services_001.jpg"
         >
           Услуги по ремонту компьютерной техники в Балашихинском районе и
           Москве.
         </LandingCard>
         <LandingCard
           header="Настройка Интернета"
-          imageUrl="/images/services_002.webp"
+          imageUrl="/images/services/services_002.jpg"
         >
           Настройка домашнего или офисного Интернета. Настройка Wi-Fi роутера:
           настройка диапазонов 2.4Ghz и 5Ghz. Проводка кабелей Ethernet (витая
@@ -53,13 +53,13 @@ export default function LandingServices() {
         </LandingCard>
         <LandingCard
           header="Компьютерная помощь"
-          imageUrl="/images/services_003.webp"
+          imageUrl="/images/services/services_003.jpg"
         >
           Устрановка и настройка программ Windows, Linux и Android.
         </LandingCard>
         <LandingCard
           header="Обслуживание цифровой техники"
-          imageUrl="/images/services_004.webp"
+          imageUrl="/images/services/services_004.jpg"
         >
           Настройка, замена расходных материалов, устранение неполадок.
         </LandingCard>

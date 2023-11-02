@@ -29,7 +29,7 @@ interface Props {
 export default function LandingCard({ header, children, imageUrl }: Props) {
   const { toggleModal } = useSiteModal();
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12} lg={6}>
       <Card
         onClick={() => toggleModal("contact request form")}
         sx={{
@@ -41,23 +41,46 @@ export default function LandingCard({ header, children, imageUrl }: Props) {
         }}
       >
         <Grid container sx={{ height: "100%" }}>
-          <Grid item xs={12} sm={5} md={5}>
+          <Grid item xs={12} sm={7} md={6} lg={6}>
             <CardMedia
               itemScope
               itemType="https://schema.org/ImageObject"
               sx={{
-                height: "100%",
                 width: "100%",
-                minHeight: { xs: "310px", sm: "inherit" },
+                height: { xs: "340px", sm: "320px", md: "270px" },
                 backgroundColor: "grey",
-                backgroundImage: `url(${imageUrl})`,
-                backgroundSize: "cover",
+                "& a": {
+                  display: "block",
+                  width: "100%",
+                  height: "100%",
+                },
+                "& img": {
+                  minHeight: "100%",
+                  maxHeight: "100%",
+                  minWidth: "100%",
+                  maxWidth: "100%",
+                  height: "auto",
+                  width: "auto",
+                  objectFit: "cover",
+                },
               }}
             >
-              <meta itemProp="image" content={imageUrl} />
+              <Link
+                itemProp="image"
+                href={imageUrl}
+                onClick={(event) => event.preventDefault()}
+              >
+                <Image
+                  src={imageUrl}
+                  width={500}
+                  height={500}
+                  quality={40}
+                  alt=""
+                />
+              </Link>
             </CardMedia>
           </Grid>
-          <Grid item xs={12} sm={7} md={7} sx={{ background: "white" }}>
+          <Grid item xs={12} sm={5} md={6} lg={6} sx={{ background: "white" }}>
             <Stack
               sx={{ height: "100%", p: "18px" }}
               direction={"column"}
