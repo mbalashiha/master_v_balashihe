@@ -23,16 +23,23 @@ import CodeMirrorEditor from "./CodeMirrorEditor";
 import { useState } from "react";
 import { grey } from "@mui/material/colors";
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+const StyledCodeDialog = styled(Dialog)(({ theme }) => ({
   "& .DialogContent-root": {
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     paddingTop: 0,
     paddingBottom: 0,
   },
   "& .DialogActions-root": {
-    padding: theme.spacing(1),
+    padding: theme.spacing(0.5),
+    paddingRight: theme.spacing(1),
     "& button": {
       borderRadius: "8px",
+      padding: 0,
+      paddingLeft: theme.spacing(1),
+      paddingRight: theme.spacing(1),
+      fontSize: "15px",
+      lineHeight: "18px",
+      fontWeight: 500,
     },
   },
   "& .Dialog-container > div:first-of-type.Paper-root": {
@@ -41,26 +48,45 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     width: "1280px",
     maxWidth: "100%",
     margin: 0,
-    borderRadius: "10px",
+    borderRadius: 0,
+    // overflowX: "hidden",
     "& .cm-theme": {
       minHeight: "100%",
       height: "100%",
       overflow: "hidden",
       borderRadius: "6px",
+      "& .cm-editor": {
+        fontFamily: "monospace",
+        fontSize: "15px",
+        lineHeight: "18px",
+      },
     },
   },
 }));
 
-export interface DialogTitleProps {
+export interface DialogTitleProps
+  extends React.ComponentProps<typeof DialogTitle> {
   id: string;
   children?: React.ReactNode;
   onClose: () => void;
 }
 
-function BootstrapDialogTitle(props: DialogTitleProps) {
-  const { children, onClose, ...other } = props;
+function CodeDialogTitle(props: DialogTitleProps) {
+  const { children, onClose, sx, ...other } = props;
   return (
-    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+    <DialogTitle
+      sx={{
+        m: 0,
+        p: 1,
+        pt: 0,
+        pl: 1.1,
+        fontSize: "16px",
+        lineHeight: "23px",
+        height: "24px",
+        ...sx,
+      }}
+      {...other}
+    >
       {children}
       {onClose ? (
         <IconButton
@@ -68,9 +94,11 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
           onClick={onClose}
           sx={{
             position: "absolute",
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
+            right: 0,
+            top: 0,
+            p: "2px",
+            color: (theme) =>
+              theme.palette.mode === "light" ? "black" : "white",
           }}
         >
           <CloseIcon />
@@ -99,36 +127,41 @@ export default function CodeMirrorDialog({
   onSave,
 }: Props) {
   const [initialHtml, setInitialHtml] = useState(inHtml);
-  React.useEffect(() => {
-    setInitialHtml(beautifyHtml(initialHtml));
-  }, [initialHtml]);
   const htmlRef = React.useRef(initialHtml);
-  const handleClose = (event: any, reason: string | null | undefined) => {
-    if (reason && reason == "backdropClick") {
-      return;
-    } else {
-      close();
-    }
-  };
+  React.useEffect(() => setInitialHtml(beautifyHtml(htmlRef.current)), []);
+  const handleClose = React.useCallback(
+    (event: any, reason: string | null | undefined) => {
+      if (reason && reason == "backdropClick") {
+        onSave(htmlRef.current);
+        close();
+      } else {
+        onSave(htmlRef.current);
+        close();
+      }
+    },
+    [onSave, close]
+  );
   return (
-    <BootstrapDialog
+    <StyledCodeDialog
       aria-labelledby="Редактор кода Codemirror"
       open={true}
       onClose={handleClose}
     >
-      <BootstrapDialogTitle
-        id={"article_codemirror_editor_modal"}
-        onClose={close}
-      >
+      <CodeDialogTitle id={"article_codemirror_editor_modal"} onClose={close}>
         Редактор кода Codemirror
-      </BootstrapDialogTitle>
+      </CodeDialogTitle>
       <DialogContent>
-        <CodeMirrorEditor initialHtml={initialHtml} htmlRef={htmlRef} />
+        <CodeMirrorEditor
+          onChange={onSave}
+          initialHtml={initialHtml}
+          htmlRef={htmlRef}
+        />
       </DialogContent>
       <DialogActions>
         <Button
           autoFocus
           onClick={() => {
+            onSave(initialHtml);
             close();
           }}
           sx={{
@@ -153,6 +186,6 @@ export default function CodeMirrorDialog({
           Сохранить
         </Button>
       </DialogActions>
-    </BootstrapDialog>
+    </StyledCodeDialog>
   );
 }
