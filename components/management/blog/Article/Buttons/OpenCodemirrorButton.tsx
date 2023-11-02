@@ -3,7 +3,7 @@ import { useArticleContext } from "../../ArticleForm";
 import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
 
 export default function OpenCodemirrorButton() {
-  const { emitter } = useArticleContext();
+  const { emitter, eventNames } = useArticleContext();
   return (
     <Button
       sx={{
@@ -11,7 +11,7 @@ export default function OpenCodemirrorButton() {
         "&:hover": { background: "black" },
       }}
       startIcon={<CodeRoundedIcon />}
-      onClick={() => emitter.emit("textHtml-codemirror-editor-open")}
+      onClick={() => emitter.emit(eventNames.openCodeMirror)}
     >
       Код
     </Button>

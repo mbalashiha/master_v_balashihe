@@ -62,7 +62,7 @@ export default function ArticleTextHtml() {
     doTimeout();
   }, []);
   const [, meta] = useField("textHtml");
-  const { savedArticle, emitter } = useArticleContext();
+  const { savedArticle, emitter, eventNames } = useArticleContext();
   return (
     <>
       {meta.error && (
@@ -98,7 +98,8 @@ export default function ArticleTextHtml() {
           onBlur={onBlur}
           onEditorChange={onEditorChange}
           emitter={emitter}
-          setContentEventName={"tinymce"}
+          setContentEventName={eventNames.articleTextHtmlSetContent}
+          openCodeMirrorEventName={eventNames.openCodeMirror}
         />
       </Box>
     </>

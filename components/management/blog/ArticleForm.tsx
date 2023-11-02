@@ -14,6 +14,10 @@ export interface ArticleMutationContext {
   mutateArticle: (article: Blog.ArticleDraft) => void;
   savedArticle: Blog.ArticleDraft;
   emitter: EventEmitter;
+  eventNames: {
+    openCodeMirror: string;
+    articleTextHtmlSetContent: string;
+  };
 }
 const ArticleMutationContext = React.createContext<
   Partial<ArticleMutationContext>
@@ -31,12 +35,22 @@ export const ArticleForm = ({ article: inArticle }: Props) => {
   const [savedFlag, setSavedFlag] = React.useState<boolean>(false);
   const articleRef = useRef({ stateArticle, router });
   articleRef.current = { stateArticle, router };
+  const eventNames = useMemo(
+    () => ({
+      openCodeMirror: "textHtml-codemirror-editor-open",
+      articleTextHtmlSetContent: "tinymce",
+    }),
+    []
+  );
   const mutateArticle = useCallback(
     (newSavedArticle: Blog.ArticleDraft) => {
       const { stateArticle, router } = articleRef.current;
       setSavedFlag(true);
       setArticle(newSavedArticle);
-      emitter.emit("tinymce", newSavedArticle.textHtml);
+      emitter.emit(
+        eventNames.articleTextHtmlSetContent,
+        newSavedArticle.textHtml
+      );
       formRef.current?.setValues(newSavedArticle);
       if (
         stateArticle.existingArticleId !== newSavedArticle.existingArticleId
@@ -50,14 +64,14 @@ export const ArticleForm = ({ article: inArticle }: Props) => {
       } else {
         setTimeout(() => {
           setSavedFlag(false);
-        }, 1500);
+        }, 900);
       }
     },
-    [emitter]
+    [emitter, eventNames]
   );
   const value = useMemo(
-    () => ({ emitter, savedArticle: stateArticle, mutateArticle }),
-    [emitter, stateArticle, mutateArticle]
+    () => ({ emitter, eventNames, savedArticle: stateArticle, mutateArticle }),
+    [emitter, eventNames, stateArticle, mutateArticle]
   );
   return (
     <ArticleMutationContext.Provider value={value}>

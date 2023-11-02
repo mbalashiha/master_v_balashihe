@@ -16,6 +16,7 @@ export interface MemoizedTinyMCEProps {
   onBlur: (event: any) => void;
   emitter?: EventEmitter;
   setContentEventName?: string;
+  openCodeMirrorEventName?: string;
 }
 interface CustomMenubarProps {
   children: React.ReactNode | React.ReactNode[];
@@ -56,6 +57,7 @@ const MemoizedTinyMCE = memo<MemoizedTinyMCEProps>(
     onEditorChange,
     emitter,
     setContentEventName,
+    openCodeMirrorEventName,
     ...rest
   }: MemoizedTinyMCEProps) {
     const htmlRef = useRef(initialValue);
@@ -79,24 +81,31 @@ const MemoizedTinyMCE = memo<MemoizedTinyMCEProps>(
       editorRef.current?.editor?.setContent(savingHtml);
     }, []);
     useEffect(() => {
-      if (emitter && setContentEventName) {
+      if (emitter) {
         const listener = (textHtml: string) => {
           editorRef.current?.editor?.setContent(textHtml);
         };
-        emitter.on(setContentEventName, listener);
-        const cmOpenEventName = "textHtml-codemirror-editor-open";
+        if (setContentEventName) {
+          emitter.on(setContentEventName, listener);
+        }
         const cmOpenlistener = () => {
           setCodeMirrorOpened(true);
         };
-        emitter.on(cmOpenEventName, cmOpenlistener);
+        if (openCodeMirrorEventName) {
+          emitter.on(openCodeMirrorEventName, cmOpenlistener);
+        }
         return () => {
-          if (emitter && setContentEventName) {
-            emitter.off(setContentEventName, listener);
-            emitter.off(cmOpenEventName, cmOpenlistener);
+          if (emitter) {
+            if (setContentEventName) {
+              emitter.off(setContentEventName, listener);
+            }
+            if (openCodeMirrorEventName) {
+              emitter.off(openCodeMirrorEventName, cmOpenlistener);
+            }
           }
         };
       }
-    }, [emitter, setContentEventName]);
+    }, [emitter, setContentEventName, openCodeMirrorEventName]);
     return (
       <>
         <input
