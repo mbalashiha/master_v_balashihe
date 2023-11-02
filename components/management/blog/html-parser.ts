@@ -16,6 +16,18 @@ export function unescapeHtml(safeEscaped: string): string {
     .replaceAll("&#039;", "'")
     .replaceAll("&amp;", "&");
 }
+export function escapeHtmlTagsOnly(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+export function unescapeHtmlTagsOnly(safeEscaped: string): string {
+  return safeEscaped
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&amp;", "&");
+}
 export function HtmlEncode(s: string) {
   var el = document.createElement("div");
   el.innerText = el.textContent = s;

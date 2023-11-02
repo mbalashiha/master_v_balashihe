@@ -25,7 +25,12 @@ import { TabsProvider } from "@components/common/Tabs/TabsProvider";
 import { locale } from "@utils/locale";
 import { Blog } from "@common/types/cms";
 import usePrettierReact from "@framework/management/api/use-prettier-react";
-import { escapeHtml, unescapeHtml } from "./html-parser";
+import {
+  escapeHtml,
+  escapeHtmlTagsOnly,
+  unescapeHtml,
+  unescapeHtmlTagsOnly,
+} from "./html-parser";
 import { useArticleContext } from "./ArticleForm";
 import { FormContextType } from "@components/ui/RefFormik";
 import { OpenCodemirrorButton } from "./Article/Buttons";
@@ -150,12 +155,12 @@ export const ChildArticleForm = forwardRef<
               className.substring("language-".length);
             const innerHTML = result[2];
             if (language && innerHTML) {
-              const innerText = unescapeHtml(innerHTML);
+              const innerText = unescapeHtmlTagsOnly(innerHTML);
               const resp = await prettierReact({
                 language,
                 textContent: innerText,
               });
-              const newStr = escapeHtml(resp.textContent).trim();
+              const newStr = escapeHtmlTagsOnly(resp.textContent).trim();
               inStr = inStr.replace(innerHTML, newStr);
             }
           }
