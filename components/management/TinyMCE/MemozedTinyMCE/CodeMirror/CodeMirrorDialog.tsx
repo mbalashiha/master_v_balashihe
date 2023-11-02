@@ -131,7 +131,7 @@ export default function CodeMirrorDialog({
   React.useEffect(() => setInitialHtml(beautifyHtml(htmlRef.current)), []);
   const handleClose = React.useCallback(
     (event: any, reason: string | null | undefined) => {
-      if (reason && reason == "backdropClick") {
+      if (reason === "backdropClick") {
         onSave(htmlRef.current);
         close();
       } else {
