@@ -40,7 +40,7 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
               position: "relative",
               clear: "both",
               borderRadius: "10px",
-              pl: "5px",
+              pl: "3px",
               py: 2,
               pt: 3,
               "&, & pre": {
@@ -92,7 +92,7 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
             >
               {codeHasBeenCopied ? "Код скопирован" : "Скопировать"}
             </Button>
-            <Box sx={{ minWidth: "21px" }}>
+            <Box sx={{ textAlign: "right", pr: "3px" }}>
               {tokens.map((line, i) => {
                 return (
                   <React.Fragment key={i}>
