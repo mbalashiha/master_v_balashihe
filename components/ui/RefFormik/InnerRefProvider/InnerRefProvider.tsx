@@ -33,7 +33,6 @@ export interface FormContextType<
   getValues: () => FormProps | undefined;
   formWasSubmited: Boolean;
   setFormWasSubmited: () => void;
-  updateFormValues: (nextState?: Partial<FormProps> | undefined) => void;
 }
 const FormContext = React.createContext<Partial<FormContextType<any>>>({});
 type FormikElementProps<FormProps extends FormikValues> = React.ComponentProps<
@@ -77,14 +76,6 @@ export const InnerRefFormik = forwardRef<
   const formikRef: InnerRef<FormikValues> = React.useRef(null);
   const providerMethods = useMemo(() => {
     const formik = () => formikRef.current;
-    const updateFormValues: FormikProps<any>["resetForm"] = (
-      nextState?: Partial<FormikState<any>> | undefined
-    ) => {
-      return formikRef.current?.resetForm({
-        ...formikRef.current?.values,
-        ...nextState,
-      });
-    };
     const getFieldProps: FormikProps<FormikValues>["getFieldProps"] = <Value,>(
       props: any
     ): FieldInputProps<Value> =>
@@ -139,7 +130,6 @@ export const InnerRefFormik = forwardRef<
       setFieldValue,
       getFieldProps,
       getValues,
-      updateFormValues,
     };
   }, []);
   const providerConfig: FormContextType<any> = {
