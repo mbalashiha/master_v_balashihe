@@ -8,11 +8,13 @@ import { useArticleContext } from "../../ArticleForm";
 import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
 import { useFormikContext } from "formik";
 import { useState } from "react";
+import { Blog } from "@common/types/cms";
 
 export default function ResetButton() {
   const { resetArticle } = useArticleContext();
-  const { dirty } = useFormikContext();
+  let { dirty, values } = useFormikContext<Blog.ArticleDraft>();
   const [showModal, setShowModal] = useState(false);
+  dirty = Boolean(dirty && values.existingArticleId);
   return (
     <>
       <Button
@@ -23,7 +25,9 @@ export default function ResetButton() {
         }}
         startIcon={<RestartAltRoundedIcon />}
         onClick={() => {
-          setShowModal(true);
+          if (dirty) {
+            setShowModal(true);
+          }
         }}
       >
         Сбросить
