@@ -31,6 +31,8 @@ export default function Home(
     <>
       <ThemeProvider theme={theme}>
         <Container
+          itemScope
+          itemType="https://schema.org/Product"
           maxWidth={false}
           sx={{
             backgroundColor: "#010101",

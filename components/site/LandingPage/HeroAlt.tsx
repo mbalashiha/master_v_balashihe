@@ -101,8 +101,6 @@ export default function Hero({ article }: Props) {
           }}
         ></Box>
         <Container
-          itemScope
-          itemType="https://schema.org/Person"
           maxWidth="lg"
           sx={{
             "&, & *": {
@@ -136,6 +134,7 @@ export default function Hero({ article }: Props) {
                   textTransform: "uppercase",
                   mb: 0,
                 }}
+                itemProp="name"
                 variant="h1"
                 component="h1"
               >
@@ -174,10 +173,14 @@ export default function Hero({ article }: Props) {
               pb: { xs: 0, lg: "80px" },
             }}
           >
+            <meta
+              itemProp="model"
+              content="Компьютерный мастер окончил МГТУ МИРЭА со специальностью Информационные системы и технологии"
+            />
             <div itemProp="description">
               {`Меня зовут Дмитрий, 
               я окончил МГТУ МИРЭА со специальностью "`}
-              <Link itemProp="url" href="/computer-master-balashiha">
+              <Link href="/computer-master-balashiha">
                 Информационные системы и технологии
               </Link>
               {`".
@@ -203,9 +206,6 @@ export default function Hero({ article }: Props) {
                 </Box>
               </Box>
             </div>
-            <meta itemProp="name" content="Дмитрий" />
-            <meta itemProp="alumniOf" content="МГТУ МИРЭА" />
-            <meta itemProp="familyName" content="Мастеров" />
             <Grid
               container
               sx={{

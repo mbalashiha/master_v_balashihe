@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import Link from "next/link";
 type NextLinkProps = React.ComponentProps<typeof Link>;
 interface Props {
@@ -26,12 +27,17 @@ const MyLink = ({
 
 export const PriceRow = ({ href, title, amount }: Props) => {
   return (
-    <p>
-      <strong>
+    <div itemProp="offers" itemScope itemType="https://schema.org/Offer">
+      <Box sx={{ display: "none" }}>
+        <link itemProp="availability" href="https://schema.org/InStock" />
+        <meta itemProp="price" content={(amount || 0).toString()} />
+        <meta itemProp="priceCurrency" content="RUB" />
+      </Box>
+      <strong itemProp="name">
         <MyLink href={href}>{title}</MyLink>
       </strong>
       {amount && <span>от {amount} &#x20bd;</span>}
-    </p>
+    </div>
   );
 };
 export default PriceRow;

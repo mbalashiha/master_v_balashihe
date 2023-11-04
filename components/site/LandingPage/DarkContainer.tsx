@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import React from "react";
 type ContainerProps = React.ComponentProps<typeof Container>;
-interface Props {
+interface Props extends ContainerProps {
   children: React.ReactNode | React.ReactNode[];
   sx?: ContainerProps["sx"];
   background?: React.ReactNode | React.ReactNode[];
@@ -12,6 +12,7 @@ export default function DarkContainer({
   sx,
   background,
   FullWidthProps,
+  ...rest
 }: Props) {
   return (
     <Container
@@ -36,6 +37,7 @@ export default function DarkContainer({
           pb: "52px",
           ...sx,
         }}
+        {...rest}
       >
         {children}
       </Container>

@@ -83,7 +83,7 @@ export const GradientCard = ({
         direction="column"
         spacing={{ xs: "17px", sm: "8px", md: "17px" }}
         sx={{
-          "& p": {
+          "& > div": {
             display: "flex",
             flexDirection: "row",
             width: "100%",

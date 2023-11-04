@@ -46,11 +46,17 @@ export default function TaskCard({
   return (
     <Grid item xs={12}>
       <Grid
+        itemProp="offers"
         itemScope
         itemType="https://schema.org/Offer"
         container
         spacing={{ xs: "8px", md: "12px", lg: "35px" }}
       >
+        <Box sx={{ display: "none" }}>
+          <link itemProp="availability" href="https://schema.org/InStock" />
+          <meta itemProp="price" content="0" />
+          <meta itemProp="priceCurrency" content="RUB" />
+        </Box>
         <Grid
           item
           xs={12}
