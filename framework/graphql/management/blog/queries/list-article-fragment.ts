@@ -12,5 +12,8 @@ export const ListArticleFragment = gql`
     updatedAt
     publishedAt
     viewed
+    description
+    datePublished
+    dateModified
   }
 `;

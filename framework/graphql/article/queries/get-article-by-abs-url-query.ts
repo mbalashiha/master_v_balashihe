@@ -1,37 +1,11 @@
 import { gql } from "graphql-request";
+import articleFragment from "@framework/article/fragments/article-fragment";
 
 export const getArticleByAbsUrlQuery = gql`
-  fragment BlogArticleFragment on BlogArticle {
-    id
-    title
-    handle
-    absURL
-    displayingPageHandle
-    renderHtml
-    unPublished
-    notSearchable
-    notInList
-    orderNumber
-    blogCategoryId
-    updatedAt
-    publishedAt
-    templateId
-    viewed
-    image {
-      imageId
-      imgSrc
-      width
-      height
-      altText
-    }
-    ogDates {
-      modified_time
-      published_time
-    }
-  }
+  ${articleFragment}
   query ($absURL: String) {
     articleByAbsUrl(absURL: $absURL) {
-      ...BlogArticleFragment
+      ...ArticleFragment
     }
   }
 `;

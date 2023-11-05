@@ -26,7 +26,7 @@ interface Props extends CMS.Blog.Article {}
 
 export default function BlogArticle({
   title,
-  image,
+  image: inImage,
   navigation,
   keyTextHtml,
   renderHtml,
@@ -37,13 +37,15 @@ export default function BlogArticle({
   url,
   canonicalUrl,
   ogDates,
+  dateModified,
+  datePublished,
   ...rest
 }: Props) {
   const articleImage =
     secondImage && secondImage?.url
       ? secondImage
-      : image && image?.url
-      ? image
+      : inImage && inImage?.url
+      ? inImage
       : randomImage;
   const imgSrc = articleImage?.url;
   const countViews = useCountViews();
@@ -86,9 +88,8 @@ export default function BlogArticle({
       <HugeContainer>
         <ArticleBreadcrumbs title={title} url={url} />
         <Paper
-          component={"article"}
           itemScope
-          itemType="https://schema.org/Article"
+          itemType="https://schema.org/BlogPosting"
           sx={{
             p: 0,
             boxShadow: "none",
@@ -125,7 +126,7 @@ export default function BlogArticle({
               float: { xs: "none", md: "right" },
               boxShadow: "none",
             },
-            "& div.firstImage": {
+            "& a.firstImage": {
               margin: { xs: 0, md: "0 0 10px 25px" },
               width: {
                 xs: "100%",
@@ -161,23 +162,27 @@ export default function BlogArticle({
             },
           }}
         >
+          <link itemProp="mainEntityOfPage" href={canonicalUrl} />
+          <meta itemProp="datePublished" content={datePublished} />
+          <meta itemProp="dateModified" content={dateModified} />
+          {articleImage?.canonicalUrl && (
+            <link itemProp="image" href={articleImage?.canonicalUrl} />
+          )}
           {imgSrc && (
-            <div
+            <Link
               className={"firstImage"}
               itemProp="image"
-              itemScope
-              itemType="https://schema.org/ImageObject"
+              href={imgSrc}
+              target={"_blank"}
             >
-              <meta itemProp="image" content={imgSrc} />
               <Image
-                itemProp="contentUrl"
                 src={imgSrc}
                 width={480}
                 height={480}
                 alt={`Балашиха Нужен мастер для ремонта ${h2 || title}`}
                 className={"firstImage"}
               />
-            </div>
+            </Link>
           )}
           <Typography
             component="h1"

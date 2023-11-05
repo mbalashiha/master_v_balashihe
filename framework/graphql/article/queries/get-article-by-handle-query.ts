@@ -44,6 +44,9 @@ export const getArticleByHandleQuery = gql`
     updatedAt
     publishedAt
     templateId
+    description
+    datePublished
+    dateModified
     ogDates {
       modified_time
       published_time

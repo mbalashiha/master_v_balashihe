@@ -2,11 +2,9 @@
 import { useArticleList } from "@common/management/blog/use-article-list";
 import { UseArticleList } from "@common/management/blog/use-article-list";
 import { API, CMS } from "@common/types";
-import { Management } from "@common/types/cms";
 import { useSearchProvider } from "@components/management/blog/Article";
 import { Schema } from "@framework/types";
 import {
-  normalizeArticle,
   normalizeBlogRow,
 } from "@framework/utils/normalize/normalize-article";
 import { useSnackbar } from "notistack";

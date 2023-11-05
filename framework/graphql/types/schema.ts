@@ -48,6 +48,9 @@ export namespace Schema {
     image: Image | null;
     secondImage: Image | null;
     viewed: number | null;
+    description: string | null;
+    datePublished: string;
+    dateModified: string;
   }
   export interface NavigationItem {
     title: String;
@@ -92,6 +95,9 @@ export namespace Schema {
     viewed: number | null;
     templateId: ID | null;
     ogDates: OpenGraphDates;
+    description: string | null;
+    datePublished: string;
+    dateModified: string;
   }
   export namespace Article {
     export interface ArticleInput {
@@ -114,6 +120,7 @@ export namespace Schema {
       imageId: ID | null;
       secondImageId: ID | null;
       templateId: ID | null;
+      description: string | null;
     }
     export interface ArticleDraftInput {
       id: ID | null;
@@ -130,6 +137,7 @@ export namespace Schema {
       imageId: ID | null;
       secondImageId: ID | null;
       templateId: ID | null;
+      description: string | null;
     }
     export interface TextDraftInput {
       id: ID | null;

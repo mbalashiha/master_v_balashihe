@@ -31,7 +31,7 @@ interface Props extends CMS.Blog.Article {}
 
 export default function ContactArticleComponent({
   title,
-  image,
+  image: inImage,
   navigation,
   keyTextHtml,
   renderHtml,
@@ -42,6 +42,8 @@ export default function ContactArticleComponent({
   url,
   canonicalUrl,
   ogDates,
+  dateModified,
+  datePublished,
   ...rest
 }: Props) {
   const articleImage =
@@ -84,13 +86,14 @@ export default function ContactArticleComponent({
           content={ogDates.published_time}
         />
       </Head>
-      <Box
-        component={"article"}
-        width="100%"
-        itemScope
-        itemType="https://schema.org/Article"
-      >
-        <SpecialHeader image={image} keyTextHtml={keyTextHtml}>
+      <Box width="100%" itemScope itemType="https://schema.org/BlogPosting">
+        <link itemProp="mainEntityOfPage" href={canonicalUrl} />
+        <meta itemProp="datePublished" content={datePublished} />
+        <meta itemProp="dateModified" content={dateModified} />
+        {articleImage?.canonicalUrl && (
+          <link itemProp="image" href={articleImage?.canonicalUrl} />
+        )}
+        <SpecialHeader image={inImage} keyTextHtml={keyTextHtml}>
           {title}
         </SpecialHeader>
         <HugeContainer
@@ -134,9 +137,7 @@ export default function ContactArticleComponent({
                 },
               }}
             >
-              <li
-                itemProp="itemListElement"
-              >
+              <li itemProp="itemListElement">
                 {navigation?.prev?.url ? (
                   <Link href={navigation.prev.url} itemProp="url">
                     <Tooltip
@@ -156,9 +157,7 @@ export default function ContactArticleComponent({
               <li>
                 <CallButton zIndex={2} />
               </li>
-              <li
-                itemProp="itemListElement"
-              >
+              <li itemProp="itemListElement">
                 {navigation?.next?.url ? (
                   <Link href={navigation.next.url} itemProp="url">
                     <Tooltip
@@ -204,7 +203,7 @@ export default function ContactArticleComponent({
                 float: { xs: "none", md: "left" },
                 height: "auto",
               },
-              "& div.firstImage": {
+              "& a.firstImage": {
                 margin: { xs: "0 2em 0.5em 0", md: "0 2em 0em 0" },
                 width: {
                   xs: "100%",
@@ -253,22 +252,20 @@ export default function ContactArticleComponent({
             <ArticleBreadcrumbs title={title} url={url} />
 
             {imgSrc && (
-              <div
+              <Link
                 className={"firstImage"}
                 itemProp="image"
-                itemScope
-                itemType="https://schema.org/ImageObject"
+                href={imgSrc}
+                target={"_blank"}
               >
-                <meta itemProp="image" content={imgSrc} />
                 <Image
-                  itemProp="contentUrl"
                   src={imgSrc}
                   width={480}
                   height={480}
                   alt={`Балашиха Нужен мастер для ремонта ${h2 || title}`}
                   className={"firstImage"}
                 />
-              </div>
+              </Link>
             )}
             <Typography
               variant="h2"

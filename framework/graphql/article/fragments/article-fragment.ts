@@ -6,9 +6,9 @@ const articleFragment = gql`
     title
     handle
     absURL
+    renderHtml
     text
     textHtml
-    textRawDraftContentState
     h2
     keyTextHtml
     autoHandleSlug
@@ -20,6 +20,9 @@ const articleFragment = gql`
     createdAt
     updatedAt
     publishedAt
+    description
+    datePublished
+    dateModified
     ogDates {
       modified_time
       published_time

@@ -58,6 +58,7 @@ export const handler: API.Graphql.MutationHook<UseSaveArtDraftPropsHook> = {
           h2: all?.h2 || null,
           secondImageId: all?.secondImageId || null,
           templateId: all?.templateId || null,
+          description: all?.description || "",
         },
       };
       all?.secondImageId;

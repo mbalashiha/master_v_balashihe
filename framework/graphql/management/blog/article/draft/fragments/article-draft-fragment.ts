@@ -1,5 +1,5 @@
 import { gql } from "graphql-request";
-import articleFragment from "@framework/management/blog/article/fragments/article-fragment";
+import articleFragment from "@framework/article/fragments/article-fragment";
 
 export const articleDraftFragment = gql`
   ${articleFragment}
@@ -24,6 +24,7 @@ export const articleDraftFragment = gql`
     createdAt
     updatedAt
     publishedAt
+    description
     ogDates {
       modified_time
       published_time

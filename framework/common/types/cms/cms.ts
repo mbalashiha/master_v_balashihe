@@ -28,6 +28,7 @@ export namespace Blog {
     id: ID;
     title: string;
     url: string;
+    canonicalUrl: string;
     displayingPageUrl: string | null;
     publishedAt: string;
     score: Float | null;
@@ -35,6 +36,13 @@ export namespace Blog {
     image: Image | null;
     secondImage: Image | null;
     viewed: number | null;
+    description: string;
+    datePublished: string;
+    dateModified: string;
+    humanDates: {
+      datePublished: string;
+      dateModified: string;
+    };
   }
   export interface NavigationItem {
     title: string;
@@ -56,7 +64,7 @@ export namespace Blog {
     id: ID;
     title: String;
     url: String;
-    canonicalUrl: String;
+    canonicalUrl: string;
     absURL: String;
     textHtml: String;
     renderHtml: String;
@@ -83,6 +91,13 @@ export namespace Blog {
     handle: String | null;
     autoHandleSlug: String | null;
     ogDates: OpenGraphDates;
+    description: string;
+    datePublished: string;
+    dateModified: string;
+    humanDates: {
+      datePublished: string;
+      dateModified: string;
+    };
   }
   export interface ArticleTemplate {
     templateId: ID;
@@ -116,6 +131,7 @@ export namespace Blog {
     secondImage: Image | null;
     templateId: ID | null;
     orderNumber: number | null;
+    description: string;
   }
 }
 export namespace Management {

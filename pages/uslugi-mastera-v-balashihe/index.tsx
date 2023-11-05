@@ -46,11 +46,18 @@ export default function Page({
         />
       </Head>
       <HugeContainer
+        itemScope
+        itemType="https://schema.org/Blog"
         leftSidebar={<BlogRootSidebar recentArticles={recentArticles} />}
         sx={{ background: "transparent" }}
       >
         <BlogListBreadcrumbs />
-        <Typography variant="h3" component="h3" sx={{ mb: 2 }}>
+        <Typography
+          itemProp="description"
+          variant="h3"
+          component="h3"
+          sx={{ mb: 2 }}
+        >
           {title}
         </Typography>
         <Grid container spacing={{ xs: 2, lg: 3 }}>

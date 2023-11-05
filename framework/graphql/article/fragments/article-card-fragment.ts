@@ -5,22 +5,16 @@ const articleCardFragment = gql`
     id
     title
     handle
+    absURL
+    displayingPageHandle
     publishedAt
     updatedAt
     score
     fragment
-    viewed
     description
     datePublished
     dateModified
     image {
-      imageId
-      imgSrc
-      width
-      height
-      altText
-    }
-    secondImage {
       imageId
       imgSrc
       width

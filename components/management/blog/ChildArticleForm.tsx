@@ -140,6 +140,7 @@ export const ChildArticleForm = forwardRef<
           h2,
           secondImageId,
           templateId,
+          description,
         } = values;
         const replacer = async (inStr: string): Promise<string> => {
           const reg =
@@ -226,6 +227,7 @@ export const ChildArticleForm = forwardRef<
           autoHandleSlug:
             (title ? slugify(title) : null) || autoHandleSlug || null,
           absURL: slugifyAbsUrl(absURL || ""),
+          description: description || "",
           text,
           textHtml,
           renderHtml,

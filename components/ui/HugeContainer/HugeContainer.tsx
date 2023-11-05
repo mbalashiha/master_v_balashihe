@@ -13,7 +13,7 @@ type BoxProps = React.ComponentProps<typeof Box>;
 type GridContainerProps = React.ComponentProps<typeof Grid>;
 type GridSX = React.ComponentProps<typeof Grid>["sx"];
 
-interface Props {
+interface Props extends BoxProps {
   children: React.ReactNode | React.ReactNode[];
   leftSidebar?: React.ReactNode | React.ReactNode[];
   rightSidebar?: React.ReactNode | React.ReactNode[];
@@ -28,6 +28,7 @@ export default function HugeContainer({
   sx,
   spacing,
   colorMode,
+  ...rest
 }: Props) {
   return (
     <Box
@@ -35,12 +36,13 @@ export default function HugeContainer({
         width: "100%",
         background: (theme) =>
           colorMode && colorMode === "dark"
-            ? "rgb(1,1,1)"
+            ? "#010101"
             : theme.palette.background.paper,
         pt: 1.5,
         pb: 0,
         ...sx,
       }}
+      {...rest}
     >
       <Container maxWidth={"lg"}>
         <Grid container spacing={spacing || { xs: 1, lg: 3, xl: 4 }}>

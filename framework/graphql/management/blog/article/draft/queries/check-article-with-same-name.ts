@@ -19,6 +19,9 @@ export const managementCheckArticleQuery = gql`
       createdAt
       updatedAt
       publishedAt
+      description
+      datePublished
+      dateModified
       ogDates {
         modified_time
         published_time

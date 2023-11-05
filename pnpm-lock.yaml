@@ -25,7 +25,7 @@ dependencies:
     version: 5.13.5(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.0.28)(react-dom@18.2.0)(react@18.2.0)
   '@mui/x-date-pickers':
     specifier: ^6.9.1
-    version: 6.9.1(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@mui/base@5.0.0-beta.4)(@mui/material@5.13.5)(@mui/system@5.13.5)(dayjs@1.11.9)(moment@2.29.4)(react-dom@18.2.0)(react@18.2.0)
+    version: 6.9.1(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@mui/base@5.0.0-beta.4)(@mui/material@5.13.5)(@mui/system@5.13.5)(dayjs@1.11.9)(luxon@3.4.3)(moment@2.29.4)(react-dom@18.2.0)(react@18.2.0)
   '@tinymce/tinymce-react':
     specifier: ^4.3.0
     version: 4.3.0(react-dom@18.2.0)(react@18.2.0)
@@ -41,6 +41,9 @@ dependencies:
   '@types/js-cookie':
     specifier: ^3.0.3
     version: 3.0.3
+  '@types/luxon':
+    specifier: ^3.3.3
+    version: 3.3.3
   '@types/node':
     specifier: 18.14.0
     version: 18.14.0
@@ -116,6 +119,9 @@ dependencies:
   js-cookie:
     specifier: 3.0.1
     version: 3.0.1
+  luxon:
+    specifier: ^3.4.3
+    version: 3.4.3
   material-icons:
     specifier: ^1.13.12
     version: 1.13.12
@@ -2302,7 +2308,7 @@ packages:
       react-is: 18.2.0
     dev: false
 
-  /@mui/x-date-pickers@6.9.1(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@mui/base@5.0.0-beta.4)(@mui/material@5.13.5)(@mui/system@5.13.5)(dayjs@1.11.9)(moment@2.29.4)(react-dom@18.2.0)(react@18.2.0):
+  /@mui/x-date-pickers@6.9.1(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@mui/base@5.0.0-beta.4)(@mui/material@5.13.5)(@mui/system@5.13.5)(dayjs@1.11.9)(luxon@3.4.3)(moment@2.29.4)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-iqw0U8fn58tP5OPXoITqkjp1JKY2EvFpsLLTd8stP/pJkVjjAnhhm/KOneMmBziIgTyMSXP4SnoRaKjwpXILew==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -2350,6 +2356,7 @@ packages:
       '@types/react-transition-group': 4.4.6
       clsx: 1.2.1
       dayjs: 1.11.9
+      luxon: 3.4.3
       moment: 2.29.4
       prop-types: 15.8.1
       react: 18.2.0
@@ -2808,6 +2815,10 @@ packages:
 
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: false
+
+  /@types/luxon@3.3.3:
+    resolution: {integrity: sha512-/BJF3NT0pRMuxrenr42emRUF67sXwcZCd+S1ksG/Fcf9O7C3kKCY4uJSbKBE4KDUIYr3WMsvfmWD8hRjXExBJQ==}
     dev: false
 
   /@types/node@18.14.0:
@@ -5370,6 +5381,11 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
+    dev: false
+
+  /luxon@3.4.3:
+    resolution: {integrity: sha512-tFWBiv3h7z+T/tDaoxA8rqTxy1CHV6gHS//QdaH4pulbq/JuBSGgQspQQqcgnwdAx6pNI7cmvz5Sv/addzHmUg==}
+    engines: {node: '>=12'}
     dev: false
 
   /material-icons@1.13.12:

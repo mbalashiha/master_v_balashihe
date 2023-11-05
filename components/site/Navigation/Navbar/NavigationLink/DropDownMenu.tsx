@@ -70,6 +70,8 @@ const DropDownMenu = ({ submenu, ...link }: Props) => {
             },
             "& a": {
               whiteSpace: "nowrap",
+              minWidth: "300px",
+              px: "15px",
             },
           },
         }}

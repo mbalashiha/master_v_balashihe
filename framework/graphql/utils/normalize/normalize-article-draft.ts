@@ -38,6 +38,7 @@ export const getEmptyDraft = ({
     secondImage: null,
     templateId: templateId || null,
     orderNumber: null,
+    description: "",
   };
 };
 export const normalizeArticleDraft = (
@@ -69,6 +70,7 @@ export const normalizeArticleDraft = (
     secondImageId,
     secondImage,
     templateId,
+    description,
   } = draft;
   if (!existingArticleId) {
     return getEmptyDraft({ templateId });
@@ -104,6 +106,7 @@ export const normalizeArticleDraft = (
     secondImageId: secondImageId || null,
     secondImage: secondImage ? normalizeImage(secondImage) : null,
     templateId: templateId || null,
+    description: description || "",
   };
   return normalizedDraft;
 };

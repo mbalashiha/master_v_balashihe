@@ -2,12 +2,28 @@ import { CMS } from "@common/types";
 import { Blog } from "@common/types/cms";
 import { ID, Schema } from "@framework/types";
 import convertDate from "./convert-date";
+import { DateTime } from "luxon";
 
 export const getCanonicalUrl = ({ url }: { url: string }) =>
   `${process.env["NEXT_PUBLIC_SITE_URL"] || ""}${
     url.startsWith("/") ? url : `/${url}`
   }`;
-
+export const getArticleUrlAndCanonicalUrl = ({
+  absURL,
+  handle,
+  displayingPageHandle,
+}: {
+  absURL: string | null;
+  handle: string | null;
+  displayingPageHandle: string | null;
+}): {
+  url: string;
+  canonicalUrl: string;
+} => {
+  const url = chooseArticleUrl({ displayingPageHandle, handle });
+  const canonicalUrl = getCanonicalUrl({ url: absURL || url });
+  return { url, canonicalUrl };
+};
 export const normalizeArticleUrl = (
   handle: string | null,
   autoHandleSlug?: string | null
@@ -37,8 +53,22 @@ export const normalizeBlogRow = (
     image,
     secondImage,
     viewed,
+    description,
+    datePublished,
+    dateModified,
   } = data;
-  const url = absURL || handle ? normalizeArticleUrl(absURL || handle) : "";
+
+  if (!datePublished) {
+    throw new Error("No article datePublished!");
+  }
+  if (!dateModified) {
+    throw new Error("No article dateModified!");
+  }
+  const { url, canonicalUrl } = getArticleUrlAndCanonicalUrl({
+    handle,
+    displayingPageHandle,
+    absURL,
+  });
   return {
     id: id || (null as any as ID),
     image: image && image.imgSrc ? normalizeImage(image) : null,
@@ -48,6 +78,7 @@ export const normalizeBlogRow = (
     fragment: fragment || null,
     title,
     url,
+    canonicalUrl,
     displayingPageUrl: displayingPageHandle || null,
     publishedAt: new Date(publishedAt).toLocaleString("ru", {
       year: "numeric",
@@ -56,7 +87,18 @@ export const normalizeBlogRow = (
       hour: "numeric",
       minute: "numeric",
     }),
+    humanDates: {
+      datePublished: DateTime.fromISO(datePublished)
+        .setLocale("ru")
+        .toLocaleString(DateTime.DATE_FULL),
+      dateModified: DateTime.fromISO(dateModified)
+        .setLocale("ru")
+        .toLocaleString(DateTime.DATE_FULL),
+    },
     viewed: viewed || null,
+    description: description || "",
+    datePublished,
+    dateModified,
   };
 };
 export const normalizeArtNavItem = (
@@ -139,14 +181,22 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
     templateId,
     blogCategoryId,
     autoHandleSlug,
-    ogDates: {
-      published_time,
-      modified_time,
-    }
+    ogDates: { published_time, modified_time },
+    description,
+    datePublished,
+    dateModified,
   } = data;
   if (!id) {
     throw new Error("No id in article row!");
   }
+
+  if (!datePublished) {
+    throw new Error("No article datePublished!");
+  }
+  if (!dateModified) {
+    throw new Error("No article dateModified!");
+  }
+
   if (!published_time) {
     throw new Error("No article published_time!");
   }
@@ -156,8 +206,11 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
   if (!process.env["NEXT_PUBLIC_SITE_URL"]) {
     throw new Error("No NEXT_PUBLIC_SITE_URL for canonical url!");
   }
-  const url = chooseArticleUrl({ displayingPageHandle, handle });
-  const canonicalUrl = getCanonicalUrl({ url: absURL || url });
+  const { url, canonicalUrl } = getArticleUrlAndCanonicalUrl({
+    handle,
+    displayingPageHandle,
+    absURL,
+  });
   return {
     id,
     title,
@@ -197,7 +250,18 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
     ogDates: {
       modified_time,
       published_time,
-    }
+    },
+    description: description || "",
+    datePublished,
+    dateModified,
+    humanDates: {
+      datePublished: DateTime.fromISO(datePublished)
+        .setLocale("ru")
+        .toLocaleString(DateTime.DATE_FULL),
+      dateModified: DateTime.fromISO(dateModified)
+        .setLocale("ru")
+        .toLocaleString(DateTime.DATE_FULL),
+    },
   };
 };
 

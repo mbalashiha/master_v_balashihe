@@ -17,6 +17,9 @@ const ArticleCard = ({ article }: Props) => {
   return (
     <Grid key={article.url} item xs={12}>
       <Card
+        itemProp="blogPosts"
+        itemScope
+        itemType="https://schema.org/BlogPosting"
         elevation={0}
         sx={{
           p: 2,
@@ -40,8 +43,25 @@ const ArticleCard = ({ article }: Props) => {
           },
         }}
       >
-        <Link href={article.url}>
-          <Typography component="h5" variant="h5" gutterBottom>
+        <link
+          itemProp="mainEntityOfPage"
+          itemScope
+          itemType="https://schema.org/WebPage"
+          href={article.canonicalUrl}
+          itemID={article.canonicalUrl}
+        />
+        <meta itemProp="datePublished" content={article.datePublished} />
+        <meta itemProp="dateModified" content={article.dateModified} />
+        {article.image?.canonicalUrl && (
+          <link itemProp="image" href={article.image?.canonicalUrl} />
+        )}
+        <Link itemProp="url" href={article.url}>
+          <Typography
+            itemProp="description"
+            component="h5"
+            variant="h5"
+            gutterBottom
+          >
             {article.title}
           </Typography>
         </Link>
@@ -85,7 +105,7 @@ const ArticleCard = ({ article }: Props) => {
                 fontWeight: 400,
                 fontSize: "13px",
                 lineHeight: "23px",
-                textTransform: "uppercase",
+                textTransform: "none",
               },
               justifyContent: "center",
               alignItems: "center",
@@ -99,7 +119,14 @@ const ArticleCard = ({ article }: Props) => {
             <Box className="material-icons-round" aria-hidden="true">
               schedule
             </Box>
-            <Box>{article.publishedAt}</Box>
+            <Box
+              itemProp="datePublished"
+              component="time"
+              dateTime={article.datePublished}
+              sx={{ minWidth: "140px" }}
+            >
+              {article.humanDates.datePublished}
+            </Box>
           </Stack>
         </Stack>
       </Card>
