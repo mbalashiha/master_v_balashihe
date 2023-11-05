@@ -31,12 +31,12 @@ export default function Hero({ article }: Props) {
   }, [article.id]);
   const { toggleModal } = useSiteModal();
   const title = `Меня зовут Дмитрий, я окончил МГТУ МИРЭА со специальностью Информационные системы и технологии`;
-  const indexCanonicalUrl = useMemo(() => getCanonicalUrl({ url: "/" }), []);
+  const indexCanonicalUrl = useMemo(() => getCanonicalUrl("/"), []);
   const image: CMS.Image = useMemo(() => {
     const url = "/images/master_v_balashihe.jpg";
     return {
       url,
-      canonicalUrl: getCanonicalUrl({ url }),
+      canonicalUrl: getCanonicalUrl(url),
       width: 1197,
       height: 1600,
       alt: "",

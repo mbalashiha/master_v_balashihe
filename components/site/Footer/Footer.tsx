@@ -56,6 +56,7 @@ export const Footer = () => {
         <Box>
           <p>
             <meta itemProp="name" content="Компьютерный мастер в Балашихе РФ" />
+            <link itemProp="image" href={"/images/master_v_balashihe.jpg"} />
             <Link
               itemProp="url"
               href={`${process.env.NEXT_PUBLIC_SITE_URL || "/"}`}

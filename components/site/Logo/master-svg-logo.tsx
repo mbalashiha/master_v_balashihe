@@ -8,7 +8,8 @@ const MasterSvgLogo = () => (
     src={"/images/master-v-balashihe-rf-screwdriver.svg"}
     width={80}
     height={80}
-    alt={"Мастер в Балашихе РФ по ремонту компьютеров"}
+    alt={"Мастер в Балашихе для ремонта компьютеров"}
+    title={"Мастер в Балашихе для ремонта"}
   />
 );
 export default MasterSvgLogo;

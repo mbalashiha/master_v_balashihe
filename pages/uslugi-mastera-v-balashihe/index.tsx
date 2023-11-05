@@ -76,14 +76,14 @@ export async function getStaticProps() {
   const image: CMS.Image = {
     url: imageRelativePath,
     alt: "",
-    canonicalUrl: getCanonicalUrl({ url: imageRelativePath }),
+    canonicalUrl: getCanonicalUrl(imageRelativePath),
     height: 380,
     width: 380,
   };
   return {
     props: {
       title: `Блог мастера в Балашихе РФ по ремонту ПК`,
-      canonicalUrl: getCanonicalUrl({ url: `/uslugi-mastera-v-balashihe/` }),
+      canonicalUrl: getCanonicalUrl(`/uslugi-mastera-v-balashihe/`),
       image,
       articles: await getArticlesCards(),
       recentArticles: await getRecentArticles(),

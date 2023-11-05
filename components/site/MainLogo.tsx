@@ -19,7 +19,6 @@ import {
   Toolbar,
   IconButton,
 } from "@mui/material";
-import { styled } from "@mui/material";
 import MasterSvgLogo from "@components/site/Logo/master-svg-logo";
 
 export const MainLogo = () => {
@@ -33,6 +32,10 @@ export const MainLogo = () => {
         justifyContent: "center",
       }}
     >
+      <link
+        itemProp="image"
+        href={`/images/about/computer_master_photo_balashikha.jpg`}
+      />
       <Link itemProp="url" href="/" passHref>
         <Stack
           direction="row"

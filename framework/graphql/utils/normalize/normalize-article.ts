@@ -3,11 +3,9 @@ import { Blog } from "@common/types/cms";
 import { ID, Schema } from "@framework/types";
 import convertDate from "./convert-date";
 import { DateTime } from "luxon";
+const NEXT_PUBLIC_SITE_URL = process.env["NEXT_PUBLIC_SITE_URL"] || "";
+export const getCanonicalUrl = (url: string) => `${NEXT_PUBLIC_SITE_URL}${url}`;
 
-export const getCanonicalUrl = ({ url }: { url: string }) =>
-  `${process.env["NEXT_PUBLIC_SITE_URL"] || ""}${
-    url.startsWith("/") ? url : `/${url}`
-  }`;
 export const getArticleUrlAndCanonicalUrl = ({
   absURL,
   handle,
@@ -21,7 +19,7 @@ export const getArticleUrlAndCanonicalUrl = ({
   canonicalUrl: string;
 } => {
   const url = chooseArticleUrl({ displayingPageHandle, handle });
-  const canonicalUrl = getCanonicalUrl({ url: absURL || url });
+  const canonicalUrl = getCanonicalUrl(absURL || url);
   return { url, canonicalUrl };
 };
 export const normalizeArticleUrl = (
@@ -288,7 +286,7 @@ export const normalizeImage = (data: Schema.Image): CMS.Image => {
     updatedAt,
   } = data;
   const url = imgSrc.startsWith("/") ? imgSrc : `/${imgSrc}`;
-  const canonicalUrl = getCanonicalUrl({ url });
+  const canonicalUrl = getCanonicalUrl(url);
   return {
     imageId: imageId || "",
     url,

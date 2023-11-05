@@ -68,7 +68,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     article.image = {
       ...article.image,
       url: imageUrl,
-      canonicalUrl: getCanonicalUrl({ url: imageUrl }),
+      canonicalUrl: getCanonicalUrl(imageUrl),
       width: 600,
       height: 392,
       alt: `Дмитрий, компьютерный мастер в Балашихе, выпускник МГТУ МИРЭА (РТУ МИРЭА)`,

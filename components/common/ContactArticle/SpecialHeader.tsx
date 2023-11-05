@@ -42,15 +42,19 @@ export const SpecialHeader = ({
   image: inImage,
   keyTextHtml,
 }: Props) => {
-  const image: CMS.Image = inImage?.url
-    ? inImage
-    : {
-        url: "/images/mfc-balashikha.webp",
-        canonicalUrl: getCanonicalUrl({ url: "/images/mfc-balashikha.webp" }),
-        width: 1024,
-        height: 1024,
-        alt: "",
-      };
+  const image: CMS.Image = React.useMemo(
+    () =>
+      inImage?.url
+        ? inImage
+        : {
+            url: "/images/mfc-balashikha.webp",
+            canonicalUrl: getCanonicalUrl("/images/mfc-balashikha.webp"),
+            width: 1024,
+            height: 1024,
+            alt: "",
+          },
+    [inImage]
+  );
   const { children, afterContent } = useMemo((): {
     children: typeof inChildren;
     afterContent: string;
