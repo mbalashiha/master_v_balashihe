@@ -7,11 +7,13 @@ import InsertCodeIcon from "../MemozedTinyMCE/InsertCodeIcon";
 export interface MemoizedShortProps {
   initialValue: string;
   onEditorChange: (textHtml: string) => void;
+  id?: string;
 }
 const MemoizedShort: React.FC<MemoizedShortProps> = React.memo(
   function MemoizedShort({
     initialValue,
     onEditorChange,
+    id,
     ...rest
   }: MemoizedShortProps) {
     const [insertCodeIcon, setInsertCodeIcon] =
@@ -23,6 +25,7 @@ const MemoizedShort: React.FC<MemoizedShortProps> = React.memo(
           <InsertCodeIcon />
         </Portal>
         <Editor
+          id={id}
           tinymceScriptSrc="/tinymce/tinymce.min.js"
           initialValue={initialValue || ""}
           ref={editorRef}
@@ -134,6 +137,9 @@ const MemoizedShort: React.FC<MemoizedShortProps> = React.memo(
         />
       </>
     );
+  },
+  (prevProps, nextProps) => {
+    return true;
   }
 ) as any;
 export default MemoizedShort;

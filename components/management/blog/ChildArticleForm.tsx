@@ -266,7 +266,7 @@ export const ChildArticleForm = forwardRef<
             xs={12}
             md={12}
             lg={2}
-            xl={1.5}
+            xl={1}
             order={{ xs: 1, lg: 2 }}
             sx={{
               mt: { xs: 0, lg: "2px" },
@@ -286,15 +286,7 @@ export const ChildArticleForm = forwardRef<
               <OpenCodemirrorButton />
             </Stack>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            md={12}
-            lg={10}
-            xl={10.5}
-            sx={{}}
-            order={{ xs: 2, lg: 1 }}
-          >
+          <Grid item xs={12} md={12} lg={10} xl={11} order={{ xs: 2, lg: 1 }}>
             <Container
               maxWidth="lg"
               sx={{

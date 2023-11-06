@@ -19,9 +19,12 @@ export default function FirstTabImageUploader({ sx, ...rest }: PaperProps) {
       sx={{
         width: "100%",
         height: "auto",
-        marginLeft: { sm: "-5px", md: "-9px" },
         borderRadius: "8px",
         cursor: "pointer",
+        "&&& img": {
+          width: "100%",
+          height: "auto",
+        },
       }}
     >
       {!(imageInput.image && imageInput.image.url) && (

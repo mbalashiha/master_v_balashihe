@@ -123,6 +123,14 @@ const getMuiTheme = (): Theme => {
             paddingLeft: "8px",
             paddingRight: "8px",
           },
+          maxWidthXl: {
+            "@media (min-width: 600px)": {
+              "&": {
+                paddingLeft: "4px",
+                paddingRight: "4px",
+              },
+            },
+          },
         },
       },
       MuiTypography: {
@@ -153,9 +161,8 @@ const getMuiTheme = (): Theme => {
           root: {
             background: "white",
             color: "#10101a",
-            padding: "18px 14px 4px 12px",
+            padding: "28px 14px 14px 12px",
             borderRadius: "8px 8px 0 0",
-
             "&:hover": {
               background: blueGrey[50],
             },
@@ -163,6 +170,9 @@ const getMuiTheme = (): Theme => {
               background: "white",
               color: "black",
             },
+          },
+          multiline: {
+            padding: "28px 14px 14px 12px",
           },
           input: {
             padding: 0,
@@ -192,14 +202,18 @@ const getMuiTheme = (): Theme => {
             transform: "translate(14px, 10px)",
             background: "transparent",
             padding: "0 8px",
+            fontSize: "16px",
             "&.InputLabel-shrink": {
+              fontWeight: 500,
               transform: "translate(12px, -8px) scale(0.835)",
             },
           },
           filled: {
             color: theme.palette.primary.main,
             transform: "translate(12px, 12px)",
+            fontSize: "18px",
             "&.InputLabel-shrink": {
+              fontWeight: 500,
               transform: "translate(12px, 1px) scale(0.8)",
             },
           },
