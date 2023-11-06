@@ -11,6 +11,7 @@ import Link from "next/link";
 import { getCanonicalUrl } from "@framework/utils/normalize";
 import Head from "next/head";
 import { CMS } from "@common/types";
+import { grey } from "@mui/material/colors";
 interface Props {
   article: Blog.Article;
 }
@@ -115,7 +116,7 @@ export default function Hero({ article }: Props) {
             pb: 0,
             px: { xs: "15px", sm: 0 },
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
+            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
             gap: { xs: 0, lg: "20px" },
           }}
         >
@@ -127,9 +128,14 @@ export default function Hero({ article }: Props) {
             >
               <Typography
                 sx={{
-                  pt: { xs: "20px", sm: "40px" },
-                  fontSize: { xs: "32px", sm: "42px" },
-                  lineHeight: { xs: "48px", sm: "65px" },
+                  pt: { xs: "20px", sm: "40px", md: 0, lg: "40px" },
+                  fontSize: { xs: "32px", sm: "42px", md: "26px", lg: "42px" },
+                  lineHeight: {
+                    xs: "48px",
+                    sm: "65px",
+                    md: "38px",
+                    lg: "65px",
+                  },
                   fontWeight: 600,
                   textTransform: "uppercase",
                   mb: 0,
@@ -164,48 +170,49 @@ export default function Hero({ article }: Props) {
             sx={{
               fontSize: "18px",
               lineHeight: "28px",
-              gridRow: { xs: `3`, lg: `2` },
-              gridColumn: { xs: `1`, lg: `1` },
+              gridRow: { xs: `3`, md: `2` },
+              gridColumn: { xs: `1`, md: `1` },
               justifyContent: `space-between`,
-              alignItems: { xs: "center", lg: "flex-start" },
+              alignItems: { xs: "center", md: "flex-start" },
               gap: "16px",
               maxWidth: { xs: "91vw", sm: "inherit" },
-              pb: { xs: 0, lg: "80px" },
+              pb: { xs: 0, md: "80px" },
             }}
           >
             <meta
               itemProp="model"
               content="Компьютерный мастер окончил МГТУ МИРЭА со специальностью Информационные системы и технологии"
             />
-            <div itemProp="description">
+            <Box
+              itemProp="description"
+              sx={{
+                textAlign: { xs: "center", sm: "center", md: "left" },
+              }}
+            >
               {`Меня зовут Дмитрий, 
-              я окончил МГТУ МИРЭА со специальностью "`}
-              <Link href="/computer-master-balashiha">
-                Информационные системы и технологии
-              </Link>
-              {`".
-            Если Вам нужно решить проблему, связанную с работой компьютера, информационными технологиями или нужно срочно починить ноутбук, моноблок, рабочую станцию или другую электротехнику: `}
-              <Box
-                component="strong"
-                sx={{
-                  display: "block",
-                  fontSize: "20px",
-                  fontWeight: 400,
-                  mt: "5px",
-                  mb: "3px",
-                }}
-              >
-                Оставьте заявку и я перезвоню Вам в течение 30 минут,{" "}
-                <Box
-                  component="span"
-                  sx={{
-                    display: { xs: "inline", md: "block" },
-                  }}
-                >
-                  работаю в городе Балашиха и Москве.
-                </Box>
-              </Box>
-            </div>
+              я окончил МГТУ МИРЭА со специальностью `}
+              <strong>
+                <Link href="/computer-master-balashiha">
+                  Информационные системы и технологии
+                </Link>
+              </strong>
+              {`. Если Вам нужно решить проблему, связанную с работой компьютера, информационными технологиями или нужно срочно починить ноутбук, моноблок, рабочую станцию или другую электротехнику: `}
+            </Box>
+            <Box
+              component="strong"
+              sx={{
+                display: "block",
+                fontSize: "20px",
+                fontWeight: 400,
+                textAlign: "left",
+                mt: 0,
+                mb: 0,
+                px: "30px",
+              }}
+            >
+              Оставьте заявку и я перезвоню Вам в течение 30 минут, работаю в
+              городе Балашиха и Москве.
+            </Box>
             <Grid
               container
               sx={{
@@ -234,10 +241,12 @@ export default function Hero({ article }: Props) {
                     border: "none",
                     borderRadius: 0,
                     m: 0,
-                    fontSize: "22px",
+                    fontSize: "24px",
                     lineHeight: "31px",
-                    color: "black",
+                    fontWeight: 400,
+                    color: grey[100],
                     "&:hover": {
+                      background: (theme) => theme.palette.primary.dark,
                       color: "white",
                     },
                   }}
@@ -276,23 +285,32 @@ export default function Hero({ article }: Props) {
           </Stack>
           <Box
             sx={{
-              gridRow: { xs: `span 1`, lg: `span 2` },
-              gridColumn: { xs: `1`, lg: `2` },
+              gridRow: { xs: `span 1`, md: `span 2` },
+              gridColumn: { xs: `1`, md: `2` },
               textAlign: "center",
-              pl: { xs: 0, lg: "20px" },
+              display: { xs: "inherit", md: "flex", lg: "inherit" },
+              alignItems: { xs: "inherit", md: "flex-end", lg: "inherit" },
+              p: {
+                xs: 0,
+                md: "0 0 40px 30px",
+                lg: "30px 30px 0px 50px",
+                xl: "0 30px 0px 70px",
+              },
               "& img": {
-                maxWidth: "96vw",
+                width: "100%",
                 height: "auto",
+                maxWidth: "96vw",
               },
             }}
           >
             <Link itemProp="image" href={image.canonicalUrl} target="_blank">
               <Image
                 alt="Информационные системы и технологии"
-                width={475}
-                height={618}
-                quality={85}
-                src="/images/computer-master-landing-balashiha.png"
+                width={600}
+                height={802}
+                quality={75}
+                src="/images/computer_master_landing_balashiha.webp"
+                title="Компьютерный мастер"
               />
             </Link>
           </Box>
