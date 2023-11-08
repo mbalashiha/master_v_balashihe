@@ -8,7 +8,7 @@ import { Blog } from "@common/types/cms";
 import useCountViews from "@framework/site/use-count-views";
 import { useSiteModal } from "@components/site/ModalProvider/ModalProvider";
 import Link from "next/link";
-import { getCanonicalUrl } from "@framework/utils/normalize";
+import { getCanonicalUrl, makeImageType } from "@framework/utils/normalize";
 import Head from "next/head";
 import { CMS } from "@common/types";
 import { grey } from "@mui/material/colors";
@@ -35,13 +35,11 @@ export default function Hero({ article }: Props) {
   const indexCanonicalUrl = useMemo(() => getCanonicalUrl("/"), []);
   const image: CMS.Image = useMemo(() => {
     const url = "/images/master_v_balashihe.jpg";
-    return {
+    return makeImageType({
       url,
-      canonicalUrl: getCanonicalUrl(url),
       width: 1197,
       height: 1600,
-      alt: "",
-    };
+    });
   }, []);
   return (
     <>

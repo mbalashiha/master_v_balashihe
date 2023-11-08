@@ -8,7 +8,7 @@ import getArticlesCards from "@framework/article/get-articles-cards";
 import getRecentArticles from "@framework/article/get-recent-articles";
 import { ArticleCard } from "@components/common/ContactArticle";
 import { BlogRootSidebar } from "@components/common/BlogArticle/Sidebars";
-import { getCanonicalUrl } from "@framework/utils/normalize";
+import { getCanonicalUrl, makeImageType } from "@framework/utils/normalize";
 import { CMS } from "@common/types";
 import BlogListBreadcrumbs from "@components/site/BlogList/BlogListBreadcrumbs";
 
@@ -73,13 +73,11 @@ Page.Layout = CardsLayout;
 export async function getStaticProps() {
   const imageRelativePath =
     "/images/logo-master-v-balashihe-rf-screwdriver.png";
-  const image: CMS.Image = {
+  const image: CMS.Image = makeImageType({
     url: imageRelativePath,
-    alt: "",
-    canonicalUrl: getCanonicalUrl(imageRelativePath),
     height: 380,
     width: 380,
-  };
+  });
   return {
     props: {
       title: `Блог мастера в Балашихе РФ по ремонту ПК`,

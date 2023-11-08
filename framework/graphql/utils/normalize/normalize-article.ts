@@ -271,6 +271,51 @@ export const normalizeArticles = (
   } = data;
   return articles.map((node) => normalizeArticle(node));
 };
+export const makeImageType = ({
+  url,
+  imgSrc,
+  alt,
+  title,
+  canonicalUrl,
+  height,
+  width,
+  orderNumber,
+  originalWidth,
+  originalHeight,
+  createdAt,
+  updatedAt,
+  imageId,
+}: {
+  url: string;
+  imgSrc?: string;
+  alt?: string;
+  title?: string;
+  canonicalUrl?: string;
+  height?: number;
+  width?: number;
+  orderNumber?: number | null;
+  originalWidth?: number | null;
+  originalHeight?: number | null;
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
+  imageId?: ID;
+}): CMS.Image => {
+  return {
+    url,
+    imgSrc: imgSrc || url,
+    alt: alt || "",
+    title: title || "",
+    canonicalUrl: canonicalUrl || getCanonicalUrl(url),
+    height: height || 800,
+    width: width || 800,
+    orderNumber: orderNumber || null,
+    originalWidth: originalWidth || null,
+    originalHeight: originalHeight || null,
+    createdAt: createdAt || null,
+    updatedAt: updatedAt || null,
+    imageId: imageId || url,
+  };
+};
 export const normalizeImage = (data: Schema.Image): CMS.Image => {
   const {
     imageId,

@@ -19,7 +19,7 @@ import { EnhImage } from "@components/ui";
 import { CallMeForFree } from "@components/site/LandingPage";
 import useCountViews from "@framework/site/use-count-views";
 import React, { useEffect, useRef } from "react";
-import { getCanonicalUrl } from "@framework/utils/normalize";
+import { getCanonicalUrl, makeImageType } from "@framework/utils/normalize";
 import { DescriptionParser } from "@components/common/BlogArticle";
 import Link from "next/link";
 
@@ -198,17 +198,12 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   if (article) {
     article.image = {
       ...article.image,
-      url: imageUrl,
-      canonicalUrl: getCanonicalUrl(imageUrl),
-      width: 1087,
-      height: 1600,
-      alt: `Дмитрий, компьютерный мастер в Балашихе, выпускник МГТУ МИРЭА (РТУ МИРЭА)`,
-      orderNumber: null,
-      originalWidth: null,
-      originalHeight: null,
-      createdAt: null,
-      updatedAt: null,
-      imageId: `/images/about/computer_master_photo_balashikha.jpg`,
+      ...makeImageType({
+        url: imageUrl,
+        width: 1087,
+        height: 1600,
+        alt: `Дмитрий, компьютерный мастер в Балашихе, выпускник МГТУ МИРЭА (РТУ МИРЭА)`,
+      }),
     };
   }
   return {

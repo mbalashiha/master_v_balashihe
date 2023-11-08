@@ -17,7 +17,7 @@ import LandingServices from "@components/site/LandingPage/LandingServices";
 import LandingClientSteps from "@components/site/LandingPage/LandingClientSteps";
 import LandingAgeTasks from "@components/site/LandingPage/LandingAgeTasks";
 import LandingWizard from "@components/site/LandingPage/LandingWizard";
-import { getCanonicalUrl } from "@framework/utils/normalize";
+import { getCanonicalUrl, makeImageType } from "@framework/utils/normalize";
 import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
 import { useThemePalette } from "@components/ui";
 import getDarkTheme from "@components/ui/theme/dark-theme";
@@ -67,17 +67,12 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   if (article) {
     article.image = {
       ...article.image,
-      url: imageUrl,
-      canonicalUrl: getCanonicalUrl(imageUrl),
-      width: 600,
-      height: 392,
-      alt: `Дмитрий, компьютерный мастер в Балашихе, выпускник МГТУ МИРЭА (РТУ МИРЭА)`,
-      orderNumber: null,
-      originalWidth: null,
-      originalHeight: null,
-      createdAt: null,
-      updatedAt: null,
-      imageId: `/images/computer_master_photo_balashikha.webp`,
+      ...makeImageType({
+        url: imageUrl,
+        width: 600,
+        height: 392,
+        alt: `Дмитрий, компьютерный мастер в Балашихе, выпускник МГТУ МИРЭА (РТУ МИРЭА)`,
+      }),
     };
   }
   return {

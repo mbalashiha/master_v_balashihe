@@ -10,7 +10,7 @@ import a from "@components/ui/Transitions/animation.module.scss";
 import GradientSVG from "public/gradient.svg";
 import { RequestComputerMaster } from "@components/site";
 import Head from "next/head";
-import { getCanonicalUrl } from "@framework/utils/normalize";
+import { getCanonicalUrl, makeImageType } from "@framework/utils/normalize";
 
 const StyledBox = styled(
   ({ children, sx, ...props }: React.ComponentProps<typeof Paper>) => (
@@ -42,19 +42,16 @@ export const SpecialHeader = ({
   image: inImage,
   keyTextHtml,
 }: Props) => {
-  const image: CMS.Image = React.useMemo(
-    () =>
-      inImage?.url
-        ? inImage
-        : {
-            url: "/images/mfc-balashikha.webp",
-            canonicalUrl: getCanonicalUrl("/images/mfc-balashikha.webp"),
-            width: 1024,
-            height: 1024,
-            alt: "",
-          },
-    [inImage]
-  );
+  const image: CMS.Image = React.useMemo(() => {
+    const url = "/images/mfc-balashikha.webp";
+    return inImage?.url
+      ? inImage
+      : makeImageType({
+          url,
+          width: 1024,
+          height: 1024,
+        });
+  }, [inImage]);
   const { children, afterContent } = useMemo((): {
     children: typeof inChildren;
     afterContent: string;
