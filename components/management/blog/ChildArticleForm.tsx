@@ -260,10 +260,22 @@ export const ChildArticleForm = forwardRef<
           if (articleDraft.textHtml !== textHtml) {
             alert("not equal");
           }
-          const imagesResponse = await mutateImages({
-            existingArticleId: articleDraft.existingArticleId || null,
-            images: getImagesInputArray([image, secondImage]),
-          });
+          try {
+            const imagesResponse = await mutateImages({
+              existingArticleId: articleDraft.existingArticleId || null,
+              images: getImagesInputArray([image, secondImage]),
+            });
+          } catch (e: any) {
+            console.error(e.stack || e.message || e);
+            enqueueSnackbar(
+              locale(
+                (e.message || e.stack || "Error occured").substring(0, 312)
+              ),
+              {
+                variant: "error",
+              }
+            );
+          }
           if (success) {
             mutateArticle(articleDraft);
           }

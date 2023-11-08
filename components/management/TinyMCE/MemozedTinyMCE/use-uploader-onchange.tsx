@@ -1,6 +1,7 @@
 import { getFileIdName } from "@common/utils/get-file-id-name";
 import { Editor } from "@tinymce/tinymce-react";
 import { useSnackbar } from "notistack";
+import React from "react";
 import { useRef } from "react";
 import util from "util";
 import { useImagesArrayUpload } from "./use-images-array-upload";
@@ -14,6 +15,32 @@ export function useUploaderOnChange({ editorRef }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const enqueueSnackbarRef = useRef(enqueueSnackbar);
   enqueueSnackbarRef.current = enqueueSnackbar;
+
+  const cleanBlobImages = React.useCallback(() => {
+    // like `data:image/jpeg;base64,`;
+    const editor = editorRef.current?.editor;
+    const dom = editor?.dom;
+    if (editor && dom) {
+      try {
+        const badDataImages = dom.select(`img`);
+        if (badDataImages.length) {
+          badDataImages.forEach((badImage) => {
+            if (dom.getAttrib(badImage, "src").startsWith("data:image/")) {
+              alert("bad data");
+              dom.remove(badImage);
+            }
+          });
+          // editor.fire("change");
+        }
+      } catch (e: any) {
+        console.error(e.message || e.stack || e);
+        alert(e.message || e.stack || e);
+      } finally {
+        editor.undoManager.add();
+        editor.fire("change");
+      }
+    }
+  }, [editorRef]);
   return async (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target;
     try {
@@ -79,7 +106,10 @@ export function useUploaderOnChange({ editorRef }: Props) {
         }
       }
     } finally {
-      input.value = "";
+      try {
+        input.value = "";
+      } catch (e) {}
+      cleanBlobImages();
     }
   };
 }

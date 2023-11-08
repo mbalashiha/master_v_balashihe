@@ -12,32 +12,6 @@ interface Props {
 export function useImagesArrayUpload({ editorRef }: Props) {
   const uploadImage = useImageUpload();
   const uploadImageRef = useRef(uploadImage);
-  uploadImageRef.current = uploadImage;
-  /**const cleanBlobImages = React.useCallback(() => {
-    // like `data:image/jpeg;base64,`;
-    const editor = editorRef.current?.editor;
-    const dom = editor?.dom;
-    if (editor && dom) {
-      try {
-        const badDataImages = dom.s//elect(`img`);
-        if (badDataImages.length) {
-          badDataImages.forEach((badImage) => {
-            if (dom.getAttrib(badImage, "src").startsWith("da//ta:image/")) {
-              alert("bad data");
-              dom.remove(badImage);
-            }
-          });
-          // editor.fire("change");
-        }
-      } catch (e: any) {
-        console.error(e.message || e.stack || e);
-        alert(e.message || e.stack || e);
-      } finally {
-        editor.undoManager.add();
-        editor.fire("change");
-      }
-    }
-  }, [editorRef]);**/
   const { enqueueSnackbar } = useSnackbar();
   const enqueueSnackbarRef = useRef(enqueueSnackbar);
   enqueueSnackbarRef.current = enqueueSnackbar;
@@ -95,7 +69,6 @@ export function useImagesArrayUpload({ editorRef }: Props) {
           variant: "error",
         });
       } finally {
-        // cleanBlobImages();
       }
     },
     [editorRef]

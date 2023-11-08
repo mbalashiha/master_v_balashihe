@@ -48,14 +48,20 @@ export interface Props<FormValuesType extends FormikValues>
   children: React.ReactNode | React.ReactNode[];
   ref: React.Ref<FormContextType<FormValuesType>>;
 }
-export function InnerRefFormik<FormValuesType extends FormikValues>({
-  ref,
-  children,
-  onSubmit,
-  initialValues: formikInitialValues,
-  innerRef: __innerRef,
-  ...formikProps
-}: Props<FormValuesType>) {
+type CastToType = <FormValuesType extends FormikValues>(
+  props: Props<FormValuesType>,
+  ref: React.Ref<FormContextType<FormValuesType>>
+) => JSX.Element;
+function LocalFormik<FormValuesType extends FormikValues>(
+  {
+    children,
+    onSubmit,
+    initialValues: formikInitialValues,
+    innerRef: __innerRef,
+    ...formikProps
+  }: Props<FormValuesType>,
+  ref: React.Ref<FormContextType<FormValuesType>>
+) {
   if (!formikInitialValues || typeof formikInitialValues !== "object") {
     throw new Error(
       "Incorrect formik initial values: " + typeof formikInitialValues
@@ -168,6 +174,13 @@ export function InnerRefFormik<FormValuesType extends FormikValues>({
     </FormContext.Provider>
   );
 }
+export const InnerRefFormik = React.forwardRef(LocalFormik) as <
+  FormValuesType extends FormikValues
+>(
+  p: Props<FormValuesType> & {
+    ref?: React.Ref<FormContextType<FormValuesType>>;
+  }
+) => JSX.Element;
 
 export const useRefFormik = <
   FormProps extends FormikValues
