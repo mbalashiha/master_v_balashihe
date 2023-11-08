@@ -47,13 +47,13 @@ const ArticleCard = ({ article }: Props) => {
           itemProp="mainEntityOfPage"
           itemScope
           itemType="https://schema.org/WebPage"
-          href={article.canonicalUrl}
           itemID={article.canonicalUrl}
+          href={article.canonicalUrl}
         />
         <meta itemProp="datePublished" content={article.datePublished} />
         <meta itemProp="dateModified" content={article.dateModified} />
         {article.image?.canonicalUrl && (
-          <link itemProp="image" href={article.image?.canonicalUrl} />
+          <meta itemProp="image" content={article.image?.canonicalUrl} />
         )}
         <Link itemProp="url" href={article.url}>
           <Typography

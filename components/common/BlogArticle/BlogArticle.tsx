@@ -166,7 +166,7 @@ export default function BlogArticle({
           <meta itemProp="datePublished" content={datePublished} />
           <meta itemProp="dateModified" content={dateModified} />
           {articleImage?.canonicalUrl && (
-            <link itemProp="image" href={articleImage?.canonicalUrl} />
+            <meta itemProp="image" content={articleImage?.canonicalUrl} />
           )}
           {imgSrc && (
             <Link

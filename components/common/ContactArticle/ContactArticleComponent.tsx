@@ -91,7 +91,7 @@ export default function ContactArticleComponent({
         <meta itemProp="datePublished" content={datePublished} />
         <meta itemProp="dateModified" content={dateModified} />
         {articleImage?.canonicalUrl && (
-          <link itemProp="image" href={articleImage?.canonicalUrl} />
+          <meta itemProp="image" content={articleImage?.canonicalUrl} />
         )}
         <SpecialHeader image={inImage} keyTextHtml={keyTextHtml}>
           {title}
