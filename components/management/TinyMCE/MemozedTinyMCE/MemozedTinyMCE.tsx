@@ -173,6 +173,7 @@ const MemoizedTinyMCE = memo<MemoizedTinyMCEProps>(
             browser_spellcheck: true,
             height: "100%",
             width: "100%",
+            relative_urls: false,
             menubar: true,
             content_css: "/additional/css/roboto.css",
             setup: function (editor) {
@@ -271,10 +272,14 @@ const MemoizedTinyMCE = memo<MemoizedTinyMCEProps>(
                   padding: 0 40px 0 40px;
                 }
               }
-               img { 
+               img {
                 box-shadow: 4px 4px 20px rgb(0 0 0 / 20%);
                 border-radius: 24px; 
                 margin: 6px;
+                height: auto !important;
+                width: auto !important;
+                max-height: 40vh !important;
+                max-width: 100% !important;
                } 
                td {
                   padding: 12px;

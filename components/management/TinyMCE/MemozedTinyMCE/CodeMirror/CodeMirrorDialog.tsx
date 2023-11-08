@@ -126,7 +126,11 @@ export default function CodeMirrorDialog({
 }: Props) {
   const [initialHtml, setInitialHtml] = useState(inHtml);
   const htmlRef = React.useRef(initialHtml);
-  React.useEffect(() => setInitialHtml(beautifyHtml(htmlRef.current)), []);
+  React.useEffect(
+    () =>
+      setInitialHtml(beautifyHtml(htmlRef.current.replaceAll("><", ">\r\n<"))),
+    []
+  );
   const handleClose = React.useCallback(
     (event: any, reason: string | null | undefined) => {
       if (reason === "backdropClick") {

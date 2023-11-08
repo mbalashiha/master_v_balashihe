@@ -7,6 +7,7 @@ export const getArticleByHandleQuery = gql`
     width
     height
     altText
+    title
   }
   fragment NavigationItemFragment on NavigationItem {
     title

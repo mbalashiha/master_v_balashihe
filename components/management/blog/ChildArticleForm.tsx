@@ -34,6 +34,8 @@ import {
 import { useArticleContext } from "./ArticleForm";
 import { FormContextType } from "@components/ui/RefFormik";
 import { OpenCodemirrorButton, ResetButton } from "./Article/Buttons";
+import useUpdateImages from "@framework/management/blog/images/use-update-images";
+import { getImagesInputArray } from "@framework/utils/normalize";
 
 interface Props {
   article: Blog.ArticleDraft;
@@ -61,8 +63,9 @@ export const ChildArticleForm = forwardRef<
   // }, [isCreatePage, setCreateButton, unsetCreateButton]);
   const saveArticle = useSaveArticle();
   const { mutateArticle } = useArticleContext();
+  const mutateImages = useUpdateImages();
   return (
-    <RefFormik
+    <RefFormik<Blog.ArticleDraft>
       ref={ref}
       initialValues={article}
       validate={async (values) => {
@@ -119,57 +122,60 @@ export const ChildArticleForm = forwardRef<
         return errors;
       }}
       onSubmit={async (values, helpers) => {
-        let {
-          id,
-          title,
-          handle,
-          autoHandleSlug,
-          absURL,
-          text,
-          textHtml,
-          textRawDraftContentState,
-          keyTextHtml,
-          unPublished,
-          notSearchable,
-          notInList,
-          orderNumber,
-          blogCategoryId,
-          existingArticleId,
-          imageId,
-          publishedAt,
-          h2,
-          secondImageId,
-          templateId,
-          description,
-        } = values;
-        const replacer = async (inStr: string): Promise<string> => {
-          const reg =
-            /\<pre(\s+[^\>]+)?\>\s*\<code\>([^\>\<]+)\<\/code\>\s*\<\/pre\>/gm;
-          let result;
-          while ((result = reg.exec(inStr)) !== null) {
-            const attribsString = result[1];
-            const classNameMatch =
-              attribsString && attribsString.match(/\s+class="([^\"\>]+)"/m);
-            const className = classNameMatch && classNameMatch[1];
-            const language =
-              className?.startsWith("language-") &&
-              className.substring("language-".length);
-            const innerHTML = result[2];
-            if (language && innerHTML) {
-              const innerText = unescapeHtmlTagsOnly(innerHTML);
-              const resp = await prettierReact({
-                language,
-                textContent: innerText,
-              });
-              const newStr = escapeHtmlTagsOnly(resp.textContent).trim();
-              inStr = inStr.replace(innerHTML, newStr);
+        try {
+          let {
+            id,
+            title,
+            handle,
+            autoHandleSlug,
+            absURL,
+            text,
+            textHtml,
+            textRawDraftContentState,
+            keyTextHtml,
+            unPublished,
+            notSearchable,
+            notInList,
+            orderNumber,
+            blogCategoryId,
+            existingArticleId,
+            imageId,
+            publishedAt,
+            h2,
+            secondImageId,
+            templateId,
+            description,
+            image,
+            secondImage,
+          } = values;
+          const replacer = async (inStr: string): Promise<string> => {
+            const reg =
+              /\<pre(\s+[^\>]+)?\>\s*\<code\>([^\>\<]+)\<\/code\>\s*\<\/pre\>/gm;
+            let result;
+            while ((result = reg.exec(inStr)) !== null) {
+              const attribsString = result[1];
+              const classNameMatch =
+                attribsString && attribsString.match(/\s+class="([^\"\>]+)"/m);
+              const className = classNameMatch && classNameMatch[1];
+              const language =
+                className?.startsWith("language-") &&
+                className.substring("language-".length);
+              const innerHTML = result[2];
+              if (language && innerHTML) {
+                const innerText = unescapeHtmlTagsOnly(innerHTML);
+                const resp = await prettierReact({
+                  language,
+                  textContent: innerText,
+                });
+                const newStr = escapeHtmlTagsOnly(resp.textContent).trim();
+                inStr = inStr.replace(innerHTML, newStr);
+              }
             }
-          }
-          return inStr;
-        };
-        textHtml = await replacer(textHtml);
-        let renderHtml = textHtml;
-        /*if (window.DOMParser) {
+            return inStr;
+          };
+          textHtml = await replacer(textHtml);
+          let renderHtml = textHtml;
+          /*if (window.DOMParser) {
           const parser = new DOMParser();
           const document = parser.parseFromString(renderHtml, "text/html");
           const pre = document.querySelectorAll<HTMLPreElement>("pre");
@@ -219,43 +225,56 @@ export const ChildArticleForm = forwardRef<
             document.documentElement.querySelector("body")?.innerHTML ||
             textHtml;
         }*/
-        renderHtml = renderHtml.replace(/\"(\.\.\/+)+/gim, '"/');
-        const article = {
-          id,
-          title,
-          handle: (handle || "").trim(),
-          autoHandleSlug:
-            (title ? slugify(title) : null) || autoHandleSlug || null,
-          absURL: slugifyAbsUrl(absURL || ""),
-          description: description || "",
-          text,
-          textHtml,
-          renderHtml,
-          textRawDraftContentState,
-          keyTextHtml: (keyTextHtml || "").trim(),
-          unPublished: Boolean(unPublished),
-          notSearchable: Boolean(notSearchable),
-          notInList: Boolean(notInList),
-          orderNumber,
-          blogCategoryId,
-          existingArticleId,
-          imageId: imageId || null,
-          publishedAt: publishedAt || null,
-          h2: h2 || null,
-          secondImageId: secondImageId || null,
-          templateId: templateId || null,
-        };
-        if (!article.handle) {
-          article.handle = autoHandleSlug || "";
-        }
-        const { success, articleId, articleDraft } = await saveArticle({
-          article,
-        });
-        if (articleDraft.textHtml !== textHtml) {
-          alert("not equal");
-        }
-        if (success) {
-          mutateArticle(articleDraft);
+          // renderHtml = renderHtml.replace(/\"(\.\.\/+)+/gim, '"/');
+          const article = {
+            id,
+            title,
+            handle: (handle || "").trim(),
+            autoHandleSlug:
+              (title ? slugify(title) : null) || autoHandleSlug || null,
+            absURL: slugifyAbsUrl(absURL || ""),
+            description: description || "",
+            text,
+            textHtml,
+            renderHtml,
+            textRawDraftContentState,
+            keyTextHtml: (keyTextHtml || "").trim(),
+            unPublished: Boolean(unPublished),
+            notSearchable: Boolean(notSearchable),
+            notInList: Boolean(notInList),
+            orderNumber,
+            blogCategoryId,
+            existingArticleId,
+            imageId: imageId || null,
+            publishedAt: publishedAt || null,
+            h2: h2 || null,
+            secondImageId: secondImageId || null,
+            templateId: templateId || null,
+          };
+          if (!article.handle) {
+            article.handle = autoHandleSlug || "";
+          }
+          const { success, articleId, articleDraft } = await saveArticle({
+            article,
+          });
+          if (articleDraft.textHtml !== textHtml) {
+            alert("not equal");
+          }
+          const imagesResponse = await mutateImages({
+            existingArticleId: articleDraft.existingArticleId || null,
+            images: getImagesInputArray([image, secondImage]),
+          });
+          if (success) {
+            mutateArticle(articleDraft);
+          }
+        } catch (e: any) {
+          console.error(e.stack || e.message || e);
+          enqueueSnackbar(
+            locale((e.message || e.stack || "Error occured").substring(0, 312)),
+            {
+              variant: "error",
+            }
+          );
         }
       }}
     >

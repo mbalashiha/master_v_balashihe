@@ -20,6 +20,7 @@ const articleCardFragment = gql`
       width
       height
       altText
+      title
     }
   }
 `;

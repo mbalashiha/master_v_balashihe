@@ -14,25 +14,27 @@ import {
   Form,
   FormikHelpers,
   FormikErrors,
+  FormikConfig,
+  FieldConfig,
 } from "formik";
 
-type InnerRef<T = FormikValues> = React.MutableRefObject<FormikProps<T> | null>;
-
 export interface FormContextType<
-  FormProps extends FormikValues = FormikValues
+  FormValuesType extends FormikValues = FormikValues
 > {
-  formik: () => FormikProps<FormProps> | null;
-  formikRef: InnerRef<FormProps>;
-  getFieldValue: <Value = any>(props: any) => Value | undefined;
-  setFieldValue: FormikProps<FormProps>["setFieldValue"];
-  getFieldProps: FormikProps<FormProps>["getFieldProps"];
-  handleSubmit: FormikProps<FormProps>["handleSubmit"];
-  setValues: FormikProps<FormProps>["setValues"];
-  resetForm: FormikProps<FormProps>["resetForm"];
-  initialValues: FormProps | undefined;
-  getValues: () => FormProps | undefined;
-  formWasSubmited: Boolean;
-  setFormWasSubmited: () => void;
+  formikRef: React.MutableRefObject<FormikProps<FormValuesType> | undefined>;
+  formik: () => FormikProps<FormValuesType> | undefined;
+  handleSubmit: FormikProps<FormValuesType>["handleSubmit"];
+  getFieldValue: <Value>(props: any) => Value | undefined;
+  setFieldValue: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean | undefined
+  ) => Promise<any>;
+  getFieldProps: FormikProps<FormValuesType>["getFieldProps"];
+  setValues: FormikProps<FormValuesType>["setValues"];
+  resetForm: FormikProps<FormValuesType>["resetForm"];
+  initialValues: FormikProps<FormValuesType>["initialValues"] | undefined;
+  getValues: () => FormikProps<FormValuesType>["values"] | null;
 }
 const FormContext = React.createContext<Partial<FormContextType<any>>>({});
 type FormikElementProps<FormProps extends FormikValues> = React.ComponentProps<
@@ -40,43 +42,31 @@ type FormikElementProps<FormProps extends FormikValues> = React.ComponentProps<
 >;
 export type ContextRef<FormProps extends FormikValues = FormikValues> =
   React.MutableRefObject<FormContextType<FormProps>>;
-export interface Props<FormProps extends FormikValues>
-  extends Omit<FormikElementProps<FormProps>, "onSubmit"> {
-  children: React.ReactNode | React.ReactNode[];
-  onSubmit: (
-    values: FormProps,
-    formikHelpers: FormikHelpers<FormProps>
-  ) => void | Promise<any>;
-}
-interface InnerRefProps<FormProps extends FormikValues>
-  extends Props<FormProps> {}
 
-export const InnerRefFormik = forwardRef<
-  FormContextType<any>,
-  InnerRefProps<FormikValues>
->(function InnerRefFormik(
-  {
-    children,
-    onSubmit,
-    initialValues: formikInitialValues,
-    innerRef: __innerRef,
-    ...formikProps
-  },
-  ref
-) {
+export interface Props<FormValuesType extends FormikValues>
+  extends FormikElementProps<FormValuesType> {
+  children: React.ReactNode | React.ReactNode[];
+  ref: React.Ref<FormContextType<FormValuesType>>;
+}
+export function InnerRefFormik<FormValuesType extends FormikValues>({
+  ref,
+  children,
+  onSubmit,
+  initialValues: formikInitialValues,
+  innerRef: __innerRef,
+  ...formikProps
+}: Props<FormValuesType>) {
   if (!formikInitialValues || typeof formikInitialValues !== "object") {
     throw new Error(
       "Incorrect formik initial values: " + typeof formikInitialValues
     );
   }
-  const [formWasSubmited, innerSetFormWasSubmited] = React.useState(false);
-  const setFormWasSubmited = React.useCallback(() => {
-    innerSetFormWasSubmited(true);
-  }, []);
-  const formikRef: InnerRef<FormikValues> = React.useRef(null);
+  const formikRef = React.useRef<FormikProps<FormValuesType>>();
   const providerMethods = useMemo(() => {
     const formik = () => formikRef.current;
-    const getFieldProps: FormikProps<FormikValues>["getFieldProps"] = <Value,>(
+    const getFieldProps: FormikProps<FormValuesType>["getFieldProps"] = <
+      Value,
+    >(
       props: any
     ): FieldInputProps<Value> =>
       formikRef.current && typeof formikRef.current.getFieldProps === "function"
@@ -95,11 +85,11 @@ export const InnerRefFormik = forwardRef<
       formikRef.current && typeof formikRef.current.getFieldProps === "function"
         ? formikRef.current?.getFieldProps(props)?.value
         : undefined;
-    const setFieldValue: FormikProps<FormikValues>["setFieldValue"] = (
+    const setFieldValue: FormikProps<FormValuesType>["setFieldValue"] = (
       field: string,
       value: any,
       shouldValidate?: boolean | undefined
-    ): Promise<void | FormikErrors<FormikValues>> => {
+    ): Promise<void | FormikErrors<FormValuesType>> => {
       if (
         formikRef.current &&
         typeof formikRef.current.getFieldProps === "function"
@@ -108,17 +98,19 @@ export const InnerRefFormik = forwardRef<
           formikRef.current.getFieldProps(field).value !== value &&
           typeof formikRef.current.setFieldValue === "function"
         ) {
-          formikRef.current.setFieldValue(field, value, shouldValidate);
+          return formikRef.current.setFieldValue(field, value, shouldValidate);
         }
       }
       return new Promise((resolve, reject) => {
         // console.warn("Formik has not been initialized yet.");
       });
     };
-    const getValues = (): FormikValues => {
-      return { ...formikRef.current?.values };
+    const getValues = (): FormValuesType | null => {
+      if (formikRef.current?.values) {
+        return { ...formikRef.current?.values };
+      } else return null;
     };
-    const handleSubmit: FormikProps<FormikValues>["handleSubmit"] = (
+    const handleSubmit: FormikProps<FormValuesType>["handleSubmit"] = (
       e?: React.FormEvent<HTMLFormElement> | undefined
     ): void => {
       return formikRef.current?.handleSubmit(e);
@@ -132,11 +124,14 @@ export const InnerRefFormik = forwardRef<
       getValues,
     };
   }, []);
-  const providerConfig: FormContextType<any> = {
-    ...providerMethods,
+  const providerConfig: FormContextType<FormValuesType> = {
     formikRef,
-    setFormWasSubmited,
-    formWasSubmited,
+    formik: providerMethods.formik,
+    handleSubmit: providerMethods.handleSubmit,
+    getFieldValue: providerMethods.getFieldValue,
+    setFieldValue: providerMethods.setFieldValue,
+    getFieldProps: providerMethods.getFieldProps,
+    getValues: providerMethods.getValues,
     setValues: (...args) => formikRef.current?.setValues(...args),
     resetForm: (...args) => formikRef.current?.resetForm(...args),
     get initialValues() {
@@ -149,8 +144,6 @@ export const InnerRefFormik = forwardRef<
       return {
         ...providerMethods,
         formikRef,
-        setFormWasSubmited,
-        formWasSubmited,
         setValues: (...args) => formikRef.current?.setValues(...args),
         resetForm: (...args) => formikRef.current?.resetForm(...args),
         get initialValues() {
@@ -158,7 +151,7 @@ export const InnerRefFormik = forwardRef<
         },
       };
     },
-    [providerMethods, formikRef, setFormWasSubmited, formWasSubmited]
+    [providerMethods, formikRef]
   );
   return (
     <FormContext.Provider value={providerConfig}>
@@ -174,7 +167,7 @@ export const InnerRefFormik = forwardRef<
       </Formik>
     </FormContext.Provider>
   );
-});
+}
 
 export const useRefFormik = <
   FormProps extends FormikValues

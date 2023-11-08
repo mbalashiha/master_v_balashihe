@@ -1,5 +1,5 @@
 import { CMS } from "@common/types";
-import { Blog } from "@common/types/cms";
+import { Blog, Image } from "@common/types/cms";
 import { ID, Schema } from "@framework/types";
 import convertDate from "./convert-date";
 import { DateTime } from "luxon";
@@ -284,20 +284,37 @@ export const normalizeImage = (data: Schema.Image): CMS.Image => {
     pathOfOriginal,
     createdAt,
     updatedAt,
+    title,
   } = data;
   const url = imgSrc.startsWith("/") ? imgSrc : `/${imgSrc}`;
   const canonicalUrl = getCanonicalUrl(url);
   return {
     imageId: imageId || "",
     url,
+    imgSrc,
     canonicalUrl,
     alt: altText || "",
-    height: height && height > 0 ? height : 1,
-    width: width && width > 0 ? width : 1,
+    height,
+    width,
     orderNumber: orderNumber || null,
     originalWidth: originalWidth || null,
     originalHeight: originalHeight || null,
     createdAt: createdAt || null,
     updatedAt: updatedAt || null,
+    title: title || "",
   };
+};
+export const getImagesInputArray = (
+  images: (Image | null)[]
+): Schema.ImageInput[] => {
+  return images
+    .filter((el) => el && el.imgSrc)
+    .map(({ imageId, imgSrc, title, width, height, alt }: any) => ({
+      imageId,
+      imgSrc,
+      title: title || "",
+      altText: alt || "",
+      width,
+      height,
+    }));
 };

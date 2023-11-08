@@ -11,7 +11,9 @@ export interface Breadcrumb {
 }
 export interface Image {
   url: string;
+  imgSrc: string;
   alt: string;
+  title: string;
   canonicalUrl: string;
   height: number;
   width: number;

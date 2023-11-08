@@ -40,6 +40,7 @@ export const articleDraftFragment = gql`
       width
       height
       altText
+      title
     }
     secondImageId
     secondImage {
@@ -48,6 +49,7 @@ export const articleDraftFragment = gql`
       width
       height
       altText
+      title
     }
   }
 `;

@@ -50,6 +50,9 @@ export interface ManagementHooks {
           useCheckArticle: Graphql.MutationHook<any>;
         };
       };
+      images: {
+        useUpdateImages: Graphql.MutationHook<any>;
+      };
     };
   };
 }

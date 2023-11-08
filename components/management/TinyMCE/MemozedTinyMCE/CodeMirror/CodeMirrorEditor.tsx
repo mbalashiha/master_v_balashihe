@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import CodeMirror from "@uiw/react-codemirror";
-import { loadLanguage, langs } from "@uiw/codemirror-extensions-langs";
+import { langs } from "@uiw/codemirror-extensions-langs";
+import { EditorView } from "@codemirror/view";
 import * as themes from "@uiw/codemirror-themes-all";
+
 interface Props {
   initialHtml: string;
   htmlRef: React.MutableRefObject<string>;
@@ -12,7 +14,7 @@ const CodeMirrorEditor = ({ initialHtml, htmlRef, onChange }: Props) => {
     <CodeMirror
       value={initialHtml}
       height={"100%"}
-      extensions={[langs.html()]}
+      extensions={[langs.html(), EditorView.lineWrapping]}
       theme={themes.dracula}
       onChange={(value, viewUpdate) => {
         htmlRef.current = value;

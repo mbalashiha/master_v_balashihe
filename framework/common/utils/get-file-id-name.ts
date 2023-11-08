@@ -21,7 +21,11 @@ function insertAtLastIndex({
   }
 }
 
-export function getFileIdName(file: File): { id: string; fieldname: string } {
+export function getFileIdName(file: File): {
+  id: string;
+  uniqId: string;
+  fieldname: string;
+} {
   const name = insertAtLastIndex({
     targetString: file.name,
     symbolString: ".",
@@ -30,5 +34,6 @@ export function getFileIdName(file: File): { id: string; fieldname: string } {
   const id = slugify(name);
   const extension = file.name.split(".").pop();
   const fieldname = id + (extension ? `.${slugify(extension)}` : "");
-  return { id, fieldname };
+  const uniqId = `${id}-${Date.now()}`;
+  return { id, fieldname, uniqId };
 }

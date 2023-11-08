@@ -8,6 +8,7 @@ import { useField } from "formik";
 export function useImageReceived(imageFieldName: string) {
   const [imageIdField] = useField(imageFieldName + "Id");
   const [imageField] = useField(imageFieldName);
+  const [titleField] = useField(imageFieldName+'.title');
   const uploadImage = useImageUpload();
   const uploaderRef = useRef<HTMLInputElement>(null);
   const setImageToNull = () => {
@@ -29,28 +30,14 @@ export function useImageReceived(imageFieldName: string) {
         const {
           imageId,
           imgSrc,
-          altText,
           height,
           width,
-          orderNumber,
-          originalWidth,
-          originalHeight,
-          pathOfOriginal,
-          createdAt,
-          updatedAt,
-        } = image as any;
+        } = image;
         const nImage = normalizeImage({
           imageId,
           imgSrc,
-          altText,
           height,
           width,
-          orderNumber,
-          originalWidth,
-          originalHeight,
-          pathOfOriginal,
-          createdAt,
-          updatedAt,
         });
         imageIdField.onChange({
           target: { name: imageIdField.name, value: imageId },
@@ -70,5 +57,6 @@ export function useImageReceived(imageFieldName: string) {
     uploaderRef,
     image: imageField.value,
     imageId: imageIdField.value,
+    titleField,
   };
 }

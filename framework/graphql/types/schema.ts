@@ -11,15 +11,33 @@ export namespace Schema {
   export interface Image {
     imageId: ID;
     imgSrc: String;
-    altText: String;
+    title?: String | null;
     height: Int;
     width: Int;
     orderNumber?: Int;
-    originalWidth: Int;
-    originalHeight: Int;
-    pathOfOriginal: String;
-    createdAt: Date;
-    updatedAt: Date;
+    originalWidth?: Int;
+    originalHeight?: Int;
+    pathOfOriginal?: String;
+    altText?: String;
+    createdAt?: Date;
+    updatedAt?: Date;
+  }
+  export interface ImageInput {
+    imageId: ID;
+    imgSrc: String;
+    title: String;
+    width: Int;
+    height: Int;
+    format?: String;
+    orderNumber?: Int;
+    originalWidth?: Int;
+    originalHeight?: Int;
+    pathOfOriginal?: String;
+    altText?: String;
+  }
+  export interface ImageArrayInput {
+    existingArticleId: ID | null;
+    images: ImageInput[];
   }
   export interface ImageConnection {
     nodes: Image[];
@@ -162,6 +180,12 @@ export namespace Schema {
     nodes: Article[];
   }
   export namespace Response {
+    export interface UpdatedImagesResponse {
+      updateImageMetadata: {
+        existingArticleId: ID;
+        images: [Image];
+      };
+    }
     export interface BlogArticles {
       blogArticles: BlogArticlesConnection;
     }

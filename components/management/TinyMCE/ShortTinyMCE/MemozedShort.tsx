@@ -46,7 +46,6 @@ const MemoizedShort: React.FC<MemoizedShortProps> = React.memo(
             const textHtml = editor.getContent({ format: "html" });
             onEditorChange(textHtml);
           }}
-          id="tinymce-key-text-editor"
           init={{
             language: "ru",
             language_url: "/tinymce/langs/ru.js", // site absolute URL

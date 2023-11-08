@@ -1,7 +1,15 @@
 import React, { useRef } from "react";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import AddAPhotoRoundedIcon from "@mui/icons-material/AddAPhotoRounded";
-import { Grid, Paper, Typography, Box, Button, Stack } from "@mui/material";
+import {
+  Grid,
+  Paper,
+  Typography,
+  Box,
+  Button,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 import { useField } from "formik";
 import Image from "next/image";
@@ -129,7 +137,19 @@ export default function ImagesTabPanel() {
                   </Box>
                 </Box>
               </Paper>
-              <>
+              <Box width="100%">
+                <TextField
+                  sx={{ width: "100%" }}
+                  variant="standard"
+                  label="Подпись"
+                  placeholder="Укажите подпись изображения"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  {...imageInput.titleField}
+                />
+              </Box>
+              <Box>
                 {imageInput.imageId && (
                   <Button
                     sx={{
@@ -154,7 +174,7 @@ export default function ImagesTabPanel() {
                     Удалить изображение
                   </Button>
                 )}
-              </>
+              </Box>
             </Stack>
           </Grid>
         </Grid>

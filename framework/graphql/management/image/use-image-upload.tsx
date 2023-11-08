@@ -21,7 +21,7 @@ export interface ImageUploadHook {
     error: string | null;
     images: Array<{
       fieldname: string;
-      imageId: string | number | null;
+      imageId: string | number;
       imgSrc: string;
       width: number;
       height: number;
@@ -33,7 +33,7 @@ export interface ImageUploadHook {
     images: Array<{
       id: string;
       fieldname: string;
-      imageId: string | number | null;
+      imageId: string | number;
       imgSrc: string;
       width: number;
       height: number;

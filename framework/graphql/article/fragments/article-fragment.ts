@@ -33,6 +33,7 @@ const articleFragment = gql`
       width
       height
       altText
+      title
     }
     secondImage {
       imageId
@@ -40,6 +41,7 @@ const articleFragment = gql`
       width
       height
       altText
+      title
     }
   }
 `;
