@@ -1,4 +1,4 @@
-import { getFileIdName } from "@common/utils/get-file-id-name";
+import { getInputFileIdName } from "@common/utils/get-file-id-name";
 import { Editor } from "@tinymce/tinymce-react";
 import { useSnackbar } from "notistack";
 import React from "react";
@@ -25,8 +25,11 @@ export function useUploaderOnChange({ editorRef }: Props) {
         const badDataImages = dom.select(`img`);
         if (badDataImages.length) {
           badDataImages.forEach((badImage) => {
-            if (dom.getAttrib(badImage, "src").startsWith("data:image/")) {
-              alert("bad data");
+            const testSrc = dom.getAttrib(badImage, "src");
+            if (
+              testSrc.startsWith("blob:") ||
+              dom.getAttrib(badImage, "src").startsWith("data:image/")
+            ) {
               dom.remove(badImage);
             }
           });
@@ -52,7 +55,7 @@ export function useUploaderOnChange({ editorRef }: Props) {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         if (file) {
-          const { id, fieldname } = getFileIdName(file);
+          const { id, fieldname } = getInputFileIdName(file);
           const constructedPromise = new Promise<{
             file: File;
             id: string;
@@ -79,7 +82,7 @@ export function useUploaderOnChange({ editorRef }: Props) {
                 });
                 const timgContainer = dom.create("div", {
                   style: "text-align:center;",
-                  "data-images-container": "1",
+                  "data-image-container": "1",
                 });
                 dom.add(timgContainer, tImg);
                 editor.selection.setNode(timgContainer);

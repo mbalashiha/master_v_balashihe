@@ -127,23 +127,19 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
               marginBottom: "2rem",
             },
             "& a": {
-              ...standartCssTransition,
               color: theme.palette.primary.main,
               textDecoration: "none",
               fontWeight: 600,
               "& > .link-icon": {
-                ...standartCssTransition,
                 color: themeGreyColor,
                 fill: themeGreyColor,
                 stroke: themeGreyColor,
               },
               "&:hover": {
-                ...standartCssTransition,
                 color: "red",
                 textDecoration: "none",
               },
               "&:hover > .link-icon": {
-                ...standartCssTransition,
                 color: "red",
                 fill: "red",
                 stroke: "red",
@@ -235,7 +231,6 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
       MuiButtonBase: {
         styleOverrides: {
           root: {
-            ...standartCssTransition,
             "&:disabled": {
               borderColor: "#adadad",
               color: "#adadad",
@@ -246,9 +241,7 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
       },
       MuiIconButton: {
         styleOverrides: {
-          root: {
-            ...standartCssTransition,
-          },
+          root: {},
         },
       },
       MuiPaper: {
@@ -262,7 +255,6 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
         styleOverrides: {
           // Name of the slot
           root: {
-            ...standartCssTransition,
             borderRadius: "50px",
             border: "3px solid",
             borderColor: theme.palette.primary.main,
@@ -300,7 +292,7 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
             color: "#10101a",
             padding: "18px 14px 4px 12px",
             borderRadius: "8px 8px 0 0",
-            ...standartCssTransition,
+
             "&:hover": {
               borderColor: blueGrey[200],
               backgroundColor:

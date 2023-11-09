@@ -36,9 +36,7 @@ const ArticleItem = ({ article }: Props) => {
       elevation={0}
       sx={{
         p: 2,
-        "&, & a, & a > *, & .ButtonBase-root.IconButton-root": {
-          ...standartCssTransition,
-        },
+        "&, & a, & a > *, & .ButtonBase-root.IconButton-root": {},
         "&:hover": {
           boxShadow: "0 35px 15px 0 rgba(0,0,0,.0605)",
         },

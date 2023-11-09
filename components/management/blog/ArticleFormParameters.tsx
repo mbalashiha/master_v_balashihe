@@ -2,7 +2,6 @@ import { useRefFormik } from "@components/ui";
 import { Box, Grid, FormControlLabel, FormGroup, Switch } from "@mui/material";
 import { useField } from "formik";
 import ArticleAbsoluteUrl from "./ArticleAbsoluteUrl";
-import useSaveArtDraftProps from "@framework/management/blog/article/draft/use-save-draft-props";
 import ArticleCreatedAt from "./ArticleCreatedAt";
 
 export const ArticleFormParameters = () => {

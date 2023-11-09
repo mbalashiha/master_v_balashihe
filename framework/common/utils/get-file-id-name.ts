@@ -21,19 +21,18 @@ function insertAtLastIndex({
   }
 }
 
-export function getFileIdName(file: File): {
+export function getInputFileIdName(file: File): {
   id: string;
-  uniqId: string;
   fieldname: string;
 } {
+  const extension = file.name.split(".").pop();
   const name = insertAtLastIndex({
     targetString: file.name,
     symbolString: ".",
     subString: `-${file.lastModified || 0}-${file.size || 0}`,
   });
   const id = slugify(name);
-  const extension = file.name.split(".").pop();
   const fieldname = id + (extension ? `.${slugify(extension)}` : "");
-  const uniqId = `${id}-${Date.now()}`;
-  return { id, fieldname, uniqId };
+  // const uniqId = `${id}-${Date.now()}`;
+  return { id, fieldname };
 }

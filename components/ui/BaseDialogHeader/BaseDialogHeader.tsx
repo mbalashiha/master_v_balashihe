@@ -23,7 +23,7 @@ const CloseButton = ({ close }: { close: () => void }) => (
     sx={{
       zIndex: 2,
       color: (theme) => theme.palette.grey[500],
-      ...standartCssTransition,
+
       m: { xs: 0, md: "4px" },
       p: { xs: "6px", md: "7px" },
       "& svg": { transform: "scale(1)", width: "28px", height: "28px" },
@@ -31,7 +31,6 @@ const CloseButton = ({ close }: { close: () => void }) => (
       right: 0,
       top: 0,
       "&:hover": {
-        ...standartCssTransition,
         color: (theme) => theme.palette.text.primary,
       },
     }}

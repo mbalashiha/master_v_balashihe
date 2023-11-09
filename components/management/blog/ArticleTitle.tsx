@@ -10,7 +10,6 @@ import { useArticleContext } from "./ArticleProvider";
 
 export const ArticleTitle = () => {
   const [field, meta] = useField<string>("title");
-  const saveDraft = useSaveArtDraftProps();
   const onBlur = field.onBlur;
   const checkArticle = useCheckArticle();
   const router = useRouter();

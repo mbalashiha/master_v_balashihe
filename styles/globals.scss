@@ -13,18 +13,14 @@ body {
   margin: 0;
   font-family: Gotham, Arial, sans-serif;
 }
-a,
-button {
-  transition-property: all;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
-  transition-delay: 0s;
-}
 svg,
 div,
-span {
-  transition-property: color fill;
-  transition-duration: 0.2s;
+span,
+a,
+button {
+  transition-property: color background background-color border border-color
+    fill stroke;
+  transition-duration: 0.1s;
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
 }

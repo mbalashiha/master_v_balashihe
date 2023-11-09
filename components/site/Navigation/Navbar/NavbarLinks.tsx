@@ -126,7 +126,6 @@ export const NavbarLinks = ({
           margin: "0 0.5px",
         },
         "& .dropbtn, & button": {
-          ...standartCssTransition,
           margin: 0,
           border: "none",
           color: (theme) => theme.typography.allVariants.color,

@@ -59,7 +59,7 @@ export const LandingCard = ({ children, image }: Props) => {
                 theme.palette.mode === "dark" ? "14px" : "14px",
               border: "none",
               borderRadius: 1,
-              ...standartCssTransition,
+
               "&": {
                 color: (theme) => theme.palette.primary.main,
                 background: (theme) =>

@@ -1,7 +1,6 @@
 import { createTheme, Theme } from "@mui/material/styles";
 import { colors, Palette, PaletteMode } from "@mui/material";
 import { purple, pink, amber, grey, blueGrey, red } from "@mui/material/colors";
-import { standartCssTransition } from "@components/ui/theme/mui-theme";
 const InterFontFamily = `Inter, Arial, sans-serif`;
 
 const getMuiTheme = (): Theme => {
@@ -82,9 +81,6 @@ const getMuiTheme = (): Theme => {
               height: "24rem",
               width: "100%",
             },
-            "& button": {
-              background: theme.palette.secondary.light,
-            },
             "& .SnackbarContent-root, & .SnackbarItem-contentRoot": {
               "& .SnackbarItem-message": {
                 color: "black",
@@ -106,12 +102,10 @@ const getMuiTheme = (): Theme => {
             "& a": {
               color: theme.palette.primary.main,
               textDecoration: "none",
-              ...standartCssTransition,
               fontWeight: 600,
               "&:hover": {
                 color: "red",
                 textDecoration: "none",
-                ...standartCssTransition,
               },
             },
           },
@@ -286,7 +280,6 @@ const getMuiTheme = (): Theme => {
         styleOverrides: {
           // Name of the slot
           root: {
-            ...standartCssTransition,
             border: "none",
             borderColor: "none",
             background: theme.palette.primary.main,

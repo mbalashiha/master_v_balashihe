@@ -79,7 +79,6 @@ const MainActionButton = styled(LoadingButton)<Props>(({ theme, loading }) => ({
       boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
     },
     "&:disabled": {
-      ...standartCssTransition,
       background: theme.palette.mode === "dark" ? grey[800] : grey[100],
       borderColor: grey[300],
       color: grey[300],

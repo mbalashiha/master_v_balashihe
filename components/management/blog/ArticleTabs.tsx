@@ -23,7 +23,7 @@ import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import { ArticleProvider } from "./ArticleProvider";
 import {
   ArticleKeyTextEditor,
-  ArticleTextHtml,
+  ArticleBodyHtml,
 } from "@components/management/blog";
 import { Title } from "@mui/icons-material";
 import ArticleTitle from "./ArticleTitle";
@@ -178,7 +178,7 @@ export const ArticleTabs = ({ article }: Props) => {
             <ArticleFormParameters />
           </TabPanel>
           <Box sx={{ display: [0, 1].includes(value) ? "inherit" : "none" }}>
-            <ArticleTextHtml />
+            <ArticleBodyHtml />
           </Box>
         </Box>
       </Paper>

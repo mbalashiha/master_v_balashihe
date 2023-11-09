@@ -312,7 +312,7 @@ const options = {
           );
           break;
         case "div":
-          if (convertedProps["data-images-container"]) {
+          if (convertedProps["data-image-container"]) {
             return (
               <Box
                 {...(convertedProps as any)}

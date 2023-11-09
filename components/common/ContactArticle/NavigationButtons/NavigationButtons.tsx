@@ -63,7 +63,6 @@ export default function NavigationButtons({ navigation }: Props) {
               borderRadius: "6px",
               color: "white",
               fill: "white",
-              ...standartCssTransition,
             },
             "& *[itemProp='name']": {
               color: "rgba(1,1,1,1)",

@@ -20,7 +20,7 @@ interface Props {
   title?: React.ReactNode | React.ReactNode[];
   message: string;
   onConfirm: () => void;
-  onClose: ()=>void;
+  onClose: () => void;
   isOpen: boolean;
 }
 
@@ -44,9 +44,8 @@ const Dialog = React.forwardRef(function ConfirmDialog(
               right: 4,
               top: 3,
               color: (theme) => theme.palette.grey[500],
-              ...standartCssTransition,
+
               ":hover": {
-                ...standartCssTransition,
                 color: (theme) => theme.palette.text.primary,
               },
             }}

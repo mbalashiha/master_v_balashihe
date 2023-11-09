@@ -26,7 +26,6 @@ const ArticleCard = ({ article }: Props) => {
             color: (theme) => theme.palette.articleText.main,
           },
           "&:hover": {
-            ...standartCssTransition,
             boxShadow: "0 35px 15px 0 rgba(0,0,0,.0605)",
             color: (theme) => theme.palette.primary.dark,
             "& a": {

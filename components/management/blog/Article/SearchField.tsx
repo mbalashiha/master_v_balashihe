@@ -107,7 +107,7 @@ export default function SearchField({ sx }: Props) {
                     width: "auto",
                     background: "transparent",
                     color: themeGreyColor,
-                    ...standartCssTransition,
+
                     pl: "10px",
                     pr: "18px",
                     fontSize: "20px",
@@ -120,7 +120,6 @@ export default function SearchField({ sx }: Props) {
                       color: (theme) => theme.palette.text.primary,
                       boxShadow: "none",
                       "&, & svg, & svg path": {
-                        ...standartCssTransition,
                         color: grey[800],
                       },
                     },

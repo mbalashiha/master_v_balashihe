@@ -8,16 +8,15 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useRef } from "react";
-import dynamic from "next/dynamic";
 import { useRefFormik } from "@components/ui";
 import { CMS } from "@common/types";
 import useSaveArticleText from "@framework/management/blog/article/draft/use-save-article-text";
 import { useField } from "formik";
-import TinyMCE from "@components/management/TinyMCE";
 import { useArticleContext } from "./ArticleForm";
 import { useRouter } from "next/router";
+import { BodyEditor } from "./Article/BodyEditor";
 
-export default function ArticleTextHtml() {
+export default function ArticleBodyHtml() {
   const form = useRefFormik<CMS.Blog.ArticleDraft>();
   const saveDraftText = useSaveArticleText();
   const [timeoutId, setTimeoutId] = React.useState<number | null>(null);
@@ -51,10 +50,10 @@ export default function ArticleTextHtml() {
       }
     };
   }, []);
-  const onBlur = React.useCallback(() => {
-    const { saveDraftText } = mutRef.current;
-    saveDraftText({});
-  }, []);
+  // const onBlur = React.useCallback(() => {
+  //   const { form, doTimeout } = mutRef.current;
+  //   do//Timeout();
+  // }, []);
   const onEditorChange = React.useCallback((textHtml: string, text: string) => {
     const { form, doTimeout } = mutRef.current;
     form.setFieldValue("textHtml", textHtml);
@@ -94,9 +93,8 @@ export default function ArticleTextHtml() {
           },
         }}
       >
-        <TinyMCE
+        <BodyEditor
           initialValue={savedArticle.textHtml}
-          onBlur={onBlur}
           onEditorChange={onEditorChange}
           emitter={emitter}
           setContentEventName={eventNames.ARTICLE_TEXTHTML_SET_CONTENT}

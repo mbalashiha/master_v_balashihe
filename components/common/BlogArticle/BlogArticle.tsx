@@ -116,13 +116,15 @@ export default function BlogArticle({
             "& img": {
               my: 1,
               mx: 0,
-              maxWidth: "100%",
+              width: { xs: "100%", sm: "auto" },
               height: "auto",
+              maxHeight: { xs: "inherit", sm: "60vh" },
               borderRadius: 0.8,
             },
             "& .firstImage": {
               my: 0,
               height: "auto",
+              maxHeight: "inherit",
               float: { xs: "none", md: "right" },
               boxShadow: "none",
             },
@@ -135,6 +137,8 @@ export default function BlogArticle({
               },
             },
             "& img.firstImage": {
+              height: "auto",
+              maxHeight: "inherit",
               width: {
                 xs: "100%",
                 md: "480px",

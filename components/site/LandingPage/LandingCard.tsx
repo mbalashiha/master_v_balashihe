@@ -122,7 +122,7 @@ export default function LandingCard({ header, children, imageUrl }: Props) {
                     color: "white",
                     border: "none",
                     borderRadius: "8px",
-                    ...standartCssTransition,
+
                     "&:hover": {
                       color: "white",
                       background: blueGrey[800],

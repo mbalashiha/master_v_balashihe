@@ -1,0 +1,1 @@
+export { TinyMCEProdiver as BodyEditor } from "./ProviderTinyMCE";

@@ -207,9 +207,9 @@ export const ChildArticleForm = forwardRef<
                 first = preFirst;
               }
             }
-            if (!first.parentElement?.getAttribute("data-images-container")) {
+            if (!first.parentElement?.getAttribute("data-image-container")) {
               const wrapper = document.createElement("div");
-              wrapper.setAttribute("data-images-container", "1");
+              wrapper.setAttribute("data-image-container", "1");
               // insert wrapper before el in the DOM tree
               first.parentElement?.insertBefore(wrapper, first);
               while (first?.tagName === "IMG") {
