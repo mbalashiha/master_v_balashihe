@@ -186,37 +186,65 @@ export default function ContactArticleComponent({
                 color: (theme) =>
                   theme.palette.mode === "light" ? "#0e0e0f" : "white",
               },
-              "& img, & .Paper-elevation1": {
+              "& .Paper-elevation1": {
                 fontSize: "17px",
                 lineHeight: "25px",
                 marginBottom: "2rem",
                 boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.2)",
                 borderRadius: 1,
               },
+              "& .data-image-container": {
+                textAlign: "center",
+                my: 2,
+                "& img": {
+                  padding: 0,
+                  margin: 0,
+                  maxWidth: "100%",
+                  objectFit: "contain",
+                },
+                "& .data-image-title": {
+                  textAlign: "center",
+                  color: "grey",
+                  fontWeight: 300,
+                },
+              },
               "& img": {
                 my: 1,
-                mx: { xs: 0.5, md: 1 },
-                maxWidth: "100%",
+                mx: 0,
+                boxShadow: "4px 4px 20px rgb(0 0 0 / 20%)",
+                borderRadius: "24px",
+                width: { xs: "100%", sm: "auto" },
                 height: "auto",
+                maxHeight: { xs: "inherit", sm: "60vh" },
+                maxWidth: "100%",
+                objectFit: "contain",
               },
               "& .firstImage": {
-                float: { xs: "none", md: "left" },
+                my: 0,
                 height: "auto",
+                maxHeight: "inherit",
+                float: { xs: "none", md: "right" },
+                boxShadow: "none",
               },
               "& a.firstImage": {
-                margin: { xs: "0 2em 0.5em 0", md: "0 2em 0em 0" },
+                margin: { xs: 0, md: "0 0 10px 25px" },
                 width: {
                   xs: "100%",
                   md: "480px",
+                  lg: "48%",
                 },
-                maxWidth: { xs: "none", md: "48%" },
               },
               "& img.firstImage": {
-                mx: 0,
+                borderRadius: 0.8,
+                boxShadow: "none",
+                height: "auto",
+                maxHeight: "inherit",
                 width: {
                   xs: "100%",
                   md: "480px",
+                  lg: "100%",
                 },
+                objectFit: "contain",
               },
               "& > h2:not(:first-of-type)": {
                 color: (theme) =>

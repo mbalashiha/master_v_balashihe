@@ -25,6 +25,7 @@ import parse, {
 } from "html-react-parser";
 import TableStructure from "./TableStructure";
 import MyHighlight from "./MyHighlight";
+import { EnhImage } from "@components/ui";
 
 interface Props {
   descriptionHTML: string;
@@ -72,6 +73,53 @@ const options = {
         if (language && textContent) {
           return <MyHighlight language={language} code={textContent} />;
         }
+      }
+      const className = attribs["class"] || "";
+      if (
+        className === "data-image-container" ||
+        attribs["data-image-container"]
+      ) {
+        const convertedProps = attributesToProps(attribs);
+        const Children: string | JSX.Element | JSX.Element[] | undefined =
+          children && <>{domToReact(children, options)}</>;
+        delete convertedProps.children;
+        const styleSX = convertedProps.style || undefined;
+        if (typeof convertedProps.style !== "undefined") {
+          delete (convertedProps as any).style;
+        }
+        delete styleSX?.width;
+        delete convertedProps.width;
+        return (
+          <Box
+            className={"data-image-container"}
+            {...(convertedProps as any)}
+            width="100%"
+            sx={{ ...styleSX }}
+          >
+            {Children}
+          </Box>
+        );
+      } else if (
+        className === "data-image-title" ||
+        attribs["data-image-title"]
+      ) {
+        const convertedProps = attributesToProps(attribs);
+        const Children: string | JSX.Element | JSX.Element[] | undefined =
+          children && <>{domToReact(children, options)}</>;
+        delete convertedProps.children;
+        const styleSX = convertedProps.style || undefined;
+        if (typeof convertedProps.style !== "undefined") {
+          delete (convertedProps as any).style;
+        }
+        return (
+          <Box
+            className={"data-image-title"}
+            {...(convertedProps as any)}
+            sx={{ ...styleSX }}
+          >
+            {Children}
+          </Box>
+        );
       }
       const hasStyle = !!attribs.style;
       let passThroughFlag = false;
@@ -269,11 +317,11 @@ const options = {
         case "img":
         case "image":
           const width = parseInt(
-            convertedProps.width || convertedProps["data-original-width"] || "0"
+            convertedProps["data-original-width"] || convertedProps.width || "0"
           );
           const height = parseInt(
-            convertedProps.height ||
-              convertedProps["data-original-height"] ||
+            convertedProps["data-original-height"] ||
+              convertedProps.height ||
               "0"
           );
           const src = (convertedProps.src || "").replace(
@@ -283,50 +331,26 @@ const options = {
           if (!src) {
             return <></>;
           }
+          delete styleSX?.width;
+          delete convertedProps.width;
           const title = convertedProps.title || "";
           const alt = convertedProps.alt || "";
           return (
             <>
-              <Image
+              <EnhImage
                 src={src}
                 alt={alt}
                 title={title}
                 width={width}
                 height={height}
-                onLoad={(event) => {
-                  const target: HTMLImageElement = (event.target ||
-                    event.currentTarget) as HTMLImageElement;
-                  if (
-                    target.parentElement?.offsetWidth &&
-                    target.offsetWidth > target.parentElement?.offsetWidth
-                  ) {
-                    target.setAttribute("width", "auto");
-                    target.setAttribute("height", "auto");
-                    target.style.width = "100%";
-                    target.style.height = "auto";
-                  }
-                }}
+                fitWidth={1152}
+                quality={90}
               />
               <>{Children}</>
             </>
           );
           break;
         case "div":
-          if (convertedProps["data-image-container"]) {
-            return (
-              <Box
-                {...(convertedProps as any)}
-                width="100%"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                flexWrap="wrap"
-                sx={{ ...styleSX }}
-              >
-                {Children}
-              </Box>
-            );
-          }
           if (styleSX) {
             return (
               <Box {...(convertedProps as any)} sx={{ ...styleSX }}>
