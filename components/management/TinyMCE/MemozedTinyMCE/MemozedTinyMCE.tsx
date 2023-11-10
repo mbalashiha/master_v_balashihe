@@ -17,6 +17,7 @@ import CodeIcon from "@mui/icons-material/Code";
 import CodeMirrorDialog from "./CodeMirror/CodeMirrorDialog";
 import EventEmitter from "events";
 import { useEditorContext } from "@components/management/blog/Article/BodyEditor/ProviderTinyMCE";
+import { useArticleEvents } from "@components/management/blog/ArticleEventsProvider";
 
 type InnerEditor = Editor["editor"];
 export interface MemoizedTinyMCEProps {
@@ -87,6 +88,7 @@ const ForwardingTinyMCEEditorRef = forwardRef<
   const [menuElement, setMenuElement] = React.useState<HTMLDivElement | null>(
     null
   );
+  const articleEvents = useArticleEvents();
   const uploaderRef = useRef<HTMLInputElement>(null);
   const editorRef: React.LegacyRef<Editor> = useRef<any>(null);
   const uploaderOnChange = useUploaderOnChange({ editorRef });
@@ -128,6 +130,10 @@ const ForwardingTinyMCEEditorRef = forwardRef<
     }
   }, [emitter, setContentEventName, openCodeMirrorEventName]);
   useImperativeHandle(ref, () => ({
+    editor: editorRef.current?.editor,
+    dom: editorRef.current?.editor?.dom,
+  }));
+  useImperativeHandle(articleEvents.editorRef, () => ({
     editor: editorRef.current?.editor,
     dom: editorRef.current?.editor?.dom,
   }));
@@ -213,6 +219,9 @@ const ForwardingTinyMCEEditorRef = forwardRef<
                   setModalImage(img);
                 }
               }
+            });
+            editor.on("keydown", (event) => {
+              articleEvents.keydownListener(event);
             });
             editor.ui.registry.addButton("insertCodeButton", {
               tooltip: "Вставить текст из буфера обмена",

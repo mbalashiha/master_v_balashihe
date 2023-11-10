@@ -28,7 +28,6 @@ export default function ImagesTabPanel() {
           key={imageInput.imageFieldName}
           container
           spacing={0}
-          sx={{ "& img": { borderRadius: 1 } }}
         >
           <Grid
             item
@@ -37,16 +36,18 @@ export default function ImagesTabPanel() {
             md={6}
             lg={4}
             sx={{
-              "& img": {
-                width: "97%",
-                height: "auto",
-              },
+              px: { xs: 0, sm: "5px" },
             }}
           >
             <Box
               width="100%"
+              height="100%"
               sx={{
-                pl: { xs: 0, sm: "5px" },
+                "& img": {
+                  borderRadius: 1,
+                  width: { xs: "100%", sm: "97%" },
+                  height: "auto",
+                },
               }}
             >
               <input
@@ -68,20 +69,22 @@ export default function ImagesTabPanel() {
                   sx={{
                     p: { xs: 1, md: 2 },
                     width: "100%",
+                    height: "100%",
                     background: "grey",
                     cursor: "pointer",
                   }}
                   onClick={() => imageInput.uploaderRef.current?.click()}
                 >
                   <Box
-                    width="auto"
-                    height="auto"
                     minHeight="208px"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
-                    border="2px dashed transparent"
                     borderRadius={1}
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                    }}
                   >
                     <AddAPhotoRoundedIcon
                       sx={{
@@ -95,7 +98,7 @@ export default function ImagesTabPanel() {
               )}
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={8}>
+          <Grid item xs={12} sm={6} md={6} lg={8} sx={{ pt: { md: 2 } }}>
             <Stack spacing={1} width="100%">
               <Paper
                 sx={{
@@ -105,37 +108,39 @@ export default function ImagesTabPanel() {
                 }}
                 onClick={() => imageInput.uploaderRef.current?.click()}
               >
-                <Box
+                <Stack
                   width="100%"
-                  minHeight="208px"
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
+                  flexDirection={"column"}
                   border="2px dashed white"
+                  p={1}
                   borderRadius={1}
+                  spacing={0}
+                  sx={{ color: "white" }}
                 >
-                  <Box
-                    sx={{ color: "white" }}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    flexDirection="column"
-                  >
-                    <Box>
-                      <CloudUploadIcon sx={{ fontSize: "100px" }} />
-                    </Box>
-                    <Box>
-                      <Typography
-                        variant="h4"
-                        component="h6"
-                        color="grey.400"
-                        fontSize={{ xs: "20px", md: "20px", lg: "35px" }}
-                      >
-                        Загрузить изображение
-                      </Typography>
-                    </Box>
+                  <Typography color="white" component={"div"} fontSize={"20px"}>
+                    {imageInput.imageFieldName === "image"
+                      ? "Основное изображение в каталоге"
+                      : imageInput.imageFieldName === "secondImage"
+                      ? "Второе изображение - описание (необязательно)"
+                      : null}
+                  </Typography>
+                  <Box>
+                    <CloudUploadIcon sx={{ fontSize: "100px" }} />
                   </Box>
-                </Box>
+                  <Box>
+                    <Typography
+                      variant="h4"
+                      component="h6"
+                      color="grey.400"
+                      fontSize={{ xs: "20px", md: "20px", lg: "35px" }}
+                    >
+                      Загрузить изображение
+                    </Typography>
+                  </Box>
+                </Stack>
               </Paper>
               <Box width="100%">
                 <TextField
@@ -163,9 +168,13 @@ export default function ImagesTabPanel() {
                       position: "relative",
                       px: "3.4rem",
                       "& .Button-endIcon": {
+                        transitionProperty: "none",
                         position: "absolute",
                         right: "1.5rem",
                         transform: "scale(2)",
+                      },
+                      "& > *, & svg": {
+                        transitionProperty: "none",
                       },
                     }}
                     onClick={() => imageInput.setImageToNull()}

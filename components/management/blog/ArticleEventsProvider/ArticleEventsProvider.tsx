@@ -1,24 +1,37 @@
-import React, { useCallback } from "react";
-import { useState, useRef, useContext, useMemo, ReactNode } from "react";
+import React from "react";
+import {
+  useState,
+  useCallback,
+  useRef,
+  useContext,
+  useMemo,
+  ReactNode,
+} from "react";
+import { Editor } from "@tinymce/tinymce-react";
 import { CMS } from "@common/types";
 import { Dialog } from "@components/ui";
 import useSaveArticleText from "@framework/management/blog/article/draft/use-save-article-text";
-import { useRefFormik } from "@components/ui";
 import { useRouter } from "next/router";
+import { useFormikContext } from "formik";
+import { TinyMCEImperativeRef } from "@components/management/TinyMCE/MemozedTinyMCE/MemozedTinyMCE";
 
-export interface ArticleEditorContext {
-  editorRef: React.MutableRefObject<any>;
+export interface ArticleEventsContext {
+  keydownListener: (event: KeyboardEvent) => void;
+  editorRef: React.MutableRefObject<TinyMCEImperativeRef | null>;
   setDuplicateArticle: (duplicateArticle: CMS.Blog.Article | undefined) => void;
   duplicateArticle: CMS.Blog.Article | undefined;
 }
-const ArticleContext = React.createContext<Partial<ArticleEditorContext>>({});
+const ArticleEventsContext = React.createContext<Partial<ArticleEventsContext>>(
+  {}
+);
 interface Props {
   children: React.ReactNode | React.ReactNode[];
-  providerRef?: React.MutableRefObject<ArticleEditorContext | undefined>;
+  providerRef?: React.MutableRefObject<ArticleEventsContext | undefined>;
 }
-export const ArticleProvider = ({ children, providerRef }: Props) => {
+export const ArticleEventsProvider = ({ children, providerRef }: Props) => {
   const router = useRouter();
-  const form = useRefFormik<CMS.Blog.ArticleDraft>();
+  // const form = useRefFormik<CMS.Blog.ArticleDraft>();
+  const form = useFormikContext();
   const saveArticleTextDraft = useSaveArticleText();
   const formRef = useRef<{
     form: typeof form;
@@ -29,7 +42,7 @@ export const ArticleProvider = ({ children, providerRef }: Props) => {
     form,
     saveArticleTextDraft,
   };
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef(null) as React.MutableRefObject<TinyMCEImperativeRef | null>;
   /*React.useEffect(() => {
     const beforeunloadListener = async () => {
       const { saveArticleTextDraft } =
@@ -44,15 +57,34 @@ export const ArticleProvider = ({ children, providerRef }: Props) => {
       beforeunloadListener();
     };
   }, []);*/
+
+  const keydownListener = useCallback((event: KeyboardEvent) => {
+    if (event.ctrlKey && event.code === "KeyS") {
+      event.preventDefault();
+      const { form } = formRef.current;
+      form.submitForm();
+    }
+  }, []);
+  React.useEffect(() => {
+    document.addEventListener("keydown", keydownListener);
+    return () => {
+      document.removeEventListener("keydown", keydownListener);
+    };
+  }, [keydownListener]);
   const [duplicateArticle, setDuplicateArticle] = React.useState<
     CMS.Blog.Article | undefined
   >();
-  const providerConfig = { editorRef, duplicateArticle, setDuplicateArticle };
+  const providerConfig = {
+    keydownListener,
+    editorRef,
+    duplicateArticle,
+    setDuplicateArticle,
+  };
   if (providerRef) {
     providerRef.current = providerConfig;
   }
   return (
-    <ArticleContext.Provider value={providerConfig}>
+    <ArticleEventsContext.Provider value={providerConfig}>
       {duplicateArticle && (
         <Dialog
           isOpen={Boolean(duplicateArticle)}
@@ -70,10 +102,10 @@ export const ArticleProvider = ({ children, providerRef }: Props) => {
         />
       )}
       {children}
-    </ArticleContext.Provider>
+    </ArticleEventsContext.Provider>
   );
 };
 
-export const useArticleContext = () => {
-  return useContext(ArticleContext) as ArticleEditorContext;
+export const useArticleEvents = () => {
+  return useContext(ArticleEventsContext) as ArticleEventsContext;
 };

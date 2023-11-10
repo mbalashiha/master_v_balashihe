@@ -18,9 +18,8 @@ import {
   Tooltip,
   HtmlTooltip,
 } from "@components/ui";
-import useArticleDraft from "@framework/management/blog/article/draft/use-article-draft";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
-import { ArticleProvider } from "./ArticleProvider";
+import { ArticleEventsProvider } from "./ArticleEventsProvider";
 import {
   ArticleKeyTextEditor,
   ArticleBodyHtml,

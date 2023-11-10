@@ -6,7 +6,7 @@ import React from "react";
 import { Blog } from "@common/types/cms";
 import { useRouter } from "next/router";
 import { CMS } from "@common/types";
-import { useArticleContext } from "./ArticleProvider";
+import { useArticleEvents } from "./ArticleEventsProvider";
 
 export const ArticleTitle = () => {
   const [field, meta] = useField<string>("title");
@@ -14,7 +14,7 @@ export const ArticleTitle = () => {
   const checkArticle = useCheckArticle();
   const router = useRouter();
   const { getValues } = useRefFormik<CMS.Blog.ArticleDraft>();
-  const { setDuplicateArticle } = useArticleContext();
+  const { setDuplicateArticle } = useArticleEvents();
   return (
     <>
       <TextField

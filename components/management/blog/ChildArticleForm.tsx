@@ -13,7 +13,6 @@ import SaveIcon from "@mui/icons-material/Save";
 import { ArticleTabs } from "./ArticleTabs";
 import { ConfirmDialog, RefFormik, SubmitButton } from "@components/ui";
 import React, { useRef, useEffect, useMemo, forwardRef } from "react";
-import { ArticleEditorContext, ArticleProvider } from "./ArticleProvider";
 import useCheckArticle from "@framework/management/blog/article/draft/use-check-article";
 import useSaveArticle from "@framework/management/blog/article/use-save-article";
 import { ValuesOfCorrectTypeRule } from "graphql";
@@ -36,6 +35,7 @@ import { FormContextType } from "@components/ui/RefFormik";
 import { OpenCodemirrorButton, ResetButton } from "./Article/Buttons";
 import useUpdateImages from "@framework/management/blog/images/use-update-images";
 import { getImagesInputArray } from "@framework/utils/normalize";
+import { ArticleEventsContext, ArticleEventsProvider } from "./ArticleEventsProvider";
 
 interface Props {
   article: Blog.ArticleDraft;
@@ -52,8 +52,8 @@ export const ChildArticleForm = forwardRef<
   const checkArticle = useCheckArticle();
   const { enqueueSnackbar } = useSnackbar();
   const prettierReact = usePrettierReact();
-  const providerRef: React.MutableRefObject<ArticleEditorContext | undefined> =
-    useRef<ArticleEditorContext | undefined>();
+  const providerRef: React.MutableRefObject<ArticleEventsContext | undefined> =
+    useRef<ArticleEventsContext | undefined>();
   // useEffect(() => {
   //   if (!isCreatePage) {
   //     setCreateButton({ href: "/management/blog/article/create" });
@@ -290,7 +290,7 @@ export const ChildArticleForm = forwardRef<
         }
       }}
     >
-      <ArticleProvider providerRef={providerRef}>
+      <ArticleEventsProvider providerRef={providerRef}>
         <Grid container spacing={1}>
           <Grid
             item
@@ -331,7 +331,7 @@ export const ChildArticleForm = forwardRef<
             </Container>
           </Grid>
         </Grid>
-      </ArticleProvider>
+      </ArticleEventsProvider>
     </RefFormik>
   );
 });
