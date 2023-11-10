@@ -50,6 +50,9 @@ dependencies:
   '@types/node':
     specifier: 18.14.0
     version: 18.14.0
+  '@types/prismjs':
+    specifier: ^1.26.3
+    version: 1.26.3
   '@types/react':
     specifier: 18.0.28
     version: 18.0.28
@@ -143,6 +146,12 @@ dependencies:
   prism-react-renderer:
     specifier: ^2.1.0
     version: 2.1.0(react@18.2.0)
+  prism-themes:
+    specifier: ^1.9.0
+    version: 1.9.0
+  prismjs:
+    specifier: ^1.29.0
+    version: 1.29.0
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -1463,20 +1472,6 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
 
-  /@codemirror/autocomplete@6.8.0(@codemirror/language@6.9.2)(@codemirror/state@6.2.1)(@codemirror/view@6.13.2)(@lezer/common@1.1.0):
-    resolution: {integrity: sha512-nTimZYnTYaZ5skAt+zlk8BD41GvjpWgtDni2K+BritA7Ed9A0aJWwo1ohTvwUEfHfhIVtcFSLEddVPkegw8C/Q==}
-    peerDependencies:
-      '@codemirror/language': ^6.0.0
-      '@codemirror/state': ^6.0.0
-      '@codemirror/view': ^6.0.0
-      '@lezer/common': ^1.0.0
-    dependencies:
-      '@codemirror/language': 6.9.2
-      '@codemirror/state': 6.2.1
-      '@codemirror/view': 6.13.2
-      '@lezer/common': 1.1.0
-    dev: false
-
   /@codemirror/autocomplete@6.8.0(@codemirror/language@6.9.2)(@codemirror/state@6.2.1)(@codemirror/view@6.22.0)(@lezer/common@1.1.0):
     resolution: {integrity: sha512-nTimZYnTYaZ5skAt+zlk8BD41GvjpWgtDni2K+BritA7Ed9A0aJWwo1ohTvwUEfHfhIVtcFSLEddVPkegw8C/Q==}
     peerDependencies:
@@ -1743,7 +1738,7 @@ packages:
     resolution: {integrity: sha512-64/M40YeJPToKvGO6p3fijo2vwUEj4nACEAXElCaYQ50HrXSvRaK+NHEhSh73WFBGdvIdhrV+lL9PdJy2RfCYA==}
     dependencies:
       '@codemirror/state': 6.2.1
-      '@codemirror/view': 6.13.2
+      '@codemirror/view': 6.22.0
       crelt: 1.0.6
     dev: false
 
@@ -1756,16 +1751,8 @@ packages:
     dependencies:
       '@codemirror/language': 6.9.2
       '@codemirror/state': 6.2.1
-      '@codemirror/view': 6.13.2
+      '@codemirror/view': 6.22.0
       '@lezer/highlight': 1.1.6
-    dev: false
-
-  /@codemirror/view@6.13.2:
-    resolution: {integrity: sha512-XA/jUuu1H+eTja49654QkrQwx2CuDMdjciHcdqyasfTVo4HRlvj87rD/Qmm4HfnhwX8234FQSSA8HxEzxihX/Q==}
-    dependencies:
-      '@codemirror/state': 6.2.1
-      style-mod: 4.0.3
-      w3c-keyname: 2.2.8
     dev: false
 
   /@codemirror/view@6.22.0:
@@ -2805,8 +2792,8 @@ packages:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
     dev: false
 
-  /@types/prismjs@1.26.1:
-    resolution: {integrity: sha512-Q7jDsRbzcNHIQje15CS/piKhu6lMLb9jwjxSfEIi4KcFKXW23GoJMkwQiJ8VObyfx+VmUaDcJxXaWN+cTCjVog==}
+  /@types/prismjs@1.26.3:
+    resolution: {integrity: sha512-A0D0aTXvjlqJ5ZILMz3rNfDBOx9hHxLZYv2by47Sm/pqW35zzjusrZTryatjN/Rf8Us2gZrJD+KeHbUSTux1Cw==}
     dev: false
 
   /@types/prop-types@15.7.5:
@@ -3752,13 +3739,13 @@ packages:
   /codemirror@6.0.1(@lezer/common@1.1.0):
     resolution: {integrity: sha512-J8j+nZ+CdWmIeFIGXEFbFPtpiYacFMDR8GlHK3IyHQJMCaVRfGx9NT+Hxivv1ckLWPvNdZqndbr/7lVhrf/Svg==}
     dependencies:
-      '@codemirror/autocomplete': 6.8.0(@codemirror/language@6.9.2)(@codemirror/state@6.2.1)(@codemirror/view@6.13.2)(@lezer/common@1.1.0)
+      '@codemirror/autocomplete': 6.8.0(@codemirror/language@6.9.2)(@codemirror/state@6.2.1)(@codemirror/view@6.22.0)(@lezer/common@1.1.0)
       '@codemirror/commands': 6.2.4
       '@codemirror/language': 6.9.2
       '@codemirror/lint': 6.2.2
       '@codemirror/search': 6.5.0
       '@codemirror/state': 6.2.1
-      '@codemirror/view': 6.13.2
+      '@codemirror/view': 6.22.0
     transitivePeerDependencies:
       - '@lezer/common'
     dev: false
@@ -5779,9 +5766,18 @@ packages:
     peerDependencies:
       react: '>=16.0.0'
     dependencies:
-      '@types/prismjs': 1.26.1
+      '@types/prismjs': 1.26.3
       clsx: 1.2.1
       react: 18.2.0
+    dev: false
+
+  /prism-themes@1.9.0:
+    resolution: {integrity: sha512-tX2AYsehKDw1EORwBps+WhBFKc2kxfoFpQAjxBndbZKr4fRmMkv47XN0BghC/K1qwodB1otbe4oF23vUTFDokw==}
+    dev: false
+
+  /prismjs@1.29.0:
+    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
+    engines: {node: '>=6'}
     dev: false
 
   /process-nextick-args@2.0.1:

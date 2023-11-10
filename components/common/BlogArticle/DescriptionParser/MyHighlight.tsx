@@ -24,34 +24,65 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
   const [codeHasBeenCopied, setCodeCopied] = useState<boolean>(false);
   return (
     <Highlight
-      theme={theme || themes.vsDark}
+      theme={theme || themes.okaidia}
       code={code}
       language={language}
       {...rest}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => {
         return (
-          <Stack
+          <Box
             width="100%"
-            direction="row"
-            spacing={"3px"}
             className={className}
             sx={{
               position: "relative",
               clear: "both",
               borderRadius: "10px",
-              pl: "3px",
-              py: 2,
-              pt: 3,
-              "&, & pre": {
-                fontFamily: "monospace",
-                fontSize: "15px",
-                lineHeight: "18px",
-                overflowX: "auto",
-              },
+              my: "1px",
+              pl: "7px",
+              pt: "24px",
+              pb: "10px",
+              fontFamily:
+                "Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace",
+              fontWeight: 500,
+              fontSize: "16px",
+              lineHeight: "25px",
               "& pre": {
-                p: 0,
-                m: 0,
+                padding: 0,
+                margin: 0,
+                fontFamily:
+                  "Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace",
+                fontWeight: 500,
+                fontSize: "16px",
+                lineHeight: "25px",
+                overflowX: "auto",
+                textShadow: "0 1px rgba(0,0,0,.3)",
+                wordSpacing: "normal",
+                wordWrap: "normal",
+                tabSize: 4,
+                hyphens: "none",
+                textWrap: "wrap",
+                whiteSpaceCollapse: "preserve",
+                wordBreak: "break-all",
+                whiteSpace: "pre-wrap",
+                boxSizing: "border-box",
+                counterReset: "line",
+                "& .token.attr-value": {
+                  color: "#e6db74",
+                  wordBreak: "break-all",
+                  whiteSpace: "pre-wrap",
+                },
+                "& > .token-line": {
+                  "&:before": {
+                    counterIncrement: "line",
+                    content: "counter(line)",
+                    display: "inline-block",
+                    borderRight: "1px solid #ddd",
+                    padding: "0 .5em",
+                    marginRight: ".5em",
+                    color: "#888",
+                  },
+                },
               },
               ...style,
             }}
@@ -66,12 +97,16 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
                 border: "none",
                 borderRadius: "3px",
                 background: "none",
-                color: codeHasBeenCopied ? blueGrey[50] : grey[100],
-                fontWeight: 400,
+                color: codeHasBeenCopied ? blueGrey[50] : "#EDEDE8",
                 textTransform: "none",
+                fontFamily:
+                  "Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace",
+                fontWeight: 500,
+                fontSize: "18px",
                 "&:hover": {
                   background: "none",
                   color: codeHasBeenCopied ? blueGrey[50] : "white",
+                  boxShadow: "none",
                 },
                 "&::before": {
                   fontFamily: "Material Icons Round",
@@ -92,16 +127,6 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
             >
               {codeHasBeenCopied ? "Код скопирован" : "Скопировать"}
             </Button>
-            <Box sx={{ textAlign: "right", pr: "3px" }}>
-              {tokens.map((line, i) => {
-                return (
-                  <React.Fragment key={i}>
-                    {i + 1}
-                    <br />
-                  </React.Fragment>
-                );
-              })}
-            </Box>
             <Box component={"pre"} className={className} sx={{ ...style }}>
               {tokens.map((line, i) => {
                 const { style, ...restProps } = getLineProps({
@@ -126,7 +151,7 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
                 );
               })}
             </Box>
-          </Stack>
+          </Box>
         );
       }}
     </Highlight>

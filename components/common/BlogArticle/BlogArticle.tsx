@@ -119,7 +119,8 @@ export default function BlogArticle({
               width: { xs: "100%", sm: "auto" },
               height: "auto",
               maxHeight: { xs: "inherit", sm: "60vh" },
-              borderRadius: 0.8,
+              boxShadow: "4px 4px 20px rgb(0 0 0 / 20%)",
+              borderRadius: "24px",
             },
             "& .firstImage": {
               my: 0,
@@ -137,6 +138,8 @@ export default function BlogArticle({
               },
             },
             "& img.firstImage": {
+              borderRadius: 0.8,
+              boxShadow: "none",
               height: "auto",
               maxHeight: "inherit",
               width: {

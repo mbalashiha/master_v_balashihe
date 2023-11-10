@@ -27,14 +27,23 @@ button {
 // .tox-notifications-container {
 //   display: none !important;
 // }
+pre {
+  color: #fff06d;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  background-color: #121311;
+}
 .tox .tox-textarea-wrap {
   textarea.tox-textarea {
     &,
     &:focus {
-      color: #000013;
+      color: #fff06d;
       font-size: 14px;
-      line-height: 16px;
-      font-family: monospace;
+      line-height: 24px;
+      font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+      background-color: #121311;
     }
   }
 }

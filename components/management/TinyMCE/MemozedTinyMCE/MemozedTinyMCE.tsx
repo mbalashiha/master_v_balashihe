@@ -18,6 +18,12 @@ import CodeMirrorDialog from "./CodeMirror/CodeMirrorDialog";
 import EventEmitter from "events";
 import { useEditorContext } from "@components/management/blog/Article/BodyEditor/ProviderTinyMCE";
 import { useArticleEvents } from "@components/management/blog/ArticleEventsProvider";
+import Prism from "prismjs";
+import "prismjs/themes/prism-okaidia.min.css";
+import "prismjs/plugins/normalize-whitespace/prism-normalize-whitespace";
+import "prismjs/plugins/line-numbers/prism-line-numbers";
+import "prismjs/components/prism-jsx";
+import "prismjs/components/prism-tsx";
 
 type InnerEditor = Editor["editor"];
 export interface MemoizedTinyMCEProps {
@@ -82,6 +88,7 @@ const ForwardingTinyMCEEditorRef = forwardRef<
   }: MemoizedTinyMCEProps,
   ref
 ) {
+  useEffect(() => Prism.highlightAll(), []);
   const htmlRef = useRef(initialValue);
   const [insertCodeIcon, setInsertCodeIcon] =
     React.useState<HTMLElement | null>(null);
@@ -170,6 +177,19 @@ const ForwardingTinyMCEEditorRef = forwardRef<
         initialValue={initialValue || ""}
         ref={editorRef}
         onInit={(evt, editor) => {
+          const dom = editor.dom;
+          // const head = dom.select("head")[0];
+          //for body //var body = ed.dom.select('body')[0]
+          // dom.add(head, "script", {
+          //   src: "/tinymce/prismjs/prism.js",
+          //   type: "text/javascript",
+          // });
+          // dom.add(head, "link", {
+          //   src: "/path/to/file1.js",
+          //   type: "text/javascript",
+          // });
+          const body = dom.select("body")[0];
+          dom.addClass(body, "line-numbers");
           const menubar: HTMLDivElement = editor.editorContainer.querySelector(
             `[role="menubar"]`
           ) as HTMLDivElement;
@@ -206,7 +226,12 @@ const ForwardingTinyMCEEditorRef = forwardRef<
           width: "100%",
           relative_urls: false,
           menubar: true,
-          content_css: "/additional/css/roboto.css",
+          codesample_global_prismjs: true,
+          content_css: [
+            "/tinymce/prismjs/prism-okaidia.min.css",
+            "/tinymce/prismjs/prism-line-numbers.min.css",
+            "/additional/css/roboto.css",
+          ],
           setup: function (editor) {
             editor.on("click", (event) => {
               if (event.target.nodeName === "IMG") {
@@ -223,9 +248,17 @@ const ForwardingTinyMCEEditorRef = forwardRef<
             editor.on("keydown", (event) => {
               articleEvents.keydownListener(event);
             });
+            editor.on("ExecCommand", function (e) {
+              // console.log("TinyMCE: The " + e.command + " command was fired.");
+              if (
+                e.command === "codesample" ||
+                e.command === "mceInsertContent"
+              ) {
+              }
+            });
             editor.ui.registry.addButton("insertCodeButton", {
               tooltip: "Вставить текст из буфера обмена",
-              text: `Вставить код`,
+              text: `Вставить текст`,
               icon: `insert-code-icon`,
               onAction: async function (_) {
                 let fromBuffer = await navigator.clipboard.readText();
@@ -276,7 +309,6 @@ const ForwardingTinyMCEEditorRef = forwardRef<
             "insertCodeButton imageUploadButton | " +
             "alignleft aligncenter alignright alignjustify link | " +
             "bullist numlist checklist outdent indent | removeformat | image code table help",
-          codesample_global_prismjs: false,
           codesample_languages: [
             { text: "React.tsx", value: "tsx" },
             { text: "React.jsx", value: "jsx" },
@@ -299,10 +331,20 @@ const ForwardingTinyMCEEditorRef = forwardRef<
                     line-height: 28px;
                     color: #0e0e0f;
                   }
-                  pre.language-tsx, pre.language-jsx {
-                    color: #000013;
+                  pre {
                     font-size: 14px;
-                    line-height: 16px;
+                    line-height: 20px;
+                    font-family: monospace;
+                  }
+                  .token {
+                    word-break: break-all !important;
+                    white-space: pre-wrap !important;
+                    font-size: 16px !important;
+                    line-height: 25px !important;
+                  }
+                  .token.attr-value { 
+                    word-break: break-all !important;
+                    white-space: pre-wrap !important;
                   }
               @media (min-width: 800px) {
                 body {
