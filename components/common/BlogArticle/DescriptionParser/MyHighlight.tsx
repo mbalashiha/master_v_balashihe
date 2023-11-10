@@ -39,7 +39,7 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
               clear: "both",
               borderRadius: "10px",
               my: "1px",
-              pl: "7px",
+              pl: "3px",
               pt: "24px",
               pb: "10px",
               fontFamily:
@@ -75,10 +75,12 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
                 "& > .token-line": {
                   "&:before": {
                     counterIncrement: "line",
+                    minWidth: "35px",
                     content: "counter(line)",
                     display: "inline-block",
                     borderRight: "1px solid #ddd",
-                    padding: "0 .5em",
+                    textAlign: "right",
+                    padding: "0 .5em 0 .5em",
                     marginRight: ".5em",
                     color: "#888",
                   },
