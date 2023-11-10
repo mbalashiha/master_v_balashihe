@@ -83,6 +83,7 @@ export function useUploaderOnChange({ editorRef }: Props) {
                 const timgContainer = dom.create("div", {
                   style: "text-align:center;",
                   "data-image-container": "1",
+                  class: "data-image-container",
                 });
                 dom.add(timgContainer, tImg);
                 editor.selection.setNode(timgContainer);

@@ -107,8 +107,7 @@ function ImageUpload({}: IUProps) {
               <Paper
                 sx={{
                   p: { xs: 1, md: 2 },
-                  width: "100%",
-                  height: "100%",
+                  width: "95%",
                   background: "grey",
                   cursor: "pointer",
                 }}
@@ -223,16 +222,24 @@ function ImageUpload({}: IUProps) {
                 border="2px dashed white"
                 borderRadius={1}
                 p={1}
+                color="white"
               >
                 {imgSrc && (
                   <Typography
                     alignSelf={"flex-start"}
                     px={2}
                     py={0}
-                    color={uploadedImageField.value ? "lightgreen" : "white"}
+                    color="grey.400"
                   >
                     {uploadedImageField.value ? "Новое изображение:" : "Путь:"}{" "}
-                    {imgSrc}
+                    <Box
+                      component="span"
+                      color={
+                        uploadedImageField.value ? "lightgreen" : "lightblue"
+                      }
+                    >
+                      {imgSrc}
+                    </Box>
                   </Typography>
                 )}
                 <Box
@@ -242,9 +249,11 @@ function ImageUpload({}: IUProps) {
                   justifyContent="center"
                   flexDirection="column"
                 >
-                  <Box>
-                    <CloudUploadIcon sx={{ fontSize: "100px" }} />
-                  </Box>
+                  {isUploading ? null : (
+                    <Box>
+                      <CloudUploadIcon sx={{ fontSize: "100px" }} />
+                    </Box>
+                  )}
                   <Box>
                     <Typography
                       variant="h4"
@@ -338,6 +347,7 @@ export default function ImageUploadModal({
                   "div",
                   {
                     "data-image-container": "1",
+                    class: "data-image-container",
                     style: "text-align: center;",
                   },
                   editor.dom.getOuterHTML(imgElement)
@@ -346,13 +356,14 @@ export default function ImageUploadModal({
                 newContainer.appendChild(
                   editor.dom.create(
                     "div",
-                    { "data-image-title": "1" },
+                    { "data-image-title": "1", class: "data-image-title" },
                     values.title || ""
                   )
                 );
                 if (!imgSrc) {
                   editor.dom.remove(newContainer);
                 }
+                editor.undoManager.add();
                 editor.fire("change");
               }
               close();

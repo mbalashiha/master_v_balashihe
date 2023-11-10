@@ -314,6 +314,12 @@ const ForwardingTinyMCEEditorRef = forwardRef<
                 max-height: 40vh !important;
                 max-width: 100% !important;
                } 
+               .data-image-title, .data-image-container {
+                font-weight: 400;
+                color: grey;
+                font-family: Verdana;
+                font-size: 14px;
+               }
                td {
                   padding: 12px;
                }
