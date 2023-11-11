@@ -270,9 +270,20 @@ const ForwardingTinyMCEEditorRef = forwardRef<
             "/tinymce/prismjs/prism-okaidia.min.css",
             "/tinymce/prismjs/prism-line-numbers.min.css",
             "/additional/css/roboto.css",
+            "/css/my_tinymce_styles.css",
           ],
           setup: function (editor) {
             editor.on("click", (event) => {
+              if (event.target.nodeName === "PRE") {
+                const el: HTMLPreElement = event.target;
+                const m = (el.className || "").match(/language\-(\w+)/);
+                const language = (m && m[1]) || "";
+                if (language) {
+                  formatPrismCodeBlocks(event.target, language);
+                }
+              }
+            });
+            editor.on("dblclick", (event) => {
               if (event.target.nodeName === "IMG") {
                 const dom = editorRef.current?.editor?.dom;
                 if (dom) {
@@ -281,13 +292,6 @@ const ForwardingTinyMCEEditorRef = forwardRef<
                   //   "Editor Clicked!  Element src: " + dom.getAttrib(img, "src")
                   // );
                   setModalImage(img);
-                }
-              } else if (event.target.nodeName === "PRE") {
-                const el: HTMLPreElement = event.target;
-                const m = (el.className || "").match(/language\-(\w+)/);
-                const language = (m && m[1]) || "";
-                if (language) {
-                  formatPrismCodeBlocks(event.target, language);
                 }
               }
             });
@@ -375,64 +379,6 @@ const ForwardingTinyMCEEditorRef = forwardRef<
             { text: "C#", value: "csharp" },
             { text: "C++", value: "cpp" },
           ],
-          content_style: `body { 
-                    padding: 0 10px 0 10px;
-                    font-family: Roboto, "Segoe UI", Tahoma, Verdana, Arial;
-                    font-weight: 500;
-                    font-size: 18px;
-                    line-height: 28px;
-                    color: #0e0e0f;
-                  }
-                  pre {
-                    font-size: 14px;
-                    line-height: 20px;
-                    font-family: monospace;
-                  }
-                  .token {
-                    word-break: break-all !important;
-                    white-space: pre-wrap !important;
-                    font-size: 16px !important;
-                    line-height: 25px !important;
-                  }
-                  .token.attr-value { 
-                    word-break: break-all !important;
-                    white-space: pre-wrap !important;
-                  }
-              @media (min-width: 800px) {
-                body {
-                  padding: 0 20px 0 20px;
-                }
-              }
-              @media (min-width: 900px) {
-                body {
-                  padding: 0 40px 0 40px;
-                }
-              }
-               img {
-                box-shadow: 4px 4px 20px rgb(0 0 0 / 20%);
-                border-radius: 24px; 
-                margin: 6px;
-                height: auto !important;
-                width: auto !important;
-                max-height: 40vh !important;
-                max-width: 100% !important;
-               } 
-               .data-image-title, .data-image-container {
-                font-weight: 400;
-                color: grey;
-                font-family: Verdana;
-                font-size: 14px;
-               }
-               td {
-                  padding: 12px;
-               }
-               td[colspan] {
-                  text-align: center;
-               }
-               td p {
-                  margin: 0 0 1px 0;
-                  padding: 0;
-               }`,
           content_langs: [
             { title: "Русский", code: "ru" },
             { title: "English", code: "en" },

@@ -292,7 +292,7 @@ interface Props {
 function SubmitButton() {
   const { dirty } = useFormikContext();
   return (
-    <Button disabled={!dirty} type="submit">
+    <Button sx={{}} disabled={!dirty} type="submit">
       Сохранить
     </Button>
   );
@@ -313,7 +313,11 @@ export default function ImageUploadModal({
           onClose={close}
           fullWidth={true}
           maxWidth="lg"
-          sx={{}}
+          sx={{
+            "& .DialogActions-root": {
+              justifyContent: "space-between",
+            },
+          }}
         >
           <Formik
             initialValues={{
@@ -375,6 +379,7 @@ export default function ImageUploadModal({
               </DialogContentText>
               <DialogActions
                 sx={{
+                  width: "100%",
                   "& button": {
                     borderRadius: 1,
                     padding: "16px",

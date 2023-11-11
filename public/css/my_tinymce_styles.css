@@ -21,9 +21,6 @@ pre {
   word-break: break-all !important;
   white-space: pre-wrap !important; }
 
-.data-image-container {
-  margin: 15px 0; }
-
 @media (min-width: 800px) {
   body {
     padding: 0 20px 0 20px; } }
@@ -35,7 +32,7 @@ pre {
 img {
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
   border-radius: 24px;
-  margin: 6px;
+  margin: 18px 0;
   height: auto !important;
   width: auto !important;
   max-height: 40vh !important;
@@ -43,10 +40,16 @@ img {
 
 .data-image-title,
 .data-image-container {
-  font-weight: 400;
+  font-weight: 300;
   color: grey;
-  font-family: Verdana;
-  font-size: 14px; }
+  font-family: Roboto, Verdana;
+  font-size: 18px;
+  line-height: 24px; }
+
+.data-image-container {
+  margin: 18px 0; }
+  .data-image-container img {
+    margin: 0; }
 
 td {
   padding: 12px; }
