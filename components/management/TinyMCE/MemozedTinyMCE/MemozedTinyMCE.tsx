@@ -5,13 +5,12 @@ import React, {
   useRef,
   FC,
   useImperativeHandle,
+  useCallback,
 } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Box, Button, Portal, styled } from "@mui/material";
 import util from "util";
 import InsertCodeIcon from "./InsertCodeIcon";
-import useImageUpload from "@framework/management/image/use-image-upload";
-import { useSnackbar } from "notistack";
 import { useUploaderOnChange } from "./use-uploader-onchange";
 import CodeIcon from "@mui/icons-material/Code";
 import CodeMirrorDialog from "./CodeMirror/CodeMirrorDialog";
@@ -24,6 +23,8 @@ import "prismjs/plugins/normalize-whitespace/prism-normalize-whitespace";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-tsx";
+import delay from "delay";
+import beatifyCode from "../../../utils/beatifyCode";
 
 type InnerEditor = Editor["editor"];
 export interface MemoizedTinyMCEProps {
@@ -88,7 +89,6 @@ const ForwardingTinyMCEEditorRef = forwardRef<
   }: MemoizedTinyMCEProps,
   ref
 ) {
-  useEffect(() => Prism.highlightAll(), []);
   const htmlRef = useRef(initialValue);
   const [insertCodeIcon, setInsertCodeIcon] =
     React.useState<HTMLElement | null>(null);
@@ -145,6 +145,45 @@ const ForwardingTinyMCEEditorRef = forwardRef<
     dom: editorRef.current?.editor?.dom,
   }));
   const { setModalImage } = useEditorContext();
+
+  const formatPrismCodeBlocks = useCallback(
+    async (targetNode?: HTMLPreElement, inLanguage?: string) => {
+      const editor = editorRef.current?.editor;
+      if (editor) {
+        const pres: HTMLPreElement[] = targetNode
+          ? [targetNode]
+          : editor.dom.select("pre");
+        for (const el of pres) {
+          const getLanguage = (): string => {
+            const m = (el.className || "").match(/language\-(\w+)/);
+            return (m && m[1]) || "";
+          };
+          const language: any = inLanguage ? inLanguage : getLanguage();
+          if (language && el.innerText) {
+            const beforeInnerText = el.innerText;
+            const editor = editorRef.current?.editor;
+            if (editor) {
+              const code = await beatifyCode({
+                textContent: beforeInnerText,
+                language,
+              });
+              if (code.textContent !== beforeInnerText) {
+                editor.undoManager.add();
+                el.textContent = code.textContent;
+                Prism.highlightElement(el);
+                editor.fire("change");
+              }
+            }
+          }
+        }
+      }
+    },
+    []
+  );
+  useEffect(() => {
+    Prism.highlightAll();
+    formatPrismCodeBlocks();
+  }, [formatPrismCodeBlocks]);
   return (
     <>
       <input
@@ -243,18 +282,31 @@ const ForwardingTinyMCEEditorRef = forwardRef<
                   // );
                   setModalImage(img);
                 }
+              } else if (event.target.nodeName === "PRE") {
+                const el: HTMLPreElement = event.target;
+                const m = (el.className || "").match(/language\-(\w+)/);
+                const language = (m && m[1]) || "";
+                if (language) {
+                  formatPrismCodeBlocks(event.target, language);
+                }
               }
             });
+            // editor.on("dblclick", (event) => {});
             editor.on("keydown", (event) => {
               articleEvents.keydownListener(event);
             });
+            let commandBefore: string = "";
             editor.on("ExecCommand", function (e) {
               // console.log("TinyMCE: The " + e.command + " command was fired.");
               if (
-                e.command === "codesample" ||
-                e.command === "mceInsertContent"
+                commandBefore === "codesample" ||
+                e.command === "codesample"
               ) {
+                setTimeout(() => {
+                  formatPrismCodeBlocks();
+                }, 50);
               }
+              commandBefore = e.command;
             });
             editor.ui.registry.addButton("insertCodeButton", {
               tooltip: "Вставить текст из буфера обмена",

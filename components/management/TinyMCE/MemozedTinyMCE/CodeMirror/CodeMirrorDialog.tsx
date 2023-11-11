@@ -11,7 +11,6 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
-import { html as beautifyHtml } from "js-beautify";
 import { TransitionProps } from "@mui/material/transitions";
 import {
   DialogActions,
@@ -22,6 +21,8 @@ import {
 import CodeMirrorEditor from "./CodeMirrorEditor";
 import { useState } from "react";
 import { grey } from "@mui/material/colors";
+import { beatifyCode } from "@components/utils";
+import { beatifyHtml } from "@components/utils/beatifyCode";
 
 const StyledCodeDialog = styled(Dialog)(({ theme }) => ({
   "& .DialogContent-root": {
@@ -126,11 +127,11 @@ export default function CodeMirrorDialog({
 }: Props) {
   const [initialHtml, setInitialHtml] = useState(inHtml);
   const htmlRef = React.useRef(initialHtml);
-  React.useEffect(
-    () =>
-      setInitialHtml(beautifyHtml(htmlRef.current.replaceAll("><", ">\r\n<"))),
-    []
-  );
+  React.useEffect(() => {
+    beatifyHtml(htmlRef.current).then((textContent) =>
+      setInitialHtml(textContent)
+    );
+  }, []);
   const handleClose = React.useCallback(
     (event: any, reason: string | null | undefined) => {
       if (reason === "backdropClick") {

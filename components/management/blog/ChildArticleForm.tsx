@@ -35,7 +35,10 @@ import { FormContextType } from "@components/ui/RefFormik";
 import { OpenCodemirrorButton, ResetButton } from "./Article/Buttons";
 import useUpdateImages from "@framework/management/blog/images/use-update-images";
 import { getImagesInputArray } from "@framework/utils/normalize";
-import { ArticleEventsContext, ArticleEventsProvider } from "./ArticleEventsProvider";
+import {
+  ArticleEventsContext,
+  ArticleEventsProvider,
+} from "./ArticleEventsProvider";
 
 interface Props {
   article: Blog.ArticleDraft;
@@ -148,7 +151,8 @@ export const ChildArticleForm = forwardRef<
             image,
             secondImage,
           } = values;
-          const replacer = async (inStr: string): Promise<string> => {
+          /**
+           * const replacer = async (inStr: string): Promise<string> => {
             const reg =
               /\<pre(\s+[^\>]+)?\>\s*\<code\>([^\>\<]+)\<\/code\>\s*\<\/pre\>/gm;
             let result;
@@ -173,7 +177,8 @@ export const ChildArticleForm = forwardRef<
             }
             return inStr;
           };
-          textHtml = await replacer(textHtml);
+           t//extHtml = await replacer(textHtml);
+          **/
           let renderHtml = textHtml;
           /*if (window.DOMParser) {
           const parser = new DOMParser();

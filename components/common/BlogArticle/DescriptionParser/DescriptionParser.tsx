@@ -341,8 +341,8 @@ const options = {
                 src={src}
                 alt={alt}
                 title={title}
-                width={width}
-                height={height}
+                width={width || 800}
+                height={height || 800}
                 fitWidth={1152}
                 quality={90}
               />
