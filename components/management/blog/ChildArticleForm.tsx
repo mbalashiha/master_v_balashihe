@@ -23,13 +23,6 @@ import { useSnackbar } from "notistack";
 import { TabsProvider } from "@components/common/Tabs/TabsProvider";
 import { locale } from "@utils/locale";
 import { Blog } from "@common/types/cms";
-import usePrettierReact from "@framework/management/api/use-prettier-react";
-import {
-  escapeHtml,
-  escapeHtmlTagsOnly,
-  unescapeHtml,
-  unescapeHtmlTagsOnly,
-} from "./html-parser";
 import { useArticleContext } from "./ArticleForm";
 import { FormContextType } from "@components/ui/RefFormik";
 import { OpenCodemirrorButton, ResetButton } from "./Article/Buttons";
@@ -54,7 +47,6 @@ export const ChildArticleForm = forwardRef<
   const router = useRouter();
   const checkArticle = useCheckArticle();
   const { enqueueSnackbar } = useSnackbar();
-  const prettierReact = usePrettierReact();
   const providerRef: React.MutableRefObject<ArticleEventsContext | undefined> =
     useRef<ArticleEventsContext | undefined>();
   // useEffect(() => {
