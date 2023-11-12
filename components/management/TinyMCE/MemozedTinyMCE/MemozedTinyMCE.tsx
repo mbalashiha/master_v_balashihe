@@ -72,7 +72,7 @@ const CustomMenubarContainer = ({
 export interface TinyMCEImperativeRef {
   editor: InnerEditor | undefined;
   dom:
-    | import("/home/yoo/cms/master_v_balashihe/node_modules/.pnpm/tinymce@6.3.1/node_modules/tinymce/tinymce").DOMUtils
+    | import("node_modules/.pnpm/tinymce@6.3.1/node_modules/tinymce/tinymce").DOMUtils
     | undefined;
 }
 const ForwardingTinyMCEEditorRef = forwardRef<

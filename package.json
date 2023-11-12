@@ -8,8 +8,8 @@
     "postbuild": "next-sitemap",
     "start": "next start -p 4404",
     "lint": "next lint",
-    "css": "node-sass public/**/*.scss -o public/css",
-    "css:watch": "npm run css; node-sass public/**/*.scss -wo public/css"
+    "css": "node-sass public/scss/*.scss -o public/css",
+    "css:watch": "npm run css; node-sass public/scss/*.scss -wo public/css"
   },
   "dependencies": {
     "@codemirror/view": "^6.22.0",
@@ -71,7 +71,6 @@
     "react-transition-group": "^4.4.5",
     "sanitize-html": "^2.10.0",
     "sass": "1.58.3",
-    "sharp": "^0.32.0",
     "slugify": "^1.6.5",
     "swr": "2.0.3",
     "typescript": "4.9.5",
@@ -80,7 +79,6 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^7.0.0",
-    "file-loader": "^6.2.0",
     "node-sass": "^9.0.0",
     "sass-loader": "^13.3.2"
   }
