@@ -259,7 +259,7 @@ const ForwardingTinyMCEEditorRef = forwardRef<
           width: "100%",
           relative_urls: false,
           menubar: true,
-          autosave_interval: "4s",
+          autosave_interval: "24s",
           codesample_global_prismjs: true,
           content_css: [
             "/tinymce/prismjs/prism-okaidia.min.css",
