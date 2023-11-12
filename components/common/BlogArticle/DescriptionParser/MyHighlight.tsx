@@ -63,10 +63,10 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
                 hyphens: "none",
                 textWrap: "wrap",
                 whiteSpaceCollapse: "preserve",
-                wordBreak: "break-all",
-                whiteSpace: "pre-wrap",
                 boxSizing: "border-box",
                 counterReset: "line",
+                wordBreak: "break-all",
+                whiteSpace: "pre-wrap",
                 "& .token.attr-value": {
                   color: "#e6db74",
                   wordBreak: "break-all",
@@ -140,12 +140,19 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
                       const { style, ...restProps } = getTokenProps({
                         token,
                       });
+                      if (style && style.color === "#f92672") {
+                        // style.fontSize = "16.5px";
+                        // style.fontWeight = 600;
+                        style.color = "#ffa7c7";
+                      }
                       return (
                         <Box
                           component="span"
                           key={key}
+                          sx={{
+                            ...style,
+                          }}
                           {...restProps}
-                          sx={{ ...style }}
                         />
                       );
                     })}
