@@ -42,16 +42,14 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
               pl: "3px",
               pt: "24px",
               pb: "10px",
-              fontFamily:
-                "Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace",
+              fontFamily: `Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace`,
               fontWeight: 500,
               fontSize: "16px",
               lineHeight: "25px",
               "& pre": {
                 padding: 0,
                 margin: 0,
-                fontFamily:
-                  "Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace",
+                fontFamily: `Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace`,
                 fontWeight: 500,
                 fontSize: "16px",
                 lineHeight: "25px",
@@ -101,8 +99,7 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
                 background: "none",
                 color: codeHasBeenCopied ? blueGrey[50] : "#EDEDE8",
                 textTransform: "none",
-                fontFamily:
-                  "Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace",
+                fontFamily: `Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace`,
                 fontWeight: 500,
                 fontSize: "18px",
                 "&:hover": {

@@ -6,6 +6,10 @@ body {
   line-height: 28px;
   color: #0e0e0f;
 }
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+}
 pre {
   font-size: 14px;
   line-height: 20px;
