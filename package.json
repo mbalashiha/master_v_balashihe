@@ -27,7 +27,6 @@
     "@types/js-cookie": "^3.0.3",
     "@types/luxon": "^3.3.3",
     "@types/node": "18.14.0",
-    "@types/prettier": "^3.0.0",
     "@types/prismjs": "^1.26.3",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
@@ -69,17 +68,16 @@
     "react-responsive-carousel": "^3.2.23",
     "react-step-wizard": "^5.3.11",
     "react-transition-group": "^4.4.5",
-    "sanitize-html": "^2.10.0",
-    "sass": "1.58.3",
     "slugify": "^1.6.5",
     "swr": "2.0.3",
-    "typescript": "4.9.5",
     "x-date-pickers": "link:@types/@mui/x-date-pickers",
     "yup": "1.0.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^7.0.0",
     "node-sass": "^9.0.0",
-    "sass-loader": "^13.3.2"
+    "sass": "^1.69.5",
+    "sass-loader": "^13.3.2",
+    "typescript": "4.9.5"
   }
 }

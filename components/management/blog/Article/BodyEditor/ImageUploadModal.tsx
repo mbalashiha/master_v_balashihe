@@ -322,7 +322,7 @@ export default function ImageUploadModal({
           <Formik
             initialValues={{
               imgSrc:
-                editorRef.current?.dom?.getAttrib(imgElement, "src") || null,
+                editorRef.current?.editor?.dom?.getAttrib(imgElement, "src") || null,
               uploadedImage: null as null | CMS.Image,
               title,
             }}

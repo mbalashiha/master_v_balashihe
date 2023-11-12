@@ -24,9 +24,8 @@ import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-tsx";
 import delay from "delay";
-import beatifyCode from "../../../utils/beatifyCode";
+import beatifyCode from "@components/utils/beatifyCode";
 
-type InnerEditor = Editor["editor"];
 export interface MemoizedTinyMCEProps {
   initialValue: string;
   onEditorChange: (textHtml: string, text: string) => void;
@@ -34,6 +33,10 @@ export interface MemoizedTinyMCEProps {
   emitter?: EventEmitter;
   setContentEventName?: string;
   openCodeMirrorEventName?: string;
+}
+type InnerEditor = Editor["editor"];
+export interface TinyMCEImperativeRef {
+  editor: InnerEditor | undefined;
 }
 interface CustomMenubarProps {
   children: React.ReactNode | React.ReactNode[];
@@ -68,13 +71,6 @@ const CustomMenubarContainer = ({
     </>
   );
 };
-
-export interface TinyMCEImperativeRef {
-  editor: InnerEditor | undefined;
-  dom:
-    | import("node_modules/.pnpm/tinymce@6.3.1/node_modules/tinymce/tinymce").DOMUtils
-    | undefined;
-}
 const ForwardingTinyMCEEditorRef = forwardRef<
   TinyMCEImperativeRef,
   MemoizedTinyMCEProps
@@ -138,18 +134,16 @@ const ForwardingTinyMCEEditorRef = forwardRef<
   }, [emitter, setContentEventName, openCodeMirrorEventName]);
   useImperativeHandle(ref, () => ({
     editor: editorRef.current?.editor,
-    dom: editorRef.current?.editor?.dom,
   }));
   useImperativeHandle(articleEvents.editorRef, () => ({
     editor: editorRef.current?.editor,
-    dom: editorRef.current?.editor?.dom,
   }));
   const { setModalImage } = useEditorContext();
 
   const formatPrismCodeBlocks = useCallback(
     async (targetNode?: HTMLPreElement, inLanguage?: string) => {
       const editor = editorRef.current?.editor;
-      if (editor) {
+      if (editor && editor.dom) {
         const pres: HTMLPreElement[] = targetNode
           ? [targetNode]
           : editor.dom.select("pre");
@@ -265,6 +259,7 @@ const ForwardingTinyMCEEditorRef = forwardRef<
           width: "100%",
           relative_urls: false,
           menubar: true,
+          autosave_interval: "4s",
           codesample_global_prismjs: true,
           content_css: [
             "/tinymce/prismjs/prism-okaidia.min.css",
@@ -359,12 +354,14 @@ const ForwardingTinyMCEEditorRef = forwardRef<
             "help",
             "wordcount",
             "codesample",
+            "autosave",
           ],
           toolbar:
             "undo redo | casechange blocks | codesample bold italic forecolor | " +
             "insertCodeButton imageUploadButton | " +
             "alignleft aligncenter alignright alignjustify link | " +
-            "bullist numlist checklist outdent indent | removeformat | image code table help",
+            "restoredraft bullist numlist checklist outdent indent | removeformat | image code table help",
+          autosave_retention: "360m",
           codesample_languages: [
             { text: "React.tsx", value: "tsx" },
             { text: "React.jsx", value: "jsx" },

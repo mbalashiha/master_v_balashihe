@@ -24,10 +24,11 @@ export const handler: API.Graphql.SWRHook<UseTemplateListHook> = {
     return templates;
   },
   useHook: ({ useData }) => {
-    return () => {
+    return (initial) => {
       const { data, ...rest } = useData({
         swrOptions: {
           revalidateOnFocus: false,
+          ...initial?.swrOptions,
         },
       });
       const isEmpty = Boolean(data?.length);

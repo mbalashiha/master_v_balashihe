@@ -19,19 +19,17 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { ID } from "@framework/types";
 
 export const ArticleTitle = () => {
-  const [{ value: receivedValue, ...field }, meta] = useField<ID>("templateId");
-  const { data: list } = useTemplateList();
-  const selected_templateId: ID | null =
-    receivedValue ||
-    list?.find((val, ind) => Boolean(val.lastUsed))?.templateId ||
-    (list && list[list.length - 1])?.templateId ||
-    null;
-  if (selected_templateId != receivedValue) {
-    field.onChange({
-      target: { name: field.name, value: selected_templateId },
-    });
-  }
-  const fieldValue = receivedValue || selected_templateId || "1";
+  const [{ value: __receivedValue, ...field }, meta] =
+    useField<ID>("templateId");
+  const receivedValue = __receivedValue || "1";
+  const { data: list } = useTemplateList({
+    swrOptions: {
+      fallbackData: [
+        { templateId: receivedValue, templateName: "Шаблон", lastUsed: 0 },
+      ],
+    },
+  });
+  const fieldValue = receivedValue;
   return (
     <FormControl fullWidth error={Boolean(meta.error)}>
       <InputLabel
