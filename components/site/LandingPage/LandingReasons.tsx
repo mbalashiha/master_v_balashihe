@@ -14,21 +14,17 @@ import ReasonItem from "./ReasonItem";
 export const LandingReasons = () => {
   return (
     <Container maxWidth="lg" sx={{ pb: "70px" }}>
-      <Typography component="h3" variant="h1" sx={{ pb: 0, mb: "30px"}}>
+      <Typography component="h3" variant="h1" sx={{ pb: 0, mb: "30px" }}>
         <Box component="span" color="primary.main">
           Несколько причин
         </Box>{" "}
-        обратиться ко мне отремонтировать и настроить
-        <Box component="span" color="primary.main">
-          {" "}
-          компьютер в Балашихе{" "}
-        </Box>
+        обратиться
       </Typography>
       <Grid container spacing={3}>
         <ReasonItem svgIcon={<IconOne />} title={<>Гарантирую результат</>}>
-          Вы платите только за оказанные услуги по ремонту. 
-          В Балашихе Вы получаете бесплатный выезд мастера и диагностику.
-          Я несу ответственность за оказанные мною услуги и после ремонта.
+          Вы платите только за оказанные услуги по ремонту. В Балашихе Вы
+          получаете бесплатный выезд мастера и диагностику. Я несу
+          ответственность за оказанные мною услуги и после ремонта.
         </ReasonItem>
         <ReasonItem svgIcon={<IconTwo />} title={<>Озвучиваю цену</>}>
           Сумму оплаты за ремонт электроники я сообщю Вам до его начала. Мы

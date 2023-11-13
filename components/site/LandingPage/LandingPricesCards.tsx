@@ -16,10 +16,11 @@ export const LandingPricesCards = () => {
   return (
     <Container maxWidth={"lg"} sx={{ pb: "30px" }}>
       <Typography component="h3" variant="h1" gutterBottom mb="2rem">
+        Настраиваю{" "}
         <Box component="span" color="primary.main">
-          Оживлю любой компьютер
+          программное обеспечение
         </Box>{" "}
-        и настрою <br /> лицензионное программное обеспечение
+        Linux и Windows
       </Typography>
       <Grid container sx={{ mt: 0 }} spacing={{ xs: 2, md: 3 }}>
         <Grid item xs={12} sm={6}>

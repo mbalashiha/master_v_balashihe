@@ -11,9 +11,9 @@ export const CardGridContainer = () => {
     <Container maxWidth="lg" sx={{ pb: "60px" }}>
       <Typography component="h1" variant="h1">
         <Box component="span" color="primary.main">
-          Ремонтирую
+          Опыт работы
         </Box>{" "}
-        технику для дома, офиса и бизнеса
+        с различной компьютерной техникой
       </Typography>
       <Grid container sx={{ mt: 0 }} spacing={3}>
         <LandingCard
