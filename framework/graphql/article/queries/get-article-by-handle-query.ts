@@ -35,6 +35,7 @@ export const getArticleByHandleQuery = gql`
     absURL
     displayingPageHandle
     renderHtml
+    text
     keyTextHtml
     unPublished
     notSearchable
@@ -48,6 +49,7 @@ export const getArticleByHandleQuery = gql`
     description
     datePublished
     dateModified
+    viewed
     ogDates {
       modified_time
       published_time

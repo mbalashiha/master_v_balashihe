@@ -3,9 +3,15 @@ import { Blog, Image } from "@common/types/cms";
 import { ID, Schema } from "@framework/types";
 import convertDate from "./convert-date";
 import { DateTime } from "luxon";
+import humanizeDuration from "humanize-duration";
 const NEXT_PUBLIC_SITE_URL = process.env["NEXT_PUBLIC_SITE_URL"] || "";
 export const getCanonicalUrl = (url: string) => `${NEXT_PUBLIC_SITE_URL}${url}`;
 
+function readingTime(text: string, wordsPerMinute: number = 200): string {
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return humanizeDuration(minutes * 60 * 1000, { language: "ru" });
+}
 export const getArticleUrlAndCanonicalUrl = ({
   absURL,
   handle,
@@ -260,6 +266,7 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
         .setLocale("ru")
         .toLocaleString(DateTime.DATE_FULL),
     },
+    readingTime: readingTime(text),
   };
 };
 

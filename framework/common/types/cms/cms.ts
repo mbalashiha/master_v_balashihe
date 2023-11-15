@@ -100,6 +100,7 @@ export namespace Blog {
       datePublished: string;
       dateModified: string;
     };
+    readingTime: string;
   }
   export interface ArticleTemplate {
     templateId: ID;

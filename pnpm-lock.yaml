@@ -38,6 +38,9 @@ dependencies:
   '@types/crypto-js':
     specifier: ^4.1.1
     version: 4.2.1
+  '@types/humanize-duration':
+    specifier: ^3.27.3
+    version: 3.27.3
   '@types/js-beautify':
     specifier: ^1.13.3
     version: 1.14.3
@@ -119,6 +122,9 @@ dependencies:
   htmlparser2:
     specifier: ^9.0.0
     version: 9.0.0
+  humanize-duration:
+    specifier: ^3.31.0
+    version: 3.31.0
   js-cookie:
     specifier: 3.0.1
     version: 3.0.1
@@ -2874,6 +2880,10 @@ packages:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
     dev: true
 
+  /@types/humanize-duration@3.27.3:
+    resolution: {integrity: sha512-wiiiFYjnrYDJE/ujU7wS/NShqp12IKrejozjDtcejP0zYi+cjyjVcfZHwcFUDKVJ7tHGsmgeW2ED92ABIIjfpg==}
+    dev: false
+
   /@types/js-beautify@1.14.3:
     resolution: {integrity: sha512-FMbQHz+qd9DoGvgLHxeqqVPaNRffpIu5ZjozwV8hf9JAGpIOzuAf4wGbRSo8LNITHqGjmmVjaMggTT5P4v4IHg==}
     dev: false
@@ -5369,6 +5379,10 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
+
+  /humanize-duration@3.31.0:
+    resolution: {integrity: sha512-fRrehgBG26NNZysRlTq1S+HPtDpp3u+Jzdc/d5A4cEzOD86YLAkDaJyJg8krSdCi7CJ+s7ht3fwRj8Dl+Btd0w==}
+    dev: false
 
   /humanize-ms@1.2.1:
     resolution: {integrity: sha512-Fl70vYtsAFb/C06PTS9dZBo7ihau+Tu/DNCk/OyHhea07S+aeMWpFFkUaXRa8fI+ScZbEI8dfSxwY7gxZ9SAVQ==}

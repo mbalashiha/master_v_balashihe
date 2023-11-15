@@ -14,33 +14,35 @@ import { CMS } from "@common/types";
 import { HeaderTextParser } from "@components/common/HeaderTextParser";
 import { CallMeForFree } from "@components/site/LandingPage";
 import useCountViews from "@framework/site/use-count-views";
-import { useEffect, useRef } from "react";
-import { grey } from "@mui/material/colors";
+import { useEffect, useRef, useState } from "react";
+import { blueGrey, grey } from "@mui/material/colors";
 import Image from "next/image";
 import { ArticleBreadcrumbs } from "./ArticleBreadcrumbs";
 import Head from "next/head";
 import NavigationButtons from "../ContactArticle/NavigationButtons/NavigationButtons";
 import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
+import IconView from "./IconView";
 
 interface Props extends CMS.Blog.Article {}
 
-export default function BlogArticle({
-  title,
-  image: inImage,
-  navigation,
-  keyTextHtml,
-  renderHtml,
-  id,
-  h2,
-  secondImage,
-  randomImage,
-  url,
-  canonicalUrl,
-  ogDates,
-  dateModified,
-  datePublished,
-  ...rest
-}: Props) {
+export default function BlogArticle(article: Props) {
+  const {
+    title,
+    image: inImage,
+    navigation,
+    keyTextHtml,
+    renderHtml,
+    id,
+    h2,
+    secondImage,
+    randomImage,
+    url,
+    canonicalUrl,
+    ogDates,
+    dateModified,
+    datePublished,
+    ...rest
+  } = article;
   const articleImage =
     secondImage && secondImage?.url
       ? secondImage
@@ -48,6 +50,7 @@ export default function BlogArticle({
       ? inImage
       : randomImage;
   const imgSrc = articleImage?.url;
+  const [viewed, setViewed] = useState<number>(article.viewed || 0);
   const countViews = useCountViews();
   const countViewsRef = useRef(countViews);
   useEffect(() => {
@@ -56,7 +59,7 @@ export default function BlogArticle({
   useEffect(() => {
     if (id) {
       const countViews = countViewsRef.current;
-      countViews({ articleId: id });
+      countViews({ articleId: id }).then((data) => setViewed(data.viewed));
     }
   }, [id]);
   return (
@@ -150,8 +153,8 @@ export default function BlogArticle({
               margin: { xs: 0, md: "0 0 10px 25px" },
               width: {
                 xs: "100%",
-                md: "480px",
-                lg: "48%",
+                sm: "50%",
+                md: "48%",
               },
             },
             "& img.firstImage": {
@@ -159,11 +162,7 @@ export default function BlogArticle({
               boxShadow: "none",
               height: "auto",
               maxHeight: "inherit",
-              width: {
-                xs: "100%",
-                md: "480px",
-                lg: "100%",
-              },
+              width: "100%",
               objectFit: "contain",
             },
             "& > h2:not(:first-of-type)": {
@@ -193,6 +192,29 @@ export default function BlogArticle({
           {articleImage?.canonicalUrl && (
             <meta itemProp="image" content={articleImage?.canonicalUrl} />
           )}
+          <Typography
+            component="h1"
+            variant="h1"
+            itemProp="headline"
+            sx={{
+              float: "none",
+              clear: "both",
+              fontSize: "32px",
+              lineHeight: "40px",
+              maxHeight: "120px",
+              overflow: "hidden",
+              display: "-webkit-box",
+              "-webkit-line-clamp": "3",
+              "-webkit-box-orient": "vertical",
+              textOverflow: "ellipsis",
+              // textAlign: { xs: "center", sm: "left" },
+              mx: { xs: "20px", sm: 0 },
+              fontWeight: 700,
+              mb: "10px",
+            }}
+          >
+            {title}
+          </Typography>
           {imgSrc && (
             <Link
               className={"firstImage"}
@@ -209,24 +231,11 @@ export default function BlogArticle({
               />
             </Link>
           )}
-          <Typography
-            component="h1"
-            variant="h1"
-            itemProp="headline"
-            sx={{
-              fontSize: { xs: "22px", md: "32px" },
-              lineHeight: { xs: "30px", md: "40px" },
-              fontWeight: 700,
-              m: { xs: "15px", md: "0 0 20px 0" },
-            }}
-          >
-            {title}
-          </Typography>
           {keyTextHtml && (
             <Box
               sx={{
-                paddingTop: 0,
-                paddingBottom: "47px",
+                p: { xs: "10px 0", md: `5px 0 30px 0` },
+                clear: "left",
                 "& > *": {
                   p: 0,
                   m: 0,
@@ -247,9 +256,74 @@ export default function BlogArticle({
               <HeaderTextParser htmlText={keyTextHtml} />
             </Box>
           )}
-          <section itemProp="articleBody">
+          <Stack
+            width={{ xs: "100%", md: "auto", lg: "auto" }}
+            direction={{ xs: "row", md: "column", lg: "row" }}
+            alignItems={"flex-start"}
+            justifyContent={"space-between"}
+            spacing={{ xs: 2, sm: 2, lg: 3 }}
+            sx={{
+              float: { xs: "none", sm: "left" },
+              pt: { xs: "30px", sm: "10px", md: "" },
+              pb: { xs: 0, sm: "20px" },
+              minWidth: { xs: "unset", lg: "49%" },
+            }}
+          >
+            <IconView
+              iconContent={`"\\e8b5"`}
+              title="Время на чтение"
+              message={article.readingTime.toString()}
+              popoverTitle={article.readingTime.toString()}
+            />
+            <IconView
+              iconContent={`"\\ebcc"`}
+              title="Дата публикации"
+              message={article.humanDates.datePublished}
+              popoverTitle={article.humanDates.datePublished}
+            />
+            <IconView
+              itemProp="aggregateRating"
+              itemScope
+              itemType="https://schema.org/AggregateRating"
+              iconContent={`"\\e8f4"`}
+              title="Просмотры"
+              message={
+                <>
+                  <meta itemProp="bestRating" content="5" />
+                  <meta
+                    itemProp="ratingValue"
+                    content={viewed < 100 ? "3.5" : viewed < 500 ? "4" : "5"}
+                  />
+                  <Box
+                    component="span"
+                    itemProp="ratingCount"
+                    sx={{
+                      overflow: "hidden",
+                      display: "block",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
+                      maxWidth: {
+                        xs: "120px",
+                        sm: "180px",
+                        md: "360px",
+                        lg: "100px",
+                      },
+                    }}
+                  >
+                    {viewed || "Ooops!!!"}
+                  </Box>
+                </>
+              }
+              popoverTitle={`${viewed || "Ooops!!!"} просмотров`}
+            />
+          </Stack>
+          <Box
+            sx={{ clear: "left" }}
+            component="section"
+            itemProp="articleBody"
+          >
             <DescriptionParser descriptionHTML={renderHtml} />
-          </section>
+          </Box>
           <NavigationButtons navigation={navigation} />
           <CallMeForFree
             sx={{

@@ -7,8 +7,8 @@ export default useCountViews as UseCountViews<typeof handler>;
 
 export interface CountViewsHook {
   requestInput: { articleId: ID };
-  requestOutput: {};
-  data: {};
+  requestOutput: { articleId: ID; viewed: number };
+  data: { articleId: ID; viewed: number };
 }
 export const handler: API.RestApi.RestApiHook<CountViewsHook> = {
   options: {
@@ -22,6 +22,11 @@ export const handler: API.RestApi.RestApiHook<CountViewsHook> = {
         ...options,
         variables,
       });
+      if (data.articleId.toString() !== input.articleId.toString()) {
+        throw new Error(
+          "Bad use-count-views api request result: no correct article id."
+        );
+      }
       return data;
     } catch (e: any) {
       console.error(e.stack || e.message || e);
