@@ -140,7 +140,7 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
                       if (style && style.color === "#f92672") {
                         // style.fontSize = "16.5px";
                         // style.fontWeight = 600;
-                        style.color = "#ffa7c7";
+                        style.color = "#ffa17b";
                       }
                       return (
                         <Box
