@@ -21,6 +21,7 @@ import { getCanonicalUrl, makeImageType } from "@framework/utils/normalize";
 import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
 import { useThemePalette } from "@components/ui";
 import getDarkTheme from "@components/ui/theme/dark-theme";
+import LandingPhotoTicker from "@components/site/LandingPage/LandingPhotoTicker";
 
 export default function Home(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -46,6 +47,7 @@ export default function Home(
           <LandingClientSteps />
           <LandingAgeTasks />
           <LandingWizard />
+          <LandingPhotoTicker />
           <CardGridContainer />
           <LandingReasons />
           <LandingPricesCards />

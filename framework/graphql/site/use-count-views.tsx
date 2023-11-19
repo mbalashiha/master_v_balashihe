@@ -23,7 +23,7 @@ export const handler: API.RestApi.RestApiHook<CountViewsHook> = {
         variables,
       });
       if (data.articleId.toString() !== input.articleId.toString()) {
-        throw new Error(
+        console.error(
           "Bad use-count-views api request result: no correct article id."
         );
       }

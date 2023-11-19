@@ -30,7 +30,7 @@ export default function LandingServices() {
           fontWeight: 500,
           textTransform: "uppercase",
           color: "white",
-          mb: { xs: "15px", lg: "65px" },
+          mb: { xs: "15px", sm: "35px", md: "40px" },
         }}
       >
         Услуги компьютерного мастера
@@ -40,8 +40,7 @@ export default function LandingServices() {
           header="Ремонт компьютеров"
           imageUrl="/images/services/services_001.jpg"
         >
-          Услуги по ремонту компьютерной техники в Балашихинском районе и
-          Москве
+          Услуги по ремонту компьютерной техники в Балашихинском районе и Москве
         </LandingCard>
         <LandingCard
           header="Настройка Интернета"

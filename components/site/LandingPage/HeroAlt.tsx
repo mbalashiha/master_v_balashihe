@@ -283,33 +283,61 @@ export default function Hero({ article }: Props) {
           </Stack>
           <Box
             sx={{
+              zIndex: -1,
               gridRow: { xs: `span 1`, md: `span 2` },
               gridColumn: { xs: `1`, md: `2` },
               textAlign: "center",
-              display: { xs: "inherit", md: "flex", lg: "inherit" },
-              alignItems: { xs: "inherit", md: "flex-end", lg: "inherit" },
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
               p: {
                 xs: 0,
-                md: "0 0 40px 30px",
-                lg: "30px 30px 0px 50px",
-                xl: "0 30px 0px 70px",
+                md: "0 0 0 30px",
+                lg: "30px 30px 0 50px",
+                xl: "0 30px 0 90px",
               },
-              "& img": {
+              "& a": {
+                display: "block",
+                position: "relative",
                 width: "100%",
-                height: "auto",
                 maxWidth: "96vw",
+                overflow: "visible",
+                "& img": {
+                  width: "100%",
+                  height: "auto",
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain",
+                },
               },
             }}
           >
             <Link itemProp="image" href={image.canonicalUrl} target="_blank">
               <Image
                 alt="Информационные системы и технологии"
-                width={600}
-                height={802}
-                quality={75}
+                width={650}
+                height={870}
+                quality={70}
                 src="/images/computer_master_landing_balashiha.webp"
                 title="Компьютерный мастер"
               />
+              <Box
+                sx={{
+                  position: "absolute",
+                  width: "100%",
+                  bottom: 0,
+                  filter: "blur(35px)",
+                  transform: "translate(0,50%)",
+                }}
+              >
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "140px",
+                    backgroundColor: "var(--landing-background-color)",
+                  }}
+                ></Box>
+              </Box>
             </Link>
           </Box>
         </Container>
