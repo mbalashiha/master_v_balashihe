@@ -1,10 +1,6 @@
-import { Layout } from "@components/site";
 import { Container, Grid, Card, Paper, Stack } from "@mui/material";
-import Head from "next/head";
-import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import LandingCard from "@components/shared/LandingCard";
 import { IconOne } from "./Icons/IconOne";
 import { IconTwo } from "./Icons/IconTwo";
 import { IconThree } from "./Icons/IconThree";
@@ -18,7 +14,7 @@ export const LandingReasons = () => {
         <Box component="span" color="primary.main">
           Несколько причин
         </Box>{" "}
-        обратиться
+        обратиться к мастеру
       </Typography>
       <Grid container spacing={3}>
         <ReasonItem svgIcon={<IconOne />} title={<>Гарантирую результат</>}>

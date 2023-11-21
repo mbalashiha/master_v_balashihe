@@ -44,7 +44,7 @@ export default function LandingClientSteps() {
           ></Box>
           <Box
             sx={{
-              backgroundImage: `linear-gradient(to bottom, rgba(1,1,1,1) 0px, rgba(1, 1, 1, 0.9) 15px, rgba(1, 1, 9, 0.85) 80px, rgba(1,1,1,1))`,
+              backgroundImage: `linear-gradient(to bottom, rgba(1,1,1,1) 0px, rgba(1, 1, 1, 0.9) 15px, rgba(9, 5, 1, 0.85) 80px, rgba(1,1,1,1))`,
               height: "100%",
               width: "100%",
               position: "absolute",

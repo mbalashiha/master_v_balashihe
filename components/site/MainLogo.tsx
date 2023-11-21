@@ -56,7 +56,19 @@ export const MainLogo = () => {
               position: "relative",
             }}
           >
-            Мастер <br /> в Балашихе <br /> РФ
+            {process.env.NEXT_PUBLIC_SITE_NAME && (
+              <>
+                <Box
+                  component={"strong"}
+                  fontSize={"21px"}
+                  color="var(--header-typography-color)"
+                >
+                  {process.env.NEXT_PUBLIC_SITE_NAME || ""}
+                </Box>{" "}
+                <br />
+              </>
+            )}
+            Компьютерный мастер <br /> НА ДОМ ИЛИ В ОФИС
           </Typography>
         </Stack>
       </Link>

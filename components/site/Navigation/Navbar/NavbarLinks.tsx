@@ -111,10 +111,6 @@ export const NavbarLinks = ({
       spacing="2px"
       component="nav"
       sx={{
-        "&, & *": {
-          fontFamily: "Gotham, Arial, sans-serif",
-          color: "#303b44",
-        },
         py: 0,
         px: { xs: "12px", sm: 0 },
         alignSelf: { xs: "flex-start", sm: "flex-end" },
@@ -128,7 +124,7 @@ export const NavbarLinks = ({
         "& .dropbtn, & button": {
           margin: 0,
           border: "none",
-          color: (theme) => theme.typography.allVariants.color,
+          color: "black",
         },
         "& a, & button, & .menuLink, & > .dropdown > .dropbtn": {
           px: { xs: 0, sm: "12px" },
@@ -151,15 +147,17 @@ export const NavbarLinks = ({
         },
         "& > a, & > div, & > button, & .dropdown .dropbtn, & .dropdown-content > *":
           {
+            fontFamily: "Gotham, Arial, sans-serif",
+            color: "black",
             background: "transparent",
             fontWeight: 600,
             position: "relative",
             transition: "color .5s ease, background-color .5s ease",
             "&:hover, &.clicked": {
-              color: (theme) => theme.palette.primary.main,
+              color: "black",
             },
             "&.active": {
-              color: (theme) => theme.palette.primary.main,
+              color: "black",
             },
             "&:after": {
               position: "absolute",
@@ -172,9 +170,13 @@ export const NavbarLinks = ({
               background: "transparent",
               transition: "width .5s ease, background-color .5s ease",
             },
-            "&:hover:after, &.active:after, &.clicked:after": {
+            "&:hover:after, &.clicked:after": {
               width: "100%",
-              background: (theme) => theme.palette.primary.main,
+              background: "black",
+            },
+            "&.active:after": {
+              width: "100%",
+              background: "black",
             },
           },
         "& > .dropdown": {

@@ -1,4 +1,7 @@
+import { useTheme } from "@mui/material";
+
 export const IconOne = () => {
+  const { palette } = useTheme();
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +27,7 @@ export const IconOne = () => {
         >
           {" "}
           <stop stopColor="#852121"></stop>{" "}
-          <stop offset="1" stopColor="#D8002F"></stop>{" "}
+          <stop offset="1" stopColor={palette.primary.main}></stop>{" "}
         </linearGradient>{" "}
       </defs>{" "}
     </svg>

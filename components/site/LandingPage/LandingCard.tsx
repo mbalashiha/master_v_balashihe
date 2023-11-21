@@ -125,7 +125,7 @@ export default function LandingCard({ header, children, imageUrl }: Props) {
 
                     "&:hover": {
                       color: "white",
-                      background: blueGrey[800],
+                      background: (theme)=>theme.palette.primary.main,
                       boxShadow: "none",
                     },
                     "& .Button-startIcon": {

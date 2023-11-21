@@ -188,6 +188,9 @@ export namespace Schema {
     }
     export interface BlogArticles {
       blogArticles: BlogArticlesConnection;
+    }    
+    export interface TickerImages {
+      getTickerImages: Image[];
     }
     export interface ArticleDraftResponse {
       articleDraft: Article.ArticleDraft;

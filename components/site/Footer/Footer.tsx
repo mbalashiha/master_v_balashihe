@@ -41,7 +41,10 @@ export const Footer = () => {
           textDecoration: "none",
           color: (theme) => theme.palette.primary.main,
           "&:hover": {
-            textDecoration: "none",
+            "&, & > span": {
+              textDecoration: "none",
+              color: "red",
+            },
           },
         },
         "& > div > div": {
@@ -55,14 +58,20 @@ export const Footer = () => {
       <div itemScope itemType="https://schema.org/LocalBusiness">
         <Box>
           <p>
-            <meta itemProp="name" content="Компьютерный мастер в Балашихе РФ" />
+            <meta
+              itemProp="name"
+              content="MBALASHIHA.RU Компьютерный мастер в Балашихе РФ"
+            />
             <meta itemProp="image" content={"/images/master_v_balashihe.jpg"} />
             <Link
               itemProp="url"
               href={`${process.env.NEXT_PUBLIC_SITE_URL || "/"}`}
             >
-              © {new Date().getFullYear()}{" "}
-              <span itemProp="name">Компьютерный мастер в Балашихе РФ</span>
+              <span>&copy; {new Date().getFullYear()} </span>
+              <span itemProp="name">
+                {process.env.NEXT_PUBLIC_SITE_NAME || ""} Компьютерный мастер в
+                Балашихе РФ
+              </span>
             </Link>
           </p>
           <div

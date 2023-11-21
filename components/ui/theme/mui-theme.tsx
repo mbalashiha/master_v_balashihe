@@ -13,7 +13,7 @@ const InterFontFamily = `Inter, Arial, sans-serif`;
 
 export const standartCssTransition = {
   transitionProperty: "all",
-  transitionDuration: "0.2s",
+  transitionDuration: "0.14s",
   transitionTimingFunction: "ease-in-out",
   transitionDelay: "0s",
 };
@@ -25,7 +25,7 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
   let theme = createTheme({
     palette: {
       mode: colorMode,
-      primary: { main: "#AA203E" },
+      primary: { main: "#b87d36" },
       background: {
         default: "#4D001D",
       },
@@ -266,7 +266,7 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
               color: "#ffffff",
               boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
               "& svg.SvgIcon-root": {
-                fill: "red",
+                fill: "white",
               },
             },
             "& .Button-iconSizeMedium": {

@@ -1,6 +1,7 @@
 :root {
   --landing-font-family: "Noto Sans", Arial, sans-serif;
   --landing-background-color: #010101;
+  --header-typography-color: #af7e42;
   --animate-duration: 1s;
   --animate-delay: 1s;
   --animate-repeat: 1;

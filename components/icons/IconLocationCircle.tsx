@@ -1,16 +1,18 @@
-import { Theme } from "@mui/material/styles";
-import { Box, SxProps } from "@mui/material";
+import { useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 type BoxProps = React.ComponentProps<typeof Box>;
 type Props = BoxProps & {
   fill?: React.CSSProperties["color"];
   iconColor?: React.CSSProperties["color"];
 };
 const IconEmailCircle = ({
-  fill = "#aa203e",
+  fill,
   iconColor = "white",
   sx,
   ...props
 }: Props) => {
+  const { palette } = useTheme();
+  fill = fill || palette.primary.main;
   return (
     <Box
       sx={

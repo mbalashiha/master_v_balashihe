@@ -29,9 +29,7 @@ import { useRouter } from "next/router";
 import NavbarLinks from "./NavbarLinks";
 import { MainLogo } from "@components/site/MainLogo";
 import { PhoneCallIcon, TelegramIcon } from "@components/icons";
-import {
-  NEXT_PUBLIC_CONTACT_PHONE_TEXT,
-} from "@framework/const";
+import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
 import IconPhoneCircle from "@components/icons/IconPhoneCircle";
 import { useSiteModal } from "@components/site/ModalProvider/ModalProvider";
 
@@ -123,9 +121,18 @@ const Navbar: FC = () => {
               sx={{ cursor: "pointer" }}
               onClick={() => toggleModal("contact list")}
             >
-              <IconPhoneCircle fill={"black"} />
+              <IconPhoneCircle fill={"#C59457"} />
               <Stack direction="column">
-                <Box itemProp="telephone">{NEXT_PUBLIC_CONTACT_PHONE_TEXT}</Box>
+                <Box
+                  itemProp="telephone"
+                  sx={{
+                    "&&": {
+                      color: "var(--header-typography-color)",
+                    },
+                  }}
+                >
+                  {NEXT_PUBLIC_CONTACT_PHONE_TEXT}
+                </Box>
                 <Typography
                   component="time"
                   itemProp="openingHours"
@@ -135,6 +142,9 @@ const Navbar: FC = () => {
                     fontSize: "16px",
                     lineHeight: "24px",
                     alignSelf: "flex-end",
+                    "&&": {
+                      color: "var(--header-typography-color)",
+                    },
                   }}
                 >
                   Ежедневно с 09:00 до 23:00

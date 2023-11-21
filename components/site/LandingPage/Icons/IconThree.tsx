@@ -1,4 +1,7 @@
+import { useTheme } from "@mui/material";
+
 export const IconThree = () => {
+  const { palette } = useTheme();
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +31,7 @@ export const IconThree = () => {
         >
           {" "}
           <stop stopColor="#852121"></stop>{" "}
-          <stop offset="1" stopColor="#D8002F"></stop>{" "}
+          <stop offset="1" stopColor={palette.primary.main}></stop>{" "}
         </linearGradient>{" "}
         <linearGradient
           id="paint1_linear_2022_reason_icon3"
@@ -40,7 +43,7 @@ export const IconThree = () => {
         >
           {" "}
           <stop stopColor="#4E1414"></stop>{" "}
-          <stop offset="1" stopColor="#D8002F"></stop>{" "}
+          <stop offset="1" stopColor={palette.primary.main}></stop>{" "}
         </linearGradient>{" "}
       </defs>{" "}
     </svg>

@@ -31,7 +31,7 @@ export default function Hero({ article }: Props) {
     }
   }, [article.id]);
   const { toggleModal } = useSiteModal();
-  const title = `Меня зовут Дмитрий, я окончил МГТУ МИРЭА со специальностью Информационные системы и технологии`;
+  const title = `Компьютерный сервис MBalashiha.ru - Меня зовут Дмитрий, я окончил МГТУ МИРЭА со специальностью Информационные системы и технологии`;
   const indexCanonicalUrl = useMemo(() => getCanonicalUrl("/"), []);
   const image: CMS.Image = useMemo(() => {
     const url = "/images/master_v_balashihe.jpg";
@@ -86,7 +86,7 @@ export default function Hero({ article }: Props) {
         ></Box>
         <Box
           sx={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0, 6, 39, 0.7), rgba(1,1,1,1))`,
+            backgroundImage: `linear-gradient(to bottom, rgba(22, 14, 0, 0.7), rgba(1,1,1,1))`,
             willChange: "transform",
             height: "100%",
             width: "100%",
@@ -315,9 +315,10 @@ export default function Hero({ article }: Props) {
             <Link itemProp="image" href={image.canonicalUrl} target="_blank">
               <Image
                 alt="Информационные системы и технологии"
-                width={650}
-                height={870}
+                width={600}
+                height={909}
                 quality={70}
+                loading={"eager"}
                 src="/images/computer_master_landing_balashiha.webp"
                 title="Компьютерный мастер"
               />

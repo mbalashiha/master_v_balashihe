@@ -9,12 +9,6 @@ import LandingCard from "@components/shared/LandingCard";
 export const CardGridContainer = () => {
   return (
     <Container maxWidth="lg" sx={{ pb: "60px" }}>
-      <Typography component="h1" variant="h1">
-        <Box component="span" color="primary.main">
-          Опыт работы
-        </Box>{" "}
-        с различной компьютерной техникой
-      </Typography>
       <Grid container sx={{ mt: 0 }} spacing={3}>
         <LandingCard
           image={
