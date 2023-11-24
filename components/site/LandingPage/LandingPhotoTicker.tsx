@@ -1,4 +1,12 @@
-import { Container, Grid, Card, Paper, Button, Stack } from "@mui/material";
+import {
+  Container,
+  Link as MuiLink,
+  Grid,
+  Card,
+  Paper,
+  Button,
+  Stack,
+} from "@mui/material";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -20,11 +28,10 @@ export default function LandingPhotoTicker({}: Props) {
       sx={{
         pb: 0,
         height: "550px",
-        "& img": {
+        "& a, & img": {
           height: "400px",
           minWidth: "534px",
           width: "auto",
-          borderRadius: 1,
           objectFit: "cover",
         },
       }}
@@ -44,11 +51,16 @@ export default function LandingPhotoTicker({}: Props) {
       </Typography>
       <Marquee>
         {images.map((im) => (
-          <Box
+          <MuiLink
             key={im.imgSrc}
             sx={{
+              display: "block",
               mx: 2,
+              borderRadius: 1,
+              overflow: "hidden",
             }}
+            href={im.url}
+            target={"_blank"}
           >
             <Image
               alt="Информационные системы и технологии"
@@ -58,7 +70,7 @@ export default function LandingPhotoTicker({}: Props) {
               src={im.url}
               title="Компьютерный мастер"
             />
-          </Box>
+          </MuiLink>
         ))}
       </Marquee>
     </Container>

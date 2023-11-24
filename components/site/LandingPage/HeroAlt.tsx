@@ -31,7 +31,9 @@ export default function Hero({ article }: Props) {
     }
   }, [article.id]);
   const { toggleModal } = useSiteModal();
-  const title = `Компьютерный сервис MBalashiha.ru - Меня зовут Дмитрий, я окончил МГТУ МИРЭА со специальностью Информационные системы и технологии`;
+  const title = `Меня зовут Дмитрий, я окончил МГТУ МИРЭА со специальностью Информационные системы и технологии - это компьютерный сервис ${
+    process.env.NEXT_PUBLIC_SITE_NAME || "Мастер-в-Балашихе.РФ"
+  } 143912`;
   const indexCanonicalUrl = useMemo(() => getCanonicalUrl("/"), []);
   const image: CMS.Image = useMemo(() => {
     const url = "/images/master_v_balashihe.jpg";
@@ -69,11 +71,11 @@ export default function Hero({ article }: Props) {
       >
         <Box
           sx={{
-            backgroundPosition: "center center",
-            backgroundAttachment: "scroll",
             backgroundImage: `url(/images/circuit.webp)`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
+            backgroundPosition: "center center",
+            backgroundAttachment: "scroll",
             height: "100%",
             width: "100%",
             position: "absolute",
@@ -82,6 +84,7 @@ export default function Hero({ article }: Props) {
             right: 0,
             bottom: 0,
             zIndex: 0,
+            filter: "blur(0.3px)",
           }}
         ></Box>
         <Box

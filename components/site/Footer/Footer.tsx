@@ -1,6 +1,6 @@
 import Link from "next/link";
 import KeyboardDoubleArrowUpRoundedIcon from "@mui/icons-material/KeyboardDoubleArrowUpRounded";
-import { Container, Box, IconButton } from "@mui/material";
+import { Container, Box, IconButton, Stack } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 import GetDiscountButton from "./GetDiscountButton";
 import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
@@ -28,6 +28,7 @@ export const Footer = () => {
         width: "100%",
         minWidth: "100%",
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         "& *": {
@@ -55,12 +56,18 @@ export const Footer = () => {
         },
       }}
     >
-      <div itemScope itemType="https://schema.org/LocalBusiness">
+      <Stack
+        spacing={"8px"}
+        itemScope
+        itemType="https://schema.org/LocalBusiness"
+      >
         <Box>
           <p>
             <meta
               itemProp="name"
-              content="MBALASHIHA.RU Компьютерный мастер в Балашихе РФ"
+              content={`${
+                process.env.NEXT_PUBLIC_SITE_NAME || ""
+              } Компьютерный мастер в Балашихе РФ`}
             />
             <meta itemProp="image" content={"/images/master_v_balashihe.jpg"} />
             <Link
@@ -97,7 +104,6 @@ export const Footer = () => {
         <Box
           sx={{
             color: grey[400],
-            marginTop: "8px",
           }}
         >
           <p>
@@ -109,7 +115,20 @@ export const Footer = () => {
             Время работы: с 9:00 до 23:00 | Без выходных
           </time>
         </Box>
-      </div>
+        <Stack spacing={"8px"}>
+          <div>
+            Компьютерный сервис {process.env.NEXT_PUBLIC_SITE_NAME || ""} 143912
+          </div>
+          {process.env.LiveInternet_Logo && (
+            <div
+              className="metrika"
+              dangerouslySetInnerHTML={{
+                __html: process.env.LiveInternet_Logo || "",
+              }}
+            />
+          )}
+        </Stack>
+      </Stack>
       <IconButton
         sx={{
           zIndex: 1,
