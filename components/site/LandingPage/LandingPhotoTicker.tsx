@@ -27,7 +27,7 @@ export default function LandingPhotoTicker({}: Props) {
       maxWidth={false}
       sx={{
         pb: 0,
-        height: "550px",
+        minHeight: { xs: "560px", md: "500px" },
         "& a, & img": {
           height: "400px",
           minWidth: "534px",
@@ -40,7 +40,8 @@ export default function LandingPhotoTicker({}: Props) {
         component="div"
         variant="h1"
         sx={{
-          my: 4,
+          mt: { xs: 0, sm: 4 },
+          mb: 4,
           textAlign: "center",
         }}
       >
