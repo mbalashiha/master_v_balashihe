@@ -16,6 +16,14 @@ const tryReadFile = function (filepath) {
   }
 };
 module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
+  },
   webpack(config, { buildId, dev, isServer, defaultLoaders, webpack }) {
     const isDevelopment = process.env.NODE_ENV === "development";
     // console.log();
@@ -32,17 +40,10 @@ module.exports = {
         "process.env.DEV_MACHINE_API_HOST": __dirname.startsWith("/var/www")
           ? JSON.stringify("")
           : JSON.stringify("http://localhost:4402"),
-        "process.env.Yandex_Metrika_dangerouslySetInnerHTML": isDevelopment
+        "process.env.metrika_counters": isDevelopment
           ? undefined
           : JSON.stringify(
-              minify(tryReadFile("webpack-define-plugin/yandex_metrika.html"))
-            ),
-        "process.env.LiveInternet_Logo": isDevelopment
-          ? undefined
-          : JSON.stringify(
-              minify(
-                tryReadFile("webpack-define-plugin/LiveInternet_logo.html")
-              )
+              minify(tryReadFile("webpack-define-plugin/metrika_counters.html"))
             ),
         "process.env.Yandex_Map_dangerouslySetInnerHTML": JSON.stringify(
           minify(tryReadFile("webpack-define-plugin/yandex-map-iframe.html"))

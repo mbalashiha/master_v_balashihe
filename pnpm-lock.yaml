@@ -89,6 +89,9 @@ dependencies:
   classnames:
     specifier: 2.3.2
     version: 2.3.2
+  crc:
+    specifier: ^4.3.2
+    version: 4.3.2
   crypto-js:
     specifier: ^4.1.1
     version: 4.2.0
@@ -4285,6 +4288,16 @@ packages:
       path-type: 4.0.0
       typescript: 4.9.5
     dev: true
+
+  /crc@4.3.2:
+    resolution: {integrity: sha512-uGDHf4KLLh2zsHa8D8hIQ1H/HtFQhyHrc0uhHBcoKGol/Xnb+MPYfUMw7cvON6ze/GUESTudKayDcJC5HnJv1A==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      buffer: '>=6.0.3'
+    peerDependenciesMeta:
+      buffer:
+        optional: true
+    dev: false
 
   /create-react-class@15.7.0:
     resolution: {integrity: sha512-QZv4sFWG9S5RUvkTYWbflxeZX+JG7Cz0Tn33rQBJ+WFQTqTfUTjMjiv9tnfXazjsO5r0KhPs+AqCjyrQX6h2ng==}

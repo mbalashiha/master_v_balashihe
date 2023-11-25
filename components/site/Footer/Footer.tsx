@@ -4,6 +4,7 @@ import { Container, Box, IconButton, Stack } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 import GetDiscountButton from "./GetDiscountButton";
 import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
+import { MetrikaScriptsParser } from "@components/common";
 export const Footer = () => {
   return (
     <Container
@@ -119,14 +120,17 @@ export const Footer = () => {
           <div>
             Компьютерный сервис {process.env.NEXT_PUBLIC_SITE_NAME || ""} 143912
           </div>
-          {process.env.LiveInternet_Logo && (
-            <div
-              className="metrika"
-              dangerouslySetInnerHTML={{
-                __html: process.env.LiveInternet_Logo || "",
-              }}
+          <Stack
+            direction={"row"}
+            flexWrap={"wrap"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            spacing={"4px"}
+          >
+            <MetrikaScriptsParser
+              htmlString={process.env.metrika_counters || ""}
             />
-          )}
+          </Stack>
         </Stack>
       </Stack>
       <IconButton
