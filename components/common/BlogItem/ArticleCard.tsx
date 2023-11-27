@@ -1,10 +1,6 @@
-import { CardsLayout } from "@components/site";
 import { Typography, Card, Grid, Button, Box, Stack } from "@mui/material";
-import Head from "next/head";
-import { InferGetStaticPropsType } from "next/types";
 import Link from "next/link";
 import { HugeContainer, LinkButton } from "@components/ui";
-import getArticlesCards from "@framework/article/get-articles-cards";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { Blog } from "@common/types/cms";
 import { grey, blueGrey } from "@mui/material/colors";
@@ -49,8 +45,8 @@ const ArticleCard = ({ article }: Props) => {
           itemID={article.canonicalUrl}
           href={article.canonicalUrl}
         />
-        <meta itemProp="datePublished" content={article.datePublished} />
-        <meta itemProp="dateModified" content={article.dateModified} />
+        <meta itemProp="datePublished" content={article.datePublishedISO} />
+        <meta itemProp="dateModified" content={article.dateModifiedISO} />
         {article.image?.canonicalUrl && (
           <meta itemProp="image" content={article.image?.canonicalUrl} />
         )}
@@ -121,7 +117,7 @@ const ArticleCard = ({ article }: Props) => {
             <Box
               itemProp="datePublished"
               component="time"
-              dateTime={article.datePublished}
+              dateTime={article.datePublishedISO}
               sx={{ minWidth: "140px" }}
             >
               {article.humanDates.datePublished}

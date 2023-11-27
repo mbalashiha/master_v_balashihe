@@ -331,7 +331,7 @@ export default function Hero({ article }: Props) {
                 alt="Информационные системы и технологии"
                 width={600}
                 height={909}
-                quality={70}
+                quality={90}
                 loading={"eager"}
                 src="/images/computer_master_landing_balashiha.webp"
                 title="Компьютерный мастер"

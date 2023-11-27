@@ -3,7 +3,7 @@ import { Blog } from "@common/types/cms";
 import NavSidebarContainer from "./NavSidebarContainer";
 import type { NavSidebarContainerProps } from "./NavSidebarContainer";
 import NavStackContainer from "./NavStackContainer";
-import ListItem from "./NavigationList";
+import ListItem from "./ListItem";
 
 interface Props extends Omit<NavSidebarContainerProps, "children"> {
   list: Blog.NavigationItem[];

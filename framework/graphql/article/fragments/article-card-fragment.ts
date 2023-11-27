@@ -12,8 +12,8 @@ const articleCardFragment = gql`
     score
     fragment
     description
-    datePublished
-    dateModified
+    datePublishedISO
+    dateModifiedISO
     image {
       imageId
       imgSrc

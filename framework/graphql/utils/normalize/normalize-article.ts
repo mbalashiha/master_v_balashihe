@@ -58,14 +58,16 @@ export const normalizeBlogRow = (
     secondImage,
     viewed,
     description,
-    datePublished,
-    dateModified,
+    datePublishedISO,
+    dateModifiedISO,
+    modifiedDate,
+    publishedDate,
   } = data;
 
-  if (!datePublished) {
+  if (!datePublishedISO) {
     throw new Error("No article datePublished!");
   }
-  if (!dateModified) {
+  if (!dateModifiedISO) {
     throw new Error("No article dateModified!");
   }
   const { url, canonicalUrl } = getArticleUrlAndCanonicalUrl({
@@ -92,24 +94,26 @@ export const normalizeBlogRow = (
       minute: "numeric",
     }),
     humanDates: {
-      datePublished: DateTime.fromISO(datePublished)
+      datePublished: DateTime.fromISO(datePublishedISO)
         .setLocale("ru")
         .toLocaleString(DateTime.DATE_FULL),
-      dateModified: DateTime.fromISO(dateModified)
+      dateModified: DateTime.fromISO(dateModifiedISO)
         .setLocale("ru")
         .toLocaleString(DateTime.DATE_FULL),
     },
     viewed: viewed || null,
     description: description || "",
-    datePublished,
-    dateModified,
+    datePublishedISO,
+    dateModifiedISO,
+    modifiedDate: modifiedDate || "",
+    publishedDate: publishedDate || "",
   };
 };
 export const normalizeArtNavItem = (
   item: Schema.NavigationItem
 ): Blog.NavigationItem => {
   item = item || {};
-  const { title, handle, itIsloop, image } = item;
+  const { title, handle, itIsloop, image, viewed, modifiedDate } = item;
   const url = (handle && normalizeArticleUrl(handle)) || "";
   return {
     title: (title || "").replace(/[\.!]+\s*/gim, " ").trim(),
@@ -117,6 +121,8 @@ export const normalizeArtNavItem = (
     active: handle === "" ? true : null,
     itIsloop: Boolean(itIsloop),
     image: image && image.imgSrc ? normalizeImage(image) : null,
+    viewed: viewed || null,
+    modifiedDate: modifiedDate || null,
   };
 };
 const normalizeArticleNavigationItems = (

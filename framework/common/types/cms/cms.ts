@@ -39,8 +39,10 @@ export namespace Blog {
     secondImage: Image | null;
     viewed: number | null;
     description: string;
-    datePublished: string;
-    dateModified: string;
+    datePublishedISO: string;
+    dateModifiedISO: string;
+    modifiedDate: string;
+    publishedDate: string;
     humanDates: {
       datePublished: string;
       dateModified: string;
@@ -52,6 +54,8 @@ export namespace Blog {
     active: true | null;
     itIsloop: Boolean | null;
     image: Image | null;
+    viewed: number | null;
+    modifiedDate: string | null;
   }
   export interface BlogArticleNavigation {
     prev: NavigationItem | null;

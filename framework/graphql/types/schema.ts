@@ -67,14 +67,18 @@ export namespace Schema {
     secondImage: Image | null;
     viewed: number | null;
     description: string | null;
-    datePublished: string;
-    dateModified: string;
+    datePublishedISO: string;
+    dateModifiedISO: string;
+    modifiedDate: string | null;
+    publishedDate: string | null;
   }
   export interface NavigationItem {
     title: String;
     handle: String;
     itIsloop: Boolean | null;
     image: Image | null;
+    viewed: number | null;
+    modifiedDate: string | null;
   }
   export interface ArticleNavigation {
     prev: NavigationItem | null;
@@ -188,7 +192,7 @@ export namespace Schema {
     }
     export interface BlogArticles {
       blogArticles: BlogArticlesConnection;
-    }    
+    }
     export interface TickerImages {
       getTickerImages: Image[];
     }
@@ -202,7 +206,7 @@ export namespace Schema {
     }
     export interface RecentArticlesConnection {
       recentArticles: {
-        nodes: ArticleCard[];
+        nodes: NavigationItem[];
       };
     }
     export interface ArticlesPathesResponse {

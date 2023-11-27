@@ -39,11 +39,12 @@ export default function NavStackContainer({ children, sx, ...rest }: Props) {
           fontWeight: 500,
           fontSize: "16px",
           lineHeight: "22px",
-          maxHeight: "44px",
-          overflow: "hidden",
         },
         "& a": {
+          display: "block",
           color: (theme) => theme.palette.articleText.main,
+          maxHeight: "44px",
+          overflow: "hidden",
         },
         ...sx,
       }}

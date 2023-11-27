@@ -11,8 +11,8 @@ const articleCardFragment = gql`
     fragment
     viewed
     description
-    datePublished
-    dateModified
+    datePublishedISO
+    dateModifiedISO
     image {
       imageId
       imgSrc

@@ -18,15 +18,15 @@ const getRecentArticles = async (
     query: getRecentArticlesQuery,
     variables: { search: (search || "").trim() },
   });
-  return shuffle(
-    data.recentArticles.nodes.map((el) =>
-      normalizeArtNavItem({
-        handle: el.handle,
-        title: el.title,
-        itIsloop: false,
-        image: el.image,
-      })
-    )
+  return data.recentArticles.nodes.map((el) =>
+    normalizeArtNavItem({
+      handle: el.handle,
+      title: el.title,
+      itIsloop: false,
+      image: el.image,
+      viewed: el.viewed,
+      modifiedDate: el.modifiedDate,
+    })
   );
 };
 
