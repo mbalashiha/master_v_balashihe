@@ -1,6 +1,14 @@
 import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
 import { CardsLayout } from "@components/site";
-import { Typography, Card, Grid, Button, Box } from "@mui/material";
+import {
+  Typography,
+  Card,
+  Grid,
+  Button,
+  Box,
+  Paper,
+  Stack,
+} from "@mui/material";
 import Head from "next/head";
 import { InferGetStaticPropsType } from "next/types";
 import { HugeContainer } from "@components/ui";
@@ -49,17 +57,45 @@ export default function Page({
         itemScope
         itemType="https://schema.org/Blog"
         leftSidebar={<BlogRootSidebar recentArticles={recentArticles} />}
-        sx={{ background: "transparent" }}
+        sx={{ background: "white" }}
+        header={
+          <Stack
+            direction="row"
+            flexWrap={"wrap"}
+            alignItems="center"
+            spacing={{ xs: 0, md: 2 }}
+            sx={{
+              my: 1,
+              "& > div:first-child": {
+                pr: { xs: 0, sm: "10px", md: 0 },
+              },
+            }}
+          >
+            <Box>
+              <Typography
+                itemProp="description"
+                variant="h3"
+                component="h3"
+                sx={{
+                  fontSize: "21px",
+                  lineHeight: "28px",
+                  fontWeight: 500,
+                }}
+              >
+                {title}
+              </Typography>
+            </Box>
+            <Box>
+              <BlogListBreadcrumbs />
+            </Box>
+          </Stack>
+        }
       >
-        <BlogListBreadcrumbs />
-        <Typography
-          itemProp="description"
-          variant="h3"
-          component="h3"
-          sx={{ mb: 2 }}
-        >
-          {title}
-        </Typography>
+        <Box
+          sx={{
+            height: { xs: "", md: "45px" },
+          }}
+        ></Box>
         <Grid container spacing={{ xs: 2, lg: 3 }}>
           {articles.map((article) => (
             <ArticleCard key={article.url} article={article} />

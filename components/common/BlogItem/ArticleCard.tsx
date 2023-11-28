@@ -18,14 +18,16 @@ const ArticleCard = ({ article }: Props) => {
         itemType="https://schema.org/BlogPosting"
         elevation={0}
         sx={{
-          p: 2,
-          boxShadow:
-            "#0000001a 0rem 0.25rem 0.375rem -0.0625rem, #0000000f 0rem 0.125rem 0.25rem -0.0625rem",
-          "&, & h5, & p": {
-            color: (theme) => theme.palette.articleText.main,
-          },
+          px: 4,
+          py: 2,
+          background: "#F8F8F8",
+          borderRadius: "16px",
+          "&, & h5, & p": {},
+          transitionDuration: "0.3s",
+          transitionTimingFunction: "ease",
           "&:hover": {
-            boxShadow: "0 35px 15px 0 rgba(0,0,0,.0605)",
+            background: "white",
+            boxShadow: "0 4px 15px 1px rgba(0,0,0,.15)",
             color: (theme) => theme.palette.primary.dark,
             "& a": {
               "& button": {
@@ -104,23 +106,31 @@ const ArticleCard = ({ article }: Props) => {
               },
               justifyContent: "center",
               alignItems: "center",
-              "& .material-icons-round": {
-                fontSize: "16px",
-                lineHeight: "23px",
-              },
             }}
             spacing={"4px"}
           >
-            <Box className="material-icons-round" aria-hidden="true">
-              schedule
-            </Box>
             <Box
               itemProp="datePublished"
               component="time"
               dateTime={article.datePublishedISO}
-              sx={{ minWidth: "140px" }}
+              sx={{
+                minWidth: "110px",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                flexWrap: "wrap",
+                "&::before": {
+                  display: "inline-block",
+                  fontFamily: "Material Icons Round",
+                  fontStyle: "normal",
+                  content: `"\\ebcc"`,
+                  pr: "4px",
+                  fontSize: "16px",
+                  lineHeight: "23px",
+                },
+              }}
             >
-              {article.humanDates.datePublished}
+              {article.publishedDate}
             </Box>
           </Stack>
         </Stack>

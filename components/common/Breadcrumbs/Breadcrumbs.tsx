@@ -19,16 +19,15 @@ export default function Breadcrumbs({ path }: Props) {
       direction="row"
       flexWrap="wrap"
       sx={{
-        px: 0,
-        mx: 0,
-        py: 0,
-        my: 0,
-        mb: "8px",
+        p: 0,
+        m: 0,
         maxWidth: "95vw",
         overflow: "hidden",
         "& li": {
           display: "flex",
           flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
           px: 0,
           mx: 0,
           "&, & > *": {
@@ -37,9 +36,11 @@ export default function Breadcrumbs({ path }: Props) {
             lineHeight: "24px",
           },
           "&:after": {
-            content: `"/"`,
-            px: "4px",
-            color: grey[600],
+            content: `"\\e409"`,
+            px: 0,
+            display: "inline-block",
+            fontFamily: "Material Icons Round",
+            fontStyle: "normal",
           },
           "& > *": {
             maxWidth: "340px",
@@ -52,6 +53,7 @@ export default function Breadcrumbs({ path }: Props) {
             transitionProperty: "none",
             transitionDuration: 0,
             "&:hover": {
+              cursor: "pointer",
               transitionProperty: "none",
               transitionDuration: 0,
               color: "black",

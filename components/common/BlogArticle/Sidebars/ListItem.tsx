@@ -60,11 +60,11 @@ export default function ListItem({
                   fontStyle: "normal",
                   content: `"\\ebcc"`,
                   pr: "4px",
-                  fontSize: "19px",
+                  fontSize: "18px",
                   lineHeight: "19px",
                 },
                 "& > div": {
-                  fontSize: "14px",
+                  fontSize: "12px",
                   lineHeight: "19px",
                 },
               }}
@@ -89,7 +89,7 @@ export default function ListItem({
                   lineHeight: "19px",
                 },
                 "& > div": {
-                  fontSize: "14px",
+                  fontSize: "12px",
                   lineHeight: "19px",
                 },
               }}

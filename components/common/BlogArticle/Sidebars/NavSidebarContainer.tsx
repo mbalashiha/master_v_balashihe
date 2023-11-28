@@ -26,7 +26,15 @@ export default function NavSidebarContainer({
       aria-label={ariaLabel || "Навигация по публикациям"}
       {...rest}
     >
-      {title && <StyledHeader>{title}</StyledHeader>}
+      {title && (
+        <Box
+          sx={{
+            height: "45px",
+          }}
+        >
+          <StyledHeader>{title}</StyledHeader>
+        </Box>
+      )}
       {children}
     </Box>
   );

@@ -8,6 +8,7 @@ const articleNavItemFragment = gql`
     publishedAt
     updatedAt
     modifiedDate
+    publishedDate
     viewed
   }
 `;

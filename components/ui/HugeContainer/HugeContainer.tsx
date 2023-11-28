@@ -15,6 +15,7 @@ type GridSX = React.ComponentProps<typeof Grid>["sx"];
 
 interface Props extends BoxProps {
   children: React.ReactNode | React.ReactNode[];
+  header?: React.ReactNode;
   leftSidebar?: React.ReactNode | React.ReactNode[];
   rightSidebar?: React.ReactNode | React.ReactNode[];
   sx?: BoxProps["sx"];
@@ -23,6 +24,7 @@ interface Props extends BoxProps {
 }
 export default function HugeContainer({
   children,
+  header,
   leftSidebar,
   rightSidebar,
   sx,
@@ -38,23 +40,24 @@ export default function HugeContainer({
           colorMode && colorMode === "dark"
             ? "#010101"
             : theme.palette.background.paper,
-        pt: 1.5,
+        pt: 1,
         pb: 0,
         ...sx,
       }}
       {...rest}
     >
-      <Container maxWidth={"lg"}>
+      <Container maxWidth={"lg"} sx={{ px: { xs: "12px", md: undefined } }}>
+        {header && <>{header}</>}
         <Grid container spacing={spacing || { xs: 1, lg: 3, xl: 4 }}>
           {leftSidebar && (
-            <Grid item xs={12} md={12} lg={4} order={{ xs: 2, lg: 1 }}>
+            <Grid item xs={12} md={4} lg={4} order={{ xs: 2, lg: 1 }}>
               <Box sx={{ pl: { xs: "5px", xl: 0 } }}>{leftSidebar}</Box>
             </Grid>
           )}
           <Grid
             item
             xs={12}
-            md={12}
+            md={leftSidebar ? 8 : 12}
             lg={leftSidebar ? 8 : 12}
             order={{ xs: 1, lg: 2 }}
           >

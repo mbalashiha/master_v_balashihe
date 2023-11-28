@@ -15,7 +15,7 @@ export default function NavStackContainer({ children, sx, ...rest }: Props) {
   return (
     <Stack
       component="ul"
-      spacing="4px"
+      spacing="8px"
       sx={{
         listStyleType: "none",
         m: 0,
@@ -25,25 +25,27 @@ export default function NavStackContainer({ children, sx, ...rest }: Props) {
           fontStyle: "normal",
           content: `"\\e5c8"`,
           paddingLeft: 0,
-          paddingRight: "7px",
+          paddingRight: "4px",
           paddingTop: 0,
-          color: (theme) => theme.palette.articleText.main,
           fontSize: "20px",
           lineHeight: "20px",
+          color: "grey",
         },
         "& li": {
           display: "flex",
           flexDirection: "row",
-        },
-        "& a, & div": {
-          fontWeight: 500,
-          fontSize: "16px",
-          lineHeight: "22px",
+          p: "12px",
+          background: "rgb(255, 244, 235)",
+          borderRadius: "18px",
+          color: "grey",
+          fontWeight: 400,
         },
         "& a": {
+          fontWeight: 400,
+          fontSize: "16px",
+          lineHeight: "22px",
           display: "block",
-          color: (theme) => theme.palette.articleText.main,
-          maxHeight: "44px",
+          height: "44px",
           overflow: "hidden",
         },
         ...sx,

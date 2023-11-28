@@ -7,8 +7,8 @@ interface Props {
 export const BlogRootSidebar = ({ recentArticles }: Props) => {
   return (
     <NavSidebar
-      title={"Недавние"}
-      sx={{ width: "100%", height: { lg: "800px" } }}
+      title={"Популярное"}
+      sx={{ width: "100%" }}
       ariaLabel="recent articles"
       list={recentArticles}
     />
