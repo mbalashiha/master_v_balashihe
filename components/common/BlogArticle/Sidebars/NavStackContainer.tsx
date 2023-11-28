@@ -47,6 +47,9 @@ export default function NavStackContainer({ children, sx, ...rest }: Props) {
           display: "block",
           height: "44px",
           overflow: "hidden",
+          "&:hover": {
+            color: "black",
+          },
         },
         ...sx,
       }}
