@@ -19,7 +19,6 @@ interface Props extends BoxProps {
   leftSidebar?: React.ReactNode | React.ReactNode[];
   rightSidebar?: React.ReactNode | React.ReactNode[];
   sx?: BoxProps["sx"];
-  spacing?: GridContainerProps["spacing"];
   colorMode?: PaletteMode;
 }
 export default function HugeContainer({
@@ -28,7 +27,6 @@ export default function HugeContainer({
   leftSidebar,
   rightSidebar,
   sx,
-  spacing,
   colorMode,
   ...rest
 }: Props) {
@@ -48,10 +46,10 @@ export default function HugeContainer({
     >
       <Container maxWidth={"lg"} sx={{ px: { xs: "12px", md: undefined } }}>
         {header && <>{header}</>}
-        <Grid container spacing={spacing || { xs: 1, lg: 3, xl: 4 }}>
+        <Grid container sx={{}}>
           {leftSidebar && (
             <Grid item xs={12} md={4} lg={4} order={{ xs: 2, lg: 1 }}>
-              <Box sx={{ pl: { xs: "5px", xl: 0 } }}>{leftSidebar}</Box>
+              {leftSidebar}
             </Grid>
           )}
           <Grid

@@ -18,61 +18,77 @@ export default function Breadcrumbs({ path }: Props) {
       itemType="https://schema.org/BreadcrumbList"
       direction="row"
       flexWrap="wrap"
+      spacing={0}
       sx={{
         p: 0,
         m: 0,
         maxWidth: "95vw",
         overflow: "hidden",
-        "& li": {
+        listStyleType: "none",
+        gap: "5px",
+        "& > li": {
+          p: 0,
+          m: 0,
+          fontWeight: 400,
+          fontSize: "14px",
+          lineHeight: "18px",
+          color: "transparent",
+          background: "transparent",
+          borderRadius: "8px",
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
-          px: 0,
-          mx: 0,
-          "&, & > *": {
-            fontWeight: 400,
-            fontSize: "14px",
-            lineHeight: "24px",
-          },
-          "&:after": {
-            content: `"\\e409"`,
-            px: 0,
-            display: "inline-block",
-            fontFamily: "Material Icons Round",
-            fontStyle: "normal",
-          },
           "& > *": {
-            maxWidth: "340px",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-          },
-          "& a": {
-            color: blueGrey[900],
+            color: "#21201f",
+            fontWeight: 500,
+            fontSize: "14px",
+            lineHeight: "18px",
             transitionProperty: "none",
-            transitionDuration: 0,
+            background: "#F5F4F2",
+            pl: "9px",
+            pr: "4px",
+            py: "4px",
+            borderRadius: "8px",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            "&:after": {
+              px: 0,
+              content: `"\\e409"`,
+              fontFamily: "Material Icons",
+              fontWeight: 300,
+              color: "#21201f",
+              display: "block",
+              fontSize: "15px",
+              lineHeight: "18px",
+              mt: "2px",
+            },
+            "& > span": {
+              maxWidth: "400px",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              transitionProperty: "color, text-decoration",
+              transitionDuration: ".1s",
+              transitionTimingFunction: "ease-in-out",
+            },
+          },
+          "& > a": {
             "&:hover": {
-              cursor: "pointer",
-              transitionProperty: "none",
-              transitionDuration: 0,
               color: "black",
-              textDecoration: "underline",
+              "& > span": {
+                textDecoration: "underline",
+              },
             },
           },
         },
-        "& li:last-of-type": {
+        "& li:last-of-type > *": {
+          pr: "9px",
           "&:after": {
             content: `""`,
-            px: 0,
           },
-          // "& a": {
-          //   color: grey[600],
-          //   cursor: "default",
-          //   "&:hover": {
-          //     textDecoration: "none",
-          //   },
-          // },
         },
       }}
     >

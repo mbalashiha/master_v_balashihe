@@ -61,14 +61,12 @@ export default function Page({
         header={
           <Stack
             direction="row"
-            flexWrap={"wrap"}
+            flexWrap="wrap-reverse"
             alignItems="center"
-            spacing={{ xs: 0, md: 2 }}
+            spacing={0}
             sx={{
               my: 1,
-              "& > div:first-child": {
-                pr: { xs: 0, sm: "10px", md: 0 },
-              },
+              gap: { xs: "5px", sm: 1, md: 2 },
             }}
           >
             <Box>
@@ -91,11 +89,7 @@ export default function Page({
           </Stack>
         }
       >
-        <Box
-          sx={{
-            height: { xs: "", md: "45px" },
-          }}
-        ></Box>
+        <Box sx={{ height: { xs: "", md: "45px" } }}></Box>
         <Grid container spacing={{ xs: 2, lg: 3 }}>
           {articles.map((article) => (
             <ArticleCard key={article.url} article={article} />
