@@ -11,7 +11,20 @@ import { ArticleCard } from "@components/common/ContactArticle";
 import { SearchPageLayout } from "@components/site/Layout";
 import getRecentArticles from "@framework/article/get-recent-articles";
 import { BlogRootSidebar } from "@components/common/BlogArticle/Sidebars";
+import Breadcrumbs from "@components/common/Breadcrumbs/Breadcrumbs";
+import { useMemo } from "react";
+import BlogSortActions from "@components/site/BlogList/BlogSortActions";
 
+function SearchPageBreadcrumbs() {
+  const path = useMemo(
+    () => [
+      { href: "/", title: "Главная" },
+      { title: "Страница поиска по сайту" },
+    ],
+    []
+  );
+  return <Breadcrumbs path={path} />;
+}
 export default function SearchPage({
   search,
   articles,
@@ -27,9 +40,12 @@ export default function SearchPage({
         />
       </Head>
       <HugeContainer
+        sx={{ pb: 8 }}
         leftSidebar={<BlogRootSidebar recentArticles={recentArticles} />}
+        header={<SearchPageBreadcrumbs />}
       >
-        <Search search={search} sx={{ mb: 4 }} />
+        <BlogSortActions />
+        <Search search={search} sx={{ mb: 2 }} />
         {articles.length ? (
           <Grid container spacing={{ xs: 2, lg: 3 }}>
             {articles.map((article) => (
@@ -37,7 +53,12 @@ export default function SearchPage({
             ))}
           </Grid>
         ) : (
-          <Typography component="h1" variant="h1">
+          <Typography
+            textAlign={"center"}
+            color="grey"
+            component="h1"
+            variant="h1"
+          >
             Ничего не найдено
           </Typography>
         )}

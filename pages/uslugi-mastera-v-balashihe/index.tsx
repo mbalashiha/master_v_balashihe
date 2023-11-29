@@ -19,6 +19,7 @@ import { BlogRootSidebar } from "@components/common/BlogArticle/Sidebars";
 import { getCanonicalUrl, makeImageType } from "@framework/utils/normalize";
 import { CMS } from "@common/types";
 import BlogListBreadcrumbs from "@components/site/BlogList/BlogListBreadcrumbs";
+import BlogSortActions from "@components/site/BlogList/BlogSortActions";
 
 export default function Page({
   articles,
@@ -57,7 +58,7 @@ export default function Page({
         itemScope
         itemType="https://schema.org/Blog"
         leftSidebar={<BlogRootSidebar recentArticles={recentArticles} />}
-        sx={{ background: "white" }}
+        sx={{ background: "white", pb: 3 }}
         header={
           <Stack
             direction="row"
@@ -89,7 +90,7 @@ export default function Page({
           </Stack>
         }
       >
-        <Box sx={{ height: { xs: "", md: "45px" } }}></Box>
+        <BlogSortActions />
         <Grid container spacing={{ xs: 2, lg: 3 }}>
           {articles.map((article) => (
             <ArticleCard key={article.url} article={article} />

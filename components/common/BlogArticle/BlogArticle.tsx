@@ -228,6 +228,7 @@ export default function BlogArticle(article: Props) {
                 height={480}
                 alt={`Балашиха Нужен мастер для ремонта ${h2 || title}`}
                 className={"firstImage"}
+                loading="eager"
               />
             </Link>
           )}

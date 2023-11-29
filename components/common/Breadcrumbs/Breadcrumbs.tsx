@@ -5,7 +5,7 @@ import { useMemo } from "react";
 
 type Props = {
   path: {
-    href: string;
+    href?: string;
     title: string;
   }[];
 };
@@ -99,10 +99,17 @@ export default function Breadcrumbs({ path }: Props) {
           itemScope
           itemType="https://schema.org/ListItem"
         >
-          <Link href={href} title={title} itemProp="item">
-            <span itemProp="name">{title}</span>
-            <meta itemProp="position" content={i.toString()} />
-          </Link>
+          {href ? (
+            <Link href={href} title={title} itemProp="item">
+              <span itemProp="name">{title}</span>
+              <meta itemProp="position" content={i.toString()} />
+            </Link>
+          ) : (
+            <div itemProp="item">
+              <span itemProp="name">{title}</span>
+              <meta itemProp="position" content={i.toString()} />
+            </div>
+          )}
         </li>
       ))}
     </Stack>

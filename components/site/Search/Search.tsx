@@ -9,12 +9,12 @@ import {
   Typography,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import * as React from "react";
 import { useRouter } from "next/router";
 import { standartCssTransition } from "@components/ui/theme/mui-theme";
 import { useMemo } from "react";
+import { getCanonicalUrl } from "@framework/utils/normalize";
 
 interface Props {
   search?: string;
@@ -77,8 +77,22 @@ export default function Search({ search, sx, onSubmit, navbarSearch }: Props) {
             },
             ...sx,
           }}
+          itemScope
+          itemType="https://schema.org/WebSite"
         >
-          <form onSubmit={handleSubmit}>
+          <meta itemProp="url" content={getCanonicalUrl("/")} />
+          <form
+            role="search"
+            itemProp="potentialAction"
+            itemScope
+            itemType="https://schema.org/SearchAction"
+            method="get"
+            onSubmit={handleSubmit}
+          >
+            <meta
+              itemProp="target"
+              content={getCanonicalUrl("/search/{search_term_string}")}
+            />
             <TextField
               sx={{
                 width: "100%",
@@ -112,6 +126,12 @@ export default function Search({ search, sx, onSubmit, navbarSearch }: Props) {
               variant="filled"
               placeholder="Поиск по сайту"
               value={searchString}
+              name="search_term_string"
+              type="search"
+              required
+              inputProps={{
+                itemProp: "query-input",
+              }}
               InputProps={{
                 disableUnderline: true,
                 endAdornment: (
@@ -134,41 +154,42 @@ export default function Search({ search, sx, onSubmit, navbarSearch }: Props) {
                       }}
                     />
                     <Button
-                      disabled={!hasSearchString}
                       type="submit"
                       sx={{
                         height: "46px",
                         minWidth: "46px",
                         width: "auto",
                         background: "transparent",
-                        color: themeGreyColor,
-
-                        pl: "10px",
-                        pr: "18px",
+                        py: 0,
+                        px: "10px",
                         fontSize: "20px",
                         fontWeight: 400,
                         boxShadow: "none",
                         border: "none",
+                        "&:after": {
+                          content: `"\\e8b6"`,
+                          fontFamily: "Material Icons",
+                          fontWeight: 400,
+                          fontSize: "34px",
+                          lineHeight: "34px",
+                        },
                         "&:hover": {
                           background: "transparent",
                           border: "none",
                           color: (theme) => theme.palette.text.primary,
                           boxShadow: "none",
-                          "&, & svg, & svg path": {
-                            color: grey[800],
-                          },
                         },
                         "&:disabled": {
                           background: "transparent",
                         },
-                        "& .SvgIcon-root": {
-                          transform: "scale(1.3)",
-                          color: grey[500],
+                        "&, &:after": {
+                          color: (theme) =>
+                            hasSearchString
+                              ? theme.palette.primary.main
+                              : "#898994",
                         },
                       }}
-                    >
-                      <SearchIcon />
-                    </Button>
+                    ></Button>
                   </>
                 ),
               }}
