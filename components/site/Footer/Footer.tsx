@@ -16,8 +16,8 @@ export const Footer = () => {
         backgroundColor: "#010101",
         backgroundImage: "url(/mir-logo.svg)",
         backgroundRepeat: "no-repeat",
-        backgroundPosition: { xs: "center", sm: "4px -96px" },
-        backgroundSize: { xs: "fit", sm: "650px auto" },
+        backgroundPosition: { xs: "center" },
+        backgroundSize: { xs: "fit" },
         color: "white",
         position: "absolute",
         minHeight: "26rem",
@@ -118,7 +118,18 @@ export const Footer = () => {
         </Box>
         <Stack spacing={"8px"}>
           <div>
-            Компьютерный сервис {process.env.NEXT_PUBLIC_SITE_NAME || ""} 143912
+            <div>
+              Компьютерный сервис {process.env.NEXT_PUBLIC_SITE_NAME || ""}{" "}
+              143912
+            </div>
+            <Box
+              component="p"
+              sx={{
+                color: grey[400],
+              }}
+            >
+              Информационные системы и технологии 230201, инженер, РТУ МИРЭА
+            </Box>
           </div>
           <Stack
             direction={"row"}

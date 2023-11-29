@@ -2,6 +2,7 @@ import { Container, Grid, Card, Paper, Button, Stack } from "@mui/material";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { SlSocialVkontakte } from "react-icons/sl";
 // import { DescriptionParser } from "@components/common/Article";
 import React, { useEffect, useMemo, useRef } from "react";
 import { Blog } from "@common/types/cms";
@@ -12,6 +13,44 @@ import { getCanonicalUrl, makeImageType } from "@framework/utils/normalize";
 import Head from "next/head";
 import { CMS } from "@common/types";
 import { grey } from "@mui/material/colors";
+import VkIcon from "public/icons/vk.svg";
+import TelegramIcon from "public/icons/telegram-fill.svg";
+import UTMLink from "@components/ui/UTMLink";
+import CutProtocol from "@components/ui/CutProtocol";
+import CutHostname from "@components/ui/CutHostname";
+
+const StyledContactButton = ({
+  sx,
+  children,
+  ...rest
+}: React.ComponentProps<typeof Button>) => {
+  return (
+    <Button
+      sx={{
+        px: "10px",
+        py: "2px",
+        border: "none",
+        borderRadius: "6px",
+        background: "transparent",
+        color: `primary.main`,
+        "& svg": {
+          fill: "white",
+        },
+        "&:hover": {
+          background: "transparent",
+          color: "white",
+          boxShadow: "none",
+        },
+        textTransform: "uppercase",
+        ...sx,
+      }}
+      {...rest}
+    >
+      {children}
+    </Button>
+  );
+};
+
 interface Props {
   article: Blog.Article;
 }
@@ -177,7 +216,7 @@ export default function Hero({ article }: Props) {
               alignItems: { xs: "center", md: "flex-start" },
               gap: "16px",
               maxWidth: { xs: "91vw", sm: "inherit" },
-              pb: { xs: 0, md: "80px" },
+              pb: { xs: 0, md: "90px" },
             }}
           >
             <meta
@@ -199,10 +238,9 @@ export default function Hero({ article }: Props) {
                 (
                 <Link
                   target="_blank"
+                  rel="noreferrer"
                   title="МИРЭА - РОССИЙСКИЙ ТЕХНОЛОГИЧЕСКИЙ УНИВЕРСИТЕТ"
-                  href={`https://www.mirea.ru/?utm_source=${
-                    process.env.NEXT_PUBLIC_SITE_NAME || "Мастер-в-Балашихе.РФ"
-                  }&utm_medium=organic`}
+                  href={`https://www.mirea.ru/`}
                 >
                   МГТУ МИРЭА
                 </Link>
@@ -210,90 +248,120 @@ export default function Hero({ article }: Props) {
               </strong>
               {`. Если Вам нужно решить проблему, связанную с работой компьютера, информационными технологиями или нужно срочно починить ноутбук, моноблок, рабочую станцию или другую электротехнику: `}
             </Box>
-            <Box
-              component="strong"
-              sx={{
-                display: "block",
-                fontSize: "20px",
-                fontWeight: 400,
-                textAlign: "left",
-                mt: 0,
-                mb: 0,
-                px: "30px",
-              }}
-            >
-              Оставьте заявку и я перезвоню Вам в течение 30 минут, работаю в
-              городе Балашиха и Москве
-            </Box>
-            <Grid
-              container
-              sx={{
-                maxWidth: "600px",
-                width: "100%",
-                p: 0,
-                borderRadius: "6px",
-                overflow: "hidden",
-                border: (theme) => `2px solid ${theme.palette.primary.main}`,
-              }}
-            >
-              <Grid
-                item
-                xs={12}
-                md={8}
+            <Stack direction="column" spacing={2}>
+              <Box
+                component="strong"
                 sx={{
+                  display: "block",
+                  fontSize: "20px",
+                  fontWeight: 400,
+                  textAlign: "left",
+                  mt: 0,
+                  mb: 0,
+                  px: "30px",
+                }}
+              >
+                Оставьте заявку и я перезвоню Вам в течение 30 минут, работаю в
+                городе Балашиха и Москве
+              </Box>
+              <Grid
+                container
+                sx={{
+                  maxWidth: "600px",
+                  width: "100%",
+                  p: 0,
+                  borderRadius: "6px",
                   overflow: "hidden",
+                  border: (theme) => `2px solid ${theme.palette.primary.main}`,
                 }}
               >
-                <Button
+                <Grid
+                  item
+                  xs={12}
+                  md={8}
                   sx={{
-                    width: "100%",
-                    py: "18px",
-                    px: "40px",
-                    background: (theme) => theme.palette.primary.main,
-                    border: "none",
-                    borderRadius: 0,
-                    m: 0,
-                    fontSize: "24px",
-                    lineHeight: "31px",
-                    fontWeight: 400,
-                    color: grey[100],
-                    "&:hover": {
-                      background: (theme) => theme.palette.primary.dark,
+                    overflow: "hidden",
+                  }}
+                >
+                  <Button
+                    sx={{
+                      width: "100%",
+                      py: "18px",
+                      px: "40px",
+                      background: (theme) => theme.palette.primary.main,
+                      border: "none",
+                      borderRadius: 0,
+                      m: 0,
+                      fontSize: "24px",
+                      lineHeight: "31px",
+                      fontWeight: 400,
+                      color: grey[100],
+                      "&:hover": {
+                        background: (theme) => theme.palette.primary.dark,
+                        color: "white",
+                      },
+                    }}
+                    onClick={() => toggleModal("contact request form")}
+                  >
+                    Вызвать мастера
+                  </Button>
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  md={4}
+                  sx={{
+                    minHeight: "60px",
+                    py: "8px",
+                    px: "37px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography
+                    component="div"
+                    sx={{
+                      width: "auto",
                       color: "white",
-                    },
-                  }}
-                  onClick={() => toggleModal("contact request form")}
-                >
-                  Вызвать мастера
-                </Button>
+                      textAlign: "left",
+                      fontSize: "18px",
+                      lineHeight: "25px",
+                    }}
+                  >
+                    Консультация бесплатная
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid
-                item
-                xs={12}
-                md={4}
-                sx={{
-                  minHeight: "60px",
-                  py: "8px",
-                  px: "37px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Typography
-                  component="div"
-                  sx={{
-                    width: "auto",
-                    color: "white",
-                    textAlign: "left",
-                    fontSize: "18px",
-                    lineHeight: "25px",
-                  }}
-                >
-                  Консультация бесплатная
-                </Typography>
-              </Grid>
-            </Grid>
+              <Stack direction="row" flexWrap="wrap">
+                {process.env.NEXT_PUBLIC_VK_LINK && (
+                  <UTMLink
+                    href={process.env.NEXT_PUBLIC_VK_LINK}
+                    target="_blank"
+                    title="Вконтакте"
+                  >
+                    <StyledContactButton startIcon={<VkIcon />}>
+                      <CutProtocol>
+                        {process.env.NEXT_PUBLIC_VK_LINK}
+                      </CutProtocol>
+                    </StyledContactButton>
+                  </UTMLink>
+                )}
+                {process.env.NEXT_PUBLIC_TELEGRAM_LINK && (
+                  <UTMLink
+                    href={process.env.NEXT_PUBLIC_TELEGRAM_LINK}
+                    target="_blank"
+                    title="Telegram messager"
+                  >
+                    <StyledContactButton startIcon={<TelegramIcon />}>
+                      <CutHostname>
+                        {process.env.NEXT_PUBLIC_TELEGRAM_LINK}
+                      </CutHostname>
+                    </StyledContactButton>
+                  </UTMLink>
+                )}
+              </Stack>
+            </Stack>
           </Stack>
           <Box
             sx={{

@@ -257,7 +257,6 @@ const MyStepWizard = ({
           <Box
             sx={{
               flexGrow: 1,
-              overflowX: "hidden",
               display: "flex",
               flexDirection: "column",
             }}

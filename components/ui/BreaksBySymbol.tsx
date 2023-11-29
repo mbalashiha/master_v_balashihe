@@ -1,5 +1,10 @@
 import React from "react";
-
+function isReactFragment(variableToInspect: any): boolean {
+  if (variableToInspect.type) {
+    return variableToInspect.type === React.Fragment;
+  }
+  return variableToInspect === React.Fragment;
+}
 interface Props {
   character?: string;
   children: React.ReactNode | React.ReactNode[];
@@ -27,14 +32,14 @@ export function BreaksBySymbol(props: Props) {
               ))}
             </React.Fragment>
           );
-        } else if (str) {
+        } else if (React.isValidElement(str) || isReactFragment(str)) {
           return (
             <BreaksBySymbol key={counter} character={character}>
               {str}
             </BreaksBySymbol>
           );
         } else {
-          return null;
+          return str;
         }
       })}
     </>
