@@ -1,4 +1,6 @@
 # cat /etc/nginx/acme 
 location /.well-known {
-    alias /var/www/html-well-known;
+    #root /var/www/html-well-known;
+    alias /var/www/html-well-known/.well-known;
+    #try_files $uri =404;
 }
