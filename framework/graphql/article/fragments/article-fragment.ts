@@ -11,7 +11,6 @@ const articleFragment = gql`
     textHtml
     h2
     keyTextHtml
-    autoHandleSlug
     unPublished
     notSearchable
     notInList

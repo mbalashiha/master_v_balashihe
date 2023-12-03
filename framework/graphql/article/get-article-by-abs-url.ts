@@ -18,7 +18,9 @@ export const getArticleByAbsUrl = async ({
     query: getArticleByAbsUrlQuery,
     variables: { absURL },
   });
-  return data.articleByAbsUrl ? normalizeArticle(data.articleByAbsUrl) : null;
+  return data.articleByAbsUrl && data.articleByAbsUrl.id
+    ? normalizeArticle(data.articleByAbsUrl)
+    : null;
 };
 
 export default getArticleByAbsUrl;

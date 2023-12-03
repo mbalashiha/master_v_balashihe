@@ -33,7 +33,6 @@ export const getArticleByHandleQuery = gql`
     title
     handle
     absURL
-    displayingPageHandle
     renderHtml
     text
     keyTextHtml
@@ -61,8 +60,8 @@ export const getArticleByHandleQuery = gql`
       ...ImageFragment
     }
   }
-  query ($handle: String) {
-    articleByHandle(handle: $handle) {
+  query ($handle: String, $filename: String) {
+    articleByHandle(handle: $handle, filename: $filename) {
       ...BlogArticleFragment
       navigation {
         ...NavigationFragment

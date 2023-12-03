@@ -10,7 +10,6 @@ export const managementCheckArticleQuery = gql`
       text
       textHtml
       textRawDraftContentState
-      autoHandleSlug
       unPublished
       notSearchable
       notInList

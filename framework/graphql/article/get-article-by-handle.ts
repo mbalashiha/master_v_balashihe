@@ -7,18 +7,22 @@ import { getArticleByHandleQuery } from "./queries";
 
 const getArticleByHandle = async ({
   handle,
+  filename,
 }: {
   handle: string;
-}): Promise<Blog.Article> => {
+  filename: string;
+}): Promise<Blog.Article | null> => {
   let config = getConfig();
   const data = await config.request<
-    { handle: string },
+    { handle: string; filename: string },
     Schema.Response.ArticleByHandleResponse
   >({
     query: getArticleByHandleQuery,
-    variables: { handle },
+    variables: { filename, handle },
   });
-  return normalizeArticle(data.articleByHandle);
+  return data.articleByHandle && data.articleByHandle.id
+    ? normalizeArticle(data.articleByHandle)
+    : null;
 };
 
 export default getArticleByHandle;

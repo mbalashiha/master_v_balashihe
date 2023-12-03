@@ -9,7 +9,7 @@
     "start": "next start -p 4404",
     "lint": "next lint",
     "css": "node-sass public/scss/*.scss -o public/css",
-    "css:watch": "npm run css; node-sass public/scss/*.scss -wo public/css"
+    "css:watch": "node-sass public/scss/*.scss -wo public/css"
   },
   "dependencies": {
     "@codemirror/view": "^6.22.0",

@@ -13,7 +13,6 @@ export const articleDraftFragment = gql`
     textRawDraftContentState
     h2
     keyTextHtml
-    autoHandleSlug
     unPublished
     notSearchable
     notInList

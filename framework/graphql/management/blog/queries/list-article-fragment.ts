@@ -5,7 +5,6 @@ export const ListArticleFragment = gql`
     id
     title
     handle
-    autoHandleSlug
     published
     orderNumber
     blogCategoryId

@@ -15,32 +15,25 @@ function readingTime(text: string, wordsPerMinute: number = 200): string {
 export const getArticleUrlAndCanonicalUrl = ({
   absURL,
   handle,
-  displayingPageHandle,
 }: {
   absURL: string | null;
   handle: string | null;
-  displayingPageHandle: string | null;
 }): {
   url: string;
   canonicalUrl: string;
 } => {
-  const url = chooseArticleUrl({ displayingPageHandle, handle });
+  const url = chooseArticleUrl({ handle });
   const canonicalUrl = getCanonicalUrl(absURL || url);
   return { url, canonicalUrl };
 };
 export const normalizeArticleUrl = (
   handle: string | null,
-  autoHandleSlug?: string | null
+  absURL?: string | null
 ): string => {
-  handle = handle || autoHandleSlug || null;
+  handle = handle || absURL || null;
   if (!handle) {
     return "";
-  } else {
-    if (handle.startsWith("/")) {
-      return handle;
-    }
-    return `/uslugi-mastera-v-balashihe/${handle}`;
-  }
+  } else return `/${handle}`;
 };
 export const normalizeBlogRow = (
   data: Schema.ArticleCard
@@ -53,7 +46,6 @@ export const normalizeBlogRow = (
     publishedAt,
     score,
     fragment,
-    displayingPageHandle,
     image,
     secondImage,
     viewed,
@@ -72,7 +64,6 @@ export const normalizeBlogRow = (
   }
   const { url, canonicalUrl } = getArticleUrlAndCanonicalUrl({
     handle,
-    displayingPageHandle,
     absURL,
   });
   return {
@@ -85,7 +76,6 @@ export const normalizeBlogRow = (
     title,
     url,
     canonicalUrl,
-    displayingPageUrl: displayingPageHandle || null,
     publishedAt: new Date(publishedAt).toLocaleString("ru", {
       year: "numeric",
       month: "long",
@@ -148,13 +138,11 @@ const normalizeArticleNavigationItems = (
   };
 };
 export const chooseArticleUrl = ({
-  displayingPageHandle,
   handle,
 }: {
-  displayingPageHandle: string | null;
   handle: string | null;
 }): string => {
-  let url: string = displayingPageHandle || handle || "";
+  let url: string = handle || "";
   if (url && !url.startsWith("/")) {
     url = normalizeArticleUrl(url) || "";
   }
@@ -166,7 +154,6 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
     title,
     handle,
     absURL,
-    displayingPageHandle,
     text,
     textHtml,
     renderHtml,
@@ -190,7 +177,6 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
     viewed,
     templateId,
     blogCategoryId,
-    autoHandleSlug,
     ogDates: { published_time, modified_time },
     description,
     datePublished,
@@ -218,7 +204,6 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
   }
   const { url, canonicalUrl } = getArticleUrlAndCanonicalUrl({
     handle,
-    displayingPageHandle,
     absURL,
   });
   return {
@@ -255,7 +240,6 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
     viewed: viewed || null,
     templateId: templateId || null,
     blogCategoryId: blogCategoryId || null,
-    autoHandleSlug: autoHandleSlug || null,
     handle: handle || null,
     ogDates: {
       modified_time,

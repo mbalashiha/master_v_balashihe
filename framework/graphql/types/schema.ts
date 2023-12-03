@@ -58,7 +58,6 @@ export namespace Schema {
     id: ID;
     title: String;
     handle: String;
-    displayingPageHandle: String;
     absURL: String;
     publishedAt: Date;
     score: Float | null;
@@ -89,9 +88,7 @@ export namespace Schema {
     id: ID | null;
     title: String;
     handle: String | null;
-    autoHandleSlug: String | null;
     absURL: String | null;
-    displayingPageHandle: String;
     text: String;
     textHtml: String;
     textRawDraftContentState: String | null;

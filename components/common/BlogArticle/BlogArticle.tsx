@@ -200,17 +200,18 @@ export default function BlogArticle(article: Props) {
               float: "none",
               clear: "both",
               fontSize: "32px",
-              lineHeight: "40px",
-              maxHeight: "120px",
+              lineHeight: { xs: "40px", md: "55px" },
+              maxHeight: { xs: 40 * 3 + "px", md: 55 * 3 + "px" },
               overflow: "hidden",
               display: "-webkit-box",
               "-webkit-line-clamp": "3",
               "-webkit-box-orient": "vertical",
               textOverflow: "ellipsis",
               // textAlign: { xs: "center", sm: "left" },
-              mx: { xs: "20px", sm: 0 },
+              px: { xs: "10px", sm: "10px", md: 0 },
               fontWeight: 700,
-              mb: "10px",
+              mb: 0,
+              pb: 0,
             }}
           >
             {title}
@@ -259,15 +260,14 @@ export default function BlogArticle(article: Props) {
           )}
           <Stack
             width={{ xs: "100%", md: "auto", lg: "auto" }}
-            direction={{ xs: "row", md: "column", lg: "row" }}
+            direction={"row"}
             alignItems={"flex-start"}
-            justifyContent={"space-between"}
-            spacing={{ xs: 2, sm: 2, lg: 3 }}
+            flexWrap="wrap"
+            spacing={0}
             sx={{
-              float: { xs: "none", sm: "left" },
-              pt: { xs: "30px", sm: "10px", md: "" },
-              pb: { xs: 0, sm: "20px" },
-              minWidth: { xs: "unset", lg: "49%" },
+              gap: { xs: 2, sm: 2, lg: 3 },
+              pt: { xs: "10px", sm: "10px", md: 0 },
+              pb: 0,
             }}
           >
             <IconView

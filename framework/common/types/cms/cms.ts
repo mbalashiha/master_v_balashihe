@@ -31,7 +31,6 @@ export namespace Blog {
     title: string;
     url: string;
     canonicalUrl: string;
-    displayingPageUrl: string | null;
     publishedAt: string;
     score: Float | null;
     fragment: String | null;
@@ -95,7 +94,6 @@ export namespace Blog {
     viewed: number | null;
     templateId: ID | null;
     handle: String | null;
-    autoHandleSlug: String | null;
     ogDates: OpenGraphDates;
     description: string;
     datePublished: string;
@@ -118,6 +116,7 @@ export namespace Blog {
     title: String;
     url: String | null;
     absURL: String;
+    autoHandleSlug: String;
     textHtml: String;
     keyTextHtml: String;
     textRawDraftContentState: String | null;
@@ -128,7 +127,6 @@ export namespace Blog {
     notInList: Boolean;
     blogCategoryId: ID | null;
     handle: string | null;
-    autoHandleSlug: string | null;
     createdAt: Date | null;
     updatedAt: Date | null;
     publishedAt: Date | string | null;

@@ -6,7 +6,6 @@ const articleCardFragment = gql`
     title
     handle
     absURL
-    displayingPageHandle
     publishedAt
     updatedAt
     score

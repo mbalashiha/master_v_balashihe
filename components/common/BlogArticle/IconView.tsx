@@ -38,21 +38,22 @@ export default function IconView({
       spacing={1}
       direction="row"
       alignItems={"flex-start"}
+      justifyContent={"flex-start"}
       title={popoverTitle}
       sx={{
         "&::before": {
           fontFamily: "Material Icons Round",
           fontStyle: "normal",
           content: iconContent,
-          fontSize: "46px",
-          lineHeight: "40px",
+          fontSize: "38px",
+          lineHeight: "38px",
           pr: "4px",
         },
-        "&, div, p": {
-          color: (theme) => theme.palette.primary.main,
+        "&, & div, & p": {
+          color: (theme) => theme.palette.primary.dark,
           fontWeight: 400,
           fontSize: "15px",
-          lineHeight: "22px",
+          lineHeight: "20px",
         },
         ...sx,
       }}
@@ -63,14 +64,24 @@ export default function IconView({
           component={"div"}
           sx={{
             "&&": {
+              pt: "3px",
               color: (theme) =>
                 theme.palette.mode === "light" ? "black" : "white",
+              fontWeight: 500,
             },
           }}
         >
           {title}:
         </Typography>
-        <Typography component={"div"} sx={{ "&&": { fontWeight: 500 } }}>
+        <Typography
+          component={"div"}
+          sx={{
+            "&&": {
+              fontWeight: 500,
+              lineHeight: "24px",
+            },
+          }}
+        >
           {message}
         </Typography>
       </Stack>

@@ -2,21 +2,24 @@ import { API } from "@common/types";
 import { Blog } from "@common/types/cms";
 import { Schema } from "@framework/types";
 import { getConfig } from "@framework/utils";
-import { normalizeArticles } from "@framework/utils/normalize/normalize-article";
 import { getArticlesPathesQuery } from "./queries";
+import util from "util";
 
-const getArticlesPathes = async (
-  config?: API.Config
-): Promise<Array<{ params: { slug: string } }>> => {
-  config = config || getConfig();
+const getArticlesPathes = async ({
+  filename,
+}: {
+  filename: string;
+}): Promise<Array<{ params: { slug: string[] } }>> => {
+  const config = getConfig();
   const data = await config.request<
-    void,
+    { filename: string },
     Schema.Response.ArticlesPathesResponse
   >({
     query: getArticlesPathesQuery,
+    variables: { filename },
   });
   return data.articlesPathes.nodes.map((handle) => ({
-    params: { slug: handle.handle },
+    params: { slug: handle.handle.split("/") },
   }));
 };
 

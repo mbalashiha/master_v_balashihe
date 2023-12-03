@@ -3,8 +3,6 @@ import { ArticleLayout } from "@components/site";
 import { Container, Grid, Card, Paper } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { ContactArticleComponent } from "@components/common/ContactArticle";
 import getArticlesPathes from "@framework/article/get-articles-pathes";
 import {
@@ -13,13 +11,11 @@ import {
   InferGetStaticPropsType,
 } from "next";
 import getArticleByHandle from "@framework/article/get-article-by-handle";
-import util from "util";
-import { renderToString } from "react-dom/server";
-import { ApiProvider } from "@framework";
 import { BlogArticle } from "@components/common/BlogArticle";
+import util from "util";
 
 export async function getStaticPaths() {
-  const paths = await getArticlesPathes();
+  const paths = await getArticlesPathes({ filename: __filename });
   return {
     paths,
     fallback: false,
@@ -27,13 +23,18 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async (
-  context: GetStaticPropsContext<{ slug: string }>
+  context: GetStaticPropsContext<{ slug: string | string[] }>
 ) => {
   const { params } = context;
   const slug = (params && params.slug) || "";
-  const article = await getArticleByHandle({ handle: slug });
+  const article = await getArticleByHandle({
+    filename: __filename,
+    handle: Array.isArray(slug) ? slug.join("/") : slug,
+  });
   if (!article || !article.title || !article.url) {
-    throw new Error("404");
+    return {
+      notFound: true,
+    };
   }
   return {
     props: { article, handle: slug },

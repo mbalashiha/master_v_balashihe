@@ -5,6 +5,8 @@ import {
   normalizeArticleUrl,
   normalizeImage,
 } from "@framework/utils/normalize/normalize-article";
+import { slugify } from "@lib/slugify";
+
 import convertDate from "./convert-date";
 export const getEmptyDraft = ({
   templateId,
@@ -28,7 +30,6 @@ export const getEmptyDraft = ({
     notInList: false,
     blogCategoryId: null,
     handle: "",
-    autoHandleSlug: null,
     createdAt: null,
     updatedAt: null,
     publishedAt: null,
@@ -39,6 +40,7 @@ export const getEmptyDraft = ({
     templateId: templateId || null,
     orderNumber: null,
     description: "",
+    autoHandleSlug: "",
   };
 };
 export const normalizeArticleDraft = (
@@ -48,7 +50,6 @@ export const normalizeArticleDraft = (
     id,
     title,
     handle,
-    autoHandleSlug,
     absURL,
     text,
     textHtml,
@@ -75,14 +76,11 @@ export const normalizeArticleDraft = (
   if (!existingArticleId) {
     return getEmptyDraft({ templateId });
   }
-  const url = existingArticleId
-    ? normalizeArticleUrl(handle, autoHandleSlug)
-    : null;
+  const url = existingArticleId ? normalizeArticleUrl(handle) : null;
   const normalizedDraft = {
     id,
     title: title || "",
     handle: handle || "",
-    autoHandleSlug: autoHandleSlug || "",
     url,
     absURL: absURL || "",
     text: text || "",
@@ -107,6 +105,7 @@ export const normalizeArticleDraft = (
     secondImage: secondImage ? normalizeImage(secondImage) : null,
     templateId: templateId || null,
     description: description || "",
+    autoHandleSlug: slugify(title || ""),
   };
   return normalizedDraft;
 };
