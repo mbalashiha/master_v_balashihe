@@ -5,7 +5,6 @@ import { ArticleForm } from "@components/management/blog";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import util from "util";
 import { Blog } from "@common/types/cms";
-import { ID } from "@framework/types";
 import getArticleEdit from "@framework/article/get-article-edit";
 
 export default function ArticleCreatePage(

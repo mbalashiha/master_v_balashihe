@@ -200,18 +200,17 @@ export default function BlogArticle(article: Props) {
               float: "none",
               clear: "both",
               fontSize: "32px",
-              lineHeight: { xs: "40px", md: "55px" },
-              maxHeight: { xs: 40 * 3 + "px", md: 55 * 3 + "px" },
+              lineHeight: "35px",
+              maxHeight: 35 * 3 + "px",
               overflow: "hidden",
               display: "-webkit-box",
               "-webkit-line-clamp": "3",
               "-webkit-box-orient": "vertical",
               textOverflow: "ellipsis",
               // textAlign: { xs: "center", sm: "left" },
-              px: { xs: "10px", sm: "10px", md: 0 },
+              mx: { xs: "10px", sm: "10px", md: 0 },
+              my: 2,
               fontWeight: 700,
-              mb: 0,
-              pb: 0,
             }}
           >
             {title}

@@ -68,7 +68,7 @@ export const Footer = () => {
               itemProp="name"
               content={`${
                 process.env.NEXT_PUBLIC_SITE_NAME || ""
-              } Компьютерный мастер в Балашихе РФ`}
+              } Компьютерный мастер в Балашихе`}
             />
             <meta itemProp="image" content={"/images/master_v_balashihe.jpg"} />
             <Link
@@ -78,7 +78,7 @@ export const Footer = () => {
               <span>&copy; {new Date().getFullYear()} </span>
               <span itemProp="name">
                 {process.env.NEXT_PUBLIC_SITE_NAME || ""} Компьютерный мастер в
-                Балашихе РФ
+                Балашихе
               </span>
             </Link>
           </p>

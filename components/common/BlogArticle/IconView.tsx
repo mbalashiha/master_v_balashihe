@@ -43,6 +43,7 @@ export default function IconView({
       sx={{
         "&::before": {
           fontFamily: "Material Icons Round",
+          color: (theme) => theme.palette.primary.main,
           fontStyle: "normal",
           content: iconContent,
           fontSize: "38px",

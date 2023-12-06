@@ -82,7 +82,7 @@ export const normalizeArticleDraft = (
     title: title || "",
     handle: handle || "",
     url,
-    absURL: absURL || "",
+    absURL: absURL ? `/${absURL}` : "",
     text: text || "",
     textHtml: textHtml || "",
     textRawDraftContentState: textRawDraftContentState || null,

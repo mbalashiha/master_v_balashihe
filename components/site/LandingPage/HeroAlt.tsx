@@ -2,7 +2,6 @@ import { Container, Grid, Card, Paper, Button, Stack } from "@mui/material";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { SlSocialVkontakte } from "react-icons/sl";
 // import { DescriptionParser } from "@components/common/Article";
 import React, { useEffect, useMemo, useRef } from "react";
 import { Blog } from "@common/types/cms";
@@ -70,7 +69,7 @@ export default function Hero({ article }: Props) {
     }
   }, [article.id]);
   const { toggleModal } = useSiteModal();
-  const title = `Меня зовут Дмитрий, я окончил МГТУ МИРЭА со специальностью Информационные системы и технологии - это компьютерный сервис ${
+  const title = `Меня зовут Дмитрий, я закончил МГТУ МИРЭА со специальностью Информационные системы и технологии - это компьютерный сервис ${
     process.env.NEXT_PUBLIC_SITE_NAME || "Мастер-в-Балашихе.РФ"
   } 143912`;
   const indexCanonicalUrl = useMemo(() => getCanonicalUrl("/"), []);
@@ -160,10 +159,16 @@ export default function Hero({ article }: Props) {
             gap: { xs: 0, lg: "20px" },
           }}
         >
-          <Box sx={{ gridRow: `1`, gridColumn: `1` }}>
+          <Box
+            sx={{
+              gridRow: `1`,
+              gridColumn: `1`,
+            }}
+          >
             <Box
               sx={{
                 maxWidth: "92vw",
+                height: "100%",
               }}
             >
               <Typography
@@ -214,14 +219,14 @@ export default function Hero({ article }: Props) {
               gridColumn: { xs: `1`, md: `1` },
               justifyContent: `space-between`,
               alignItems: { xs: "center", md: "flex-start" },
-              gap: "16px",
               maxWidth: { xs: "91vw", sm: "inherit" },
               pb: { xs: 0, md: "90px" },
             }}
+            spacing={2}
           >
             <meta
               itemProp="model"
-              content="Компьютерный мастер окончил МГТУ МИРЭА со специальностью Информационные системы и технологии"
+              content="Компьютерный мастер окончил МГТУ МИРЭА (Московский институт радиотехники, электроники и автоматики) со специальностью Информационные системы и технологии"
             />
             <Box
               itemProp="description"
@@ -230,7 +235,7 @@ export default function Hero({ article }: Props) {
               }}
             >
               {`Меня зовут Дмитрий, 
-              я окончил РТУ МИРЭА со специальностью `}
+              я закончил Московский институт радиотехники, электроники и автоматики со специальностью `}
               <strong>
                 <Link href="/computer-master-balashiha">
                   Информационные системы и технологии
@@ -248,119 +253,115 @@ export default function Hero({ article }: Props) {
               </strong>
               {`. Если Вам нужно решить проблему, связанную с работой компьютера, информационными технологиями или нужно срочно починить ноутбук, моноблок, рабочую станцию или другую электротехнику: `}
             </Box>
-            <Stack direction="column" spacing={2}>
-              <Box
-                component="strong"
-                sx={{
-                  display: "block",
-                  fontSize: "20px",
-                  fontWeight: 400,
-                  textAlign: "left",
-                  mt: 0,
-                  mb: 0,
-                  px: "30px",
-                }}
-              >
-                Оставьте заявку и я перезвоню Вам в течение 30 минут, работаю в
-                городе Балашиха и Москве
-              </Box>
+            <Box
+              component="strong"
+              sx={{
+                display: "block",
+                fontSize: "20px",
+                fontWeight: 400,
+                textAlign: "left",
+                mt: 0,
+                mb: 0,
+                px: "30px",
+              }}
+            >
+              Оставьте заявку и я перезвоню Вам в течение 30 минут, работаю в
+              городе Балашиха и Москве
+            </Box>
+            <Grid
+              container
+              sx={{
+                maxWidth: "600px",
+                width: "100%",
+                p: 0,
+                borderRadius: "6px",
+                overflow: "hidden",
+                border: (theme) => `2px solid ${theme.palette.primary.main}`,
+              }}
+            >
               <Grid
-                container
+                item
+                xs={12}
+                md={8}
                 sx={{
-                  maxWidth: "600px",
-                  width: "100%",
-                  p: 0,
-                  borderRadius: "6px",
                   overflow: "hidden",
-                  border: (theme) => `2px solid ${theme.palette.primary.main}`,
                 }}
               >
-                <Grid
-                  item
-                  xs={12}
-                  md={8}
+                <Button
                   sx={{
-                    overflow: "hidden",
-                  }}
-                >
-                  <Button
-                    sx={{
-                      width: "100%",
-                      py: "18px",
-                      px: "40px",
-                      background: (theme) => theme.palette.primary.main,
-                      border: "none",
-                      borderRadius: 0,
-                      m: 0,
-                      fontSize: "24px",
-                      lineHeight: "31px",
-                      fontWeight: 400,
-                      color: grey[100],
-                      "&:hover": {
-                        background: (theme) => theme.palette.primary.dark,
-                        color: "white",
-                      },
-                    }}
-                    onClick={() => toggleModal("contact request form")}
-                  >
-                    Вызвать мастера
-                  </Button>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  md={4}
-                  sx={{
-                    minHeight: "60px",
-                    py: "8px",
-                    px: "37px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography
-                    component="div"
-                    sx={{
-                      width: "auto",
+                    width: "100%",
+                    py: "18px",
+                    px: "40px",
+                    background: (theme) => theme.palette.primary.main,
+                    border: "none",
+                    borderRadius: 0,
+                    m: 0,
+                    fontSize: "24px",
+                    lineHeight: "31px",
+                    fontWeight: 400,
+                    color: grey[100],
+                    "&:hover": {
+                      background: (theme) => theme.palette.primary.dark,
                       color: "white",
-                      textAlign: "left",
-                      fontSize: "18px",
-                      lineHeight: "25px",
-                    }}
-                  >
-                    Консультация бесплатная
-                  </Typography>
-                </Grid>
+                    },
+                  }}
+                  onClick={() => toggleModal("contact request form")}
+                >
+                  Вызвать мастера
+                </Button>
               </Grid>
-              <Stack direction="row" flexWrap="wrap">
-                {process.env.NEXT_PUBLIC_VK_LINK && (
-                  <UTMLink
-                    href={process.env.NEXT_PUBLIC_VK_LINK}
-                    target="_blank"
-                    title="Вконтакте"
-                  >
-                    <StyledContactButton startIcon={<VkIcon />}>
-                      <CutProtocol>
-                        {process.env.NEXT_PUBLIC_VK_LINK}
-                      </CutProtocol>
-                    </StyledContactButton>
-                  </UTMLink>
-                )}
-                {process.env.NEXT_PUBLIC_TELEGRAM_LINK && (
-                  <UTMLink
-                    href={process.env.NEXT_PUBLIC_TELEGRAM_LINK}
-                    target="_blank"
-                    title="Telegram messager"
-                  >
-                    <StyledContactButton startIcon={<TelegramIcon />}>
-                      <CutHostname>
-                        {process.env.NEXT_PUBLIC_TELEGRAM_LINK}
-                      </CutHostname>
-                    </StyledContactButton>
-                  </UTMLink>
-                )}
-              </Stack>
+              <Grid
+                item
+                xs={12}
+                md={4}
+                sx={{
+                  minHeight: "60px",
+                  py: "8px",
+                  px: "37px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  component="div"
+                  sx={{
+                    width: "auto",
+                    color: "white",
+                    textAlign: "left",
+                    fontSize: "18px",
+                    lineHeight: "25px",
+                  }}
+                >
+                  Консультация бесплатная
+                </Typography>
+              </Grid>
+            </Grid>
+            <Stack direction="row" flexWrap="wrap">
+              {process.env.NEXT_PUBLIC_VK_LINK && (
+                <UTMLink
+                  href={process.env.NEXT_PUBLIC_VK_LINK}
+                  target="_blank"
+                  title="Вконтакте"
+                >
+                  <StyledContactButton startIcon={<VkIcon />}>
+                    <CutProtocol>{process.env.NEXT_PUBLIC_VK_LINK}</CutProtocol>
+                  </StyledContactButton>
+                </UTMLink>
+              )}
+              {process.env.NEXT_PUBLIC_TELEGRAM_LINK && (
+                <UTMLink
+                  href={process.env.NEXT_PUBLIC_TELEGRAM_LINK}
+                  target="_blank"
+                  title="Telegram messager"
+                >
+                  <StyledContactButton startIcon={<TelegramIcon />}>
+                    <CutHostname>
+                      {process.env.NEXT_PUBLIC_TELEGRAM_LINK}
+                    </CutHostname>
+                  </StyledContactButton>
+                </UTMLink>
+              )}
             </Stack>
           </Stack>
           <Box

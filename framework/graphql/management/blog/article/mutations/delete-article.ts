@@ -3,8 +3,8 @@ import articleCardFragment from "@framework/management/blog/article/fragments/ma
 
 export const deleteArticle = gql`
   ${articleCardFragment}
-  mutation ($id: ID!) {
-    deleteArticle(id: $id) {
+  mutation ($id: ID!, $hostOrigin: String!) {
+    deleteArticle(id: $id, hostOrigin: $hostOrigin) {
       success
       error
       message

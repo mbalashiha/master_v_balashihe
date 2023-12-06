@@ -23,7 +23,7 @@ export const getArticleUrlAndCanonicalUrl = ({
   canonicalUrl: string;
 } => {
   const url = chooseArticleUrl({ handle });
-  const canonicalUrl = getCanonicalUrl(absURL || url);
+  const canonicalUrl = getCanonicalUrl(absURL ? `/${absURL}` : url);
   return { url, canonicalUrl };
 };
 export const normalizeArticleUrl = (
@@ -142,11 +142,7 @@ export const chooseArticleUrl = ({
 }: {
   handle: string | null;
 }): string => {
-  let url: string = handle || "";
-  if (url && !url.startsWith("/")) {
-    url = normalizeArticleUrl(url) || "";
-  }
-  return url;
+  return `/${handle || ""}`;
 };
 export const normalizeArticle = (data: Schema.Article): Blog.Article => {
   let {
@@ -211,7 +207,7 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
     title,
     url,
     canonicalUrl,
-    absURL: absURL || "",
+    absURL: absURL ? `/${absURL}` : "",
     navigation: normalizeArticleNavigationItems(navigation),
     textHtml: textHtml || renderHtml || "",
     renderHtml: renderHtml || "",

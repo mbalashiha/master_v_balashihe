@@ -111,7 +111,7 @@ export async function getStaticProps() {
   });
   return {
     props: {
-      title: `Блог мастера в Балашихе РФ по ремонту ПК`,
+      title: `Блог мастера в Балашихе по ремонту ПК`,
       canonicalUrl: getCanonicalUrl(`/uslugi-mastera-v-balashihe/`),
       image,
       articles: await getArticlesCards(),

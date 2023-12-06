@@ -18,7 +18,7 @@ export async function getStaticPaths() {
   const paths = await getArticlesPathes({ filename: __filename });
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   };
 }
 

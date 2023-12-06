@@ -29,7 +29,10 @@ export const handler: API.Graphql.MutationHook<UseSaveArticleHook> = {
   },
   async request({ request, options, input }) {
     try {
-      const variables = input;
+      const variables = {
+        ...input,
+        hostOrigin: window?.location?.origin || "",
+      };
       const data = await request({ ...options, variables });
       const res = data.saveArticle;
       return {

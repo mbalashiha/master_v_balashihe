@@ -74,7 +74,7 @@ export const SpecialHeader = ({
         {typeof children === "string" && children && (
           <meta
             name="description"
-            content={`${children} - вызвать частного мастера на дом для ремонта ПК в Балашихе РФ`}
+            content={`${children} - вызвать частного мастера на дом для ремонта ПК в Балашихе`}
           />
         )}
       </Head>

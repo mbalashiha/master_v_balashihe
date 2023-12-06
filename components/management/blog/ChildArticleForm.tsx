@@ -41,21 +41,10 @@ export const ChildArticleForm = forwardRef<
   FormContextType<Blog.ArticleDraft>,
   Props
 >(function ChildArticleForm({ article }, ref) {
-  const hasArticle = Boolean(article && article.existingArticleId);
-  const isCreatePage = !hasArticle;
-  const existingArticleId = (hasArticle && article?.existingArticleId) || null;
-  const router = useRouter();
   const checkArticle = useCheckArticle();
   const { enqueueSnackbar } = useSnackbar();
   const providerRef: React.MutableRefObject<ArticleEventsContext | undefined> =
     useRef<ArticleEventsContext | undefined>();
-  // useEffect(() => {
-  //   if (!isCreatePage) {
-  //     setCreateButton({ href: "/management/blog/article/create" });
-  //   } else {
-  //     unsetCreateButton();
-  //   }
-  // }, [isCreatePage, setCreateButton, unsetCreateButton]);
   const saveArticle = useSaveArticle();
   const { mutateArticle } = useArticleContext();
   const mutateImages = useUpdateImages();
@@ -172,57 +161,6 @@ export const ChildArticleForm = forwardRef<
            t//extHtml = await replacer(textHtml);
           **/
           let renderHtml = textHtml;
-          /*if (window.DOMParser) {
-          const parser = new DOMParser();
-          const document = parser.parseFromString(renderHtml, "text/html");
-          const pre = document.querySelectorAll<HTMLPreElement>("pre");
-          const codeBlocks: Array<() => Promise<void>> = [];
-          for (const el of Array.from(pre)) {
-            const className = el.getAttribute("class");
-            if (
-              className &&
-              className.startsWith("language-") &&
-              el.textContent
-            ) {
-              const language = className.substring("language-".length);
-              if (language) {
-                const code: HTMLPreElement = (
-                  el.children.length === 1 && el.children[0].tagName === "CODE"
-                    ? el.children[0]
-                    : el
-                ) as any;
-              }
-            }
-          }
-          const imgs = document.querySelectorAll<HTMLImageElement>("img");
-          imgs.forEach((img) => {
-            let first = img;
-            let preFirst: any = first;
-            while (preFirst?.tagName === "IMG") {
-              preFirst = preFirst.previousSibling;
-              if (preFirst?.tagName === "IMG") {
-                first = preFirst;
-              }
-            }
-            if (!first.parentElement?.getAttribute("data-image-container")) {
-              const wrapper = document.createElement("div");
-              wrapper.setAttribute("data-image-container", "1");
-              // insert wrapper before el in the DOM tree
-              first.parentElement?.insertBefore(wrapper, first);
-              while (first?.tagName === "IMG") {
-                const imgClone = first.cloneNode(true);
-                wrapper.appendChild(imgClone);
-                const olderFirst = first;
-                first = olderFirst.nextSibling as any;
-                olderFirst.remove();
-              }
-            }
-          });
-          renderHtml =
-            document.documentElement.querySelector("body")?.innerHTML ||
-            textHtml;
-        }*/
-          // renderHtml = renderHtml.replace(/\"(\.\.\/+)+/gim, '"/');
           const article = {
             id,
             title,
