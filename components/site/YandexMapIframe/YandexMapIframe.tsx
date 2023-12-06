@@ -9,8 +9,11 @@ import ContactInfoRow from "@components/site/LandingPage/ContactInfoRow";
 import IconPhoneCircle from "@components/icons/IconPhoneCircle";
 import IconLocationCircle from "@components/icons/IconLocationCircle";
 import { BreaksBySymbol } from "@components/ui/BreaksBySymbol";
+import React from "react";
 
-const YandexMapIframe = () => {
+type Props = Omit<React.ComponentProps<typeof Container>, "children">;
+
+const YandexMapIframe = ({ sx, maxWidth, ...rest }: Props) => {
   return (
     <Container
       maxWidth={false}
@@ -20,10 +23,12 @@ const YandexMapIframe = () => {
         },
         position: "relative",
         display: { xs: "block", md: "flex", lg: "block" },
+        ...sx,
       }}
+      {...rest}
     >
       <Container
-        maxWidth={"lg"}
+        maxWidth={maxWidth || "lg"}
         sx={{
           "&&": {
             px: { xs: 0, md: 0, lg: 0 },

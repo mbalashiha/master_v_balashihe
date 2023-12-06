@@ -84,14 +84,14 @@ export const LandingPricesCards = () => {
         <Grid item xs={12} sm={6}>
           <GradientCard
             key={"3"}
-            title={"Балашиха"}
+            title={"Услуги в Балашихе"}
             titleIcon={<PriceIcon2 />}
             gradientNumber={4}
           >
-            <PriceRow title={"Ремонт в Балашихе с хорошими отзывами"} />
+            <PriceRow title={"Ремонт и настройка компьютеров в Балашихе"} />
             <PriceRow title={"Установка Windows в Балашихе"} />
             <PriceRow title={"Компьютерная помощь в Балашихе"} />
-            <PriceRow title={"Балашиха бесплатная диагностика"} />
+            <PriceRow title={"Бесплатная диагностика для Балашихи"} />
             <PriceRow title={"Ремонт рядом с Шоссе Энтузиастов"} />
             <PriceRow title={"Ремонт ноутбуков недорого в Балашихе"} />
             <PriceRow title={"Диагностика техники в центре Балашихи"} />

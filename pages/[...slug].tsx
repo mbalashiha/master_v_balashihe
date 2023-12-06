@@ -63,7 +63,7 @@ export default function Page(
         />
       </Head>
       <>{articleElement}</>
-      <BottomContactsWithMap />
+      <BottomContactsWithMap sx={{ background: "white" }} />
     </>
   );
 }

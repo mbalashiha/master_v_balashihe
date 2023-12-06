@@ -97,6 +97,7 @@ export default function Page({
           ))}
         </Grid>
       </HugeContainer>
+      <BottomContactsWithMap sx={{ background: "white" }} />
     </>
   );
 }
