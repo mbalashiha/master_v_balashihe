@@ -5,7 +5,7 @@ const InterFontFamily = `Inter, Arial, sans-serif`;
 
 const getMuiTheme = (): Theme => {
   const colorMode: PaletteMode = "light" as any;
-  const fontFamily = "Roboto, Gotham, Helvetica, Arial, sans-serif";
+  const fontFamily = `var(--text-font-family)`;
   let theme = createTheme({
     palette: {
       mode: colorMode,

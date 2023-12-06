@@ -76,7 +76,7 @@ const Navbar: FC = () => {
             justifyContent: "space-between",
             alignItems: "space-between",
             "&, & *, & .logo, & .timeline-typography": {
-              fontFamily: `var(--landing-font-family)`,
+              fontFamily: `var(--navbar-font-family)`,
               color: "black",
               fontWeight: 400,
             },

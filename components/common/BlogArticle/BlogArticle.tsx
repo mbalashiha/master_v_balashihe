@@ -99,12 +99,12 @@ export default function BlogArticle(article: Props) {
             boxSizing: "border-box",
             overflow: "visible",
             "&, & p, & .Paper-root": {
-              fontFamily: 'Roboto, "Segoe UI", Tahoma, Verdana, Arial',
-              fontWeight: 500,
+              fontFamily: `var(--text-font-family)`,
+              fontWeight: 400,
               fontSize: "18px",
               lineHeight: "27px",
               color: (theme) =>
-                theme.palette.mode === "light" ? "#0e0e0f" : "white",
+                theme.palette.mode === "light" ? theme.palette.articleText.main : "white",
             },
             "& .Paper-root": {
               clear: "both",
@@ -197,10 +197,12 @@ export default function BlogArticle(article: Props) {
             variant="h1"
             itemProp="headline"
             sx={{
+              color: (theme) => theme.palette.text.primary,
               float: "none",
               clear: "both",
               fontSize: "32px",
               lineHeight: "35px",
+              fontWeight: 600,
               maxHeight: 35 * 3 + "px",
               overflow: "hidden",
               display: "-webkit-box",
@@ -210,7 +212,6 @@ export default function BlogArticle(article: Props) {
               // textAlign: { xs: "center", sm: "left" },
               mx: { xs: "10px", sm: "10px", md: 0 },
               my: 2,
-              fontWeight: 700,
             }}
           >
             {title}
@@ -237,7 +238,8 @@ export default function BlogArticle(article: Props) {
               sx={{
                 p: { xs: "10px 0", md: `5px 0 30px 0` },
                 clear: "left",
-                "& > *": {
+                "& > p": {
+                  fontWeight: 400,
                   p: 0,
                   m: 0,
                   ml: "30px",

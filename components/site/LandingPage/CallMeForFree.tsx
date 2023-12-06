@@ -43,7 +43,7 @@ export const CallMeForFree = ({
           border: elevation ? `none` : `2px solid #EBEBEA`,
           textAlign: "center",
           "&, & p, & h2": {
-            color: (theme) => theme.palette.text.primary,
+            color: (theme) => theme.palette.text.secondary,
           },
           "& p span": {
             color: (theme) => theme.palette.primary.main,
@@ -56,8 +56,8 @@ export const CallMeForFree = ({
             fontSize: "34px",
             lineHeight: "44px",
             fontWeight: 400,
-            color: (theme) => theme.palette.text.primary,
-            fontFamily: (theme) => theme.typography.fontFamily,
+            color: (theme) => theme.palette.text.secondary,
+            fontFamily: `var(--header-font-family)`,
             ...(paperSx as any),
           },
         }}

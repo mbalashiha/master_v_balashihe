@@ -246,7 +246,8 @@ const MyStepWizard = ({
                   display: "block",
                   fontSize: { xs: "20px", md: "25px" },
                   lineHeight: { xs: "23px", md: "28px" },
-                  fontWeight: 500,
+                  fontWeight: 400,
+                  fontFamily: `var(--text-font-family)`,
                 },
                 mb: "5px",
               }}

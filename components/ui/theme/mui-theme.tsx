@@ -1,13 +1,5 @@
 import { createTheme, Theme } from "@mui/material/styles";
-import {
-  colors,
-  Palette,
-  PaletteMode,
-  Button,
-  Button as MuiButton,
-  PaletteColorOptions,
-  CSSInterpolation,
-} from "@mui/material";
+import { colors, Palette, PaletteMode } from "@mui/material";
 import { grey, blueGrey } from "@mui/material/colors";
 const InterFontFamily = `Inter, Arial, sans-serif`;
 
@@ -20,17 +12,20 @@ export const standartCssTransition = {
 
 const getMuiTheme = (colorMode?: PaletteMode): Theme => {
   colorMode = colorMode || "light";
-  const fontFamily = "Gotham, Arial, sans-serif";
+  const fontFamily = `var(--text-font-family)`;
   const themeGreyColor = "rgba(40, 39, 37, 0.94)";
   let theme = createTheme({
     palette: {
       mode: colorMode,
       primary: { main: "#b87d36" },
+      secondary: {
+        main: "#24263F",
+      },
       background: {
         default: "#4D001D",
       },
       articleText: {
-        main: "#302f5c",
+        main: "#24263F",
       },
       secondaryBackground: {
         main: "#F3F5FE",
@@ -39,7 +34,8 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
         main: "#EFDDD1",
       },
       text: {
-        primary: "#303B44",
+        primary: "#24263F",
+        secondary: "#303B44",
       },
       dialogClickColor: {
         main: "#2e2d58",
@@ -49,7 +45,7 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
       borderRadius: 24,
     },
     typography: {
-      fontFamily,
+      fontFamily: `var(--text-font-family)`,
       fontSize: 14,
       fontWeightLight: 300,
       fontWeightRegular: 400,
@@ -58,18 +54,20 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
         color: colorMode === "light" ? "#303B44" : grey[100],
       },
       button: {
-        fontFamily,
+        fontFamily: `var(--header-font-family)`,
         fontSize: 14,
         fontWeightLight: 300,
         fontWeightRegular: 400,
         fontWeightMedium: 500,
       },
       h1: {
+        fontFamily: `var(--header-font-family)`,
         fontSize: "40px",
         lineHeight: "52px",
         fontWeight: 700,
       },
       h2: {
+        fontFamily: `var(--header-font-family)`,
         fontSize: "26px",
         lineHeight: "32px",
         fontWeight: 700,
@@ -77,15 +75,18 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
         marginTop: "30px",
       },
       h3: {
+        fontFamily: `var(--header-font-family)`,
         fontSize: "24px",
         lineHeight: "37px",
         fontWeight: 700,
       },
       h5: {
+        fontFamily: `var(--header-font-family)`,
         color: colorMode === "dark" ? "white" : "black",
         fontWeight: 500,
       },
       h6: {
+        fontFamily: `var(--header-font-family)`,
         fontSize: "24px",
         lineHeight: "30px",
         fontWeight: 600,
@@ -231,6 +232,7 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
       MuiButtonBase: {
         styleOverrides: {
           root: {
+            fontFamily: `var(--header-font-family)`,
             "&:disabled": {
               borderColor: "#adadad",
               color: "#adadad",
@@ -255,6 +257,7 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
         styleOverrides: {
           // Name of the slot
           root: {
+            fontFamily: `var(--header-font-family)`,
             borderRadius: "50px",
             border: "3px solid",
             borderColor: theme.palette.primary.main,

@@ -21,6 +21,7 @@ export default function DarkContainer({
       sx={{
         "&&": {
           px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 },
+          fontFamily: `var(--landing-font-family)`,
         },
         position: "relative",
         ...FullWidthProps?.sx,

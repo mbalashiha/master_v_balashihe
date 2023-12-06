@@ -68,6 +68,9 @@ export default function TaskCard({
             alignItems: "left",
             justifyContent: "center",
             gap: "27px",
+            "&, & *": {
+              fontFamily: `var(--landing-font-family)`,
+            },
           }}
         >
           <Typography
@@ -80,6 +83,7 @@ export default function TaskCard({
               fontWeight: 400,
               fontSize: "28px",
               lineHeight: "37px",
+              fontFamily: `var(--landing-font-family)`,
             }}
           >
             {title}
@@ -92,6 +96,7 @@ export default function TaskCard({
                 textAlign: "left",
                 fontSize: "18px",
                 lineHeight: "25px",
+                fontFamily: `var(--landing-font-family)`,
               }}
             >
               {`Время работы - ${timeAmount}`}
@@ -104,6 +109,7 @@ export default function TaskCard({
               textAlign: "left",
               fontSize: "16.5px",
               lineHeight: "25px",
+              fontFamily: `var(--landing-font-family)`,
             }}
           >
             {children}

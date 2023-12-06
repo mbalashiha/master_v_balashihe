@@ -29,7 +29,7 @@ export default function Breadcrumbs({ path }: Props) {
         "& > li": {
           p: 0,
           m: 0,
-          fontWeight: 400,
+          fontWeight: 600,
           fontSize: "14px",
           lineHeight: "18px",
           color: "transparent",
@@ -40,8 +40,8 @@ export default function Breadcrumbs({ path }: Props) {
           alignItems: "center",
           justifyContent: "center",
           "& > *": {
-            color: "#21201f",
-            fontWeight: 500,
+            color: (theme) => theme.palette.text.primary,
+            fontWeight: 600,
             fontSize: "14px",
             lineHeight: "18px",
             transitionProperty: "none",
@@ -59,7 +59,7 @@ export default function Breadcrumbs({ path }: Props) {
               content: `"\\e409"`,
               fontFamily: "Material Icons",
               fontWeight: 300,
-              color: "#21201f",
+              color: (theme) => theme.palette.text.primary,
               display: "block",
               fontSize: "15px",
               lineHeight: "18px",

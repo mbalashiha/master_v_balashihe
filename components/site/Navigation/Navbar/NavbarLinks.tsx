@@ -118,6 +118,7 @@ export const NavbarLinks = ({
         justifyContent: "flex-start",
         alignItems: { xs: "flex-start", sm: "center" },
         flexWrap: "wrap",
+        color: (theme) => theme.palette.text.secondary,
         "& > *, & > .dropdown": {
           margin: "0 0.5px",
         },
@@ -127,6 +128,7 @@ export const NavbarLinks = ({
           color: "black",
         },
         "& a, & button, & .menuLink, & > .dropdown > .dropbtn": {
+          color: (theme) => theme.palette.text.secondary,
           px: { xs: 0, sm: "12px" },
           py: { xs: "6px", sm: "14px" },
           borderRadius: 0,
@@ -147,17 +149,21 @@ export const NavbarLinks = ({
         },
         "& > a, & > div, & > button, & .dropdown .dropbtn, & .dropdown-content > *":
           {
-            fontFamily: "Gotham, Arial, sans-serif",
-            color: "black",
+            color: (theme) => theme.palette.text.secondary,
+            "& svg": {
+              color: (theme) => theme.palette.text.secondary,
+              fill: (theme) => theme.palette.text.secondary,
+            },
             background: "transparent",
             fontWeight: 600,
             position: "relative",
             transition: "color .5s ease, background-color .5s ease",
-            "&:hover, &.clicked": {
+            "&.active, &:hover, &.clicked": {
               color: "black",
-            },
-            "&.active": {
-              color: "black",
+              "& svg": {
+                color: "black",
+                fill: "black",
+              },
             },
             "&:after": {
               position: "absolute",

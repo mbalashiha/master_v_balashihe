@@ -92,18 +92,7 @@ export default function AboutMaster(
           }}
           itemProp="name"
         >
-          Дмитрий,{" "}
-          <Box component="strong" color="primary.main">
-            {" "}
-            компьютерный мастер в Балашихе
-          </Box>
-          ,{" "}
-          <Box component="br" sx={{ display: { xs: "none", md: "inline" } }} />
-          <Box component="strong" color="primary.main">
-            МГТУ МИРЭА
-          </Box>{" "}
-          <br />
-          Российский Технологический Университет
+          {article.title}
         </Typography>
         <Grid container sx={{ mb: "26px" }}>
           <Grid item xs={12}>

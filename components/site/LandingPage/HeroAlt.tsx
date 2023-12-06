@@ -144,7 +144,7 @@ export default function Hero({ article }: Props) {
           maxWidth="lg"
           sx={{
             "&, & *": {
-              fontFamily: `var(--landing-font-family)`,
+              fontFamily: `var(--text-font-family)`,
               color: "white",
               textAlign: { xs: "center", lg: "left" },
               "& p": { my: 0 },
@@ -184,6 +184,7 @@ export default function Hero({ article }: Props) {
                   fontWeight: 600,
                   textTransform: "uppercase",
                   mb: 0,
+                  fontFamily: `var(--text-font-family)`,
                 }}
                 itemProp="name"
                 variant="h1"
