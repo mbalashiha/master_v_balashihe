@@ -31,7 +31,7 @@ const StyledContainer = styled(Box)(({ theme }) => ({
   width: "100%",
   minHeight: "516px",
   maxHeight: "90vh",
-  overflow: "auto",
+  overflow: "visible",
   paddingBottom: "15px",
 }));
 export default StyledContainer;

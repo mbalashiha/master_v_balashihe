@@ -18,6 +18,7 @@ export default function LandingWizard() {
     <DarkContainer sx={{ pt: 0 }}>
       <Paper
         sx={{
+          padding: 0,
           borderRadius: "8px",
           background: "#EFEFF4",
           "& .FormControl-root, & .Typography-root, & .Typography-body1, & .FormControlLabel-label":

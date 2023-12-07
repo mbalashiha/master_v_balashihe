@@ -50,7 +50,7 @@ const Step1: React.FC<Partial<StepWizardChildProps>> = (({
   return (
     <WizFormControl>
       <FormLabel id="step1">{stepName}</FormLabel>
-      <Grid container spacing={3} sx={{ width: "100%", pl: 2.5, pt: 1 }}>
+      <Grid container spacing={3} sx={{ width: "100%", pt: 1 }}>
         {variants.map(({ title, src }, ind) => (
           <Grid item xs={12} sm={6} md={3} key={title}>
             <ImagePaper

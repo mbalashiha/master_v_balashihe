@@ -8,6 +8,7 @@ import {
   Divider,
   Button,
   styled,
+  LinearProgress,
 } from "@mui/material";
 
 import DefaultWizardNav from "./DefaultWizardNav";
@@ -235,27 +236,56 @@ const MyStepWizard = ({
               height: "100%",
               flexGrow: 1,
             },
+            "& .in-slider-container": {
+              width: "100%",
+              px: "27px",
+              py: "19px",
+            },
             ...StepContainerProps?.sx,
           }}
         >
           {title && (
-            <Typography
-              variant="h1"
-              sx={{
-                "&&&": {
-                  display: "block",
-                  fontSize: { xs: "20px", md: "25px" },
-                  lineHeight: { xs: "23px", md: "28px" },
-                  fontWeight: 400,
-                  fontFamily: `var(--text-font-family)`,
-                },
-                mb: "5px",
-              }}
-            >
-              {title}
-            </Typography>
+            <>
+              <Box
+                className="in-slider-container"
+                sx={{
+                  "& > div": {
+                    display: "block",
+                    fontSize: { xs: "20px", md: "25px" },
+                    lineHeight: { xs: "23px", md: "28px" },
+                    fontWeight: 400,
+                    fontFamily: `var(--text-font-family)`,
+                  },
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography component="div" variant="h1">
+                  {title}
+                </Typography>
+                <Typography
+                  component="div"
+                  variant="h1"
+                  sx={{
+                    "&&": {
+                      color: (theme) => theme.palette.primary.main,
+                    },
+                  }}
+                >{`${currentStep}/${totalSteps}`}</Typography>
+              </Box>
+              <LinearProgress
+                sx={{
+                  height: "8px",
+                }}
+                variant="determinate"
+                value={progressPercents}
+                color="info"
+              />
+            </>
           )}
           <Box
+            className="in-slider-container"
             sx={{
               flexGrow: 1,
               display: "flex",
@@ -272,7 +302,14 @@ const MyStepWizard = ({
               ? React.cloneElement(selectedStep, getClonedElementProps())
               : undefined}
           </Box>
-          {nav}
+          <Box
+            className="in-slider-container"
+            sx={{
+              py: "12px",
+            }}
+          >
+            {nav}
+          </Box>
         </Box>
       ) : (
         <Grid

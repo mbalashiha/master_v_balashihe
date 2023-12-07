@@ -24,7 +24,7 @@ const InPageWizard = () => {
         minWidth: { xs: "99.5vw", md: "inherit" },
       }}
       title={"Ответьте на пару вопросов и получите скидку 25%"}
-      StepContainerProps={{ sx: { p: "15px 10px 5px 25px" } }}
+      StepContainerProps={{}}
     >
       <Step1 stepName="Какое у вас устройство?" />
       <Step1_2 stepName="Что сейчас с вашей техникой?" />
