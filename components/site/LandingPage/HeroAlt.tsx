@@ -73,14 +73,9 @@ export default function Hero({ article }: Props) {
     process.env.NEXT_PUBLIC_SITE_NAME || "Мастер-в-Балашихе.РФ"
   } 143912`;
   const indexCanonicalUrl = useMemo(() => getCanonicalUrl("/"), []);
-  const image: CMS.Image = useMemo(() => {
-    const url = "/images/master_v_balashihe.jpg";
-    return makeImageType({
-      url,
-      width: 1197,
-      height: 1600,
-    });
-  }, []);
+  if (!article?.image?.canonicalUrl) {
+    throw new Error("No article.image.canonicalUrl for link.");
+  }
   return (
     <>
       <Head>
@@ -95,9 +90,15 @@ export default function Hero({ article }: Props) {
 Оставьте заявку и я перезвоню Вам в течение 30 минут,
 работаю в городе Балашиха и Москве`}
         />
-        <meta property="og:image" content={image.canonicalUrl} />
-        <meta property="og:image:width" content={image.width.toString()} />
-        <meta property="og:image:height" content={image.height.toString()} />
+        <meta property="og:image" content={article.image.canonicalUrl} />
+        <meta
+          property="og:image:width"
+          content={article.image.width.toString()}
+        />
+        <meta
+          property="og:image:height"
+          content={article.image.height.toString()}
+        />
       </Head>
       <Container
         maxWidth={false}
@@ -127,7 +128,7 @@ export default function Hero({ article }: Props) {
         ></Box>
         <Box
           sx={{
-            backgroundImage: `linear-gradient(to bottom, rgba(22, 14, 0, 0.7), rgba(1,1,1,1))`,
+            backgroundImage: `linear-gradient(to bottom, rgba(49, 18, 0, 0.7), rgba(1,1,1,1))`,
             willChange: "transform",
             height: "100%",
             width: "100%",
@@ -190,7 +191,17 @@ export default function Hero({ article }: Props) {
                 variant="h1"
                 component="h1"
               >
-                <Box>Мастер</Box>
+                <Box
+                  component={"span"}
+                  sx={{
+                    px: "12px",
+                    py: { xs: "7px", sm: "0" },
+                    background: (theme) => `#69000080`,
+                    borderRadius: "6px",
+                  }}
+                >
+                  Мастер
+                </Box>
                 <Box>на дом или в офис </Box>
                 <Box
                   sx={{
@@ -202,7 +213,7 @@ export default function Hero({ article }: Props) {
                     sx={{
                       px: "12px",
                       py: { xs: "7px", sm: "0" },
-                      background: (theme) => `${theme.palette.primary.main}80`,
+                      background: (theme) => `#69000080`,
                       borderRadius: "6px",
                     }}
                   >
@@ -233,6 +244,9 @@ export default function Hero({ article }: Props) {
               itemProp="description"
               sx={{
                 textAlign: { xs: "center", sm: "center", md: "left" },
+                "&&": {
+                  marginTop: { xs: 0, md: undefined },
+                },
               }}
             >
               {`Меня зовут Дмитрий, 
@@ -396,11 +410,15 @@ export default function Hero({ article }: Props) {
               },
             }}
           >
-            <Link itemProp="image" href={image.canonicalUrl} target="_blank">
+            <Link
+              itemProp="image"
+              href={article.image.canonicalUrl}
+              target="_blank"
+            >
               <Image
                 alt="Информационные системы и технологии"
                 width={600}
-                height={909}
+                height={902}
                 quality={90}
                 loading={"eager"}
                 src="/images/computer_master_landing_balashiha.webp"

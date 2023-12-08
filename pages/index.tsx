@@ -65,14 +65,14 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     absURL: "/",
   });
 
-  const imageUrl = `/images/computer_master_balashikha_hero.webp`;
+  const imageUrl = `/images/master_v_balashihe.jpg`;
   if (article) {
     article.image = {
       ...article.image,
       ...makeImageType({
         url: imageUrl,
-        width: 600,
-        height: 392,
+        width: 1544,
+        height: 2160,
         alt: `Дмитрий, компьютерный мастер в Балашихе, выпускник МГТУ МИРЭА (РТУ МИРЭА)`,
       }),
     };
