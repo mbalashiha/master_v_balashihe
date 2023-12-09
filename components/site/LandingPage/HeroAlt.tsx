@@ -213,7 +213,7 @@ export default function Hero({ article }: Props) {
                     sx={{
                       px: "12px",
                       py: { xs: "7px", sm: "0" },
-                      background: (theme) => `#69000080`,
+                      background: `#69000080`,
                       borderRadius: "6px",
                     }}
                   >
@@ -392,7 +392,7 @@ export default function Hero({ article }: Props) {
                 xs: 0,
                 md: "0 0 0 30px",
                 lg: "30px 30px 0 50px",
-                xl: "0 30px 0 90px",
+                xl: "0 110px 0 20px",
               },
               "& a": {
                 display: "block",

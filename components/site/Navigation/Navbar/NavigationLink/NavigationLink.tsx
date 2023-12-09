@@ -28,6 +28,7 @@ export interface NavLinkProps {
   active?: boolean;
   hideHrefLink?: boolean;
   submenu?: Array<NavLinkProps>;
+  about?: boolean;
 }
 interface Props
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -37,44 +38,56 @@ interface Props
 export default function NavigationLink({
   linkProps,
   className,
+  about,
   ...props
 }: Props) {
-  if (linkProps.submenu?.length) {
-    return <DropDownMenu {...linkProps} />;
-  } else {
-    return (
-      <>
-        {linkProps.active && linkProps.hideHrefLink ? (
-          <div className={cn(className, "active", "menuLink")} {...props}>
-            {linkProps.name}
-          </div>
-        ) : linkProps.active && linkProps.href ? (
-          <Link
-            href={linkProps.href}
-            className={cn(className, "active")}
-            passHref
-            {...(props as any)}
-          >
-            {linkProps.name}
-          </Link>
-        ) : linkProps.href ? (
-          <Link
-            href={linkProps.href}
-            className={cn(className)}
-            passHref
-            {...(props as any)}
-          >
-            {linkProps.name}
-          </Link>
-        ) : linkProps.active && linkProps.name ? (
-          <div
-            className={cn(className, linkProps.active && "active", "menuLink")}
-            {...props}
-          >
-            {linkProps.name}
-          </div>
-        ) : null}
-      </>
-    );
-  }
+  return (
+    <Box
+      component="li"
+      itemProp={about ? "about" : "itemListElement"}
+      itemScope
+      itemType="https://schema.org/ItemList"
+      className={cn(
+        className,
+        { active: linkProps.active },
+        {
+          menuLink: !linkProps.href || linkProps.hideHrefLink,
+        }
+      )}
+    >
+      {linkProps.submenu?.length ? (
+        <DropDownMenu {...(linkProps as any)} />
+      ) : (
+        <>
+          {linkProps.active && linkProps.hideHrefLink ? (
+            <div className="menu-item" {...props}>
+              {linkProps.name}
+            </div>
+          ) : linkProps.active && linkProps.href ? (
+            <Link
+              className="menu-item"
+              href={linkProps.href}
+              passHref
+              {...(props as any)}
+            >
+              {linkProps.name}
+            </Link>
+          ) : linkProps.href ? (
+            <Link
+              className="menu-item"
+              href={linkProps.href}
+              passHref
+              {...(props as any)}
+            >
+              {linkProps.name}
+            </Link>
+          ) : linkProps.active && linkProps.name ? (
+            <div className="menu-item" {...props}>
+              {linkProps.name}
+            </div>
+          ) : null}
+        </>
+      )}
+    </Box>
+  );
 }

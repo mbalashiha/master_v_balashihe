@@ -41,6 +41,7 @@ export default function Breadcrumbs({ path }: Props) {
           justifyContent: "center",
           "& > *": {
             color: (theme) => theme.palette.text.primary,
+            fontFamily: `var(--header-font-family)`,
             fontWeight: 600,
             fontSize: "14px",
             lineHeight: "18px",

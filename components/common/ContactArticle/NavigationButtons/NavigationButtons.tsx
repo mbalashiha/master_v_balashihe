@@ -67,7 +67,10 @@ export default function NavigationButtons({ navigation }: Props) {
               "-webkit-line-clamp": "2",
               "-webkit-box-orient": "vertical",
               textOverflow: "ellipsis",
-              color: (theme) => theme.palette.text.primary,
+              color: (theme) =>
+                theme.palette.mode === "light"
+                  ? theme.palette.articleText.main
+                  : "white",
               fontWeight: 400,
               fontFamily: `var(--landing-font-family)`,
             },

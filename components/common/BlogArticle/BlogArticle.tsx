@@ -99,12 +99,14 @@ export default function BlogArticle(article: Props) {
             boxSizing: "border-box",
             overflow: "visible",
             "&, & p, & .Paper-root": {
-              fontFamily: `var(--text-font-family)`,
+              fontFamily: "var(--article-text-font-family)",
               fontWeight: 400,
               fontSize: "18px",
               lineHeight: "27px",
               color: (theme) =>
-                theme.palette.mode === "light" ? theme.palette.articleText.main : "white",
+                theme.palette.mode === "light"
+                  ? theme.palette.articleText.main
+                  : "white",
             },
             "& .Paper-root": {
               clear: "both",

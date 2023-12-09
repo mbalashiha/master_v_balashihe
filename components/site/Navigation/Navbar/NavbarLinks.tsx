@@ -1,10 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { default as Link, LinkProps } from "next/link";
-import ListSubheader from "@mui/material/ListSubheader";
-import List from "@mui/material/List";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import cn from "classnames";
 import { grey, blueGrey } from "@mui/material/colors";
@@ -69,7 +65,7 @@ const getLinks = (): Array<NavLinkProps> => [
     ],
   },
   { href: "/uslugi-mastera-v-balashihe", name: "Блог" },
-  { href: "/computer-master-balashiha", name: "Контакты" },
+  { href: "/computer-master-balashiha", name: "Контакты", about: true },
 ];
 export const NavbarLinks = ({
   orientation,
@@ -107,59 +103,64 @@ export const NavbarLinks = ({
   }, [asPath]);
   return (
     <Stack
-      direction={{ xs: "column", sm: "row" }}
-      spacing="2px"
-      component="nav"
+      direction={"row"}
+      spacing={0}
+      component="ul"
+      itemScope
+      itemType="https://schema.org/SiteNavigationElement"
       sx={{
+        listStyleType: "none",
         py: 0,
-        px: { xs: "12px", sm: 0 },
+        px: { xs: "2px", sm: 0 },
         alignSelf: { xs: "flex-start", sm: "flex-end" },
         display: "flex",
         justifyContent: "flex-start",
         alignItems: { xs: "flex-start", sm: "center" },
         flexWrap: "wrap",
+        gap: "4px",
         color: (theme) => theme.palette.text.secondary,
-        "& > *, & > .dropdown": {
-          margin: "0 0.5px",
-        },
-        "& .dropbtn, & button": {
-          margin: 0,
-          border: "none",
-          color: "black",
-        },
-        "& a, & button, & .menuLink, & > .dropdown > .dropbtn": {
-          color: (theme) => theme.palette.text.secondary,
-          px: { xs: 0, sm: "12px" },
-          py: { xs: "6px", sm: "14px" },
-          borderRadius: 0,
-          minWidth: "3rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "16px",
-          lineHeight: "24px",
-        },
         "&:hover": {
-          "& > a, & > div": {
-            "&.active:not(:hover):after": {
-              width: 0,
-              background: "transparent",
+          "& > li": {
+            "&.active > .menu-item": {
+              "&:after": {
+                width: 0,
+                background: "transparent",
+              },
             },
           },
         },
-        "& > a, & > div, & > button, & .dropdown .dropbtn, & .dropdown-content > *":
-          {
+        "& > li": {
+          "&.active > .menu-item, &.clicked > .menu-item, & .menu-item:hover": {
+            "&:after": {
+              width: "100%",
+              background: "black",
+            },
+          },
+          "&.active > .menu-item": {
+            cursor: "default",
+          },
+          "& .menu-item": {
+            cursor: "pointer",
             color: (theme) => theme.palette.text.secondary,
             "& svg": {
               color: (theme) => theme.palette.text.secondary,
               fill: (theme) => theme.palette.text.secondary,
             },
+            fontFamily: `var(--header-font-family)`,
             background: "transparent",
             fontWeight: 600,
             position: "relative",
             transition: "color .5s ease, background-color .5s ease",
+            px: { xs: 0, sm: "12px" },
+            py: { xs: "6px", sm: "14px" },
+            borderRadius: 0,
+            minWidth: "3rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "16px",
+            lineHeight: "24px",
             "&.active, &:hover, &.clicked": {
-              color: "black",
               "& svg": {
                 color: "black",
                 fill: "black",
@@ -176,17 +177,10 @@ export const NavbarLinks = ({
               background: "transparent",
               transition: "width .5s ease, background-color .5s ease",
             },
-            "&:hover:after, &.clicked:after": {
-              width: "100%",
-              background: "black",
-            },
-            "&.active:after": {
-              width: "100%",
-              background: "black",
-            },
           },
-        "& > .dropdown": {
-          "&, & > button, && > .dropbtn, && > button.dropbtn": {
+        },
+        "& .dropdown": {
+          "&, & > button, & > .dropbtn, & > button.dropbtn": {
             borderRadius: `8px 8px 0 0`,
           },
         },

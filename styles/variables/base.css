@@ -3,6 +3,7 @@
   --landing-font-family: var(--header-font-family);
   --text-font-family: "Noto Sans", Verdana, Arial, sans-serif;
   --navbar-font-family: var(--text-font-family);
+  --article-text-font-family: Verdana, sans-serif;
   --landing-background-color: #010101;
   --header-typography-color: #af7e42;
   --animate-duration: 1s;

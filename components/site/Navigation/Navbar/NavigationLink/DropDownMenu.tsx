@@ -6,36 +6,78 @@ import { useState } from "react";
 import cn from "classnames";
 import React from "react";
 
-type Props = NavLinkProps;
+type Props = Partial<React.ComponentProps<typeof Box> & NavLinkProps>;
 
-const DropDownMenu = ({ submenu, ...link }: Props) => {
-  const [opened, setOpened] = useState(false);
+const DropDownMenu = ({ submenu, name, href, active, ...rest }: Props) => {
+  const [opened, setOpened] = useState<boolean | null>(null);
   return (
     <ClickAwayListener
       onClickAway={(event) => {
-        if (opened) {
-          setOpened(false);
+        if (opened !== null) {
+          setOpened(null);
         }
       }}
     >
       <Box
-        className={cn("dropdown", { clicked: opened })}
+        {...rest}
+        className={cn(
+          rest.className,
+          "dropdown",
+          { clicked: Boolean(opened) },
+          { closed: opened === false }
+        )}
         sx={{
           zIndex: 1,
           position: "relative",
           display: "inline-block",
-          "& > .dropdown-content": {
+          px: 0,
+          py: 0,
+          "& button.dropbtn": {
+            border: "none",
+            borderRadius: `8px 8px 0 0`,
+            "& > .material-icons": {
+              transform: `rotate(0)`,
+            },
+            "&:hover > .material-icons": {
+              transform: `rotate(0.25turn)`,
+            },
+          },
+          "&.clicked:not(.closed)": {
+            "& button.dropbtn": {
+              "& > .material-icons": {
+                transform: `rotate(0.25turn)`,
+              },
+            },
+          },
+          "&:hover, &.clicked": {
+            "& > .dropdown-content": {
+              display: "block",
+            },
+          },
+          "&.closed": {
+            "& > .dropdown-content": {
+              display: "none",
+            },
+          },
+          "& .dropdown-content": {
+            listStyleType: "decimal",
             display: "none",
-            //   transformOrigin: "top center",
-            //   transform: "scale(0)",
-            //   opacity: 0,
             position: "absolute",
-            left: 0,
-            minWidth: "100%",
-            width: "auto",
+            minWidth: "300px",
             boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
             zIndex: 1,
             borderRadius: `0 0 8px 8px`,
+            "& li .menu-item": {
+              width: "auto",
+              whiteSpace: "nowrap",
+              minWidth: "220px",
+              px: "15px",
+              textAlign: "left",
+              justifyContent: "flex-start",
+              "&:hover": {
+                color: "red",
+              },
+            },
             "& > *": {
               "&, & > .dropbtn, & > button.dropbtn, & > button": {
                 borderRadius: 0,
@@ -46,55 +88,31 @@ const DropDownMenu = ({ submenu, ...link }: Props) => {
                 },
               },
             },
-            "& a": {
-              justifyContent: "flex-start",
-            },
           },
-          "& .dropbtn, & button.dropbtn": {
-            borderRadius: `8px 8px 0 0`,
-          },
-          "&:hover, &.clicked": {
-            "& > .dropdown-content": {
-              display: "block",
-            },
-          },
-          "& .dropdown-content": {
-            width: "auto",
-            "& > div": {
-              minWidth: "100%",
-              width: "auto",
-              "& > .dropbtn, & > button.dropbtn, & > button": {
-                width: "100%",
-                justifyContent: "flex-start",
-              },
-            },
-            "& a": {
-              whiteSpace: "nowrap",
-              minWidth: "300px",
-              px: "15px",
-            },
-          },
+          ...rest.sx,
         }}
       >
         <button
-          className={cn("dropbtn", { clicked: opened })}
+          className={cn("menu-item", "dropbtn", { clicked: opened })}
           type="button"
           onClick={(event) => {
             setOpened((prev) => !prev);
           }}
         >
-          {link.name}
+          {name}
           <span className="material-icons">keyboard_arrow_down</span>
         </button>
-        <Box className="dropdown-content">
+        <Box component="ul" className="dropdown-content">
           {submenu?.map((item) => (
-            <React.Fragment key={item.name + "_" + item.href}>
+            <Box component="li" key={item.name + "_" + item.href}>
               {item.href ? (
-                <Link href={item.href}>{item.name}</Link>
+                <Link className="menu-item" href={item.href}>
+                  {item.name}
+                </Link>
               ) : (
-                <DropDownMenu {...item} />
+                <DropDownMenu {...(item as any)} />
               )}
-            </React.Fragment>
+            </Box>
           ))}
         </Box>
       </Box>

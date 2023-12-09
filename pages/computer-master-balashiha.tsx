@@ -22,6 +22,7 @@ import React, { useEffect, useRef } from "react";
 import { getCanonicalUrl, makeImageType } from "@framework/utils/normalize";
 import { DescriptionParser } from "@components/common/BlogArticle";
 import Link from "next/link";
+import BlogListBreadcrumbs from "@components/site/BlogList/BlogListBreadcrumbs";
 
 export default function AboutMaster(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -164,12 +165,13 @@ export default function AboutMaster(
                   content="РТУ МИРЭА (Российский Технологический Университет)"
                 />
                 <DescriptionParser descriptionHTML={renderHtml} />
+                <BlogListBreadcrumbs />
               </Box>
             </Paper>
           </Grid>
         </Grid>
       </Container>
-      <CallMeForFree elevation={8} sx={{ my: "38px" }} />
+      <CallMeForFree elevation={8} sx={{ mt: "3px", mb: "38px" }} />
       <CardGridContainer />
       <LandingReasons />
       <LandingPricesCards />
@@ -189,8 +191,8 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       ...article.image,
       ...makeImageType({
         url: imageUrl,
-        width: 1061,
-        height: 1600,
+        width: 1504,
+        height: 2057,
         alt: `Дмитрий, компьютерный мастер в Балашихе, выпускник МГТУ МИРЭА (РТУ МИРЭА)`,
       }),
     };
