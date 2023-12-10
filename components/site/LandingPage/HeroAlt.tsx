@@ -128,7 +128,7 @@ export default function Hero({ article }: Props) {
         ></Box>
         <Box
           sx={{
-            backgroundImage: `linear-gradient(to bottom, rgba(49, 18, 0, 0.7), rgba(1,1,1,1))`,
+            backgroundImage: `linear-gradient(to bottom, rgba(27, 10, 0, 0.7), rgba(1,1,1,1))`,
             willChange: "transform",
             height: "100%",
             width: "100%",
@@ -196,7 +196,7 @@ export default function Hero({ article }: Props) {
                   sx={{
                     px: "12px",
                     py: { xs: "7px", sm: "0" },
-                    background: (theme) => `#69000080`,
+                    background: (theme) => `#ffffff30`,
                     borderRadius: "6px",
                   }}
                 >
@@ -213,7 +213,7 @@ export default function Hero({ article }: Props) {
                     sx={{
                       px: "12px",
                       py: { xs: "7px", sm: "0" },
-                      background: `#69000080`,
+                      background: (theme) => `#ffffff30`,
                       borderRadius: "6px",
                     }}
                   >

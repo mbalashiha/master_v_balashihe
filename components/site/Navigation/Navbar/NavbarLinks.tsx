@@ -102,103 +102,124 @@ export const NavbarLinks = ({
     return navLinks;
   }, [asPath]);
   return (
-    <Stack
-      direction={"row"}
-      spacing={0}
-      component="ul"
+    <Box
+      component="nav"
       itemScope
       itemType="https://schema.org/SiteNavigationElement"
       sx={{
-        listStyleType: "none",
-        py: 0,
-        px: { xs: "2px", sm: 0 },
+        p: 0,
+        m: 0,
         alignSelf: { xs: "flex-start", sm: "flex-end" },
+        justifySelf: { xs: "flex-start", sm: "flex-end" },
         display: "flex",
-        justifyContent: "flex-start",
-        alignItems: { xs: "flex-start", sm: "center" },
+        justifyContent: "flex-end",
+        alignItems: { xs: "flex-start", sm: "flex-end" },
         flexWrap: "wrap",
-        gap: "4px",
-        color: (theme) => theme.palette.text.secondary,
-        "&:hover": {
-          "& > li": {
-            "&.active > .menu-item": {
-              "&:after": {
-                width: 0,
-                background: "transparent",
-              },
-            },
-          },
-        },
-        "& > li": {
-          "&.active > .menu-item, &.clicked > .menu-item, & .menu-item:hover": {
-            "&:after": {
-              width: "100%",
-              background: "black",
-            },
-          },
-          "&.active > .menu-item": {
-            cursor: "default",
-          },
-          "& .menu-item": {
-            cursor: "pointer",
-            color: (theme) => theme.palette.text.secondary,
-            "& svg": {
-              color: (theme) => theme.palette.text.secondary,
-              fill: (theme) => theme.palette.text.secondary,
-            },
-            fontFamily: `var(--header-font-family)`,
-            background: "transparent",
-            fontWeight: 600,
-            position: "relative",
-            transition: "color .5s ease, background-color .5s ease",
-            px: { xs: 0, sm: "12px" },
-            py: { xs: "6px", sm: "14px" },
-            borderRadius: 0,
-            minWidth: "3rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "16px",
-            lineHeight: "24px",
-            "&.active, &:hover, &.clicked": {
-              "& svg": {
-                color: "black",
-                fill: "black",
-              },
-            },
-            "&:after": {
-              position: "absolute",
-              left: 0,
-              bottom: 0,
-              content: `""`,
-              display: "block",
-              height: "4px",
-              width: 0,
-              background: "transparent",
-              transition: "width .5s ease, background-color .5s ease",
-            },
-          },
-        },
-        "& .dropdown": {
-          "&, & > button, & > .dropbtn, & > button.dropbtn": {
-            borderRadius: `8px 8px 0 0`,
-          },
-        },
-        "& .dropdown-content": {
-          background: "white",
-        },
-        ...sx,
       }}
     >
-      {navLinks.map((linkProps) => (
-        <NavigationLink
-          key={linkProps.href + "_" + (linkProps.name || "")}
-          linkProps={linkProps}
-        >
-          {linkProps.name || ""}
-        </NavigationLink>
-      ))}
-    </Stack>
+      <Stack
+        direction={"row"}
+        spacing={0}
+        component="ul"
+        itemScope
+        itemType="https://schema.org/ItemList"
+        sx={{
+          listStyleType: "none",
+          py: 0,
+          px: { xs: "2px", sm: 0 },
+          alignSelf: { xs: "flex-start", sm: "flex-end" },
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: { xs: "flex-start", sm: "center" },
+          flexWrap: "wrap",
+          gap: "4px",
+          color: (theme) => theme.palette.text.secondary,
+          "&:hover": {
+            "& > li": {
+              "&.active > .menu-item": {
+                "&:after": {
+                  width: 0,
+                  background: "transparent",
+                },
+                "&:hover:after": {
+                  width: "100%",
+                  background: "black",
+                },
+              },
+            },
+          },
+          "& > li": {
+            "&.active > .menu-item, &.clicked > .menu-item, & .menu-item:hover":
+              {
+                "&:after": {
+                  width: "100%",
+                  background: "black",
+                },
+              },
+            "&.active > .menu-item": {
+              cursor: "default",
+            },
+            "& .menu-item": {
+              cursor: "pointer",
+              color: (theme) => theme.palette.text.secondary,
+              "& svg": {
+                color: (theme) => theme.palette.text.secondary,
+                fill: (theme) => theme.palette.text.secondary,
+              },
+              fontFamily: `var(--header-font-family)`,
+              background: "transparent",
+              fontWeight: 600,
+              position: "relative",
+              transition: "color .5s ease, background-color .5s ease",
+              px: { xs: 0, sm: "12px" },
+              py: { xs: "6px", sm: "14px" },
+              borderRadius: 0,
+              minWidth: "3rem",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "16px",
+              lineHeight: "24px",
+              "&.active, &:hover, &.clicked": {
+                "& svg": {
+                  color: "black",
+                  fill: "black",
+                },
+              },
+              "&:after": {
+                position: "absolute",
+                left: 0,
+                bottom: 0,
+                content: `""`,
+                display: "block",
+                height: "4px",
+                width: 0,
+                background: "transparent",
+                transition: "width .5s ease, background-color .5s ease",
+              },
+            },
+          },
+          "& .dropdown": {
+            "&, & > button, & > .dropbtn, & > button.dropbtn": {
+              borderRadius: `8px 8px 0 0`,
+            },
+          },
+          "& .dropdown-content": {
+            background: "white",
+          },
+          ...sx,
+        }}
+      >
+        {navLinks.map((linkProps) => (
+          <NavigationLink
+            key={linkProps.href + "_" + (linkProps.name || "")}
+            linkProps={linkProps}
+          >
+            {linkProps.name || ""}
+          </NavigationLink>
+        ))}
+      </Stack>
+    </Box>
   );
 };
 export default NavbarLinks;

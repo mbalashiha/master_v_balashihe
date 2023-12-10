@@ -8,7 +8,7 @@ import React from "react";
 
 type Props = Partial<React.ComponentProps<typeof Box> & NavLinkProps>;
 
-const DropDownMenu = ({ submenu, name, href, active, ...rest }: Props) => {
+const   DropDownMenu = ({ submenu, name, href, active, ...rest }: Props) => {
   const [opened, setOpened] = useState<boolean | null>(null);
   return (
     <ClickAwayListener
@@ -20,6 +20,9 @@ const DropDownMenu = ({ submenu, name, href, active, ...rest }: Props) => {
     >
       <Box
         {...rest}
+        itemProp="itemListElement"
+        itemScope
+        itemType="https://schema.org/ItemList"
         className={cn(
           rest.className,
           "dropdown",
@@ -98,15 +101,42 @@ const DropDownMenu = ({ submenu, name, href, active, ...rest }: Props) => {
           onClick={(event) => {
             setOpened((prev) => !prev);
           }}
+          itemScope
+          itemType="https://schema.org/ListItem"
         >
           {name}
           <span className="material-icons">keyboard_arrow_down</span>
+          <meta
+            itemProp="name"
+            content={
+              typeof name === "object"
+                ? href || "Подменю"
+                : (name || href || "Подменю").toString()
+            }
+          />
         </button>
-        <Box component="ul" className="dropdown-content">
+        <Box
+          component="ul"
+          className="dropdown-content"
+          itemScope
+          itemType="https://schema.org/ListItem"
+        >
           {submenu?.map((item) => (
             <Box component="li" key={item.name + "_" + item.href}>
+              <meta
+                itemProp="name"
+                content={
+                  typeof item.name === "object"
+                    ? item.href || "Страница в подкатегории"
+                    : (
+                        item.name ||
+                        item.href ||
+                        "Страница в подкатегории"
+                      ).toString()
+                }
+              />
               {item.href ? (
-                <Link className="menu-item" href={item.href}>
+                <Link className="menu-item" href={item.href} itemProp="url">
                   {item.name}
                 </Link>
               ) : (

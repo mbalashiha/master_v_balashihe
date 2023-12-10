@@ -59,6 +59,14 @@ export default function NavigationLink({
         <DropDownMenu {...(linkProps as any)} />
       ) : (
         <>
+          <meta
+            itemProp="name"
+            content={
+              typeof linkProps.name === "object"
+                ? linkProps.href || "Начальная страница"
+                : (linkProps.name || linkProps.href || "Страница").toString()
+            }
+          />
           {linkProps.active && linkProps.hideHrefLink ? (
             <div className="menu-item" {...props}>
               {linkProps.name}
@@ -69,6 +77,7 @@ export default function NavigationLink({
               href={linkProps.href}
               passHref
               {...(props as any)}
+              itemProp="url"
             >
               {linkProps.name}
             </Link>
@@ -78,6 +87,7 @@ export default function NavigationLink({
               href={linkProps.href}
               passHref
               {...(props as any)}
+              itemProp="url"
             >
               {linkProps.name}
             </Link>

@@ -80,7 +80,7 @@ export default function Search({ search, sx, onSubmit, navbarSearch }: Props) {
           itemScope
           itemType="https://schema.org/WebSite"
         >
-          <meta itemProp="url" content={getCanonicalUrl("/")} />
+          <link itemProp="url" href={getCanonicalUrl("/")} />
           <form
             role="search"
             itemProp="potentialAction"
@@ -130,7 +130,7 @@ export default function Search({ search, sx, onSubmit, navbarSearch }: Props) {
               type="search"
               required
               inputProps={{
-                itemProp: "query-input",
+                itemProp: "query",
               }}
               InputProps={{
                 disableUnderline: true,
