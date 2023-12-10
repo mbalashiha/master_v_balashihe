@@ -164,6 +164,9 @@ dependencies:
   prismjs:
     specifier: ^1.29.0
     version: 1.29.0
+  promise-worker:
+    specifier: ^2.0.1
+    version: 2.0.1
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -6675,6 +6678,10 @@ packages:
     dependencies:
       err-code: 2.0.3
       retry: 0.12.0
+
+  /promise-worker@2.0.1:
+    resolution: {integrity: sha512-jR7vHqMEwWJ15i9vA3qyCKwRHihyLJp1sAa3RyY5F35m3u5s2lQUfq0nzVjbA8Xc7+3mL3Y9+9MHBO9UFRpFxA==}
+    dev: false
 
   /prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}

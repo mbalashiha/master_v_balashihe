@@ -2,11 +2,11 @@ import prettier from "prettier/standalone";
 import prettierPluginBabel from "prettier/plugins/babel";
 import prettierPluginHtml from "prettier/plugins/html";
 import prettierPluginEstree from "prettier/plugins/estree";
-
-export default async function beatifyCode(value: {
+export type BeatifyCodeValue = {
   textContent: string;
   language: "tsx" | "jsx" | "markup";
-}) {
+};
+export default async function beatifyCode(value: BeatifyCodeValue) {
   try {
     const { language } = value;
     let parser: string = "";
@@ -27,23 +27,29 @@ export default async function beatifyCode(value: {
       parser,
       plugins: [prettierPluginBabel, prettierPluginHtml, prettierPluginEstree],
     });
-    return {
+    const result = {
       textContent: newTextContent
         .trim()
         .replace(/^;\</im, "<")
         .replace(/\>;$/im, ">"),
       language: value.language,
     };
+    // console.log("beatifyCode with prettier: Success result:", result);
+    return result;
   } catch (e: any) {
-    console.error(e.message || e);
-    debugger;
-    throw e;
+    console.warn("beatifyCode with prettier:", e.message || e);
+    return value;
   }
 }
 export async function beatifyHtml(inTextContent: string): Promise<string> {
-  const { textContent } = await beatifyCode({
-    textContent: inTextContent,
-    language: "markup",
-  });
-  return textContent;
+  try {
+    const { textContent } = await beatifyCode({
+      textContent: inTextContent,
+      language: "markup",
+    });
+    return textContent;
+  } catch (e: any) {
+    console.warn("beatifyHtml with prettier:", e.message || e);
+    return inTextContent;
+  }
 }

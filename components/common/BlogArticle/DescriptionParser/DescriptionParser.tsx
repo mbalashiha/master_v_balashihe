@@ -306,12 +306,31 @@ const options = {
           break;
         case "a":
         case "link":
+          const href = convertedProps.href;
+          if (!href) {
+            return (
+              <Box
+                {...(convertedProps as any)}
+                component="a"
+                sx={{ ...styleSX }}
+              >
+                {Children}
+              </Box>
+            );
+          }
+          const target = href.includes("://")
+            ? "_blank"
+            : convertedProps.target || undefined;
           if (hasStyle) {
             <Box component="span" sx={{ ...styleSX }}>
-              <Link {...(convertedProps as any)}>{Children}</Link>
+              <Link {...(convertedProps as any)} target={target}>{Children}</Link>
             </Box>;
           } else {
-            return <Link {...(convertedProps as any)}>{Children}</Link>;
+            return (
+              <Link {...(convertedProps as any)} target={target}>
+                {Children}
+              </Link>
+            );
           }
           break;
         case "img":

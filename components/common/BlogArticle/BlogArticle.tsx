@@ -102,11 +102,19 @@ export default function BlogArticle(article: Props) {
               fontFamily: "var(--article-text-font-family)",
               fontWeight: 400,
               fontSize: "18px",
-              lineHeight: "27px",
+              lineHeight: "24px",
               color: (theme) =>
                 theme.palette.mode === "light"
                   ? theme.palette.articleText.main
                   : "white",
+              "& a": {
+                fontWeight: 600,
+                fontFamily: `var(--text-font-family)`,
+              },
+            },
+            "& p": {
+              // p: 0,
+              m: `15px 0 3px 0`,
             },
             "& .Paper-root": {
               clear: "both",

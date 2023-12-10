@@ -6,7 +6,9 @@ import React, {
   FC,
   useImperativeHandle,
   useCallback,
+  useState,
 } from "react";
+import PromiseWorker from "promise-worker";
 import { Editor } from "@tinymce/tinymce-react";
 import { Box, Button, Portal, styled } from "@mui/material";
 import util from "util";
@@ -24,7 +26,7 @@ import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-tsx";
 import delay from "delay";
-import beatifyCode from "@components/utils/beatifyCode";
+import beatifyCode, { BeatifyCodeValue } from "@components/utils/beatifyCode";
 
 export interface MemoizedTinyMCEProps {
   initialValue: string;
@@ -139,44 +141,90 @@ const ForwardingTinyMCEEditorRef = forwardRef<
     editor: editorRef.current?.editor,
   }));
   const { setModalImage } = useEditorContext();
-
+  const prettierWorkerRef = useRef<PromiseWorker | null>(null);
   const formatPrismCodeBlocks = useCallback(
     async (targetNode?: HTMLPreElement, inLanguage?: string) => {
       const editor = editorRef.current?.editor;
-      if (editor && editor.dom) {
-        const pres: HTMLPreElement[] = targetNode
-          ? [targetNode]
-          : editor.dom.select("pre");
-        for (const el of pres) {
-          const getLanguage = (): string => {
-            const m = (el.className || "").match(/language\-(\w+)/);
-            return (m && m[1]) || "";
-          };
-          const language: any = inLanguage ? inLanguage : getLanguage();
-          if (language && el.innerText) {
-            const beforeInnerText = el.innerText;
-            const editor = editorRef.current?.editor;
-            if (editor) {
-              const code = await beatifyCode({
-                textContent: beforeInnerText,
-                language,
-              });
-              if (code.textContent !== beforeInnerText) {
-                editor.undoManager.add();
-                el.textContent = code.textContent;
-                Prism.highlightElement(el);
-                editor.fire("change");
+      try {
+        if (editor && editor.dom) {
+          const pres: HTMLPreElement[] = targetNode
+            ? [targetNode]
+            : editor.dom.select("pre");
+          for (const el of pres) {
+            const getLanguage = (): string => {
+              const m = (el.className || "").match(/language\-(\w+)/);
+              return (m && m[1]) || "";
+            };
+            const language: any = inLanguage ? inLanguage : getLanguage();
+            if (language && el.innerText) {
+              const beforeInnerText = el.innerText;
+              const editor = editorRef.current?.editor;
+              const promiseWorker = prettierWorkerRef.current;
+              if (editor && promiseWorker) {
+                var hasBeenResolved = false;
+                const code = targetNode
+                  ? await Promise.race([
+                      promiseWorker.postMessage<
+                        BeatifyCodeValue,
+                        BeatifyCodeValue
+                      >({
+                        textContent: beforeInnerText,
+                        language,
+                      }),
+                      new Promise<BeatifyCodeValue>((resolve) =>
+                        setTimeout(() => {
+                          try {
+                            resolve({
+                              textContent: beforeInnerText,
+                              language,
+                            });
+                          } finally {
+                            if (!hasBeenResolved) {
+                              formatPrismCodeBlocks();
+                            }
+                          }
+                        }, 400)
+                      ),
+                    ])
+                  : await promiseWorker.postMessage<
+                      BeatifyCodeValue,
+                      BeatifyCodeValue
+                    >({
+                      textContent: beforeInnerText,
+                      language,
+                    });
+                hasBeenResolved = true;
+                if (code.textContent !== beforeInnerText) {
+                  editor.undoManager.add();
+                  el.textContent = code.textContent;
+                  Prism.highlightElement(el);
+                  editor.fire("change");
+                }
               }
             }
           }
+        }
+      } finally {
+        if (targetNode) {
+          const editor = editorRef.current?.editor;
+          editor?.execCommand("CodeSample");
         }
       }
     },
     []
   );
   useEffect(() => {
+    const prettierWorker = new Worker(
+      new URL("components/utils/beatifyCodeWorker", import.meta.url)
+    );
+    const promiseWorker = new PromiseWorker(prettierWorker);
+    prettierWorkerRef.current = promiseWorker;
+
     Prism.highlightAll();
     formatPrismCodeBlocks();
+    return () => {
+      prettierWorker.terminate();
+    };
   }, [formatPrismCodeBlocks]);
   return (
     <>
