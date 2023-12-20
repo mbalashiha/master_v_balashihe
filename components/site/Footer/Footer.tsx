@@ -5,6 +5,7 @@ import { blueGrey, grey } from "@mui/material/colors";
 import GetDiscountButton from "./GetDiscountButton";
 import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
 import { MetrikaScriptsParser } from "@components/common";
+import NbspPhone from "@components/ui/NbspPhone/NbspPhone";
 export const Footer = () => {
   return (
     <Container
@@ -109,8 +110,10 @@ export const Footer = () => {
         >
           <p>
             Вызвать мастера в Балашихе для ремонта компьютера или ноутбука на
-            дом или в офис, тел.{" "}
-            <span itemProp="telephone">{NEXT_PUBLIC_CONTACT_PHONE_TEXT}</span>
+            дом или в офис,{" "}
+            <NbspPhone itemProp="telephone" prefix="тел.">
+              {NEXT_PUBLIC_CONTACT_PHONE_TEXT}
+            </NbspPhone>
           </p>
           <time itemProp="openingHours" dateTime="Mo-Su">
             Время работы: с 9:00 до 23:00 | Без выходных
