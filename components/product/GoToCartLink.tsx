@@ -25,7 +25,7 @@ const GoToCartLink = styled((props: React.ComponentProps<typeof Button>) => {
     "&:hover": {
       background: theme.palette.primary.light,
     },
-    fontFamily: "Montserrat, Roboto",
+    fontFamily: "var(--text-font-family)",
     fontWeight: 700,
     color: theme.palette.mode === "dark" ? "white" : "black",
     padding: "0.1rem 1.2rem",

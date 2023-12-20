@@ -15,7 +15,7 @@ import Link from "next/link";
 export const LandingPricesCards = () => {
   return (
     <Container maxWidth={"lg"} sx={{ pb: "30px" }}>
-      <Typography component="h3" variant="h1" gutterBottom mb="2rem">
+      <Typography component="h3" variant="h1" gutterBottom mb="2rem" fontWeight={500}>
         Настраиваю{" "}
         <Box component="span" color="primary.main">
           программное обеспечение

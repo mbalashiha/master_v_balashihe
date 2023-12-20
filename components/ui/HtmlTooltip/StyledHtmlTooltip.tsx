@@ -14,11 +14,11 @@ export const StyledHtmlTooltip = styled("span")`
     color: #ffffff;
     background: #555555;
     font-weight: 400;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-family: Tahoma, Helvetica, Arial, sans-serif;
     font-size: 13pt;
     * {
       color: #fff;
-      font-family: Roboto, Helvetica, Arial, sans-serif;
+      font-family: Tahoma, Helvetica, Arial, sans-serif;
       font-size: 13pt;
     }
     & header {

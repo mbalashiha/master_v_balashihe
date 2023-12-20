@@ -30,7 +30,6 @@ export default function LandingAgeTasks() {
             textAlign: "center",
             fontSize: "38px",
             lingHeight: "50px",
-            fontWeight: 500,
             textTransform: "none",
             color: "white",
             mb: { xs: "15px", lg: "35px" },

@@ -102,10 +102,10 @@ export default function BlogArticle(article: Props) {
               fontFamily: "var(--article-text-font-family)",
               fontWeight: 400,
               fontSize: "18px",
-              lineHeight: "24px",
+              lineHeight: "28px",
               color: (theme) =>
                 theme.palette.mode === "light"
-                  ? theme.palette.articleText.main
+                  ? theme.palette.articleText?.main || "black"
                   : "white",
               "& a": {
                 fontWeight: 600,
@@ -118,6 +118,10 @@ export default function BlogArticle(article: Props) {
             },
             "& .Paper-root": {
               clear: "both",
+              fontFamily: `var(--text-font-family)`,
+              "& strong": {
+                fontFamily: `var(--text-font-family)`,
+              },
             },
             "& .Paper-elevation1": {
               fontSize: "17px",
@@ -128,6 +132,7 @@ export default function BlogArticle(article: Props) {
             },
             "& .data-image-container": {
               textAlign: "center",
+              fontFamily: `var(--text-font-family)`,
               my: 2,
               "& img": {
                 padding: 0,

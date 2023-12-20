@@ -95,7 +95,7 @@ export default function Hero({ article }: Props) {
                   p: 3,
                   pb: 0,
                   pr: 1,
-                  fontFamily: `Roboto, "Segoe UI", Tahoma, Verdana, Arial`,
+                  fontFamily: "var(--text-font-family)",
                   fontWeight: 500,
                   fontSize: "18px",
                   lineHeight: "28px",

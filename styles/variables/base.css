@@ -1,5 +1,5 @@
 :root {
-  --header-font-family: Gotham, Tahoma, Verdana, Arial, sans-serif;
+  --header-font-family: "Noto Sans", Tahoma, Verdana, Arial, sans-serif;
   --text-font-family: "Noto Sans", Verdana, Arial, sans-serif;
   --article-text-font-family: Verdana, Tahoma, Arial, sans-serif;
   --landing-font-family: var(--header-font-family);

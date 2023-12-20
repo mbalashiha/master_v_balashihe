@@ -34,6 +34,8 @@ export default function GetDiscountButton() {
         startIcon={<DiscountIcon />}
         onClick={() => toggleModal("get discount wizard")}
         sx={{
+          fontWeight: 600,
+          fontSize: "16px",
           zIndex: 2,
           position: "absolute",
           bottom: 0,

@@ -76,8 +76,8 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
       },
       h3: {
         fontFamily: `var(--header-font-family)`,
-        fontSize: "24px",
-        lineHeight: "37px",
+        fontSize: "21px",
+        lineHeight: "28px",
         fontWeight: 700,
       },
       h5: {
@@ -263,7 +263,7 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
             borderColor: theme.palette.primary.main,
             color: theme.palette.primary.main,
             padding: "10px 30px",
-            fontWeight: 600,
+            fontWeight: 700,
             "&:hover": {
               background: theme.palette.primary.main,
               color: "#ffffff",

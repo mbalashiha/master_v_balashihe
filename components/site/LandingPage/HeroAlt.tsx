@@ -31,7 +31,9 @@ const StyledContactButton = ({
         border: "none",
         borderRadius: "6px",
         background: "transparent",
-        color: `primary.main`,
+        color: "primary.main",
+        fontWeight: 600,
+        textTransform: "uppercase",
         "& svg": {
           fill: "white",
         },
@@ -40,7 +42,7 @@ const StyledContactButton = ({
           color: "white",
           boxShadow: "none",
         },
-        textTransform: "uppercase",
+        // fontFamily: "var(--article-text-font-family)",
         ...sx,
       }}
       {...rest}
@@ -182,7 +184,7 @@ export default function Hero({ article }: Props) {
                     md: "38px",
                     lg: "65px",
                   },
-                  fontWeight: 600,
+                  fontWeight: 500,
                   textTransform: "uppercase",
                   mb: 0,
                   fontFamily: `var(--text-font-family)`,

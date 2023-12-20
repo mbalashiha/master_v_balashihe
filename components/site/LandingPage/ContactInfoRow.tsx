@@ -20,7 +20,6 @@ export const ContactInfoRow = ({ svgIcon, label, infoText }: Props) => {
               fontSize: "16px",
               lineHeight: "25px",
               fontWeight: 400,
-              fontFamily: "Arial",
               color: (theme) =>
                 theme.palette.mode === "dark" ? "grey.500" : "grey.600",
               marginBottom: "-6px",
@@ -40,7 +39,7 @@ export const ContactInfoRow = ({ svgIcon, label, infoText }: Props) => {
               fontWeight: (theme) =>
                 theme.palette.mode === "dark" ? 500 : 700,
               color: (theme) =>
-                theme.palette.mode === "dark" ? "grey.200" : "text.primary",
+                theme.palette.mode === "dark" ? "grey.200" : "text.secondary",
               marginTop: "-6px",
             },
           }}

@@ -179,10 +179,10 @@ export default function ContactArticleComponent({
           <Paper
             sx={{
               "&, & p, & .Paper-root": {
-                fontFamily: 'Roboto, "Segoe UI", Tahoma, Verdana, Arial',
+                fontFamily: "var(--text-font-family)",
                 fontWeight: 500,
                 fontSize: "18px",
-                lineHeight: "27px",
+                lineHeight: "28px",
                 color: (theme) =>
                   theme.palette.mode === "light" ? "#0e0e0f" : "white",
               },

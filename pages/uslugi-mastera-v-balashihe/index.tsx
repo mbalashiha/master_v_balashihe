@@ -75,11 +75,6 @@ export default function Page({
                 itemProp="description"
                 variant="h3"
                 component="h3"
-                sx={{
-                  fontSize: "21px",
-                  lineHeight: "28px",
-                  fontWeight: 500,
-                }}
               >
                 {title}
               </Typography>
@@ -112,7 +107,7 @@ export async function getStaticProps() {
   });
   return {
     props: {
-      title: `Блог мастера в Балашихе по ремонту ПК`,
+      title: `Блог`,
       canonicalUrl: getCanonicalUrl(`/uslugi-mastera-v-balashihe/`),
       image,
       articles: await getArticlesCards(),

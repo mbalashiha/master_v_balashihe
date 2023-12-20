@@ -10,7 +10,11 @@ import ReasonItem from "./ReasonItem";
 export const LandingReasons = () => {
   return (
     <Container maxWidth="lg" sx={{ pb: "70px" }}>
-      <Typography component="h3" variant="h1" sx={{ pb: 0, mb: "30px" }}>
+      <Typography
+        component="h3"
+        variant="h1"
+        sx={{ fontWeight: 500, pb: 0, mb: "30px" }}
+      >
         <Box component="span" color="primary.main">
           Несколько причин
         </Box>{" "}

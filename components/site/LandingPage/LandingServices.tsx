@@ -27,10 +27,10 @@ export default function LandingServices() {
           textAlign: "center",
           fontSize: "38px",
           lingHeight: "50px",
-          fontWeight: 500,
           textTransform: "uppercase",
           color: "white",
           mb: { xs: "15px", sm: "35px", md: "40px" },
+          fontWeight: 500,
         }}
       >
         Услуги компьютерного мастера

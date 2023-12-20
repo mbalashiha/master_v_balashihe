@@ -40,7 +40,7 @@ export const PopoverButton = ({
   return (
     <Button
       sx={{
-        fontFamily: "Roboto",
+        fontFamily: "Tahoma, Verdana, Arial, sans-serif",
         fontWeight: 500,
         fontSize: "11pt",
         color: "#2d2f43",
@@ -71,7 +71,7 @@ export const PopoverButton = ({
   );
 };
 export const ConfirmMessage = styled("div")(({ theme }) => ({
-  fontFamily: "Roboto",
+  fontFamily: "Tahoma, Verdana, Arial, sans-serif",
   fontWeight: 500,
   color: "white",
   fontSize: "12pt",

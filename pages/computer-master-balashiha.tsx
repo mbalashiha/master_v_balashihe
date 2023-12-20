@@ -112,7 +112,7 @@ export default function AboutMaster(
                   overflow: "visible",
                   borderColor: (theme) => theme.palette.primary.light,
                   borderRadius: (theme) => theme.shape.borderRadius - 9 + "px",
-                  fontFamily: `Roboto, "Segoe UI", Tahoma, Verdana, Arial`,
+                  fontFamily: "var(--text-font-family)",
                   fontWeight: 500,
                   fontSize: { xs: "18px", sm: "16px", md: "18px" },
                   lineHeight: { xs: "28px", sm: "23px", md: "28px" },

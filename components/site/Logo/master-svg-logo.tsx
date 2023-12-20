@@ -10,6 +10,7 @@ const MasterSvgLogo = () => (
     height={80}
     alt={"Мастер в Балашихе для ремонта компьютеров"}
     title={"Мастер в Балашихе для ремонта"}
+    loading="eager"
   />
 );
 export default MasterSvgLogo;

@@ -43,6 +43,7 @@ export default function LandingPhotoTicker({}: Props) {
           mt: { xs: 0, sm: 4 },
           mb: 4,
           textAlign: "center",
+          fontWeight: 500,
         }}
       >
         <Box component="span" color="primary.main">
