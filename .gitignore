@@ -31,5 +31,6 @@ yarn-error.log*
 .env.production
 *Zone.Identifier
 /webpack-define-plugin/**
-yandex_*
-/public/*.html
+/public/google*.html
+/public/yandex_*.html
+/public/yandex-*.txt
