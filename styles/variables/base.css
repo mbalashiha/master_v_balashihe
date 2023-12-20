@@ -1,9 +1,9 @@
 :root {
-  --header-font-family: Gotham, Verdana, Arial, sans-serif;
-  --landing-font-family: var(--header-font-family);
+  --header-font-family: Gotham, Tahoma, Verdana, Arial, sans-serif;
   --text-font-family: "Noto Sans", Verdana, Arial, sans-serif;
+  --article-text-font-family: Verdana, Tahoma, Arial, sans-serif;
+  --landing-font-family: var(--header-font-family);
   --navbar-font-family: var(--text-font-family);
-  --article-text-font-family: Verdana, sans-serif;
   --landing-background-color: #010101;
   --header-typography-color: #af7e42;
   --animate-duration: 1s;
