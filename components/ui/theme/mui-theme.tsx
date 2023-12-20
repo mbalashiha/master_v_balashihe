@@ -5,7 +5,7 @@ const InterFontFamily = `Inter, Arial, sans-serif`;
 
 export const standartCssTransition = {
   transitionProperty: "all",
-  transitionDuration: "0.14s",
+  transitionDuration: "0.16s",
   transitionTimingFunction: "ease-in-out",
   transitionDelay: "0s",
 };

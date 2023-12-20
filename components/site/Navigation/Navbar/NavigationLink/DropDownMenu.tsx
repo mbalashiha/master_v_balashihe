@@ -8,7 +8,7 @@ import React from "react";
 
 type Props = Partial<React.ComponentProps<typeof Box> & NavLinkProps>;
 
-const   DropDownMenu = ({ submenu, name, href, active, ...rest }: Props) => {
+const DropDownMenu = ({ submenu, name, href, active, ...rest }: Props) => {
   const [opened, setOpened] = useState<boolean | null>(null);
   return (
     <ClickAwayListener
@@ -38,16 +38,18 @@ const   DropDownMenu = ({ submenu, name, href, active, ...rest }: Props) => {
           "& button.dropbtn": {
             border: "none",
             borderRadius: `8px 8px 0 0`,
-            "& > .material-icons": {
-              transform: `rotate(0)`,
+            pl: 0,
+            "&:before": {
+              ...standartCssTransition,
+              transform: `rotate(0turn)`,
             },
-            "&:hover > .material-icons": {
+            "&:hover:before": {
               transform: `rotate(0.25turn)`,
             },
           },
           "&.clicked:not(.closed)": {
             "& button.dropbtn": {
-              "& > .material-icons": {
+              "&:before": {
                 transform: `rotate(0.25turn)`,
               },
             },
@@ -95,7 +97,8 @@ const   DropDownMenu = ({ submenu, name, href, active, ...rest }: Props) => {
           ...rest.sx,
         }}
       >
-        <button
+        <Box
+          component="button"
           className={cn("menu-item", "dropbtn", { clicked: opened })}
           type="button"
           onClick={(event) => {
@@ -103,9 +106,19 @@ const   DropDownMenu = ({ submenu, name, href, active, ...rest }: Props) => {
           }}
           itemScope
           itemType="https://schema.org/ListItem"
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            "&:before": {
+              content: `"\\e315"`,
+              fontFamily: "Material Icons Round",
+              fontWeight: 400,
+              fontSize: "24px",
+              lineHeight: "24px",
+            },
+          }}
         >
           {name}
-          <span className="material-icons">keyboard_arrow_down</span>
           <meta
             itemProp="name"
             content={
@@ -114,7 +127,7 @@ const   DropDownMenu = ({ submenu, name, href, active, ...rest }: Props) => {
                 : (name || href || "Подменю").toString()
             }
           />
-        </button>
+        </Box>
         <Box
           component="ul"
           className="dropdown-content"

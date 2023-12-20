@@ -196,7 +196,7 @@ export default function Hero({ article }: Props) {
                   sx={{
                     px: "12px",
                     py: { xs: "7px", sm: "0" },
-                    background: (theme) => `#ffffff30`,
+                    background: (theme) => `${theme.palette.primary.main}2e`,
                     borderRadius: "6px",
                   }}
                 >
@@ -213,7 +213,7 @@ export default function Hero({ article }: Props) {
                     sx={{
                       px: "12px",
                       py: { xs: "7px", sm: "0" },
-                      background: (theme) => `#ffffff30`,
+                      background: (theme) => `${theme.palette.primary.main}2e`,
                       borderRadius: "6px",
                     }}
                   >
