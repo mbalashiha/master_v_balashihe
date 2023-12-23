@@ -1,14 +1,17 @@
 body {
-  padding: 0 10px 0 10px;
+  padding: 0 10px 0 10px; }
+
+html,
+body {
+  -webkit-font-smoothing: antialiased;
   font-family: Tahoma, Verdana, Arial, sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 28px;
   color: #0e0e0f; }
 
-html,
-body {
-  -webkit-font-smoothing: antialiased; }
+p {
+  color: #0e0e0f; }
 
 pre {
   font-size: 14px;

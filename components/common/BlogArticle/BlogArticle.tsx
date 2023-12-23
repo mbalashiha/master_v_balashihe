@@ -103,10 +103,7 @@ export default function BlogArticle(article: Props) {
               fontWeight: 400,
               fontSize: "18px",
               lineHeight: "28px",
-              color: (theme) =>
-                theme.palette.mode === "light"
-                  ? theme.palette.articleText?.main || "black"
-                  : "white",
+              color: (theme) => theme.palette.articleText?.main || "black",
               "& a": {
                 fontWeight: 600,
               },

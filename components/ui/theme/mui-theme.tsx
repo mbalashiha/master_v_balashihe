@@ -22,7 +22,7 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
         main: "#ffc14d",
       },
       articleText: {
-        main: "#0e0e0f",
+        main: "black",
       },
       secondaryBackground: {
         main: "#F3F5FE",

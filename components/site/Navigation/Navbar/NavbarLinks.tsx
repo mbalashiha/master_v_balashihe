@@ -134,9 +134,18 @@ export const NavbarLinks = ({
           flexWrap: "wrap",
           gap: "4px",
           color: (theme) => theme.palette.text.primary,
+          "& svg": {
+            color: (theme) => theme.palette.text.primary,
+            fill: (theme) => theme.palette.text.primary,
+          },
           "&:hover": {
             "& > li": {
               "&.active > .menu-item": {
+                color: "black",
+                "& svg": {
+                  color: "black",
+                  fill: "black",
+                },
                 "&:after": {
                   width: 0,
                   background: "transparent",
