@@ -1,7 +1,8 @@
 @import "@styles/fonts/noto-sans.css";
+@import "@styles/fonts/tahoma.css";
+// @import "@styles/fonts/verdana.css";
 // @import "@styles/fonts/gotham.css";
 // @import "@styles/fonts/segoe-ui.css";
-@import "@styles/fonts/verdana.css";
 // @import "@styles/fonts/roboto.css";
 // @import "@styles/fonts/inter.css";
 @import "@styles/fonts/material-icons.css";
@@ -45,7 +46,7 @@ pre {
   font-weight: 500;
   font-size: 18px;
   line-height: 27px;
-  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-family: var(--monospace-font-family);
   background-color: #121311;
 }
 .tox .tox-textarea-wrap {
@@ -55,7 +56,7 @@ pre {
       color: #fff06d;
       font-size: 14px;
       line-height: 24px;
-      font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+      font-family: var(--monospace-font-family);
       background-color: #121311;
     }
   }
@@ -99,8 +100,8 @@ pre {
       }
       &,
       & * {
-        font-family: Roboto, Arial, sans-serif;
-        font-weight: 600;
+        font-family: var(--tinymce-font-family);
+        font-weight: 500;
         padding: 0;
       }
       svg {
@@ -111,7 +112,7 @@ pre {
     .tox-tbtn {
       &,
       & * {
-        font-family: Roboto, Arial, sans-serif !important;
+        font-family: var(--tinymce-font-family);
         font-weight: 500 !important;
         transition-property: all;
         transition-duration: 0.1s;
@@ -137,7 +138,7 @@ ol {
   li {
     padding: 0.5em;
     text-indent: 0;
-    font-family: Roboto, Arial, sans-serif;
+    font-family: var(--tinymce-font-family);
     font-size: 17px;
     line-height: 25px;
   }

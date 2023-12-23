@@ -1,7 +1,10 @@
 :root {
   --header-font-family: "Noto Sans", Tahoma, Verdana, Arial, sans-serif;
   --text-font-family: "Noto Sans", Verdana, Arial, sans-serif;
-  --article-text-font-family: Verdana, Tahoma, Arial, sans-serif;
+  --article-text-font-family: Tahoma, Verdana, Arial, sans-serif;
+  --monospace-font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
+    monospace;
+  --tinymce-font-family: Tahoma, "Noto Sans", Arial, sans-serif;
   --landing-font-family: var(--header-font-family);
   --navbar-font-family: var(--text-font-family);
   --landing-background-color: #010101;

@@ -182,7 +182,7 @@ const Navbar: FC = () => {
           boxShadow:
             "#0000001a 0rem 0.25rem 0.375rem -0.0625rem, #0000000f 0rem 0.125rem 0.25rem -0.0625rem",
 
-          backgroundColor: "rgba(237, 239, 245, 0.75)",
+          backgroundColor: "rgba(245, 242, 237, 0.623)",
         }}
       >
         <Container

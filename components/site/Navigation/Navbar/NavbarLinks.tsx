@@ -133,7 +133,7 @@ export const NavbarLinks = ({
           alignItems: { xs: "flex-start", sm: "center" },
           flexWrap: "wrap",
           gap: "4px",
-          color: (theme) => theme.palette.text.secondary,
+          color: (theme) => theme.palette.text.primary,
           "&:hover": {
             "& > li": {
               "&.active > .menu-item": {
@@ -159,12 +159,15 @@ export const NavbarLinks = ({
             "&.active > .menu-item": {
               cursor: "default",
             },
+            "&.active > a[href].menu-item": {
+              cursor: "pointer",
+            },
             "& .menu-item": {
               cursor: "pointer",
-              color: (theme) => theme.palette.text.secondary,
+              color: (theme) => theme.palette.text.primary,
               "& svg": {
-                color: (theme) => theme.palette.text.secondary,
-                fill: (theme) => theme.palette.text.secondary,
+                color: (theme) => theme.palette.text.primary,
+                fill: (theme) => theme.palette.text.primary,
               },
               fontFamily: `var(--header-font-family)`,
               background: "transparent",

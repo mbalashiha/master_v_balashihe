@@ -1,6 +1,6 @@
 body {
   padding: 0 10px 0 10px;
-  font-family: Roboto, "Segoe UI", Tahoma, Verdana, Arial;
+  font-family: Tahoma, Verdana, Arial, sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 28px;
@@ -46,7 +46,7 @@ img {
 .data-image-container {
   font-weight: 300;
   color: grey;
-  font-family: Roboto, Verdana;
+  font-family: "Noto Sans", Verdana, Arial, sans-serif;
   font-size: 18px;
   line-height: 24px; }
 

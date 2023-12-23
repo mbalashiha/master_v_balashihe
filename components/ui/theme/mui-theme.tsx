@@ -19,13 +19,10 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
       mode: colorMode,
       primary: { main: "#b87d36" },
       secondary: {
-        main: "#24263F",
-      },
-      background: {
-        default: "#4D001D",
+        main: "#ffc14d",
       },
       articleText: {
-        main: "#04040a",
+        main: "#0e0e0f",
       },
       secondaryBackground: {
         main: "#F3F5FE",
@@ -34,11 +31,11 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
         main: "#EFDDD1",
       },
       text: {
-        primary: "#24263F",
-        secondary: "#303B44",
+        primary: "#25252c",
+        secondary: "#757575",
       },
       dialogClickColor: {
-        main: "#2e2d58",
+        main: "#3b362b",
       },
     },
     shape: {
@@ -51,7 +48,7 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
       fontWeightRegular: 400,
       fontWeightMedium: 500,
       allVariants: {
-        color: colorMode === "light" ? "#303B44" : grey[100],
+        color: colorMode === "light" ? "#3b362b" : grey[100],
       },
       button: {
         fontFamily: `var(--header-font-family)`,

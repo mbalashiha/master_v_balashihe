@@ -93,6 +93,10 @@ const YandexMapIframe = ({ sx, maxWidth, ...rest }: Props) => {
                 fontSize="34px"
                 lineHeight={"39px"}
                 fontWeight={700}
+                sx={{
+                  color: (theme) =>
+                    theme.palette.mode === "dark" ? "grey.100" : "text.primary",
+                }}
               >
                 Контакты
               </Typography>

@@ -112,6 +112,7 @@ export namespace Blog {
   export interface ArticleDraft {
     existingArticleId: ID | null;
     existingArticle: Article | null;
+    canonicalUrl?: string | null;
     id: ID | null;
     title: String;
     url: String | null;

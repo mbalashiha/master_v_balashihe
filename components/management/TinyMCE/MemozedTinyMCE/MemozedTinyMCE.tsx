@@ -25,8 +25,7 @@ import "prismjs/plugins/normalize-whitespace/prism-normalize-whitespace";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-tsx";
-import delay from "delay";
-import beatifyCode, { BeatifyCodeValue } from "@components/utils/beatifyCode";
+import type { BeatifyCodeValue } from "@components/utils/beatifyCode";
 
 export interface MemoizedTinyMCEProps {
   initialValue: string;
@@ -312,7 +311,7 @@ const ForwardingTinyMCEEditorRef = forwardRef<
           content_css: [
             "/tinymce/prismjs/prism-okaidia.min.css",
             "/tinymce/prismjs/prism-line-numbers.min.css",
-            "/additional/css/roboto.css",
+            "/additional/css/tahoma.css",
             "/css/my_tinymce_styles.css",
           ],
           setup: function (editor) {

@@ -63,7 +63,7 @@ export const CallMeForFree = ({
         }}
         {...PaperProps}
       >
-        <Typography component="p" variant="h4" mb={0} pb={0}>
+        <Typography component="p" mb={0} pb={0}>
           Звоните{" "}
           <Box
             component="span"
@@ -78,10 +78,10 @@ export const CallMeForFree = ({
             {NEXT_PUBLIC_CONTACT_PHONE_TEXT}
           </Box>
         </Typography>
-        <Typography component="h4" variant="h4" mb={0} pb={0}>
+        <Typography mb={0} pb={0}>
           Консультация компьютерного мастера в Балашихе
         </Typography>
-        <Typography component="p" variant="h1" mb={0} pb={0}>
+        <Typography mb={0} pb={0}>
           всегда бесплатна!
         </Typography>
       </Paper>

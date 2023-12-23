@@ -11,6 +11,7 @@ import {
   TextField,
   Typography,
   IconButton,
+  FormLabel,
 } from "@mui/material";
 import {
   AlertPoper,
@@ -34,6 +35,7 @@ import ArticleTemplates from "./Article/ArticleTemplates";
 import { Blog } from "@common/types/cms";
 import FirstTabImageUploader from "./Article/FirstTabImageUploader";
 import ImagesTabPanel from "./Article/ImagesTabPanel";
+import { getCanonicalUrl } from "@framework/utils/normalize";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -69,7 +71,13 @@ interface Props {
 }
 export const ArticleTabs = ({ article }: Props) => {
   const { value, handleChange, setTabNumber } = useTabs();
-  const displayingPageUrl: string = article.absURL || article.url || "";
+  const displayingPageUrl: string = useMemo(
+    () =>
+      article.absURL
+        ? getCanonicalUrl(article.absURL)
+        : article.canonicalUrl || article.url || "",
+    [article.absURL, article.canonicalUrl, article.url]
+  );
   return (
     <>
       <Paper
@@ -120,11 +128,25 @@ export const ArticleTabs = ({ article }: Props) => {
                     <Grid item xs={12}>
                       <Paper
                         elevation={1}
-                        sx={{ width: "100%", p: 1, fontWeight: 600 }}
+                        sx={{
+                          width: "100%",
+                          p: 1,
+                          pt: 0.3,
+                          fontWeight: 600,
+                          borderRadius: "6px",
+                        }}
                       >
                         <Stack direction={"row"}>
                           <Box sx={{ flexGrow: 1 }}>
-                            Страница на сайте:{" "}
+                            <FormLabel
+                              sx={{
+                                display: "block",
+                                fontWeight: 500,
+                                color: "grey.700",
+                              }}
+                            >
+                              Страница на сайте:{" "}
+                            </FormLabel>
                             <Tooltip title={"Читать статью на сайте"} inline>
                               <a
                                 href={displayingPageUrl}

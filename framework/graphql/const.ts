@@ -1,3 +1,19 @@
+const env: "development" | "production" | "" = process.env.NODE_ENV as any;
+export const NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN: string =
+  process.env.NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN || "";
+
+process.env.NEXT_PUBLIC_SITE_ORIGIN =
+  env === "production"
+    ? process.env.NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN || ""
+    : env === "development"
+    ? process.env.NEXT_PUBLIC_DEVELOPMENT_SITE_ORIGIN || ""
+    : process.env.NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN ||
+      process.env.NEXT_PUBLIC_SITE_ORIGIN ||
+      "";
+
+export const NEXT_PUBLIC_SITE_ORIGIN: string =
+  process.env.NEXT_PUBLIC_SITE_ORIGIN;
+
 export const API_HOST: string = (
   typeof window === "undefined"
     ? process.env.DEV_MACHINE_API_HOST ||

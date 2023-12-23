@@ -4,8 +4,10 @@ import { ID, Schema } from "@framework/types";
 import convertDate from "./convert-date";
 import { DateTime } from "luxon";
 import humanizeDuration from "humanize-duration";
-const NEXT_PUBLIC_SITE_URL = process.env["NEXT_PUBLIC_SITE_URL"] || "";
-export const getCanonicalUrl = (url: string) => `${NEXT_PUBLIC_SITE_URL}${url}`;
+import { NEXT_PUBLIC_SITE_ORIGIN } from "@framework/const";
+
+export const getCanonicalUrl = (url: string) =>
+  `${NEXT_PUBLIC_SITE_ORIGIN}${url}`;
 
 function readingTime(text: string, wordsPerMinute: number = 200): string {
   const words = text.trim().split(/\s+/).length;
@@ -195,8 +197,8 @@ export const normalizeArticle = (data: Schema.Article): Blog.Article => {
   if (!modified_time) {
     throw new Error("No article modified_time!");
   }
-  if (!process.env["NEXT_PUBLIC_SITE_URL"]) {
-    throw new Error("No NEXT_PUBLIC_SITE_URL for canonical url!");
+  if (!process.env["NEXT_PUBLIC_SITE_ORIGIN"]) {
+    throw new Error("No NEXT_PUBLIC_SITE_ORIGIN for canonical url!");
   }
   const { url, canonicalUrl } = getArticleUrlAndCanonicalUrl({
     handle,

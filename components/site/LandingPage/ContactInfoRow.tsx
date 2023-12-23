@@ -39,7 +39,7 @@ export const ContactInfoRow = ({ svgIcon, label, infoText }: Props) => {
               fontWeight: (theme) =>
                 theme.palette.mode === "dark" ? 500 : 700,
               color: (theme) =>
-                theme.palette.mode === "dark" ? "grey.200" : "text.secondary",
+                theme.palette.mode === "dark" ? "grey.100" : "text.primary",
               marginTop: "-6px",
             },
           }}

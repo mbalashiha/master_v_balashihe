@@ -109,7 +109,6 @@ export default function BlogArticle(article: Props) {
                   : "white",
               "& a": {
                 fontWeight: 600,
-                fontFamily: `var(--text-font-family)`,
               },
             },
             "& p": {
@@ -212,12 +211,15 @@ export default function BlogArticle(article: Props) {
             variant="h1"
             itemProp="headline"
             sx={{
-              color: (theme) => theme.palette.text.primary,
+              mx: { xs: "10px", sm: "10px", md: 0 },
+              my: 2,
+              padding: 0,
               float: "none",
               clear: "both",
               fontSize: "32px",
               lineHeight: "35px",
               fontWeight: 600,
+              minHeight: "41px",
               maxHeight: 35 * 3 + "px",
               overflow: "hidden",
               display: "-webkit-box",
@@ -225,8 +227,6 @@ export default function BlogArticle(article: Props) {
               "-webkit-box-orient": "vertical",
               textOverflow: "ellipsis",
               // textAlign: { xs: "center", sm: "left" },
-              mx: { xs: "10px", sm: "10px", md: 0 },
-              my: 2,
             }}
           >
             {title}

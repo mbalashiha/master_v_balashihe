@@ -48,13 +48,10 @@ export default function NavigationButtons({ navigation }: Props) {
           },
           "&&& a": {
             "& svg": {
-              width: "50px",
+              width: "auto",
               height: "50px",
-              background: (theme) => theme.palette.text.primary,
-              padding: "10px",
+              py: { xs: "1px", sm: "5px", md: "8px" },
               borderRadius: "9px",
-              color: "white",
-              fill: "white",
             },
             "& *[itemProp='name']": {
               margin: "10px",
@@ -67,10 +64,7 @@ export default function NavigationButtons({ navigation }: Props) {
               "-webkit-line-clamp": "2",
               "-webkit-box-orient": "vertical",
               textOverflow: "ellipsis",
-              color: (theme) =>
-                theme.palette.mode === "light"
-                  ? theme.palette.articleText.main
-                  : "white",
+              color: (theme) => theme.palette.text.secondary,
               fontWeight: 400,
               fontFamily: `var(--landing-font-family)`,
             },
@@ -79,7 +73,7 @@ export default function NavigationButtons({ navigation }: Props) {
               boxShadow: "none",
               color: (theme) => theme.palette.primary.main,
               "& svg": {
-                background: (theme) => theme.palette.primary.main,
+                fill: (theme) => theme.palette.primary.main,
               },
               "& *[itemProp='name']": {
                 color: (theme) => theme.palette.primary.main,

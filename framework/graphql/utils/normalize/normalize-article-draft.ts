@@ -1,6 +1,7 @@
 import { CMS } from "@common/types";
 import { ID, Schema } from "@framework/types";
 import {
+  getCanonicalUrl,
   normalizeArticle,
   normalizeArticleUrl,
   normalizeImage,
@@ -83,6 +84,7 @@ export const normalizeArticleDraft = (
     handle: handle || "",
     url,
     absURL: absURL ? `/${absURL}` : "",
+    canonicalUrl: url ? getCanonicalUrl(url) : "",
     text: text || "",
     textHtml: textHtml || "",
     textRawDraftContentState: textRawDraftContentState || null,

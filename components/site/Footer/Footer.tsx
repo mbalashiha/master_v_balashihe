@@ -74,7 +74,7 @@ export const Footer = () => {
             <meta itemProp="image" content={"/images/master_v_balashihe.jpg"} />
             <Link
               itemProp="url"
-              href={`${process.env.NEXT_PUBLIC_SITE_URL || "/"}`}
+              href={`${process.env.NEXT_PUBLIC_SITE_ORIGIN || "/"}`}
             >
               <span>&copy; {new Date().getFullYear()} </span>
               <span itemProp="name">

@@ -1,6 +1,7 @@
 import "@utils/MuiClassNameSetup";
 import "@styles/globals.scss";
 // import "animate.css/animate.css";
+import { NEXT_PUBLIC_SITE_ORIGIN } from "@framework/const";
 import { MuiSnackbarProvider } from "@components/ui";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "@utils/emotion-cache";
@@ -19,7 +20,9 @@ function MyMasterApp(
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = ctx;
   const hasLayout = !!Component.Layout;
   const Layout = hasLayout ? Component.Layout : Noop;
-  const title = pageProps?.product?.title;
+  const title = NEXT_PUBLIC_SITE_ORIGIN
+    ? pageProps?.product?.title + ""
+    : pageProps?.product?.title;
   return (
     <>
       <Head>
