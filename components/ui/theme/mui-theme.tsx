@@ -31,7 +31,7 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
         main: "#EFDDD1",
       },
       text: {
-        primary: "#25252c",
+        primary: "#1e1e20",
         secondary: "#757575",
       },
       dialogClickColor: {
