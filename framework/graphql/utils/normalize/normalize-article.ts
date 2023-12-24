@@ -25,7 +25,10 @@ export const getArticleUrlAndCanonicalUrl = ({
   canonicalUrl: string;
 } => {
   const url = chooseArticleUrl({ handle });
-  const canonicalUrl = getCanonicalUrl(absURL ? `/${absURL}` : url);
+  if (absURL && !absURL.startsWith("/")) {
+    absURL = `/${absURL}`;
+  }
+  const canonicalUrl = getCanonicalUrl(absURL ? absURL : url);
   return { url, canonicalUrl };
 };
 export const normalizeArticleUrl = (

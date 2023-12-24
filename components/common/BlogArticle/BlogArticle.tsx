@@ -20,7 +20,6 @@ import Image from "next/image";
 import { ArticleBreadcrumbs } from "./ArticleBreadcrumbs";
 import Head from "next/head";
 import NavigationButtons from "../ContactArticle/NavigationButtons/NavigationButtons";
-import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContactsWithMap";
 import IconView from "./IconView";
 
 interface Props extends CMS.Blog.Article {}
@@ -220,8 +219,8 @@ export default function BlogArticle(article: Props) {
               maxHeight: 35 * 3 + "px",
               overflow: "hidden",
               display: "-webkit-box",
-              "-webkit-line-clamp": "3",
-              "-webkit-box-orient": "vertical",
+              lineClamp: "3",
+              boxOrient: "vertical",
               textOverflow: "ellipsis",
               // textAlign: { xs: "center", sm: "left" },
             }}

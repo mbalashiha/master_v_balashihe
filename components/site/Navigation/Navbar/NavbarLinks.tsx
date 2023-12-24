@@ -80,7 +80,6 @@ export const NavbarLinks = ({
     navLinks.forEach((elem) => {
       if (elem.href === asPath) {
         elem.active = true;
-        elem.hideHrefLink = true;
         activeSetted = true;
       }
     });
@@ -94,7 +93,6 @@ export const NavbarLinks = ({
       navLinks.forEach((elem) => {
         if (elem.href === pathnamePrefix) {
           elem.active = true;
-          elem.hideHrefLink = false;
           activeSetted = true;
         }
       });

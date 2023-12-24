@@ -3,7 +3,10 @@ import KeyboardDoubleArrowUpRoundedIcon from "@mui/icons-material/KeyboardDouble
 import { Container, Box, IconButton, Stack } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 import GetDiscountButton from "./GetDiscountButton";
-import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
+import {
+  NEXT_PUBLIC_CONTACT_PHONE_TEXT,
+  NEXT_PUBLIC_SITE_ORIGIN,
+} from "@framework/const";
 import { MetrikaScriptsParser } from "@components/common";
 import NbspPhone from "@components/ui/NbspPhone/NbspPhone";
 export const Footer = () => {
@@ -72,10 +75,7 @@ export const Footer = () => {
               } Компьютерный мастер в Балашихе`}
             />
             <meta itemProp="image" content={"/images/master_v_balashihe.jpg"} />
-            <Link
-              itemProp="url"
-              href={`${process.env.NEXT_PUBLIC_SITE_ORIGIN || "/"}`}
-            >
+            <Link itemProp="url" href={`${NEXT_PUBLIC_SITE_ORIGIN}/`}>
               <span>&copy; {new Date().getFullYear()} </span>
               <span itemProp="name">
                 {process.env.NEXT_PUBLIC_SITE_NAME || ""} Компьютерный мастер в

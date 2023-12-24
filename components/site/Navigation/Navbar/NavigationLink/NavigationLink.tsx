@@ -26,7 +26,6 @@ export interface NavLinkProps {
   name: string | React.ReactNode;
   href?: string;
   active?: boolean;
-  hideHrefLink?: boolean;
   submenu?: Array<NavLinkProps>;
   about?: boolean;
 }
@@ -41,6 +40,7 @@ export default function NavigationLink({
   about,
   ...props
 }: Props) {
+  const { name, href, active, submenu } = linkProps;
   return (
     <Box
       component="li"
@@ -49,14 +49,19 @@ export default function NavigationLink({
       itemType="https://schema.org/ItemList"
       className={cn(
         className,
-        { active: linkProps.active },
+        { active: active },
         {
-          menuLink: !linkProps.href || linkProps.hideHrefLink,
+          menuLink: !href,
         }
       )}
     >
-      {linkProps.submenu?.length ? (
-        <DropDownMenu {...(linkProps as any)} />
+      {submenu?.length ? (
+        <DropDownMenu
+          name={name}
+          href={href}
+          active={active}
+          submenu={submenu}
+        />
       ) : (
         <>
           <meta
@@ -67,33 +72,21 @@ export default function NavigationLink({
                 : (linkProps.name || linkProps.href || "Страница").toString()
             }
           />
-          {linkProps.active && linkProps.hideHrefLink ? (
-            <div className="menu-item" {...props}>
-              {linkProps.name}
+          {active ? (
+            <div className="menu-item">
+              {name}
             </div>
-          ) : linkProps.active && linkProps.href ? (
-            <Link
-              className="menu-item"
-              href={linkProps.href}
-              passHref
-              {...(props as any)}
-              itemProp="url"
-            >
-              {linkProps.name}
+          ) : active && href ? (
+            <Link className="menu-item" href={href} passHref itemProp="url">
+              {name}
             </Link>
-          ) : linkProps.href ? (
-            <Link
-              className="menu-item"
-              href={linkProps.href}
-              passHref
-              {...(props as any)}
-              itemProp="url"
-            >
-              {linkProps.name}
+          ) : href ? (
+            <Link className="menu-item" href={href} passHref itemProp="url">
+              {name}
             </Link>
-          ) : linkProps.active && linkProps.name ? (
-            <div className="menu-item" {...props}>
-              {linkProps.name}
+          ) : active && name ? (
+            <div className="menu-item">
+              {name}
             </div>
           ) : null}
         </>
