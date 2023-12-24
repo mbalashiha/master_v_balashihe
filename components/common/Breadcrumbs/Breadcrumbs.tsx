@@ -29,7 +29,6 @@ export default function Breadcrumbs({ path }: Props) {
         "& > li": {
           p: 0,
           m: 0,
-          fontWeight: 600,
           fontSize: "14px",
           lineHeight: "18px",
           color: "transparent",
@@ -42,7 +41,7 @@ export default function Breadcrumbs({ path }: Props) {
           "& > *": {
             color: (theme) => theme.palette.text.primary,
             fontFamily: `var(--header-font-family)`,
-            fontWeight: 500,
+            fontWeight: 600,
             fontSize: "14px",
             lineHeight: "18px",
             transitionProperty: "none",

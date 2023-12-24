@@ -215,7 +215,7 @@ export default function BlogArticle(article: Props) {
               clear: "both",
               fontSize: "32px",
               lineHeight: "35px",
-              fontWeight: 600,
+              fontWeight: 700,
               minHeight: "41px",
               maxHeight: 35 * 3 + "px",
               overflow: "hidden",

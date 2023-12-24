@@ -68,7 +68,7 @@ export default function IconView({
               pt: "3px",
               color: (theme) =>
                 theme.palette.mode === "light" ? "black" : "white",
-              fontWeight: 500,
+              fontWeight: 400,
             },
           }}
         >
@@ -78,7 +78,7 @@ export default function IconView({
           component={"div"}
           sx={{
             "&&": {
-              fontWeight: 500,
+              fontWeight: 400,
               lineHeight: "24px",
             },
           }}
