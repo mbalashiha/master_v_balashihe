@@ -87,7 +87,12 @@ export default function ImagePaper({
       <Typography
         className={"title"}
         component={"div"}
-        sx={{ fontSize: "18px", mt: "-4px", textAlign: "center" }}
+        sx={{
+          fontWeight: 400,
+          fontSize: "18px",
+          mt: "-4px",
+          textAlign: "center",
+        }}
       >
         {title}
       </Typography>

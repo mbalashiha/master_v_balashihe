@@ -253,7 +253,6 @@ const MyStepWizard = ({
                     display: "block",
                     fontSize: { xs: "20px", md: "25px" },
                     lineHeight: { xs: "23px", md: "28px" },
-                    fontWeight: 400,
                     fontFamily: `var(--text-font-family)`,
                   },
                   display: "flex",
@@ -261,7 +260,7 @@ const MyStepWizard = ({
                   justifyContent: "space-between",
                 }}
               >
-                <Typography component="div" variant="h1">
+                <Typography component="div" variant="h1" fontWeight={400}>
                   {title}
                 </Typography>
                 <Typography
@@ -342,7 +341,7 @@ const MyStepWizard = ({
                     display: "block",
                     fontSize: { xs: "20px", md: "25px" },
                     lineHeight: { xs: "23px", md: "28px" },
-                    fontWeight: 500,
+                    fontWeight: 400,
                   },
                   mb: "5px",
                 }}

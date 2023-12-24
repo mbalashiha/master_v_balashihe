@@ -36,7 +36,7 @@ const Step1: React.FC<Partial<StepWizardChildProps>> = (({
         {...field}
         onChange={onChange}
         name={name}
-        value={value}
+        value={value || null}
         onClick={onClick}
       >
         <RadioString value="Не включается или не запускается" />

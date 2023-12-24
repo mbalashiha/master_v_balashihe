@@ -36,7 +36,7 @@ const Step2_1_3: React.FC<Partial<StepWizardChildProps>> = (({
         {...field}
         onChange={onChange}
         name={name}
-        value={value}
+        value={value || null}
         onClick={onClick}
       >
         <RadioString value="Починить Mac, а то не работает" />

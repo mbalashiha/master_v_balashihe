@@ -23,7 +23,7 @@ export default function RadioImageLabel({
   return (
     <FormControlLabel
       control={<WizRadio image={image} />}
-      value={value}
+      value={value || null}
       label={label}
       sx={{
         position: "relative",
@@ -32,6 +32,7 @@ export default function RadioImageLabel({
         alignItems: "center",
         justifyContent: "flex-end",
         background: "white",
+        fontWeight: 400,
         m: 0,
         borderRadius: 1 / 2,
         boxShadow: 0,

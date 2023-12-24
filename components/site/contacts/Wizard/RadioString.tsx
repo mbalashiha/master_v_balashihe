@@ -12,17 +12,12 @@ type Props = Omit<Omit<FormControlLabelProps, "control">, "label"> & {
   label?: React.ReactNode;
   value: string;
 };
-export default function RadioString({
-  sx,
-  value,
-  label,
-  ...props
-}: Props) {
+export default function RadioString({ sx, value, label, ...props }: Props) {
   label = label || value;
   return (
     <FormControlLabel
       control={<Radio />}
-      value={value}
+      value={value || null}
       label={label}
       sx={{
         background: "white",
@@ -33,6 +28,7 @@ export default function RadioString({
         m: 0,
         borderRadius: 1 / 2,
         boxShadow: 0,
+        fontWeight: 300,
         ...sx,
       }}
       {...props}

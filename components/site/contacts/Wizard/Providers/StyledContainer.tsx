@@ -14,7 +14,7 @@ import React from "react";
 
 const StyledContainer = styled(Box)(({ theme }) => ({
   "&, & > p, & > *": {
-    fontWeight: 500,
+    fontWeight: 400,
     color: `#24263F`,
   },
   "& label": {
@@ -26,7 +26,7 @@ const StyledContainer = styled(Box)(({ theme }) => ({
     [theme.breakpoints.up("md")]: {
       fontSize: "21px",
     },
-    fontWeight: 500,
+    fontWeight: 400,
   },
   width: "100%",
   minHeight: "516px",
