@@ -1,19 +1,21 @@
 @font-face {
   font-family: "Tahoma";
-  src: url("/fonts/tahoma/Tahoma.eot");
-  src: local("Tahoma"), url("/fonts/tahoma/Tahoma.eot?#iefix") format("embedded-opentype"),
-    url("/fonts/tahoma/Tahoma.woff") format("woff"), url("/fonts/tahoma/Tahoma.ttf") format("truetype");
-  font-weight: normal;
+  src: url("/fonts/tahoma/Tahoma-Bold.eot");
+  src: local("Tahoma Bold"), local("Tahoma-Bold"),
+    url("/fonts/tahoma/Tahoma-Bold.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/tahoma/Tahoma-Bold.woff2") format("woff2"),
+    url("/fonts/tahoma/Tahoma-Bold.woff") format("woff"),
+    url("/fonts/tahoma/Tahoma-Bold.ttf") format("truetype");
+  font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Tahoma";
-  src: url("/fonts/tahoma/Tahoma-Bold.eot");
-  src: local("Tahoma Bold"), local("Tahoma-Bold"),
-    url("/fonts/tahoma/Tahoma-Bold.eot?#iefix") format("embedded-opentype"),
-    url("/fonts/tahoma/Tahoma-Bold.woff") format("woff"),
-    url("/fonts/tahoma/Tahoma-Bold.ttf") format("truetype");
-  font-weight: bold;
+  src: url("/fonts/tahoma/Tahoma.eot");
+  src: local("Tahoma"), url("/fonts/tahoma/Tahoma.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/tahoma/Tahoma.woff2") format("woff2"), url("/fonts/tahoma/Tahoma.woff") format("woff"),
+    url("/fonts/tahoma/Tahoma.ttf") format("truetype");
+  font-weight: normal;
   font-style: normal;
 }
