@@ -84,7 +84,6 @@ export default function AboutMaster(
           variant="h1"
           mb={2}
           pb={0}
-          color={(theme) => theme.palette.text.primary}
           sx={{
             px: { xs: 3, md: 0 },
             textAlign: "right",
@@ -119,13 +118,13 @@ export default function AboutMaster(
                   color: (theme) =>
                     theme.palette.mode === "light" ? "#04040a" : "white",
                   "& .main-image": {
-                    p: 1,
-                    pb: 0,
+                    p: 0,
                     ml: { xs: 0, sm: -6 },
                     mt: { xs: 0, sm: -5 },
                     mr: { xs: 0, sm: 2.5, lg: 3.2 },
                     mb: 2,
                     float: { xs: "none", sm: "left" },
+                    display: "block",
                     "& img": {
                       p: 0,
                       m: 0,
@@ -138,27 +137,27 @@ export default function AboutMaster(
                         xl: "460px",
                       },
                       height: "auto",
+                      boxShadow: `0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12), -2px 9px 10px 1px rgba(0,0,0,0.52)`,
                     },
                   },
                 }}
               >
                 {image && (
-                  <Paper elevation={4} className="main-image">
-                    <Link
-                      itemProp="image"
-                      href={image.canonicalUrl}
-                      target="_blank"
-                    >
-                      <EnhImage
-                        src={image.url}
-                        width={image.width}
-                        height={image.height}
-                        alt={image.alt}
-                        fitWidth={600}
-                        quality={90}
-                      ></EnhImage>
-                    </Link>
-                  </Paper>
+                  <Link
+                    itemProp="image"
+                    href={image.canonicalUrl}
+                    target="_blank"
+                    className="main-image"
+                  >
+                    <EnhImage
+                      src={image.url}
+                      width={image.width}
+                      height={image.height}
+                      alt={image.alt}
+                      fitWidth={600}
+                      quality={90}
+                    ></EnhImage>
+                  </Link>
                 )}
                 <meta
                   itemProp="alumniOf"
