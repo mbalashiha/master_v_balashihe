@@ -140,7 +140,7 @@
     url("/fonts/noto-sans/NotoSans-ExtraBoldItalic.woff2") format("woff2"),
     url("/fonts/noto-sans/NotoSans-ExtraBoldItalic.woff") format("woff"),
     url("/fonts/noto-sans/NotoSans-ExtraBoldItalic.ttf") format("truetype");
-  font-weight: bold;
+  font-weight: 800;
   font-style: italic;
 }
 
