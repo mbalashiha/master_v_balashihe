@@ -87,8 +87,8 @@ export default function AboutMaster(
           sx={{
             px: { xs: 3, md: 0 },
             textAlign: "right",
-            fontSize: { xs: "20px", md: "30px", lg: "40px" },
-            lineHeight: { xs: "35px", md: "40px", lg: "52px" },
+            fontSize: { xs: "20px", md: "30px" },
+            lineHeight: { xs: "35px", md: "40px" },
           }}
           itemProp="name"
         >
