@@ -97,6 +97,7 @@ export default function BlogArticle(article: Props) {
             boxShadow: "none",
             boxSizing: "border-box",
             overflow: "visible",
+            marginBottom: "1.5rem",
             "&, & p, & .Paper-root": {
               fontFamily: "var(--article-text-font-family)",
               fontWeight: 400,
@@ -175,24 +176,25 @@ export default function BlogArticle(article: Props) {
               width: "100%",
               objectFit: "contain",
             },
-            "& > h2:not(:first-of-type)": {
+            "& h2:not(:first-of-type)": {
               color: (theme) =>
                 theme.palette.mode === "light" ? grey[600] : grey[400],
               fontSize: "21px",
               lineHeight: "26px",
               fontWeight: 500,
-              marginBottom: "1.5rem",
+              my: "1.5rem",
             },
-            marginBottom: "1.5rem",
-            "& > h3": {
+            "& h3": {
               color: (theme) =>
                 theme.palette.mode === "light" ? grey[800] : grey[200],
-              marginBottom: "0.7rem",
+              mb: "0.5rem",
+              mt: "1.1rem",
+              fontWeight: 700,
             },
-            "& > h4": {
+            "& h4": {
               color: (theme) =>
                 theme.palette.mode === "light" ? grey[900] : grey[100],
-              marginBottom: "0.7rem",
+              my: "0.7rem",
             },
           }}
         >
