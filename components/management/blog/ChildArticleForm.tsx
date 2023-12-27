@@ -192,8 +192,8 @@ export const ChildArticleForm = forwardRef<
           const { success, articleId, articleDraft } = await saveArticle({
             article,
           });
-          if (articleDraft.textHtml !== textHtml) {
-            alert("not equal");
+          if (success && articleDraft.textHtml !== textHtml) {
+            alert("Not equal: articleDraft.textHtml !== textHtml");
           }
           try {
             const imagesResponse = await mutateImages({

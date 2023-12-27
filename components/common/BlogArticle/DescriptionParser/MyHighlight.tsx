@@ -46,6 +46,9 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
               fontWeight: 500,
               fontSize: "16px",
               lineHeight: "25px",
+              maxHeight: "70vh",
+              overflowX: "auto",
+              overflowY: "auto",
               "& pre": {
                 padding: 0,
                 margin: 0,
@@ -76,7 +79,7 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
                     minWidth: "35px",
                     content: "counter(line)",
                     display: "inline-block",
-                    borderRight: "1px solid #ddd",
+                    borderRight: "1px solid #88888822",
                     textAlign: "right",
                     padding: "0 .5em 0 .5em",
                     marginRight: ".5em",
@@ -97,14 +100,14 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
                 border: "none",
                 borderRadius: "3px",
                 background: "none",
-                color: codeHasBeenCopied ? blueGrey[50] : "#EDEDE8",
+                color: codeHasBeenCopied ? "lightgreen" : "white",
                 textTransform: "none",
-                fontFamily: `Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace`,
-                fontWeight: 500,
-                fontSize: "18px",
+                fontFamily: `var(--text-font-family)`,
+                fontWeight: 400,
+                fontSize: "16px",
                 "&:hover": {
                   background: "none",
-                  color: codeHasBeenCopied ? blueGrey[50] : "white",
+                  color: codeHasBeenCopied ? "lightgreen" : "#EDEDE8",
                   boxShadow: "none",
                 },
                 "&::before": {
@@ -121,7 +124,7 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
               onClick={() => {
                 navigator.clipboard.writeText(code);
                 setCodeCopied(true);
-                setTimeout(() => setCodeCopied(false), 1500);
+                setTimeout(() => setCodeCopied(false), 2500);
               }}
             >
               {codeHasBeenCopied ? "Код скопирован" : "Скопировать"}

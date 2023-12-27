@@ -18,6 +18,11 @@ pre {
   line-height: 20px;
   font-family: monospace; }
 
+pre[class^="language-"] {
+  max-height: 50vh;
+  overflow-x: auto;
+  overflow-y: auto; }
+
 .token {
   word-break: break-all !important;
   white-space: pre-wrap !important;
