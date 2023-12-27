@@ -43,12 +43,12 @@ export default function BlogArticle(article: Props) {
     ...rest
   } = article;
   const articleImage =
-    secondImage && secondImage?.url
+    secondImage && secondImage?.canonicalUrl
       ? secondImage
-      : inImage && inImage?.url
+      : inImage && inImage?.canonicalUrl
       ? inImage
       : randomImage;
-  const imgSrc = articleImage?.url;
+  const imgSrc = articleImage?.canonicalUrl;
   const [viewed, setViewed] = useState<number>(article.viewed || 0);
   const countViews = useCountViews();
   const countViewsRef = useRef(countViews);

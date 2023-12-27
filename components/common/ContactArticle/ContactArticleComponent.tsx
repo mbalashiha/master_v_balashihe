@@ -47,8 +47,12 @@ export default function ContactArticleComponent({
   ...rest
 }: Props) {
   const articleImage =
-    secondImage && secondImage?.url ? secondImage : randomImage;
-  const imgSrc = articleImage?.url;
+    secondImage && secondImage?.canonicalUrl
+      ? secondImage
+      : inImage && inImage?.canonicalUrl
+      ? inImage
+      : randomImage;
+  const imgSrc = articleImage?.canonicalUrl;
   const countViews = useCountViews();
   const countViewsRef = useRef(countViews);
   useEffect(() => {

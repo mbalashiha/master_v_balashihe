@@ -59,7 +59,7 @@ export default function ImagesTabPanel() {
               />
               {imageInput.image && imageInput.image.url ? (
                 <Image
-                  src={imageInput.image.url}
+                  src={imageInput.image.canonicalUrl}
                   alt={imageInput.image.alt}
                   width={500}
                   height={500}

@@ -15,14 +15,44 @@ const tryReadFile = function (filepath) {
     return "";
   }
 };
+const isDevelopment = process.env.NODE_ENV === "development";
+function getUrlOriginRegexp() {
+  return /^(\w+)\:\/\/([^\/]+)/im;
+}
+function getProductionHost() {
+  const publicOrigin = process.env.NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN;
+  if (!publicOrigin) {
+    throw new Error("No process.env.NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN.");
+  }
+  const m = publicOrigin.match(getUrlOriginRegexp());
+  return m && m[2];
+}
+function getProductionProtocol() {
+  const publicOrigin = process.env.NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN;
+  if (!publicOrigin) {
+    throw new Error("No process.env.NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN.");
+  }
+  const m = publicOrigin.match(getUrlOriginRegexp());
+  return m && m[1];
+}
+function getImagesRemotePatters() {
+  const remotePatterns = [];
+  const isDevelopment = process.env.NODE_ENV === "development";
+  if (isDevelopment) {
+    remotePatterns.push({
+      protocol: "http",
+      hostname: "localhost",
+    });
+  }
+  remotePatterns.push({
+    protocol: getProductionProtocol(),
+    hostname: getProductionHost(),
+  });
+  return remotePatterns;
+}
 module.exports = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**",
-      },
-    ],
+    remotePatterns: getImagesRemotePatters(),
   },
   webpack(config, { buildId, dev, isServer, defaultLoaders, webpack }) {
     const isDevelopment = process.env.NODE_ENV === "development";

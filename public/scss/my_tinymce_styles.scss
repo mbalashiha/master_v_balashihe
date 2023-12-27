@@ -16,12 +16,15 @@ p {
 pre {
   font-size: 14px;
   line-height: 20px;
-  font-family: monospace;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
 }
 pre[class^="language-"] {
   max-height: 50vh;
   overflow-x: auto;
   overflow-y: auto;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-size: 16px;
+  line-height: 25px;
 }
 .token {
   word-break: break-all !important;

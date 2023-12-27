@@ -39,7 +39,7 @@ export default function FirstTabImageUploader({ sx, ...rest }: PaperProps) {
 
       {imageInput.image && imageInput.image.url ? (
         <Image
-          src={imageInput.image.url}
+          src={imageInput.image.canonicalUrl}
           alt={imageInput.image.alt}
           width={200}
           height={200}

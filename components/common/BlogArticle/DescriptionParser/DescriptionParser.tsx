@@ -26,6 +26,7 @@ import parse, {
 import TableStructure from "./TableStructure";
 import MyHighlight from "./MyHighlight";
 import { EnhImage } from "@components/ui";
+import { testAndGetCanonicalUrl } from "@framework/utils/normalize";
 
 interface Props {
   descriptionHTML: string;
@@ -323,7 +324,9 @@ const options = {
             : convertedProps.target || undefined;
           if (hasStyle) {
             <Box component="span" sx={{ ...styleSX }}>
-              <Link {...(convertedProps as any)} target={target}>{Children}</Link>
+              <Link {...(convertedProps as any)} target={target}>
+                {Children}
+              </Link>
             </Box>;
           } else {
             return (
@@ -357,7 +360,7 @@ const options = {
           return (
             <>
               <EnhImage
-                src={src}
+                src={testAndGetCanonicalUrl(src)}
                 alt={alt}
                 title={title}
                 width={width || 800}

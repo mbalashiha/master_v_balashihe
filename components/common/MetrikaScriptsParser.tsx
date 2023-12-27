@@ -87,6 +87,7 @@ const options = {
             width={width}
             height={height}
             unoptimized
+            loading="lazy"
           />
         );
       } else {

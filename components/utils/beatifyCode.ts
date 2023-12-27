@@ -19,7 +19,7 @@ export default async function beatifyCode(value: BeatifyCodeValue) {
         parser = "html";
         break;
       default:
-        parser = "babel";
+        return value;
         break;
     }
     const newTextContent = await prettier.format(value.textContent.trim(), {
