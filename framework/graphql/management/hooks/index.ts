@@ -16,6 +16,7 @@ import { handler as useCheckArticle } from "@framework/management/blog/article/d
 import { handler as useArticleTemplateList } from "@framework/management/blog/article/use-template-list";
 import { handler as usePrettierReact } from "@framework/management/api/use-prettier-react";
 import { handler as useUpdateImages } from "@framework/management/blog/images/use-update-images";
+import { handler as useIndexNowRequest } from "@framework/management/index-now/use-index-now-request";
 import { API } from "@common/types";
 
 export const graphqlHooks: API.ManagementHooks = {
@@ -28,6 +29,9 @@ export const graphqlHooks: API.ManagementHooks = {
       useTokenInfo,
       useTokenOneTime,
       useSignOut,
+    },
+    indexNow: {
+      useIndexNowRequest,
     },
     image: {
       useImageUpload,

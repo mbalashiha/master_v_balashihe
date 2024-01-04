@@ -32,6 +32,7 @@ import {
   ArticleEventsContext,
   ArticleEventsProvider,
 } from "./ArticleEventsProvider";
+import useIndexNowRequest from "@framework/management/index-now/use-index-now-request";
 
 interface Props {
   article: Blog.ArticleDraft;
@@ -47,6 +48,7 @@ export const ChildArticleForm = forwardRef<
     useRef<ArticleEventsContext | undefined>();
   const saveArticle = useSaveArticle();
   const { mutateArticle } = useArticleContext();
+  const postIndexNow = useIndexNowRequest();
   const mutateImages = useUpdateImages();
   return (
     <RefFormik<Blog.ArticleDraft>
@@ -189,9 +191,21 @@ export const ChildArticleForm = forwardRef<
           if (!article.handle) {
             article.handle = autoHandleSlug || "";
           }
-          const { success, articleId, articleDraft } = await saveArticle({
+          const {
+            success,
+            articleId,
+            articleDraft,
+            productionUuidsByIndexNow,
+          } = await saveArticle({
             article,
           });
+          Object.entries(productionUuidsByIndexNow).forEach(
+            ([apiUrl, nodes]) => {
+              if (apiUrl && nodes.length) {
+                postIndexNow({ apiUrl, nodes });
+              }
+            }
+          );
           if (success && articleDraft.textHtml !== textHtml) {
             alert("Not equal: articleDraft.textHtml !== textHtml");
           }

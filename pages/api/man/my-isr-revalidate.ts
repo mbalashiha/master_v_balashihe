@@ -1,3 +1,4 @@
+import getNextjsRevalidateUrls from "@framework/getNextjsRevalidateUrls";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -8,7 +9,7 @@ export default async function handler(
     return res.status(405).json({ message: "Method not allowed" });
   }
   const body = req.body as {
-    handlesToRevalidate: string[];
+    revalidateUuids: string[];
     secret: string;
   };
   // Check for secret to confirm this is a valid request
@@ -16,17 +17,25 @@ export default async function handler(
     return res.status(401).json({ message: "Invalid token" });
   }
   if (
-    !Array.isArray(body.handlesToRevalidate) ||
-    body.handlesToRevalidate.length <= 0
+    !Array.isArray(body.revalidateUuids) ||
+    body.revalidateUuids.length <= 0
   ) {
     return res.status(500).send("Error revalidating: no handles to revalidate");
   }
   try {
-    for (const handle of body.handlesToRevalidate) {
-      // console.l//og('revalidating:', handle);
-      await res.revalidate(`${handle}`);
+    const handles = await getNextjsRevalidateUrls({
+      uuids: body.revalidateUuids,
+      secret: process.env.MY_SECRET_TOKEN,
+    });
+    const revalidated = [];
+    for (const handle of handles) {
+      const revUrl = handle.startsWith("/") ? handle : `/${handle}`;
+      await res.revalidate(revUrl);
+      revalidated.push(revUrl);
     }
-    return res.json({ revalidated: true });
+    return res.json({
+      revalidated,
+    });
   } catch (err: any) {
     // If there was an error, Next.js will continue
     // to show the last successfully generated page

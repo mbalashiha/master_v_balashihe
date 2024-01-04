@@ -2,6 +2,7 @@
 import { useSaveArticle } from "@common/management/blog/article/use-save-article";
 import { UseSaveArticle } from "@common/management/blog/article/use-save-article";
 import { API, CMS } from "@common/types";
+import { NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN } from "@framework/const";
 import { ID, Schema } from "@framework/types";
 import { locale } from "@utils/locale";
 import { slugify } from "lib";
@@ -17,10 +18,16 @@ export interface UseSaveArticleHook {
   requestOutput: Schema.Response.SaveArticleResponse;
   data: {
     articleId: ID | null;
-    success: Boolean;
-    message: String;
+    success: boolean;
+    message: string;
     error?: string | null;
     articleDraft: CMS.Blog.ArticleDraft;
+    productionUuidsByIndexNow: {
+      [key: string]: Array<{
+        uuid: string;
+        apiUrl: string;
+      }>;
+    };
   };
 }
 export const handler: API.Graphql.MutationHook<UseSaveArticleHook> = {
@@ -32,11 +39,23 @@ export const handler: API.Graphql.MutationHook<UseSaveArticleHook> = {
       const variables = {
         ...input,
         hostOrigin: window?.location?.origin || "",
+        NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN,
       };
       const data = await request({ ...options, variables });
       const res = data.saveArticle;
+      const __productionUuidsByIndexNow =
+        res.productionUuidsByIndexNow?.nodes || [];
+      const productionUuidsByIndexNow = __productionUuidsByIndexNow.reduce(
+        (prev, current, ind, array) => {
+          prev[current.apiUrl] = prev[current.apiUrl] || [];
+          prev[current.apiUrl].push({ ...current });
+          return prev;
+        },
+        {} as { [key: string]: Array<{ uuid: string; apiUrl: string }> }
+      );
       return {
         ...res,
+        productionUuidsByIndexNow,
         articleDraft: normalizeArticleDraft(res.articleDraft),
       };
     } catch (e: any) {

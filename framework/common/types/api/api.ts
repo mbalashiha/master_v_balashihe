@@ -31,6 +31,9 @@ export interface ManagementHooks {
       useTokenInfo: Graphql.SWRHook<any>;
       useTokenOneTime: Graphql.SWRHook<any>;
     };
+    indexNow: {
+      useIndexNowRequest: Graphql.MutationHook<any>;
+    };
     image: {
       useImageUpload: RestApi.RestApiHook<any>;
     };

@@ -3,6 +3,7 @@ import { useDeleteArticle } from "@common/management/blog/article/use-delete-art
 import { UseDeleteArticle } from "@common/management/blog/article/use-delete-article";
 import { API, CMS } from "@common/types";
 import { useSearchProvider } from "@components/management/blog/Article";
+import { NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN } from "@framework/const";
 import { Schema } from "@framework/types";
 import {
   normalizeArticle,
@@ -32,6 +33,7 @@ export const handler: API.Graphql.MutationHook<UseDeleteArticleHook> = {
       const variables = {
         ...input,
         hostOrigin: window?.location?.origin || "",
+        NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN,
       };
       const data = await request({ ...options, variables });
       const res = data.deleteArticle;

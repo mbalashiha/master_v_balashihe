@@ -181,6 +181,18 @@ export namespace Schema {
     nodes: Article[];
   }
   export namespace Response {
+    export interface SendIndexNowRequestResponse {
+      sendIndexNowRequest: {
+        articleId: ID | null;
+        success: Boolean;
+        message: String;
+        error?: string | null;
+        articleDraft: Article.ArticleDraft;
+        productionUuidsByIndexNow?: {
+          nodes: Array<{ uuid: String; apiUrl: String }>;
+        };
+      };
+    }
     export interface UpdatedImagesResponse {
       updateImageMetadata: {
         existingArticleId: ID;
@@ -288,6 +300,7 @@ export namespace Schema {
         success: Boolean;
         message: String;
         error?: string | null;
+        productionUuidsByIndexNow?: Array<{ uuid: String; apiUrl: String }>;
         articleList: {
           search: String;
           nodes: ArticleCard[];
@@ -297,10 +310,13 @@ export namespace Schema {
     export interface SaveArticleResponse {
       saveArticle: {
         articleId: ID | null;
-        success: Boolean;
-        message: String;
+        success: boolean;
+        message: string;
         error?: string | null;
         articleDraft: Article.ArticleDraft;
+        productionUuidsByIndexNow?: {
+          nodes: Array<{ uuid: string; apiUrl: string }>;
+        };
       };
     }
   }

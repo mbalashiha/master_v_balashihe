@@ -1,7 +1,9 @@
 const env: "development" | "production" | "" = process.env.NODE_ENV as any;
 export const NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN: string =
   process.env.NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN || "";
-
+if (!NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN) {
+  throw new Error("No enviroment variable NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN");
+}
 process.env.NEXT_PUBLIC_SITE_ORIGIN =
   env === "production"
     ? process.env.NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN || ""

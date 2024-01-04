@@ -75,7 +75,7 @@ export const parseHtml = (inHtml: string) =>
         console.log("tag closed:", tagname);
       },
       onend() {
-        debugger;
+        // d//ebugger;
         resolve();
       },
     });
