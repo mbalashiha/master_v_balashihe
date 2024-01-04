@@ -300,10 +300,12 @@ export namespace Schema {
         success: Boolean;
         message: String;
         error?: string | null;
-        productionUuidsByIndexNow?: Array<{ uuid: String; apiUrl: String }>;
         articleList: {
           search: String;
           nodes: ArticleCard[];
+        };
+        productionUuidsByIndexNow?: {
+          nodes: Array<{ uuid: string; apiUrl: string }>;
         };
       };
     }

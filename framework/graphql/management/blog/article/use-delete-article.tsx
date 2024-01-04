@@ -12,6 +12,7 @@ import {
 import { locale } from "@utils/locale";
 import { useSnackbar } from "notistack";
 import { deleteArticle } from "./mutations/delete-article";
+import useIndexNowRequest from "@framework/management/index-now/use-index-now-request";
 export default useDeleteArticle as UseDeleteArticle<typeof handler>;
 
 export interface UseDeleteArticleHook {
@@ -22,6 +23,12 @@ export interface UseDeleteArticleHook {
     message: String;
     error?: string | null;
     articleList?: CMS.Blog.ArticleCard[];
+    productionUuidsByIndexNow: {
+      [key: string]: Array<{
+        uuid: string;
+        apiUrl: string;
+      }>;
+    };
   };
 }
 export const handler: API.Graphql.MutationHook<UseDeleteArticleHook> = {
@@ -40,19 +47,36 @@ export const handler: API.Graphql.MutationHook<UseDeleteArticleHook> = {
       const articleList = res.articleList.nodes.map((el) =>
         normalizeBlogRow(el)
       );
-      return { ...res, success: Boolean(res.success), articleList };
+      const __productionUuidsByIndexNow =
+        res.productionUuidsByIndexNow?.nodes || [];
+      const productionUuidsByIndexNow = __productionUuidsByIndexNow.reduce(
+        (prev, current, ind, array) => {
+          prev[current.apiUrl] = prev[current.apiUrl] || [];
+          prev[current.apiUrl].push({ ...current });
+          return prev;
+        },
+        {} as { [key: string]: Array<{ uuid: string; apiUrl: string }> }
+      );
+      return {
+        ...res,
+        productionUuidsByIndexNow,
+        success: Boolean(res.success),
+        articleList,
+      };
     } catch (e: any) {
       console.error(e.stack || e.message || e);
       return {
         success: false,
         message: e.stack || e.message || e,
         error: e.stack || e.message || e,
+        productionUuidsByIndexNow: {},
       };
     }
   },
   useHook: ({ request }) => {
     const { enqueueSnackbar } = useSnackbar();
     const { updateArticleList, ...ctx } = useSearchProvider();
+    const postIndexNow = useIndexNowRequest();
     return () => async (input) => {
       const response = await request(input);
       if (!response.success || !response.articleList) {
@@ -73,6 +97,13 @@ export const handler: API.Graphql.MutationHook<UseDeleteArticleHook> = {
           false
         );
       }
+      Object.entries(response.productionUuidsByIndexNow).forEach(
+        ([apiUrl, nodes]) => {
+          if (apiUrl && nodes.length) {
+            postIndexNow({ apiUrl, nodes });
+          }
+        }
+      );
       return response;
     };
   },

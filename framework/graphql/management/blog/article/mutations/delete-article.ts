@@ -22,6 +22,12 @@ export const deleteArticle = gql`
           ...ArticleCardFragment
         }
       }
+      productionUuidsByIndexNow {
+        nodes {
+          uuid
+          apiUrl
+        }
+      }
     }
   }
 `;
