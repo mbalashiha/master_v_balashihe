@@ -216,14 +216,7 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
       },
       MuiFab: {
         styleOverrides: {
-          root: {
-            backgroundColor: colors.red[900],
-            color: "white",
-            "&:hover": {
-              backgroundColor: colors.red.A700,
-              boxShadow: "none",
-            },
-          },
+          root: {},
         },
       },
       MuiButtonBase: {

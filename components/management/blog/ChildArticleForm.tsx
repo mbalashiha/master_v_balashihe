@@ -257,9 +257,11 @@ export const ChildArticleForm = forwardRef<
             }}
           >
             <Stack
-              spacing={1}
+              spacing={0}
               direction={{ xs: "row", lg: "column" }}
               justifyContent={"flex-end"}
+              flexWrap={"wrap"}
+              sx={{ position: "sticky", top: { xs: 0, lg: "5px" }, gap: "6px" }}
             >
               <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
               <ResetButton />

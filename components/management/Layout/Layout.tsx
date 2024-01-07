@@ -10,6 +10,7 @@ import { ThemeProvider } from "@mui/material";
 import { ManagementApiProvider } from "@framework/management";
 import { ManagementLayoutProvider } from "@framework/management/utils/providers";
 import ManagementAppBar from "./ManagementAppBar";
+import { BackToTop } from "@components/ui/ScrollTop";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -33,6 +34,10 @@ const ManagementLayout: FC<Props> = ({ children }: Props) => {
             {children}
           </ManagementLayoutProvider>
         </ManagementApiProvider>
+        <BackToTop
+          size="small"
+          FabContainer={{ sx: { bottom: 26, right: 26 } }}
+        />
       </ThemeProvider>
     </>
   );

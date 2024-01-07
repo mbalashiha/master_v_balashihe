@@ -16,9 +16,18 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Link from "next/link";
 import { Stack, Fab } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import { string } from "yup";
-
+interface LinkProps {
+  href: string;
+  name: string;
+  target?: React.HTMLAttributeAnchorTarget | undefined;
+}
+const AppBarLink = ({ href, name, target }: LinkProps) => (
+  <Link href={href} target={target}>
+    <Typography variant="h6" component="div">
+      {name}
+    </Typography>
+  </Link>
+);
 export default function ManagementAppBar() {
   const { manager } = useManagementLayoutProvider();
   const signOut = useSignOut();
@@ -34,25 +43,15 @@ export default function ManagementAppBar() {
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
-  interface LinkProps {
-    href: string;
-    name: string;
-    target?: React.HTMLAttributeAnchorTarget | undefined;
-  }
-  const AppBarLink = ({ href, name, target }: LinkProps) => (
-    <Link href={href} target={target}>
-      <Typography variant="h6" component="div">
-        {name}
-      </Typography>
-    </Link>
-  );
   const appbarLinks: Array<LinkProps> = [
     { href: "/management", name: "CMS" },
     { href: "/", name: "Сайт", target: "_blank" },
   ];
   return (
     <>
-      <AppBar position="static" sx={{ background: "#121220" }}>
+      <AppBar
+        sx={{ background: "#121220", position: { xs: "fixed", lg: "static" } }}
+      >
         <Toolbar
           sx={{
             "& *": {
