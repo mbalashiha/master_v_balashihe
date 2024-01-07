@@ -34,3 +34,4 @@ yarn-error.log*
 /public/google*.html
 /public/yandex_*.html
 /public/yandex-*.txt
+/public/idxnow-*.txt

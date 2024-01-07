@@ -82,10 +82,15 @@ export const handler: API.Graphql.MutationHook<UseDeleteArticleHook> = {
       if (!response.success || !response.articleList) {
         enqueueSnackbar(
           locale(
-            (response.message || response.error || "Error occured").substring(
-              0,
-              312
-            )
+            (
+              response.message ||
+              response.error ||
+              (!response.success
+                ? "Operation was unsuccessfull"
+                : !response.articleList
+                ? "No articles list"
+                : "Error")
+            ).substring(0, 312)
           ),
           {
             variant: "error",

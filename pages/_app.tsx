@@ -50,7 +50,7 @@ function MyMasterApp(
       </Head>
       <CacheProvider value={emotionCache}>
         <MuiSnackbarProvider
-          autoHideDuration={8000}
+          autoHideDuration={16000}
           anchorOrigin={{ horizontal: "center", vertical: "top" }}
         >
           <Layout {...pageProps}>
