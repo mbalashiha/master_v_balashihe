@@ -1,17 +1,59 @@
 body {
-  padding: 0 10px 0 10px;
+  padding: 0 10px;
+}
+@media (min-width: 800px) {
+  body {
+    padding: 0 20px;
+  }
+}
+@media (min-width: 900px) {
+  body {
+    padding: 0 40px;
+  }
+}
+@media (min-width: 1250px) {
+  body {
+    padding: 0 13vw;
+  }
+}
+@media (min-width: 1400px) {
+  body {
+    padding: 0 17vw;
+  }
+}
+@media (min-width: 1820px) {
+  body {
+    padding: 0 18vw;
+  }
+}
+@media (min-width: 2000px) {
+  body {
+    padding: 0 20vw;
+  }
+}
+@media (min-width: 2100px) {
+  body {
+    padding: 0 22vw;
+  }
+}
+@media (min-width: 2700px) {
+  body {
+    padding: 0 30vw;
+  }
 }
 html,
 body {
-  -webkit-font-smoothing: antialiased;
+  // -webkit-font-smoothing: antialiased;
   font-family: Tahoma, Verdana, Arial, sans-serif;
   font-weight: 500;
   font-size: 18px;
-  line-height: 28px;
-  color: #0e0e0f;
+  line-height: 26px;
+  color: black;
 }
 p {
-  color: #0e0e0f;
+  color: black;
+  margin-top: 8px;
+  margin-bottom: 6px;
 }
 pre {
   font-size: 14px;
@@ -35,16 +77,6 @@ pre[class^="language-"] {
 .token.attr-value {
   word-break: break-all !important;
   white-space: pre-wrap !important;
-}
-@media (min-width: 800px) {
-  body {
-    padding: 0 20px 0 20px;
-  }
-}
-@media (min-width: 900px) {
-  body {
-    padding: 0 40px 0 40px;
-  }
 }
 img {
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);

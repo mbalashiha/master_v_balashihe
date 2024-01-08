@@ -110,9 +110,6 @@ export const ArticleTabs = ({ article }: Props) => {
           </Tabs>
         </Box>
         <Box
-          sx={{
-            minHeight: "95vh",
-          }}
         >
           <TabPanel value={value} index={0}>
             <Grid container spacing={0}>

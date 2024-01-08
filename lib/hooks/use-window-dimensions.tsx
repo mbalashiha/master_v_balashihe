@@ -8,13 +8,23 @@ interface WindowDimensions {
 }
 
 function getWindowDimensions(): WindowDimensions {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height,
-    orientation: innerWidth >= innerHeight ? "landscape" : "portrate",
-    windowWidthBiggerOrEqualThanHeigh: innerWidth >= innerHeight,
-  };
+  if (typeof window !== "undefined") {
+    const { innerWidth: width, innerHeight: height } = window;
+    const windowWidthBiggerOrEqualThanHeigh = innerWidth >= innerHeight;
+    return {
+      width,
+      height,
+      orientation: windowWidthBiggerOrEqualThanHeigh ? "landscape" : "portrate",
+      windowWidthBiggerOrEqualThanHeigh,
+    };
+  } else {
+    return {
+      width: 0,
+      height: 0,
+      orientation: "landscape",
+      windowWidthBiggerOrEqualThanHeigh: true,
+    };
+  }
 }
 
 export default function useWindowDimensions(): WindowDimensions {

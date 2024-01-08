@@ -25,6 +25,7 @@ import "prismjs/plugins/normalize-whitespace/prism-normalize-whitespace";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-tsx";
+import "prismjs/components/prism-bash";
 import type { BeatifyCodeValue } from "@components/utils/beatifyCode";
 
 export interface MemoizedTinyMCEProps {
@@ -413,6 +414,7 @@ const ForwardingTinyMCEEditorRef = forwardRef<
             { text: "React.tsx", value: "tsx" },
             { text: "React.jsx", value: "jsx" },
             { text: "HTML/XML", value: "markup" },
+            { text: "Bash", value: "bash" },
             { text: "JavaScript", value: "javascript" },
             { text: "CSS", value: "css" },
             { text: "PHP", value: "php" },

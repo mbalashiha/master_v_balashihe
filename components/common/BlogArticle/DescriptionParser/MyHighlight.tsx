@@ -1,4 +1,4 @@
-import React, { useState, FC, memo } from "react";
+import React, { useState, FC, memo, useMemo, useRef } from "react";
 import {
   Container,
   Grid,
@@ -22,6 +22,16 @@ interface Props
 
 export default function MyHighlight({ language, code, theme, ...rest }: Props) {
   const [codeHasBeenCopied, setCodeCopied] = useState<boolean>(false);
+  const codeCopiedTimeoutId = useRef<NodeJS.Timeout | null>(null);
+  const replacedLanguage = useMemo(() => {
+    switch (language) {
+      case "markup":
+        return "html";
+        break;
+      default:
+        return language;
+    }
+  }, [language]);
   return (
     <Highlight
       theme={theme || themes.okaidia}
@@ -40,23 +50,22 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
               borderRadius: "10px",
               my: "1px",
               pl: "3px",
-              pt: "24px",
+              pt: "2px",
               pb: "10px",
               fontFamily: `Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace`,
               fontWeight: 500,
               fontSize: "16px",
               lineHeight: "25px",
-              maxHeight: "70vh",
-              overflowX: "auto",
-              overflowY: "auto",
               "& pre": {
+                maxHeight: "70vh",
+                overflowX: "auto",
+                overflowY: "auto",
                 padding: 0,
                 margin: 0,
                 fontFamily: `Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace`,
                 fontWeight: 500,
                 fontSize: "16px",
                 lineHeight: "25px",
-                overflowX: "auto",
                 textShadow: "0 1px rgba(0,0,0,.3)",
                 wordSpacing: "normal",
                 wordWrap: "normal",
@@ -90,45 +99,83 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
               ...style,
             }}
           >
-            <Button
+            <Stack
+              width="100%"
+              flexDirection={"row"}
               sx={{
-                position: "absolute",
-                right: 0,
-                top: 0,
-                p: "3px",
-                pr: "10px",
-                border: "none",
-                borderRadius: "3px",
-                background: "none",
-                color: codeHasBeenCopied ? "lightgreen" : "white",
-                textTransform: "none",
-                fontFamily: `var(--text-font-family)`,
-                fontWeight: 400,
-                fontSize: "16px",
-                "&:hover": {
-                  background: "none",
-                  color: codeHasBeenCopied ? "lightgreen" : "#EDEDE8",
-                  boxShadow: "none",
+                alignItems: "flex-center",
+                px: "14px",
+                "&&": {
+                  "& > *": {
+                    p: "3px",
+                    pb: 0,
+                    fontSize: "14px",
+                    lineHeight: "16px",
+                    fontFamily: `var(--text-font-family)`,
+                  },
+                  "& .copyButton": {
+                    justifySelf: "flex-end",
+                    pr: "10px",
+                    border: "none",
+                    borderRadius: "3px",
+                    background: "none",
+                    textTransform: "none",
+                    fontFamily: `var(--text-font-family)`,
+                    fontWeight: 400,
+                    "&:hover": {
+                      background: "none",
+                      boxShadow: "none",
+                      color: "#EDEDE8",
+                    },
+                    "&::before": {
+                      fontFamily: "Material Icons Round",
+                      fontStyle: "normal",
+                      paddingLeft: 0,
+                      paddingRight: "5px",
+                      paddingTop: 0,
+                      fontSize: "16px",
+                      lineHeight: "16px",
+                      content: `"\\e14d"`,
+                    },
+                    color: "#cecece",
+                  },
+                  "& .copyButton.codeHasBeenCopied": {
+                    "&:hover": {
+                      color: "lightgreen",
+                    },
+                    "&::before": {
+                      content: `"\\e876"`,
+                      color: "lightgreen",
+                    },
+                    color: "lightgreen",
+                  },
                 },
-                "&::before": {
-                  fontFamily: "Material Icons Round",
-                  fontStyle: "normal",
-                  content: codeHasBeenCopied ? `"\\e876"` : `"\\e14d"`,
-                  paddingLeft: 0,
-                  paddingRight: "5px",
-                  paddingTop: 0,
-                  fontSize: "18px",
-                  lineHeight: "18px",
-                },
-              }}
-              onClick={() => {
-                navigator.clipboard.writeText(code);
-                setCodeCopied(true);
-                setTimeout(() => setCodeCopied(false), 2500);
               }}
             >
-              {codeHasBeenCopied ? "Код скопирован" : "Скопировать"}
-            </Button>
+              <Box
+                sx={{ flexGrow: 1, textTransform: "uppercase", color: "#888" }}
+              >
+                {replacedLanguage}
+              </Box>
+              <Button
+                className={cn("copyButton", {
+                  codeHasBeenCopied: codeHasBeenCopied,
+                })}
+                onClick={() => {
+                  navigator.clipboard.writeText(code);
+                  setCodeCopied(true);
+                  if (codeCopiedTimeoutId.current) {
+                    clearTimeout(codeCopiedTimeoutId.current);
+                  }
+                  codeCopiedTimeoutId.current = setTimeout(
+                    () => setCodeCopied(false),
+                    2500
+                  );
+                }}
+              >
+                {codeHasBeenCopied ? "Код скопирован" : "Скопировать"}
+              </Button>
+            </Stack>
             <Box component={"pre"} className={className} sx={{ ...style }}>
               {tokens.map((line, i) => {
                 const { style, ...restProps } = getLineProps({

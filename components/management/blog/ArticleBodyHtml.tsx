@@ -7,7 +7,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import React, { useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useRefFormik } from "@components/ui";
 import { CMS } from "@common/types";
 import useSaveArticleText from "@framework/management/blog/article/draft/use-save-article-text";
@@ -15,6 +15,8 @@ import { useField } from "formik";
 import { useArticleContext } from "./ArticleForm";
 import { useRouter } from "next/router";
 import { BodyEditor } from "./Article/BodyEditor";
+import { useTabs } from "@components/common/Tabs/TabsProvider";
+import { useWindowDimensions } from "@lib/hooks";
 
 export default function ArticleBodyHtml() {
   const form = useRefFormik<CMS.Blog.ArticleDraft>();
@@ -62,6 +64,25 @@ export default function ArticleBodyHtml() {
   }, []);
   const [, meta] = useField("textHtml");
   const { savedArticle, emitter, eventNames } = useArticleContext();
+  const { value, handleChange, setTabNumber } = useTabs();
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState<number>(200);
+  const { height: windowHeight, width: windowWidth } = useWindowDimensions();
+  useEffect(() => {
+    if (
+      windowWidth &&
+      windowHeight &&
+      typeof value !== "undefined" &&
+      typeof window !== "undefined"
+    ) {
+      const viewportHeight = windowHeight || 0;
+      const offset = boxRef.current?.offsetTop || 0;
+      const tinyMceEditorHeight = viewportHeight - offset;
+      if (tinyMceEditorHeight !== height) {
+        setHeight(tinyMceEditorHeight > 10 ? tinyMceEditorHeight : 200);
+      }
+    }
+  }, [value, height, windowWidth, windowHeight]);
   return (
     <>
       {meta.error && (
@@ -79,6 +100,7 @@ export default function ArticleBodyHtml() {
         </Paper>
       )}
       <Box
+        ref={boxRef}
         sx={{
           border: "none",
           width: "100%",
@@ -87,9 +109,8 @@ export default function ArticleBodyHtml() {
           },
           "&, & > *, & .tox.tox-tinymce": {
             borderRadius: "0 0 8px 8px",
-            height: "1200px",
-            minHeight: "90vh",
             background: "white",
+            height: height + "px",
           },
         }}
       >
