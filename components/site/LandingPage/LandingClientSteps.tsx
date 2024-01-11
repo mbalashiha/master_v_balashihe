@@ -16,48 +16,14 @@ import ClientStep from "./ClientStep";
 import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
 import { EnhImage } from "@components/ui";
 import { useSiteModal } from "@components/site/ModalProvider/ModalProvider";
+import { DarkerCircuitBackground } from "./DarkerCircuitBackground";
 
 export default function LandingClientSteps() {
   const { toggleModal } = useSiteModal();
   return (
     <DarkContainer
       sx={{ zIndex: 2, pb: "90px" }}
-      background={
-        <>
-          <Box
-            sx={{
-              backgroundPosition: "center center",
-              backgroundAttachment: "scroll",
-              backgroundImage: `url(/images/circuit.webp)`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              height: "100%",
-              width: "100%",
-              position: "absolute",
-              left: 0,
-              top: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: 0,
-              border: "1px solid #010101",
-            }}
-          ></Box>
-          <Box
-            sx={{
-              backgroundImage: `linear-gradient(to bottom, rgba(1,1,1,1) 0px, rgba(1, 1, 1, 0.9) 15px, rgba(9, 5, 1, 0.85) 80px, rgba(1,1,1,1))`,
-              height: "100%",
-              width: "100%",
-              position: "absolute",
-              left: 0,
-              top: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: 1,
-              border: "1px solid #010101",
-            }}
-          ></Box>
-        </>
-      }
+      background={<DarkerCircuitBackground />}
     >
       <Typography
         variant="h1"

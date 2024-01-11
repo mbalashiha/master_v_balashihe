@@ -10,12 +10,13 @@ import {
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useRef } from "react";
-import DarkContainer from "./DarkContainer";
 import InPageWizard from "./LandingWizard/InPageWizard";
+import DarkContainer, { DarkContainerProps } from "./DarkContainer";
+import { DarkerCircuitBackground } from "./DarkerCircuitBackground";
 
-export default function LandingWizard() {
+export default function LandingWizard(props: DarkContainerProps) {
   return (
-    <DarkContainer sx={{ pt: 0 }}>
+    <DarkContainer {...props} sx={{ ...props.sx }}>
       <Paper
         sx={{
           padding: 0,

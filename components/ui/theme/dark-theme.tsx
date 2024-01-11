@@ -12,7 +12,14 @@ import { grey, blueGrey } from "@mui/material/colors";
 import getMuiTheme from "./mui-theme";
 
 const getDarkTheme = (): Theme => {
-  const darkTheme = getMuiTheme("dark");
+  const darkTheme = getMuiTheme("dark", {
+    defaultProps: {
+      sx: {
+        pt: "52px",
+        pb: "52px",
+      },
+    },
+  });
   return darkTheme;
 };
 export default getDarkTheme;

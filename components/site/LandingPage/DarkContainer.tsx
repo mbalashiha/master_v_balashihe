@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Container, useTheme } from "@mui/material";
 import React from "react";
 type ContainerProps = React.ComponentProps<typeof Container>;
 interface Props extends ContainerProps {
@@ -7,6 +7,8 @@ interface Props extends ContainerProps {
   background?: React.ReactNode | React.ReactNode[];
   FullWidthProps?: ContainerProps;
 }
+export type DarkContainerProps = Omit<Props, "children">;
+
 export default function DarkContainer({
   children,
   sx,
@@ -14,6 +16,7 @@ export default function DarkContainer({
   FullWidthProps,
   ...rest
 }: Props) {
+  const theme = useTheme();
   return (
     <Container
       maxWidth={false}
@@ -34,8 +37,7 @@ export default function DarkContainer({
           position: "relative",
           color: "white",
           "& p": { my: 0 },
-          pt: "52px",
-          pb: "52px",
+          ...theme.components?.DarkContainer?.defaultProps?.sx,
           ...sx,
         }}
         {...rest}

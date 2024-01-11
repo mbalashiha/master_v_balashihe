@@ -7,7 +7,7 @@ import {
 } from "next";
 import util from "util";
 import { Layout } from "@components/site";
-import CardGridContainer from "@components/site/LandingPage/CardGridContainer";
+import CardGridContainer from "@components/site/LandingPage/LandingPictureCardGridContainer";
 import LandingReasons from "@components/site/LandingPage/LandingReasons";
 import LandingPricesCards from "@components/site/LandingPage/LandingPricesCards";
 import getArticleByAbsUrl from "@framework/article/get-article-by-abs-url";
@@ -22,6 +22,7 @@ import { BottomContactsWithMap } from "@components/site/LandingPage/BottomContac
 import { useThemePalette } from "@components/ui";
 import getDarkTheme from "@components/ui/theme/dark-theme";
 import LandingPhotoTicker from "@components/site/LandingPage/LandingPhotoTicker";
+import { DarkerCircuitBackground } from "@components/site/LandingPage/DarkerCircuitBackground";
 
 export default function Home(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -48,7 +49,7 @@ export default function Home(
           <LandingAgeTasks />
           <LandingWizard />
           <LandingPhotoTicker />
-          <CardGridContainer />
+          <CardGridContainer background={<DarkerCircuitBackground />} />
           <LandingReasons />
           <LandingPricesCards />
           <CallMeForFree elevation={8} sx={{ mb: "20px" }} />

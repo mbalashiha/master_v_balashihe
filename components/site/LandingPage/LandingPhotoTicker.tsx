@@ -16,6 +16,7 @@ import { grey } from "@mui/material/colors";
 import Marquee from "react-fast-marquee";
 import getTickerImages from "@framework/images/get-ticker-images";
 import { CMS } from "@common/types";
+import { DarkerCircuitBackground } from "./DarkerCircuitBackground";
 interface Props {}
 export default function LandingPhotoTicker({}: Props) {
   const [images, setimages] = useState<CMS.Image[]>([]);
@@ -26,6 +27,7 @@ export default function LandingPhotoTicker({}: Props) {
     <Container
       maxWidth={false}
       sx={{
+        position: "relative",
         pb: 0,
         minHeight: { xs: "560px", md: "500px" },
         "& a, & img": {
@@ -36,6 +38,7 @@ export default function LandingPhotoTicker({}: Props) {
         },
       }}
     >
+      <DarkerCircuitBackground />
       <Typography
         component="div"
         variant="h1"

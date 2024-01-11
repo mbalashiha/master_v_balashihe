@@ -1,4 +1,12 @@
-import { Container, Grid, Card, Paper, Button, Stack } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Card,
+  Paper,
+  Button,
+  Stack,
+  useTheme,
+} from "@mui/material";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -17,6 +25,7 @@ import TelegramIcon from "public/icons/telegram-fill.svg";
 import UTMLink from "@components/ui/UTMLink";
 import CutProtocol from "@components/ui/CutProtocol";
 import CutHostname from "@components/ui/CutHostname";
+import tinycolor from "tinycolor2";
 
 const StyledContactButton = ({
   sx,
@@ -78,6 +87,18 @@ export default function Hero({ article }: Props) {
   if (!article?.image?.canonicalUrl) {
     throw new Error("No article.image.canonicalUrl for link.");
   }
+  const theme = useTheme();
+  const headerBgColor = useMemo(() => {
+    const dark = tinycolor(theme.palette.primary.dark);
+    dark.setAlpha(0.4);
+    const resultColor = dark.toRgbString();
+    return resultColor;
+  }, [theme.palette.primary.dark]);
+  const buttonHoverBgColor = useMemo(() => {
+    const dark = tinycolor(theme.palette.primary.dark);
+    const resultColor = dark.darken(4).toRgbString();
+    return resultColor;
+  }, [theme.palette.primary.dark]);
   return (
     <>
       <Head>
@@ -130,7 +151,7 @@ export default function Hero({ article }: Props) {
         ></Box>
         <Box
           sx={{
-            backgroundImage: `linear-gradient(to bottom, rgba(27, 10, 0, 0.7), rgba(1,1,1,1))`,
+            backgroundImage: `linear-gradient(to bottom, rgba(27, 16, 0, 0.8), rgba(1,1,1,1))`,
             willChange: "transform",
             height: "100%",
             width: "100%",
@@ -198,7 +219,7 @@ export default function Hero({ article }: Props) {
                   sx={{
                     px: "12px",
                     py: { xs: "7px", sm: "0" },
-                    background: (theme) => `${theme.palette.primary.main}2e`,
+                    background: headerBgColor,
                     borderRadius: "6px",
                   }}
                 >
@@ -215,7 +236,7 @@ export default function Hero({ article }: Props) {
                     sx={{
                       px: "12px",
                       py: { xs: "7px", sm: "0" },
-                      background: (theme) => `${theme.palette.primary.main}2e`,
+                      background: headerBgColor,
                       borderRadius: "6px",
                     }}
                   >
@@ -302,6 +323,7 @@ export default function Hero({ article }: Props) {
                 md={8}
                 sx={{
                   overflow: "hidden",
+                  background: (theme) => theme.palette.primary.main,
                 }}
               >
                 <Button
@@ -309,7 +331,7 @@ export default function Hero({ article }: Props) {
                     width: "100%",
                     py: "18px",
                     px: "40px",
-                    background: (theme) => theme.palette.primary.main,
+                    background: (theme) => theme.palette.primary.dark,
                     border: "none",
                     borderRadius: 0,
                     m: 0,
@@ -318,7 +340,7 @@ export default function Hero({ article }: Props) {
                     fontWeight: 400,
                     color: grey[100],
                     "&:hover": {
-                      background: (theme) => theme.palette.primary.dark,
+                      background: buttonHoverBgColor,
                       color: "white",
                     },
                   }}

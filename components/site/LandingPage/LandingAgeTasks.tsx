@@ -21,7 +21,7 @@ import { useSiteModal } from "@components/site/ModalProvider/ModalProvider";
 export default function LandingAgeTasks() {
   const { toggleModal } = useSiteModal();
   return (
-    <DarkContainer sx={{ pt: 0 }}>
+    <DarkContainer sx={{ pt: 0, pb: 0 }}>
       <Container maxWidth="md">
         <Typography
           variant="h1"

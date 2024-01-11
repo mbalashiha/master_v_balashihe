@@ -5,10 +5,11 @@ import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import LandingCard from "@components/shared/LandingCard";
+import DarkContainer, { DarkContainerProps } from "./DarkContainer";
 
-export const CardGridContainer = () => {
+export const CardGridContainer = (props: DarkContainerProps) => {
   return (
-    <Container maxWidth="lg" sx={{ pb: "60px" }}>
+    <DarkContainer {...props}>
       <Grid container sx={{ mt: 0 }} spacing={3}>
         <LandingCard
           image={
@@ -68,7 +69,7 @@ export const CardGridContainer = () => {
           </ul>
         </LandingCard>
       </Grid>
-    </Container>
+    </DarkContainer>
   );
 };
 export default CardGridContainer;

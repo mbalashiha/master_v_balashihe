@@ -42,6 +42,7 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
       {({ className, style, tokens, getLineProps, getTokenProps }) => {
         return (
           <Box
+            component="code"
             width="100%"
             className={className}
             sx={{
@@ -103,6 +104,7 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
               width="100%"
               flexDirection={"row"}
               sx={{
+                ...style,
                 alignItems: "flex-center",
                 px: "14px",
                 "&&": {

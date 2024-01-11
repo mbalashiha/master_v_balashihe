@@ -1,4 +1,5 @@
 import { PaletteOptions } from "@mui/material/styles/createPalette";
+import { Components } from "@mui/material/styles/components";
 
 declare module "@mui/material/styles" {
   export interface PaletteOptions {
@@ -13,6 +14,13 @@ declare module "@mui/material/styles" {
     };
     dialogClickColor: {
       main: React.CSSProperties["color"];
+    };
+  }
+  export interface Components {
+    DarkContainer?: {
+      defaultProps?: ComponentsProps["MuiAlert"];
+      styleOverrides?: ComponentsOverrides<Theme>["MuiAlert"];
+      variants?: ComponentsVariants["MuiAlert"];
     };
   }
   export interface Palette {

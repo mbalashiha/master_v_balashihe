@@ -11,7 +11,7 @@ import {
 } from "next";
 import util from "util";
 import { Layout } from "@components/site";
-import CardGridContainer from "@components/site/LandingPage/CardGridContainer";
+import CardGridContainer from "@components/site/LandingPage/LandingPictureCardGridContainer";
 import LandingReasons from "@components/site/LandingPage/LandingReasons";
 import LandingPricesCards from "@components/site/LandingPage/LandingPricesCards";
 import getArticleByAbsUrl from "@framework/article/get-article-by-abs-url";

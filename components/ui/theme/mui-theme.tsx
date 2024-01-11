@@ -1,5 +1,13 @@
 import { createTheme, Theme } from "@mui/material/styles";
-import { colors, Palette, PaletteMode } from "@mui/material";
+import { Components } from "@mui/material/styles/components";
+import {
+  colors,
+  ComponentsOverrides,
+  ComponentsProps,
+  ComponentsVariants,
+  Palette,
+  PaletteMode,
+} from "@mui/material";
 import { grey, blueGrey } from "@mui/material/colors";
 const InterFontFamily = `Inter, Arial, sans-serif`;
 
@@ -10,7 +18,14 @@ export const standartCssTransition = {
   transitionDelay: "0s",
 };
 
-const getMuiTheme = (colorMode?: PaletteMode): Theme => {
+const getMuiTheme = (
+  colorMode?: PaletteMode,
+  DarkContainer?: {
+    defaultProps?: ComponentsProps["MuiAlert"];
+    styleOverrides?: ComponentsOverrides<Theme>["MuiAlert"];
+    variants?: ComponentsVariants["MuiAlert"];
+  }
+): Theme => {
   colorMode = colorMode || "light";
   const fontFamily = `var(--text-font-family)`;
   const themeGreyColor = "rgba(40, 39, 37, 0.94)";
@@ -93,6 +108,17 @@ const getMuiTheme = (colorMode?: PaletteMode): Theme => {
   return createTheme({
     ...theme,
     components: {
+      DarkContainer: {
+        ...DarkContainer,
+        defaultProps: {
+          ...DarkContainer?.defaultProps,
+          sx: {
+            pt: "20px",
+            pb: "20px",
+            ...DarkContainer?.defaultProps?.sx,
+          },
+        },
+      },
       MuiCssBaseline: {
         styleOverrides: {
           body: {

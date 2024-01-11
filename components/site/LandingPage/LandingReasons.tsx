@@ -6,10 +6,11 @@ import { IconTwo } from "./Icons/IconTwo";
 import { IconThree } from "./Icons/IconThree";
 import { IconFoo } from "./Icons/IconFoo";
 import ReasonItem from "./ReasonItem";
+import DarkContainer, { DarkContainerProps } from "./DarkContainer";
 
-export const LandingReasons = () => {
+export const LandingReasons = (props: DarkContainerProps) => {
   return (
-    <Container maxWidth="lg" sx={{ pb: "70px" }}>
+    <DarkContainer {...props}>
       <Typography
         component="h3"
         variant="h1"
@@ -41,7 +42,7 @@ export const LandingReasons = () => {
           повторного возникновения поломки.
         </ReasonItem>
       </Grid>
-    </Container>
+    </DarkContainer>
   );
 };
 export default LandingReasons;
