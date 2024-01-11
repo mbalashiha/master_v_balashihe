@@ -191,7 +191,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       ...makeImageType({
         url: imageUrl,
         width: 1504,
-        height: 2057,
+        height: 2160,
         alt: `Дмитрий, компьютерный мастер в Балашихе, выпускник МГТУ МИРЭА (РТУ МИРЭА)`,
       }),
     };

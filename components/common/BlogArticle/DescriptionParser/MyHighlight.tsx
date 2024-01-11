@@ -45,8 +45,13 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
             component="code"
             width="100%"
             className={className}
+            itemScope
+            itemType="https://schema.org/Thing"
             sx={{
+              ...style,
+              display: "block",
               position: "relative",
+              overflow: "hidden",
               clear: "both",
               borderRadius: "10px",
               my: "1px",
@@ -97,16 +102,18 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
                   },
                 },
               },
-              ...style,
             }}
           >
             <Stack
+              component={"menu"}
               width="100%"
               flexDirection={"row"}
               sx={{
                 ...style,
                 alignItems: "flex-center",
                 px: "14px",
+                py: 0,
+                m: 0,
                 "&&": {
                   "& > *": {
                     p: "3px",
@@ -157,6 +164,10 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
               <Box
                 sx={{ flexGrow: 1, textTransform: "uppercase", color: "#888" }}
               >
+                <meta
+                  itemProp="name"
+                  content={`computer code ${replacedLanguage} ${className}`}
+                />
                 {replacedLanguage}
               </Box>
               <Button
@@ -178,7 +189,12 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
                 {codeHasBeenCopied ? "Код скопирован" : "Скопировать"}
               </Button>
             </Stack>
-            <Box component={"pre"} className={className} sx={{ ...style }}>
+            <Box
+              itemProp="description"
+              component={"pre"}
+              className={className}
+              sx={{ ...style }}
+            >
               {tokens.map((line, i) => {
                 const { style, ...restProps } = getLineProps({
                   line,
