@@ -1,10 +1,5 @@
 import { FC, default as React } from "react";
-import { useUI } from "@components/ui";
-import { Tooltip } from "@components/ui";
 import { Search } from "@components/site";
-import Link from "next/link";
-import { grey, blueGrey } from "@mui/material/colors";
-import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import {
   Badge,
   Stack,
@@ -21,14 +16,8 @@ import {
   IconButton,
   Container,
 } from "@mui/material";
-import { styled } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import dynamic from "next/dynamic";
-import PaletterModeSwitch from "@components/common/paletter/PaletteSwitch";
-import { useRouter } from "next/router";
 import NavbarLinks from "./NavbarLinks";
 import { MainLogo } from "@components/site/MainLogo";
-import { PhoneCallIcon, TelegramIcon } from "@components/icons";
 import { NEXT_PUBLIC_CONTACT_PHONE_TEXT } from "@framework/const";
 import IconPhoneCircle from "@components/icons/IconPhoneCircle";
 import { useSiteModal } from "@components/site/ModalProvider/ModalProvider";
