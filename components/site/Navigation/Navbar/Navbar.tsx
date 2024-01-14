@@ -91,6 +91,7 @@ const Navbar: FC = () => {
             flexWrap="nowrap"
             alignSelf={"center"}
             sx={{
+              pb: { xs: "10px", sm: 0 },
               color: "black",
               fontSize: "26px",
               lineHeight: "37px",

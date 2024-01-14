@@ -11,8 +11,6 @@ import Image from "next/image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
-import { grey } from "@mui/material/colors";
 import Marquee from "react-fast-marquee";
 import getTickerImages from "@framework/images/get-ticker-images";
 import { CMS } from "@common/types";
@@ -43,10 +41,12 @@ export default function LandingPhotoTicker({}: Props) {
         component="div"
         variant="h1"
         sx={{
+          position: "relative",
           mt: { xs: 0, sm: 4 },
           mb: 4,
           textAlign: "center",
           fontWeight: 500,
+          color: "white",
         }}
       >
         <Box component="span" color="primary.main">

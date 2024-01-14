@@ -1,6 +1,6 @@
 import { FC } from "react";
 import React from "react";
-import s from "@components/site/Layout/DiscountButton.module.scss";
+import s from "@components/site/Footer/DiscountButton.module.scss";
 import DiscountIcon from "@public/icons/badge-discount.svg";
 import {
   Grid,

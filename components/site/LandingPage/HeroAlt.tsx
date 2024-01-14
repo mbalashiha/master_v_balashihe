@@ -92,7 +92,10 @@ export default function Hero({ article }: Props) {
     const dark = tinycolor(theme.palette.primary.dark);
     dark.setAlpha(0.4);
     const resultColor = dark.toRgbString();
-    return resultColor;
+    return {
+      xs: "rgba(255,255,255,0.2)",
+      sm: resultColor,
+    };
   }, [theme.palette.primary.dark]);
   const buttonHoverBgColor = useMemo(() => {
     const dark = tinycolor(theme.palette.primary.dark);
@@ -151,7 +154,10 @@ export default function Hero({ article }: Props) {
         ></Box>
         <Box
           sx={{
-            backgroundImage: `linear-gradient(to bottom, rgba(27, 16, 0, 0.8), rgba(1,1,1,1))`,
+            backgroundImage: {
+              xs: `linear-gradient(to bottom, rgba(0, 0, 27, 0.8), rgba(1,1,1,1))`,
+              sm: `linear-gradient(to bottom, rgba(27, 16, 0, 0.8), rgba(1,1,1,1))`,
+            },
             willChange: "transform",
             height: "100%",
             width: "100%",
@@ -441,8 +447,8 @@ export default function Hero({ article }: Props) {
             >
               <Image
                 alt="Информационные системы и технологии"
-                width={600}
-                height={902}
+                width={610}
+                height={897}
                 quality={90}
                 loading={"eager"}
                 src="/images/computer_master_landing_balashiha.webp"

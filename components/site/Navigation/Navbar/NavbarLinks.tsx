@@ -105,6 +105,7 @@ export const NavbarLinks = ({
       itemScope
       itemType="https://schema.org/SiteNavigationElement"
       sx={{
+        width: { xs: "100%", sm: "auto" },
         p: 0,
         m: 0,
         alignSelf: { xs: "flex-start", sm: "flex-end" },
@@ -122,12 +123,14 @@ export const NavbarLinks = ({
         itemScope
         itemType="https://schema.org/ItemList"
         sx={{
+          width: { xs: "100%", sm: "auto" },
           listStyleType: "none",
           py: 0,
+          my: 0,
           px: { xs: "2px", sm: 0 },
           alignSelf: { xs: "flex-start", sm: "flex-end" },
           display: "flex",
-          justifyContent: "flex-start",
+          justifyContent: "space-around",
           alignItems: { xs: "flex-start", sm: "center" },
           flexWrap: "wrap",
           gap: "4px",
