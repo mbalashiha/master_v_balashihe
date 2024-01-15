@@ -6,10 +6,7 @@ export default function OpenCodemirrorButton() {
   const { emitter, eventNames } = useArticleContext();
   return (
     <Button
-      sx={{
-        background: (theme) => theme.palette.primary.dark,
-        "&:hover": { background: "black" },
-      }}
+      sx={{}}
       startIcon={<CodeRoundedIcon />}
       onClick={() => emitter.emit(eventNames.openCodeMirror)}
     >

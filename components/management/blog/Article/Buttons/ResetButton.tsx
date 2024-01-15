@@ -24,8 +24,6 @@ export default function ResetButton() {
       <Button
         disabled={!dirty}
         sx={{
-          background: (theme) => theme.palette.primary.dark,
-          "&:hover": { background: "black" },
         }}
         startIcon={<RestartAltRoundedIcon />}
         onClick={() => {

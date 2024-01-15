@@ -9,7 +9,7 @@ const getMuiTheme = (): Theme => {
   let theme = createTheme({
     palette: {
       mode: colorMode,
-      primary: { main: "rgb(36, 94, 156)" },
+      primary: { main: "#006CE7" },
       background: {
         default: "black",
       },
@@ -257,10 +257,10 @@ const getMuiTheme = (): Theme => {
       MuiFab: {
         styleOverrides: {
           root: {
-            backgroundColor: colors.red.A700,
+            backgroundColor: theme.palette.primary.dark,
             color: "white",
             "&:hover": {
-              backgroundColor: colors.red[900],
+              backgroundColor: theme.palette.primary.main,
               boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
             },
           },
@@ -280,26 +280,10 @@ const getMuiTheme = (): Theme => {
         styleOverrides: {
           // Name of the slot
           root: {
-            border: "none",
-            borderColor: "none",
-            background: theme.palette.primary.main,
-            color: "#ffffff",
-            fontWeight: 400,
-            fontSize: "16px",
-            lineHeight: "16px",
-            textTransform: "capitalize",
-            borderRadius: "12px",
-            padding: "10px",
-            "&:disabled": {
-              background: grey[200],
-            },
+            background: "white",
+            border: `1px solid ${grey[300]}`,
             "&:hover": {
-              background: theme.palette.primary.dark,
-              color: "#ffffff",
-              boxShadow: "0 0 30px rgb(13 70 144 / 40%)",
-            },
-            "& .Button-iconSizeMedium": {
-              transform: "scale(1.2)",
+              borderColor: grey[200],
             },
           },
         },

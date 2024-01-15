@@ -23,7 +23,7 @@ interface LinkProps {
 }
 const AppBarLink = ({ href, name, target }: LinkProps) => (
   <Link href={href} target={target}>
-    <Typography variant="h6" component="div">
+    <Typography variant="h6" component="div" sx={{ color: "white" }}>
       {name}
     </Typography>
   </Link>
@@ -52,23 +52,14 @@ export default function ManagementAppBar() {
       <AppBar
         sx={{ background: "#121220", position: { xs: "fixed", lg: "static" } }}
       >
-        <Toolbar
-          sx={{
-            "& *": {
-              "&, &.Typography-root": {
-                color: "white",
-              },
-            },
-          }}
-        >
+        <Toolbar>
           <IconButton
             size="large"
             edge="start"
-            color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ color: "white" }} />
           </IconButton>
           <Stack direction="row" spacing={2} sx={{ flexGrow: 1 }}>
             {appbarLinks.map((el) => (
@@ -84,12 +75,21 @@ export default function ManagementAppBar() {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
-                color="inherit"
                 startIcon={<AccountCircle />}
+                sx={{
+                  color: (theme) => theme.palette.primary.main,
+                  background: "white",
+                  "&:hover": {
+                    borderColor: "transparent",
+                    color: "black",
+                    background: (theme) => theme.palette.primary.light,
+                    "& svg": {
+                      color: "black",
+                    },
+                  },
+                }}
               >
-                <Typography component={"span"}>
-                  {manager.friendlyName}
-                </Typography>
+                {manager.friendlyName}
               </Button>
               {Boolean(anchorEl) && (
                 <Menu

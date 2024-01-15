@@ -99,9 +99,6 @@ pre {
       text-transform: none;
       width: auto;
       cursor: pointer;
-      &:hover {
-        background: #d3e8f1;
-      }
       &,
       & * {
         font-family: var(--tinymce-font-family);
@@ -122,9 +119,6 @@ pre {
         transition-duration: 0.1s;
         transition-timing-function: ease-in-out;
         transition-delay: 0s;
-        &:hover {
-          background: #d3e8f1 !important;
-        }
       }
     }
   }
