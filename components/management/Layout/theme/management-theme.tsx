@@ -9,9 +9,9 @@ const getMuiTheme = (): Theme => {
   let theme = createTheme({
     palette: {
       mode: colorMode,
-      primary: { main: "#AA203E" },
+      primary: { main: "rgb(36, 94, 156)" },
       background: {
-        default: "#4D001D",
+        default: "black",
       },
       articleText: {
         main: "#302f5c",

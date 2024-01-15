@@ -12,9 +12,7 @@ import PromiseWorker from "promise-worker";
 import { Editor } from "@tinymce/tinymce-react";
 import { Box, Button, Portal, styled } from "@mui/material";
 import util from "util";
-import InsertCodeIcon from "./InsertCodeIcon";
 import { useUploaderOnChange } from "./use-uploader-onchange";
-import CodeIcon from "@mui/icons-material/Code";
 import CodeMirrorDialog from "./CodeMirror/CodeMirrorDialog";
 import EventEmitter from "events";
 import { useEditorContext } from "@components/management/blog/Article/BodyEditor/ProviderTinyMCE";
@@ -27,6 +25,9 @@ import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-tsx";
 import "prismjs/components/prism-bash";
 import type { BeatifyCodeValue } from "@components/utils/beatifyCode";
+import CodeIcon from "@mui/icons-material/Code";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 
 export interface MemoizedTinyMCEProps {
   initialValue: string;
@@ -88,8 +89,6 @@ const ForwardingTinyMCEEditorRef = forwardRef<
   ref
 ) {
   const htmlRef = useRef(initialValue);
-  const [insertCodeIcon, setInsertCodeIcon] =
-    React.useState<HTMLElement | null>(null);
   const [menuElement, setMenuElement] = React.useState<HTMLDivElement | null>(
     null
   );
@@ -104,6 +103,30 @@ const ForwardingTinyMCEEditorRef = forwardRef<
   };
   const closeCodeMirror = React.useCallback(() => {
     setCodeMirrorOpened(false);
+  }, []);
+  const [fullScreenFlag, setFullScreenFlag] = useState<boolean>(false);
+  const fullScreenFlagRef = useRef<boolean>(fullScreenFlag);
+  useEffect(() => {
+    fullScreenFlagRef.current = fullScreenFlag;
+  }, [fullScreenFlag]);
+  const fullScreenCloseHideTimeout = useRef<NodeJS.Timeout | null>(null);
+  const toggleFullscreen = React.useCallback(() => {
+    editorRef.current?.editor?.execCommand("mceFullScreen");
+    setFullScreenFlag((value) => !value);
+    if (
+      fullScreenFlagRef.current &&
+      editorRef.current?.editor?.editorContainer?.style
+    ) {
+      editorRef.current.editor.editorContainer.style.display = "none";
+      if (fullScreenCloseHideTimeout.current) {
+        clearTimeout(fullScreenCloseHideTimeout.current);
+      }
+      fullScreenCloseHideTimeout.current = setTimeout(() => {
+        if (editorRef.current?.editor?.editorContainer?.style?.display) {
+          editorRef.current.editor.editorContainer.style.display = "";
+        }
+      }, 100);
+    }
   }, []);
   const onCodeMirrorSave = React.useCallback((savingHtml: string) => {
     editorRef.current?.editor?.setContent(savingHtml);
@@ -238,12 +261,18 @@ const ForwardingTinyMCEEditorRef = forwardRef<
         style={{ display: "none" }}
         onChange={uploaderOnChange}
       />
-      <Portal container={insertCodeIcon}>
-        <InsertCodeIcon />
-      </Portal>
       <CustomMenubarContainer menuElement={menuElement}>
         <Button startIcon={<CodeIcon />} onClick={openCodeMirror}>
           Редактор кода
+        </Button>
+        <Button
+          startIcon={
+            fullScreenFlag ? <FullscreenExitIcon /> : <FullscreenIcon />
+          }
+          onClick={toggleFullscreen}
+          title="Ctrl+Shift+F"
+        >
+          {fullScreenFlag ? "Выйти из полного" : "Полный экран"}
         </Button>
       </CustomMenubarContainer>
       {codeMirrorOpened && (
@@ -269,26 +298,25 @@ const ForwardingTinyMCEEditorRef = forwardRef<
           //   src: "/path/to/file1.js",
           //   type: "text/javascript",
           // });
-          const body = dom.select("body")[0];
-          dom.addClass(body, "line-numbers");
+          // const body = dom.select("body")[0];
           const menubar: HTMLDivElement = editor.editorContainer.querySelector(
             `[role="menubar"]`
           ) as HTMLDivElement;
+          setMenuElement(menubar);
+          /*const button = editor.editorContainer.querySelector(
+            `[role="group"] button[title="Вставить текст из буфера обмена"]`
+          );*/
           // if (menubar && menubar.style) {
           //   (menubar.style as any)["margin-right"] = "200px";
           // }
-          const button = editor.editorContainer.querySelector(
-            `[role="group"] button[title="Вставить текст из буфера обмена"]`
-          );
-          const svgIcon = button?.querySelector("svg");
+          /*const svgIcon = button?.querySelector("svg");
           setInsertCodeIcon(svgIcon?.parentElement || null);
-          setMenuElement(menubar);
           svgIcon?.remove();
           button?.parentElement?.querySelectorAll("*").forEach((elem) => {
             if (elem && elem.classList && elem.classList.add) {
               elem.classList.add("main_color");
             }
-          });
+          });*/
         }}
         onEditorChange={(__textHtml, editor) => {
           const textHtml = editor.getContent({ format: "html" });
