@@ -1,5 +1,5 @@
-import { MainActionButton } from "@components/ui";
-import { Box, Card, Stack, TextField } from "@mui/material";
+import { MainActionButton, TextField } from "@components/ui";
+import { Box, Card, Stack } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 import ClosableAlert from "@components/ui/ClosableAlert";
 import { AlertTitle } from "@mui/material";
@@ -37,6 +37,9 @@ const LoginForm = () => {
         align="center"
         fontWeight={800}
         fontSize={"3rem"}
+        sx={{
+          color: "#3D3357",
+        }}
       >
         Войти&nbsp;в&nbsp;
         <Box component="span" fontWeight="300">
@@ -45,18 +48,14 @@ const LoginForm = () => {
       </Typography>
       <Box height="4.3rem"></Box>
       <TextField
-        sx={{ height: "3.2rem" }}
         label="Логин"
-        variant="outlined"
         {...loginField}
         error={!!loginFieldError}
         helperText={loginFieldError}
         required
       ></TextField>
       <TextField
-        sx={{ height: "3rem" }}
         label="Пароль"
-        variant="outlined"
         type="password"
         {...passwordField}
         error={!!passwordFieldError}

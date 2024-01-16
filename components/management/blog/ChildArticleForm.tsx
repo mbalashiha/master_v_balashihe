@@ -25,7 +25,7 @@ import { locale } from "@utils/locale";
 import { Blog } from "@common/types/cms";
 import { useArticleContext } from "./ArticleForm";
 import { FormContextType } from "@components/ui/RefFormik";
-import { OpenCodemirrorButton, ResetButton } from "./Article/Buttons";
+import { OpenCodemirrorButton, ResetButton, ToggleTinyMceFullscreen } from "./Article/Buttons";
 import useUpdateImages from "@framework/management/blog/images/use-update-images";
 import { getImagesInputArray } from "@framework/utils/normalize";
 import {
@@ -239,50 +239,55 @@ export const ChildArticleForm = forwardRef<
         }
       }}
     >
-      <ArticleEventsProvider providerRef={providerRef}>
-        <Grid container spacing={1}>
-          <Grid
-            item
-            xs={12}
-            md={12}
-            lg={2}
-            xl={1}
-            order={{ xs: 1, lg: 2 }}
-            sx={{
-              mt: { xs: 0, lg: "2px" },
-              "& button": {
-                width: { xs: "auto", lg: "100%" },
-                minWidth: "160px",
-              },
-            }}
-          >
-            <Stack
-              spacing={0}
-              direction={{ xs: "row", lg: "column" }}
-              justifyContent={"flex-end"}
-              flexWrap={"wrap"}
-              sx={{ position: "sticky", top: { xs: 0, lg: "5px" }, gap: "6px" }}
-            >
-              <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
-              <ResetButton />
-              <OpenCodemirrorButton />
-            </Stack>
-          </Grid>
-          <Grid item xs={12} md={12} lg={10} xl={11} order={{ xs: 2, lg: 1 }}>
-            <Container
-              maxWidth="lg"
+      <TabsProvider>
+        <ArticleEventsProvider providerRef={providerRef}>
+          <Grid container spacing={1}>
+            <Grid
+              item
+              xs={12}
+              md={12}
+              lg={2}
+              xl={1}
+              order={{ xs: 1, lg: 2 }}
               sx={{
-                float: { xs: "none", lg: "right" },
-                "&&": { px: 0, py: 0 },
+                mt: { xs: 0, lg: "2px" },
+                "& button": {
+                  width: { xs: "auto", lg: "100%" },
+                  minWidth: "160px",
+                },
               }}
             >
-              <TabsProvider>
+              <Stack
+                spacing={0}
+                direction={{ xs: "row", lg: "column" }}
+                justifyContent={"flex-end"}
+                flexWrap={"wrap"}
+                sx={{
+                  position: "sticky",
+                  top: { xs: 0, lg: "5px" },
+                  gap: "6px",
+                }}
+              >
+                <SubmitButton startIcon={<SaveIcon />}>Сохранить</SubmitButton>
+                <ResetButton />
+                <OpenCodemirrorButton />
+                <ToggleTinyMceFullscreen />
+              </Stack>
+            </Grid>
+            <Grid item xs={12} md={12} lg={10} xl={11} order={{ xs: 2, lg: 1 }}>
+              <Container
+                maxWidth="lg"
+                sx={{
+                  float: { xs: "none", lg: "right" },
+                  "&&": { px: 0, py: 0 },
+                }}
+              >
                 <ArticleTabs article={article} />
-              </TabsProvider>
-            </Container>
+              </Container>
+            </Grid>
           </Grid>
-        </Grid>
-      </ArticleEventsProvider>
+        </ArticleEventsProvider>
+      </TabsProvider>
     </RefFormik>
   );
 });

@@ -10,7 +10,7 @@ import React, {
 } from "react";
 import PromiseWorker from "promise-worker";
 import { Editor } from "@tinymce/tinymce-react";
-import { Box, Button, Portal, styled } from "@mui/material";
+import { Box, Button, Portal, Stack, styled } from "@mui/material";
 import util from "util";
 import { useUploaderOnChange } from "./use-uploader-onchange";
 import CodeMirrorDialog from "./CodeMirror/CodeMirrorDialog";
@@ -40,6 +40,7 @@ export interface MemoizedTinyMCEProps {
 type InnerEditor = Editor["editor"];
 export interface TinyMCEImperativeRef {
   editor: InnerEditor | undefined;
+  toggleEditorFullscreen: () => void;
 }
 interface CustomMenubarProps {
   children: React.ReactNode | React.ReactNode[];
@@ -159,9 +160,11 @@ const ForwardingTinyMCEEditorRef = forwardRef<
   }, [emitter, setContentEventName, openCodeMirrorEventName]);
   useImperativeHandle(ref, () => ({
     editor: editorRef.current?.editor,
+    toggleEditorFullscreen: toggleFullscreen,
   }));
   useImperativeHandle(articleEvents.editorRef, () => ({
     editor: editorRef.current?.editor,
+    toggleEditorFullscreen: toggleFullscreen,
   }));
   const { setModalImage } = useEditorContext();
   const prettierWorkerRef = useRef<PromiseWorker | null>(null);
@@ -262,18 +265,20 @@ const ForwardingTinyMCEEditorRef = forwardRef<
         onChange={uploaderOnChange}
       />
       <CustomMenubarContainer menuElement={menuElement}>
-        <Button startIcon={<CodeIcon />} onClick={openCodeMirror}>
-          Редактор кода
-        </Button>
-        <Button
-          startIcon={
-            fullScreenFlag ? <FullscreenExitIcon /> : <FullscreenIcon />
-          }
-          onClick={toggleFullscreen}
-          title="Ctrl+Shift+F"
-        >
-          {fullScreenFlag ? "Выйти из полного" : "Полный экран"}
-        </Button>
+        <Stack flexDirection={"row"}>
+          <Button startIcon={<CodeIcon />} onClick={openCodeMirror}>
+            Редактор кода
+          </Button>
+          <Button
+            startIcon={
+              fullScreenFlag ? <FullscreenExitIcon /> : <FullscreenIcon />
+            }
+            onClick={toggleFullscreen}
+            title="Ctrl+Shift+F"
+          >
+            {fullScreenFlag ? "Выйти из полного" : "Полный экран"}
+          </Button>
+        </Stack>
       </CustomMenubarContainer>
       {codeMirrorOpened && (
         <CodeMirrorDialog

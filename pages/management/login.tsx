@@ -20,31 +20,6 @@ export default function LoginPage() {
         sx={{
           width: { xs: "97vw", sm: "460px" },
           padding: { xs: 2, sm: 3, md: 4 },
-          "&, & .FormLabel-root.InputLabel-shrink": {
-            background: grey[50],
-          },
-          "& .InputBase-root": {
-            "& legend": {
-              width: 0,
-            },
-            "& input": {
-              paddingLeft: "6px",
-            },
-          },
-          "& *": {
-            color: "#3D3357",
-          },
-          "& .OutlinedInput-notchedOutline": {
-            borderWidth: "2px",
-            borderColor: "#3D3357",
-          },
-          "& .FormLabel-root.InputLabel-root.InputLabel-formControl:not(.Mui-focused):not(.Mui-error)":
-            {
-              color: "#3D3357",
-            },
-          "&& .InputBase-input.OutlinedInput-input": {
-            color: "black",
-          },
         }}
         elevation={3}
       >

@@ -77,9 +77,10 @@ export default function ArticleBodyHtml() {
     ) {
       const viewportHeight = windowHeight || 0;
       const offset = boxRef.current?.offsetTop || 0;
-      const tinyMceEditorHeight = viewportHeight - offset;
+      const tempVarHeight = viewportHeight - offset;
+      const tinyMceEditorHeight = tempVarHeight >= 400 ? tempVarHeight : 400;
       if (tinyMceEditorHeight !== height) {
-        setHeight(tinyMceEditorHeight > 10 ? tinyMceEditorHeight : 200);
+        setHeight(tinyMceEditorHeight);
       }
     }
   }, [value, height, windowWidth, windowHeight]);
@@ -111,6 +112,7 @@ export default function ArticleBodyHtml() {
             borderRadius: "0 0 8px 8px",
             background: "white",
             height: height + "px",
+            minHeight: "400px",
           },
         }}
       >

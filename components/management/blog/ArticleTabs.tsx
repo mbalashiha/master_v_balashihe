@@ -82,7 +82,6 @@ export const ArticleTabs = ({ article }: Props) => {
     <>
       <Paper
         sx={{
-          background: blueGrey[100],
           borderRadius: "12px",
           p: 0,
         }}
@@ -109,8 +108,7 @@ export const ArticleTabs = ({ article }: Props) => {
             <Tab label="Параметры" {...a11yProps(4)} />
           </Tabs>
         </Box>
-        <Box
-        >
+        <Box>
           <TabPanel value={value} index={0}>
             <Grid container spacing={0}>
               <Grid item xs={12} sm={2}>

@@ -42,7 +42,9 @@ export const ArticleEventsProvider = ({ children, providerRef }: Props) => {
     form,
     saveArticleTextDraft,
   };
-  const editorRef = useRef(null) as React.MutableRefObject<TinyMCEImperativeRef | null>;
+  const editorRef = useRef(
+    null
+  ) as React.MutableRefObject<TinyMCEImperativeRef | null>;
   /*React.useEffect(() => {
     const beforeunloadListener = async () => {
       const { saveArticleTextDraft } =

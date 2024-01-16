@@ -3,9 +3,30 @@ import React from "react";
 
 type Props = React.ComponentProps<typeof MuiTextField>;
 
-const TextField = ({ children, sx, ...rest }: Props) => {
+const TextField = ({ sx, InputLabelProps, children, ...rest }: Props) => {
   return (
-    <MuiTextField sx={{ width: "100%", ...sx }} variant="filled" {...rest}>
+    <MuiTextField
+      variant="outlined"
+      sx={{
+        "& .InputLabel-shrink": {
+          background: "transparent",
+          padding: "0 12px",
+        },
+        "& .InputBase-root.OutlinedInput-root": {
+          borderRadius: "9px",
+          "& input": { padding: "20px 15px 6px 15px" },
+          "& fieldset": {
+            border: "none",
+          },
+        },
+        ...sx,
+      }}
+      InputLabelProps={{
+        shrink: true,
+        ...InputLabelProps,
+      }}
+      {...rest}
+    >
       {children}
     </MuiTextField>
   );

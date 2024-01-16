@@ -1,6 +1,7 @@
 import { createTheme, Theme } from "@mui/material/styles";
 import { colors, Palette, PaletteMode } from "@mui/material";
 import { purple, pink, amber, grey, blueGrey, red } from "@mui/material/colors";
+import tinycolor from "tinycolor2";
 const InterFontFamily = `Inter, Arial, sans-serif`;
 
 const getMuiTheme = (): Theme => {
@@ -66,6 +67,12 @@ const getMuiTheme = (): Theme => {
       },
     },
   });
+  const inputFieldBackground = tinycolor(theme.palette.primary.light)
+    .setAlpha(0.1)
+    .toRgbString();
+  const inputFieldFocusedBackground = tinycolor(theme.palette.primary.main)
+    .setAlpha(0.1)
+    .toRgbString();
   return createTheme({
     ...theme,
     components: {
@@ -150,29 +157,50 @@ const getMuiTheme = (): Theme => {
           },
         },
       },
+      MuiInput: {
+        styleOverrides: {
+          root: {},
+          input: {
+            padding: "0 6px 3px 0",
+            fontWeight: 500,
+            fontSize: "18px",
+            lineHeight: "24px",
+          },
+        },
+      },
       MuiFilledInput: {
         styleOverrides: {
           root: {
-            background: "white",
-            color: "#10101a",
-            padding: "28px 14px 14px 12px",
-            borderRadius: "8px 8px 0 0",
+            background: inputFieldBackground,
             "&:hover": {
-              background: blueGrey[50],
+              background: inputFieldBackground,
             },
-            "&.Mui-focused": {
-              background: "white",
-              color: "black",
+            "&.Mui-focused, &.Mui-focused:hover": {
+              background: inputFieldFocusedBackground,
             },
+            color: "#10101a",
+            padding: "20px 12px 7px 12px",
+            borderRadius: "8px 8px 0 0",
           },
-          multiline: {
-            padding: "28px 14px 14px 12px",
-          },
+          multiline: {},
           input: {
             padding: 0,
             fontWeight: 500,
             fontSize: "18px",
-            lineHeight: "18px",
+            lineHeight: "24px",
+          },
+        },
+      },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            background: inputFieldBackground,
+            "&:hover": {
+              background: inputFieldBackground,
+            },
+            "&.Mui-focused, &.Mui-focused:hover": {
+              background: inputFieldFocusedBackground,
+            },
           },
         },
       },
@@ -221,7 +249,6 @@ const getMuiTheme = (): Theme => {
             },
             "&.Menu-root": {
               "& .Paper-root": {
-                backgroundColor: blueGrey["100"],
               },
               "& .Menu-list": {
                 padding: 0,
@@ -286,12 +313,6 @@ const getMuiTheme = (): Theme => {
               borderColor: grey[200],
             },
           },
-        },
-      },
-      MuiOutlinedInput: {
-        styleOverrides: {
-          input: {},
-          root: {},
         },
       },
     },
