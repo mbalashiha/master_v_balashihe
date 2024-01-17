@@ -10,12 +10,10 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import Script from "next/script";
-import Typography from "@mui/material/Typography";
 import type { Element, DOMNode, Text } from "html-react-parser";
 import crc32 from "crc/crc32";
 

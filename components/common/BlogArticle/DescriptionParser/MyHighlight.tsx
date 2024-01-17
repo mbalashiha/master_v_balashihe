@@ -63,7 +63,7 @@ export default function MyHighlight({ language, code, theme, ...rest }: Props) {
               fontSize: "16px",
               lineHeight: "25px",
               "& pre": {
-                maxHeight: "70vh",
+                maxHeight: "60vh",
                 overflowX: "auto",
                 overflowY: "auto",
                 padding: 0,

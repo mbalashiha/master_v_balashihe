@@ -52,6 +52,8 @@ export default function NavigationButtons({ navigation }: Props) {
               height: "50px",
               py: { xs: "1px", sm: "5px", md: "8px" },
               borderRadius: "9px",
+              color: (theme) => theme.palette.text.secondary,
+              fill: (theme) => theme.palette.text.secondary,
             },
             "& *[itemProp='name']": {
               margin: "10px",
