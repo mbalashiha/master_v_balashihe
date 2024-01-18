@@ -130,6 +130,7 @@ const MyStepWizard = ({
   const [progressPercents, setProgressPercents] = React.useState<number>(
     (currentStep / (totalSteps || 1)) * 100
   );
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const setCurrentStep = (nextStepIndex: number): void => {
     if (nextStepIndex > totalSteps) {
       return;
@@ -145,6 +146,14 @@ const MyStepWizard = ({
     setStepsHistory(newStepHistory);
     __setCurrentStep(nextStepIndex);
     setProgressPercents((nextStepIndex / (totalSteps || 1)) * 100);
+    process.nextTick(() => {
+      if (
+        containerRef.current &&
+        typeof containerRef.current.scrollIntoView === "function"
+      ) {
+        containerRef.current.scrollIntoView();
+      }
+    });
   };
   const goToNamedStep = (step: string): void => {
     const namedStepIndex = collectedStepsNames.get(step)?.index;
@@ -211,6 +220,7 @@ const MyStepWizard = ({
     goToStep,
     goToNamedStep,
     currentStep,
+    containerRef,
   });
   sidebar =
     sidebar && !showOnlyStep && !noSidebar
@@ -229,17 +239,18 @@ const MyStepWizard = ({
     <>
       {!sidebar ? (
         <Box
+          ref={containerRef}
           sx={{
             display: "flex",
             flexDirection: "column",
             "& form": {
               height: "100%",
+              width: "100%",
               flexGrow: 1,
             },
             "& .in-slider-container": {
               width: "100%",
-              px: "27px",
-              py: "19px",
+              p: { xs: "19px 10px 19px 20px", sm: "19px 27px" },
             },
             ...StepContainerProps?.sx,
           }}
@@ -312,6 +323,7 @@ const MyStepWizard = ({
         </Box>
       ) : (
         <Grid
+          ref={containerRef}
           container
           sx={{
             ...sx,
