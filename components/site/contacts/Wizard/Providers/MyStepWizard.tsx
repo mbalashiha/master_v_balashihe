@@ -241,6 +241,7 @@ const MyStepWizard = ({
         <Box
           ref={containerRef}
           sx={{
+            overflowX: "hidden",
             display: "flex",
             flexDirection: "column",
             "& form": {

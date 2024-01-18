@@ -1,7 +1,8 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://mbalashiha.ru",
+  siteUrl:
+    process.env.NEXT_PUBLIC_PRODUCTION_SITE_ORIGIN || "https://mbalashiha.ru",
   generateRobotsTxt: true, // (optional)
-  exclude: ["/management", "/management/*", "/advert", "/advert/*"],
+  exclude: ["/management", "/management/*"],
   // ...other options
 };
